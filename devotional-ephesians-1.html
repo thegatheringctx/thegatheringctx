@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blessed Before You Breathed | Ephesians Week 1 | Gathering CTX</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6F0;
+    --warm-white: #F5EFE6;
+    --gold: #B8860B;
+    --gold-light: #D4A843;
+    --deep-wine: #5C1A1B;
+    --charcoal: #2B2B2B;
+    --text: #3A3632;
+    --text-light: #6B6560;
+    --olive: #6B7B4C;
+    --rule: #D6CCBC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Source Sans 3', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(175deg, var(--deep-wine) 0%, #3D1213 55%, #1E0A0A 100%);
+    overflow: hidden;
+    padding: 4rem 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(184,134,11,0.12) 0%, transparent 70%),
+      radial-gradient(circle at 20% 80%, rgba(184,134,11,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    animation: fadeUp 1.2s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-series {
+    font-family: 'Source Sans 3', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.7rem;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .hero-label {
+    font-family: 'Source Sans 3', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.75rem;
+    color: rgba(250,239,216,0.5);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: #FAEFD8;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-style: italic;
+    color: rgba(250,239,216,0.7);
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 1.8rem auto;
+    opacity: 0.7;
+  }
+
+  .hero-scripture-ref {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(250,239,216,0.45);
+    margin-top: 0.5rem;
+  }
+
+  .article-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+  }
+
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.25;
+    line-height: 1;
+    margin-bottom: -0.3rem;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--deep-wine);
+    line-height: 1.3;
+    margin-bottom: 1.2rem;
+  }
+
+  p {
+    margin-bottom: 1.4rem;
+    font-weight: 300;
+  }
+
+  .scripture-block {
+    background: var(--warm-white);
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem 1.8rem;
+    margin: 2rem 0;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .scripture-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.85;
+    margin-bottom: 0.6rem;
+  }
+
+  .scripture-block p:last-child { margin-bottom: 0; }
+
+  .scripture-ref {
+    font-family: 'Source Sans 3', sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 0.8rem;
+  }
+
+  .pull-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--deep-wine);
+    text-align: center;
+    padding: 2.2rem 1.5rem;
+    margin: 2.5rem 0;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .pull-quote::before,
+  .pull-quote::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto;
+  }
+
+  .pull-quote::before { margin-bottom: 1.5rem; }
+  .pull-quote::after { margin-top: 1.5rem; }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 3rem 0;
+    color: var(--rule);
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background: var(--rule);
+  }
+
+  .section-divider .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  .reflection-box {
+    background: linear-gradient(135deg, var(--warm-white) 0%, #F0E8DA 100%);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 2rem 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .reflection-box h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .reflection-box p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+  }
+
+  .reflection-box p:last-child { margin-bottom: 0; }
+
+  .prayer-section {
+    background: var(--deep-wine);
+    color: #FAEFD8;
+    border-radius: 8px;
+    padding: 2.5rem 2.2rem;
+    margin: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .prayer-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(184,134,11,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .prayer-section h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .prayer-section p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(250,239,216,0.9);
+    line-height: 1.8;
+    position: relative;
+  }
+
+  .declaration-box {
+    background: linear-gradient(135deg, #1E0A0A 0%, var(--deep-wine) 100%);
+    border: 1px solid rgba(184,134,11,0.3);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    margin: 3rem 0;
+    text-align: center;
+  }
+
+  .declaration-box h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+
+  .declaration-box p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #FAEFD8;
+    line-height: 1.9;
+    margin-bottom: 0;
+  }
+
+  .benediction {
+    text-align: center;
+    padding: 3rem 1rem;
+    margin-top: 2rem;
+  }
+
+  .benediction p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-light);
+    line-height: 1.9;
+  }
+
+  .benediction .amen {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--deep-wine);
+    display: block;
+    margin-top: 0.8rem;
+    letter-spacing: 2px;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+
+  em { color: var(--text); }
+
+  .greek-word {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--deep-wine);
+  }
+
+  .word-def {
+    display: inline-block;
+    background: var(--warm-white);
+    padding: 0.15rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-left: 0.3rem;
+  }
+
+  .illustration-box {
+    background: var(--warm-white);
+    border-radius: 8px;
+    padding: 1.8rem 2rem;
+    margin: 2rem 0;
+    border-left: 3px solid var(--olive);
+  }
+
+  .illustration-box p {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0;
+    line-height: 1.75;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border-top: 1px solid var(--rule);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .footer p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+  }
+
+  .footer .site-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--deep-wine);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 600px) {
+    .article-wrapper { padding: 2.5rem 1.3rem 3rem; }
+    .hero { min-height: 55vh; padding: 3rem 1.5rem; }
+    .pull-quote { font-size: 1.25rem; padding: 1.8rem 1rem; }
+    .scripture-block { padding: 1.2rem 1.3rem; }
+    .prayer-section { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-content">
+    <p class="hero-series">Ephesians Series</p>
+    <p class="hero-label">Week 1</p>
+    <h1>Blessed Before<br>You Breathed</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">The Staggering Grace of Election and Spiritual Blessing</p>
+    <p class="hero-scripture-ref">Ephesians 1:1-14</p>
+  </div>
+</header>
+
+<article class="article-wrapper">
+
+  <p>Paul wrote Ephesians from prison. Roman chains. A dark cell. Awaiting possible execution. And from that place he writes what scholars call the most elevated, most exalted letter in the New Testament.</p>
+
+  <p>How does a man in chains write like a man in heaven?</p>
+
+  <p>Because Paul had discovered something that no chain, no prison, no emperor, and no circumstance could touch. He had discovered <em>who he was in Christ</em>. And once you know who you are in Christ, your geography becomes irrelevant.</p>
+
+  <p>The first fourteen verses of Ephesians 1 are perhaps the most compressed, most explosive statement of the believer's identity in the entire Bible. If these verses move from your head to your spirit, it will change everything about how you pray, how you live, how you fight, and how you worship.</p>
+
+  <div class="pull-quote">
+    You are blessed. Not because of what you did, but because of what He did before you ever existed.
+  </div>
+
+  <div class="section-divider"><span class="dot"></span></div>
+
+  <!-- SECTION 1 -->
+  <div class="section-number">01</div>
+  <h2>Identity Over Circumstance</h2>
+
+  <div class="scripture-block">
+    <p>"Paul, an apostle of Christ Jesus by the will of God, To the saints who are in Ephesus, and are faithful in Christ Jesus: Grace to you and peace from God our Father and the Lord Jesus Christ."</p>
+    <span class="scripture-ref">Ephesians 1:1-2 · ESV</span>
+  </div>
+
+  <p>Paul opens: "an apostle of Christ Jesus by the will of God." He does not open with complaint. He opens with identity. He is in prison, but he knows who he is. His circumstance has not overridden his calling.</p>
+
+  <p>Your assignment in the kingdom is not tied to your resume. It is tied to His grace. And His grace is sufficient for whatever He has called you to do.</p>
+
+  <div class="illustration-box">
+    <p>Imagine a young man who has inherited a vast estate. But through a series of lies told to him in childhood, he believes he is a servant. He eats in the servant's quarters. He wears worn-out clothes. One day, the family attorney arrives and reads him the will: "You are the heir. Everything belongs to you." The heir does not become the heir when he hears the news. He already was. He simply did not know it. Ephesians 1 is God reading you His will.</p>
+  </div>
+
+  <div class="pull-quote">
+    Your situation does not define you. God defined you before your situation existed.
+  </div>
+
+  <div class="section-divider"><span class="dot"></span></div>
+
+  <!-- SECTION 2 -->
+  <div class="section-number">02</div>
+  <h2>Every Spiritual Blessing Is Already Yours</h2>
+
+  <div class="scripture-block">
+    <p>"Blessed be the God and Father of our Lord Jesus Christ, who has blessed us in Christ with every spiritual blessing in the heavenly places."</p>
+    <span class="scripture-ref">Ephesians 1:3 · ESV</span>
+  </div>
+
+  <p>Past tense. Already done.</p>
+
+  <p>Paul is not saying God will eventually bless you if you try hard enough. He is saying God <em>has already</em> blessed you with everything in Christ before you walk out your front door this morning. Identity. Forgiveness. Access to the Father. Adoption. Redemption. Power. Purpose. Destiny. These are yours right now in Christ.</p>
+
+  <p>The Greek word <span class="greek-word">eulogētos</span> <span class="word-def">blessed</span> comes from <em>eu</em> (well) and <em>logos</em> (word). God has spoken well over you. The blessings are <em>spiritual blessings</em>, meaning they originate in the Spirit, exist in the heavenly realm, and cannot be taken away by earthly circumstance.</p>
+
+  <div class="illustration-box">
+    <p>Imagine you receive a notice from a bank that an account was opened in your name twenty years ago and has been accruing interest ever since. You had no idea it existed. You have been working double shifts to pay rent, eating ramen, barely surviving, when the entire time there was an account with your name on it, full and waiting. Ephesians 1:3 is that notice.</p>
+  </div>
+
+  <div class="pull-quote">
+    You are not begging for what God has already given. You are learning to walk in it.
+  </div>
+
+  <div class="section-divider"><span class="dot"></span></div>
+
+  <!-- SECTION 3 -->
+  <div class="section-number">03</div>
+  <h2>Chosen Before the Foundation of the World</h2>
+
+  <div class="scripture-block">
+    <p>"Even as he chose us in him before the foundation of the world, that we should be holy and blameless before him."</p>
+    <span class="scripture-ref">Ephesians 1:4 · ESV</span>
+  </div>
+
+  <p>Before the first photon of light. Before the first breath of the first human. God chose you in Christ.</p>
+
+  <p>This is meant to produce security and worship. If God chose you before you existed, before you did anything good or bad, then your standing before Him is not based on your performance. It is based on His purpose.</p>
+
+  <p>The Greek word <span class="greek-word">eklegō</span> <span class="word-def">to choose, to select</span> describes deliberate, purposeful selection. You were not an accident in the mind of God. You were a deliberate choice. Before you had a name, God already knew yours.</p>
+
+  <div class="pull-quote">
+    You cannot earn what God decided before you were born.
+  </div>
+
+  <div class="section-divider"><span class="dot"></span></div>
+
+  <!-- SECTION 4 -->
+  <div class="section-number">04</div>
+  <h2>Adopted, Not Just Pardoned</h2>
+
+  <div class="scripture-block">
+    <p>"In love he predestined us for adoption to himself as sons through Jesus Christ, according to the purpose of his will, to the praise of his glorious grace."</p>
+    <span class="scripture-ref">Ephesians 1:5-6 · ESV</span>
+  </div>
+
+  <p>God did not just pardon you. He adopted you.</p>
+
+  <p>A pardon says: your charges are dropped, you may go. Adoption says: you are now my child, you belong in my family, my name is your name, my house is your house, my inheritance is your inheritance.</p>
+
+  <p>Sons live differently than strangers. Sons pray differently. Sons carry the Father's name with authority. Sons do not beg at the door of a house they own.</p>
+
+  <p>The Greek word <span class="greek-word">huiothesia</span> <span class="word-def">adoption</span> carries immense legal weight. In Roman law, adoption gave the adopted child all the rights of a biological son, including inheritance, the family name, and legal standing. Once adopted, the old debts and obligations of the previous life were completely erased.</p>
+
+  <p>That is your legal standing in Christ.</p>
+
+  <div class="pull-quote">
+    God did not just pardon you from your past. He adopted you into His future.
+  </div>
+
+  <div class="section-divider"><span class="dot"></span></div>
+
+  <!-- SECTION 5 -->
+  <div class="section-number">05</div>
+  <h2>Redeemed According to Riches, Not Reserves</h2>
+
+  <div class="scripture-block">
+    <p>"In him we have redemption through his blood, the forgiveness of our trespasses, according to the riches of his grace, which he lavished upon us."</p>
+    <span class="scripture-ref">Ephesians 1:7-8 · ESV</span>
+  </div>
+
+  <p>Not according to the measure of your faith. According to the riches of His grace.</p>
+
+  <p>When a billionaire gives a gift, he does not give according to your budget. He gives according to his resources. God does not forgive you according to what your repentance deserves. He forgives you according to the infinite riches of His grace.</p>
+
+  <p>The Greek word <span class="greek-word">apolytrōsis</span> <span class="word-def">redemption</span> literally means "a releasing for a ransom." In the ancient world, it was used for the buying back of slaves or prisoners of war. The price has been paid. The papers have been signed. You have been purchased and set free.</p>
+
+  <div class="reflection-box">
+    <h3>Reflect</h3>
+    <p>Have you been living as an heir or as a servant?</p>
+    <p>What old identity have you been carrying that God erased before you were born?</p>
+    <p>What would change if you truly believed the blessing is already yours?</p>
+  </div>
+
+  <div class="pull-quote">
+    God did not forgive you on a budget. He forgave you according to infinite riches.
+  </div>
+
+  <!-- PRAYER -->
+  <div class="prayer-section">
+    <h3>A Prayer of Identity</h3>
+    <p>Father, I receive what You have spoken over me. I was chosen before the foundation of the world. I am blessed with every spiritual blessing in Christ. I am not an accident. I am not defined by my history, my failures, or my feelings. I am defined by what You decided before time began. I lay down the old identity today. I receive the new one, not because of what I have done, but because of what You did before I was born. I am Your child. I carry Your name. I walk with victory, not to it, in Jesus' name. Amen.</p>
+  </div>
+
+  <!-- DECLARATION -->
+  <div class="declaration-box">
+    <h3>Closing Declaration</h3>
+    <p>I am chosen in Christ before the foundation of the world.<br>
+    I am blessed with every spiritual blessing in heavenly places.<br>
+    I am adopted as a son of the living God.<br>
+    I am redeemed according to the riches of His grace,<br>
+    not the poverty of my performance.<br>
+    My identity is in Christ Jesus, settled before time began.<br>
+    I walk with victory, not to it.</p>
+  </div>
+
+  <!-- BENEDICTION -->
+  <div class="benediction">
+    <p>Now go chosen, blessed, adopted, and redeemed.<br>
+    May the God who selected you before the foundation of the world<br>
+    keep you this week from forgetting your name.<br>
+    May the Father who lavished His grace upon you in Christ<br>
+    remind you every morning that the blessing is not coming.<br>
+    It is already yours.<br>
+    Go and live like it.</p>
+    <span class="amen">Amen</span>
+  </div>
+
+</article>
+
+<footer class="footer">
+  <p class="site-name">The Gathering CTX</p>
+  <p>gatheringctx.org</p>
+</footer>
+
+</body>
+</html>
