@@ -187,6 +187,16 @@
     .step-desc{font-size:.88rem;line-height:1.9;color:var(--w75);flex:1}
     .step-arrow{margin-top:2rem;color:var(--gold);font-size:1.2rem}
 
+    /* CURRENT SERIES */
+    .series{padding:0;max-width:100%}
+    .series-banner{position:relative;width:100%;aspect-ratio:21/9;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .series-banner img{width:100%;height:100%;object-fit:cover}
+    .series-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.7) 0%,rgba(0,0,0,.3) 50%,rgba(0,0,0,.5) 100%);display:flex;flex-direction:column;justify-content:center;padding:4rem 6rem}
+    .series-label{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:600}
+    .series-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#fff;margin-bottom:1rem;letter-spacing:.02em}
+    .series-desc{font-size:1rem;color:rgba(255,255,255,.7);max-width:500px;line-height:1.8;margin-bottom:1.5rem}
+    .series-start{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
     /* EVENTS */
     .events{background:var(--off);padding:9rem 6rem}
     .events-header{display:flex;justify-content:space-between;align-items:end;margin-bottom:4rem}
@@ -327,64 +337,44 @@
     .footer-email{font-size:.6rem;letter-spacing:.1em;color:var(--w30);transition:color .2s}
     .footer-email:hover{color:var(--w75)}
 
-
-    /* PCO CALENDAR EMBED */
-    .pco-embed-wrap{padding:0 6rem 6rem;background:var(--off)}
-    .pco-calendar-live{padding-top:1rem}
-    .pco-loading{text-align:center;padding:3rem;color:rgba(0,0,0,.4);font-size:.85rem}
-    .pco-live-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.1)}
-    .pco-event-card{background:var(--off);padding:2rem 2.5rem;display:flex;gap:1.5rem;align-items:flex-start;transition:background .2s}
-    .pco-event-card:hover{background:#ede8e0}
-    .pco-event-date{display:flex;flex-direction:column;align-items:center;min-width:48px;text-align:center}
-    .pco-month{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
-    .pco-day{font-size:2.2rem;font-weight:200;color:#000;line-height:1;letter-spacing:-.02em}
-    .pco-weekday{font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.4);margin-top:.2rem}
-    .pco-event-info{flex:1}
-    .pco-event-title{font-size:1rem;font-weight:300;color:#000;margin-bottom:.4rem;line-height:1.3}
-    .pco-event-time{font-size:.8rem;color:var(--gold);margin-bottom:.3rem}
-    .pco-event-loc{font-size:.78rem;color:rgba(0,0,0,.5);line-height:1.5}
-    .pco-fallback{display:flex;align-items:center;justify-content:center;min-height:280px;border:1px dashed rgba(0,0,0,.15);border-radius:4px}
-    .pco-fallback-inner{text-align:center;padding:3rem}
-    @media(max-width:900px){.pco-embed-wrap{padding:0 2rem 4rem}.pco-live-grid{grid-template-columns:1fr}}
-
-    /* GIVING EMBED */
-    .giving-embed{background:#000;padding:9rem 6rem;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center}
-    .giving-embed-left{}
-    .giving-embed-frame{background:var(--w08);border:1px solid var(--w08);overflow:hidden;border-radius:4px;min-height:500px}
-    .giving-embed-frame iframe{width:100%;border:none;min-height:500px;display:block}
-    @media(max-width:900px){.giving-embed{grid-template-columns:1fr;padding:6rem 2rem;gap:3rem}}
-
-    /* INSTAGRAM FEED */
-    .insta-section{background:var(--ash);padding:9rem 6rem}
-    .insta-header{display:flex;justify-content:space-between;align-items:end;margin-bottom:3rem}
-    .insta-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em}
-    .insta-h2 em{font-style:italic;color:var(--w55)}
-    .insta-feed-wrap{width:100%}
-    @media(max-width:900px){.insta-section{padding:6rem 2rem}}
-
     /* YOUVERSION */
     .youversion-bar{background:var(--gold);padding:2rem 6rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
-    .yv-text{font-size:.9rem;color:rgba(0,0,0,.75);font-weight:300}
-    .yv-text strong{color:#000;font-weight:500}
-    .yv-btn{background:#000;color:#fff;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.7rem 1.8rem;text-decoration:none;white-space:nowrap;transition:opacity .2s;font-family:"Nunito Sans",sans-serif}
-    .yv-btn:hover{opacity:.8}
-    @media(max-width:900px){.youversion-bar{padding:2rem;flex-direction:column;text-align:center}}
-
-    /* PODCAST */
-    .podcast-section{background:#000;padding:9rem 6rem}
-    .podcast-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:4rem;align-items:end}
-    .podcast-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em}
-    .podcast-h2 em{font-style:italic;color:var(--w55)}
-    .podcast-sub{font-size:.9rem;line-height:2;color:var(--w75);align-self:end}
-    .podcast-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--w08)}
-    .podcast-card{background:#000;padding:2.5rem;transition:background .3s;text-decoration:none;display:flex;gap:2rem;align-items:flex-start}
-    .podcast-card:hover{background:rgba(255,255,255,.04)}
-    .podcast-icon{width:56px;height:56px;background:var(--w08);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem}
-    .podcast-info{}
-    .podcast-name{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
-    .podcast-title{font-size:.95rem;color:#fff;font-weight:300;line-height:1.4}
-    .podcast-cta{margin-top:3rem;display:flex;gap:1.5rem;flex-wrap:wrap}
-    @media(max-width:900px){.podcast-section{padding:6rem 2rem}.podcast-header{grid-template-columns:1fr;gap:2rem}.podcast-grid{grid-template-columns:1fr}}
+    .yv-text{font-size:.9rem;color:rgba(0,0,0,.8);font-weight:300}.yv-text strong{color:#000;font-weight:500}
+    .yv-btn{background:#000;color:#fff;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.7rem 1.8rem;text-decoration:none;white-space:nowrap;transition:opacity .2s;font-family:"Nunito Sans",sans-serif}.yv-btn:hover{opacity:.8}
+    /* PCO CALENDAR */
+    .pco-wrap{background:var(--off);padding:0 6rem 5rem}
+    .pco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.1)}
+    .pco-card{background:var(--off);padding:2rem 2.2rem;display:flex;gap:1.4rem;align-items:flex-start}
+    .pco-card:hover{background:#ede8e0}
+    .pco-dt{display:flex;flex-direction:column;align-items:center;min-width:42px;text-align:center}
+    .pco-mon{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
+    .pco-day{font-size:2rem;font-weight:200;color:#000;line-height:1;letter-spacing:-.02em}
+    .pco-dow{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.35)}
+    .pco-title{font-size:.95rem;font-weight:300;color:#000;margin-bottom:.3rem;line-height:1.3}
+    .pco-time{font-size:.78rem;color:var(--gold);margin-bottom:.2rem}
+    .pco-loc{font-size:.72rem;color:rgba(0,0,0,.45)}
+    /* GIVING */
+    .give-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+    .give-left{padding:8rem 6rem;display:flex;flex-direction:column;justify-content:center;background:#000}
+    .give-right{background:rgba(255,255,255,.03);border-left:1px solid var(--w08)}
+    .give-right iframe{width:100%;min-height:560px;border:none;display:block}
+    /* SERMONS */
+    .sermons{background:#000;padding:9rem 6rem}
+    .sermon-hdr{display:grid;grid-template-columns:1fr 1fr;gap:6rem;margin-bottom:4rem;align-items:end}
+    .sermon-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;color:#fff}
+    .sermon-h2 em{font-style:italic;color:var(--w55)}
+    .sermon-latest{background:rgba(255,255,255,.04);border:1px solid var(--w08);padding:3rem;margin-bottom:2px}
+    .sermon-meta{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+    .sermon-title{font-size:1.25rem;font-weight:300;color:#fff;margin-bottom:.4rem;line-height:1.3}
+    .sermon-speaker{font-size:.82rem;color:var(--w55);margin-bottom:1.8rem}
+    .sermon-audio{width:100%;height:48px;outline:none;accent-color:var(--gold)}
+    .sermon-platforms{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--w08);margin-top:2px}
+    .sermon-platform{background:#000;padding:1.8rem 2rem;display:flex;align-items:center;gap:1.2rem;text-decoration:none;transition:background .2s}
+    .sermon-platform:hover{background:rgba(255,255,255,.05)}
+    .sp-icon{width:42px;height:42px;background:var(--w08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .sp-name{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+    .sp-sub{font-size:.82rem;color:var(--w75);font-weight:300}
+    @media(max-width:900px){.youversion-bar{padding:2rem;flex-direction:column;text-align:center}.pco-wrap{padding:0 2rem 4rem}.pco-grid{grid-template-columns:1fr}.give-wrap{grid-template-columns:1fr}.give-left{padding:5rem 2rem}.sermons{padding:6rem 2rem}.sermon-hdr{grid-template-columns:1fr;gap:2rem}.sermon-platforms{grid-template-columns:1fr 1fr}}
     /* RESPONSIVE */
     @media(max-width:900px){
       nav{padding:1.4rem 2rem}
@@ -395,6 +385,9 @@
       .hero-service{right:2rem;bottom:2.5rem}
       .welcome,.visit,.give,.contact{grid-template-columns:1fr}
       .welcome-copy,.welcome-verse,.visit-copy,.visit-map{padding:5rem 2rem}
+      .series-banner{aspect-ratio:16/9}
+      .series-overlay{padding:3rem 2rem}
+      .series-title{font-size:2.2rem}
       .gallery,.fellowship,.convictions,.declaration,.pillars,.steps,.events,.media,.devotionals,.app-section,.faith,.give,.contact{padding:6rem 2rem}
       .gallery-header,.fellowship-header,.conv-header,.pillars-header,.steps-header,.faith-header,.app-inner,.dev-header{grid-template-columns:1fr;gap:2rem}
       .gallery-grid,.fellowship-grid{grid-template-columns:repeat(2,1fr)}
@@ -407,7 +400,6 @@
       .app-inner{grid-template-columns:1fr}
     }
   </style>
-  
   <!-- Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3L9RY5RS73');</script>
@@ -422,9 +414,10 @@
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
     <a href="#devotionals">Devotionals</a>
+    <a href="#convictions">Convictions</a>
     <a href="#events">Events</a>
     <a href="#media">Media</a>
-    <a href="#podcast">Sermons</a>
+    <a href="#sermons">Sermons</a>
     <a href="#visit">Visit</a>
     <a href="#contact">Contact</a>
     <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="nav-give">Give</a>
@@ -434,9 +427,6 @@
       </a>
       <a href="https://www.instagram.com/thegatheringctx" target="_blank" class="social-link" aria-label="Instagram">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      </a>
-      <a href="https://www.youtube.com/@thegatheringctx" target="_blank" class="social-link" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
       </a>
       <a href="https://www.tiktok.com/@thegatheringctx" target="_blank" class="social-link" aria-label="TikTok">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
@@ -567,8 +557,8 @@
 
 <!-- YOUVERSION BAR -->
 <div class="youversion-bar">
-  <p class="yv-text"><strong>Read along on YouVersion.</strong> Find THE gathering on the Bible App — follow along with Sunday's scripture and access our Bible reading plans.</p>
-  <a href="https://www.bible.com/churches/search?q=the+gathering+cleburne" target="_blank" class="yv-btn">Find us on YouVersion →</a>
+  <p class="yv-text"><strong>Read along on YouVersion.</strong> Find THE gathering on the Bible App &mdash; follow along with Sunday&rsquo;s scripture and access our reading plans.</p>
+  <a href="https://www.bible.com/churches/search?q=the+gathering+cleburne" target="_blank" class="yv-btn">Find us on YouVersion &rarr;</a>
 </div>
 
 <!-- LIGHTBOX -->
@@ -641,202 +631,53 @@
   </div>
 </section>
 
-<!-- EVENTS — Planning Center Live Embed -->
+<!-- CURRENT SERIES -->
+<section class="series" id="series">
+  <div class="series-banner">
+    <img src="Ephesians.jpg" alt="Ephesians Sermon Series">
+    <div class="series-overlay">
+      <span class="series-label">Current Series</span>
+      <h2 class="series-title">Ephesians</h2>
+      <p class="series-desc">Identity. Blessing. Adoption. Redemption. Discover who you are in Christ and walk in the victory He has already won.</p>
+      <span class="series-start">Sundays at 5:00 PM · Starting April 12</span>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
 <section class="events" id="events">
   <div class="events-header">
     <div><span class="label label-dark">Upcoming</span><h2 class="events-h2">Upcoming<br><em>gatherings.</em></h2></div>
     <a href="https://gatheringctx.churchcenter.com/calendar" target="_blank" class="btn-text-dark">View all events</a>
   </div>
-</section>
-<div class="pco-embed-wrap">
-  <!-- LIVE PLANNING CENTER CALENDAR — pulls from your iCal feed automatically -->
-  <div id="pco-calendar" class="pco-calendar-live">
-    <div class="pco-loading">
-      <span class="label label-dark" style="display:block;margin-bottom:.8rem">Loading events…</span>
-    </div>
-  </div>
-  <script>
-  (function() {
-    var ICAL_URL = 'https://calendar.planningcenteronline.com/icals/eJxj4ajmsGLLz2R-uoPJiiu1OL-gpJrdiiM5McdTiSclNS2xNKeEzYrNNcSKrTSTuaAg24q7ILEoMbe4mgEA_eIRmA==7b22bf675dc4764794e9c8526722002056bfe2d6';
-    var PROXY = 'https://api.allorigins.win/raw?url=';
-    var container = document.getElementById('pco-calendar');
-
-    function parseDate(str) {
-      if (!str) return null;
-      str = str.replace('Z','').replace('T','T');
-      if (str.length === 8) {
-        return new Date(str.slice(0,4)+'-'+str.slice(4,6)+'-'+str.slice(6,8)+'T00:00:00');
-      }
-      return new Date(str.slice(0,4)+'-'+str.slice(4,6)+'-'+str.slice(6,8)+'T'+str.slice(9,11)+':'+str.slice(11,13)+':'+str.slice(13,15));
-    }
-
-    function parseIcal(text) {
-      var events = [];
-      var blocks = text.split('BEGIN:VEVENT');
-      for (var i = 1; i < blocks.length; i++) {
-        var b = blocks[i];
-        var get = function(key) {
-          var m = b.match(new RegExp(key+'[^:]*:([^\\r\\n]+)'));
-          return m ? m[1].replace(/\\n/g,'\n').replace(/\\,/g,',') : '';
-        };
-        var dtstart = get('DTSTART') || get('DTSTART;VALUE=DATE') || get('DTSTART;TZID[^:]*');
-        var dtend   = get('DTEND')   || get('DTEND;VALUE=DATE')   || get('DTEND;TZID[^:]*');
-        var title   = get('SUMMARY');
-        var loc     = get('LOCATION');
-        var desc    = get('DESCRIPTION');
-        var start   = parseDate(dtstart.trim());
-        var end     = parseDate(dtend.trim());
-        if (start && title && start >= new Date()) {
-          events.push({ title: title.trim(), start: start, end: end, location: loc.trim(), desc: desc.trim() });
-        }
-      }
-      events.sort(function(a,b){ return a.start - b.start; });
-      return events;
-    }
-
-    var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-
-    function formatTime(d) {
-      if (!d) return '';
-      var h = d.getHours(), m = d.getMinutes(), ampm = h >= 12 ? 'PM' : 'AM';
-      h = h % 12 || 12;
-      return h + (m ? ':' + (m < 10 ? '0' + m : m) : '') + ' ' + ampm;
-    }
-
-    function render(events) {
-      if (!events.length) {
-        container.innerHTML = '<div class="pco-fallback"><div class="pco-fallback-inner"><span class="label label-dark" style="display:block;margin-bottom:1rem">No upcoming events found</span><a href="https://gatheringctx.churchcenter.com/calendar" target="_blank" class="btn-solid-dark">View Calendar →</a></div></div>';
-        return;
-      }
-      // Show next 6 events
-      var shown = events.slice(0, 6);
-      var html = '<div class="pco-live-grid">';
-      shown.forEach(function(ev) {
-        var d = ev.start;
-        var isRecurring = ev.title.toLowerCase().includes('sunday service');
-        html += '<div class="pco-event-card">';
-        html += '<div class="pco-event-date"><span class="pco-month">' + MONTHS[d.getMonth()] + '</span><span class="pco-day">' + d.getDate() + '</span><span class="pco-weekday">' + DAYS[d.getDay()] + '</span></div>';
-        html += '<div class="pco-event-info">';
-        if (isRecurring) html += '<span class="event-badge" style="margin-bottom:.5rem;display:inline-block">Weekly</span>';
-        html += '<div class="pco-event-title">' + ev.title + '</div>';
-        html += '<div class="pco-event-time">' + formatTime(d) + (ev.end ? ' – ' + formatTime(ev.end) : '') + '</div>';
-        if (ev.location) html += '<div class="pco-event-loc">📍 ' + ev.location + '</div>';
-        html += '</div></div>';
-      });
-      html += '</div>';
-      html += '<div style="text-align:right;padding:1.5rem 0 0"><a href="https://gatheringctx.churchcenter.com/calendar" target="_blank" class="btn-text-dark">View full calendar →</a></div>';
-      container.innerHTML = html;
-    }
-
-    fetch(PROXY + encodeURIComponent(ICAL_URL))
-      .then(function(r) { return r.text(); })
-      .then(function(text) { render(parseIcal(text)); })
-      .catch(function() {
-        container.innerHTML = '<div class="pco-fallback"><div class="pco-fallback-inner"><span class="label label-dark" style="display:block;margin-bottom:1rem">Live Calendar</span><p style="color:rgba(0,0,0,.6);font-size:.9rem;margin-bottom:1.5rem">See all upcoming events on Church Center.</p><a href="https://gatheringctx.churchcenter.com/calendar" target="_blank" class="btn-solid-dark">View Calendar →</a></div></div>';
-      });
-  })();
-  </script>
+  <div class="pco-wrap">
+  <div id="pco-cal" style="min-height:240px"><div style="text-align:center;padding:3rem 6rem;color:rgba(0,0,0,.4);font-size:.85rem">Loading events&hellip;</div></div>
 </div>
+</section>
 
 <!-- MEDIA -->
 <section class="media" id="media">
   <div class="media-header">
-    <div><span class="label">Messages</span><h2 class="media-h2">Watch &amp;<br><em>listen.</em></h2></div>
+    <div><span class="label">Messages</span><h2 class="media-h2">Listen &amp;<br><em>grow.</em></h2></div>
     <a href="https://gatheringctx.churchcenter.com/messages" target="_blank" class="btn-text-light">All messages →</a>
   </div>
   <div class="media-grid">
     <div class="media-card">
-      <div class="media-thumb"><div class="media-thumb-line"></div></div>
+      <span class="media-series">Easter Sunday · Apr 5</span>
+      <div class="media-title">He Got Up, And Everything Changed</div>
+      <div class="media-meta">Pastor Billy Philips</div>
+      <div style="margin-top:1rem"><div id="buzzsprout-player-18972694"></div><script src="https://www.buzzsprout.com/2608288/episodes/18972694-easter-sunday-april-5th-2026.js?container_id=buzzsprout-player-18972694&player=small" type="text/javascript" charset="utf-8"></script></div>
+    </div>
+    <div class="media-card">
       <span class="media-series">Launch Sunday · Mar 22</span>
       <div class="media-title">Walking With Victory, Not To It</div>
       <div class="media-meta">Pastor Billy Philips</div>
     </div>
     <div class="media-card">
-      <div class="media-thumb"><div class="media-thumb-line"></div></div>
-      <span class="media-series">Coming Soon</span>
-      <div class="media-title">More messages available after launch</div>
-      <div class="media-meta">gatheringctx.org</div>
-    </div>
-    <div class="media-card">
-      <div class="media-thumb"><div class="media-thumb-line"></div></div>
-      <span class="media-series">Planning Center</span>
-      <div class="media-title">Access full message archive on Church Center</div>
+      <span class="media-series">Church Center</span>
+      <div class="media-title">Access full message archive</div>
       <div class="media-meta"><a href="https://gatheringctx.churchcenter.com/messages" target="_blank" style="color:var(--gold)">View all messages →</a></div>
     </div>
-  </div>
-  <div class="media-cta"><a href="https://gatheringctx.churchcenter.com/messages" target="_blank" class="btn-text-light">All Messages</a></div>
-</section>
-
-<!-- PODCAST / SERMONS -->
-<section class="podcast-section" id="podcast">
-  <div class="podcast-header">
-    <div>
-      <span class="label">Listen Anywhere</span>
-      <h2 class="podcast-h2">Sermons on<br><em>every platform.</em></h2>
-    </div>
-    <p class="podcast-sub">Take the message with you. THE gathering sermons are available on all major podcast platforms — listen on your commute, at the gym, or whenever you need it.</p>
-  </div>
-  <div class="podcast-grid">
-    <a href="https://gatheringctx.churchcenter.com/messages" target="_blank" class="podcast-card">
-      <div class="podcast-icon">🎧</div>
-      <div class="podcast-info">
-        <div class="podcast-name">Church Center</div>
-        <div class="podcast-title">Stream all messages directly from Planning Center</div>
-      </div>
-    </a>
-    <a href="https://open.spotify.com/search/the%20gathering%20cleburne" target="_blank" class="podcast-card">
-      <div class="podcast-icon">🎵</div>
-      <div class="podcast-info">
-        <div class="podcast-name">Spotify</div>
-        <div class="podcast-title">Listen on Spotify — coming soon</div>
-      </div>
-    </a>
-    <a href="https://podcasts.apple.com/search?term=the+gathering+cleburne" target="_blank" class="podcast-card">
-      <div class="podcast-icon">🎙</div>
-      <div class="podcast-info">
-        <div class="podcast-name">Apple Podcasts</div>
-        <div class="podcast-title">Subscribe on Apple Podcasts — coming soon</div>
-      </div>
-    </a>
-    <a href="https://www.youtube.com/@thegatheringctx" target="_blank" class="podcast-card">
-      <div class="podcast-icon">▶️</div>
-      <div class="podcast-info">
-        <div class="podcast-name">YouTube</div>
-        <div class="podcast-title">Watch messages on YouTube @thegatheringctx</div>
-      </div>
-    </a>
-  </div>
-  <div class="media-cta" style="margin-top:3rem">
-    <p style="font-size:.75rem;color:var(--w30);letter-spacing:.1em">To add to Spotify &amp; Apple Podcasts, set up a free account at <a href="https://anchor.fm" target="_blank" style="color:var(--gold)">Spotify for Podcasters</a> and connect your Church Center RSS feed.</p>
-  </div>
-</section>
-
-<!-- INSTAGRAM FEED -->
-<section class="insta-section" id="social">
-  <div class="insta-header">
-    <div>
-      <span class="label">Follow Along</span>
-      <h2 class="insta-h2">@thegatheringctx<br><em>on Instagram.</em></h2>
-    </div>
-    <a href="https://www.instagram.com/thegatheringctx" target="_blank" class="btn-text-light">Follow us →</a>
-  </div>
-  <div class="insta-feed-wrap">
-    <!-- ═══════════════════════════════════════════════════════════════
-         INSTAGRAM FEED — SnapWidget (Free)
-         HOW TO ACTIVATE:
-         1. Go to snapwidget.com → Sign in with Instagram
-         2. Choose Grid style → copy the embed code
-         3. Replace the fallback below with your SnapWidget script
-         ═══════════════════════════════════════════════════════════════ -->
-    <div id="insta-fallback" style="display:flex;align-items:center;justify-content:center;min-height:300px;border:1px dashed var(--w15);border-radius:4px">
-      <div style="text-align:center;padding:3rem">
-        <p style="color:var(--w55);font-size:.9rem;margin-bottom:1.5rem">Instagram feed will appear here once connected.</p>
-        <a href="https://www.instagram.com/thegatheringctx" target="_blank" class="btn-solid">View on Instagram →</a>
-      </div>
-    </div>
-    <!-- PASTE SNAPWIDGET EMBED CODE HERE ↓ -->
-    <!-- <script src="https://snapwidget.com/embed/XXXXXX.js" class="snapwidget-widget"></script> -->
   </div>
 </section>
 
@@ -847,25 +688,67 @@
     <p class="dev-sub">Short readings to carry you through the week — grounded in Scripture, written for everyday life.</p>
   </div>
   <div class="dev-grid">
+    <a href="devotional-ephesians-1.html" class="dev-card">
+      <div class="dev-card-label">Ephesians Week 1</div>
+      <div class="dev-card-title">Blessed Before You Breathed</div>
+      <p class="dev-card-desc">The staggering grace of election and spiritual blessing. You were chosen before the foundation of the world.</p>
+      <div class="dev-card-ref">Ephesians 1:1-14</div>
+      <span class="dev-card-arrow">Read →</span>
+    </a>
+    <a href="devotional-easter-sunday.html" class="dev-card">
+      <div class="dev-card-label">Easter Sunday</div>
+      <div class="dev-card-title">He Got Up, And Everything Changed</div>
+      <p class="dev-card-desc">The Risen Christ and the Death of Death. A devotional on the resurrection that split history open.</p>
+      <div class="dev-card-ref">Matthew 28:1-10</div>
+      <span class="dev-card-arrow">Read →</span>
+    </a>
     <a href="devotional-palm-sunday.html" class="dev-card">
       <div class="dev-card-label">Palm Sunday</div>
       <div class="dev-card-title">The King Is Here</div>
       <p class="dev-card-desc">Will you still follow Him when He does not fit your plan? A Palm Sunday devotional from Matthew 21.</p>
-      <div class="dev-card-ref">Matthew 21:1–11</div>
+      <div class="dev-card-ref">Matthew 21:1-11</div>
       <span class="dev-card-arrow">Read →</span>
     </a>
-    <div class="dev-card dev-card--soon">
-      <div class="dev-card-label">Coming Soon</div>
-      <div class="dev-card-title">More devotionals on the way.</div>
-      <p class="dev-card-desc">New readings posted regularly. Check back soon or subscribe to stay connected.</p>
-      <span class="dev-card-arrow" style="color:var(--w30)">Coming soon</span>
+  </div>
+</section>
+
+<!-- SERMONS -->
+<section class="sermons" id="sermons">
+  <div class="sermon-hdr">
+    <div>
+      <span class="label">Messages</span>
+      <h2 class="sermon-h2">Sermons.<br><em>Take the Word with you.</em></h2>
     </div>
-    <div class="dev-card dev-card--soon">
-      <div class="dev-card-label">Coming Soon</div>
-      <div class="dev-card-title">More devotionals on the way.</div>
-      <p class="dev-card-desc">New readings posted regularly. Check back soon or subscribe to stay connected.</p>
-      <span class="dev-card-arrow" style="color:var(--w30)">Coming soon</span>
+    <p style="font-size:.9rem;line-height:2;color:var(--w75);align-self:end">Every Sunday message available to stream, download, and share. Subscribe on your platform so you never miss a word.</p>
+  </div>
+  <div class="sermon-latest">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap;margin-bottom:2rem">
+      <div>
+        <p class="sermon-meta">Latest &middot; April 13, 2026</p>
+        <h3 class="sermon-title">Sunday Service &mdash; THE gathering CTX</h3>
+        <p class="sermon-speaker">Pastor Billy Philips &middot; Cleburne Conference Center</p>
+      </div>
+      <a href="the-gathering-04-12-26.mp3" download style="display:flex;align-items:center;gap:.6rem;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w55);text-decoration:none;padding:.7rem 1.4rem;border:1px solid var(--w15);transition:color .2s,border-color .2s;white-space:nowrap" onmouseover="this.style.color='#fff';this.style.borderColor='var(--w55)'" onmouseout="this.style.color='var(--w55)';this.style.borderColor='var(--w15)'">
+        <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Download
+      </a>
     </div>
+    <audio controls class="sermon-audio" preload="none">
+      <source src="the-gathering-04-12-26.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  <div class="sermon-platforms">
+    <a href="https://gatheringctx.churchcenter.com/messages" target="_blank" class="sermon-platform">
+      <div class="sp-icon">🎧</div><div><div class="sp-name">Church Center</div><div class="sp-sub">All messages</div></div>
+    </a>
+    <a href="https://www.youtube.com/@thegatheringctx" target="_blank" class="sermon-platform">
+      <div class="sp-icon">▶️</div><div><div class="sp-name">YouTube</div><div class="sp-sub">@thegatheringctx</div></div>
+    </a>
+    <a href="https://open.spotify.com" target="_blank" class="sermon-platform">
+      <div class="sp-icon">🎵</div><div><div class="sp-name">Spotify</div><div class="sp-sub">Coming soon</div></div>
+    </a>
+    <a href="https://podcasts.apple.com" target="_blank" class="sermon-platform">
+      <div class="sp-icon">🎙</div><div><div class="sp-name">Apple Podcasts</div><div class="sp-sub">Coming soon</div></div>
+    </a>
   </div>
 </section>
 
@@ -924,25 +807,19 @@
   </div>
 </section>
 
-<!-- GIVE — Planning Center Giving Embed -->
-<section class="giving-embed" id="give">
-  <div class="giving-embed-left">
-    <span class="label">Generosity</span>
-    <h2 class="give-h2">Give with<br><em>purpose.</em></h2>
-    <p class="give-body">Everything we do is made possible by generosity. Your gift advances the Kingdom in Cleburne and beyond.</p>
-    <p class="give-body" style="font-size:.8rem;color:var(--w55)">"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." <span style="color:var(--gold)">2 Corinthians 9:7</span></p>
-    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem">
-      <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="btn-solid">Give Online →</a>
+<!-- GIVE -->
+<section id="give" style="padding:0;background:#000">
+  <div class="give-wrap">
+    <div class="give-left">
+      <span class="label">Generosity</span>
+      <h2 class="give-h2" style="margin-top:.8rem">Give with<br><em>purpose.</em></h2>
+      <p class="give-body">Everything we do is made possible by generosity. Your gift advances the Kingdom in Cleburne and beyond.</p>
+      <p style="font-size:.78rem;color:var(--w30);line-height:1.9;margin-top:1.5rem">&ldquo;Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.&rdquo; <em style="color:var(--gold)">2 Corinthians 9:7</em></p>
+      <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="btn-solid" style="display:inline-block;margin-top:2.5rem;width:fit-content">Give Online &rarr;</a>
     </div>
-  </div>
-  <div class="giving-embed-frame">
-    <!-- Planning Center Giving Embed — loads securely in iframe -->
-    <iframe
-      src="https://gatheringctx.churchcenter.com/giving/embed"
-      title="Give to THE gathering"
-      allow="payment"
-      loading="lazy">
-    </iframe>
+    <div class="give-right">
+      <iframe src="https://gatheringctx.churchcenter.com/giving/embed" title="Give to THE gathering" allow="payment" loading="lazy"></iframe>
+    </div>
   </div>
 </section>
 
@@ -1016,9 +893,6 @@
         <a href="https://www.instagram.com/thegatheringctx" target="_blank" class="social-link" aria-label="Instagram">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
-        <a href="https://www.youtube.com/@thegatheringctx" target="_blank" class="social-link" aria-label="YouTube">
-          <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-        </a>
         <a href="https://www.tiktok.com/@thegatheringctx" target="_blank" class="social-link" aria-label="TikTok">
           <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
         </a>
@@ -1026,7 +900,7 @@
     </div>
     <div class="f-col"><div class="f-col-head">Visit</div><ul><li><a href="https://gatheringctx.churchcenter.com">Plan a Visit</a></li><li><a href="https://gatheringctx.churchcenter.com/calendar">Events</a></li><li><a href="#visit">Service Times</a></li><li><a href="https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX" target="_blank">Location</a></li></ul></div>
     <div class="f-col"><div class="f-col-head">Connect</div><ul><li><a href="#contact">Small Groups</a></li><li><a href="#contact">Serve</a></li><li><a href="#app">Church Center App</a></li><li><a href="#beliefs">Statement of Faith</a></li></ul></div>
-    <div class="f-col"><div class="f-col-head">More</div><ul><li><a href="https://gatheringctx.churchcenter.com/giving">Give</a></li><li><a href="https://gatheringctx.churchcenter.com/messages">Messages</a></li><li><a href="#podcast">Sermons</a></li><li><a href="#devotionals">Devotionals</a></li><li><a href="https://www.bible.com/churches/search?q=the+gathering+cleburne" target="_blank">YouVersion</a></li><li><a href="#social">Instagram</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div class="f-col"><div class="f-col-head">More</div><ul><li><a href="https://gatheringctx.churchcenter.com/giving">Give</a></li><li><a href="https://gatheringctx.churchcenter.com/messages">Messages</a></li><li><a href="#devotionals">Devotionals</a></li><li><a href="#sermons">Sermons</a></li><li><a href="https://www.bible.com/churches/search?q=the+gathering+cleburne" target="_blank">YouVersion</a></li><li><a href="#contact">Contact</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 Gathering in Victory Inc. All rights reserved.</span>
@@ -1089,6 +963,28 @@
     window.open('mailto:info@gatheringctx.org?subject='+sub+'&body='+bdy,'_self');
     setTimeout(function(){ f.reset(); document.getElementById('formSuccess').style.display='block'; btn.style.display='none'; }, 900);
   }
+</script>
+<script>
+(function(){
+  var U='https://calendar.planningcenteronline.com/icals/eJxj4ajmsGLLz2R-uoPJiiu1OL-gpJrdiiM5McdTiSclNS2xNKeEzYrNNcSKrTSTuaAg24q7ILEoMbe4mgEA_eIRmA==7b22bf675dc4764794e9c8526722002056bfe2d6';
+  var el=document.getElementById('pco-cal');
+  if(!el)return;
+  var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var D=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  function pd(s){if(!s)return null;s=s.trim();if(s.length===8)return new Date(s.slice(0,4)+'-'+s.slice(4,6)+'-'+s.slice(6,8)+'T00:00:00');return new Date(s.slice(0,4)+'-'+s.slice(4,6)+'-'+s.slice(6,8)+'T'+s.slice(9,11)+':'+s.slice(11,13)+':'+s.slice(13,15));}
+  function ft(d){if(!d)return'';var h=d.getHours(),m=d.getMinutes(),a=h>=12?'PM':'AM';h=h%12||12;return h+(m?':'+(m<10?'0'+m:m):'')+' '+a;}
+  function parse(t){var evs=[],bs=t.split('BEGIN:VEVENT');for(var i=1;i<bs.length;i++){var b=bs[i];var g=function(k){var m=b.match(new RegExp(k+'[^:]*:([^\r\n]+)'));return m?m[1].trim():'';};var st=pd(g('DTSTART'));var ti=g('SUMMARY');var lo=g('LOCATION');var en=pd(g('DTEND'));if(st&&ti&&st>=new Date())evs.push({t:ti,s:st,e:en,l:lo});}evs.sort(function(a,b){return a.s-b.s;});return evs;}
+  function render(evs){
+    if(!evs.length){el.innerHTML='<div style="padding:3rem 6rem;text-align:center"><a href="https://gatheringctx.churchcenter.com/calendar" target="_blank" class="btn-text-dark">View Calendar &rarr;</a></div>';return;}
+    var h='<div class="pco-grid">';
+    evs.slice(0,6).forEach(function(ev){var d=ev.s;h+='<div class="pco-card"><div class="pco-dt"><span class="pco-mon">'+M[d.getMonth()]+'</span><span class="pco-day">'+d.getDate()+'</span><span class="pco-dow">'+D[d.getDay()]+'</span></div><div><div class="pco-title">'+ev.t+'</div><div class="pco-time">'+ft(d)+(ev.e?' &ndash; '+ft(ev.e):'')+'</div>'+(ev.l?'<div class="pco-loc">'+ev.l+'</div>':'')+'</div></div>';});
+    h+='</div><div style="text-align:right;padding:1.5rem 6rem 0"><a href="https://gatheringctx.churchcenter.com/calendar" target="_blank" class="btn-text-dark">View full calendar &rarr;</a></div>';
+    el.innerHTML=h;
+  }
+  fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(U))
+    .then(function(r){return r.text();}).then(function(t){render(parse(t));})
+    .catch(function(){el.innerHTML='<div style="padding:3rem 6rem;text-align:center"><a href="https://gatheringctx.churchcenter.com/calendar" target="_blank" class="btn-text-dark">View Calendar &rarr;</a></div>';});
+})();
 </script>
 </body>
 </html>
