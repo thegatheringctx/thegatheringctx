@@ -358,17 +358,26 @@
     .sermon-hdr{display:grid;grid-template-columns:1fr 1fr;gap:6rem;margin-bottom:4rem;align-items:end}
     .sermon-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;color:#fff}
     .sermon-h2 em{font-style:italic;color:var(--w55)}
-    .sermon-archive{display:flex;flex-direction:column;gap:1px;background:var(--w08);margin-bottom:2px}
-    .sermon-row{background:#000;padding:2.5rem 3rem;display:grid;grid-template-columns:60px 1fr auto;gap:2rem;align-items:start;transition:background .2s}
-    .sermon-row:hover{background:rgba(255,255,255,.04)}
-    .sermon-ep-num{font-size:2.5rem;font-weight:200;color:var(--w15);letter-spacing:-.02em;padding-top:.3rem}
-    .sermon-ep-date{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
-    .sermon-ep-title{font-size:1.1rem;font-weight:300;color:#fff;margin-bottom:.3rem;line-height:1.3}
-    .sermon-ep-speaker{font-size:.8rem;color:var(--w55)}
-    .sermon-ep-actions{display:flex;flex-direction:column;gap:.8rem;padding-top:.5rem}
-    .sermon-dl-btn{display:flex;align-items:center;gap:.5rem;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w55);text-decoration:none;padding:.6rem 1.2rem;border:1px solid var(--w15);white-space:nowrap;transition:color .2s,border-color .2s}
-    .sermon-dl-btn:hover{color:#fff;border-color:var(--w55)}
-    
+    .sermon-subscribe{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem}
+    .sermon-sub-btn{display:inline-flex;align-items:center;gap:.7rem;padding:.8rem 1.6rem;border:1px solid var(--w15);text-decoration:none;transition:border-color .2s,background .2s;border-radius:2px}
+    .sermon-sub-btn:hover{border-color:var(--w55);background:rgba(255,255,255,.05)}
+    .sermon-sub-btn svg{flex-shrink:0}
+    .sermon-sub-btn span{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-family:"Nunito Sans",sans-serif}
+    .sermon-list{display:flex;flex-direction:column;gap:1px;background:var(--w08)}
+    .sermon-item{background:#000;padding:3rem;display:grid;grid-template-columns:56px 1fr;gap:2.5rem;align-items:start;transition:background .2s}
+    .sermon-item:hover{background:rgba(255,255,255,.03)}
+    .sermon-num{font-size:2rem;font-weight:200;color:var(--w15);letter-spacing:-.02em;line-height:1;padding-top:.4rem;text-align:center}
+    .sermon-info{}
+    .sermon-date{font-size:.54rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem}
+    .sermon-title{font-size:1.1rem;font-weight:300;color:#fff;margin-bottom:.3rem;line-height:1.3}
+    .sermon-speaker{font-size:.78rem;color:var(--w55);margin-bottom:1.6rem}
+    .sermon-audio-wrap{position:relative;background:rgba(255,255,255,.06);border:1px solid var(--w08);border-radius:3px;overflow:hidden;margin-bottom:1rem}
+    .sermon-audio-wrap audio{width:100%;display:block;height:48px;background:transparent}
+    .sermon-audio-wrap audio::-webkit-media-controls-panel{background:rgba(255,255,255,.04)}
+    .sermon-audio-wrap audio::-webkit-media-controls-current-time-display,.sermon-audio-wrap audio::-webkit-media-controls-time-remaining-display{color:#fff}
+    .sermon-dl{display:inline-flex;align-items:center;gap:.45rem;font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-decoration:none;transition:color .2s}
+    .sermon-dl:hover{color:var(--w75)}
+    @media(max-width:900px){.sermons{padding:6rem 2rem}.sermon-hdr{grid-template-columns:1fr;gap:2rem}.sermon-item{grid-template-columns:1fr;gap:1rem}.sermon-num{display:none}}
 
     @media(max-width:900px){.youversion-bar{padding:2rem;flex-direction:column;text-align:center}.pco-wrap{padding:0 2rem 4rem}.pco-grid{grid-template-columns:1fr}.give-wrap{grid-template-columns:1fr}.give-left{padding:5rem 2rem}.sermons{padding:6rem 2rem}.sermon-hdr{grid-template-columns:1fr;gap:2rem}.sermon-platforms{grid-template-columns:1fr 1fr}}
     /* RESPONSIVE */
@@ -681,63 +690,66 @@
       <span class="label">Messages</span>
       <h2 class="sermon-h2">Sermons.<br><em>Take the Word with you.</em></h2>
     </div>
-    <div style="align-self:end;display:flex;flex-direction:column;gap:1rem">
-      <p style="font-size:.85rem;line-height:1.9;color:var(--w75)">Subscribe and never miss a message.</p>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap">
-        <a href="https://podcasts.apple.com/search?term=the+gathering+cleburne" target="_blank" style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.06);border:1px solid var(--w15);padding:.7rem 1.4rem;text-decoration:none;transition:background .2s;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='rgba(255,255,255,.06)'">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c2.071 0 3.75 1.679 3.75 3.75S14.071 12 12 12s-3.75-1.679-3.75-3.75S9.929 4.5 12 4.5zm6 13.934A9.946 9.946 0 0112 21a9.946 9.946 0 01-6-2.066V18c0-2.485 2.015-4.5 4.5-4.5h3c2.485 0 4.5 2.015 4.5 4.5v.434z"/></svg>
-          <span style="font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;font-family:'Nunito Sans',sans-serif">Apple Podcasts</span>
+    <div style="align-self:end">
+      <p style="font-size:.85rem;color:var(--w55);margin-bottom:1.2rem;line-height:1.8">Subscribe and never miss a message.</p>
+      <div class="sermon-subscribe">
+        <a href="https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293" target="_blank" class="sermon-sub-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="24" rx="5" fill="#8B3CF7"/>
+            <path d="M12 3.5C7.86 3.5 4.5 6.86 4.5 11c0 2.56 1.28 4.82 3.24 6.18-.06-.46-.1-.94-.1-1.43 0-.32.02-.64.06-.95C6.62 13.62 6 12.38 6 11c0-3.31 2.69-6 6-6s6 2.69 6 6c0 1.38-.62 2.62-1.7 3.8.04.31.06.63.06.95 0 .49-.04.97-.1 1.43C18.22 15.82 19.5 13.56 19.5 11c0-4.14-3.36-7.5-7.5-7.5z" fill="white"/>
+            <circle cx="12" cy="11.5" r="2.5" fill="white"/>
+            <path d="M10.5 16.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v3c0 .28-.22.5-.5.5h-2c-.28 0-.5-.22-.5-.5v-3z" fill="white"/>
+          </svg>
+          <span>Apple Podcasts</span>
         </a>
-        <a href="https://open.spotify.com/search/the%20gathering%20cleburne" target="_blank" style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.06);border:1px solid var(--w15);padding:.7rem 1.4rem;text-decoration:none;transition:background .2s;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='rgba(255,255,255,.06)'">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          <span style="font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;font-family:'Nunito Sans',sans-serif">Spotify</span>
+        <a href="https://open.spotify.com/show/0Wy33N5PgLrtGZtFcI9uaj" target="_blank" class="sermon-sub-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1DB954" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="12" fill="#1DB954"/>
+            <path d="M16.8 10.8c-2.8-1.66-7.4-1.82-10.07-1.01-.43.13-.88-.11-1.01-.54-.13-.43.11-.88.54-1.01 3.06-.93 8.16-.75 11.38 1.16.39.23.52.73.29 1.12-.23.38-.73.51-1.13.28zm-.11 2.97c-.2.33-.62.43-.95.23-2.33-1.43-5.88-1.85-8.63-1.01-.37.11-.76-.1-.87-.47-.11-.37.1-.76.47-.87 3.14-.95 7.05-.49 9.75 1.17.33.2.43.62.23.95zm-1.08 2.85c-.16.26-.5.35-.76.19-2.04-1.25-4.6-1.53-7.62-.84-.3.07-.6-.12-.67-.42-.07-.3.12-.6.42-.67 3.3-.75 6.14-.43 8.44.97.26.16.34.5.19.77z" fill="white"/>
+          </svg>
+          <span>Spotify</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- EPISODE CARDS -->
-  <div style="display:flex;flex-direction:column;gap:1px;background:var(--w08)">
+  <div class="sermon-list">
 
     <!-- EP 02 -->
-    <div style="background:#0e0d0b;padding:3rem;display:grid;grid-template-columns:80px 1fr;gap:2.5rem;align-items:start">
-      <div style="background:var(--gold);border-radius:8px;width:80px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0">
-        <span style="font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,0,0,.7);margin-bottom:.2rem">EP</span>
-        <span style="font-size:1.8rem;font-weight:200;color:#000;line-height:1">02</span>
-      </div>
-      <div style="min-width:0">
-        <div style="font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">April 13, 2026</div>
-        <div style="font-size:1.15rem;font-weight:300;color:#fff;margin-bottom:.3rem;line-height:1.3">The Gathering &mdash; Week 1 &mdash; Ephesians</div>
-        <div style="font-size:.8rem;color:var(--w55);margin-bottom:1.5rem">Pastor Billy Philips &middot; Cleburne Conference Center</div>
-        <audio controls preload="none" style="width:100%;accent-color:var(--gold);height:44px">
-          <source src="https://www.buzzsprout.com/2608288/episodes/19008173-the-gathering-week-1-ephesians-4-12-2026.mp3?download=true" type="audio/mpeg">
-        </audio>
-        <div style="margin-top:1rem">
-          <a href="https://www.buzzsprout.com/2608288/episodes/19008173-the-gathering-week-1-ephesians-4-12-2026.mp3?download=true" download style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:.4rem" onmouseover="this.style.color='var(--w75)'" onmouseout="this.style.color='var(--w30)'">
-            <svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Download MP3
-          </a>
+    <div class="sermon-item">
+      <div class="sermon-num">02</div>
+      <div class="sermon-info">
+        <div class="sermon-date">April 13, 2026</div>
+        <div class="sermon-title">The Gathering &mdash; Week 1 &mdash; Ephesians</div>
+        <div class="sermon-speaker">Pastor Billy Philips &middot; Cleburne Conference Center</div>
+        <div class="sermon-audio-wrap">
+          <audio controls preload="none">
+            <source src="https://www.buzzsprout.com/2608288/episodes/19008173-the-gathering-week-1-ephesians-4-12-2026.mp3?download=true" type="audio/mpeg">
+          </audio>
         </div>
+        <a href="https://www.buzzsprout.com/2608288/episodes/19008173-the-gathering-week-1-ephesians-4-12-2026.mp3?download=true" download class="sermon-dl">
+          <svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download MP3
+        </a>
       </div>
     </div>
 
     <!-- EP 01 -->
-    <div style="background:#0e0d0b;padding:3rem;display:grid;grid-template-columns:80px 1fr;gap:2.5rem;align-items:start">
-      <div style="background:rgba(200,169,110,.2);border:1px solid var(--gold);border-radius:8px;width:80px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0">
-        <span style="font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem">EP</span>
-        <span style="font-size:1.8rem;font-weight:200;color:var(--gold);line-height:1">01</span>
-      </div>
-      <div style="min-width:0">
-        <div style="font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">April 5, 2026 &mdash; Easter Sunday</div>
-        <div style="font-size:1.15rem;font-weight:300;color:#fff;margin-bottom:.3rem;line-height:1.3">Easter Sunday &mdash; He Is Risen</div>
-        <div style="font-size:.8rem;color:var(--w55);margin-bottom:1.5rem">Pastor Billy Philips &middot; Cleburne Conference Center</div>
-        <audio controls preload="none" style="width:100%;accent-color:var(--gold);height:44px">
-          <source src="https://www.buzzsprout.com/2608288/episodes/18972694-easter-sunday-april-5th-2026.mp3?download=true" type="audio/mpeg">
-        </audio>
-        <div style="margin-top:1rem">
-          <a href="https://www.buzzsprout.com/2608288/episodes/18972694-easter-sunday-april-5th-2026.mp3?download=true" download style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:.4rem" onmouseover="this.style.color='var(--w75)'" onmouseout="this.style.color='var(--w30)'">
-            <svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Download MP3
-          </a>
+    <div class="sermon-item">
+      <div class="sermon-num">01</div>
+      <div class="sermon-info">
+        <div class="sermon-date">April 5, 2026 &mdash; Easter Sunday</div>
+        <div class="sermon-title">Easter Sunday &mdash; He Is Risen</div>
+        <div class="sermon-speaker">Pastor Billy Philips &middot; Cleburne Conference Center</div>
+        <div class="sermon-audio-wrap">
+          <audio controls preload="none">
+            <source src="https://www.buzzsprout.com/2608288/episodes/18972694-easter-sunday-april-5th-2026.mp3?download=true" type="audio/mpeg">
+          </audio>
         </div>
+        <a href="https://www.buzzsprout.com/2608288/episodes/18972694-easter-sunday-april-5th-2026.mp3?download=true" download class="sermon-dl">
+          <svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download MP3
+        </a>
       </div>
     </div>
 
