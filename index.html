@@ -991,5 +991,72 @@
     .catch(function(){el.innerHTML='<div style="padding:3rem 6rem;text-align:center"><a href="https://gatheringctx.churchcenter.com/calendar" target="_blank" class="btn-text-dark">View Calendar &rarr;</a></div>';});
 })();
 </script>
+
+<script>
+// ── CLICK & PLAY TRACKING ──
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Track devotional card clicks
+  document.querySelectorAll('a.dev-card[href]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var title = el.querySelector('.dev-card-title')?.innerText || el.href;
+      gtag('event', 'devotional_click', {
+        event_category: 'Devotionals',
+        event_label: title,
+      });
+    });
+  });
+
+  // Track sermon audio plays
+  document.querySelectorAll('.sermon-audio-wrap audio').forEach(function(audio) {
+    var tracked = false;
+    audio.addEventListener('play', function() {
+      if (tracked) return;
+      tracked = true;
+      var item = audio.closest('.sermon-item');
+      var title = item?.querySelector('.sermon-title')?.innerText || 'Unknown';
+      gtag('event', 'sermon_play', {
+        event_category: 'Sermons',
+        event_label: title,
+      });
+    });
+    // Reset so each new play session counts
+    audio.addEventListener('ended', function() { tracked = false; });
+  });
+
+  // Track sermon MP3 downloads
+  document.querySelectorAll('a.sermon-dl').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var item = el.closest('.sermon-item');
+      var title = item?.querySelector('.sermon-title')?.innerText || 'Unknown';
+      gtag('event', 'sermon_download', {
+        event_category: 'Sermons',
+        event_label: title,
+      });
+    });
+  });
+
+  // Track Apple Podcasts clicks
+  document.querySelectorAll('a.sermon-sub-btn[href*="apple"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      gtag('event', 'podcast_subscribe', {
+        event_category: 'Sermons',
+        event_label: 'Apple Podcasts',
+      });
+    });
+  });
+
+  // Track Spotify clicks
+  document.querySelectorAll('a.sermon-sub-btn[href*="spotify"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      gtag('event', 'podcast_subscribe', {
+        event_category: 'Sermons',
+        event_label: 'Spotify',
+      });
+    });
+  });
+
+});
+</script>
 </body>
 </html>
