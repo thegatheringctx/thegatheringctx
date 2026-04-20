@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Devotionals | The Gathering CTX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,::before,::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:#000;color:#fff;font-family:"Nunito Sans",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    :root{--black:#000;--white:#fff;--off:#f8f6f2;--ash:#0e0d0b;--gold:#c8a96e;--w90:rgba(255,255,255,.90);--w75:rgba(255,255,255,.75);--w55:rgba(255,255,255,.55);--w30:rgba(255,255,255,.30);--w15:rgba(255,255,255,.15);--w08:rgba(255,255,255,.08)}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.8rem 4rem;background:rgba(0,0,0,.92);backdrop-filter:blur(12px)}
+    .logo-text{font-size:1.05rem;font-weight:400;letter-spacing:.05em;line-height:1}
+    .logo-text sup{font-size:.45em;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);vertical-align:super;margin-right:.15em}
+    .nav-links{display:flex;align-items:center;gap:2.5rem}
+    .nav-links a{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w75);font-weight:400;transition:color .2s}
+    .nav-links a:hover{color:#fff}
+    .nav-links a.active{color:var(--gold)}
+    .nav-give{border:1px solid var(--w30);padding:.45rem 1.2rem;transition:border-color .2s,color .2s !important}
+    .nav-give:hover{border-color:#fff;color:#fff !important}
+    .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+    .nav-burger span{display:block;width:22px;height:1px;background:#fff}
+    .nav-mobile{display:none;position:fixed;inset:0;background:#000;z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+    .nav-mobile.open{display:flex}
+    .nav-mobile .close-btn{position:absolute;top:2rem;right:2.5rem;font-size:1.5rem;cursor:pointer;color:var(--w75)}
+    .nav-mobile a{font-size:1.2rem;letter-spacing:.15em;text-transform:uppercase;font-weight:300;color:var(--w75)}
+
+    /* HERO */
+    .page-hero{padding:12rem 6rem 6rem;position:relative}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(200,169,110,.04) 0%,transparent 70%);pointer-events:none}
+    .label{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1.2rem}
+    .page-hero h1{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:200;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+    .page-hero h1 em{font-style:italic;color:var(--w55)}
+    .page-hero p{font-size:.95rem;line-height:2;color:var(--w55);max-width:520px}
+    .back-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);margin-bottom:2rem;transition:color .2s}
+    .back-link:hover{color:#fff}
+
+    /* DEVOTIONAL LIST */
+    .archive-section{background:var(--off);padding:6rem}
+    .archive-grid{display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.1)}
+    .archive-card{background:var(--off);display:grid;grid-template-columns:100px 1fr auto;gap:3rem;padding:3rem;align-items:center;text-decoration:none;transition:background .3s;cursor:pointer}
+    .archive-card:hover{background:#ede8e0}
+    .archive-date{text-align:center}
+    .archive-month{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block}
+    .archive-day{font-size:2.8rem;font-weight:200;color:#000;line-height:1;letter-spacing:-.02em}
+    .archive-year{font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,0,0,.35);display:block;margin-top:.2rem}
+    .archive-info{}
+    .archive-series{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;display:block}
+    .archive-title{font-size:1.25rem;font-weight:300;color:#000;letter-spacing:-.01em;line-height:1.3;margin-bottom:.5rem}
+    .archive-desc{font-size:.85rem;line-height:1.8;color:rgba(0,0,0,.55);max-width:500px}
+    .archive-ref{font-size:.72rem;font-style:italic;color:var(--gold);margin-top:.5rem;display:block}
+    .archive-arrow{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:#000;transition:letter-spacing .2s;white-space:nowrap}
+    .archive-card:hover .archive-arrow{letter-spacing:.22em}
+
+    /* FOOTER */
+    .page-footer{background:var(--ash);border-top:1px solid var(--w08);padding:4rem 6rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+    .footer-brand{font-size:1rem;font-weight:400;letter-spacing:.05em}
+    .footer-brand sup{font-size:.45em;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);vertical-align:super;margin-right:.15em}
+    .footer-links{display:flex;gap:2rem;align-items:center}
+    .footer-links a{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);transition:color .2s}
+    .footer-links a:hover{color:var(--w75)}
+    .footer-copy{font-size:.55rem;letter-spacing:.1em;color:var(--w30);width:100%;text-align:center;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--w08)}
+
+    @media(max-width:900px){
+      nav{padding:1.4rem 2rem}
+      .nav-links{display:none}
+      .nav-burger{display:flex}
+      .page-hero{padding:9rem 2rem 4rem}
+      .archive-section{padding:3rem 1.5rem}
+      .archive-card{grid-template-columns:70px 1fr;gap:1.5rem;padding:2rem 1.5rem}
+      .archive-arrow{display:none}
+      .archive-day{font-size:2rem}
+      .page-footer{padding:3rem 2rem}
+    }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-3L9RY5RS73');</script>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo-text"><sup>the</sup>gathering</a>
+  <div class="nav-links">
+    <a href="/#about">About</a>
+    <a href="/devotionals.html" class="active">Devotionals</a>
+    <a href="/sermons.html">Sermons</a>
+    <a href="/#events">Events</a>
+    <a href="/#visit">Visit</a>
+    <a href="/#contact">Contact</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="nav-give">Give</a>
+  </div>
+  <div class="nav-burger" onclick="document.getElementById('mobileNav').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-mobile" id="mobileNav">
+  <span class="close-btn" onclick="document.getElementById('mobileNav').classList.remove('open')">&#215;</span>
+  <a href="/" onclick="document.getElementById('mobileNav').classList.remove('open')">Home</a>
+  <a href="/devotionals.html" onclick="document.getElementById('mobileNav').classList.remove('open')">Devotionals</a>
+  <a href="/sermons.html" onclick="document.getElementById('mobileNav').classList.remove('open')">Sermons</a>
+  <a href="/#events" onclick="document.getElementById('mobileNav').classList.remove('open')">Events</a>
+  <a href="/#visit" onclick="document.getElementById('mobileNav').classList.remove('open')">Visit</a>
+  <a href="/#contact" onclick="document.getElementById('mobileNav').classList.remove('open')">Contact</a>
+  <a href="https://gatheringctx.churchcenter.com/giving" target="_blank">Give</a>
+</div>
+
+<section class="page-hero">
+  <a href="/" class="back-link">&larr; Back to Home</a>
+  <span class="label">Read &amp; Reflect</span>
+  <h1>All <em>Devotionals.</em></h1>
+  <p>Short readings to carry you through the week. Grounded in Scripture, written for everyday life.</p>
+</section>
+
+<section class="archive-section">
+  <div class="archive-grid">
+
+    <a href="/devotional-ephesians-2" class="archive-card">
+      <div class="archive-date">
+        <span class="archive-month">Apr</span>
+        <span class="archive-day">18</span>
+        <span class="archive-year">2026</span>
+      </div>
+      <div class="archive-info">
+        <span class="archive-series">Ephesians Week 2</span>
+        <div class="archive-title">Brought Near by the Blood</div>
+        <p class="archive-desc">You were far off. You were dead. But God, who is rich in mercy, brought you near by the blood of Christ.</p>
+        <span class="archive-ref">Ephesians 2:13-22</span>
+      </div>
+      <span class="archive-arrow">Read &rarr;</span>
+    </a>
+
+    <a href="/devotional-ephesians-1" class="archive-card">
+      <div class="archive-date">
+        <span class="archive-month">Apr</span>
+        <span class="archive-day">12</span>
+        <span class="archive-year">2026</span>
+      </div>
+      <div class="archive-info">
+        <span class="archive-series">Ephesians Week 1</span>
+        <div class="archive-title">Blessed Before You Breathed</div>
+        <p class="archive-desc">The staggering grace of election and spiritual blessing. You were chosen before the foundation of the world.</p>
+        <span class="archive-ref">Ephesians 1:1-14</span>
+      </div>
+      <span class="archive-arrow">Read &rarr;</span>
+    </a>
+
+    <a href="/devotional-easter-sunday" class="archive-card">
+      <div class="archive-date">
+        <span class="archive-month">Apr</span>
+        <span class="archive-day">05</span>
+        <span class="archive-year">2026</span>
+      </div>
+      <div class="archive-info">
+        <span class="archive-series">Easter Sunday</span>
+        <div class="archive-title">He Got Up, And Everything Changed</div>
+        <p class="archive-desc">The Risen Christ and the Death of Death. A devotional on the resurrection that split history open.</p>
+        <span class="archive-ref">Matthew 28:1-10</span>
+      </div>
+      <span class="archive-arrow">Read &rarr;</span>
+    </a>
+
+    <a href="/devotional-palm-sunday" class="archive-card">
+      <div class="archive-date">
+        <span class="archive-month">Mar</span>
+        <span class="archive-day">29</span>
+        <span class="archive-year">2026</span>
+      </div>
+      <div class="archive-info">
+        <span class="archive-series">Palm Sunday</span>
+        <div class="archive-title">The King Is Here</div>
+        <p class="archive-desc">Will you still follow Him when He does not fit your plan? A Palm Sunday devotional from Matthew 21.</p>
+        <span class="archive-ref">Matthew 21:1-11</span>
+      </div>
+      <span class="archive-arrow">Read &rarr;</span>
+    </a>
+
+  </div>
+</section>
+
+<footer class="page-footer">
+  <div class="footer-brand"><sup>the</sup>gathering</div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/sermons.html">Sermons</a>
+    <a href="/#visit">Plan a Visit</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank">Give</a>
+    <a href="mailto:info@gatheringctx.org">Contact</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Gathering in Victory Inc. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

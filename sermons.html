@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sermons | The Gathering CTX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,::before,::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:#000;color:#fff;font-family:"Nunito Sans",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    :root{--black:#000;--white:#fff;--off:#f8f6f2;--ash:#0e0d0b;--gold:#c8a96e;--w90:rgba(255,255,255,.90);--w75:rgba(255,255,255,.75);--w55:rgba(255,255,255,.55);--w30:rgba(255,255,255,.30);--w15:rgba(255,255,255,.15);--w08:rgba(255,255,255,.08)}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.8rem 4rem;background:rgba(0,0,0,.92);backdrop-filter:blur(12px)}
+    .logo-text{font-size:1.05rem;font-weight:400;letter-spacing:.05em;line-height:1}
+    .logo-text sup{font-size:.45em;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);vertical-align:super;margin-right:.15em}
+    .nav-links{display:flex;align-items:center;gap:2.5rem}
+    .nav-links a{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w75);font-weight:400;transition:color .2s}
+    .nav-links a:hover{color:#fff}
+    .nav-links a.active{color:var(--gold)}
+    .nav-give{border:1px solid var(--w30);padding:.45rem 1.2rem;transition:border-color .2s,color .2s !important}
+    .nav-give:hover{border-color:#fff;color:#fff !important}
+    .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+    .nav-burger span{display:block;width:22px;height:1px;background:#fff}
+    .nav-mobile{display:none;position:fixed;inset:0;background:#000;z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+    .nav-mobile.open{display:flex}
+    .nav-mobile .close-btn{position:absolute;top:2rem;right:2.5rem;font-size:1.5rem;cursor:pointer;color:var(--w75)}
+    .nav-mobile a{font-size:1.2rem;letter-spacing:.15em;text-transform:uppercase;font-weight:300;color:var(--w75)}
+
+    /* HERO */
+    .page-hero{padding:12rem 6rem 6rem;position:relative}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(200,169,110,.04) 0%,transparent 70%);pointer-events:none}
+    .label{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1.2rem}
+    .page-hero h1{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:200;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+    .page-hero h1 em{font-style:italic;color:var(--w55)}
+    .page-hero p{font-size:.95rem;line-height:2;color:var(--w55);max-width:520px}
+    .back-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);margin-bottom:2rem;transition:color .2s}
+    .back-link:hover{color:#fff}
+
+    /* PLATFORM BAR */
+    .platform-bar{background:var(--ash);border-top:1px solid var(--w08);border-bottom:1px solid var(--w08);padding:2.5rem 6rem;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap}
+    .platform-label{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--w30)}
+    .platform-link{display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--w55);transition:color .2s;padding:.5rem 1rem;border:1px solid var(--w08);transition:border-color .2s,color .2s}
+    .platform-link:hover{color:#fff;border-color:var(--w30)}
+    .platform-icon{font-size:1.1rem}
+
+    /* SERMON LIST */
+    .sermon-section{background:var(--ash);padding:5rem 6rem 6rem}
+    .sermon-list{display:flex;flex-direction:column;gap:1px;background:var(--w08)}
+    .sermon-card{background:var(--ash);display:grid;grid-template-columns:100px 1fr;gap:3rem;padding:3rem;align-items:start;transition:background .3s}
+    .sermon-card:hover{background:rgba(255,255,255,.03)}
+    .sermon-date{text-align:center}
+    .sermon-month{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block}
+    .sermon-day{font-size:2.8rem;font-weight:200;color:#fff;line-height:1;letter-spacing:-.02em}
+    .sermon-year{font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--w30);display:block;margin-top:.2rem}
+    .sermon-info{display:flex;flex-direction:column;gap:.6rem}
+    .sermon-series{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block}
+    .sermon-title{font-size:1.35rem;font-weight:200;color:#fff;letter-spacing:-.01em;line-height:1.3}
+    .sermon-meta{font-size:.8rem;color:var(--w55)}
+    .sermon-scripture{font-size:.75rem;font-style:italic;color:var(--gold);margin-top:.2rem}
+
+    /* AUDIO PLAYER */
+    .sermon-player{margin-top:1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+    .sermon-player audio{height:36px;flex:1;min-width:200px;border-radius:0;filter:brightness(.85) contrast(1.1)}
+    .sermon-player audio::-webkit-media-controls-panel{background:rgba(255,255,255,.06)}
+    .sermon-download{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);border:1px solid var(--w15);padding:.4rem 1rem;transition:color .2s,border-color .2s;white-space:nowrap}
+    .sermon-download:hover{color:#fff;border-color:var(--w55)}
+
+    /* FOOTER */
+    .page-footer{background:#000;border-top:1px solid var(--w08);padding:4rem 6rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+    .footer-brand{font-size:1rem;font-weight:400;letter-spacing:.05em}
+    .footer-brand sup{font-size:.45em;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);vertical-align:super;margin-right:.15em}
+    .footer-links{display:flex;gap:2rem;align-items:center}
+    .footer-links a{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);transition:color .2s}
+    .footer-links a:hover{color:var(--w75)}
+    .footer-copy{font-size:.55rem;letter-spacing:.1em;color:var(--w30);width:100%;text-align:center;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--w08)}
+
+    @media(max-width:900px){
+      nav{padding:1.4rem 2rem}
+      .nav-links{display:none}
+      .nav-burger{display:flex}
+      .page-hero{padding:9rem 2rem 4rem}
+      .platform-bar{padding:2rem;gap:1rem}
+      .sermon-section{padding:3rem 1.5rem}
+      .sermon-card{grid-template-columns:60px 1fr;gap:1.5rem;padding:2rem 1.5rem}
+      .sermon-day{font-size:2rem}
+      .sermon-title{font-size:1.1rem}
+      .page-footer{padding:3rem 2rem}
+    }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-3L9RY5RS73');</script>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo-text"><sup>the</sup>gathering</a>
+  <div class="nav-links">
+    <a href="/#about">About</a>
+    <a href="/devotionals.html">Devotionals</a>
+    <a href="/sermons.html" class="active">Sermons</a>
+    <a href="/#events">Events</a>
+    <a href="/#visit">Visit</a>
+    <a href="/#contact">Contact</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="nav-give">Give</a>
+  </div>
+  <div class="nav-burger" onclick="document.getElementById('mobileNav').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+<div class="nav-mobile" id="mobileNav">
+  <span class="close-btn" onclick="document.getElementById('mobileNav').classList.remove('open')">&#215;</span>
+  <a href="/" onclick="document.getElementById('mobileNav').classList.remove('open')">Home</a>
+  <a href="/devotionals.html" onclick="document.getElementById('mobileNav').classList.remove('open')">Devotionals</a>
+  <a href="/sermons.html" onclick="document.getElementById('mobileNav').classList.remove('open')">Sermons</a>
+  <a href="/#events" onclick="document.getElementById('mobileNav').classList.remove('open')">Events</a>
+  <a href="/#visit" onclick="document.getElementById('mobileNav').classList.remove('open')">Visit</a>
+  <a href="/#contact" onclick="document.getElementById('mobileNav').classList.remove('open')">Contact</a>
+  <a href="https://gatheringctx.churchcenter.com/giving" target="_blank">Give</a>
+</div>
+
+<section class="page-hero">
+  <a href="/" class="back-link">&larr; Back to Home</a>
+  <span class="label">Listen Anywhere</span>
+  <h1>All <em>Sermons.</em></h1>
+  <p>Take the message with you. Every sermon from THE gathering, available to stream, download, or listen on your favorite podcast platform.</p>
+</section>
+
+<div class="platform-bar">
+  <span class="platform-label">Subscribe</span>
+  <a href="https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293" target="_blank" class="platform-link"><span class="platform-icon">&#127911;</span> Apple Podcasts</a>
+  <a href="https://open.spotify.com/show/0Wy33N5PgLrtGZtFcI9uaj" target="_blank" class="platform-link"><span class="platform-icon">&#127925;</span> Spotify</a>
+  <a href="https://www.youtube.com/@thegatheringctx" target="_blank" class="platform-link"><span class="platform-icon">&#9654;&#65039;</span> YouTube</a>
+  <a href="https://gatheringctx.churchcenter.com/messages" target="_blank" class="platform-link"><span class="platform-icon">&#127908;</span> Church Center</a>
+</div>
+
+<section class="sermon-section">
+  <div class="sermon-list">
+
+    <div class="sermon-card">
+      <div class="sermon-date">
+        <span class="sermon-month">Apr</span>
+        <span class="sermon-day">13</span>
+        <span class="sermon-year">2026</span>
+      </div>
+      <div class="sermon-info">
+        <span class="sermon-series">Ephesians &middot; Week 1</span>
+        <div class="sermon-title">The Gathering &mdash; Week 1 &mdash; Ephesians</div>
+        <div class="sermon-meta">Pastor Billy Philips &middot; Cleburne Conference Center</div>
+        <span class="sermon-scripture">Ephesians 1:1-14</span>
+        <div class="sermon-player">
+          <audio controls preload="none">
+            <source src="https://www.buzzsprout.com/2608288/episodes/19008173-the-gathering-week-1-ephesians-4-12-2026.mp3" type="audio/mpeg">
+          </audio>
+          <a href="https://www.buzzsprout.com/2608288/episodes/19008173-the-gathering-week-1-ephesians-4-12-2026.mp3?download=true" class="sermon-download">Download MP3</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sermon-card">
+      <div class="sermon-date">
+        <span class="sermon-month">Apr</span>
+        <span class="sermon-day">05</span>
+        <span class="sermon-year">2026</span>
+      </div>
+      <div class="sermon-info">
+        <span class="sermon-series">Easter Sunday</span>
+        <div class="sermon-title">Easter Sunday &mdash; He Is Risen</div>
+        <div class="sermon-meta">Pastor Billy Philips &middot; Cleburne Conference Center</div>
+        <span class="sermon-scripture">Matthew 28:1-10</span>
+        <div class="sermon-player">
+          <audio controls preload="none">
+            <source src="https://www.buzzsprout.com/2608288/episodes/18972694-easter-sunday-april-5th-2026.mp3" type="audio/mpeg">
+          </audio>
+          <a href="https://www.buzzsprout.com/2608288/episodes/18972694-easter-sunday-april-5th-2026.mp3?download=true" class="sermon-download">Download MP3</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="page-footer">
+  <div class="footer-brand"><sup>the</sup>gathering</div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/devotionals.html">Devotionals</a>
+    <a href="/#visit">Plan a Visit</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank">Give</a>
+    <a href="mailto:info@gatheringctx.org">Contact</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Gathering in Victory Inc. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
