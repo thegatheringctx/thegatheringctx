@@ -1,202 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Mystery Is Out | Ephesians Week 3 | The Gathering</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:#FAF6F0;color:#1a1a1a;font-family:'Source Sans 3',sans-serif;font-weight:300;line-height:1.8;-webkit-font-smoothing:antialiased}
-    ::selection{background:#5C1A1B;color:#fff}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mystery Is Out | The Gathering CTX</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6F0;
+    --warm-white: #F5EFE6;
+    --gold: #B8860B;
+    --gold-light: #D4A843;
+    --deep-wine: #5C1A1B;
+    --charcoal: #2B2B2B;
+    --text: #3A3632;
+    --text-light: #6B6560;
+    --rule: #D6CCBC;
+  }
 
-    /* NAV */
-    .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;background:rgba(250,246,240,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}
-    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#1a1a1a;text-decoration:none;letter-spacing:.02em}
-    .nav-logo sup{font-size:.5em;color:#B8860B;margin-right:.1em}
-    .nav-back{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#5C1A1B;text-decoration:none;transition:opacity .2s}
-    .nav-back:hover{opacity:.7}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* HERO */
-    .hero{min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10rem 2rem 5rem;background:linear-gradient(to bottom,#FAF6F0,#f5f0e8);position:relative}
-    .hero::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(92,26,27,.2),transparent)}
-    .hero-series{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem}
-    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:300;color:#5C1A1B;line-height:1.15;margin-bottom:1.5rem;max-width:700px}
-    .hero-ref{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:#B8860B}
-    .hero-date{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,0,0,.4);margin-top:1.5rem}
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Source Sans 3', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    /* CONTENT */
-    .content{max-width:680px;margin:0 auto;padding:5rem 2rem 6rem}
-    .scripture-box{background:#fff;border-left:3px solid #B8860B;padding:2rem 2.5rem;margin-bottom:4rem;box-shadow:0 2px 20px rgba(0,0,0,.04)}
-    .scripture-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
-    .scripture-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:#333;line-height:1.9}
-    .scripture-text span{display:block;text-align:right;font-style:normal;font-size:.85rem;color:#B8860B;margin-top:1rem}
+  .hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(175deg, var(--deep-wine) 0%, #3D1213 55%, #1E0A0A 100%);
+    overflow: hidden;
+    padding: 4rem 2rem;
+  }
 
-    .section{margin-bottom:4rem}
-    .section-num{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:.8rem;display:block}
-    .section-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:#5C1A1B;margin-bottom:1.5rem;line-height:1.3}
-    .section p{font-size:1.05rem;color:#333;margin-bottom:1.5rem}
-    .section p strong{font-weight:600;color:#5C1A1B}
-    .section p em{font-style:italic;color:#5C1A1B}
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(184,134,11,0.12) 0%, transparent 70%),
+      radial-gradient(circle at 20% 80%, rgba(184,134,11,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
 
-    .pull-quote{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;color:#5C1A1B;text-align:center;padding:2.5rem 2rem;margin:3rem 0;border-top:1px solid rgba(92,26,27,.15);border-bottom:1px solid rgba(92,26,27,.15);line-height:1.6}
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
-    .greek-box{background:#5C1A1B;color:#fff;padding:2rem 2.5rem;margin:2.5rem 0;border-radius:2px}
-    .greek-word{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:#D4A843;margin-bottom:.5rem}
-    .greek-def{font-size:.95rem;color:rgba(255,255,255,.9);line-height:1.8}
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    animation: fadeUp 1.2s ease-out;
+  }
 
-    .reflection{background:#5C1A1B;color:#fff;padding:3rem;margin:4rem 0}
-    .reflection-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
-    .reflection-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin-bottom:1.5rem;color:#fff}
-    .reflection ul{list-style:none;display:flex;flex-direction:column;gap:1rem}
-    .reflection li{font-size:1rem;color:rgba(255,255,255,.85);padding-left:1.5rem;position:relative;line-height:1.7}
-    .reflection li::before{content:'';position:absolute;left:0;top:.6rem;width:6px;height:6px;background:#B8860B;border-radius:50%}
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-    .prayer{background:#f5f0e8;padding:3rem;margin:4rem 0;text-align:center}
-    .prayer-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
-    .prayer-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:#333;line-height:1.9;max-width:550px;margin:0 auto}
+  .hero-label {
+    font-family: 'Source Sans 3', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
 
-    .declaration{text-align:center;padding:3rem 2rem;margin:3rem 0;border:1px solid rgba(92,26,27,.15)}
-    .declaration-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
-    .declaration-text{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#5C1A1B;line-height:1.6}
+  .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: #FAEFD8;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
 
-    /* FOOTER */
-    .dev-footer{text-align:center;padding:4rem 2rem;border-top:1px solid rgba(0,0,0,.08)}
-    .dev-footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#5C1A1B;margin-bottom:1rem}
-    .dev-footer-logo sup{font-size:.5em;color:#B8860B;margin-right:.1em}
-    .dev-footer p{font-size:.8rem;color:rgba(0,0,0,.5);margin-bottom:.5rem}
-    .dev-footer a{color:#5C1A1B}
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-style: italic;
+    color: rgba(250,239,216,0.7);
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 auto;
+  }
 
-    @media(max-width:600px){
-      .nav{padding:1rem 1.5rem}
-      .hero{padding:8rem 1.5rem 4rem}
-      .content{padding:3rem 1.5rem 4rem}
-      .scripture-box{padding:1.5rem}
-      .reflection,.prayer,.greek-box{padding:2rem 1.5rem}
-    }
-  </style>
+  .hero-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 1.8rem auto;
+    opacity: 0.7;
+  }
+
+  .hero-scripture-ref {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(250,239,216,0.45);
+    margin-top: 0.5rem;
+  }
+
+  .article-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+  }
+
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.25;
+    line-height: 1;
+    margin-bottom: -0.3rem;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--deep-wine);
+    line-height: 1.3;
+    margin-bottom: 1.2rem;
+  }
+
+  p { margin-bottom: 1.4rem; font-weight: 300; }
+
+  .scripture-block {
+    background: var(--warm-white);
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem 1.8rem;
+    margin: 2rem 0;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .scripture-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.85;
+    margin-bottom: 0.6rem;
+  }
+
+  .scripture-block p:last-child { margin-bottom: 0; }
+
+  .scripture-ref {
+    font-family: 'Source Sans 3', sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 0.8rem;
+  }
+
+  .pull-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--deep-wine);
+    text-align: center;
+    padding: 2.2rem 1.5rem;
+    margin: 2.5rem 0;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .pull-quote::before,
+  .pull-quote::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto;
+  }
+
+  .pull-quote::before { margin-bottom: 1.5rem; }
+  .pull-quote::after { margin-top: 1.5rem; }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 3rem 0;
+    color: var(--rule);
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background: var(--rule);
+  }
+
+  .section-divider .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  .reflection-box {
+    background: linear-gradient(135deg, var(--warm-white) 0%, #F0E8DA 100%);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 2rem 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .reflection-box h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .reflection-box p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+  }
+
+  .reflection-box p:last-child { margin-bottom: 0; }
+
+  .prayer-section {
+    background: var(--deep-wine);
+    color: #FAEFD8;
+    border-radius: 8px;
+    padding: 2.5rem 2.2rem;
+    margin: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .prayer-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(184,134,11,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .prayer-section h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .prayer-section p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(250,239,216,0.9);
+    line-height: 1.8;
+    position: relative;
+  }
+
+  .benediction {
+    text-align: center;
+    padding: 3rem 1rem;
+    margin-top: 2rem;
+  }
+
+  .benediction p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--text);
+    line-height: 1.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .benediction .amen {
+    font-weight: 700;
+    color: var(--deep-wine);
+    display: block;
+    margin-top: 0.8rem;
+    letter-spacing: 2px;
+  }
+
+  strong { font-weight: 600; color: var(--charcoal); }
+  em { color: var(--text); }
+
+  .greek-word {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--deep-wine);
+  }
+
+  .word-def {
+    display: inline-block;
+    background: var(--warm-white);
+    padding: 0.15rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-left: 0.3rem;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border-top: 1px solid var(--rule);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .footer p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+  }
+
+  .footer .site-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--deep-wine);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 600px) {
+    .article-wrapper { padding: 2.5rem 1.3rem 3rem; }
+    .hero { min-height: 55vh; padding: 3rem 1.5rem; }
+    .pull-quote { font-size: 1.25rem; padding: 1.8rem 1rem; }
+    .scripture-block { padding: 1.2rem 1.3rem; }
+    .prayer-section { padding: 2rem 1.5rem; }
+  }
+</style>
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="nav-logo"><sup>the</sup>gathering</a>
-  <a href="index.html#devotionals" class="nav-back">← All Devotionals</a>
-</nav>
-
 <header class="hero">
-  <span class="hero-series">Ephesians · Week 3</span>
-  <h1 class="hero-title">The Mystery Is Out</h1>
-  <div class="hero-ref">Ephesians 3:1-21</div>
-  <div class="hero-date">April 26, 2026</div>
+  <div class="hero-content">
+    <p class="hero-label">Ephesians Series &middot; Week 3</p>
+    <h1>The Mystery Is Out</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">The excluded are included. The strangers are now sons. And God is able to do far more than you have dared to ask.</p>
+    <p class="hero-scripture-ref">Ephesians 3:1-21</p>
+  </div>
 </header>
 
-<main class="content">
+<article class="article-wrapper">
 
-  <div class="scripture-box">
-    <span class="scripture-label">Scripture Reading</span>
-    <p class="scripture-text">
-      "Now to him who is able to do far more abundantly than all that we ask or think, according to the power at work within us, to him be glory in the church and in Christ Jesus throughout all generations, forever and ever. Amen."
-      <span>— Ephesians 3:20-21</span>
-    </p>
-  </div>
+  <p>Ephesians 3 is one of the most breathtaking chapters in the entire Bible. Paul, writing from a prison cell, calls himself "a prisoner of Christ Jesus" and then launches into a revelation so staggering he has to interrupt himself to make sure you understand what you are hearing.</p>
 
-  <div class="section">
-    <span class="section-num">01</span>
-    <h2 class="section-title">The Mystery Revealed</h2>
-    <p>Ephesians 3 is one of the most breathtaking chapters in the entire Bible. Paul, writing from a prison cell, calls himself "a prisoner of Christ Jesus" and then launches into a revelation so staggering he has to interrupt himself to make sure you understand what you are hearing.</p>
-    <p>He is revealing what he calls <strong>the mystery</strong>. In the New Testament, a mystery is not something impossible to know. It is something that was hidden and has now been revealed.</p>
-    <p>And the mystery of Ephesians 3 is this: <em>Gentiles, outsiders, those who had no claim, are now fellow heirs, members of the same body, and partakers of the promise in Christ Jesus.</em></p>
-    <p>The wall is down. The excluded are included. The strangers are now sons. <strong>The mystery is out.</strong></p>
-  </div>
+  <p>He is revealing what he calls <strong>the mystery</strong>. In the New Testament, a mystery is not something impossible to know. It is something that was hidden and has now been revealed.</p>
+
+  <p>And the mystery of Ephesians 3 is this: Gentiles, outsiders, those who had no claim, are now fellow heirs, members of the same body, and partakers of the promise in Christ Jesus. The wall is down. The excluded are included. The strangers are now sons. <strong>The mystery is out.</strong></p>
 
   <div class="pull-quote">
-    "Grace does not choose the most qualified. It qualifies the chosen."
+    Grace does not choose the most qualified. It qualifies the chosen.
   </div>
 
-  <div class="section">
-    <span class="section-num">02</span>
-    <h2 class="section-title">Grace Qualifies the Chosen</h2>
-    <p>Paul describes himself as "the very least of all the saints" and yet he was the one entrusted with this mystery. He did not volunteer. He was a persecutor of the church. He was the last person anyone would have picked.</p>
-    <p>But that is how grace works. <strong>Grace does not choose the most qualified. It qualifies the chosen.</strong> God does not call those who are ready. He makes ready those He calls.</p>
-    <p>Your assignment in the Kingdom is not tied to your résumé. It is tied to His grace. And His grace is sufficient for whatever He has called you to do.</p>
+  <div class="section-divider"><span class="dot"></span></div>
 
-    <div class="greek-box">
-      <div class="greek-word">oikonomia (οἰκονομία)</div>
-      <div class="greek-def">"Stewardship," literally the law of the household. Paul was entrusted with a specific management responsibility: to make known the mystery. Every believer carries a stewardship, a portion of God's work entrusted specifically to them.</div>
-    </div>
+  <div class="section-number">01</div>
+  <h2>Grace Qualifies the Chosen</h2>
+
+  <div class="scripture-block">
+    <p>"To me, though I am the very least of all the saints, this grace was given, to preach to the Gentiles the unsearchable riches of Christ."</p>
+    <span class="scripture-ref">Ephesians 3:8 &middot; ESV</span>
   </div>
 
-  <div class="section">
-    <span class="section-num">03</span>
-    <h2 class="section-title">The Church: God's Display Case</h2>
-    <p>This is one of the most explosive verses in Ephesians: <em>"So that through the church the manifold wisdom of God might now be made known to the rulers and authorities in the heavenly places."</em> (3:10)</p>
-    <p>Through the church. Not through angels. Not through the sun, the stars, or the heavens. <strong>Through the church.</strong></p>
-    <p>The church, this gathered, imperfect, diverse, Spirit filled assembly of people who have nothing in common except the blood of Jesus, is God's chosen display case of His wisdom to the unseen world.</p>
-    <p>When the church loves across racial divides, God puts His wisdom on display. When the church forgives the unforgivable, God puts His wisdom on display. When the church holds together in unity across culture and background, principalities and powers see something they cannot explain.</p>
-    <p><strong>The church is not just a meeting place. It is a cosmic announcement.</strong></p>
+  <p>Paul describes himself as "the very least of all the saints" and yet he was the one entrusted with this mystery. He did not volunteer. He was a persecutor of the church. He was the last person anyone would have picked.</p>
 
-    <div class="greek-box">
-      <div class="greek-word">polupoikilos (πολυποίκιλος)</div>
-      <div class="greek-def">"Manifold," literally many colored or multi faceted. Used of embroidery with many patterns and colors woven together. God's wisdom is not monochrome. It is displayed through the diverse, unified, Spirit knit body of believers. Every background, every nation, every story woven together into one tapestry of grace.</div>
-    </div>
+  <p>But that is how grace works. <strong>Grace does not choose the most qualified. It qualifies the chosen.</strong> God does not call those who are ready. He makes ready those He calls.</p>
+
+  <p>Your assignment in the Kingdom is not tied to your resume. It is tied to His grace. And His grace is sufficient for whatever He has called you to do.</p>
+
+  <p>The Greek word <span class="greek-word">oikonomia</span> (&#959;&#7984;&#954;&#959;&#957;&#959;&#956;&#943;&#945;) <span class="word-def">stewardship</span> literally means "the law of the household." Paul was entrusted with a specific management responsibility: to make known the mystery. Every believer carries a stewardship, a portion of God's work entrusted specifically to them.</p>
+
+  <div class="section-divider"><span class="dot"></span></div>
+
+  <div class="section-number">02</div>
+  <h2>The Church: God's Display Case</h2>
+
+  <div class="scripture-block">
+    <p>"So that through the church the manifold wisdom of God might now be made known to the rulers and authorities in the heavenly places."</p>
+    <span class="scripture-ref">Ephesians 3:10 &middot; ESV</span>
   </div>
+
+  <p>Through the church. Not through angels. Not through the sun, the stars, or the heavens. <strong>Through the church.</strong></p>
+
+  <p>The church, this gathered, imperfect, diverse, Spirit-filled assembly of people who have nothing in common except the blood of Jesus, is God's chosen display case of His wisdom to the unseen world.</p>
+
+  <p>When the church loves across racial divides, God puts His wisdom on display. When the church forgives the unforgivable, God puts His wisdom on display. When the church holds together in unity across culture and background, principalities and powers see something they cannot explain.</p>
+
+  <p>The Greek word <span class="greek-word">polupoikilos</span> (&#960;&#959;&#955;&#965;&#960;&#959;&#943;&#954;&#953;&#955;&#959;&#962;) <span class="word-def">manifold, many-colored</span> was used of embroidery with many patterns and colors woven together. God's wisdom is not monochrome. It is displayed through the diverse, unified, Spirit-knit body of believers. Every background, every nation, every story woven together into one tapestry of grace.</p>
 
   <div class="pull-quote">
-    "God is not trying to give you enough. He is trying to fill you until you overflow."
+    The church is not just a meeting place. It is a cosmic announcement.
   </div>
 
-  <div class="section">
-    <span class="section-num">04</span>
-    <h2 class="section-title">A Prayer for Fullness, Not Comfort</h2>
-    <p>Paul falls to his knees and prays. Not for their circumstances, not for their finances, not for their health. He prays that they would be <strong>strengthened in the inner person</strong>. That Christ would dwell in their hearts through faith. That they would be rooted and grounded in love. That they would comprehend the incomprehensible love of Christ. That they would be <em>filled with all the fullness of God</em>.</p>
-    <p>This is not a small prayer. This is not a comfortable prayer. This is a transformational prayer.</p>
-    <p>He prays that they would know what surpasses knowledge. That is not a contradiction. It is a paradox of grace. The love of Christ is so vast that it cannot be contained in theological categories. It must be experienced.</p>
-    <p>Not 10 percent of God. Not enough to be religious. <strong>All the fullness.</strong> The same word used when Scripture says the earth is full of the glory of God. That is what God wants to pour into His people.</p>
+  <div class="section-divider"><span class="dot"></span></div>
+
+  <div class="section-number">03</div>
+  <h2>A Prayer for Fullness, Not Comfort</h2>
+
+  <div class="scripture-block">
+    <p>"That according to the riches of his glory he may grant you to be strengthened with power through his Spirit in your inner being, so that Christ may dwell in your hearts through faith."</p>
+    <span class="scripture-ref">Ephesians 3:16-17 &middot; ESV</span>
   </div>
 
-  <div class="section">
-    <span class="section-num">05</span>
-    <h2 class="section-title">Far More Abundantly</h2>
-    <p><em>"Now to him who is able to do far more abundantly than all that we ask or think, according to the power at work within us..."</em></p>
-    <p>This is Paul's doxology, his burst of praise. And it is perhaps the most expansive promise in the Bible about God's ability.</p>
-    <p><strong>Far more abundantly.</strong> Not a little more. Not double. Far more abundantly than all that we ask, and not just ask, but think. Even your imagination does not reach the ceiling of what God is able to do.</p>
-    <p>The limitation is never on God's side. The power is at work within us and it is limitless. The question is not what God can do. The question is what we are willing to believe and yield to.</p>
-    <p><strong>You have not yet asked for too much. You have probably asked for too little.</strong></p>
+  <p>Paul falls to his knees and prays. Not for their circumstances, not for their finances, not for their health. He prays that they would be <strong>strengthened in the inner person</strong>. That Christ would dwell in their hearts through faith. That they would be rooted and grounded in love. That they would comprehend the incomprehensible love of Christ. That they would be filled with all the fullness of God.</p>
+
+  <p>This is not a small prayer. This is not a comfortable prayer. This is a transformational prayer.</p>
+
+  <p>He prays that they would know what surpasses knowledge. That is not a contradiction. It is a paradox of grace. The love of Christ is so vast that it cannot be contained in theological categories. It must be experienced.</p>
+
+  <p>Not 10 percent of God. Not enough to be religious. <strong>All the fullness.</strong> The same word used when Scripture says the earth is full of the glory of God. That is what God wants to pour into His people.</p>
+
+  <div class="pull-quote">
+    God is not trying to give you enough. He is trying to fill you until you overflow.
   </div>
 
-  <div class="reflection">
-    <span class="reflection-label">Reflect</span>
-    <h3 class="reflection-title">Questions for the Week</h3>
-    <ul>
-      <li>Have you been living like an outsider — as if the promises of God are for everyone else but not fully for you?</li>
-      <li>What stewardship has God entrusted specifically to you? Are you walking in it?</li>
-      <li>How does being part of the church — God's display case — change the way you see Sunday gatherings?</li>
-      <li>Where have you been asking God for "enough" instead of asking Him for fullness?</li>
-      <li>What would you ask for if you truly believed God could do far more abundantly than you could imagine?</li>
-    </ul>
+  <div class="section-divider"><span class="dot"></span></div>
+
+  <div class="section-number">04</div>
+  <h2>Far More Abundantly</h2>
+
+  <div class="scripture-block">
+    <p>"Now to him who is able to do far more abundantly than all that we ask or think, according to the power at work within us, to him be glory in the church and in Christ Jesus throughout all generations, forever and ever. Amen."</p>
+    <span class="scripture-ref">Ephesians 3:20-21 &middot; ESV</span>
   </div>
 
-  <div class="prayer">
-    <span class="prayer-label">Pray</span>
-    <p class="prayer-text">
-      Father, thank You that the mystery is out — I am a fellow heir, a member of Your body, a partaker of the promise. Strengthen me with power in my inner being. Let Christ dwell in my heart through faith. Root me and ground me in love. Help me comprehend the breadth and length and height and depth of Your love that surpasses knowledge. Fill me with all Your fullness — not a portion, but all of You. Do far more abundantly than I could ever ask or imagine. In Jesus' name, Amen.
-    </p>
+  <p>This is Paul's doxology, his burst of praise. And it is perhaps the most expansive promise in the Bible about God's ability.</p>
+
+  <p><strong>Far more abundantly.</strong> Not a little more. Not double. Far more abundantly than all that we ask, and not just ask, but think. Even your imagination does not reach the ceiling of what God is able to do.</p>
+
+  <p>The limitation is never on God's side. The power is at work within us and it is limitless. The question is not what God can do. The question is what we are willing to believe and yield to.</p>
+
+  <p><strong>You have not yet asked for too much. You have probably asked for too little.</strong></p>
+
+  <div class="reflection-box">
+    <h3>Reflect</h3>
+    <p>Have I been living like an outsider, as if the promises of God are for everyone else but not fully for me?</p>
+    <p>What stewardship has God entrusted specifically to me? Am I walking in it?</p>
+    <p>How does being part of the church, God's display case, change the way I see Sunday gatherings?</p>
+    <p>Where have I been asking God for "enough" instead of asking Him for fullness?</p>
+    <p>What would I ask for if I truly believed God could do far more abundantly than I could imagine?</p>
   </div>
 
-  <div class="declaration">
-    <span class="declaration-label">Declare</span>
-    <p class="declaration-text">The mystery of Christ is in me and I am in Him! I am a fellow heir, a member of His body, a partaker of the promise! I am filled, not halfway, not enough to get by, but with all the fullness of God! My God is able to do far more abundantly than everything I have asked or imagined, according to His power that is already at work within me! I walk with victory, not to it. Amen!</p>
+  <div class="prayer-section">
+    <h3>Pray</h3>
+    <p>Father, thank You that the mystery is out. I am a fellow heir, a member of Your body, a partaker of the promise. Strengthen me with power in my inner being. Let Christ dwell in my heart through faith. Root me and ground me in love. Help me comprehend the breadth and length and height and depth of Your love that surpasses knowledge. Fill me with all Your fullness, not a portion, but all of You. Do far more abundantly than I could ever ask or imagine. In Jesus' name. Amen.</p>
   </div>
 
-</main>
+  <div class="benediction">
+    <p>The mystery of Christ is in me and I am in Him. I am a fellow heir, a member of His body, a partaker of the promise. I am filled, not halfway, not enough to get by, but with all the fullness of God. My God is able to do far more abundantly than everything I have asked or imagined, according to His power that is already at work within me. I walk with victory, not to it, in Jesus' name.</p>
+    <span class="amen">Amen</span>
+  </div>
 
-<footer class="dev-footer">
-  <div class="dev-footer-logo"><sup>the</sup>gathering</div>
-  <p>Sundays at 5:00 PM · Cleburne Conference Center</p>
-  <p><a href="index.html">gatheringctx.org</a></p>
+</article>
+
+<footer class="footer">
+  <p class="site-name">The Gathering CTX</p>
+  <p>gatheringctx.org</p>
 </footer>
 
 </body>
