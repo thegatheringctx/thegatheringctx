@@ -147,9 +147,9 @@
         <span class="sermon-year">2026</span>
       </div>
       <div class="sermon-info">
-        <span class="sermon-series">Ephesians Â· Week 4</span>
-        <div class="sermon-title">Ephesians 3 â The Mystery Is Out</div>
-        <div class="sermon-meta">Pastor Billy Philips Â· Cleburne Conference Center</div>
+        <span class="sermon-series">Ephesians ÃÂ· Week 4</span>
+        <div class="sermon-title">Ephesians 3 Ã¢ÂÂ The Mystery Is Out</div>
+        <div class="sermon-meta">Pastor Billy Philips ÃÂ· Cleburne Conference Center</div>
         <span class="sermon-scripture">Ephesians 3</span>
         <div class="sermon-player">
           <audio controls preload="none">
@@ -166,9 +166,9 @@
         <span class="sermon-year">2026</span>
       </div>
       <div class="sermon-info">
-        <span class="sermon-series">Ephesians Â· Week 3</span>
-        <div class="sermon-title">Ephesians 2 â Brought Near by the Blood</div>
-        <div class="sermon-meta">Ben Philips Â· Cleburne Conference Center</div>
+        <span class="sermon-series">Ephesians ÃÂ· Week 3</span>
+        <div class="sermon-title">Ephesians 2 Ã¢ÂÂ Brought Near by the Blood</div>
+        <div class="sermon-meta">Ben Philips ÃÂ· Cleburne Conference Center</div>
         <span class="sermon-scripture">Ephesians 2:11-22</span>
         <div class="sermon-player">
           <audio controls preload="none">
@@ -218,6 +218,17 @@
     </div>
 
   </div>
+  <!-- SUBSCRIBE NUDGE -->
+  <div class="sermon-nudge">
+    <p class="nudge-text">Enjoyed this message? Get the next one in your inbox.</p>
+    <a href="#sub-form-sermons" class="nudge-btn" onclick="document.getElementById('sub-form-sermons').querySelector('input').focus();return false;">Subscribe Free →</a>
+  </div>
+  <style>
+    .sermon-nudge{display:flex;align-items:center;justify-content:space-between;padding:1.8rem 3rem;background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
+    .nudge-text{font-size:.82rem;color:rgba(255,255,255,.45);letter-spacing:.02em;margin:0}
+    .nudge-btn{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold,#c9a84c);text-decoration:none;white-space:nowrap;border:1px solid rgba(201,168,76,.3);padding:.6rem 1.2rem;border-radius:2px;transition:border-color .2s,background .2s}
+    .nudge-btn:hover{border-color:var(--gold,#c9a84c);background:rgba(201,168,76,.06)}
+  </style>
 </section>
 
 <footer class="page-footer">
@@ -239,12 +250,12 @@
       <div class="subscribe-text">
         <span class="label label-light">Stay Connected</span>
         <h2 class="subscribe-h2">Never miss a sermon.</h2>
-        <p class="subscribe-sub">Get new sermons delivered straight to your inbox — free, no spam, unsubscribe anytime.</p>
+        <p class="subscribe-sub">Get new sermons delivered straight to your inbox â free, no spam, unsubscribe anytime.</p>
       </div>
       <form class="subscribe-form" id="sub-form-sermons" onsubmit="handleSub(event,'sermons')">
         <div class="sub-input-row">
           <input type="email" name="email" placeholder="Your email address" required class="sub-input" autocomplete="email">
-          <button type="submit" class="sub-btn">Subscribe →</button>
+          <button type="submit" class="sub-btn">Subscribe â</button>
         </div>
         <p class="sub-msg" id="sub-msg-sermons"></p>
       </form>
@@ -273,7 +284,7 @@
     const email = form.email.value.trim();
     const btn = form.querySelector('.sub-btn');
     const msg = document.getElementById('sub-msg-' + list);
-    btn.disabled = true; btn.textContent = 'Sending…';
+    btn.disabled = true; btn.textContent = 'Sendingâ¦';
     msg.className = 'sub-msg'; msg.textContent = '';
     try {
       const res = await fetch('/api/subscribe', {
@@ -284,16 +295,16 @@
       const data = await res.json();
       if (res.ok && data.success) {
         msg.className = 'sub-msg success';
-        msg.textContent = '✓ You\'re subscribed! Check your inbox.';
+        msg.textContent = 'â You\'re subscribed! Check your inbox.';
         form.reset();
       } else {
         throw new Error(data.error || 'Something went wrong.');
       }
     } catch(err) {
       msg.className = 'sub-msg error';
-      msg.textContent = '✗ ' + err.message;
+      msg.textContent = 'â ' + err.message;
     } finally {
-      btn.disabled = false; btn.textContent = 'Subscribe →';
+      btn.disabled = false; btn.textContent = 'Subscribe â';
     }
   }
   </script>
