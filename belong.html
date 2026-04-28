@@ -401,41 +401,14 @@
     </div>
   </div>
   <div class="register-right">
-    <form id="belongForm">
-      <div class="form-field">
-        <label class="form-label" for="firstname">First Name</label>
-        <input class="form-input" type="text" id="firstname" name="firstname" placeholder="" required/>
-      </div>
-      <div class="form-field">
-        <label class="form-label" for="lastname">Last Name</label>
-        <input class="form-input" type="text" id="lastname" name="lastname" placeholder="" required/>
-      </div>
-      <div class="form-field">
-        <label class="form-label" for="email">Email Address</label>
-        <input class="form-input" type="email" id="email" name="email" placeholder="" required/>
-      </div>
-      <div class="form-field">
-        <label class="form-label" for="phone">Phone (optional)</label>
-        <input class="form-input" type="tel" id="phone" name="phone" placeholder=""/>
-      </div>
-      <div class="form-field">
-        <label class="form-label" for="connection">How long have you been attending?</label>
-        <select class="form-select" id="connection" name="connection">
-          <option value="">Select one</option>
-          <option>This is my first time</option>
-          <option>A few weeks</option>
-          <option>A few months</option>
-          <option>Six months or more</option>
-        </select>
-      </div>
-      <div class="form-field">
-        <label class="form-label" for="note">Anything you want us to know? (optional)</label>
-        <textarea class="form-textarea" id="note" name="note" rows="3" placeholder="Questions, family size, childcare needs..."></textarea>
-      </div>
-      <button type="submit" class="form-submit" id="submitBtn">I Want to Be in the Room</button>
-    </form>
-    <div class="form-success" id="formSuccess">
-      <div class="form-success-icon">✓</div>
+    <div style="margin-top:0">
+      <iframe
+        src="https://gatheringctx.churchcenter.com/people/forms/1215903/responses/new"
+        style="width:100%;min-height:620px;border:none;background:transparent"
+        title="Belong & Become Registration"
+        loading="lazy"
+      ></iframe>
+    </div>
       <div class="form-success-title">You're on the list.</div>
       <div class="form-success-body">We will be in touch soon with details on the next Belong &amp; Become class. We are glad you are here.</div>
     </div>
@@ -459,33 +432,6 @@
     document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Form submit — mailto fallback (no backend needed)
-  document.getElementById('belongForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-
-    const d = new FormData(this);
-    const fn = d.get('firstname') || '';
-    const ln = d.get('lastname') || '';
-    const em = d.get('email') || '';
-    const ph = d.get('phone') || '';
-    const cn = d.get('connection') || '';
-    const nt = d.get('note') || '';
-
-    const subject = encodeURIComponent(`Belong & Become — ${fn} ${ln}`);
-    const body = encodeURIComponent(
-      `Name: ${fn} ${ln}\nEmail: ${em}\nPhone: ${ph}\nAttending: ${cn}\n\nNote:\n${nt}`
-    );
-
-    window.open(`mailto:info@gatheringctx.org?subject=${subject}&body=${body}`, '_self');
-
-    setTimeout(() => {
-      document.getElementById('belongForm').style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    }, 800);
-  });
-</script>
+  // Form submit — mailto fallback (no backend needed)</script>
 </body>
 </html>
