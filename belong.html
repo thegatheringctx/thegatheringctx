@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Belong & Become | The Gathering CTX</title>
+  <meta name="description" content="Belong & Become is The Gathering's vision and partnership class. One session. 90 minutes. Everything you need to know about who we are, why we exist, and what your next step looks like."/>
+  <link rel="canonical" href="https://gatheringctx.org/belong"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #000;
+      --off: #f5f0e8;
+      --gold: #c8a96e;
+      --gold-dim: rgba(200,169,110,.15);
+      --w08: rgba(255,255,255,.08);
+      --w15: rgba(255,255,255,.15);
+      --w30: rgba(255,255,255,.3);
+      --w55: rgba(255,255,255,.55);
+      --w80: rgba(255,255,255,.8);
+      --k70: rgba(0,0,0,.7);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: #fff;
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.4rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: background .3s, border-color .3s;
+    }
+    nav.scrolled { background: rgba(0,0,0,.92); border-color: var(--w08); backdrop-filter: blur(8px); }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 400; letter-spacing: .05em;
+      text-decoration: none; color: #fff;
+    }
+    .nav-brand sup { font-size: .55em; vertical-align: super; margin-right: .15em; }
+    .nav-back {
+      font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--w55); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 10rem 6rem 6rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(200,169,110,.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: .6rem; letter-spacing: .35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem;
+    }
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300; line-height: 1.0;
+      letter-spacing: -.02em; margin-bottom: 2.5rem;
+      max-width: 800px;
+    }
+    .hero-h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 1.05rem; line-height: 1.9;
+      color: var(--w80); max-width: 560px;
+      margin-bottom: 3rem;
+    }
+    .hero-meta {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      border-top: 1px solid var(--w08); padding-top: 2rem;
+    }
+    .hero-meta-item { }
+    .hero-meta-label {
+      font-size: .55rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .4rem;
+    }
+    .hero-meta-val { font-size: .9rem; color: var(--w80); font-weight: 300; }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-hint {
+      position: absolute; bottom: 3rem; left: 6rem;
+      display: flex; align-items: center; gap: 1rem;
+      font-size: .58rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--w30);
+    }
+    .scroll-line {
+      width: 40px; height: 1px; background: var(--w30);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+    /* ── WHAT IS IT ── */
+    .what {
+      background: var(--off); padding: 9rem 6rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center;
+    }
+    .what-left { }
+    .what-label {
+      font-size: .58rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--k70); margin-bottom: 1.5rem;
+    }
+    .what-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300; line-height: 1.15;
+      color: #000; letter-spacing: -.01em; margin-bottom: 2rem;
+    }
+    .what-h2 em { font-style: italic; color: #5c4b2a; }
+    .what-body { font-size: .95rem; line-height: 2; color: var(--k70); }
+    .what-body p + p { margin-top: 1.2rem; }
+    .what-right { }
+    .what-card {
+      background: #fff; border: 1px solid rgba(0,0,0,.07);
+      padding: 2.5rem; margin-bottom: 1px;
+    }
+    .what-card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300;
+      color: rgba(0,0,0,.12); line-height: 1;
+      margin-bottom: .8rem;
+    }
+    .what-card-title { font-size: .95rem; font-weight: 500; color: #000; margin-bottom: .5rem; }
+    .what-card-body { font-size: .85rem; line-height: 1.85; color: var(--k70); }
+
+    /* ── QUOTE BAND ── */
+    .quote-band {
+      background: var(--black); padding: 7rem 6rem;
+      text-align: center;
+    }
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 300; font-style: italic;
+      line-height: 1.5; color: #fff; max-width: 800px; margin: 0 auto 1.5rem;
+    }
+    .quote-ref {
+      font-size: .6rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── WHO ── */
+    .who {
+      background: #0a0a0a; padding: 9rem 6rem;
+      border-top: 1px solid var(--w08);
+    }
+    .who-header {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8rem;
+      margin-bottom: 5rem;
+    }
+    .who-label {
+      font-size: .58rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .who-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300; line-height: 1.15; letter-spacing: -.01em;
+    }
+    .who-h2 em { font-style: italic; color: var(--gold); }
+    .who-body { font-size: .95rem; line-height: 2; color: var(--w55); align-self: end; }
+    .who-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--w08);
+    }
+    .who-card {
+      background: #0a0a0a; padding: 2.5rem 2rem;
+      border-top: 2px solid transparent; transition: border-color .3s;
+    }
+    .who-card:hover { border-color: var(--gold); }
+    .who-card-icon { font-size: 1.4rem; margin-bottom: 1rem; }
+    .who-card-title { font-size: .9rem; font-weight: 500; color: #fff; margin-bottom: .6rem; }
+    .who-card-body { font-size: .82rem; line-height: 1.85; color: var(--w55); }
+
+    /* ── REGISTER ── */
+    .register {
+      background: var(--black); padding: 9rem 6rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start;
+      border-top: 1px solid var(--w08);
+    }
+    .register-left { }
+    .register-label {
+      font-size: .58rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .register-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300; line-height: 1.15; letter-spacing: -.01em;
+      margin-bottom: 1.8rem;
+    }
+    .register-h2 em { font-style: italic; color: var(--gold); }
+    .register-body { font-size: .95rem; line-height: 2; color: var(--w55); margin-bottom: 2rem; }
+    .register-note {
+      font-size: .78rem; color: var(--w30); line-height: 1.8;
+      padding-top: 1.5rem; border-top: 1px solid var(--w08);
+    }
+    .register-right { }
+    .form-field { margin-bottom: 1.2rem; }
+    .form-label {
+      display: block; font-size: .58rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--w30); margin-bottom: .5rem;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: var(--w08); border: 1px solid var(--w15);
+      color: #fff; padding: .9rem 1.1rem;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: .88rem; font-weight: 300;
+      outline: none; appearance: none;
+      transition: border-color .2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--w30); }
+    .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff44' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
+    .form-select option { background: #111; }
+    .form-textarea { resize: vertical; min-height: 80px; }
+    .form-submit {
+      width: 100%; background: #fff; color: #000; border: none;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      font-weight: 600; padding: 1.1rem 2rem;
+      cursor: pointer; transition: opacity .2s; margin-top: .5rem;
+    }
+    .form-submit:hover { opacity: .85; }
+    .form-submit:disabled { opacity: .5; cursor: not-allowed; }
+    .form-success {
+      display: none; text-align: center; padding: 3rem 2rem;
+      border: 1px solid var(--w08);
+    }
+    .form-success-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .form-success-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 300; margin-bottom: .8rem;
+    }
+    .form-success-body { font-size: .88rem; color: var(--w55); line-height: 1.8; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #000; border-top: 1px solid var(--w08);
+      padding: 3rem 6rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .95rem; font-weight: 400; color: var(--w55);
+    }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-link {
+      font-size: .6rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--w30); text-decoration: none; transition: color .2s;
+    }
+    .footer-link:hover { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { padding: 8rem 2rem 5rem; }
+      .scroll-hint { left: 2rem; }
+      .what, .who-header, .register { grid-template-columns: 1fr; gap: 3rem; padding: 6rem 2rem; }
+      .who { padding: 6rem 2rem; }
+      .who-grid { grid-template-columns: 1fr; }
+      .quote-band { padding: 5rem 2rem; }
+      footer { padding: 2.5rem 2rem; flex-direction: column; align-items: flex-start; }
+      nav { padding: 1.2rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
+  <a href="/" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Vision &amp; Partnership Class</div>
+  <h1 class="hero-h1">Belong<br><em>&amp; Become.</em></h1>
+  <p class="hero-sub">One session. 90 minutes. Everything you need to know about who we are, why we exist, and what your next step looks like.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Format</div>
+      <div class="hero-meta-val">Single Session · 90 Minutes</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Location</div>
+      <div class="hero-meta-val">Cleburne Conference Center</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Cost</div>
+      <div class="hero-meta-val">Free · Always</div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Keep reading</div>
+</section>
+
+<!-- WHAT IS IT -->
+<section class="what">
+  <div class="what-left">
+    <div class="what-label">What to expect</div>
+    <h2 class="what-h2">Not an orientation.<br><em>An invitation.</em></h2>
+    <div class="what-body">
+      <p>Belong &amp; Become is not a membership class. It is not a list of rules or a tour of the building. It is a vision class — a chance to sit in the room, hear the heart behind everything we are building, and decide if this is where you belong.</p>
+      <p>By the time you leave, you will know who we are, what drives us, how we are structured, and exactly what your next step looks like. No pressure. No obligation. Just clarity.</p>
+      <p>Some people walk out ready to call this home. Others need more time. Both are okay. The table stays open.</p>
+    </div>
+  </div>
+  <div class="what-right">
+    <div class="what-card">
+      <div class="what-card-num">01</div>
+      <div class="what-card-title">The Vision</div>
+      <div class="what-card-body">Why The Gathering exists, what we are building, and the convictions we will not negotiate.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">02</div>
+      <div class="what-card-title">The Structure</div>
+      <div class="what-card-body">How we are built, what we stand on, and the rhythm of life together — large gatherings and small.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">03</div>
+      <div class="what-card-title">Your Next Step</div>
+      <div class="what-card-body">What partnership at The Gathering actually looks like — and what we are committing to you in return.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">04</div>
+      <div class="what-card-title">Q&amp;A + Prayer</div>
+      <div class="what-card-body">The floor is yours. Ask anything. We close together in prayer.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-band">
+  <p class="quote-text">"There is a seat at the table for you. That is not a slogan. That is the heartbeat of everything we do."</p>
+  <div class="quote-ref">Pastor Billy Philips · The Gathering CTX</div>
+</section>
+
+<!-- WHO -->
+<section class="who">
+  <div class="who-header">
+    <div>
+      <div class="who-label">Who should come</div>
+      <h2 class="who-h2">If you have been showing up,<br><em>this is your next step.</em></h2>
+    </div>
+    <div class="who-body">
+      Belong &amp; Become is for anyone who wants to go deeper — whether you just visited for the first time or you have been in the room for months. You do not need to have it all figured out. You just need to be curious about what God is building here.
+    </div>
+  </div>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-card-icon">🌱</div>
+      <div class="who-card-title">New to The Gathering</div>
+      <div class="who-card-body">You have visited a few times and something keeps pulling you back. This is where you find out why.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">🏠</div>
+      <div class="who-card-title">Looking for a Church Home</div>
+      <div class="who-card-body">You want to know the real vision before you commit. Fair. This class was built for that question.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">🔥</div>
+      <div class="who-card-title">Ready to Go Deeper</div>
+      <div class="who-card-body">You have been showing up and you are ready for the next step. Partnership starts here.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="register" id="register">
+  <div class="register-left">
+    <div class="register-label">Reserve your seat</div>
+    <h2 class="register-h2">Ready to be<br><em>in the room?</em></h2>
+    <p class="register-body">Classes are offered periodically. Fill out the form and we will reach out with the next available date, time, and any details you need. No commitment required — just let us know you are interested.</p>
+    <div class="register-note">
+      Belong &amp; Become is held in person at the Cleburne Conference Center. Childcare availability will be communicated when we confirm your spot. Questions? Reach us at <a href="mailto:info@gatheringctx.org" style="color:var(--gold);text-decoration:none">info@gatheringctx.org</a>
+    </div>
+  </div>
+  <div class="register-right">
+    <form id="belongForm">
+      <div class="form-field">
+        <label class="form-label" for="firstname">First Name</label>
+        <input class="form-input" type="text" id="firstname" name="firstname" placeholder="" required/>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="lastname">Last Name</label>
+        <input class="form-input" type="text" id="lastname" name="lastname" placeholder="" required/>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="email">Email Address</label>
+        <input class="form-input" type="email" id="email" name="email" placeholder="" required/>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="phone">Phone (optional)</label>
+        <input class="form-input" type="tel" id="phone" name="phone" placeholder=""/>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="connection">How long have you been attending?</label>
+        <select class="form-select" id="connection" name="connection">
+          <option value="">Select one</option>
+          <option>This is my first time</option>
+          <option>A few weeks</option>
+          <option>A few months</option>
+          <option>Six months or more</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="note">Anything you want us to know? (optional)</label>
+        <textarea class="form-textarea" id="note" name="note" rows="3" placeholder="Questions, family size, childcare needs..."></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="submitBtn">I Want to Be in the Room</button>
+    </form>
+    <div class="form-success" id="formSuccess">
+      <div class="form-success-icon">✓</div>
+      <div class="form-success-title">You're on the list.</div>
+      <div class="form-success-body">We will be in touch soon with details on the next Belong &amp; Become class. We are glad you are here.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><sup>the</sup>gathering · Cleburne, TX</div>
+  <div class="footer-links">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/#visit" class="footer-link">Visit</a>
+    <a href="/#contact" class="footer-link">Contact</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="footer-link">Give</a>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Form submit — mailto fallback (no backend needed)
+  document.getElementById('belongForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const d = new FormData(this);
+    const fn = d.get('firstname') || '';
+    const ln = d.get('lastname') || '';
+    const em = d.get('email') || '';
+    const ph = d.get('phone') || '';
+    const cn = d.get('connection') || '';
+    const nt = d.get('note') || '';
+
+    const subject = encodeURIComponent(`Belong & Become — ${fn} ${ln}`);
+    const body = encodeURIComponent(
+      `Name: ${fn} ${ln}\nEmail: ${em}\nPhone: ${ph}\nAttending: ${cn}\n\nNote:\n${nt}`
+    );
+
+    window.open(`mailto:info@gatheringctx.org?subject=${subject}&body=${body}`, '_self');
+
+    setTimeout(() => {
+      document.getElementById('belongForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }, 800);
+  });
+</script>
+</body>
+</html>
