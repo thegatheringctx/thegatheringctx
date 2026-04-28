@@ -770,16 +770,14 @@
       <div style="font-size:1.4rem;font-weight:200;color:#fff;line-height:1.3">Get new sermons<br>delivered to your inbox.</div>
     </div>
     <div>
-      <form name="sermon-subscribe" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="sermon-sub-form" style="max-width:480px">
-        <input type="hidden" name="form-name" value="sermon-subscribe">
-        <p style="display:none"><input name="bot-field"></p>
+      <form id="sub-form-main" onsubmit="handleSub(event,'sermons')" style="display:flex;flex-direction:column;gap:.8rem">
         <div style="display:flex;gap:.8rem;flex-wrap:wrap">
           <input type="email" name="email" placeholder="Your email address" required
-            style="flex:1;min-width:200px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#fff;padding:.9rem 1.2rem;font-family:'Nunito Sans',sans-serif;font-size:.85rem;font-weight:300;outline:none">
-          <button type="submit"
-            style="background:#fff;color:#000;border:none;font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:.9rem 2rem;cursor:pointer;white-space:nowrap">Subscribe</button>
+            style="flex:1;min-width:180px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;padding:.85rem 1.1rem;font-family:'Nunito Sans',sans-serif;font-size:.85rem;font-weight:300;outline:none;-webkit-appearance:none">
+          <button type="submit" id="sub-btn-main"
+            style="background:#fff;color:#000;border:none;font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:.85rem 2rem;cursor:pointer;white-space:nowrap;transition:opacity .2s">Subscribe</button>
         </div>
-        <p id="sermon-sub-success" style="display:none;color:#c8a96e;font-size:.85rem;padding:.9rem 0">You're subscribed. New sermons will be in your inbox.</p>
+        <p id="sub-msg-main" style="font-size:.82rem;min-height:1.1rem;margin:0"></p>
       </form>
     </div>
   </div>
@@ -1111,6 +1109,34 @@ document.getElementById('sermon-sub-form')?.addEventListener('submit', function(
     .then(function() { form.querySelector('div[style*="flex"]').style.display='none'; document.getElementById('sermon-sub-success').style.display='block'; })
     .catch(function() { form.submit(); });
 });
+
+  async function handleSub(e, list) {
+    e.preventDefault();
+    var form = e.target;
+    var email = form.email.value.trim();
+    var listId = list === 'sermons' ? 'main' : list;
+    var btn = document.getElementById('sub-btn-' + listId) || form.querySelector('button[type=submit]');
+    var msg = document.getElementById('sub-msg-' + listId);
+    var origTxt = btn ? btn.textContent : 'Subscribe';
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+    if (msg) { msg.style.color = ''; msg.textContent = ''; }
+    try {
+      var res = await fetch('/api/subscribe', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email, list: list})
+      });
+      var data = await res.json();
+      if (res.ok && data.success) {
+        if (msg) { msg.style.color = '#6fcf97'; msg.textContent = '✓ You\'re subscribed! Check your inbox.'; }
+        form.reset();
+      } else { throw new Error(data.error || 'Something went wrong.'); }
+    } catch(err) {
+      if (msg) { msg.style.color = '#eb5757'; msg.textContent = '✗ ' + err.message; }
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = origTxt; }
+    }
+  }
+
 </script>
 </body>
 </html>
