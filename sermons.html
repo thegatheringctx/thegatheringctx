@@ -94,6 +94,27 @@
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-3L9RY5RS73');</script>
+
+  <style>
+    .subscribe-section{background:#111;padding:6rem;border-top:1px solid rgba(255,255,255,.06)}
+    .subscribe-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .subscribe-h2{font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:200;color:#fff;line-height:1.2;margin:.6rem 0 .8rem}
+    .subscribe-sub{font-size:.85rem;line-height:1.9;color:rgba(255,255,255,.45)}
+    .subscribe-form{display:flex;flex-direction:column;gap:.8rem}
+    .sub-input-row{display:flex;gap:.6rem}
+    .sub-input{flex:1;padding:1rem 1.4rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;font-size:.9rem;border-radius:2px;outline:none;transition:border-color .2s;font-family:inherit}
+    .sub-input:focus{border-color:var(--gold,#c9a84c)}
+    .sub-btn{padding:1rem 1.8rem;background:var(--gold,#c9a84c);color:#000;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;border-radius:2px;transition:opacity .2s;white-space:nowrap;font-family:inherit}
+    .sub-btn:hover{opacity:.85}
+    .sub-msg{font-size:.8rem;min-height:1.2rem;transition:color .3s}
+    .sub-msg.success{color:#6fcf97}
+    .sub-msg.error{color:#eb5757}
+    .sermon-nudge{display:flex;align-items:center;justify-content:space-between;padding:1.8rem 3rem;background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
+    .nudge-text{font-size:.82rem;color:rgba(255,255,255,.45);letter-spacing:.02em;margin:0}
+    .nudge-btn{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold,#c9a84c);text-decoration:none;white-space:nowrap;border:1px solid rgba(201,168,76,.3);padding:.6rem 1.2rem;border-radius:2px;transition:border-color .2s,background .2s}
+    .nudge-btn:hover{border-color:var(--gold,#c9a84c);background:rgba(201,168,76,.06)}
+    @media(max-width:768px){.subscribe-inner{grid-template-columns:1fr;gap:2rem}.sub-input-row{flex-direction:column}.subscribe-section{padding:4rem 2rem}.sermon-nudge{padding:1.8rem 2rem}}
+  </style>
 </head>
 <body>
 
@@ -140,7 +161,26 @@
   <div class="sermon-list">
 
     
-            <div class="sermon-card">
+                <div class="sermon-card">
+      <div class="sermon-date">
+        <span class="sermon-month">Apr</span>
+        <span class="sermon-day">26</span>
+        <span class="sermon-year">2026</span>
+      </div>
+      <div class="sermon-info">
+        <span class="sermon-series">Ephesians &middot; Week 4</span>
+        <div class="sermon-title">Ephesians 3 &mdash; The Mystery Is Out</div>
+        <div class="sermon-meta">Pastor Billy Philips &middot; Cleburne Conference Center</div>
+        <span class="sermon-scripture">Ephesians 3</span>
+        <div class="sermon-player">
+          <audio controls preload="none">
+            <source src="https://www.buzzsprout.com/2608288/episodes/19087134-ephesians-3-the-mystery-is-out-04-26-26.mp3" type="audio/mpeg">
+          </audio>
+          <a href="https://www.buzzsprout.com/2608288/episodes/19087134-ephesians-3-the-mystery-is-out-04-26-26.mp3?download=true" class="sermon-download">Download MP3</a>
+        </div>
+      </div>
+    </div>
+    <div class="sermon-card">
       <div class="sermon-date">
         <span class="sermon-month">Apr</span>
         <span class="sermon-day">19</span>
@@ -162,24 +202,6 @@
 <div class="sermon-card">
       <div class="sermon-date">
         <span class="sermon-month">Apr</span>
-        <span class="sermon-day">19</span>
-        <span class="sermon-year">2026</span>
-      </div>
-      <div class="sermon-info">
-        <span class="sermon-series">Ephesians ÃÂ· Week 3</span>
-        <div class="sermon-title">Ephesians 2 Ã¢ÂÂ Brought Near by the Blood</div>
-        <div class="sermon-meta">Ben Philips ÃÂ· Cleburne Conference Center</div>
-        <span class="sermon-scripture">Ephesians 2:11-22</span>
-        <div class="sermon-player">
-          <audio controls preload="none">
-            <source src="https://www.buzzsprout.com/2608288/episodes/19049916-ephesians-2-brought-near-by-the-blood-04-19-26.mp3" type="audio/mpeg">
-          </audio>
-          <a href="https://www.buzzsprout.com/2608288/episodes/19049916-ephesians-2-brought-near-by-the-blood-04-19-26.mp3?download=true" class="sermon-download">Download MP3</a>
-        </div>
-      </div>
-    </div><div class="sermon-card">
-      <div class="sermon-date">
-        <span class="sermon-month">Apr</span>
         <span class="sermon-day">13</span>
         <span class="sermon-year">2026</span>
       </div>
@@ -196,8 +218,7 @@
         </div>
       </div>
     </div>
-
-    <div class="sermon-card">
+<div class="sermon-card">
       <div class="sermon-date">
         <span class="sermon-month">Apr</span>
         <span class="sermon-day">05</span>
@@ -216,20 +237,33 @@
         </div>
       </div>
     </div>
-
+    </div>
   </div>
+</section>
+
   <!-- SUBSCRIBE NUDGE -->
   <div class="sermon-nudge">
     <p class="nudge-text">Enjoyed this message? Get the next one in your inbox.</p>
-    <a href="#sub-form-sermons" class="nudge-btn" onclick="document.getElementById('sub-form-sermons').querySelector('input').focus();return false;">Subscribe Free →</a>
+    <a href="#sub-form-sermons" class="nudge-btn" onclick="document.getElementById('sub-form-sermons').querySelector('input').focus();return false;">Subscribe Free &rarr;</a>
   </div>
-  <style>
-    .sermon-nudge{display:flex;align-items:center;justify-content:space-between;padding:1.8rem 3rem;background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
-    .nudge-text{font-size:.82rem;color:rgba(255,255,255,.45);letter-spacing:.02em;margin:0}
-    .nudge-btn{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold,#c9a84c);text-decoration:none;white-space:nowrap;border:1px solid rgba(201,168,76,.3);padding:.6rem 1.2rem;border-radius:2px;transition:border-color .2s,background .2s}
-    .nudge-btn:hover{border-color:var(--gold,#c9a84c);background:rgba(201,168,76,.06)}
-  </style>
-</section>
+
+  <!-- SUBSCRIBE -->
+  <section class="subscribe-section">
+    <div class="subscribe-inner">
+      <div class="subscribe-text">
+        <span class="label label-light">Stay Connected</span>
+        <h2 class="subscribe-h2">Never miss a sermon.</h2>
+        <p class="subscribe-sub">Get new sermons delivered straight to your inbox &mdash; free, no spam, unsubscribe anytime.</p>
+      </div>
+      <form class="subscribe-form" id="sub-form-sermons" onsubmit="handleSub(event,'sermons')">
+        <div class="sub-input-row">
+          <input type="email" name="email" placeholder="Your email address" required class="sub-input" autocomplete="email">
+          <button type="submit" class="sub-btn">Subscribe &rarr;</button>
+        </div>
+        <p class="sub-msg" id="sub-msg-sermons"></p>
+      </form>
+    </div>
+  </section>
 
 <footer class="page-footer">
   <div class="footer-brand"><sup>the</sup>gathering</div>
@@ -305,6 +339,38 @@
       msg.textContent = 'â ' + err.message;
     } finally {
       btn.disabled = false; btn.textContent = 'Subscribe &rarr;';
+    }
+  }
+  </script>
+
+  <script>
+  async function handleSub(e, list) {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value.trim();
+    const btn = form.querySelector('.sub-btn');
+    const msg = document.getElementById('sub-msg-' + list);
+    btn.disabled = true; btn.textContent = 'Sending…';
+    msg.className = 'sub-msg'; msg.textContent = '';
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({email, list})
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        msg.className = 'sub-msg success';
+        msg.textContent = '✓ You\'re subscribed! Check your inbox.';
+        form.reset();
+      } else {
+        throw new Error(data.error || 'Something went wrong.');
+      }
+    } catch(err) {
+      msg.className = 'sub-msg error';
+      msg.textContent = '✗ ' + err.message;
+    } finally {
+      btn.disabled = false; btn.textContent = 'Subscribe →';
     }
   }
   </script>
