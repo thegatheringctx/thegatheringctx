@@ -98,6 +98,21 @@
     .sub-msg.error{color:#eb5757}
     @media(max-width:768px){.subscribe-inner{grid-template-columns:1fr;gap:2rem}.sub-input-row{flex-direction:column}.subscribe-section{padding:4rem 2rem}}
   </style>
+<style>
+.subscribe-section{background:#111;padding:6rem;border-top:1px solid rgba(255,255,255,.06)}
+.subscribe-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.subscribe-h2{font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:200;color:#fff;line-height:1.2;margin:.6rem 0 .8rem}
+.subscribe-sub{font-size:.85rem;line-height:1.9;color:rgba(255,255,255,.45)}
+.subscribe-form{display:flex;flex-direction:column;gap:.8rem}
+.sub-input-row{display:flex;gap:.6rem}
+.sub-input{flex:1;padding:1rem 1.4rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;font-size:.9rem;border-radius:2px;outline:none;transition:border-color .2s;font-family:inherit}
+.sub-input:focus{border-color:var(--gold,#c9a84c)}
+.sub-btn{padding:1rem 1.8rem;background:var(--gold,#c9a84c);color:#000;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;border-radius:2px;transition:opacity .2s;white-space:nowrap;font-family:inherit}
+.sub-btn:hover{opacity:.85}
+.sub-msg{font-size:.8rem;min-height:1.4rem;transition:color .3s}
+.sub-msg.ok{color:#6fcf97}.sub-msg.err{color:#eb5757}
+@media(max-width:768px){.subscribe-inner{grid-template-columns:1fr;gap:2rem}.sub-input-row{flex-direction:column}.subscribe-section{padding:4rem 2rem}}
+</style>
 </head>
 <body>
 
@@ -438,48 +453,47 @@
 </footer>
 
   <!-- SUBSCRIBE -->
-  <section class="subscribe-section">
-    <div class="subscribe-inner">
-      <div class="subscribe-text">
-        <span class="label label-light">Stay Connected</span>
-        <h2 class="subscribe-h2">Never miss a devotional.</h2>
-        <p class="subscribe-sub">Get new devotionals delivered straight to your inbox &mdash; free, no spam, unsubscribe anytime.</p>
-      </div>
-      <form class="subscribe-form" id="sub-form-devotionals" onsubmit="handleSub(event,'devotionals')">
-        <div class="sub-input-row">
-          <input type="email" name="email" placeholder="Your email address" required class="sub-input" autocomplete="email">
-          <button type="submit" class="sub-btn">Subscribe &rarr;</button>
-        </div>
-        <p class="sub-msg" id="sub-msg-devotionals"></p>
-      </form>
+  
+<footer class="page-footer">
+  <div class="footer-brand"><sup>the</sup>gathering</div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/sermons.html">Sermons</a>
+    <a href="/#visit">Plan a Visit</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank">Give</a>
+    <a href="mailto:info@gatheringctx.org">Contact</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Gathering in Victory Inc. All rights reserved.</div>
+</footer>
+<section class="subscribe-section">
+  <div class="subscribe-inner">
+    <div class="subscribe-text">
+      <span class="label label-light">Stay Connected</span>
+      <h2 class="subscribe-h2">Never miss a devotional.</h2>
+      <p class="subscribe-sub">Get new devotionals delivered to your inbox &mdash; free, no spam, unsubscribe anytime.</p>
     </div>
-  </section>
-
-  <script>
-  async function handleSub(e, list) {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value.trim();
-    const btn = form.querySelector('.sub-btn');
-    const msg = document.getElementById('sub-msg-' + list);
-    btn.disabled = true; btn.textContent = 'Sending…';
-    msg.className = 'sub-msg'; msg.textContent = '';
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({email, list})
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        msg.className = 'sub-msg success';
-        msg.textContent = '✓ You\'re subscribed! Check your inbox.';
-        form.reset();
-      } else { throw new Error(data.error || 'Something went wrong.'); }
-    } catch(err) {
-      msg.className = 'sub-msg error';
-      msg.textContent = '✗ ' + err.message;
-    } finally { btn.disabled = false; btn.textContent = 'Subscribe →'; }
-  }
-  </script>
+    <form class="subscribe-form" id="sub-form-devotionals" onsubmit="handleSub(event,'devotionals')">
+      <div class="sub-input-row">
+        <input type="email" name="email" placeholder="Your email address" required class="sub-input" autocomplete="email">
+        <button type="submit" class="sub-btn">Subscribe &rarr;</button>
+      </div>
+      <p class="sub-msg" id="sub-msg-devotionals"></p>
+    </form>
+  </div>
+</section>
+<script>
+async function handleSub(e,list){
+  e.preventDefault();
+  var f=e.target,em=f.email.value.trim(),btn=f.querySelector('.sub-btn'),msg=document.getElementById('sub-msg-'+list);
+  btn.disabled=true;btn.textContent='Sending…';msg.className='sub-msg';msg.textContent='';
+  try{
+    var r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,list:list})});
+    var data=await r.json();
+    if(r.ok&&data.success){msg.className='sub-msg ok';msg.textContent='✓ Subscribed! Check your inbox.';f.reset();}
+    else throw new Error(data.error||'Something went wrong.');
+  }catch(err){msg.className='sub-msg err';msg.textContent='✗ '+err.message;}
+  finally{btn.disabled=false;btn.textContent='Subscribe →';}
+}
+</script>
 </body>
 </html>
