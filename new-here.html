@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Here | The Gathering CTX</title>
+  <meta name="description" content="Everything you need to know before you walk in. Service times, location, what to expect, and how we do things at The Gathering in Cleburne, TX."/>
+  <link rel="canonical" href="https://gatheringctx.org/new-here.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --black:#000;--off:#f5f0e8;--gold:#c8a96e;
+      --w08:rgba(255,255,255,.08);--w15:rgba(255,255,255,.15);
+      --w30:rgba(255,255,255,.3);--w55:rgba(255,255,255,.55);
+      --w80:rgba(255,255,255,.8);--k70:rgba(0,0,0,.7);--k40:rgba(0,0,0,.4);
+    }
+    html{scroll-behavior:smooth}
+    body{background:#000;color:#fff;font-family:'Nunito Sans',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+    nav.scrolled{background:rgba(0,0,0,.92);border-color:var(--w08);backdrop-filter:blur(8px)}
+    .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;letter-spacing:.05em;text-decoration:none;color:#fff}
+    .nav-brand sup{font-size:.55em;vertical-align:super;margin-right:.15em}
+    .nav-back{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);text-decoration:none;transition:color .2s}
+    .nav-back:hover{color:#fff}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:10rem 6rem 6rem;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%,rgba(200,169,110,.06) 0%,transparent 60%);pointer-events:none}
+    .hero-eyebrow{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
+    .hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,7vw,6.5rem);font-weight:300;line-height:1.05;letter-spacing:-.02em;margin-bottom:2rem;max-width:700px}
+    .hero-h1 em{font-style:italic;color:var(--gold)}
+    .hero-sub{font-size:1rem;line-height:1.9;color:var(--w80);max-width:520px;margin-bottom:3rem}
+    .hero-details{display:flex;gap:3rem;flex-wrap:wrap;border-top:1px solid var(--w08);padding-top:2rem}
+    .detail-label{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+    .detail-val{font-size:.9rem;color:var(--w80);font-weight:300;line-height:1.6}
+    .btn-primary{display:inline-block;background:#fff;color:#000;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;padding:.9rem 2.2rem;transition:opacity .2s;margin-top:2rem}
+    .btn-primary:hover{opacity:.85}
+
+    /* WHAT TO EXPECT */
+    .expect{background:var(--off);padding:9rem 6rem}
+    .section-label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;margin-bottom:1.5rem}
+    .section-label.dark{color:var(--k70)}
+    .section-label.light{color:var(--gold)}
+    .section-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;line-height:1.15;letter-spacing:-.01em;margin-bottom:3rem}
+    .section-h2.dark{color:#000}.section-h2.dark em{font-style:italic;color:#5c4b2a}
+    .section-h2.light em{font-style:italic;color:var(--gold)}
+    .expect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.08);margin-top:4rem}
+    .expect-card{background:var(--off);padding:3rem 2.5rem}
+    .expect-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(0,0,0,.1);line-height:1;margin-bottom:.8rem}
+    .expect-title{font-size:1rem;font-weight:500;color:#000;margin-bottom:.8rem}
+    .expect-body{font-size:.88rem;line-height:1.9;color:var(--k70)}
+
+    /* THE ROOM */
+    .room{background:#000;padding:9rem 6rem;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;border-top:1px solid var(--w08)}
+    .room-body{font-size:.95rem;line-height:2;color:var(--w55)}
+    .room-body p+p{margin-top:1.2rem}
+    .room-visual{position:relative}
+    .room-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:300;font-style:italic;line-height:1.5;color:#fff;border-left:2px solid var(--gold);padding-left:2rem}
+    .room-quote-ref{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:1.2rem;padding-left:2rem}
+
+    /* KIDS */
+    .kids{background:#0a0a0a;padding:9rem 6rem;border-top:1px solid var(--w08)}
+    .kids-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;margin-top:4rem}
+    .kids-card{background:var(--w08);border:1px solid var(--w08);padding:2.5rem}
+    .kids-card-label{font-size:.56rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+    .kids-card-title{font-size:1.1rem;font-weight:400;color:#fff;margin-bottom:.8rem}
+    .kids-card-body{font-size:.88rem;line-height:1.9;color:var(--w55)}
+
+    /* COMMUNION */
+    .communion{background:var(--off);padding:9rem 6rem;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center}
+    .communion-verse{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,2vw,1.8rem);font-weight:300;font-style:italic;line-height:1.6;color:#000;border-left:2px solid var(--k40);padding-left:2rem}
+    .communion-ref{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--k70);margin-top:1rem;padding-left:2rem}
+    .communion-body{font-size:.95rem;line-height:2;color:var(--k70)}
+    .communion-body p+p{margin-top:1.2rem}
+
+    /* CTA */
+    .cta{background:#000;padding:9rem 6rem;text-align:center;border-top:1px solid var(--w08)}
+    .cta-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;line-height:1.1;margin-bottom:1.5rem}
+    .cta-h2 em{font-style:italic;color:var(--gold)}
+    .cta-sub{font-size:.95rem;color:var(--w55);max-width:480px;margin:0 auto 2.5rem;line-height:1.9}
+    .cta-details{font-size:.82rem;color:var(--w30);margin-top:1.5rem;line-height:2}
+
+    /* FOOTER */
+    footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+    .footer-brand{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--w55)}
+    .footer-links{display:flex;gap:2rem;flex-wrap:wrap}
+    .footer-link{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-decoration:none;transition:color .2s}
+    .footer-link:hover{color:#fff}
+
+    @media(max-width:900px){
+      .hero{padding:8rem 2rem 5rem}
+      .expect,.room,.kids,.communion,.cta{padding:6rem 2rem}
+      .expect-grid{grid-template-columns:1fr}
+      .room,.kids-grid,.communion{grid-template-columns:1fr;gap:3rem}
+      footer{padding:2.5rem 2rem;flex-direction:column;align-items:flex-start}
+      nav{padding:1.2rem 2rem}
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
+  <a href="/" class="nav-back">&larr; Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">New Here</div>
+  <h1 class="hero-h1">You don&rsquo;t have to<br>figure it out<br><em>before you come.</em></h1>
+  <p class="hero-sub">No dress code. No expectations. No performance. Just a community of real people gathered around the Word, led by the Spirit, and glad you walked in.</p>
+  <div class="hero-details">
+    <div>
+      <div class="detail-label">When</div>
+      <div class="detail-val">Sundays at 5:00 PM<br>Doors open at 4:30 PM</div>
+    </div>
+    <div>
+      <div class="detail-label">Where</div>
+      <div class="detail-val">Cleburne Conference Center<br>1501 W Henderson St, Cleburne TX</div>
+    </div>
+    <div>
+      <div class="detail-label">What to wear</div>
+      <div class="detail-val">Whatever you&rsquo;re comfortable in.<br>No dress code. Ever.</div>
+    </div>
+  </div>
+  <a href="https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX" target="_blank" class="btn-primary">Get Directions &rarr;</a>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="expect">
+  <div class="section-label dark">What to Expect</div>
+  <h2 class="section-h2 dark">A Sunday at<br><em>The Gathering.</em></h2>
+  <p style="font-size:.95rem;line-height:2;color:var(--k70);max-width:600px">Here&rsquo;s what a typical Sunday looks like &mdash; not to prepare a performance, but so you can walk in and simply be present.</p>
+  <div class="expect-grid">
+    <div class="expect-card">
+      <div class="expect-num">4:30</div>
+      <div class="expect-title">Doors Open</div>
+      <div class="expect-body">Come early. Meet people. There&rsquo;s no rush. The half hour before is one of the best parts &mdash; real conversation, no agenda.</div>
+    </div>
+    <div class="expect-card">
+      <div class="expect-num">5:00</div>
+      <div class="expect-title">We Gather</div>
+      <div class="expect-body">We open in worship. Songs rooted in Scripture, sung together. Not a performance &mdash; a declaration. Everyone in the room participates.</div>
+    </div>
+    <div class="expect-card">
+      <div class="expect-num">Word</div>
+      <div class="expect-title">The Message</div>
+      <div class="expect-body">We preach the full counsel of Scripture. Practical, grounded, and unapologetic. Every week anchored in a text and applied to real life.</div>
+    </div>
+    <div class="expect-card">
+      <div class="expect-num">Table</div>
+      <div class="expect-title">Communion</div>
+      <div class="expect-body">We take communion together every week. It is open to all who are in Christ. Not a ritual &mdash; a declaration of what He finished.</div>
+    </div>
+    <div class="expect-card">
+      <div class="expect-num">Prayer</div>
+      <div class="expect-title">We Pray</div>
+      <div class="expect-body">Prayer is not a formality here. We believe it changes things. We pray for each other, for Cleburne, and for what God is building.</div>
+    </div>
+    <div class="expect-card">
+      <div class="expect-num">Stay</div>
+      <div class="expect-title">After Service</div>
+      <div class="expect-body">Nobody rushes out. We linger, we talk, we connect. Some of the best moments happen in the 20 minutes after the service ends.</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE ROOM -->
+<section class="room">
+  <div>
+    <div class="section-label light">The Setup</div>
+    <h2 class="section-h2 light">No stage.<br><em>No platform.</em></h2>
+    <div class="room-body">
+      <p>Chairs are set up in the round &mdash; the worship team and the pastor are in the middle, and the community gathers around them. Not an audience watching a stage. A family around a table.</p>
+      <p>There is no separation between the people leading and the people gathered. We are all in the room together. That is not an accident. That is the conviction.</p>
+      <p>What you walk into on Sunday is less like a concert and more like a living room. Warm, real, and fully present.</p>
+    </div>
+  </div>
+  <div class="room-visual">
+    <div class="room-quote">They devoted themselves to the apostles&rsquo; teaching, to fellowship, to the breaking of bread, and to prayer.</div>
+    <div class="room-quote-ref">Acts 2:42</div>
+  </div>
+</section>
+
+<!-- KIDS -->
+<section class="kids">
+  <div class="section-label light">Children</div>
+  <h2 class="section-h2 light">Kids belong<br><em>here too.</em></h2>
+  <p style="font-size:.95rem;line-height:2;color:var(--w55);max-width:600px">Faith is caught as much as it is taught. We believe children grow when they are in the room with the community &mdash; not separated from it.</p>
+  <div class="kids-grid">
+    <div class="kids-card">
+      <div class="kids-card-label">Ages 4 &amp; Under</div>
+      <div class="kids-card-title">Dedicated Care Space</div>
+      <div class="kids-card-body">We offer a dedicated space for children four and under so parents can engage fully in worship. Our team is ready to love on your little ones while you are in the room.</div>
+    </div>
+    <div class="kids-card">
+      <div class="kids-card-label">Ages 5 &amp; Up</div>
+      <div class="kids-card-title">In the Room With Us</div>
+      <div class="kids-card-body">Children five and older join us in the gathering. They are welcome, expected, and loved. If they make noise, that is okay &mdash; we are a family, not a performance. Parents are the primary disciple-makers for their children. We come alongside you.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNION -->
+<section class="communion">
+  <div>
+    <div class="communion-verse">&ldquo;For as often as you eat this bread and drink the cup, you proclaim the Lord&rsquo;s death until he comes.&rdquo;</div>
+    <div class="communion-ref">1 Corinthians 11:26</div>
+  </div>
+  <div>
+    <div class="section-label dark">Every Week</div>
+    <h2 class="section-h2 dark">We take<br><em>communion together.</em></h2>
+    <div class="communion-body">
+      <p>Every Sunday, we observe the Lord&rsquo;s Supper together. It is not a ritual or a formality. It is a declaration &mdash; a proclamation of what Christ finished on the cross, made together as a body.</p>
+      <p>Communion is open to all who are in Christ. If you are His, there is a place at this table. If you are still figuring that out, you are welcome to watch and reflect. No pressure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2 class="cta-h2">Ready to<br><em>come see for yourself?</em></h2>
+  <p class="cta-sub">You do not need to have it together. You do not need to know anyone. You just need to show up. The rest takes care of itself.</p>
+  <a href="https://gatheringctx.churchcenter.com" target="_blank" class="btn-primary">I&rsquo;m Planning to Visit &rarr;</a>
+  <div class="cta-details">
+    Sundays at 5:00 PM &nbsp;&middot;&nbsp; Doors open 4:30 PM<br>
+    Cleburne Conference Center &nbsp;&middot;&nbsp; 1501 W Henderson St, Cleburne TX<br>
+    Questions? <a href="mailto:info@gatheringctx.org" style="color:var(--gold);text-decoration:none">info@gatheringctx.org</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand"><sup>the</sup>gathering &middot; Cleburne, TX</div>
+  <div class="footer-links">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/belong.html" class="footer-link">Belong &amp; Become</a>
+    <a href="/#sermons" class="footer-link">Sermons</a>
+    <a href="/#contact" class="footer-link">Contact</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="footer-link">Give</a>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll',()=>{
+    document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+  });
+</script>
+</body>
+</html>
