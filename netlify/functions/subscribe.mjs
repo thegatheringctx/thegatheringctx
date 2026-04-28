@@ -19,34 +19,26 @@ async function getOrCreateGroup(apiKey, name) {
 
 export default async (req) => {
   const headers = { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" };
-  if (req.method === "OPTIONS") return new Response("", { status: 200, headers });
   if (req.method !== "POST") return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers });
-
-  const apiKey = Netlify.env.get("MAILERLITE_API_KEY");
-  if (!apiKey) return new Response(JSON.stringify({ error: "Not configured" }), { status: 500, headers });
-
-  let body;
-  try { body = await req.json(); } catch { return new Response(JSON.stringify({ error: "Invalid JSON" }), { status: 400, headers }); }
-
-  const { email, list = "sermons" } = body;
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-    return new Response(JSON.stringify({ error: "Valid email required" }), { status: 400, headers });
-
-  const groupName = GROUPS[list];
-  if (!groupName) return new Response(JSON.stringify({ error: "Invalid list" }), { status: 400, headers });
-
+  let email, list;
+  try { const body = await req.json(); email = body.email; list = body.list || "sermons"; }
+  catch { return new Response(JSON.stringify({ error: "Invalid request body" }), { status: 400, headers }); }
+  if (!email || !email.includes("@")) return new Response(JSON.stringify({ error: "Valid email required" }), { status: 400, headers });
+  const apiKey = process.env.MAILERLITE_API_KEY;
+  if (!apiKey) return new Response(JSON.stringify({ error: "API key not configured" }), { status: 500, headers });
+  const groupName = GROUPS[list] || GROUPS.sermons;
   try {
     const groupId = await getOrCreateGroup(apiKey, groupName);
-    const sub = await fetch(MAILERLITE_API + "/subscribers", {
+    if (!groupId) throw new Error("Could not get or create group");
+    const res = await fetch(MAILERLITE_API + "/subscribers", {
       method: "POST",
       headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" },
-      body: JSON.stringify({ email, groups: [groupId], status: "active" })
+      body: JSON.stringify({ email, groups: [groupId] })
     });
-    if (!sub.ok) { const e = await sub.json(); throw new Error(e.message || "MailerLite error"); }
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "MailerLite error");
     return new Response(JSON.stringify({ success: true }), { status: 200, headers });
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), { status: 500, headers });
   }
 };
-
-export const config = { path: "/api/subscribe" };
