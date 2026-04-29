@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Small Groups | The Gathering CTX</title>
+  <meta name="description" content="Small groups at The Gathering CTX in Cleburne, TX. Community is where faith grows. Groups are forming now."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--gold:#c8a96e;--off:#f5f0e8;--w08:rgba(255,255,255,.08);--w30:rgba(255,255,255,.3);--w55:rgba(255,255,255,.55);--w80:rgba(255,255,255,.8);--k70:rgba(0,0,0,.7)}
+    html{scroll-behavior:smooth}
+    body{background:#000;color:#fff;font-family:'Nunito Sans',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+    nav.scrolled{background:rgba(0,0,0,.92);border-color:var(--w08);backdrop-filter:blur(8px)}
+    .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;letter-spacing:.05em;text-decoration:none;color:#fff}
+    .nav-brand sup{font-size:.55em;vertical-align:super;margin-right:.15em}
+    .nav-back{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);text-decoration:none;transition:color .2s}
+    .nav-back:hover{color:#fff}
+    .hero{min-height:80vh;display:flex;flex-direction:column;justify-content:center;padding:10rem 6rem 6rem;position:relative}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 50%,rgba(200,169,110,.06) 0%,transparent 60%);pointer-events:none}
+    .eyebrow{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
+    .hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.05;letter-spacing:-.02em;margin-bottom:2rem;max-width:700px}
+    .hero-h1 em{font-style:italic;color:var(--gold)}
+    .hero-sub{font-size:1rem;line-height:1.9;color:var(--w80);max-width:500px}
+    .why{background:var(--off);padding:9rem 6rem;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center}
+    .section-label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;margin-bottom:1.5rem}
+    .label-dark{color:var(--k70)}.label-light{color:var(--gold)}
+    .section-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;line-height:1.15;letter-spacing:-.01em;margin-bottom:2rem}
+    .h2-dark{color:#000}.h2-dark em{font-style:italic;color:#5c4b2a}
+    .h2-light em{font-style:italic;color:var(--gold)}
+    .body-dark{font-size:.95rem;line-height:2;color:var(--k70)}
+    .body-dark p+p{margin-top:1.2rem}
+    .verse{font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,2vw,1.7rem);font-weight:300;font-style:italic;line-height:1.6;color:#000;border-left:2px solid rgba(0,0,0,.3);padding-left:2rem}
+    .verse-ref{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--k70);margin-top:1rem;padding-left:2rem}
+    .what{background:#0a0a0a;padding:9rem 6rem;border-top:1px solid var(--w08)}
+    .what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--w08);margin-top:4rem}
+    .what-card{background:#0a0a0a;padding:2.5rem 2rem;border-top:2px solid transparent;transition:border-color .3s}
+    .what-card:hover{border-color:var(--gold)}
+    .what-icon{font-size:1.3rem;margin-bottom:1rem}
+    .what-title{font-size:.95rem;font-weight:500;color:#fff;margin-bottom:.7rem}
+    .what-body{font-size:.85rem;line-height:1.9;color:var(--w55)}
+    .cta{background:#000;padding:9rem 6rem;text-align:center;border-top:1px solid var(--w08)}
+    .cta-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;line-height:1.1;margin-bottom:1.5rem}
+    .cta-h2 em{font-style:italic;color:var(--gold)}
+    .cta-sub{font-size:.95rem;color:var(--w55);max-width:480px;margin:0 auto 2.5rem;line-height:1.9}
+    .btn{display:inline-block;background:#fff;color:#000;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;padding:.9rem 2.5rem;transition:opacity .2s}
+    .btn:hover{opacity:.85}
+    .btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);margin-left:1rem}
+    .btn-outline:hover{background:rgba(255,255,255,.05);opacity:1}
+    footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+    .footer-brand{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--w55)}
+    .footer-links{display:flex;gap:2rem;flex-wrap:wrap}
+    .footer-link{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-decoration:none;transition:color .2s}
+    .footer-link:hover{color:#fff}
+    @media(max-width:900px){
+      .hero{padding:8rem 2rem 5rem}
+      .why,.what,.cta{padding:6rem 2rem}
+      .why{grid-template-columns:1fr;gap:3rem}
+      .what-grid{grid-template-columns:1fr}
+      footer{padding:2.5rem 2rem;flex-direction:column;align-items:flex-start}
+      nav{padding:1.2rem 2rem}
+      .btn-outline{margin-left:0;margin-top:.8rem}
+    }
+  </style>
+</head>
+<body>
+<nav id="nav">
+  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
+  <a href="/" class="nav-back">&larr; Back to Home</a>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Small Groups</div>
+  <h1 class="hero-h1">Faith grows best<br><em>in close quarters.</em></h1>
+  <p class="hero-sub">Sunday gathers the community. Small groups are where the community actually happens. Real people, real life, real faith.</p>
+</section>
+
+<section class="why">
+  <div>
+    <div class="section-label label-dark">Why Groups</div>
+    <h2 class="section-h2 h2-dark">You were not meant to<br><em>do this alone.</em></h2>
+    <div class="body-dark">
+      <p>The early church did not just gather once a week and scatter. They ate together, prayed together, carried each other's weight, and walked each other through real life. That is the model we are building from.</p>
+      <p>Small groups at The Gathering are not programs. They are relationships. People who know your name, your kids, your struggles, and your story. People who will still be there when Sunday is a long way off.</p>
+      <p>Groups are forming now. If you are ready to go deeper, reach out and we will connect you.</p>
+    </div>
+  </div>
+  <div>
+    <div class="verse">&ldquo;And they devoted themselves to the apostles&rsquo; teaching and the fellowship, to the breaking of bread and the prayers.&rdquo;</div>
+    <div class="verse-ref">Acts 2:42</div>
+  </div>
+</section>
+
+<section class="what">
+  <div class="section-label label-light">What to expect</div>
+  <h2 class="section-h2 h2-light">What small groups<br><em>actually look like.</em></h2>
+  <div class="what-grid">
+    <div class="what-card">
+      <div class="what-icon">&#128214;</div>
+      <div class="what-title">Rooted in the Word</div>
+      <div class="what-body">Every group studies Scripture together. Not a lecture. A conversation around what God is actually saying and how it applies to your real life this week.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-icon">&#128591;</div>
+      <div class="what-title">Honest Prayer</div>
+      <div class="what-body">We pray for each other. Not performance prayer. The kind where you actually tell people what is going on and trust them with it.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-icon">&#127968;</div>
+      <div class="what-title">In Homes</div>
+      <div class="what-body">Groups meet in people&rsquo;s homes around Cleburne. Smaller rooms, longer tables, and the kind of conversation you can not have in a crowd.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-icon">&#128101;</div>
+      <div class="what-title">Real Relationships</div>
+      <div class="what-body">You will know people&rsquo;s names. You will know their kids. You will celebrate with them and carry weight with them. That is the point.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-icon">&#128336;</div>
+      <div class="what-title">Regular Rhythm</div>
+      <div class="what-body">Groups meet consistently, typically every other week. Enough to build something real without it feeling like another obligation on the calendar.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-icon">&#10024;</div>
+      <div class="what-title">Open to All</div>
+      <div class="what-body">You do not need to have it together to join a group. You need to want community. That is the only requirement. The table is open.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2 class="cta-h2">Ready to find<br><em>your people?</em></h2>
+  <p class="cta-sub">Groups are forming now. Reach out and we will connect you with the right group for where you are in life.</p>
+  <a href="mailto:info@gatheringctx.org?subject=Small%20Groups" class="btn">I Want to Join a Group &rarr;</a>
+  <a href="/#contact" class="btn btn-outline">Contact Us</a>
+</section>
+
+<footer>
+  <div class="footer-brand"><sup>the</sup>gathering &middot; Cleburne, TX</div>
+  <div class="footer-links">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/new-here.html" class="footer-link">I&rsquo;m New</a>
+    <a href="/belong.html" class="footer-link">Belong &amp; Become</a>
+    <a href="/#contact" class="footer-link">Contact</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="footer-link">Give</a>
+  </div>
+</footer>
+<script>window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)});</script>
+</body>
+</html>
