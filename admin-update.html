@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weekly Update | The Gathering Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--gold:#c8a96e;--black:#000;--off:#f5f0e8;--w08:rgba(255,255,255,.08);--w15:rgba(255,255,255,.15);--w30:rgba(255,255,255,.3);--w55:rgba(255,255,255,.55);--green:#4caf50;--red:#ef5350}
+    body{background:#0a0a0a;color:#fff;font-family:'Nunito Sans',sans-serif;font-weight:300;min-height:100vh;-webkit-font-smoothing:antialiased}
+    header{padding:2rem 3rem;border-bottom:1px solid var(--w08);display:flex;align-items:center;justify-content:space-between}
+    .brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:.05em;color:#fff}
+    .brand sup{font-size:.55em;vertical-align:super}
+    .badge{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);padding:.3rem .8rem}
+    main{max-width:900px;margin:0 auto;padding:4rem 2rem}
+    .page-title{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;margin-bottom:.5rem}
+    .page-title em{font-style:italic;color:var(--gold)}
+    .page-sub{font-size:.88rem;color:var(--w55);margin-bottom:3rem;line-height:1.7}
+    .card{background:rgba(255,255,255,.03);border:1px solid var(--w08);padding:2.5rem;margin-bottom:1.5rem}
+    .card-header{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--w08)}
+    .card-icon{width:40px;height:40px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .card-title{font-size:1rem;font-weight:500;color:#fff}
+    .card-desc{font-size:.78rem;color:var(--w30);margin-top:.2rem}
+    .field{margin-bottom:1.5rem}
+    label{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w30);margin-bottom:.6rem}
+    input,select,textarea{width:100%;background:var(--w08);border:1px solid var(--w15);color:#fff;padding:.85rem 1rem;font-family:'Nunito Sans',sans-serif;font-size:.88rem;font-weight:300;outline:none;transition:border-color .2s}
+    input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+    input::placeholder,textarea::placeholder{color:var(--w30)}
+    select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff44' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+    select option{background:#111}
+    textarea{resize:vertical;min-height:80px}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .preview-box{background:rgba(0,0,0,.3);border:1px solid var(--w08);padding:1rem;font-size:.82rem;color:var(--w55);font-family:monospace;word-break:break-all;margin-top:.8rem;min-height:40px;line-height:1.6}
+    .preview-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--w30);margin-bottom:.3rem}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;background:#fff;color:#000;border:none;font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;padding:.9rem 2rem;cursor:pointer;transition:opacity .2s;margin-top:.5rem}
+    .btn:hover{opacity:.85}
+    .btn:disabled{opacity:.4;cursor:not-allowed}
+    .btn-ghost{background:transparent;color:var(--w55);border:1px solid var(--w15);margin-left:.8rem}
+    .btn-ghost:hover{color:#fff;border-color:var(--w30);opacity:1}
+    .step-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--w08)}
+    .step-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:rgba(255,255,255,.15);flex-shrink:0;width:40px;line-height:1}
+    .step-content{flex:1}
+    .step-title{font-size:.9rem;font-weight:500;margin-bottom:.3rem}
+    .step-desc{font-size:.82rem;color:var(--w55);line-height:1.7}
+    code{font-family:monospace;background:rgba(200,169,110,.1);color:var(--gold);padding:.1rem .4rem;font-size:.82em}
+    .alert{padding:1rem 1.2rem;font-size:.85rem;line-height:1.7;margin-bottom:1.5rem;display:none}
+    .alert.success{background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.3);color:#81c784}
+    .alert.error{background:rgba(239,83,80,.1);border:1px solid rgba(239,83,80,.3);color:#ef9a9a}
+    .alert.show{display:block}
+    .current-badge{display:inline-block;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);padding:.2rem .6rem;margin-left:.6rem;vertical-align:middle}
+    .github-link{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-decoration:none;transition:color .2s}
+    .github-link:hover{color:var(--gold)}
+    @media(max-width:640px){.field-row{grid-template-columns:1fr}header{padding:1.5rem 1.5rem}main{padding:2rem 1.5rem}}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><sup>the</sup>gathering <span style="color:var(--w30);font-family:'Nunito Sans',sans-serif;font-size:.7rem;font-weight:300;letter-spacing:.05em">/ admin</span></div>
+  <div class="badge">Weekly Update Guide</div>
+</header>
+
+<main>
+  <h1 class="page-title">New Week,<br><em>New Content.</em></h1>
+  <p class="page-sub">Use this page each week to update the homepage with the latest sermon and devotional. Follow the steps below and you'll be done in under 5 minutes.</p>
+
+  <div id="alertBox" class="alert"></div>
+
+  <!-- STEP 1: SERMON -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🎙</div>
+      <div>
+        <div class="card-title">Step 1 — New Sermon</div>
+        <div class="card-desc">Update the homepage to show the latest episode from Buzzsprout</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Get the episode ID from Buzzsprout</div>
+        <div class="step-desc">Go to <a href="https://www.buzzsprout.com/2608288/episodes" target="_blank" style="color:var(--gold)">buzzsprout.com/2608288/episodes</a>, click your newest episode, and copy the number from the URL. It looks like: <code>buzzsprout.com/2608288/episodes/<strong>19087134</strong></code></div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Paste the episode ID below</div>
+        <div class="field" style="margin-top:.8rem;margin-bottom:0">
+          <label>New Episode ID</label>
+          <input type="text" id="episodeId" placeholder="e.g. 19087134" oninput="updateSermonPreview()"/>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="preview-label">This will replace the player src in index.html</div>
+          <div class="preview-box" id="sermonPreview">Paste an episode ID above to see the preview</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row" style="border:none;margin-bottom:0;padding-bottom:0">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Open index.html on GitHub and make the change</div>
+        <div class="step-desc">In <code>index.html</code>, find the two places that say <code>19087134</code> (the current episode ID) and replace both with your new ID. One is in the <code>div id</code>, one is in the <code>script src</code>.</div>
+        <a href="https://github.com/thegatheringctx/thegatheringctx/edit/main/index.html" target="_blank" class="github-link" style="display:inline-block;margin-top:.8rem">Open index.html on GitHub →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: DEVOTIONAL -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📖</div>
+      <div>
+        <div class="card-title">Step 2 — New Devotional</div>
+        <div class="card-desc">Swap the homepage devotional card to point to your newest post</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Create the new devotional page</div>
+        <div class="step-desc">Copy an existing devotional file (e.g. <code>devotional-ephesians-3.html</code>), rename it for the new week, update the title, Scripture, content, and Buzzsprout episode ID inside it. Upload it to GitHub.</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Fill in the new devotional details</div>
+        <div class="field-row" style="margin-top:.8rem">
+          <div class="field" style="margin-bottom:0">
+            <label>New Filename</label>
+            <input type="text" id="devFilename" placeholder="devotional-ephesians-4.html" oninput="updateDevPreview()"/>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label>Series Label</label>
+            <input type="text" id="devSeries" placeholder="EPHESIANS WEEK 4" oninput="updateDevPreview()"/>
+          </div>
+        </div>
+        <div class="field" style="margin-top:1rem;margin-bottom:0">
+          <label>Devotional Title</label>
+          <input type="text" id="devTitle" placeholder="e.g. Rooted and Established in Love" oninput="updateDevPreview()"/>
+        </div>
+        <div class="field" style="margin-top:1rem;margin-bottom:0">
+          <label>Scripture Reference</label>
+          <input type="text" id="devScripture" placeholder="e.g. Ephesians 3:14-21" oninput="updateDevPreview()"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row" style="border:none;margin-bottom:0;padding-bottom:0">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Replace the devotional card in index.html</div>
+        <div class="step-desc">In <code>index.html</code>, find the section that says <code>devotional-ephesians-3.html</code> and replace the filename, series label, title, and scripture with your new ones. Here's exactly what to paste:</div>
+        <div style="margin-top:1rem">
+          <div class="preview-label">New card HTML (copy &amp; paste into index.html)</div>
+          <div class="preview-box" id="devPreview" style="white-space:pre-wrap;font-size:.75rem">Fill in the fields above to generate the card HTML</div>
+        </div>
+        <a href="https://github.com/thegatheringctx/thegatheringctx/edit/main/index.html" target="_blank" class="github-link" style="display:inline-block;margin-top:.8rem">Open index.html on GitHub →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: AFTER -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">✅</div>
+      <div>
+        <div class="card-title">Step 3 — Commit &amp; Verify</div>
+        <div class="card-desc">Save your changes and confirm the site updated</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Commit your changes on GitHub</div>
+        <div class="step-desc">After making your edits in the GitHub editor, click <strong>Commit changes</strong>, write a message like <code>Week 4 update: sermon + devotional</code>, and click the green button. Netlify deploys automatically in about 30 seconds.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Verify it's live</div>
+        <div class="step-desc">Visit <a href="https://gatheringctx.org" target="_blank" style="color:var(--gold)">gatheringctx.org</a> and confirm the new sermon player and devotional card are showing. If it looks the same, wait 30 more seconds and hard refresh (Ctrl+Shift+R on Windows, Cmd+Shift+R on Mac).</div>
+      </div>
+    </div>
+    <div class="step-row" style="border:none;margin-bottom:0;padding-bottom:0">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Also update devotionals.html</div>
+        <div class="step-desc">Add the new devotional card to <code>devotionals.html</code> so it shows in the full archive. Copy an existing card block, update the filename, title, series, and scripture. Place it at the <strong>top</strong> of the grid so newest is first.</div>
+        <a href="https://github.com/thegatheringctx/thegatheringctx/edit/main/devotionals.html" target="_blank" class="github-link" style="display:inline-block;margin-top:.8rem">Open devotionals.html on GitHub →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📋</div>
+      <div>
+        <div class="card-title">Quick Reference</div>
+        <div class="card-desc">Key IDs and links you'll need every week</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w30);margin-bottom:.8rem">Current Episode ID</div>
+        <div style="font-family:monospace;color:var(--gold);font-size:1.1rem">19087134</div>
+        <div style="font-size:.75rem;color:var(--w30);margin-top:.3rem">Ephesians 3 &middot; The Mystery Is Out</div>
+      </div>
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w30);margin-bottom:.8rem">Buzzsprout Podcast ID</div>
+        <div style="font-family:monospace;color:var(--gold);font-size:1.1rem">2608288</div>
+        <div style="font-size:.75rem;color:var(--w30);margin-top:.3rem">the gathering ctx</div>
+      </div>
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w30);margin-bottom:.8rem">Current Devotional</div>
+        <div style="font-family:monospace;color:var(--gold);font-size:.85rem">devotional-ephesians-3.html</div>
+        <div style="font-size:.75rem;color:var(--w30);margin-top:.3rem">The Mystery Is Out &middot; Ephesians 3</div>
+      </div>
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w30);margin-bottom:.8rem">GitHub Repo</div>
+        <div style="font-family:monospace;color:var(--gold);font-size:.85rem">thegatheringctx/thegatheringctx</div>
+        <div style="font-size:.75rem;color:var(--w30);margin-top:.3rem">Branch: main</div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--w08)">
+      <div style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w30);margin-bottom:1rem">Key Links</div>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem">
+        <a href="https://github.com/thegatheringctx/thegatheringctx" target="_blank" class="github-link">GitHub Repo →</a>
+        <a href="https://app.netlify.com/projects/gatheringctx/deploys" target="_blank" class="github-link">Netlify Deploys →</a>
+        <a href="https://www.buzzsprout.com/2608288/episodes" target="_blank" class="github-link">Buzzsprout Episodes →</a>
+        <a href="https://gatheringctx.org" target="_blank" class="github-link">Live Site →</a>
+        <a href="https://app.mailerlite.com" target="_blank" class="github-link">MailerLite →</a>
+        <a href="https://people.planningcenteronline.com" target="_blank" class="github-link">Planning Center →</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+function updateSermonPreview() {
+  const id = document.getElementById('episodeId').value.trim();
+  const box = document.getElementById('sermonPreview');
+  if (!id) { box.textContent = 'Paste an episode ID above to see the preview'; return; }
+  box.innerHTML = `<span style="color:var(--gold)">Find:</span> 19087134 (both occurrences)\n<span style="color:var(--gold)">Replace with:</span> ${id}\n\n<span style="opacity:.5">div id='buzzsprout-player-<strong>${id}</strong>'\n...episodes/<strong>${id}</strong>.js?container_id=buzzsprout-player-<strong>${id}</strong>...</span>`;
+}
+
+function updateDevPreview() {
+  const filename = document.getElementById('devFilename').value.trim();
+  const series = document.getElementById('devSeries').value.trim();
+  const title = document.getElementById('devTitle').value.trim();
+  const scripture = document.getElementById('devScripture').value.trim();
+  const box = document.getElementById('devPreview');
+  if (!filename && !title) { box.textContent = 'Fill in the fields above to generate the card HTML'; return; }
+  const html = `<a href="${filename || 'devotional-new.html'}" class="dev-card">
+  <div class="dev-series">${series || 'SERIES NAME'}</div>
+  <div class="dev-title">${title || 'Devotional Title'}</div>
+  <div class="dev-ref">${scripture || 'Scripture Reference'}</div>
+  <span class="dev-arrow">Read &rarr;</span>
+</a>`;
+  box.textContent = html;
+}
+</script>
+</body>
+</html>
