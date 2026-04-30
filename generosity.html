@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Generosity | The Gathering CTX</title>
+<meta name="description" content="We don't give out of pressure â we give out of worship. Generosity at The Gathering CTX in Cleburne, TX."/>
+<link rel="canonical" href="https://gatheringctx.org/generosity"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --black: #000;
+  --off: #f5f0e8;
+  --gold: #c8a96e;
+  --gold-dim: rgba(200,169,110,.15);
+  --w08: rgba(255,255,255,.08);
+  --w15: rgba(255,255,255,.15);
+  --w30: rgba(255,255,255,.3);
+  --w55: rgba(255,255,255,.55);
+  --w80: rgba(255,255,255,.8);
+  --k70: rgba(0,0,0,.7);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: #fff; font-family: 'Nunito Sans', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.4rem 3rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid transparent; transition: background .3s, border-color .3s; }
+nav.scrolled { background: rgba(0,0,0,.92); border-color: var(--w08); backdrop-filter: blur(8px); }
+.nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: .05em; text-decoration: none; color: #fff; }
+.nav-brand sup { font-size: .55em; vertical-align: super; margin-right: .15em; }
+.nav-back { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--w55); text-decoration: none; transition: color .2s; }
+.nav-back:hover { color: #fff; }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 10rem 6rem 6rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 40%, rgba(200,169,110,.07) 0%, transparent 65%); pointer-events: none; }
+.hero-eyebrow { font-size: .6rem; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+.hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 300; line-height: 1.0; letter-spacing: -.02em; margin-bottom: 2.5rem; max-width: 800px; }
+.hero-h1 em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 1.05rem; line-height: 1.9; color: var(--w80); max-width: 600px; margin-bottom: 3rem; }
+.scroll-hint { position: absolute; bottom: 3rem; left: 6rem; display: flex; align-items: center; gap: 1rem; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--w30); }
+.scroll-line { width: 40px; height: 1px; background: var(--w30); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+/* SCRIPTURE PULL */
+.scripture-band { background: var(--off); padding: 7rem 6rem; text-align: center; }
+.scripture-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 300; font-style: italic; line-height: 1.7; color: #000; max-width: 780px; margin: 0 auto 1.5rem; }
+.scripture-ref { font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(0,0,0,.4); }
+
+/* BODY SECTION */
+.body-section { background: var(--black); padding: 9rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; border-top: 1px solid var(--w08); }
+.body-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.body-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -.01em; margin-bottom: 2rem; }
+.body-h2 em { font-style: italic; color: var(--gold); }
+.body-text { font-size: .95rem; line-height: 2.1; color: var(--w55); }
+.body-text p + p { margin-top: 1.4rem; }
+
+/* DECLARATION BAND */
+.declaration-band { background: #0a0a0a; padding: 9rem 6rem; border-top: 1px solid var(--w08); }
+.declaration-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 3rem; }
+.declaration-lines { display: flex; flex-direction: column; gap: 1px; background: var(--w08); }
+.declaration-line { background: #0a0a0a; padding: 2.2rem 3rem; font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 300; line-height: 1.5; color: var(--w80); border-left: 2px solid transparent; transition: border-color .3s; }
+.declaration-line:hover { border-left-color: var(--gold); }
+.declaration-line em { font-style: italic; color: var(--gold); }
+
+/* GIVE SECTION */
+.give { background: var(--black); padding: 9rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; border-top: 1px solid var(--w08); }
+.give-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.give-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -.01em; margin-bottom: 1.8rem; }
+.give-h2 em { font-style: italic; color: var(--gold); }
+.give-body { font-size: .95rem; line-height: 2; color: var(--w55); margin-bottom: 2rem; }
+.give-note { font-size: .78rem; color: var(--w30); line-height: 1.8; padding-top: 1.5rem; border-top: 1px solid var(--w08); }
+.btn-primary { display: inline-block; background: #fff; color: #000; text-decoration: none; font-family: 'Nunito Sans', sans-serif; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 600; padding: 1.2rem 3rem; transition: opacity .2s; margin-bottom: 1.5rem; }
+.btn-primary:hover { opacity: .85; }
+.btn-note { font-size: .82rem; color: rgba(255,255,255,.4); line-height: 1.8; }
+
+/* FOOTER */
+footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-weight: 400; color: var(--w55); }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-link { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--w30); text-decoration: none; transition: color .2s; }
+.footer-link:hover { color: #fff; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero { padding: 8rem 2rem 5rem; }
+  .scroll-hint { left: 2rem; }
+  .scripture-band { padding: 5rem 2rem; }
+  .body-section, .give { grid-template-columns: 1fr; gap: 3rem; padding: 6rem 2rem; }
+  .declaration-band { padding: 6rem 2rem; }
+  .declaration-line { padding: 1.8rem 2rem; }
+  footer { padding: 2.5rem 2rem; flex-direction: column; align-items: flex-start; }
+  nav { padding: 1.2rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
+  <a href="/" class="nav-back">&larr; Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Generosity &middot; Worship</div>
+  <h1 class="hero-h1">Generosity<br><em>Is Worship.</em></h1>
+  <p class="hero-sub">We don&rsquo;t give out of pressure&mdash;we give out of worship.</p>
+  <div class="scroll-hint"><div class="scroll-line"></div>Keep reading</div>
+</section>
+
+<!-- SCRIPTURE -->
+<section class="scripture-band">
+  <p class="scripture-text">&ldquo;Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.&rdquo;</p>
+  <div class="scripture-ref">2 Corinthians 9:7</div>
+</section>
+
+<!-- BODY -->
+<section class="body-section">
+  <div>
+    <div class="body-label">What We Believe</div>
+    <h2 class="body-h2">Not a dead work.<br><em>A joyful response.</em></h2>
+  </div>
+  <div class="body-text">
+    <p>Generosity is not a dead work driven by guilt, performance, or the need to earn God&rsquo;s approval. It is a joyful response flowing from hearts transformed by repentance and faith&mdash;the foundation of a Word-driven life.</p>
+    <p>Everything we do is made possible through generosity. Every life reached, every disciple formed, every need met in Cleburne and beyond is a result of people who give freely and joyfully.</p>
+    <p>We don&rsquo;t give because we have to. We give because God has already given.</p>
+  </div>
+</section>
+
+<!-- DECLARATION -->
+<section class="declaration-band">
+  <div class="declaration-label">Who We Are</div>
+  <div class="declaration-lines">
+    <div class="declaration-line">Formed by the Word. Led by the Spirit. Walking in the victory Christ has already won.</div>
+    <div class="declaration-line">We are a family on mission&mdash;disciples who multiply the Kingdom through <em>cheerful, faith-filled generosity.</em></div>
+    <div class="declaration-line">This is who we are: A people whose giving is worship. A people whose generosity reflects Jesus.</div>
+    <div class="declaration-line">And with every act of generosity, we declare: <em>&ldquo;I walk with victory, not to it, in Jesus&rsquo; name.&rdquo;</em></div>
+  </div>
+</section>
+
+<!-- GIVE CTA -->
+<section class="give" id="give">
+  <div>
+    <div class="give-label">Give</div>
+    <h2 class="give-h2">Ready to<br><em>give joyfully?</em></h2>
+    <p class="give-body">Giving at The Gathering is simple, secure, and goes directly to Kingdom work in Cleburne and beyond. Every gift matters. Every act of generosity declares who we are.</p>
+    <div class="give-note">
+      Questions? Reach us at <a href="mailto:info@gatheringctx.org" style="color:var(--gold);text-decoration:none">info@gatheringctx.org</a>
+    </div>
+  </div>
+  <div>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" rel="noopener" class="btn-primary">Give Now &rarr;</a>
+    <p class="btn-note">You&rsquo;ll be taken to our secure Church Center giving page.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><sup>the</sup>gathering &middot; Cleburne, TX</div>
+  <div class="footer-links">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/belong" class="footer-link">Belong &amp; Become</a>
+    <a href="/formed" class="footer-link">Formed &amp; Sent</a>
+    <a href="/#visit" class="footer-link">Visit</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="footer-link">Give</a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+</script>
+</body>
+</html>
