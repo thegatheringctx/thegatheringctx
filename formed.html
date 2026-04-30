@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Formed &amp; Sent | The Gathering CTX</title>
+<meta name="description" content="Formed &amp; Sent is a five-week discipleship course built on the six First Principles of Hebrews 6. Five weeks. Six foundations. One unshakeable life."/>
+<link rel="canonical" href="https://gatheringctx.org/formed"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --black: #000;
+  --off: #f5f0e8;
+  --gold: #c8a96e;
+  --gold-dim: rgba(200,169,110,.15);
+  --w08: rgba(255,255,255,.08);
+  --w15: rgba(255,255,255,.15);
+  --w30: rgba(255,255,255,.3);
+  --w55: rgba(255,255,255,.55);
+  --w75: rgba(255,255,255,.75);
+  --w80: rgba(255,255,255,.8);
+  --k70: rgba(0,0,0,.7);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: #fff; font-family: 'Nunito Sans', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* -- NAV -- */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.4rem 3rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid transparent; transition: background .3s, border-color .3s; }
+nav.scrolled { background: rgba(0,0,0,.92); border-color: var(--w08); backdrop-filter: blur(8px); }
+.nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: .05em; text-decoration: none; color: #fff; }
+.nav-brand sup { font-size: .55em; vertical-align: super; margin-right: .15em; }
+.nav-back { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--w55); text-decoration: none; transition: color .2s; }
+.nav-back:hover { color: #fff; }
+
+/* -- HERO -- */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 10rem 6rem 6rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 40%, rgba(200,169,110,.07) 0%, transparent 65%); pointer-events: none; }
+.hero-eyebrow { font-size: .6rem; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+.hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 300; line-height: 1.0; letter-spacing: -.02em; margin-bottom: 2.5rem; max-width: 800px; }
+.hero-h1 em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 1.05rem; line-height: 1.9; color: var(--w80); max-width: 560px; margin-bottom: 3rem; }
+.hero-meta { display: flex; gap: 3rem; flex-wrap: wrap; border-top: 1px solid var(--w08); padding-top: 2rem; }
+.hero-meta-label { font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
+.hero-meta-val { font-size: .9rem; color: var(--w80); font-weight: 300; }
+
+/* -- SCROLL INDICATOR -- */
+.scroll-hint { position: absolute; bottom: 3rem; left: 6rem; display: flex; align-items: center; gap: 1rem; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--w30); }
+.scroll-line { width: 40px; height: 1px; background: var(--w30); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+/* -- WHAT -- */
+.what { background: var(--off); padding: 9rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
+.what-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--k70); margin-bottom: 1.5rem; }
+.what-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: #000; letter-spacing: -.01em; margin-bottom: 2rem; }
+.what-h2 em { font-style: italic; color: #5c4b2a; }
+.what-body { font-size: .95rem; line-height: 2; color: var(--k70); }
+.what-body p + p { margin-top: 1.2rem; }
+.what-card { background: #fff; border: 1px solid rgba(0,0,0,.07); padding: 2.5rem; margin-bottom: 1px; }
+.what-card-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: rgba(0,0,0,.12); line-height: 1; margin-bottom: .8rem; }
+.what-card-title { font-size: .95rem; font-weight: 500; color: #000; margin-bottom: .5rem; }
+.what-card-body { font-size: .85rem; line-height: 1.85; color: var(--k70); }
+
+/* -- QUOTE BAND -- */
+.quote-band { background: var(--black); padding: 7rem 6rem; text-align: center; }
+.quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 300; font-style: italic; line-height: 1.5; color: #fff; max-width: 800px; margin: 0 auto 1.5rem; }
+.quote-ref { font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); }
+
+/* -- WEEKS -- */
+.weeks { background: #0a0a0a; padding: 9rem 6rem; border-top: 1px solid var(--w08); }
+.weeks-header { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; margin-bottom: 5rem; }
+.weeks-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.weeks-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -.01em; }
+.weeks-h2 em { font-style: italic; color: var(--gold); }
+.weeks-body { font-size: .95rem; line-height: 2; color: var(--w55); align-self: end; }
+.weeks-grid { display: flex; flex-direction: column; gap: 1px; background: var(--w08); }
+.week-card { background: #0a0a0a; padding: 2.8rem 3rem; display: grid; grid-template-columns: 120px 1fr; gap: 3rem; align-items: start; border-left: 2px solid transparent; transition: border-color .3s; }
+.week-card:hover { border-left-color: var(--gold); }
+.week-card-left { }
+.week-num { font-family: 'Cormorant Garamond', serif; font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: .5rem; }
+.week-title-sm { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; line-height: 1.2; color: #fff; }
+.week-card-right { }
+.week-subtitle { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--w30); margin-bottom: .8rem; }
+.week-body { font-size: .88rem; line-height: 1.9; color: var(--w55); margin-bottom: .8rem; }
+.week-scripture { font-size: .72rem; letter-spacing: .12em; color: var(--gold); opacity: .7; }
+
+/* -- WALK AWAY -- */
+.walkaway { background: var(--off); padding: 9rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
+.walkaway-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--k70); margin-bottom: 1.5rem; }
+.walkaway-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: #000; letter-spacing: -.01em; margin-bottom: 2rem; }
+.walkaway-h2 em { font-style: italic; color: #5c4b2a; }
+.walkaway-body { font-size: .95rem; line-height: 2; color: var(--k70); }
+.walkaway-items { display: flex; flex-direction: column; gap: 1px; }
+.walkaway-item { background: #fff; border: 1px solid rgba(0,0,0,.07); padding: 2rem 2.5rem; display: flex; gap: 2rem; align-items: start; }
+.walkaway-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: rgba(0,0,0,.12); line-height: 1; flex-shrink: 0; }
+.walkaway-text { font-size: .88rem; line-height: 1.9; color: var(--k70); padding-top: .5rem; }
+.walkaway-text strong { display: block; font-weight: 500; color: #000; margin-bottom: .3rem; font-size: .9rem; }
+
+/* -- WHO -- */
+.who { background: #000; padding: 9rem 6rem; border-top: 1px solid var(--w08); }
+.who-header { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; margin-bottom: 5rem; }
+.who-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.who-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -.01em; }
+.who-h2 em { font-style: italic; color: var(--gold); }
+.who-body { font-size: .95rem; line-height: 2; color: var(--w55); align-self: end; }
+.who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--w08); }
+.who-card { background: #000; padding: 2.5rem 2rem; border-top: 2px solid transparent; transition: border-color .3s; }
+.who-card:hover { border-color: var(--gold); }
+.who-card-icon { font-size: 1.4rem; margin-bottom: 1rem; }
+.who-card-title { font-size: .9rem; font-weight: 500; color: #fff; margin-bottom: .6rem; }
+.who-card-body { font-size: .82rem; line-height: 1.85; color: var(--w55); }
+
+/* -- REGISTER -- */
+.register { background: var(--black); padding: 9rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; border-top: 1px solid var(--w08); }
+.register-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.register-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -.01em; margin-bottom: 1.8rem; }
+.register-h2 em { font-style: italic; color: var(--gold); }
+.register-body { font-size: .95rem; line-height: 2; color: var(--w55); margin-bottom: 2rem; }
+.register-note { font-size: .78rem; color: var(--w30); line-height: 1.8; padding-top: 1.5rem; border-top: 1px solid var(--w08); }
+.btn-primary { display: inline-block; background: #fff; color: #000; text-decoration: none; font-family: 'Nunito Sans', sans-serif; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 600; padding: 1.2rem 3rem; transition: opacity .2s; margin-bottom: 1.5rem; }
+.btn-primary:hover { opacity: .85; }
+.btn-note { font-size: .82rem; color: rgba(255,255,255,.4); line-height: 1.8; }
+
+/* -- FOOTER -- */
+footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-weight: 400; color: var(--w55); }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-link { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--w30); text-decoration: none; transition: color .2s; }
+.footer-link:hover { color: #fff; }
+
+/* -- RESPONSIVE -- */
+@media (max-width: 900px) {
+  .hero { padding: 8rem 2rem 5rem; }
+  .scroll-hint { left: 2rem; }
+  .what, .walkaway, .who-header, .register, .weeks-header { grid-template-columns: 1fr; gap: 3rem; padding: 6rem 2rem; }
+  .weeks, .who { padding: 6rem 2rem; }
+  .who-grid { grid-template-columns: 1fr; }
+  .quote-band { padding: 5rem 2rem; }
+  .week-card { grid-template-columns: 1fr; gap: 1rem; padding: 2rem; }
+  footer { padding: 2.5rem 2rem; flex-direction: column; align-items: flex-start; }
+  nav { padding: 1.2rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
+  <a href="/" class="nav-back">&larr; Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Discipleship Course &middot; Five Weeks</div>
+  <h1 class="hero-h1">Formed<br><em>&amp; Sent.</em></h1>
+  <p class="hero-sub">Five weeks. Six foundations. One unshakeable life. This is where vision becomes something you stand on.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Format</div>
+      <div class="hero-meta-val">Five Sessions &middot; Weekly</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Location</div>
+      <div class="hero-meta-val">Cleburne Conference Center</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Prerequisite</div>
+      <div class="hero-meta-val">Belong &amp; Become</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Cost</div>
+      <div class="hero-meta-val">Free &middot; Always</div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Keep reading</div>
+</section>
+
+<!-- WHAT IS IT -->
+<section class="what">
+  <div class="what-left">
+    <div class="what-label">The Course</div>
+    <h2 class="what-h2">Not a class.<br><em>A foundation.</em></h2>
+    <div class="what-body">
+      <p>Formed &amp; Sent is a five-week discipleship course built on the six First Principles of Hebrews 6:1&ndash;2. Every week, one stone. By the time you finish, you will have a rock-solid, personal answer to the question every storm eventually asks.</p>
+      <p><em>What is actually underneath your life?</em></p>
+      <p>Not a textbook answer. Your own. Built from the Word, tested in prayer, and ready to be passed on to the next person who needs it.</p>
+    </div>
+  </div>
+  <div class="what-right">
+    <div class="what-card">
+      <div class="what-card-num">01</div>
+      <div class="what-card-title">The Word, deep</div>
+      <div class="what-card-body">Six First Principles from Hebrews 6 â not as doctrine to carry, but as stone to stand on.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">02</div>
+      <div class="what-card-title">A daily walk rhythm</div>
+      <div class="what-card-body">Word, prayer, community. A sustainable pattern for living close to God, built week by week.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-card-num">03</div>
+      <div class="what-card-title">The commission</div>
+      <div class="what-card-body">You were not saved to sit. The final week puts a sending on everything you have built.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<section class="quote-band">
+  <p class="quote-text">"The person who has never laid these stones properly is always one storm away from a collapse they cannot explain."</p>
+  <div class="quote-ref">Formed &amp; Sent &middot; Hebrews 6:1&ndash;2</div>
+</section>
+
+<!-- FIVE WEEKS -->
+<section class="weeks">
+  <div class="weeks-header">
+    <div>
+      <div class="weeks-label">Five Weeks at a Glance</div>
+      <h2 class="weeks-h2">Stone by stone.<br><em>Week by week.</em></h2>
+    </div>
+    <div class="weeks-body">
+      Each week builds on the last. Each stone is irreplaceable. By Week 5 you will not just know what The Gathering believes&mdash;you will be standing on it.
+    </div>
+  </div>
+  <div class="weeks-grid">
+    <div class="week-card">
+      <div class="week-card-left">
+        <div class="week-num">Week 01</div>
+        <div class="week-title-sm">The Sure Foundation</div>
+      </div>
+      <div class="week-card-right">
+        <div class="week-subtitle">Repentance from Dead Works &middot; Faith Toward God</div>
+        <p class="week-body">What you are building on determines everything. Two builders. Same storm. One standing, one in ruins. The difference was never strength &mdash; it was always foundation. This week you lay the first two stones.</p>
+        <div class="week-scripture">Matthew 7:24&ndash;27 &middot; Psalm 51 &middot; Hebrews 11:1</div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="week-card-left">
+        <div class="week-num">Week 02</div>
+        <div class="week-title-sm">Baptized into New Life</div>
+      </div>
+      <div class="week-card-right">
+        <div class="week-subtitle">The Doctrine of Baptisms</div>
+        <p class="week-body">The Christian life is not an improved version of your old life. It is an entirely different one. This week unpacks three baptisms &mdash; into the Body of Christ, into water, and into the power of the Holy Spirit &mdash; and why every believer needs all three.</p>
+        <div class="week-scripture">Romans 6:4 &middot; Acts 1:8 &middot; Acts 2:38</div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="week-card-left">
+        <div class="week-num">Week 03</div>
+        <div class="week-title-sm">Hands That Carry Heaven</div>
+      </div>
+      <div class="week-card-right">
+        <div class="week-subtitle">Laying on of Hands</div>
+        <p class="week-body">What God placed in you is meant to flow through you into the lives of people around you. This week uncovers the five functions of laying on of hands &mdash; and why your hands are one of the primary mechanisms the Kingdom operates through.</p>
+        <div class="week-scripture">Genesis 2:7 &middot; 1 Timothy 4:14 &middot; James 5:14</div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="week-card-left">
+        <div class="week-num">Week 04</div>
+        <div class="week-title-sm">Resurrection Life</div>
+      </div>
+      <div class="week-card-right">
+        <div class="week-subtitle">Resurrection of the Dead &middot; Eternal Judgment</div>
+        <p class="week-body">You do not strive toward victory. You live from it. This week confronts the two foundation stones that create the most urgency in a disciple's life &mdash; and the most hope. Everything rises or falls at the empty tomb.</p>
+        <div class="week-scripture">Romans 8:11 &middot; Ephesians 2:6 &middot; 2 Corinthians 5:10</div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="week-card-left">
+        <div class="week-num">Week 05</div>
+        <div class="week-title-sm">Become and Multiply</div>
+      </div>
+      <div class="week-card-right">
+        <div class="week-subtitle">Discipleship: Go, Baptize, Teach</div>
+        <p class="week-body">You were not saved to sit. You were saved to be sent. The final week puts a commission on everything you have built. Foundation leads to formation. Formation leads to multiplication. This is where it all goes.</p>
+        <div class="week-scripture">Matthew 28:18&ndash;20 &middot; 2 Timothy 2:2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WALK AWAY WITH -->
+<section class="walkaway">
+  <div>
+    <div class="walkaway-label">What Every Partner Walks Away With</div>
+    <h2 class="walkaway-h2">Something that<br><em>cannot be shaken.</em></h2>
+    <div class="walkaway-body">
+      <p>Every partner who completes Formed &amp; Sent walks out with something that cannot be shaken. Not a certificate. Not information. A foundation.</p>
+    </div>
+  </div>
+  <div class="walkaway-items">
+    <div class="walkaway-item">
+      <div class="walkaway-num">01</div>
+      <div class="walkaway-text"><strong>A rock-solid personal answer</strong>To the question every storm asks: What is actually underneath your life?</div>
+    </div>
+    <div class="walkaway-item">
+      <div class="walkaway-num">02</div>
+      <div class="walkaway-text"><strong>Biblical depth on all six First Principles</strong>Lived, not just learned. Stone by stone, week by week.</div>
+    </div>
+    <div class="walkaway-item">
+      <div class="walkaway-num">03</div>
+      <div class="walkaway-text"><strong>A daily walk rhythm</strong>Built on the Word, prayer, and community. Sustainable. Personal. Yours.</div>
+    </div>
+    <div class="walkaway-item">
+      <div class="walkaway-num">04</div>
+      <div class="walkaway-text"><strong>The confidence and pattern to disciple one other person</strong>You are not the finish line. You are a link in a chain that extends past your lifetime.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="who">
+  <div class="who-header">
+    <div>
+      <div class="who-label">Who This Is For</div>
+      <h2 class="who-h2">Brand new<br><em>or been here for years.</em></h2>
+    </div>
+    <div class="who-body">
+      Formed &amp; Sent is not just for new believers. Paul's warning in Hebrews 5 was addressed to people who had been around truth for years. If you have never laid these stones properly, you are one storm away from a collapse you cannot explain. This course is for anyone ready to build on something that does not move.
+    </div>
+  </div>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-card-icon">&#127757;</div>
+      <div class="who-card-title">New to Faith</div>
+      <div class="who-card-body">You just gave your life to Christ and you want to build it right from the beginning. This course was made for that moment.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">&#128196;</div>
+      <div class="who-card-title">Completed Belong &amp; Become</div>
+      <div class="who-card-body">You have heard the vision. Now you want the foundation underneath it. Formed &amp; Sent is your next step.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">&#128293;</div>
+      <div class="who-card-title">Long-time Believer</div>
+      <div class="who-card-body">You have been in church for years and you are honest enough to admit: some of these stones were never properly laid. This is for you.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="register" id="register">
+  <div>
+    <div class="register-label">Your Next Step</div>
+    <h2 class="register-h2">Ready to go<br><em>deeper?</em></h2>
+    <p class="register-body">Formed &amp; Sent runs in five-week cohorts. Spots are limited to keep it personal. If you have completed Belong &amp; Become &mdash; or if you are ready to start &mdash; reach out and we will get you connected to the next cohort.</p>
+    <div class="register-note">
+      Formed &amp; Sent meets in person at the Cleburne Conference Center. Questions? Reach us at <a href="mailto:info@gatheringctx.org" style="color:var(--gold);text-decoration:none">info@gatheringctx.org</a>
+    </div>
+  </div>
+  <div>
+    <a href="https://gatheringctx.churchcenter.com/people/forms/1215903" target="_blank" rel="noopener" class="btn-primary">Register for Formed &amp; Sent &rarr;</a>
+    <p class="btn-note">You'll be taken to our secure Planning Center form.<br>Your information goes directly into our church database.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><sup>the</sup>gathering &middot; Cleburne, TX</div>
+  <div class="footer-links">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/belong" class="footer-link">Belong &amp; Become</a>
+    <a href="/#visit" class="footer-link">Visit</a>
+    <a href="/#contact" class="footer-link">Contact</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="footer-link">Give</a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+</script>
+</body>
+</html>
