@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Our Story | The Gathering CTX</title>
+<meta name="description" content="March 2026. A barn in Blum, Texas. This is how The Gathering began and why we exist to make disciples who make disciples."/>
+<link rel="canonical" href="https://gatheringctx.org/our-story"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --black: #000; --off: #f5f0e8; --gold: #c8a96e; --w08: rgba(255,255,255,.08); --w30: rgba(255,255,255,.3); --w55: rgba(255,255,255,.55); --w80: rgba(255,255,255,.8); --k70: rgba(0,0,0,.7); }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: #fff; font-family: 'Nunito Sans', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.4rem 3rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid transparent; transition: background .3s, border-color .3s; }
+nav.scrolled { background: rgba(0,0,0,.92); border-color: var(--w08); backdrop-filter: blur(8px); }
+.nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: .05em; text-decoration: none; color: #fff; }
+.nav-brand sup { font-size: .55em; vertical-align: super; margin-right: .15em; }
+.nav-back { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--w55); text-decoration: none; transition: color .2s; }
+.nav-back:hover { color: #fff; }
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 10rem 6rem 7rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(200,169,110,.06) 0%, transparent 65%); pointer-events: none; }
+.hero-eyebrow { font-size: .6rem; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+.hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 8vw, 7.5rem); font-weight: 300; line-height: .95; letter-spacing: -.03em; margin-bottom: 3rem; max-width: 900px; }
+.hero-h1 em { font-style: italic; color: var(--gold); }
+.hero-context { display: flex; gap: 4rem; border-top: 1px solid var(--w08); padding-top: 2rem; flex-wrap: wrap; }
+.hero-context-label { font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
+.hero-context-val { font-size: .9rem; color: var(--w80); font-weight: 300; }
+.scroll-hint { position: absolute; bottom: 3rem; right: 6rem; display: flex; align-items: center; gap: 1rem; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--w30); }
+.scroll-line { width: 40px; height: 1px; background: var(--w30); animation: sp 2s ease-in-out infinite; }
+@keyframes sp { 0%,100%{opacity:.3} 50%{opacity:1} }
+.narrative { background: var(--off); padding: 9rem 6rem; }
+.section-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--k70); margin-bottom: 4rem; }
+.section-label-light { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
+.narrative-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.2; color: #000; letter-spacing: -.01em; margin-bottom: 2.5rem; }
+.narrative-h2 em { font-style: italic; color: #5c4b2a; }
+.narrative-text { font-size: .95rem; line-height: 2.1; color: var(--k70); }
+.narrative-text p + p { margin-top: 1.4rem; }
+.pull-quote { background: var(--black); padding: 7rem 6rem; text-align: center; border-top: 1px solid var(--w08); }
+.pull-quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; font-style: italic; line-height: 1.4; color: #fff; max-width: 800px; margin: 0 auto; }
+.pull-quote-text em { color: var(--gold); }
+.why { background: #0a0a0a; padding: 9rem 6rem; border-top: 1px solid var(--w08); }
+.why-statement { background: var(--gold); padding: 3rem 4rem; margin-bottom: 4rem; }
+.why-statement-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.5; color: #000; }
+.why-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -.01em; margin-bottom: 3rem; }
+.why-h2 em { font-style: italic; color: var(--gold); }
+.scripture-block { border-left: 2px solid var(--gold); padding: 2rem 3rem; margin-bottom: 4rem; }
+.scripture-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 300; font-style: italic; line-height: 1.7; color: var(--w80); margin-bottom: 1rem; }
+.scripture-ref { font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); }
+.pillars { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--w08); margin-bottom: 4rem; }
+.pillar { background: #0a0a0a; padding: 2.5rem 2rem; border-top: 2px solid transparent; transition: border-color .3s; }
+.pillar:hover { border-top-color: var(--gold); }
+.pillar-word { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--gold); margin-bottom: .8rem; line-height: 1; }
+.pillar-body { font-size: .85rem; line-height: 1.85; color: var(--w55); }
+.how-block { background: var(--w08); padding: 2.5rem 3rem; }
+.how-text { font-size: .95rem; line-height: 2.1; color: var(--w80); }
+.how-text strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; color: #fff; margin-bottom: .6rem; }
+.link-pull { background: var(--black); padding: 9rem 6rem; border-top: 1px solid var(--w08); display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
+.link-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -.01em; margin-bottom: 1.8rem; }
+.link-h2 em { font-style: italic; color: var(--gold); }
+.link-body { font-size: .95rem; line-height: 2; color: var(--w55); }
+.btn-primary { display: inline-block; background: #fff; color: #000; text-decoration: none; font-family: 'Nunito Sans', sans-serif; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 600; padding: 1.2rem 3rem; transition: opacity .2s; margin-top: 2.5rem; }
+.btn-primary:hover { opacity: .85; }
+footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-weight: 400; color: var(--w55); }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-link { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--w30); text-decoration: none; transition: color .2s; }
+.footer-link:hover { color: #fff; }
+@media (max-width: 900px) {
+  .hero { padding: 8rem 2rem 5rem; } .scroll-hint { right: 2rem; }
+  .narrative { padding: 6rem 2rem; } .two-col { grid-template-columns: 1fr; gap: 3rem; }
+  .pull-quote { padding: 5rem 2rem; } .why { padding: 6rem 2rem; }
+  .pillars { grid-template-columns: 1fr 1fr; } .link-pull { grid-template-columns: 1fr; gap: 3rem; padding: 6rem 2rem; }
+  footer { padding: 2.5rem 2rem; flex-direction: column; align-items: flex-start; } nav { padding: 1.2rem 2rem; }
+}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
+  <a href="/" class="nav-back">&larr; Back to Home</a>
+</nav>
+<section class="hero">
+  <div class="hero-eyebrow">Our Story</div>
+  <h1 class="hero-h1">Every church<br>has <em>a moment.</em></h1>
+  <div class="hero-context">
+    <div><div class="hero-context-label">Founded</div><div class="hero-context-val">March 2026</div></div>
+    <div><div class="hero-context-label">First Gathering</div><div class="hero-context-val">A barn in Blum, Texas</div></div>
+    <div><div class="hero-context-label">Home</div><div class="hero-context-val">Cleburne, TX</div></div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Keep reading</div>
+</section>
+<section class="narrative">
+  <div class="section-label">How We Started</div>
+  <div class="two-col">
+    <div>
+      <h2 class="narrative-h2">A barn. The Word.<br><em>A hunger for something real.</em></h2>
+    </div>
+    <div class="narrative-text">
+      <p>A moment before it was a church. Before there were chairs to set up or a name anyone recognized. Just a conviction and a few people willing to act on it.</p>
+      <p>March 2026. A barn in Blum, Texas. No stage production, no polished program, no guarantee of what would happen when the doors opened. What we had was the Word of God, the presence of the Holy Spirit, and a barn full of people who were hungry for something real.</p>
+      <p>This did not come from a church growth strategy. It came from families sitting around tables asking honest questions. Why does so much church activity produce so little transformation? Why are believers encouraged but not equipped, inspired but not activated?</p>
+      <p>We were not critics looking for something to tear down. We were disciples looking for something to build. Not another program. A people.</p>
+      <p>So we are not here to build something impressive. We are here to build something lasting. A family on mission. A community where you do not just attend, you belong. Where you do not just show up, you become.</p>
+      <p>We are young. We are still growing, still learning, still becoming. But the heart of what we are will not change. And we are glad you are in the room for it.</p>
+    </div>
+  </div>
+</section>
+<section class="pull-quote">
+  <p class="pull-quote-text">Not another program.<br><em>A people.</em></p>
+</section>
+<section class="why">
+  <div class="section-label-light">Why We Exist</div>
+  <h2 class="why-h2">One reason.<br><em>One mandate.</em></h2>
+  <div class="why-statement">
+    <p class="why-statement-text">We exist to make disciples who are confident and empowered to make disciples.</p>
+  </div>
+  <div class="scripture-block">
+    <p class="scripture-text">"Go therefore and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all that I have commanded you."</p>
+    <div class="scripture-ref">Matthew 28:19&ndash;20</div>
+  </div>
+  <div class="pillars">
+    <div class="pillar"><div class="pillar-word">Go.</div><p class="pillar-body">Get in proximity. Discipleship does not happen at a distance.</p></div>
+    <div class="pillar"><div class="pillar-word">Make.</div><p class="pillar-body">You are not the finish line. You are a link. A disciple who makes disciples who make disciples.</p></div>
+    <div class="pillar"><div class="pillar-word">Baptize.</div><p class="pillar-body">Mark the life. Declare the identity. Bring them fully into the Body of Christ.</p></div>
+    <div class="pillar"><div class="pillar-word">Teach.</div><p class="pillar-body">Pass on everything. Not just information. Formation. The full life of a disciple.</p></div>
+  </div>
+  <div class="how-block">
+    <div class="how-text">
+      <strong>How discipleship happens at The Gathering</strong>
+      Discipleship does not happen by accident. It is intentional, relational, and Spirit-empowered. We are not an information delivery system. We are a formation community. Word and Spirit and shared life. That is how disciples are made.
+    </div>
+  </div>
+</section>
+<section class="link-pull">
+  <div>
+    <div class="section-label-light">Your Next Step</div>
+    <h2 class="link-h2">Young. Growing.<br><em>Glad you are here.</em></h2>
+    <div class="link-body">A family on mission. A community where you do not just attend, you belong. Where you do not just show up, you become. The next step is Belong &amp; Become.</div>
+    <a href="/belong" class="btn-primary">Belong &amp; Become &rarr;</a>
+  </div>
+  <div style="border-left:2px solid var(--w08);padding:2.5rem 3rem;">
+    <div style="font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;">Join us</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:300;color:var(--w80);line-height:1.8;margin-bottom:.5rem;">Every Sunday</div>
+    <div style="font-size:.9rem;color:var(--w55);margin-bottom:2rem;">5:00 PM &middot; Cleburne Conference Center<br>Doors open at 4:30 PM</div>
+    <div style="font-size:.9rem;color:var(--w55);">Come as you are. There is a seat at the table for you.</div>
+  </div>
+</section>
+<footer>
+  <div class="footer-brand"><sup>the</sup>gathering &middot; Cleburne, TX</div>
+  <div class="footer-links">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/belong" class="footer-link">Belong &amp; Become</a>
+    <a href="/formed" class="footer-link">Formed &amp; Sent</a>
+    <a href="/#visit" class="footer-link">Visit</a>
+    <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="footer-link">Give</a>
+  </div>
+</footer>
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+</script>
+</body>
+</html>
