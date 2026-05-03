@@ -3,105 +3,273 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Walk Worthy | Ephesians Week 4 | The Gathering</title>
+  <title>Walk Worthy Inside and Out | Ephesians Week 4 | The Gathering</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:#FAF6F0;color:#1a1a1a;font-family:'Source Sans 3',sans-serif;font-weight:300;line-height:1.8;-webkit-font-smoothing:antialiased}::selection{background:#5C1A1B;color:#fff}.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;background:rgba(250,246,240,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#1a1a1a;text-decoration:none;letter-spacing:.02em}.nav-logo sup{font-size:.5em;color:#B8860B;margin-right:.1em}.nav-back{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#5C1A1B;text-decoration:none;transition:opacity .2s}.nav-back:hover{opacity:.7}.hero{min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10rem 2rem 5rem;background:linear-gradient(to bottom,#FAF6F0,#f5f0e8);position:relative}.hero::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(92,26,27,.2),transparent)}.hero-series{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem}.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:300;color:#5C1A1B;line-height:1.15;margin-bottom:1.5rem;max-width:700px}.hero-ref{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:#B8860B}.hero-date{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,0,0,.4);margin-top:1.5rem}.content{max-width:680px;margin:0 auto;padding:5rem 2rem 6rem}.scripture-box{background:#fff;border-left:3px solid #B8860B;padding:2rem 2.5rem;margin-bottom:4rem;box-shadow:0 2px 20px rgba(0,0,0,.04)}.scripture-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}.scripture-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:#333;line-height:1.9}.scripture-text span{display:block;text-align:right;font-style:normal;font-size:.85rem;color:#B8860B;margin-top:1rem}.section{margin-bottom:4rem}.section-num{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:.8rem;display:block}.section-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:#5C1A1B;margin-bottom:1.5rem;line-height:1.3}.section p{font-size:1.05rem;color:#333;margin-bottom:1.5rem}.section p strong{font-weight:600;color:#5C1A1B}.section p em{font-style:italic;color:#5C1A1B}.pull-quote{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;color:#5C1A1B;text-align:center;padding:2.5rem 2rem;margin:3rem 0;border-top:1px solid rgba(92,26,27,.15);border-bottom:1px solid rgba(92,26,27,.15);line-height:1.6}.greek-box{background:#5C1A1B;color:#fff;padding:2rem 2.5rem;margin:2.5rem 0;border-radius:2px}.greek-word{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:#D4A843;margin-bottom:.5rem}.greek-def{font-size:.95rem;color:rgba(255,255,255,.9);line-height:1.8}.reflection{background:#5C1A1B;color:#fff;padding:3rem;margin:4rem 0}.reflection-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}.reflection-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin-bottom:1.5rem;color:#fff}.reflection ul{list-style:none;display:flex;flex-direction:column;gap:1rem}.reflection li{font-size:1rem;color:rgba(255,255,255,.85);padding-left:1.5rem;position:relative;line-height:1.7}.reflection li::before{content:'';position:absolute;left:0;top:.6rem;width:6px;height:6px;background:#B8860B;border-radius:50%}.prayer{background:#f5f0e8;padding:3rem;margin:4rem 0;text-align:center}.prayer-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}.prayer-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:#333;line-height:1.9;max-width:550px;margin:0 auto}.declaration{text-align:center;padding:3rem 2rem;margin:3rem 0;border:1px solid rgba(92,26,27,.15)}.declaration-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}.declaration-text{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#5C1A1B;line-height:1.6}.dev-footer{text-align:center;padding:4rem 2rem;border-top:1px solid rgba(0,0,0,.08)}.dev-footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#5C1A1B;margin-bottom:1rem}.dev-footer-logo sup{font-size:.5em;color:#B8860B;margin-right:.1em}.dev-footer p{font-size:.8rem;color:rgba(0,0,0,.5);margin-bottom:.5rem}.dev-footer a{color:#5C1A1B}@media(max-width:600px){.nav{padding:1rem 1.5rem}.hero{padding:8rem 1.5rem 4rem}.content{padding:3rem 1.5rem 4rem}.scripture-box{padding:1.5rem}.reflection,.prayer,.greek-box{padding:2rem 1.5rem}}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:#FAF6F0;color:#1a1a1a;font-family:'Source Sans 3',sans-serif;font-weight:300;line-height:1.8;-webkit-font-smoothing:antialiased}
+    ::selection{background:#5C1A1B;color:#fff}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;background:rgba(250,246,240,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#1a1a1a;text-decoration:none;letter-spacing:.02em}
+    .nav-logo sup{font-size:.5em;color:#B8860B;margin-right:.1em}
+    .nav-back{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#5C1A1B;text-decoration:none;transition:opacity .2s}
+    .nav-back:hover{opacity:.7}
+
+    /* HERO */
+    .hero{min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10rem 2rem 5rem;background:linear-gradient(to bottom,#FAF6F0,#f5f0e8);position:relative}
+    .hero::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(92,26,27,.2),transparent)}
+    .hero-series{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:300;color:#5C1A1B;line-height:1.15;margin-bottom:1.5rem;max-width:700px}
+    .hero-ref{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:#B8860B}
+    .hero-date{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,0,0,.4);margin-top:1.5rem}
+
+    /* CONTENT */
+    .content{max-width:680px;margin:0 auto;padding:5rem 2rem 6rem}
+    .scripture-box{background:#fff;border-left:3px solid #B8860B;padding:2rem 2.5rem;margin-bottom:4rem;box-shadow:0 2px 20px rgba(0,0,0,.04)}
+    .scripture-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
+    .scripture-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:#333;line-height:1.9}
+    .scripture-text span{display:block;text-align:right;font-style:normal;font-size:.85rem;color:#B8860B;margin-top:1rem}
+
+    .section{margin-bottom:4rem}
+    .section-num{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:.8rem;display:block}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:#5C1A1B;margin-bottom:1.5rem;line-height:1.3}
+    .section p{font-size:1.05rem;color:#333;margin-bottom:1.5rem}
+    .section p strong{font-weight:600;color:#5C1A1B}
+    .section p em{font-style:italic;color:#5C1A1B}
+
+    .pull-quote{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;color:#5C1A1B;text-align:center;padding:2.5rem 2rem;margin:3rem 0;border-top:1px solid rgba(92,26,27,.15);border-bottom:1px solid rgba(92,26,27,.15);line-height:1.6}
+
+    .greek-box{background:#5C1A1B;color:#fff;padding:2rem 2.5rem;margin:2.5rem 0;border-radius:2px}
+    .greek-word{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:#D4A843;margin-bottom:.5rem}
+    .greek-def{font-size:.95rem;color:rgba(255,255,255,.9);line-height:1.8}
+
+    .movement-header{background:#f5f0e8;padding:1.5rem 2rem;margin:3rem 0 2rem;text-align:center}
+    .movement-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#B8860B;margin-bottom:.5rem;display:block}
+    .movement-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:#5C1A1B}
+
+    .reflection{background:#5C1A1B;color:#fff;padding:3rem;margin:4rem 0}
+    .reflection-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
+    .reflection-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin-bottom:1.5rem;color:#fff}
+    .reflection ul{list-style:none;display:flex;flex-direction:column;gap:1rem}
+    .reflection li{font-size:1rem;color:rgba(255,255,255,.85);padding-left:1.5rem;position:relative;line-height:1.7}
+    .reflection li::before{content:'';position:absolute;left:0;top:.6rem;width:6px;height:6px;background:#B8860B;border-radius:50%}
+
+    .prayer{background:#f5f0e8;padding:3rem;margin:4rem 0;text-align:center}
+    .prayer-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
+    .prayer-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:#333;line-height:1.9;max-width:550px;margin:0 auto}
+
+    .declaration{text-align:center;padding:3rem 2rem;margin:3rem 0;border:1px solid rgba(92,26,27,.15)}
+    .declaration-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
+    .declaration-text{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#5C1A1B;line-height:1.6}
+
+    /* FOOTER */
+    .dev-footer{text-align:center;padding:4rem 2rem;border-top:1px solid rgba(0,0,0,.08)}
+    .dev-footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#5C1A1B;margin-bottom:1rem}
+    .dev-footer-logo sup{font-size:.5em;color:#B8860B;margin-right:.1em}
+    .dev-footer p{font-size:.8rem;color:rgba(0,0,0,.5);margin-bottom:.5rem}
+    .dev-footer a{color:#5C1A1B}
+
+    @media(max-width:600px){
+      .nav{padding:1rem 1.5rem}
+      .hero{padding:8rem 1.5rem 4rem}
+      .content{padding:3rem 1.5rem 4rem}
+      .scripture-box{padding:1.5rem}
+      .reflection,.prayer,.greek-box{padding:2rem 1.5rem}
+    }
   </style>
 </head>
 <body>
+
 <nav class="nav">
-  <a href="/" class="nav-logo"><sup>the</sup>gathering</a>
-  <a href="/devotionals" class="nav-back">&larr; All Devotionals</a>
+  <a href="index.html" class="nav-logo"><sup>the</sup>gathering</a>
+  <a href="index.html#devotionals" class="nav-back">← All Devotionals</a>
 </nav>
+
 <header class="hero">
-  <span class="hero-series">Ephesians &middot; Week 4</span>
-  <h1 class="hero-title">Walk Worthy</h1>
-  <div class="hero-ref">Ephesians 4:1&ndash;16</div>
+  <span class="hero-series">Ephesians · Week 4</span>
+  <h1 class="hero-title">Walk Worthy Inside and Out</h1>
+  <div class="hero-ref">Ephesians 4:1-32</div>
   <div class="hero-date">May 3, 2026</div>
 </header>
+
 <main class="content">
+
   <div class="scripture-box">
     <span class="scripture-label">Scripture Reading</span>
-    <p class="scripture-text">"I therefore, a prisoner for the Lord, urge you to walk in a manner worthy of the calling to which you have been called, with all humility and gentleness, with patience, bearing with one another in love, eager to maintain the unity of the Spirit in the bond of peace."<span>&mdash; Ephesians 4:1&ndash;3</span></p>
+    <p class="scripture-text">
+      "I therefore, a prisoner for the Lord, urge you to walk in a manner worthy of the calling to which you have been called, with all humility and gentleness, with patience, bearing with one another in love, eager to maintain the unity of the Spirit in the bond of peace."
+      <span>— Ephesians 4:1-3</span>
+    </p>
   </div>
+
   <div class="section">
     <span class="section-num">01</span>
-    <h2 class="section-title">From Identity to Conduct</h2>
-    <p>The first three chapters of Ephesians are almost entirely about what God has done for us. Chosen. Adopted. Redeemed. Seated. Revealed. Filled.</p>
-    <p>Chapter 4 opens with the word <strong>therefore</strong>. And in the Bible, when you see therefore you ask: what is it there for? The answer is everything Paul has just said.</p>
-    <p>Therefore, because of all of this, walk worthy of the calling to which you have been called.</p>
-    <p>The shift from Ephesians 1&ndash;3 to Ephesians 4&ndash;6 is the shift from identity to conduct. From who you are to how you walk. From the indicative to the imperative. From the gift to the responsibility.</p>
-    <p><strong>God does not give you identity so you can sit still. He gives you identity so you have something worth walking in.</strong></p>
+    <h2 class="section-title">Therefore</h2>
+    <p>For three weeks we have been diving into who we really are. Week 1: Before you drew a breath, God chose you. Adopted you. Blessed you with every spiritual blessing in heavenly places. Week 2: You were dead. But God, rich in mercy, great in love, made you alive, raised you up, and seated you with Christ. Week 3: The mystery is out. The wall is down. You are a fellow heir, a member of His body, a partaker of the promise, filled with all the fullness of God.</p>
+    <p>Three weeks of the most exhilarating theology in the New Testament. Chosen. Adopted. Redeemed. Raised. Seated. Filled.</p>
+    <p>And now Paul says one word: <strong>Therefore.</strong></p>
+    <p>In the Bible, when you see the word "therefore," you stop and ask: what is it there for? It is there for everything Paul has just said. Chapter 4 is the therefore of the entire letter. It is where Paul takes everything he has built and says: now walk in it.</p>
+    <p>Ephesians 4 has two movements. And you need both. The first half is the corporate call: walk worthy together, maintain the unity, take your place in the body, grow up. The second half is the personal exchange: take off what is dead, put on what is new, walk worthy on the inside. Same chapter. Same call. <strong>Inside and out.</strong></p>
   </div>
-  <div class="pull-quote">"You are not walking worthy to earn grace. You are walking worthy because of grace."</div>
+
+  <div class="pull-quote">
+    "The Christian life is not behavior modification. It is identity manifestation."
+  </div>
+
+  <div class="movement-header">
+    <span class="movement-label">First Movement · Ephesians 4:1-16</span>
+    <div class="movement-title">The Corporate Call: How We Walk Together</div>
+  </div>
+
   <div class="section">
     <span class="section-num">02</span>
     <h2 class="section-title">Walk in a Way That Matches Your Name</h2>
-    <p>Worthy does not mean perfect. It means proportionate. It means your walk matches your talk. Your conduct matches your confession. Your Monday matches your Sunday.</p>
-    <p>You carry the name of Jesus Christ. You are a son of God. You are a member of His body. You are a royal priesthood. <strong>Walk in a way that is proportionate to that name.</strong></p>
-    <p>This is not performance based Christianity. It is identity based living. You are not walking worthy to earn grace. You are walking worthy because of grace.</p>
+    <p>Remember where Paul is writing from. Chains. A Roman prison. Not a man speaking from comfort or security. A prisoner. Writing about walking. Paul is physically not walking anywhere. He is in chains. And from that place, he urges the church to walk worthy. Because he has discovered that your circumstances, your chains, your setbacks, your limitations, cannot stop the walk he is talking about.</p>
+    <p>The walk Paul means is not the walk of your feet. It is the walk of your life.</p>
+    <p>Now let's get the word "worthy" right. Because someone reading this is already feeling the weight of unworthiness. Let me take that pressure off. Worthy does not mean perfect. It means <strong>proportionate</strong>. It means your walk matches your talk. Your conduct matches your confession. Your Monday matches your Sunday.</p>
+    <p>This is not performance based Christianity. It is identity based living. You are not walking worthy to earn grace. You are walking worthy <strong>because of</strong> grace. The grace came first. Now the walk follows.</p>
+
     <div class="greek-box">
-      <div class="greek-word">axios (&alpha;&xi;&iota;&omicron;&sigmaf;)</div>
-      <div class="greek-def">"Worthy," from the root meaning to weigh. It is the image of a scale in balance. Walk axios means walk in a way that balances, that is proportionate to the weight of what God has called you to. Your daily life should carry the same weight as your identity in Christ. Not heavier. Not lighter. Balanced.</div>
+      <div class="greek-word">axios (ἄξιος)</div>
+      <div class="greek-def">"Worthy," from the root meaning to weigh. The image is a scale in balance. Walk axios means walk proportionately, your daily life carrying the same weight as your identity in Christ. Not heavier. Not lighter. Balanced.</div>
     </div>
   </div>
+
   <div class="section">
     <span class="section-num">03</span>
     <h2 class="section-title">Unity Is Maintained, Not Created</h2>
-    <p><em>"Bearing with one another in love, eager to maintain the unity of the Spirit in the bond of peace."</em></p>
-    <p>Notice: <strong>maintain</strong>, not create. The Spirit has already produced the unity. Your job is to keep it. To guard it. To refuse to let division rob what the Spirit has built.</p>
-    <p>And the way you maintain it is specific: with all humility and gentleness, with patience, bearing with one another in love. This is not passive. It is active. It requires humility, which is the most countercultural virtue in a self promoting culture.</p>
-    <p>The reason Paul pushes so hard for unity is the foundation he gives in verses 4&ndash;6: one body, one Spirit, one hope, one Lord, one faith, one baptism, one God and Father of all. Seven ones. You cannot be unified in seven dimensions and divided in your pew.</p>
+    <p>Notice the word: <strong>maintain</strong>. Not create. Not manufacture. Maintain. The Holy Spirit has already produced the unity. He wove it together in the blood of Jesus Christ. Your job is to keep it. To guard it.</p>
+    <p>And Paul is specific about how. Not through willpower. Not through programs. Through humility. Gentleness. Patience. Bearing with one another in love. In a Roman culture that worshipped power and self promotion, these were radical acts of spiritual warfare.</p>
+    <p>Look at verses 4 through 6. Paul gives them the foundation: one body, one Spirit, one hope, one Lord, one faith, one baptism, one God and Father of all. Seven ones. You cannot be unified in seven dimensions and divided in your row. The things that divide us are almost never the seven ones. They are preferences. Offenses. Pride.</p>
+
     <div class="greek-box">
-      <div class="greek-word">spoudaz&omacr; (&sigma;&pi;&omicron;&upsilon;&delta;&alpha;&zeta;&omega;)</div>
-      <div class="greek-def">"Eager, diligent, making every effort," used in Ephesians 4:3. This word carries urgency. It is not casual. It is not optional. Paul is saying: urgently, earnestly, with your whole effort, maintain the unity. Division in the body of Christ is not just a social problem. It is a spiritual emergency.</div>
+      <div class="greek-word">spoudazō (σπουδάζω)</div>
+      <div class="greek-def">"Eager, diligent, making every effort," used in verse 3. This word carries urgency. It is not casual. Paul is saying: urgently, earnestly, with your whole effort, maintain the unity. Division in the body of Christ is not just a social problem. It is a spiritual emergency.</div>
     </div>
   </div>
-  <div class="pull-quote">"Unity is not accidental. It is maintained by people who choose humility over being right."</div>
+
+  <div class="pull-quote">
+    "Unity is not accidental. It is chosen by people who choose humility over being right."
+  </div>
+
   <div class="section">
     <span class="section-num">04</span>
-    <h2 class="section-title">Gifts Build the Body, Not the Platform</h2>
-    <p>Christ gave gifts to His people: apostles, prophets, evangelists, shepherds, teachers. Not so that certain people could be stars, but so that the saints might be equipped for the work of ministry, for the building up of the body of Christ.</p>
-    <p>The fivefold gifts exist for <strong>equipping</strong>. Not performing. Not platforming. Equipping.</p>
-    <p>A minister who uses their gift to build a following rather than build the body has missed the point entirely. The gifts are tools, and tools exist to build something greater than themselves.</p>
-    <p>And every member has a gift. Not just the platform ministers. Every believer has been given something, and the body only reaches full maturity when every part is functioning in its right place.</p>
+    <h2 class="section-title">The Body Needs What You Carry</h2>
+    <p>When Christ ascended, He did not leave the church empty handed. He gave gifts: apostles, prophets, evangelists, shepherds, teachers. But notice what they are for. Not performance. Not platform. Not popularity. <strong>Equipping.</strong> The gifts are tools. And tools exist to build something greater than themselves.</p>
+    <p>A minister who uses their gift to build a following rather than build the body has missed the point entirely. Every gift is given downward to serve, to equip, to build.</p>
+    <p>And here is the part that liberates every person who does not preach, does not play an instrument, and does not lead anything visible: every member has a gift. The body only reaches full maturity when every part is functioning in its right place. Your gift is structural. The body needs what you carry. When you keep it hidden, the body limps.</p>
+
+    <div class="greek-box">
+      <div class="greek-word">katartismos (καταρτισμός)</div>
+      <div class="greek-def">"Equipping," used in verse 12. This word was used in medicine for setting a broken bone, in fishing for mending the nets, in military contexts for fully outfitting a soldier. God is setting you, mending you, outfitting you. Not so you can sit in a pew. So you can take your place.</div>
+    </div>
   </div>
+
   <div class="section">
     <span class="section-num">05</span>
     <h2 class="section-title">Maturity Means Being Anchored</h2>
-    <p>The goal of all the gifts, all the equipping, all the building is <em>the measure of the stature of the fullness of Christ</em>. Full spiritual maturity.</p>
-    <p>And Paul contrasts maturity with immaturity in vivid terms: <em>children tossed by waves and carried about by every wind of doctrine, by human cunning, by craftiness in deceitful schemes.</em></p>
-    <p>Spiritual immaturity is not primarily a knowledge problem. It is an anchor problem. The immature believer has not yet planted deep enough in Christ to hold firm when the wind comes. And wind will come. False doctrine will come. Deception will come. Persecution will come.</p>
-    <p>The mature believer is not unmoved by storms. They are <strong>unswept</strong> by them. Roots deep enough to bend without breaking.</p>
-    <p><strong>Maturity is not knowing more. It is being anchored enough that storms cannot sweep you away.</strong></p>
+    <p>The goal of all the gifts, all the equipping, all the building is <em>the measure of the stature of the fullness of Christ</em>. Paul is not aiming at better behavior. He is not aiming at nicer, more disciplined, more respectable people. He is aiming at something far more staggering: a people who collectively, together, as a joined body, reflect the character, the nature, the life of Jesus Christ in the earth.</p>
+    <p>Paul paints two pictures. And you need to decide which one describes you right now. Picture one: children, tossed to and fro by the waves, carried by every wind of doctrine, destabilized by one bad conversation, blown around by the voice of whoever spoke to them last. Picture two: people rooted in Christ, speaking truth in love, growing up in every way into Him who is the head.</p>
+    <p>The difference is not age. Not how long you have been in church. Spiritual immaturity is not mainly a lack of knowledge but a lack of anchoring. Mature believers still face storms, yet they are not swept away because their roots run deep.</p>
   </div>
+
+  <div class="movement-header">
+    <span class="movement-label">Second Movement · Ephesians 4:17-32</span>
+    <div class="movement-title">The Personal Exchange: How We Walk on the Inside</div>
+  </div>
+
+  <div class="section">
+    <span class="section-num">06</span>
+    <h2 class="section-title">That Is Not Who You Are</h2>
+    <p>Paul moves from addressing the community as a whole to speaking directly to each person. He describes the old walk: futility of mind, darkened understanding, hardness of heart, given over to sensuality. Watch how the progression moves: Futility of mind leads to darkened understanding. Darkened understanding leads to hardness of heart. Hardness of heart leads to being given over. Sin does not stay where it starts. What begins as a temptation becomes a habit. What begins as a habit becomes a callus. What begins as a callus becomes a lifestyle.</p>
+    <p>But Paul does not leave them there. He never leaves them there. Verse 20: <em>"But that is not the way you learned Christ."</em></p>
+    <p>Five words that change everything. That is not who you are. That is not what you were taught. That is not the life you were raised into. You learned Christ. And Christ does not walk in futility. Christ does not live in darkness. Christ is not callous. And if you are in Christ, neither are you.</p>
+
+    <div class="greek-box">
+      <div class="greek-word">pōrōsis (πώρωσις)</div>
+      <div class="greek-def">"Hardness," a medical term for the formation of a callus. Skin wounded so many times it no longer feels. Sin does not just damage us. Over time, it numbs us. What shocked us once no longer registers. That is the warning Paul is sounding.</div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    "The old man does not live here anymore. Stop letting him sleep on the couch."
+  </div>
+
+  <div class="section">
+    <span class="section-num">07</span>
+    <h2 class="section-title">The Exchange: Put Off, Be Renewed, Put On</h2>
+    <p>Paul gives us one of the clearest pictures in all of Scripture: the exchange. Put off. Be renewed. Put on. Not complicated. But not passive.</p>
+    <p>The old self is not ripped off you automatically at salvation. Paul is addressing believers. He tells them to take it off. Actively. Daily. Here is the illustration. A man comes to Christ. Genuinely saved. Genuinely transformed. But he still has the old wardrobe hanging in his closet. Old habits. Old thought patterns. Old relational dynamics. Old addictions. Old anger. Old insecurities. He does not have to wear them anymore. They have no claim on him. The blood of Jesus purchased his freedom from every one of them. But nobody is making him throw them away. Paul says: you have to do that. Actively. Deliberately.</p>
+    <p>And here is what you cannot miss about the "put on." The new self is not a better version of you. It is participation in Christ Himself. When you put on the new self, you are not upgrading your personality. You are clothing yourself in the nature and life of Jesus Christ. This is not self improvement. This is transformation from the inside out, through union with a living Person.</p>
+
+    <div class="greek-box">
+      <div class="greek-word">apotithēmi (ἀποτίθημι) and endyō (ἐνδύω)</div>
+      <div class="greek-def">"Put off" and "Put on." Apotithēmi is the same word used for taking off old clothes. Deliberate. Intentional. Endyō is used for dressing yourself, for soldiers putting on armor. The new self is not something that descends on you passively. You put it on. Every morning. Like armor. Like a decision.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="section-num">08</span>
+    <h2 class="section-title">Walk It Out in the Specific</h2>
+    <p>Paul does not let us stay in abstraction. He brings it into the house. Into the marriage. Into the workplace. Into the conversation you had on the way to church this morning.</p>
+    <p><strong>Put away falsehood.</strong> Let each one of you speak the truth with his neighbor, for we are members one of another. Truth is the oxygen of a healthy church. When you cut off the oxygen, the body suffocates.</p>
+    <p><strong>Deal with anger before the sun goes down.</strong> Paul does not say anger is a sin. He says do not let it stay. Do not let it sleep. Because every night you go to sleep with unresolved anger, you hand the enemy a key to a room in your house.</p>
+    <p><strong>Let no corrupting talk come out of your mouth.</strong> The word corrupting is sapros in Greek, the same word used for rotten fruit. Words that decay the people around you. Your words should leave people with more grace than they had before you opened your mouth.</p>
+    <p><strong>Put away bitterness, wrath, anger, clamor, slander, and malice.</strong> Bitterness is the slow poison. It starts with a wound, grows in silence, quietly colors everything. It will make you see enemies everywhere until the only enemy left is the one in the mirror. Put it away. Not because the person who hurt you deserves your forgiveness. But because bitterness is destroying you. And you are too valuable to be destroyed by something you have the power to release.</p>
+    <p><strong>Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you.</strong> The capacity to forgive is not found in your willpower. It is found in the revelation of how much you have been forgiven. Forgive as you have been forgiven. That is the worthy walk.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-num">09</span>
+    <h2 class="section-title">Do Not Grieve the Holy Spirit</h2>
+    <p><em>"And do not grieve the Holy Spirit of God, by whom you were sealed for the day of redemption."</em></p>
+    <p>Pause here. This matters. The Holy Spirit can be grieved. Not as a mere theological idea but as a relational reality. Only someone who loves you can be hurt. Indifference, contracts, and machines cannot be grieved. But a person can. The Holy Spirit, who lives in every believer, sealed you at salvation, and serves as God's down payment on His promises, is a person. And He can be wounded.</p>
+    <p>The text warns that sins like lying, corrupt speech, bitterness, and anger deeply grieve the Holy Spirit. Paul grounds the warning in the Spirit's role as the seal of the new covenant, the mark of God's ownership, the guarantee of His promises, the down payment of our eternal inheritance. Grieving Him is not merely relational hurt. It is living out of step with the covenant reality we have been brought into.</p>
+    <p>In response to His steady faithfulness through every season and failure, we should honor Him by putting off what grieves Him and putting on what pleases Him.</p>
+
+    <div class="greek-box">
+      <div class="greek-word">lypeō (λυπέω)</div>
+      <div class="greek-def">"To cause grief, pain, or sorrow," the same word used when Jesus was in agony in Gethsemane. The Holy Spirit is not distant. He is present. And He feels.</div>
+    </div>
+  </div>
+
   <div class="reflection">
     <span class="reflection-label">Reflect</span>
     <h3 class="reflection-title">Questions for the Week</h3>
     <ul>
       <li>Does your Monday match your Sunday? Where is your walk out of balance with your identity?</li>
-      <li>Are you actively maintaining unity, or passively allowing division to grow?</li>
-      <li>Is your gift being used to build the body or to build your own platform?</li>
-      <li>What winds of doctrine or circumstance have been tossing you lately? Where do you need deeper roots?</li>
-      <li>What would it look like for you to take your place in the body and function in your gift faithfully?</li>
+      <li>Are you actively maintaining unity, or passively allowing division to grow? Is there an offense you need to release?</li>
+      <li>Is your gift being used to build the body, or is it sitting unused? What would it look like to take your place?</li>
+      <li>What part of the old wardrobe is still hanging in your closet? What needs to come off today?</li>
+      <li>Is there unresolved anger or bitterness you have carried past sundown? What would it take to deal with it tonight?</li>
+      <li>How are you honoring the Holy Spirit who sealed you? Or how have you grieved Him?</li>
     </ul>
   </div>
+
   <div class="prayer">
     <span class="prayer-label">Pray</span>
-    <p class="prayer-text">Father, thank You for my identity in Christ. Help me walk worthy of the calling You have placed on my life. Give me humility to maintain unity with my brothers and sisters. Show me where my gift fits in the body and help me use it to build others up, not myself. Anchor me deep in You so that no wind of doctrine or storm of life can sweep me away. I want to grow up in every way into Christ. In Jesus&rsquo; name, Amen.</p>
+    <p class="prayer-text">
+      Father, thank You for my identity in Christ. Help me walk worthy of the calling You have placed on my life, not to earn it, but because of it. Give me humility to maintain unity. Show me where my gift fits in the body. Help me put off everything that belongs to the old self and put on the new self, not a better version of me, but Christ formed in me. Renew my mind in Your Word. Help me deal with anger before the sun goes down and release every root of bitterness. I do not want to grieve the Spirit who sealed me. Let my walk match my name, inside and out. In Jesus' name, Amen.
+    </p>
   </div>
+
   <div class="declaration">
     <span class="declaration-label">Declare</span>
-    <p class="declaration-text">I walk worthy of my calling! I maintain the unity of the Spirit! I am not tossed by every wind of doctrine. I am rooted and grounded in Christ! My gift is not for my platform. It is for the building of the body! I am growing up in every way into Him who is the head! I walk with victory, not to it. Amen!</p>
+    <p class="declaration-text">I walk worthy of my calling, not to earn it, but because of it! I maintain the unity of the Spirit in the bond of peace! I put off the old self. It has no dominion over me! I am renewed in the spirit of my mind by the Word of God! I put on the new self, not a better version of me, but Christ formed in me! I speak truth. I deal with anger before the sun goes down. I let no corrupt talk come out of my mouth, only words that give grace. I do not grieve the One who sealed me into covenant! I put away bitterness, wrath, anger, slander, and malice, all of it! And I put on kindness, tenderheartedness, and forgiveness, as God in Christ forgave me! The Christian life is not behavior modification. It is identity manifestation! I walk with victory, not to it. Amen!</p>
   </div>
+
 </main>
+
 <footer class="dev-footer">
   <div class="dev-footer-logo"><sup>the</sup>gathering</div>
-  <p>Sundays at 5:00 PM &middot; Cleburne Conference Center</p>
-  <p><a href="/">gatheringctx.org</a></p>
+  <p>Sundays at 5:00 PM · Cleburne Conference Center</p>
+  <p><a href="index.html">gatheringctx.org</a></p>
 </footer>
+
 </body>
 </html>
