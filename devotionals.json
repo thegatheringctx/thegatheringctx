@@ -1,6 +1,16 @@
 {
   "devotionals": [
     {
+      "id": "ephesians-4-walk-worthy",
+      "title": "Walk Worthy",
+      "series": "Ephesians · Week 4",
+      "date": "May 3, 2026",
+      "scripture": "Ephesians 4:1-16",
+      "excerpt": "God does not give you identity so you can sit still. He gives you identity so you have something worth walking in.",
+      "file": "devotional-ephesians-4.html",
+      "published": true
+    },
+    {
       "id": "palm-sunday-2026",
       "title": "The King Is Here",
       "series": "Palm Sunday",
