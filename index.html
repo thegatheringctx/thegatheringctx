@@ -1,28 +1,505 @@
-<div id="sermon-player-wrap"><div id="buzzsprout-latest"></div></div>
-<script>
-(function(){
-  fetch('https://feeds.buzzsprout.com/2608288.rss')
-    .then(function(r){return r.text();})
-    .then(function(xml){
-      var parser=new DOMParser();
-      var doc=parser.parseFromString(xml,'text/xml');
-      var item=doc.querySelector('item');
-      if(!item) return;
-      var enclosure=item.querySelector('enclosure');
-      var epUrl=enclosure?enclosure.getAttribute('url'):'';
-      var m=epUrl.match(/episodes\/([0-9]+)/);
-      if(!m) return;
-      var id=m[1];
-      var wrap=document.getElementById('buzzsprout-latest');
-      if(!wrap) return;
-      wrap.innerHTML='<div id="buzzsprout-player-'+id+'"></div>';
-      var s=document.createElement('script');
-      s.src='https://www.buzzsprout.com/2608288/episodes/'+id+'.js?container_id=buzzsprout-player-'+id+'&player=small';
-      s.charset='utf-8';
-      document.body.appendChild(s);
-    }).catch(function(){});
-})();
-</script></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="google-site-verification" content="-xmjDJzFw3FkFwfuFYB9tZaezBEvbigkJu9Q2EzUtr8"/>
+ <meta charset="UTF-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="The Gathering CTX is a Spirit-led, Word-driven church in Cleburne, TX. Sundays at 5 PM at the Cleburne Conference Center. Making disciples who make disciples. Come as you are.">
+  <meta name="keywords" content="church Cleburne Texas, The Gathering CTX, Cleburne TX church, Sunday church service Cleburne, Christian church Johnson County Texas, discipleship church Cleburne, gatheringctx, new church Cleburne 2026">
+  <link rel="canonical" href="https://gatheringctx.org/">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gatheringctx.org/">
+  <meta property="og:title" content="THE gathering | Cleburne, TX">
+  <meta property="og:description" content="A Spirit-led, Word-driven church in Cleburne, TX. Making disciples who make disciples. Sundays at 5 PM.">
+  <meta property="og:image" content="https://gatheringctx.org/gather-01.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="THE gathering | Cleburne, TX">
+  <meta name="twitter:description" content="A place to belong and become. Sundays at 5:00 PM â Cleburne Conference Center.">
+  <meta name="twitter:image" content="https://gatheringctx.org/gather-01.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text y='.9em' font-size='80' x='50%' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c8a96e'>g</text></svg>">
+  <link rel="apple-touch-icon" href="https://gatheringctx.org/gather-01.jpg">
+ <title>The Gathering CTX | Church in Cleburne, TX</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com"/>
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+ <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+ <style>
+ *,::before,::after{box-sizing:border-box;margin:0;padding:0}
+ html{scroll-behavior:smooth}
+ body{background:#000;color:#fff;font-family:"Nunito Sans",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+ img{display:block;max-width:100%}
+ a{color:inherit;text-decoration:none}
+ :root{--black:#000;--white:#fff;--off:#f8f6f2;--ash:#0e0d0b;--gold:#c8a96e;--w90:rgba(255,255,255,.90);--w75:rgba(255,255,255,.75);--w55:rgba(255,255,255,.55);--w30:rgba(255,255,255,.30);--w15:rgba(255,255,255,.15);--w08:rgba(255,255,255,.08);--k70:rgba(0,0,0,.70);--k50:rgba(0,0,0,.50);--k35:rgba(0,0,0,.35);--k15:rgba(0,0,0,.15);--k08:rgba(0,0,0,.08)}
+
+ /* NAV */
+ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.8rem 4rem;transition:background .3s,padding .3s}
+ nav.scrolled{background:rgba(0,0,0,.92);backdrop-filter:blur(12px);padding:1.2rem 4rem}
+ .logo-text{font-size:1.05rem;font-weight:400;letter-spacing:.05em;line-height:1}
+ .logo-text sup{font-size:.45em;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);vertical-align:super;margin-right:.15em}
+ .nav-links{display:flex;align-items:center;gap:2.5rem}
+ .nav-links a{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w75);font-weight:400;transition:color .2s}
+ .nav-links a:hover{color:#fff}
+ .nav-give{border:1px solid var(--w30);padding:.45rem 1.2rem;transition:border-color .2s,color .2s !important}
+ .nav-give:hover{border-color:#fff;color:#fff !important}
+ .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+ .nav-burger span{display:block;width:22px;height:1px;background:#fff}
+ .nav-mobile{display:none;position:fixed;inset:0;background:#000;z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+ .nav-mobile.open{display:flex}
+ .nav-mobile .close-btn{position:absolute;top:2rem;right:2.5rem;font-size:1.5rem;cursor:pointer;color:var(--w75)}
+ .nav-mobile a{font-size:1.2rem;letter-spacing:.15em;text-transform:uppercase;font-weight:300;color:var(--w75)}
+ .nav-mobile a:hover{color:#fff}
+
+ /* HERO */
+ .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10rem 2rem 6rem;position:relative;overflow:hidden}
+ .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(200,169,110,.06) 0%,transparent 70%);pointer-events:none}
+ .hero-logo{margin-bottom:3.5rem}
+ .hero-logo img{width:min(520px,80vw);margin:0 auto;filter:drop-shadow(0 0 48px rgba(255,255,255,.18))}
+ .hero-location{font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--w55);margin-bottom:1.6rem}
+ .hero-tagline{font-size:clamp(1rem,1.7vw,1.35rem);font-weight:200;line-height:1.9;color:var(--w75);letter-spacing:.04em;max-width:400px;margin:0 auto 3rem}
+ .hero-tagline em{font-style:italic;color:#fff}
+ .hero-btns{display:flex;gap:1.2rem;align-items:center;justify-content:center;flex-wrap:wrap}
+ .btn-solid{display:inline-block;background:#fff;color:#000;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:.82rem 2.2rem;box-shadow:0 0 32px rgba(255,255,255,.18);transition:.2s}
+ .btn-solid:hover{opacity:.88;transform:translateY(-1px)}
+ .btn-outline{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;font-weight:400;color:var(--w75);border-bottom:1px solid var(--w30);padding-bottom:2px;transition:.2s}
+ .btn-outline:hover{color:#fff;border-color:#fff}
+ .hero-service{position:absolute;bottom:3.5rem;right:4rem;text-align:right}
+ .service-time{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:200;letter-spacing:-.03em;line-height:1;margin-bottom:.5rem}
+ .service-detail{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);line-height:2}
+ .hero-divider{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--w15),transparent)}
+
+ /* TICKER */
+ .ticker{background:var(--ash);padding:.9rem 0;overflow:hidden;border-top:1px solid var(--w08);border-bottom:1px solid var(--w08)}
+ .ticker-inner{display:flex;gap:4rem;white-space:nowrap;animation:ticker 30s linear infinite}
+ @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+ .ticker-item{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);display:flex;align-items:center;gap:1.5rem}
+ .ticker-dot{width:3px;height:3px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+ /* WELCOME */
+ .welcome{display:grid;grid-template-columns:1fr 1fr;min-height:70vh;background:var(--off)}
+ .welcome-copy{padding:8rem 6rem;display:flex;flex-direction:column;justify-content:center}
+ .label{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1.2rem}
+ .label-dark{color:var(--gold)}
+ .welcome-h2{font-size:clamp(2.5rem,4.5vw,4rem);font-weight:200;line-height:1.05;letter-spacing:-.02em;color:#000;margin-bottom:2rem}
+ .welcome-h2 em{font-style:italic;color:var(--k70)}
+ .welcome-body{font-size:.95rem;line-height:2;color:rgba(0,0,0,.7);margin-bottom:1.2rem;max-width:440px}
+ .btn-solid-dark{display:inline-block;margin-top:.6rem;width:fit-content;background:#000;color:#fff;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:.82rem 2.2rem;transition:opacity .2s}
+ .btn-solid-dark:hover{opacity:.75}
+ .welcome-verse{background:var(--ash);color:#fff;padding:8rem 6rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+ .welcome-verse::before{content:'"';position:absolute;top:-3rem;left:1.5rem;font-size:20rem;color:var(--gold);opacity:.06;line-height:1;pointer-events:none;font-family:Georgia,serif}
+ .verse-text{font-size:clamp(1.15rem,2vw,1.65rem);font-weight:200;font-style:italic;line-height:1.8;color:var(--w90);margin-bottom:1.8rem;position:relative}
+ .verse-ref{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+
+ /* GALLERY */
+ .gallery{background:#000;padding:9rem 6rem}
+ .gallery-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:4rem;align-items:end}
+ .gallery-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em}
+ .gallery-h2 em{font-style:italic;color:var(--w55)}
+ .gallery-sub{font-size:.9rem;line-height:2;color:var(--w75);align-self:end}
+ .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+ .gallery-item{overflow:hidden;aspect-ratio:4/3;background:#111;cursor:pointer}
+ .gallery-item:nth-child(5),.gallery-item:nth-child(6){grid-column:span 2;aspect-ratio:16/9}
+ .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:brightness(.9) saturate(.85)}
+ .gallery-item:hover img{transform:scale(1.04);filter:brightness(1) saturate(1)}
+
+ /* FELLOWSHIP GALLERY  " new section */
+ .fellowship{background:var(--ash);padding:9rem 6rem}
+ .fellowship-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:4rem;align-items:end}
+ .fellowship-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em}
+ .fellowship-h2 em{font-style:italic;color:var(--w55)}
+ .fellowship-sub{font-size:.9rem;line-height:2;color:var(--w75);align-self:end}
+ .fellowship-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+ .fellowship-item{overflow:hidden;aspect-ratio:4/3;background:#111;cursor:pointer}
+ .fellowship-item:nth-child(9),.fellowship-item:nth-child(10){grid-column:span 2;aspect-ratio:16/9}
+ .fellowship-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:brightness(.9) saturate(.85)}
+ .fellowship-item:hover img{transform:scale(1.04);filter:brightness(1) saturate(1)}
+
+ /* DEVOTIONALS */
+ .devotionals{background:var(--off);padding:9rem 6rem}
+ .dev-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:4rem;align-items:end}
+ .dev-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em;color:#000}
+ .dev-h2 em{font-style:italic;color:var(--k70)}
+ .dev-sub{font-size:.9rem;line-height:2;color:rgba(0,0,0,.6);align-self:end}
+ .dev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.1)}
+ .dev-card{background:var(--off);padding:3rem 2.5rem;display:flex;flex-direction:column;gap:.6rem;text-decoration:none;transition:background .3s;cursor:pointer}
+ .dev-card:hover{background:#ede8e0}
+ .dev-card--soon{cursor:default}
+ .dev-card--soon:hover{background:var(--off)}
+ .dev-card-label{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-family:"Nunito Sans",sans-serif}
+ .dev-card-title{font-size:1.15rem;font-weight:300;color:#000;letter-spacing:-.01em;line-height:1.3}
+ .dev-card-desc{font-size:.85rem;line-height:1.9;color:rgba(0,0,0,.55);flex:1}
+ .dev-card-ref{font-size:.72rem;font-style:italic;color:var(--gold);margin-top:.3rem}
+ .dev-card-arrow{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:#000;margin-top:1rem;transition:letter-spacing .2s}
+ .dev-card:hover .dev-card-arrow{letter-spacing:.22em}
+
+ /* PHOTO CREDIT */
+ .gallery-credit{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-align:right;margin-top:1rem}
+ .gallery-credit a{color:var(--w30);transition:color .2s}
+ .gallery-credit a:hover{color:var(--gold)}
+ .fellowship-credit{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-align:right;margin-top:1rem}
+ .fellowship-credit a{color:var(--w30);transition:color .2s}
+ .fellowship-credit a:hover{color:var(--gold)}
+
+ /* FAITH SCRIPTURE */
+ .faith-scripture{font-size:.72rem;font-style:italic;color:var(--gold);margin-top:.8rem;line-height:1.6}
+ .faith-scripture-ref{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);opacity:.75;margin-left:.4rem;font-style:normal}
+ .faith-item--full{grid-column:1/-1}
+
+ /* LIGHTBOX */
+ .lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:200;align-items:center;justify-content:center;flex-direction:column}
+ .lb.open{display:flex}
+ .lb-img{max-width:90vw;max-height:85vh;object-fit:contain}
+ .lb-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;cursor:pointer;color:var(--w75);background:none;border:none;line-height:1;transition:color .2s}
+ .lb-close:hover{color:#fff}
+ .lb-nav{display:flex;gap:1rem;margin-top:1.5rem}
+ .lb-nav button{background:var(--w08);border:1px solid var(--w15);color:var(--w75);padding:.5rem 1.8rem;cursor:pointer;font-family:inherit;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;transition:.2s}
+ .lb-nav button:hover{background:var(--w15);color:#fff}
+
+ /* CONVICTIONS */
+ .convictions{background:#000;padding:9rem 6rem}
+ .conv-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:6rem;align-items:start}
+ .conv-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em}
+ .conv-h2 em{font-style:italic;color:var(--w55)}
+ .conv-intro{font-size:.95rem;line-height:2;color:var(--w75);align-self:start;padding-top:.5rem}
+ .conv-intro strong{color:#fff;font-weight:400}
+ .conv-row{display:grid;grid-template-columns:80px 1fr;gap:2rem;padding:3rem 0;border-top:1px solid var(--w08)}
+ .conv-num{font-size:clamp(2.5rem,4vw,4rem);font-weight:200;color:var(--w15);letter-spacing:-.02em;line-height:1}
+ .conv-tag{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.8rem}
+ .conv-title{font-size:clamp(1.1rem,1.8vw,1.5rem);font-weight:200;line-height:1.2;color:#fff;margin-bottom:1rem;letter-spacing:-.01em}
+ .conv-body{font-size:.88rem;line-height:2;color:var(--w75);max-width:580px}
+ .conv-body em{font-style:italic;color:#fff}
+
+ /* DECLARATION */
+ .declaration{background:#000;border-top:1px solid var(--w08);border-bottom:1px solid var(--w08);padding:9rem 6rem;text-align:center}
+ .decl-quote{font-size:clamp(.95rem,1.6vw,1.3rem);font-weight:200;font-style:italic;color:var(--w75);max-width:580px;margin:0 auto 1.2rem;line-height:1.9}
+ .decl-ref{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--w55);display:block;margin-bottom:4.5rem}
+ .decl-words{font-size:clamp(1.5rem,3.2vw,3rem);font-weight:200;line-height:1.65;color:#fff;max-width:680px;margin:0 auto 2rem;letter-spacing:-.01em}
+ .decl-words em{font-style:normal;color:var(--gold)}
+ .decl-sub{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--w30)}
+
+ /* PILLARS */
+ .pillars{background:var(--off);padding:9rem 6rem}
+ .pillars-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:5rem;align-items:end}
+ .pillars-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em;color:#000}
+ .pillars-h2 em{font-style:italic;color:var(--k70)}
+ .pillars-sub{font-size:.9rem;line-height:2;color:rgba(0,0,0,.6);align-self:end}
+ .pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,0,0,.1)}
+ .pillar{background:var(--off);padding:3rem 2.5rem;position:relative}
+ .pillar-accent{width:24px;height:2px;background:var(--gold);margin-bottom:2rem}
+ .pillar-num{font-size:2.5rem;font-weight:200;color:rgba(0,0,0,.12);letter-spacing:-.02em;line-height:1;margin-bottom:1.2rem}
+ .pillar-name{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:#000;font-weight:500;margin-bottom:.8rem}
+ .pillar-desc{font-size:.88rem;line-height:1.9;color:rgba(0,0,0,.65)}
+
+ /* STEPS */
+ .steps{background:var(--ash);padding:9rem 6rem}
+ .steps-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:5rem;align-items:end}
+ .steps-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em}
+ .steps-h2 em{font-style:italic;color:var(--w55)}
+ .steps-sub{font-size:.9rem;line-height:2;color:var(--w75);align-self:end}
+ .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--w08)}
+ .step-card{background:#000;padding:3rem 2.5rem;display:flex;flex-direction:column;transition:background .3s;cursor:pointer}
+ .step-card:hover{background:rgba(255,255,255,.04)}
+ .step-num{font-size:2.5rem;font-weight:200;color:var(--w15);letter-spacing:-.02em;line-height:1;margin-bottom:2rem}
+ .step-name{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;font-weight:400;margin-bottom:1rem}
+ .step-desc{font-size:.88rem;line-height:1.9;color:var(--w75);flex:1}
+ .step-arrow{margin-top:2rem;color:var(--gold);font-size:1.2rem}
+
+ /* CURRENT SERIES */
+ .series{padding:0;max-width:100%}
+ .series-banner{position:relative;width:100%;aspect-ratio:21/9;overflow:hidden;display:flex;align-items:center;justify-content:center}
+ .series-banner img{width:100%;height:100%;object-fit:cover}
+ .series-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.7) 0%,rgba(0,0,0,.3) 50%,rgba(0,0,0,.5) 100%);display:flex;flex-direction:column;justify-content:center;padding:4rem 6rem}
+ .series-label{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:600}
+ .series-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#fff;margin-bottom:1rem;letter-spacing:.02em}
+ .series-desc{font-size:1rem;color:rgba(255,255,255,.7);max-width:500px;line-height:1.8;margin-bottom:1.5rem}
+ .series-start{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+ /* EVENTS */
+ .events{background:var(--off);padding:9rem 6rem}
+ .events-header{display:flex;justify-content:space-between;align-items:end;margin-bottom:4rem}
+ .events-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em;color:#000}
+ .events-h2 em{font-style:italic;color:var(--k70)}
+ .events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.1)}
+ .event-card{background:var(--off);padding:3rem 2.5rem}
+ .event-day{font-size:clamp(3rem,5vw,5rem);font-weight:200;color:#000;line-height:1;margin-bottom:.3rem;letter-spacing:-.03em}
+ .event-month{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(0,0,0,.45);display:block;margin-bottom:1.5rem}
+ .event-name{font-size:1.1rem;font-weight:300;color:#000;margin-bottom:.8rem;letter-spacing:-.01em}
+ .event-info{font-size:.82rem;line-height:1.9;color:rgba(0,0,0,.55);margin-bottom:1rem}
+ .event-badge{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;background:#000;color:#fff;padding:.3rem .8rem}
+ .btn-text-dark{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.6);border-bottom:1px solid rgba(0,0,0,.3);padding-bottom:2px;font-weight:400;transition:.2s}
+ .btn-text-dark:hover{color:#000;border-color:#000}
+
+ /* MEDIA */
+ .media{background:#000;padding:9rem 6rem}
+ .media-header{display:flex;justify-content:space-between;align-items:end;margin-bottom:4rem}
+ .media-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em}
+ .media-h2 em{font-style:italic;color:var(--w55)}
+ .btn-text-light{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--w75);border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px;font-weight:400;transition:.2s}
+ .btn-text-light:hover{color:#fff;border-color:#fff}
+ .media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--w08)}
+ .media-card{background:#000;padding:2.5rem;transition:background .3s}
+ .media-card:hover{background:rgba(255,255,255,.04)}
+ .media-thumb{width:100%;aspect-ratio:16/9;background:#1a1a1a;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+ .media-thumb::after{content:"  Â¶";font-size:1.5rem;color:var(--w55);transition:color .2s}
+ .media-card:hover .media-thumb::after{color:#fff}
+ .media-thumb-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left center;transition:transform .4s}
+ .media-card:hover .media-thumb-line{transform:scaleX(1)}
+ .media-series{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:block}
+ .media-title{font-size:1rem;font-weight:300;color:#fff;margin-bottom:.5rem;letter-spacing:-.01em;line-height:1.3}
+ .media-meta{font-size:.75rem;color:var(--w55)}
+ .media-cta{margin-top:4rem;text-align:center}
+
+ /* APP */
+ .app-section{background:var(--ash);padding:8rem 6rem}
+ .app-inner{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center}
+ .app-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em;margin-bottom:1.5rem}
+ .app-h2 em{font-style:italic;color:var(--w55)}
+ .app-body{font-size:.9rem;line-height:2;color:var(--w75);margin-bottom:2.5rem}
+ .app-features{list-style:none;display:flex;flex-direction:column;gap:.8rem;margin-bottom:3rem}
+ .app-features li{font-size:.8rem;color:var(--w75);display:flex;align-items:center;gap:.8rem}
+ .app-features li::before{content:'';width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0}
+ .app-btns{display:flex;gap:1rem;flex-wrap:wrap}
+ .app-btn{display:flex;align-items:center;gap:.7rem;border:1px solid var(--w15);padding:.7rem 1.4rem;transition:.2s;cursor:pointer}
+ .app-btn:hover{border-color:var(--w55)}
+ .app-btn-label{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--w55);display:block;margin-bottom:.1rem}
+ .app-btn-name{font-size:.85rem;font-weight:300}
+ .app-mockup{background:var(--w08);aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;border:1px solid var(--w08)}
+ .app-mockup-icon{font-size:3rem}
+ .app-mockup-name{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--w55)}
+ .app-mockup-url{font-size:.65rem;color:var(--gold)}
+
+ /* FAITH */
+ .faith{background:var(--off);padding:9rem 6rem}
+ .faith-header{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:5rem;align-items:end}
+ .faith-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em;color:#000}
+ .faith-h2 em{font-style:italic;color:var(--k70)}
+ .faith-sub{font-size:.8rem;line-height:1.9;color:rgba(0,0,0,.55);align-self:end}
+ .faith-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(0,0,0,.1)}
+ .faith-item{background:var(--off);padding:3rem}
+ .faith-num{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:block}
+ .faith-name{font-size:.95rem;font-weight:400;color:#000;margin-bottom:.8rem}
+ .faith-text{font-size:.85rem;line-height:1.9;color:rgba(0,0,0,.6)}
+
+ /* GIVE */
+ .give{background:var(--ash);padding:9rem 6rem;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center}
+ .give-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em;margin-bottom:1.5rem}
+ .give-h2 em{font-style:italic;color:var(--w55)}
+ .give-body{font-size:.9rem;line-height:2;color:var(--w75);margin-bottom:2.5rem}
+ .give-visual{background:var(--w08);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;border:1px solid var(--w08);padding:3rem}
+ .give-visual-inner{text-align:center}
+ .give-visual-text{font-size:clamp(.85rem,1.3vw,1.1rem);font-weight:200;font-style:italic;color:var(--w75);line-height:1.9;margin-bottom:1.2rem}
+ .give-visual-ref{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+
+ /* VISIT */
+ .visit{display:grid;grid-template-columns:1fr 1fr;background:var(--off)}
+ .visit-copy{padding:8rem 6rem;display:flex;flex-direction:column;justify-content:center}
+ .visit-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em;color:#000;margin-bottom:3rem}
+ .visit-h2 em{font-style:italic;color:var(--k70)}
+ .visit-info{display:flex;flex-direction:column;gap:2.5rem;margin-bottom:3rem}
+ .vi-label{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+ .vi-val{font-size:.95rem;line-height:1.8;color:rgba(0,0,0,.7)}
+ .vi-val a{color:rgba(0,0,0,.7);transition:color .2s}
+ .vi-val a:hover{color:#000}
+ .visit-note{font-size:.8rem;font-style:italic;color:rgba(0,0,0,.45);margin-top:2rem}
+ .visit-map{background:#e8e4de;display:flex;align-items:flex-end;justify-content:flex-end;position:relative;overflow:hidden;flex-direction:column;gap:0;padding:0}
+ .visit-map iframe{position:absolute;inset:0;width:100%;height:100%}
+ .map-link{position:relative;z-index:2;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;background:#000;color:#fff;padding:.7rem 1.8rem;display:inline-block;transition:opacity .2s;margin:1.5rem}
+ .map-link:hover{opacity:.75}
+
+ /* CONTACT */
+ .contact{background:#000;padding:9rem 6rem;display:grid;grid-template-columns:1fr 1fr;gap:8rem}
+ .contact-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;letter-spacing:-.01em;margin-bottom:1.5rem}
+ .contact-h2 em{font-style:italic;color:var(--w55)}
+ .contact-body{font-size:.9rem;line-height:2;color:var(--w75);margin-bottom:2rem}
+ .contact-info{display:flex;flex-direction:column;gap:1.5rem}
+ .ci-label{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+ .ci-val{font-size:.9rem;color:var(--w75)}
+ .ci-val a{transition:color .2s}
+ .ci-val a:hover{color:#fff}
+ .contact-form{display:flex;flex-direction:column;gap:1.2rem}
+ .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+ .form-field{display:flex;flex-direction:column;gap:.5rem}
+ .form-field label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--w75)}
+ .form-field input,.form-field select,.form-field textarea{background:rgba(255,255,255,.06);border:1px solid var(--w15);color:#fff;padding:.8rem 1rem;font-family:inherit;font-size:.88rem;font-weight:300;transition:border-color .2s;outline:none}
+ .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--w55)}
+ .form-field select option{background:#111;color:#fff}
+ .form-field textarea{resize:vertical;min-height:100px}
+ .form-submit{background:#fff;color:#000;border:none;font-family:inherit;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:.9rem 2.2rem;cursor:pointer;transition:opacity .2s;margin-top:.5rem;width:fit-content}
+ .form-submit:hover{opacity:.85}
+ .form-success{display:none;padding:2rem;border:1px solid var(--w15);text-align:center}
+ .form-success p{color:var(--w75);font-size:.9rem;line-height:1.8}
+
+ /* SOCIAL ICONS */
+ .social-links{display:flex;gap:1rem;align-items:center;margin-top:1.8rem}
+ .social-link{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--w15);border-radius:50%;color:var(--w55);transition:color .25s,border-color .25s,background .25s}
+ .social-link:hover{color:#fff;border-color:var(--w55);background:rgba(255,255,255,.06)}
+ .social-link svg{width:15px;height:15px;fill:currentColor}
+ .nav-social{display:flex;gap:.5rem;align-items:center;margin-left:1rem;padding-left:1rem;border-left:1px solid var(--w15)}
+ .nav-social .social-link{width:26px;height:26px;border:none;border-radius:0}
+ .nav-social .social-link:hover{background:none;color:#fff}
+ .nav-social .social-link svg{width:13px;height:13px}
+
+ /* FOOTER */
+ footer{background:var(--ash);border-top:1px solid var(--w08);padding:6rem}
+ .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem}
+ .footer-brand{font-size:1.3rem;font-weight:400;letter-spacing:.05em;margin-bottom:1.2rem}
+ .footer-brand sup{font-size:.45em;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);vertical-align:super;margin-right:.15em}
+ .footer-tag{font-size:.82rem;line-height:2;color:var(--w55)}
+ .f-col-head{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+ .f-col ul{list-style:none;display:flex;flex-direction:column;gap:.8rem}
+ .f-col ul li a{font-size:.82rem;color:var(--w55);transition:color .2s}
+ .f-col ul li a:hover{color:#fff}
+ .footer-bottom{margin-top:5rem;padding-top:2rem;border-top:1px solid var(--w08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+ .footer-copy{font-size:.6rem;letter-spacing:.1em;color:var(--w30)}
+ .footer-email{font-size:.6rem;letter-spacing:.1em;color:var(--w30);transition:color .2s}
+ .footer-email:hover{color:var(--w75)}
+ /* PCO CALENDAR */
+ .pco-wrap{background:var(--off);padding:0 6rem 5rem}
+ .pco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.1)}
+ .pco-card{background:var(--off);padding:2rem 2.2rem;display:flex;gap:1.4rem;align-items:flex-start}
+ .pco-card:hover{background:#ede8e0}
+ .pco-dt{display:flex;flex-direction:column;align-items:center;min-width:42px;text-align:center}
+ .pco-mon{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
+ .pco-day{font-size:2rem;font-weight:200;color:#000;line-height:1;letter-spacing:-.02em}
+ .pco-dow{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.35)}
+ .pco-title{font-size:.95rem;font-weight:300;color:#000;margin-bottom:.3rem;line-height:1.3}
+ .pco-time{font-size:.78rem;color:var(--gold);margin-bottom:.2rem}
+ .pco-loc{font-size:.72rem;color:rgba(0,0,0,.45)}
+ /* GIVING */
+ .give-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+ .give-left{padding:8rem 6rem;display:flex;flex-direction:column;justify-content:center;background:#000}
+ .give-right{background:rgba(255,255,255,.03);border-left:1px solid var(--w08)}
+ .give-right iframe{width:100%;min-height:560px;border:none;display:block}
+ /* SERMONS */
+ .sermons{background:#000;padding:9rem 6rem}
+ .sermon-hdr{display:grid;grid-template-columns:1fr 1fr;gap:6rem;margin-bottom:4rem;align-items:end}
+ .sermon-h2{font-size:clamp(2rem,3.5vw,3.3rem);font-weight:200;line-height:1.1;color:#fff}
+ .sermon-h2 em{font-style:italic;color:var(--w55)}
+ .sermon-subscribe{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem}
+ .sermon-sub-btn{display:inline-flex;align-items:center;gap:.7rem;padding:.8rem 1.6rem;border:1px solid var(--w15);text-decoration:none;transition:border-color .2s,background .2s;border-radius:2px}
+ .sermon-sub-btn:hover{border-color:var(--w55);background:rgba(255,255,255,.05)}
+ .sermon-sub-btn svg{flex-shrink:0}
+ .sermon-sub-btn span{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-family:"Nunito Sans",sans-serif}
+ .sermon-list{display:flex;flex-direction:column;gap:1px;background:var(--w08)}
+ .sermon-item{background:#000;padding:3rem;display:grid;grid-template-columns:56px 1fr;gap:2.5rem;align-items:start;transition:background .2s}
+ .sermon-item:hover{background:rgba(255,255,255,.03)}
+ .sermon-num{font-size:2rem;font-weight:200;color:var(--w15);letter-spacing:-.02em;line-height:1;padding-top:.4rem;text-align:center}
+ .sermon-info{}
+ .sermon-date{font-size:.54rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem}
+ .sermon-title{font-size:1.1rem;font-weight:300;color:#fff;margin-bottom:.3rem;line-height:1.3}
+ .sermon-speaker{font-size:.78rem;color:var(--w55);margin-bottom:1.6rem}
+ .sermon-audio-wrap{position:relative;background:rgba(255,255,255,.06);border:1px solid var(--w08);border-radius:3px;overflow:hidden;margin-bottom:1rem}
+ .sermon-audio-wrap audio{width:100%;display:block;height:48px;background:transparent}
+ .sermon-audio-wrap audio::-webkit-media-controls-panel{background:rgba(255,255,255,.04)}
+ .sermon-audio-wrap audio::-webkit-media-controls-current-time-display,.sermon-audio-wrap audio::-webkit-media-controls-time-remaining-display{color:#fff}
+ .sermon-dl{display:inline-flex;align-items:center;gap:.45rem;font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-decoration:none;transition:color .2s}
+ .sermon-dl:hover{color:var(--w75)}
+ @media(max-width:900px){.sermons{padding:6rem 2rem}.sermon-hdr{grid-template-columns:1fr;gap:2rem}.sermon-item{grid-template-columns:1fr;gap:1rem}.sermon-num{display:none}}
+
+ @media(max-width:900px){.youversion-bar{padding:2rem;flex-direction:column;text-align:center}.pco-wrap{padding:0 2rem 4rem}.pco-grid{grid-template-columns:1fr}.give-wrap{grid-template-columns:1fr}.give-left{padding:5rem 2rem}.sermons{padding:6rem 2rem}.sermon-hdr{grid-template-columns:1fr;gap:2rem}.sermon-platforms{grid-template-columns:1fr 1fr}}
+ /* RESPONSIVE */
+ @media(max-width:900px){
+ nav{padding:1.4rem 2rem}
+ nav.scrolled{padding:1rem 2rem}
+ .nav-links{display:none}
+ .nav-burger{display:flex}
+ .hero{padding:8rem 2rem 5rem}
+ .hero-service{right:2rem;bottom:2.5rem}
+ .welcome,.visit,.give,.contact{grid-template-columns:1fr}
+ .welcome-copy,.welcome-verse,.visit-copy,.visit-map{padding:5rem 2rem}
+ .series-banner{aspect-ratio:16/9}
+ .series-overlay{padding:3rem 2rem}
+ .series-title{font-size:2.2rem}
+ .gallery,.fellowship,.convictions,.declaration,.pillars,.steps,.events,.media,.devotionals,.app-section,.faith,.give,.contact{padding:6rem 2rem}
+ .gallery-header,.fellowship-header,.conv-header,.pillars-header,.steps-header,.faith-header,.app-inner,.dev-header{grid-template-columns:1fr;gap:2rem}
+ .gallery-grid,.fellowship-grid{grid-template-columns:repeat(2,1fr)}
+ .gallery-item:nth-child(5),.gallery-item:nth-child(6),.fellowship-item:nth-child(9),.fellowship-item:nth-child(10){grid-column:span 1;aspect-ratio:4/3}
+ .conv-header,.events-header,.media-header{grid-template-columns:1fr;gap:2rem}
+ .pillars-grid,.steps-grid{grid-template-columns:1fr 1fr}
+ .events-grid,.media-grid,.faith-grid,.dev-grid{grid-template-columns:1fr}
+ .footer-grid{grid-template-columns:1fr 1fr;gap:3rem}
+ .give{grid-template-columns:1fr}
+ .app-inner{grid-template-columns:1fr}
+ }
+
+    .nav-belong { color: var(--gold) !important; font-weight: 500; white-space: nowrap; }
+  
+    @media(max-width:640px){
+      .sub-grid{grid-template-columns:1fr !important;}
+    }
+  </style>
+ <!-- Analytics -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
+ <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3L9RY5RS73');</script>
+ <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w9jnu6rqds");</script>
+
+  <!-- Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-3L9RY5RS73');</script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"><\/script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-XXXXXXXXXX");<\/script> -->
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+ <a href="#" class="logo-text"><sup>the</sup>gathering</a>
+ <div class="nav-links">
+ <a href="new-here.html" class="nav-newherelink" style="color:var(--w80)">I&rsquo;m New</a>
+ <a href="belong.html" class="nav-belong">Belong &amp; Become</a>
+ <a href="#about">About</a>
+ <a href="#gallery">Gallery</a>
+ <a href="#devotionals">Devotionals</a>
+ <a href="#convictions">Convictions</a>
+ <a href="#events">Events</a>
+ <a href="#sermons">Sermons</a>
+ <a href="#visit">Visit</a>
+ <a href="#contact">Contact</a>
+ <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="nav-give">Give</a>
+ <div class="nav-social">
+ <a href="https://www.facebook.com/profile.php?id=61576417910311" target="_blank" class="social-link" aria-label="Facebook">
+ <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+ </a>
+ <a href="https://www.instagram.com/thegatheringctx" target="_blank" class="social-link" aria-label="Instagram">
+ <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+ </a>
+ <a href="https://www.tiktok.com/@thegatheringctx" target="_blank" class="social-link" aria-label="TikTok">
+ <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+ </a>
+ </div>
+ </div>
+ <div class="nav-burger" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+ <span></span><span></span><span></span>
+ </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile" id="mobileNav">
+ <span class="close-btn" onclick="document.getElementById('mobileNav').classList.remove('open')">&times; </span>
+ <a href="#about" onclick="document.getElementById('mobileNav').classList.remove('open')">About</a>
+ <a href="#gallery" onclick="document.getElementById('mobileNav').classList.remove('open')">Gallery</a>
+ <a href="#devotionals" onclick="document.getElementById('mobileNav').classList.remove('open')">Devotionals</a>
+ <a href="#convictions" onclick="document.getElementById('mobileNav').classList.remove('open')">Convictions</a>
+ <a href="#events" onclick="document.getElementById('mobileNav').classList.remove('open')">Events</a>
+ <a href="#visit" onclick="document.getElementById('mobileNav').classList.remove('open')">Visit</a>
+ <a href="#contact" onclick="document.getElementById('mobileNav').classList.remove('open')">Contact</a>
+ <a href="https://gatheringctx.churchcenter.com/giving" target="_blank">Give</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+ <div class="hero-logo">
+ <div style="font-size:clamp(3.5rem,9vw,8rem);font-weight:200;letter-spacing:-.02em;line-height:1;filter:drop-shadow(0 0 48px rgba(255,255,255,.18))"><sup style="font-size:.28em;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.55);vertical-align:super;margin-right:.1em">the</sup>gathering</div>
+ </div>
+ <p class="hero-location">Cleburne, Texas &middot; Est. 2026</p>
+ <p class="hero-tagline"><em>Walk with victory.</em> Not to it.</p>
+ <p style="font-size:clamp(.85rem,1.5vw,1.05rem);color:rgba(255,255,255,.6);font-weight:300;letter-spacing:.01em;margin-top:-.5rem;margin-bottom:2rem;max-width:480px;line-height:1.8;">A Spirit-led church in Cleburne, TX making disciples who are confident and empowered to make disciples.</p>
+ <div class="hero-btns">
+ <a href="/visit" class="btn-solid">Plan a Visit</a>
+ <a href="/our-story" class="btn-outline">Our Story</a>
+ </div>
+ <div class="hero-service-time"><span class="hero-time">5:00</span><div class="hero-service-details"><div class="hero-day">Every Sunday</div><div class="hero-venue">Cleburne Conference Center</div><div class="hero-doors">Doors Open 4:30 PM</div></div></div>
 </section>
 
 <!-- TICKER -->
@@ -221,28 +698,11 @@
  <div><span class="label label-dark">Read &amp; Reflect</span><h2 class="dev-h2">Devotionals.<br><em>Go deeper.</em></h2></div>
  <p class="dev-sub">Short readings to carry you through the week, grounded in Scripture, written for everyday life.</p>
  </div>
- <div class="dev-grid" id="dev-grid-dynamic">
-  <!-- Loaded dynamically from devotionals.json -->
-</div>
-<script>
-(function(){
-  fetch('/devotionals.json').then(r=>r.json()).then(data=>{
-    const grid = document.getElementById('dev-grid-dynamic');
-    if(!grid) return;
-    const devs = (data.devotionals||[]).filter(d=>d.published).slice(0,3);
-    grid.innerHTML = devs.map(d=>{
-      const url = '/'+( d.file ? d.file.replace('.html','') : 'devotionals');
-      return '<a href="'+url+'" class="dev-card">'+
-        '<div class="dev-card-label">'+( d.series||'Devotional')+'</div>'+
-        '<div class="dev-card-title">'+d.title+'</div>'+
-        '<p class="dev-card-desc">'+(d.excerpt||'')+'</p>'+
-        '<div class="dev-card-ref">'+(d.scripture||'')+'</div>'+
-        '<span class="dev-card-arrow">Read &rarr;</span>'+
-      '</a>';
-    }).join('');
-  }).catch(function(){});
-})();
-</script>
+ <div class="dev-grid">
+
+    <!-- Ephesians Week 4 -->
+    <a href="/devotional-ephesians-4" class="dev-card">
+      <div class="dev-card-label">Ephesians &middot; Week 4</div>
       <div class="dev-card-title">Walk Worthy</div>
       <p class="dev-card-desc">God does not give you identity so you can sit still. He gives you identity so you have something worth walking in.</p>
       <div class="dev-card-ref">Ephesians 4:1&ndash;16</div>
@@ -287,7 +747,12 @@
  </div>
 
  <div style="margin-top:0">
-    <div id='buzzsprout-player-19125538-ephesians-4-walk-worthy-inside-and-out-05-03-26"background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.08);padding:4rem 6rem;display:flex;align-items:center;justify-content:space-between;gap:4rem;flex-wrap:wrap">
+    <div id='buzzsprout-player-19087134'></div>
+    <script src='https://www.buzzsprout.com/2608288/episodes/19087134.js?container_id=buzzsprout-player-19087134&player=small' type='text/javascript' charset='utf-8'></script>
+   </div>
+
+  <!-- SERMON EMAIL SUBSCRIBE -->
+  <div style="background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.08);padding:4rem 6rem;display:flex;align-items:center;justify-content:space-between;gap:4rem;flex-wrap:wrap">
     <div>
       <span style="font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:#c8a96e;margin-bottom:.8rem;display:block">Stay Connected</span>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem" class="sub-grid">
