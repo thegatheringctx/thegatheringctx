@@ -142,10 +142,20 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display
   </div>
 </section>
 <section class="cta-band">
-  <h2 class="cta-h2">Revisit.htmlady to<br><em>be in the room?</em></h2>
-  <p class="cta-body">We would love to see you this Sunday. If you have questions before you come, reach out. We are real people who actually respond.</p>
-  <a href="https://maps.google.com/?q=Cleburne+Conference+Center+Cleburne+TX" target="_blank" rel="noopener" class="btn-dark">Get Directions &rarr;</a>
-  <a href="mailto:info@gatheringctx.org" class="btn-outline-dark">Ask a Question &rarr;</a>
+  <h2 class="cta-h2">Ready to<br><em>be in the room?</em></h2>
+  <p class="cta-body">Drop your name and number and we will text you everything you need for Sunday. No spam. One text. That is it.</p>
+  <form id="visit-form" style="max-width:420px;margin:0 auto 2rem;display:flex;flex-direction:column;gap:1rem;">
+    <input type="text" id="visit-name" placeholder="Your name" style="padding:1rem 1.5rem;font-family:'Nunito Sans',sans-serif;font-size:.9rem;border:1px solid rgba(0,0,0,.2);background:#fff;color:#000;outline:none;width:100%;" required/>
+    <div style="display:flex;gap:.75rem;">
+      <input type="tel" id="visit-mobile" placeholder="Phone number" style="padding:1rem 1.5rem;font-family:'Nunito Sans',sans-serif;font-size:.9rem;border:1px solid rgba(0,0,0,.2);background:#fff;color:#000;outline:none;flex:1;" required/>
+      <button type="submit" id="visit-btn" style="background:#000;color:#fff;border:none;padding:1rem 2rem;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;">I Am In &rarr;</button>
+    </div>
+    <p id="visit-msg" style="font-size:.82rem;color:#5c4b2a;display:none;text-align:center;"></p>
+  </form>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="https://maps.google.com/?q=Cleburne+Conference+Center+Cleburne+TX" target="_blank" rel="noopener" class="btn-outline-dark">Get Directions &rarr;</a>
+    <a href="mailto:info@gatheringctx.org" class="btn-outline-dark">Ask a Question &rarr;</a>
+  </div>
 </section>
 <footer>
   <div class="footer-brand"><sup>the</sup>gathering &middot; Cleburne, TX</div>
@@ -157,6 +167,38 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display
     <a href="https://gatheringctx.churchcenter.com/giving" target="_blank" class="footer-link">Give</a>
   </div>
 </footer>
-<script>window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)});</script>
+<script>
+document.getElementById('visit-form')?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('visit-btn');
+  const msg = document.getElementById('visit-msg');
+  const name = document.getElementById('visit-name').value.trim();
+  const mobile = document.getElementById('visit-mobile').value.trim();
+  btn.textContent = 'Sending...';
+  btn.style.opacity = '.6';
+  try {
+    const res = await fetch('/api/clearstream-subscribe', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({name, mobile, list:'visit'})
+    });
+    const data = await res.json();
+    if (data.success) {
+      msg.textContent = 'You are in! Check your phone for a text from us.';
+      msg.style.color = '#2d6a4f';
+      msg.style.display = 'block';
+      this.reset();
+    } else {
+      msg.textContent = 'Something went wrong. Text VISIT to reach us directly.';
+      msg.style.display = 'block';
+    }
+  } catch(err) {
+    msg.textContent = 'Could not connect. Text VISIT to reach us directly.';
+    msg.style.display = 'block';
+  }
+  btn.textContent = 'I Am In →';
+  btn.style.opacity = '1';
+});
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)});</script>
 </body>
 </html>
