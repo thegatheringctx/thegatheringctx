@@ -958,6 +958,68 @@
  <div class="form-success" id="formSuccess"><p>Thank you. We'll be in touch soon.<br>See you Sunday!</p></div>
 </section>
 
+
+<!-- SOCIAL -->
+<section style="background:#0a0a0a;padding:7rem 6rem;border-top:1px solid rgba(255,255,255,.08);">
+  <div style="text-align:center;margin-bottom:4rem;">
+    <div style="font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:#c8a96e;margin-bottom:1rem;">Follow Along</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:#fff;line-height:1.15;">Stay connected<br><em style="font-style:italic;color:#c8a96e;">between Sundays.</em></h2>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto;align-items:start;">
+
+    <!-- FACEBOOK -->
+    <div>
+      <div style="font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:#c8a96e;margin-bottom:1.5rem;">Facebook</div>
+      <div style="background:#fff;border-radius:4px;overflow:hidden;line-height:0;">
+        <div class="fb-page"
+          data-href="https://www.facebook.com/thegatheringctx"
+          data-tabs="timeline"
+          data-width="500"
+          data-height="500"
+          data-small-header="true"
+          data-adapt-container-width="true"
+          data-hide-cover="false"
+          data-show-facepile="false">
+          <blockquote cite="https://www.facebook.com/thegatheringctx" class="fb-xfbml-parse-ignore">
+            <a href="https://www.facebook.com/thegatheringctx">The Gathering CTX</a>
+          </blockquote>
+        </div>
+      </div>
+      <div style="margin-top:1rem;text-align:center;">
+        <a href="https://www.facebook.com/thegatheringctx" target="_blank" rel="noopener"
+          style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;"
+          onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">
+          Follow on Facebook &rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- INSTAGRAM -->
+    <div>
+      <div style="font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:#c8a96e;margin-bottom:1.5rem;">Instagram</div>
+      <div id="behold-widget" style="min-height:500px;background:rgba(255,255,255,.04);border-radius:4px;display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;padding:3rem;">
+          <a href="https://www.instagram.com/thegatheringctx" target="_blank" rel="noopener"
+            style="display:block;font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:#fff;text-decoration:none;margin-bottom:1rem;">
+            @thegatheringctx
+          </a>
+          <p style="font-size:.85rem;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:1.5rem;">
+            Follow us on Instagram for Sunday<br>moments, devotionals, and more.
+          </p>
+          <a href="https://www.instagram.com/thegatheringctx" target="_blank" rel="noopener"
+            style="display:inline-block;border:1px solid rgba(255,255,255,.2);color:#fff;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.9rem 2rem;transition:all .2s;"
+            onmouseover="this.style.borderColor='#c8a96e';this.style.color='#c8a96e';"
+            onmouseout="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='#fff';">
+            Follow on Instagram &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- END SOCIAL -->
+
 <!-- FOOTER -->
 <footer>
  <div class="footer-grid">
@@ -1183,6 +1245,11 @@ document.getElementById('sermon-sub-form')?.addEventListener('submit', function(
     }
   }
 
+</script>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0">
 </script>
 </body>
 </html>
