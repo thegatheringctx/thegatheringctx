@@ -1,6 +1,16 @@
 {
   "devotionals": [
     {
+      "id": "ephesians-5-walk-love-light-wisdom",
+      "title": "Walk in Love, Light, and Wisdom",
+      "series": "Ephesians · Week 5",
+      "date": "May 10, 2026",
+      "scripture": "Ephesians 5:1-33",
+      "excerpt": "Be imitators of God, as beloved children. Walk in love, light, and wisdom — not as the world walks, but as children of the Father.",
+      "file": "devotional-ephesians-5.html",
+      "published": true
+    },
+    {
       "id": "ephesians-4-walk-worthy",
       "title": "Walk Worthy",
       "series": "Ephesians · Week 4",
