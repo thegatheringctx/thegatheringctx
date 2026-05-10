@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walk in Love, Light, and Wisdom | Ephesians Week 5 | The Gathering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:#FAF6F0;color:#1a1a1a;font-family:'Source Sans 3',sans-serif;font-weight:300;line-height:1.8;-webkit-font-smoothing:antialiased}
+    ::selection{background:#5C1A1B;color:#fff}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;background:rgba(250,246,240,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#1a1a1a;text-decoration:none;letter-spacing:.02em}
+    .nav-logo sup{font-size:.5em;color:#B8860B;margin-right:.1em}
+    .nav-back{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#5C1A1B;text-decoration:none;transition:opacity .2s}
+    .nav-back:hover{opacity:.7}
+    .hero{min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10rem 2rem 5rem;background:linear-gradient(to bottom,#FAF6F0,#f5f0e8);position:relative}
+    .hero::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(92,26,27,.2),transparent)}
+    .hero-series{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:300;color:#5C1A1B;line-height:1.15;margin-bottom:1.5rem;max-width:700px}
+    .hero-ref{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:#B8860B}
+    .hero-date{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,0,0,.4);margin-top:1.5rem}
+    .content{max-width:680px;margin:0 auto;padding:5rem 2rem 6rem}
+    .scripture-box{background:#fff;border-left:3px solid #B8860B;padding:2rem 2.5rem;margin-bottom:4rem;box-shadow:0 2px 20px rgba(0,0,0,.04)}
+    .scripture-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
+    .scripture-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:#333;line-height:1.9}
+    .scripture-text span{display:block;text-align:right;font-style:normal;font-size:.85rem;color:#B8860B;margin-top:1rem}
+    .section{margin-bottom:4rem}
+    .section-num{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:.8rem;display:block}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:#5C1A1B;margin-bottom:1.5rem;line-height:1.3}
+    .section p{font-size:1.05rem;color:#333;margin-bottom:1.5rem}
+    .section p strong{font-weight:600;color:#5C1A1B}
+    .section p em{font-style:italic;color:#5C1A1B}
+    .pull-quote{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;color:#5C1A1B;text-align:center;padding:2.5rem 2rem;margin:3rem 0;border-top:1px solid rgba(92,26,27,.15);border-bottom:1px solid rgba(92,26,27,.15);line-height:1.6}
+    .greek-box{background:#5C1A1B;color:#fff;padding:2rem 2.5rem;margin:2.5rem 0;border-radius:2px}
+    .greek-word{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:#D4A843;margin-bottom:.5rem}
+    .greek-def{font-size:.95rem;color:rgba(255,255,255,.9);line-height:1.8}
+    .movement-header{background:#f5f0e8;padding:1.5rem 2rem;margin:3rem 0 2rem;text-align:center}
+    .movement-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#B8860B;margin-bottom:.5rem;display:block}
+    .movement-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:#5C1A1B}
+    .reflection{background:#5C1A1B;color:#fff;padding:3rem;margin:4rem 0}
+    .reflection-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
+    .reflection-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin-bottom:1.5rem;color:#fff}
+    .reflection ul{list-style:none;display:flex;flex-direction:column;gap:1rem}
+    .reflection li{font-size:1rem;color:rgba(255,255,255,.85);padding-left:1.5rem;position:relative;line-height:1.7}
+    .reflection li::before{content:'';position:absolute;left:0;top:.6rem;width:6px;height:6px;background:#B8860B;border-radius:50%}
+    .prayer{background:#f5f0e8;padding:3rem;margin:4rem 0;text-align:center}
+    .prayer-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
+    .prayer-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:#333;line-height:1.9;max-width:550px;margin:0 auto}
+    .declaration{text-align:center;padding:3rem 2rem;margin:3rem 0;border:1px solid rgba(92,26,27,.15)}
+    .declaration-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#B8860B;margin-bottom:1rem;display:block}
+    .declaration-text{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#5C1A1B;line-height:1.6}
+    .dev-footer{text-align:center;padding:4rem 2rem;border-top:1px solid rgba(0,0,0,.08)}
+    .dev-footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#5C1A1B;margin-bottom:1rem}
+    .dev-footer-logo sup{font-size:.5em;color:#B8860B;margin-right:.1em}
+    .dev-footer p{font-size:.8rem;color:rgba(0,0,0,.5);margin-bottom:.5rem}
+    .dev-footer a{color:#5C1A1B}
+    @media(max-width:600px){.nav{padding:1rem 1.5rem}.hero{padding:8rem 1.5rem 4rem}.content{padding:3rem 1.5rem 4rem}.scripture-box{padding:1.5rem}.reflection,.prayer,.greek-box{padding:2rem 1.5rem}}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><sup>the</sup>gathering</a>
+  <a href="index.html#devotionals" class="nav-back">&#8592; All Devotionals</a>
+</nav>
+<header class="hero">
+  <span class="hero-series">Ephesians &middot; Week 5</span>
+  <h1 class="hero-title">Walk in Love, Light, and Wisdom</h1>
+  <div class="hero-ref">Ephesians 5:1-33</div>
+  <div class="hero-date">May 10, 2026</div>
+</header>
+<main class="content">
+  <div class="scripture-box">
+    <span class="scripture-label">Scripture Reading</span>
+    <p class="scripture-text">
+      "Therefore be imitators of God, as beloved children. And walk in love, as Christ loved us and gave himself up for us, a fragrant offering and sacrifice to God."
+      <span>&#8212; Ephesians 5:1-2</span>
+    </p>
+  </div>
+  <div class="movement-header">
+    <span class="movement-label">First Movement &middot; Ephesians 5:1-14</span>
+    <div class="movement-title">Imitate God and Walk as Children of Light</div>
+  </div>
+  <div class="section">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Be Imitators of God</h2>
+    <p>This is one of the most breathtaking commands in all of Scripture. <strong>Imitate God.</strong> Not imitate a good pastor. Not imitate a respected elder. Not imitate a disciplined believer you admire. Imitate God.</p>
+    <p>And before the weight of that crushes you, Paul gives you the foundation: <em>as beloved children.</em></p>
+    <p>Children imitate their Father. Not by straining and performing, but by proximity and relationship. A child does not sit down in the morning and say: today I will mimic my father's character through concentrated effort. They simply absorb it. Naturally. Over time. Because they are with him. Because they love him. Because they belong to him.</p>
+    <p>This is the model. Not performance. Proximity. Relationship. Love.</p>
+    <p>And then Paul defines what Godlike love actually looks like in practice: <em>walk in love, as Christ loved us and gave himself up for us.</em> A fragrant offering. A sacrifice. The love of God is not sentimental. It is sacrificial. It does not look for what it can receive. It looks for what it can give, even at cost to itself. Even at infinite cost.</p>
+    <div class="greek-box">
+      <div class="greek-word">mim&#275;t&#275;s (&#956;&#953;&#956;&#951;&#964;&#942;&#962;)</div>
+      <div class="greek-def">"Imitator," the word we get "mimic" from. It implies careful, sustained, intentional modeling of someone else's behavior and character. This is not casual imitation. It is discipleship at its deepest level, becoming so familiar with how God acts that His ways become your natural response.</div>
+    </div>
+  </div>
+  <div class="section">
+    <span class="section-num">02</span>
+    <h2 class="section-title">What Must Not Even Be Named</h2>
+    <p>Paul does not soften this. Sexual immorality. All impurity. Covetousness. Filthiness. Foolish talk. Crude joking. <em>Must not even be named among you.</em></p>
+    <p>Paul says: that is not who you are anymore. Stop calling it normal. Stop making peace with what God calls darkness.</p>
+    <p>When the Spirit feels distant and prayer or worship feels heavy, it may be because we have allowed things into our inner life that no longer belong to who we are in Christ. Not in condemnation, but in love, calling us to put them away.</p>
+    <p>Paul warns not to be deceived by "empty words" that claim our conduct does not matter or that grace makes holiness optional. <strong>Grace is not a license to sin. It is God's power to help us become what He says we already are.</strong></p>
+  </div>
+  <div class="pull-quote">"A flashlight does not argue with the darkness. It simply turns on."</div>
+  <div class="section">
+    <span class="section-num">03</span>
+    <h2 class="section-title">You Were Darkness. Now You Are Light.</h2>
+    <p>Paul's wording emphasizes identity, not surroundings: apart from Christ, people were not merely in darkness. They <em>were</em> darkness. Likewise, believers are not simply placed in light or gradually becoming brighter. In the Lord they <em>are</em> light, because the One who is Light now lives in them.</p>
+    <p>And light does two things. It reveals and it produces.</p>
+    <p><strong>Reveal:</strong> In the presence of light, darkness cannot hide. Paul says expose the works of darkness, not by pointing fingers, not by mounting a campaign. By shining. A flashlight does not argue with the darkness. It simply turns on.</p>
+    <p><strong>Produce:</strong> The fruit of light is found in all that is good and right and true. Where light is present, things grow. The life of a believer walking in the light is a productive life. The fruit, goodness, righteousness, truth, is not manufactured. It is grown in the light.</p>
+    <p>And then verse 14, an early Christian hymn embedded in the middle of the text: <em>"Awake, O sleeper, and arise from the dead, and Christ will shine on you."</em></p>
+    <p>This is an altar call hiding in the theology. Someone reading this is spiritually asleep. Not dead, asleep. Drifted. Numbed by the slow anesthesia of routine, compromise, and making peace with the wrong things. Present in the pew but not producing fruit. Alive but not awake. <strong>Awake, O sleeper.</strong> The light of Christ is shining right now. You do not have to stay in the drift. Arise.</p>
+    <div class="greek-box">
+      <div class="greek-word">ph&#333;s (&#966;&#8182;&#962;)</div>
+      <div class="greek-def">"Light," in the ancient world associated with truth, revelation, and divine presence. God is light. Darkness is not merely the absence of light. It is the domain of deception and spiritual bondage. Walking as children of light means we carry the nature of the God who is light. Wherever we go, we do not just brighten the atmosphere. We carry a Person.</div>
+    </div>
+  </div>
+  <div class="movement-header">
+    <span class="movement-label">Second Movement &middot; Ephesians 5:15-21</span>
+    <div class="movement-title">Walk in Wisdom and Be Filled with the Spirit</div>
+  </div>
+  <div class="section">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Look Carefully How You Walk</h2>
+    <p>Paul shifts from what we walk away from to how we walk. And he uses a word that demands attention: <strong>carefully</strong>. Not casually. Not reactively. Not simply following the current that everyone else is following. Carefully. With precision. With intention. With eyes open.</p>
+    <p>Because the days are evil. That is not pessimism. That is discernment. The days we live in are not neutral. There are forces at work in this cultural moment that are intentionally designed to pull you away from the life God has for you. An unintentional believer in an intentionally dark culture will lose ground without ever realizing it.</p>
+    <p>And verse 17: understand what the will of the Lord is. Paul is not sending you on an anxious treasure hunt for a hidden divine roadmap. He has spent five chapters telling you the will of God. Walk worthy. Love your neighbor. Walk in the light. Be filled with the Spirit. The will of God is not hidden. The call is to live aligned with what has already been written.</p>
+    <div class="greek-box">
+      <div class="greek-word">kairos (&#954;&#945;&#953;&#961;&#972;&#962;)</div>
+      <div class="greek-def">"The appointed, strategic, Spirit-marked moment," distinct from chronos, the steady tick of ordinary time. Make the best use of the kairos moments: the open doors, the divine appointments, the opportunities to speak truth, extend grace, and carry the gospel into places that need it. These moments are finite. Do not sleepwalk through them.</div>
+    </div>
+  </div>
+  <div class="pull-quote">"You do not fill yourself with the Spirit. You yield to the Spirit who is already in you. The overflow is His work. Your part is surrender."</div>
+  <div class="section">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Be Filled with the Spirit</h2>
+    <p>Paul's practical teaching reaches its climax in the command to "be filled with the Spirit," not as a one time experience, but an ongoing, moment by moment dependence that answers the deep human emptiness the world tries to satisfy with lesser substitutes.</p>
+    <p>Only God's Spirit can fill what God created, and that continual filling produces a distinct kind of life: everyday worship that overflows into song, sincere heart level devotion, constant gratitude in all circumstances, and humble mutual submission out of reverence for Christ.</p>
+    <p>The Spirit does not just fill the Sunday moments. He fills the Monday ordinary. He is not a weekend presence. He is a continuously available, inexhaustible reservoir of everything you need. You do not fill yourself with the Spirit. You yield to the Spirit who is already in you. The overflow is His work. Your part is surrender.</p>
+    <div class="greek-box">
+      <div class="greek-word">pl&#275;ro&#333; (&#960;&#955;&#951;&#961;&#972;&#969;)</div>
+      <div class="greek-def">"To fill," present tense, passive voice, imperative. Be continuously being filled. The same word from Ephesians 3:19: "filled with all the fullness of God." Rather than a weekend only presence, the Spirit is a continuously available, inexhaustible reservoir, and our role is not to fill ourselves but to yield in surrender so His overflow can shape our ordinary days.</div>
+    </div>
+  </div>
+  <div class="movement-header">
+    <span class="movement-label">Third Movement &middot; Ephesians 5:22-33</span>
+    <div class="movement-title">The Holy Marriage: A Living Picture of Christ and the Church</div>
+  </div>
+  <div class="section">
+    <span class="section-num">06</span>
+    <h2 class="section-title">The Mystery of Marriage</h2>
+    <p>Paul is not primarily writing a marriage manual. He is writing about Christ and the church and he uses marriage as the living illustration. Even more, he uses the mystery of Christ's covenant love to redefine what marriage is supposed to be.</p>
+    <p>Marriage does not invent the picture of how Jesus treats his people. It is meant to become the visible, embodied display of how Jesus already loves the church. In other words, your marriage is never merely private. It is a public proclamation, a living sermon, announcing the fierce, faithful, covenant love of Christ for his bride.</p>
+  </div>
+  <div class="section">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Wives: Honor the Covenant</h2>
+    <p>Paul is not asking wives to submit to every man, or to a husband who has not earned it, or to abuse or neglect. He is describing the dynamic within a healthy, Christ centered covenant where the husband is serving his wife the way Christ serves the church.</p>
+    <p>And here is the key: Paul addresses wives in three verses. He addresses husbands in nine. Because the standard Paul places on husbands is far more demanding than anything he asks of wives. If a husband is loving his wife the way Christ loved the church, giving himself up for her, nourishing her, cherishing her, sanctifying her, the submission of a wife is not a burden. It is a response to love.</p>
+    <div class="greek-box">
+      <div class="greek-word">hypotass&#333; (&#8017;&#960;&#959;&#964;&#940;&#963;&#963;&#969;)</div>
+      <div class="greek-def">"Submit," a military term meaning to arrange oneself under the authority of another. But in the New Testament it carries the idea of voluntary, willing deference, not coerced servitude. This is the same word used in verse 21 for mutual submission: "submitting to one another out of reverence for Christ."</div>
+    </div>
+  </div>
+  <div class="section">
+    <span class="section-num">08</span>
+    <h2 class="section-title">Husbands: Love as Christ Loved</h2>
+    <p>This is one of the most demanding verses ever directed at husbands. <em>Love your wives as Christ loved the church.</em></p>
+    <p>How did Christ love the church? He gave himself up for her. He died for her. He washed her. He is actively working to present her to himself in splendor, holy and blameless. This is not passive affection. This is not providing financially and calling it love. This is not occasional kindness and expecting gratitude. This is the most costly, self giving, sanctifying, other centered love in the universe. And Paul says: husband, that is your assignment.</p>
+    <p>Notice what Christ's love produces: the church is sanctified. Cleansed. Made holy. Presented in splendor. What does your love produce in your wife? Is she flourishing because of how you love her? Is she growing? Is she more secure? More seen? More known? Does she know she is cherished?</p>
+    <p>Two words. <strong>Nourish.</strong> To bring to full development. To invest in the growth and flourishing of your wife. To help her become everything God created her to be. <strong>Cherish.</strong> To warm. To protect. To hold tenderly. The image is of holding something precious close, shielding it from damage.</p>
+    <div class="greek-box">
+      <div class="greek-word">agapa&#333; (&#7936;&#947;&#945;&#960;&#940;&#969;)</div>
+      <div class="greek-def">"Love," not eros (romantic love) or phileo (brotherly affection), but agape: the deliberate, covenantal, sacrificial choosing of another person's good above your own. This is not a love that depends on how you feel. It is a love that acts consistently, sacrificially, regardless of whether it is returned or even recognized.</div>
+    </div>
+  </div>
+  <div class="pull-quote">"Your marriage is a sermon. Make sure it is preaching the right gospel."</div>
+  <div class="section">
+    <span class="section-num">09</span>
+    <h2 class="section-title">The Profound Mystery</h2>
+    <p>Paul quotes Genesis 2:24, the oldest institution in human history. And then he says: this was always about something more than marriage.</p>
+    <p>From the very beginning, when God created the first husband and wife and said the two shall become one flesh, He was writing a story. A parable embedded in creation itself. A story about a Bridegroom who would leave His Father's house, pursue a bride who was not worthy of Him, give Himself entirely for her, and make her one with Himself.</p>
+    <p>That is what marriage is for. Not just companionship. Not just family. Not just the foundation of society. <strong>Marriage is a living, daily, embodied proclamation of the gospel.</strong></p>
+    <p>Every time a husband loves his wife sacrificially, the world gets a picture of how Jesus loves His church. Every time a wife honors and trusts her husband, the world gets a picture of how the church trusts and follows Christ. This is why marriage matters. This is why the enemy attacks it so relentlessly. He knows what it is preaching.</p>
+  </div>
+  <div class="reflection">
+    <span class="reflection-label">Reflect</span>
+    <h3 class="reflection-title">Questions for the Week</h3>
+    <ul>
+      <li>What would it look like to imitate God in the ordinary moments of your week, not just the big spiritual ones?</li>
+      <li>Is there anything in your life that "must not even be named" among saints that you have been making peace with?</li>
+      <li>Are you spiritually awake or spiritually asleep? What would it take to arise?</li>
+      <li>Are you being filled with the Spirit continuously, or only occasionally? What does daily surrender look like for you?</li>
+      <li>If you are married: what is your marriage preaching to the people around you? Is your spouse flourishing because of your love?</li>
+    </ul>
+  </div>
+  <div class="prayer">
+    <span class="prayer-label">Pray</span>
+    <p class="prayer-text">Father, thank You that I am Your beloved child. Help me imitate You, not through straining, but through staying close. Fill me with Your Spirit continuously, not just on Sundays, but in the Monday ordinary. Wake me up where I have drifted. Help me walk carefully, making the best use of every moment You have given me. For those of us who are married, make our homes a living picture of Christ and His church. May our love preach the gospel. In Jesus' name, Amen.</p>
+  </div>
+  <div class="declaration">
+    <span class="declaration-label">Declare</span>
+    <p class="declaration-text">I am an imitator of God as His beloved child! I walk in love, the kind that gives itself up! I am light in the Lord and I walk as a child of light! I make no peace with the works of darkness. I expose them by shining! I am awake, not drifting, not sleeping, not numb. I am alive and producing fruit! I am filled with the Spirit continuously, not occasionally, and that filling overflows in worship, in gratitude, and in love for the people around me! I walk carefully, making the best use of every moment God has given me! My marriage is a living picture of Christ and His church and I take that calling seriously! I walk with victory, not to it. Amen!</p>
+  </div>
+</main>
+<footer class="dev-footer">
+  <div class="dev-footer-logo"><sup>the</sup>gathering</div>
+  <p>Sundays at 5:00 PM &middot; Cleburne Conference Center</p>
+  <p><a href="index.html">gatheringctx.org</a></p>
+</footer>
+</body>
+</html>
