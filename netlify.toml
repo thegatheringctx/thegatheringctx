@@ -3,3 +3,14 @@
 
 [functions]
   directory = "netlify/functions"
+[[redirects]]
+  from = "/kids"
+  to = "https://gathering-kids-zone.netlify.app"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/kids/*"
+  to = "https://gathering-kids-zone.netlify.app/:splat"
+  status = 200
+  force = true
