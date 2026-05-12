@@ -3,7 +3,8 @@
 <head>
   <meta name="google-site-verification" content="-xmjDJzFw3FkFwfuFYB9tZaezBEvbigkJu9Q2EzUtr8"/>
   <meta name="google-site-verification" content="Ni1_mNDrhwZ6W-wZ6i2EHO8W8P7wI6V0JVUGqIe-fnw"/>
- <meta charset="UTF-8"/>
+ <meta name="robots" content="index, follow"/>
+  <meta charset="UTF-8"/>
  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="The Gathering CTX is a Spirit-led church in Cleburne, TX (Johnson County). Sundays at 5 PM at the Cleburne Conference Center. Making disciples who make disciples. New to the area? Come as you are.">
   <meta name="keywords" content="church Cleburne Texas, The Gathering CTX, Cleburne TX church, Sunday church service Cleburne, Christian church Johnson County Texas, discipleship church Cleburne, gatheringctx, new church Cleburne 2026">
@@ -445,45 +446,74 @@
   <!-- Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-3L9RY5RS73');</script>
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"><\/script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-XXXXXXXXXX");<\/script> -->
 
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
-  "@type": "Church",
-  "name": "The Gathering CTX",
-  "alternateName": ["Gathering in Victory", "The Gathering Cleburne", "GatheringCTX"],
-  "url": "https://gatheringctx.org",
-  "logo": "https://gatheringctx.org/gather-01.jpg",
-  "description": "A Spirit-led, Word-driven church in Cleburne, TX making disciples who are confident and empowered to make disciples. Sundays at 5 PM at the Cleburne Conference Center.",
-  "telephone": "+16822865640",
-  "email": "info@gatheringctx.org",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Cleburne Conference Center",
-    "addressLocality": "Cleburne",
-    "addressRegion": "TX",
-    "postalCode": "76033",
-    "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 32.3468,
-    "longitude": -97.3866
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": "Sunday",
-    "opens": "16:30",
-    "closes": "19:00"
-  },
-  "sameAs": [
-    "https://www.facebook.com/thegatheringctx",
-    "https://www.instagram.com/thegatheringctx",
-    "https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293"
-  ],
-  "servesCuisine": "Christian Church",
-  "priceRange": "Free"
-}
-</script>
+  "@graph": [
+    {
+      "@type": "Church",
+      "@id": "https://gatheringctx.org/#church",
+      "name": "The Gathering CTX",
+      "alternateName": ["The Gathering Cleburne", "GatheringCTX", "Gathering CTX"],
+      "url": "https://gatheringctx.org",
+      "logo": "https://gatheringctx.org/gather-01.jpg",
+      "image": "https://gatheringctx.org/gather-01.jpg",
+      "description": "A Spirit-led, Word-driven church in Cleburne, TX making disciples who are confident and empowered to make disciples. Sundays at 5 PM at the Cleburne Conference Center.",
+      "telephone": "+16822865640",
+      "email": "info@gatheringctx.org",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1501 W Henderson St",
+        "addressLocality": "Cleburne",
+        "addressRegion": "TX",
+        "postalCode": "76033",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 32.347,
+        "longitude": -97.407
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "17:00",
+        "closes": "18:30"
+      },
+      "sameAs": [
+        "https://www.facebook.com/thegatheringctx",
+        "https://www.instagram.com/thegatheringctx",
+        "https://www.tiktok.com/@thegatheringctx"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Billy Philips"
+      },
+      "currentsInformation": "Sundays at 5:00 PM at the Cleburne Conference Center"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://gatheringctx.org/#website",
+      "url": "https://gatheringctx.org",
+      "name": "The Gathering CTX",
+      "description": "A Spirit-led church in Cleburne, TX. Sundays at 5 PM.",
+      "publisher": {"@id": "https://gatheringctx.org/#church"},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://gatheringctx.org/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"When does The Gathering CTX meet?","acceptedAnswer":{"@type":"Answer","text":"The Gathering CTX meets Sundays at 5:00 PM at the Cleburne Conference Center, 1501 W Henderson St, Cleburne, TX 76033."}},
+        {"@type":"Question","name":"Where is The Gathering CTX located?","acceptedAnswer":{"@type":"Answer","text":"The Gathering CTX meets at the Cleburne Conference Center, 1501 W Henderson St, Cleburne, TX 76033."}},
+        {"@type":"Question","name":"Is The Gathering CTX a good church for families?","acceptedAnswer":{"@type":"Answer","text":"Yes! The Gathering CTX has a dedicated Kids Zone program and family devotionals to help families grow in faith together."}},
+        {"@type":"Question","name":"What kind of church is The Gathering CTX?","acceptedAnswer":{"@type":"Answer","text":"The Gathering CTX is a Spirit-led, Word-driven church focused on making disciples who make disciples. Services are contemporary and grounded in Scripture."}}
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 
