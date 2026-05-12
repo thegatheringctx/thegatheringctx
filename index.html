@@ -45,7 +45,9 @@
  .nav-links{display:flex;align-items:center;gap:2.5rem}
  .nav-links a{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w75);font-weight:400;transition:color .2s}
  .nav-links a:hover{color:#fff}
- .nav-kids{background:transparent;border:1px solid rgba(92,26,27,.3);color:#5C1A1B;padding:.45rem 1.1rem;border-radius:20px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;font-weight:600}
+ .nav-kids-mobile{display:block;padding:.75rem 1rem;color:#5C1A1B;font-weight:700;font-size:1rem;text-decoration:none;border-radius:8px;background:rgba(92,26,27,.06);margin-bottom:.25rem}
+  .nav-kids-mobile:hover{background:rgba(92,26,27,.12)}
+  .nav-kids{background:transparent;border:1px solid rgba(92,26,27,.3);color:#5C1A1B;padding:.45rem 1.1rem;border-radius:20px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;font-weight:600}
   .nav-kids:hover{background:#5C1A1B;color:#fff;border-color:#5C1A1B}
   .nav-give{border:1px solid var(--w30);padding:.45rem 1.2rem;transition:border-color .2s,color .2s !important}
  .nav-give:hover{border-color:#fff;color:#fff !important}
@@ -528,7 +530,8 @@
  <a href="#events" onclick="document.getElementById('mobileNav').classList.remove('open')">Events</a>
  <a href="#visit" onclick="document.getElementById('mobileNav').classList.remove('open')">Visit</a>
  <a href="#contact" onclick="document.getElementById('mobileNav').classList.remove('open')">Contact</a>
- <a href="https://gatheringctx.churchcenter.com/giving" target="_blank">Give</a>
+ <a href="/kids" class="nav-kids-mobile" onclick="document.getElementById('mobileNav').classList.remove('open')">Kids</a>
+          <a href="https://gatheringctx.churchcenter.com/giving" target="_blank">Give</a>
 </div>
 
 <!-- HERO -->
