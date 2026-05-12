@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /netlify/
 
 Sitemap: https://gatheringctx.org/sitemap.xml
