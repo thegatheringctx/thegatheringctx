@@ -470,7 +470,7 @@
   
   .logo-the{font-size:.45rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;line-height:1;margin-bottom:1px}
   .logo-gathering{font-size:.85rem;letter-spacing:.08em;text-transform:lowercase;color:#fff;font-weight:300;display:block;line-height:1}
-  .logo-badge{font-size:.38rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.2);border-radius:3px;padding:1px 4px;display:inline-block;margin-top:3px}
+  .logo-badge{font-size:.38rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.2);border-radius:3px;padding:1px 4px;display:inline-block;margin-top:3px;text-decoration:none;cursor:pointer;transition:color .2s,border-color .2s}.logo-badge:hover{color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.5)}
   .nav-links li{list-style:none}
   .nav-links li::before{display:none}
   </style>
@@ -555,7 +555,7 @@
 
 <!-- NAV -->
 <nav class="site-nav">
-    <a href="/" class="nav-logo"><span class="logo-the">THE</span><span class="logo-gathering">gathering</span><span class="logo-badge">I'M NEW</span></a>
+    <a href="/" class="nav-logo"><span class="logo-the">THE</span><span class="logo-gathering">gathering</span><a href="/new-here" class="logo-badge">I'M NEW</a></a>
     <ul class="nav-links">
       <li><a href="/visit">VISIT</a></li>
       <li><a href="/sermons">SERMONS</a></li>
