@@ -5,7 +5,13 @@
   directory = "netlify/functions"
 
 [[redirects]]
+  from = "/kids"
+  to = "https://kids.gatheringctx.org"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/kids/*"
-  to = "/kids/index.html"
-  status = 200
+  to = "https://kids.gatheringctx.org/:splat"
+  status = 301
   force = true
