@@ -6,12 +6,12 @@
 
 [[redirects]]
   from = "/kids"
-  to = "https://kids.gatheringctx.org"
+  to = "https://gathering-kids-zone.netlify.app"
   status = 301
   force = true
 
 [[redirects]]
   from = "/kids/*"
-  to = "https://kids.gatheringctx.org/:splat"
+  to = "https://gathering-kids-zone.netlify.app/:splat"
   status = 301
   force = true
