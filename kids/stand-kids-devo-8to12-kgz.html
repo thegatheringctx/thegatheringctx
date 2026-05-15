@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stand Firm. Ages 8–12 | Kids Gathering Zone</title>
+  <meta name="theme-color" content="#0f0a2e" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark: #0f0a2e;
+      --card: #1a1445;
+      --card2: #1d1750;
+      --gold: #f5c842;
+      --teal: #3ecfcf;
+      --coral: #ff6b6b;
+      --green: #4ecb71;
+      --purple: #a78bfa;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.55);
+      --rule: rgba(255,255,255,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: rgba(15,10,46,0.97);
+      border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .nav-back:hover { color: #fff; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 28px;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--purple);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(36px, 9vw, 58px);
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 6px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero .sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .direct-address {
+      background: var(--card2);
+      border: 1px solid var(--purple);
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .direct-address span { color: var(--gold); }
+
+    /* POINTS BANNER */
+    .points-banner {
+      background: rgba(167,139,250,0.12);
+      border: 1px solid var(--purple);
+      border-radius: 12px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 16px 32px;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .points-banner span {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple);
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    /* DAY CARD */
+    .day-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .day-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--purple);
+      color: #fff;
+      font-family: 'Fredoka One', cursive;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .day-info { flex: 1; }
+    .day-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+    .day-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 20px;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .day-read {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    .day-body { padding: 18px 20px; }
+
+    /* VERSE */
+    .verse-block {
+      background: rgba(255,255,255,0.05);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    .verse-block .vb-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .verse-block p {
+      font-size: 14px;
+      font-style: italic;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.88);
+    }
+    .verse-block .vb-ref {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-top: 8px;
+    }
+
+    /* BODY */
+    .day-body .body-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 14px;
+    }
+    .day-body .body-text strong { color: var(--gold); font-weight: 800; }
+
+    /* GREEK BOX */
+    .greek-box {
+      background: rgba(167,139,250,0.1);
+      border: 1px solid rgba(167,139,250,0.3);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 16px 0;
+    }
+    .greek-box .gb-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 8px;
+    }
+    .greek-box .gb-word {
+      font-size: 22px;
+      font-style: italic;
+      color: var(--purple);
+      margin-bottom: 2px;
+      font-family: serif;
+    }
+    .greek-box .gb-trans {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(167,139,250,0.7);
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    .greek-box .gb-def {
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* CALLOUT */
+    .callout {
+      background: rgba(245,200,66,0.07);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 16px;
+      margin: 16px 0;
+      font-size: 15px;
+      font-weight: 700;
+      font-style: italic;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.6;
+    }
+
+    /* THINK SECTION */
+    .think-section {
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+    .think-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .think-section ol { list-style: none; padding: 0; counter-reset: think; }
+    .think-section ol li {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.8);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      gap: 10px;
+      counter-increment: think;
+    }
+    .think-section ol li:last-child { border-bottom: none; }
+    .think-section ol li::before {
+      content: counter(think);
+      font-family: 'Fredoka One', cursive;
+      font-size: 18px;
+      color: var(--teal);
+      flex-shrink: 0;
+      width: 20px;
+      padding-top: 1px;
+    }
+
+    /* DECLARATION */
+    .declaration {
+      background: linear-gradient(135deg, #1e3a6e, #122550);
+      border: 1px solid rgba(62,207,207,0.4);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+    }
+    .decl-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .declaration p {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.75;
+      color: #fff;
+    }
+    .declaration .final-sig {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--gold);
+      margin-top: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    footer .logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 18px;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    footer p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    footer a { color: var(--teal); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://gatheringctx.org" class="nav-logo">&#9889; thegathering</a>
+  <a href="https://gatheringctx.org/kids" class="nav-back">&#8592; Kids Zone</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">&#128737;&#65039; Ages 8&ndash;12 &middot; Week 6</div>
+  <h1>Stand <span>Firm.</span></h1>
+  <p class="sub">5 days in Ephesians 6 &middot; Just for you</p>
+  <div class="direct-address">
+    Hey. This one is written <span>just for you.</span> Not for your parents to read to you. For you to read. Pick a quiet moment each day, grab your Bible, and dig in. By the end of the week you will have spent five days in one of the most powerful chapters in the whole New Testament.
+  </div>
+</div>
+
+<div class="points-banner">
+  <span>&#128737;&#65039;</span>
+  <span>Complete all 5 days to earn +50 bonus warrior points!</span>
+  <span>&#128737;&#65039;</span>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- DAY 1 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">1</div>
+      <div class="day-info">
+        <p class="day-label">Day 1</p>
+        <p class="day-title">Honor Is Not Just Obeying</p>
+        <p class="day-read">Read: Ephesians 6:1&ndash;4</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;Children, obey your parents in the Lord, for this is right. &lsquo;Honor your father and mother&rsquo; &mdash; this is the first commandment with a promise &mdash; &lsquo;that it may go well with you and that you may live long in the land.&rsquo;&rdquo;</p>
+        <p class="vb-ref">Ephesians 6:1&ndash;2, ESV</p>
+      </div>
+
+      <p class="body-text">Here is something worth noticing. Paul uses two different words in these verses. <strong>Obey.</strong> And <strong>honor.</strong> They are not the same thing.</p>
+
+      <p class="body-text">Obeying means doing what you are told. Honoring means something deeper. It means treating someone like they genuinely matter. You can obey without honoring. You can do exactly what your parents say while rolling your eyes, having an attitude, and letting them know with every signal you send that you think they are wrong.</p>
+
+      <p class="body-text">Paul is calling for both. The action AND the posture behind it.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word Study</p>
+        <p class="gb-word">&#964;&#953;&#956;&#940;&#969;</p>
+        <p class="gb-trans">timaō</p>
+        <p class="gb-def">To prize someone. To treat them as genuinely valuable. Not because they are perfect. But because God placed them in your life in that role. You can comply on the outside and still be dishonoring on the inside. This word gets at the posture, not just the action.</p>
+      </div>
+
+      <p class="body-text">This command comes with a promise: &ldquo;that it may go well with you.&rdquo; God attached a covenant blessing to honor. That is not nothing. And notice the phrase &ldquo;in the Lord.&rdquo; That is the filter. Not blind obedience to everything a parent says. Honor that flows from your relationship with Christ. Genuine respect.</p>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>What is the difference between obeying and honoring in a real situation this week?</li>
+          <li>Is there a relationship at home where you have been obeying on the outside but holding something else on the inside?</li>
+          <li>What is one way you can show genuine honor today? Not because you have to. Because you choose to.</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>I choose honor. Not just compliance. I treat the people God placed over me with genuine respect. I do it as unto the Lord.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">2</div>
+      <div class="day-info">
+        <p class="day-label">Day 2</p>
+        <p class="day-title">Who Is Watching You Work?</p>
+        <p class="day-read">Read: Ephesians 6:5&ndash;9</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;...not by way of eye-service, as people-pleasers, but as bondservants of Christ, doing the will of God from the heart...&rdquo;</p>
+        <p class="vb-ref">Ephesians 6:6, ESV</p>
+      </div>
+
+      <p class="body-text">Paul invented a word in this passage. He smashed two Greek words together to describe a very specific kind of person.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word Study</p>
+        <p class="gb-word">&#7952;&#966;&#952;&#945;&#955;&#956;&#959;&#948;&#959;&#965;&#955;&#943;&#945;</p>
+        <p class="gb-trans">ophthalmodoulia</p>
+        <p class="gb-def">Eye-service. A compound of ophthalmos (eye) and douleia (service). The person who works hard when someone is watching and does the bare minimum when they are not. Paul may have invented this word. It did not exist before he wrote it. That is how specifically he is targeting this behavior.</p>
+      </div>
+
+      <p class="body-text">You know this person. You might have been this person. Be honest. We all have. The question Paul is asking: <strong>who is your real audience?</strong></p>
+
+      <p class="body-text">He is writing to people who were literal slaves with no rights, no pay, no choice. And he still says: do your work as unto Christ. For you, that means school assignments you do not feel like doing. Chores nobody notices. Being kind to a sibling when your parents are not in the room.</p>
+
+      <div class="callout">Verse 8: &ldquo;Whatever good anyone does, this he will receive back from the Lord.&rdquo; God is keeping the accounts. The effort you put in when nobody sees. He sees it. He records it. It will not be lost.</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Can you think of a specific time when your effort changed based on who was watching?</li>
+          <li>What is one area of your life where you need to do the work as unto the Lord instead of for people?</li>
+          <li>How does it change things to believe God is keeping record of your faithfulness in the quiet moments?</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>I work as unto the Lord. My effort does not change based on who is watching. God sees what people miss. That is enough.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">3</div>
+      <div class="day-info">
+        <p class="day-label">Day 3</p>
+        <p class="day-title">Know Your Real Enemy</p>
+        <p class="day-read">Read: Ephesians 6:10&ndash;12</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;For we do not wrestle against flesh and blood, but against the rulers, against the authorities, against the cosmic powers over this present darkness, against the spiritual forces of evil in the heavenly places.&rdquo;</p>
+        <p class="vb-ref">Ephesians 6:12, ESV</p>
+      </div>
+
+      <p class="body-text">This verse changes everything when you actually believe it. The person who hurt you is not your real enemy. The situation that feels impossible is not your real enemy. The classmate making your life hard is not your real enemy. There is a spiritual dimension behind the visible world. Paul names it directly.</p>
+
+      <p class="body-text">Rulers. Authorities. Cosmic powers over this present darkness. Spiritual forces of evil in the heavenly places. This is not a horror movie. This is not something to be afraid of. But it is real.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word Study</p>
+        <p class="gb-word">&#960;&#940;&#955;&#951;</p>
+        <p class="gb-trans">palē</p>
+        <p class="gb-def">Hand-to-hand combat. Wrestling. The closest, most personal, most exhausting form of fighting. Paul does not say we watch the war from a safe distance. We are in it. But we are not unarmed. And we are not fighting alone.</p>
+      </div>
+
+      <p class="body-text">The enemy fights at the level of your identity. &ldquo;You are not good enough.&rdquo; &ldquo;God does not really care about you.&rdquo; &ldquo;That sin defines you.&rdquo; Lies. Every one. Because if he can make you forget who you are in Christ, the rest is easy.</p>
+
+      <div class="callout">When you misidentify the enemy, you fight the wrong battle. You get angry at people. You get paralyzed by circumstances. Know your enemy. Then fight the right battle.</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Is there a conflict in your life right now where you might be fighting the wrong enemy?</li>
+          <li>What specific lie have you been believing that might be coming from the enemy instead of from truth?</li>
+          <li>What does &ldquo;be strong in the Lord&rdquo; actually look like in your daily life?</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>I know who my real enemy is. I do not fight flesh and blood. I am strong in the Lord. Not my own strength. And God&rsquo;s strength never runs out.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">4</div>
+      <div class="day-info">
+        <p class="day-label">Day 4</p>
+        <p class="day-title">The Armor. What Each Piece Actually Does.</p>
+        <p class="day-read">Read: Ephesians 6:13&ndash;17</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;Therefore take up the whole armor of God, that you may be able to withstand in the evil day, and having done all, to stand firm.&rdquo;</p>
+        <p class="vb-ref">Ephesians 6:13, ESV</p>
+      </div>
+
+      <p class="body-text">Important word: <strong>whole.</strong> Not some of the armor. Not the comfortable pieces. The whole thing. And notice: it is God&rsquo;s armor. Not armor you built. Not armor you earned. Armor He provided because He knew exactly what you would face.</p>
+
+      <p class="body-text"><strong>Belt of Truth.</strong> In Roman armor, the belt held everything else together. Truth is what holds your spiritual life together. When the truth is locked around your core, the enemy&rsquo;s lies do not find a place to stick. Get in the Word before the world starts making its claims about you.</p>
+
+      <p class="body-text"><strong>Breastplate of Righteousness.</strong> This is not your righteousness. It is Christ&rsquo;s. His right standing before God, placed on your account at salvation. Romans 8:1: no condemnation for those in Christ Jesus. The accusation has nowhere to land.</p>
+
+      <p class="body-text"><strong>Shoes of the Gospel of Peace.</strong> Roman soldiers wore sandals with studs for grip on rough terrain. Gospel-shod believers move through difficult situations with stability. Wherever you go, you carry good news.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word Study. Shield of Faith.</p>
+        <p class="gb-word">&#960;&#943;&#963;&#964;&#953;&#962;</p>
+        <p class="gb-trans">pistis</p>
+        <p class="gb-def">Active trust in a living God. Not just believing facts. Choosing to trust what God said even when circumstances are saying the opposite. Every flaming dart has a message: &ldquo;God forgot you,&rdquo; &ldquo;This is too far gone.&rdquo; Raise the shield. Truth wins.</p>
+      </div>
+
+      <p class="body-text"><strong>Helmet of Salvation.</strong> The enemy goes after your thinking above everything else. The helmet is the settled assurance of who you are and where you stand. You belong to God. You know how the story ends. A person who knows the end of the story is not destroyed by the middle chapters.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word Study. Sword of the Spirit.</p>
+        <p class="gb-word">&#961;&#8134;&#956;&#945;</p>
+        <p class="gb-trans">rhēma</p>
+        <p class="gb-def">Not just the Bible in general (logos), but the specific Word spoken in a specific moment against a specific lie. The only offensive weapon in the whole armor. Jesus used it in the wilderness. Every temptation: &ldquo;It is written.&rdquo; He did not debate. He declared. The enemy had nothing left.</p>
+      </div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Which piece of armor do you most consistently skip? What would it cost you to put it on daily?</li>
+          <li>What is a specific lie you have been believing? What specific verse is the sword against it?</li>
+          <li>What does putting on the belt of truth look like before school every morning?</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>I take up the whole armor of God. Not some of it. All of it. The belt is fastened. The breastplate holds. The shield is raised. The helmet is secured. The sword is in my hand.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">5</div>
+      <div class="day-info">
+        <p class="day-label">Day 5</p>
+        <p class="day-title">Stand. Even When It Is Hard.</p>
+        <p class="day-read">Read: Ephesians 6:18&ndash;24</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;Peace be to the brothers, and love with faith, from God the Father and the Lord Jesus Christ. Grace be with all who love our Lord Jesus Christ with love incorruptible.&rdquo;</p>
+        <p class="vb-ref">Ephesians 6:23&ndash;24, ESV</p>
+      </div>
+
+      <p class="body-text">Paul uses the word <strong>stand</strong> four times in this passage. Four times. It is clearly important. Standing in spiritual warfare is one of the most active, determined, costly things you can do. It means: I refuse to retreat. I refuse to give up ground that Christ purchased. Whatever is coming at me. I hold my position.</p>
+
+      <p class="body-text">But here is the part most people skip. Standing is not supposed to be done alone. Prayer is the atmosphere in which the armor functions. You can be fully dressed in God&rsquo;s armor and still lose if you are not in communication with your Commander. Prayer keeps the connection open.</p>
+
+      <p class="body-text">&ldquo;Praying at all times in the Spirit.&rdquo; All kinds of prayer. The whispered prayer at lunch when something feels off. The &ldquo;God I need You right now&rdquo; in the middle of a hard situation. All of it. All the time.</p>
+
+      <p class="body-text">Then Paul does something surprising. He asks the church to pray for him. The man who wrote Ephesians. In prison for the gospel. He still asks for prayer. Because no one operates outside the need for the prayers of the people of God. Not the most seasoned pastor. Not the most anointed leader. You need it. And people need you to hold the line for them.</p>
+
+      <div class="callout">The final word of the entire letter is grace. Not a challenge. Not a call to try harder. Grace. Everything Paul has written. The calling, the armor, the standing, the identity. All of it is grace. Freely given. Never earned.</div>
+
+      <p class="body-text">The love God has for you is described as <strong>incorruptible.</strong> It does not decay. It does not fade when life gets hard. Unchanging. From before time began to after time ends. Stand in that. Walk in that. Live from that.</p>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>What would it look like to actually stand in a situation you have been wanting to retreat from?</li>
+          <li>Who in your life can you commit to praying for this week? Specifically. By name.</li>
+          <li>After five days in Ephesians 6. What is the one thing you want to remember?</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>I have done everything. Now I stand. I refuse to retreat from ground that belongs to Jesus. I pray always. I hold the line for the people I love. And the love God has for me does not change.</p>
+        <p class="final-sig">I walk with victory, not to it, in Jesus&rsquo; name. Amen. &#9889;</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">&#9889; Kids Gathering Zone</div>
+  <p>The Gathering CTX &middot; Cleburne, TX &middot; Est. 2026</p>
+  <p>Sundays at 5:00 PM &middot; Cleburne Conference Center</p>
+  <p><a href="https://gatheringctx.org/kids">gatheringctx.org/kids</a></p>
+</footer>
+
+</body>
+</html>
