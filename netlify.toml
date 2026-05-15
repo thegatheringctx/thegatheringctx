@@ -8,7 +8,7 @@
   from = "/kids"
   to = "https://gathering-kids-zone.netlify.app"
   status = 301
-  force = true
+  
 
 [[redirects]]
   from = "/kids/*"
