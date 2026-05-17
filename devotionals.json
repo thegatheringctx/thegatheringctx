@@ -1,6 +1,16 @@
 {
   "devotionals": [
     {
+      "id": "ephesians-6-stand",
+      "title": "Stand",
+      "series": "Ephesians - Week 6",
+      "date": "May 18, 2026",
+      "scripture": "Ephesians 6:1-24",
+      "excerpt": "Six weeks. One letter. One story. From the heavenly places to the household to the battlefield. Having done all, stand.",
+      "file": "devotional-ephesians-6.html",
+      "published": true
+    },
+    {
       "id": "ephesians-5-walk-love-light-wisdom",
       "title": "Walk in Love, Light, and Wisdom",
       "series": "Ephesians · Week 5",
