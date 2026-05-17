@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kids Gathering Zone | The Gathering CTX | Cleburne, TX</title>
+<meta name="description" content="Kids ministry at The Gathering CTX in Cleburne, TX. Safe, fun, Bible-centered. Sundays at 5 PM at the Cleburne Conference Center. Ages 4-12."/>
+<link rel="canonical" href="https://gatheringctx.org/kids"/>
+<meta property="og:title" content="Kids Gathering Zone | The Gathering CTX"/>
+<meta property="og:description" content="Safe. Fun. Bible-centered. Kids ministry at The Gathering CTX in Cleburne, TX. Sundays at 5 PM."/>
+<meta property="og:url" content="https://gatheringctx.org/kids"/>
+<meta property="og:image" content="https://gatheringctx.org/gather-01.jpg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#000;--off:#f5f0e8;--gold:#c8a96e;--w08:rgba(255,255,255,.08);--w55:rgba(255,255,255,.55);--w80:rgba(255,255,255,.8);--k70:rgba(0,0,0,.7)}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:#fff;font-family:'Nunito Sans',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.92);border-bottom:1px solid var(--w08);backdrop-filter:blur(8px)}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;letter-spacing:.05em;text-decoration:none;color:#fff}
+.nav-brand sup{font-size:.55em;vertical-align:super;margin-right:.1em}
+.nav-back{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:#fff}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 3rem 5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,169,110,.08) 0%,transparent 65%);pointer-events:none}
+.kids-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#000;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.5rem 1.2rem;margin-bottom:2rem}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,7rem);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:clamp(.9rem,2vw,1.1rem);color:var(--w55);line-height:1.8;max-width:520px;margin:0 auto 3rem}
+.hero-vitals{display:flex;border:1px solid var(--w08);flex-wrap:wrap;margin-bottom:3rem}
+.vital{padding:1.2rem 2rem;border-right:1px solid var(--w08)}
+.vital:last-child{border-right:none}
+.vital-label{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.vital-val{font-size:.9rem;color:var(--w80);font-weight:400}
+.btn-gold{display:inline-block;background:var(--gold);color:#000;text-decoration:none;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:1.2rem 2.5rem;margin:.4rem;transition:opacity .2s}
+.btn-gold:hover{opacity:.88}
+.btn-outline{display:inline-block;border:1px solid rgba(255,255,255,.2);color:#fff;text-decoration:none;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:400;padding:1.2rem 2.5rem;margin:.4rem;transition:all .2s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.ages{background:var(--off);padding:7rem 6rem}
+.section-label-dark{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--k70);margin-bottom:3rem}
+.ages-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(0,0,0,.1);max-width:700px}
+.age-card{background:var(--off);padding:2.5rem;border-top:3px solid var(--gold)}
+.age-emoji{font-size:2rem;margin-bottom:.75rem}
+.age-range{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:#000;margin-bottom:.3rem}
+.age-name{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--k70);margin-bottom:.75rem}
+.age-desc{font-size:.88rem;line-height:1.85;color:var(--k70)}
+.expect{background:#0a0a0a;padding:7rem 6rem;border-top:1px solid var(--w08)}
+.section-label-gold{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:3rem}
+.expect-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.15;letter-spacing:-.01em;margin-bottom:3rem}
+.expect-h2 em{font-style:italic;color:var(--gold)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--w08)}
+.step{background:#0a0a0a;padding:2rem 1.5rem;border-top:2px solid transparent;transition:border-color .3s}
+.step:hover{border-top-color:var(--gold)}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:rgba(200,169,110,.2);line-height:1;margin-bottom:.75rem}
+.step-title{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.step-body{font-size:.85rem;line-height:1.8;color:var(--w55)}
+.safety{background:var(--off);padding:7rem 6rem}
+.safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.safety-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:300;line-height:1.15;color:#000;letter-spacing:-.01em;margin-bottom:1.5rem}
+.safety-h2 em{font-style:italic;color:#5c4b2a}
+.safety-body{font-size:.95rem;line-height:2;color:var(--k70)}
+.safety-items{display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.08)}
+.safety-item{background:var(--off);padding:1.5rem 2rem;border-left:3px solid var(--gold);display:flex;gap:1rem}
+.s-icon{font-size:1.1rem;flex-shrink:0;margin-top:.1rem}
+.s-title{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:#5c4b2a;margin-bottom:.3rem}
+.s-body{font-size:.85rem;line-height:1.75;color:var(--k70)}
+.faq{background:var(--black);padding:7rem 6rem;border-top:1px solid var(--w08);display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+.faq-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.15;letter-spacing:-.01em}
+.faq-h2 em{font-style:italic;color:var(--gold)}
+.faq-sub{font-size:.9rem;line-height:2;color:var(--w55);margin-top:1.5rem}
+.faq-list{display:flex;flex-direction:column;gap:1.75rem}
+.faq-q{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.faq-a{font-size:.9rem;line-height:1.85;color:var(--w80)}
+.cta-band{background:var(--gold);padding:6rem;text-align:center}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:#000;line-height:1.2;margin-bottom:1rem}
+.cta-band h2 em{font-style:italic}
+.cta-band p{font-size:.95rem;color:rgba(0,0,0,.6);margin-bottom:2.5rem;line-height:1.8}
+.btn-black{display:inline-block;background:#000;color:#fff;text-decoration:none;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;padding:1.2rem 3rem;margin:.4rem;transition:opacity .2s}
+.btn-black:hover{opacity:.8}
+.btn-outline-black{display:inline-block;border:2px solid #000;color:#000;text-decoration:none;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:1.1rem 3rem;margin:.4rem;transition:all .2s}
+.btn-outline-black:hover{background:#000;color:var(--gold)}
+footer{background:#000;border-top:1px solid var(--w08);padding:2.5rem 6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--w55)}
+.footer-links{display:flex;gap:2rem;flex-wrap:wrap}
+.footer-link{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
+.footer-link:hover{color:#fff}
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  .hero{padding:7rem 1.5rem 4rem}
+  .hero-vitals{flex-direction:column}
+  .vital{border-right:none;border-bottom:1px solid var(--w08);padding:1rem 1.5rem}
+  .vital:last-child{border-bottom:none}
+  .ages,.expect,.safety,.faq,.cta-band{padding:5rem 1.5rem}
+  .ages-grid,.safety-grid,.faq{grid-template-columns:1fr;gap:3rem}
+  .steps{grid-template-columns:1fr 1fr}
+  footer{padding:2rem 1.5rem;flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
+  <a href="/" class="nav-back">&larr; Main Site</a>
+</nav>
+
+<section class="hero">
+  <div class="kids-badge">&#127775; Kids Gathering Zone</div>
+  <h1>Your kids<br>belong <em>here.</em></h1>
+  <p class="hero-sub">Safe. Fun. Bible-centered. Every Sunday at The Gathering CTX, your children are learning to walk in victory too.</p>
+  <div class="hero-vitals">
+    <div class="vital"><div class="vital-label">When</div><div class="vital-val">Every Sunday &middot; 5:00 PM</div></div>
+    <div class="vital"><div class="vital-label">Where</div><div class="vital-val">Cleburne Conference Center</div></div>
+    <div class="vital"><div class="vital-label">Ages</div><div class="vital-val">4 &ndash; 12 years old</div></div>
+  </div>
+  <div>
+    <a href="https://gathering-kids-zone.netlify.app" target="_blank" rel="noopener" class="btn-gold">Launch Kids Zone App &#127775;</a>
+    <a href="#what-to-expect" class="btn-outline">Parent Info &darr;</a>
+  </div>
+</section>
+
+<section class="ages">
+  <div class="section-label-dark">Age Groups</div>
+  <div class="ages-grid">
+    <div class="age-card">
+      <div class="age-emoji">&#127775;</div>
+      <div class="age-range">Ages 4&ndash;7</div>
+      <div class="age-name">Little Warriors</div>
+      <p class="age-desc">Big truths told in simple, memorable ways. Stories, songs, and activities designed for young hearts learning who God is.</p>
+    </div>
+    <div class="age-card">
+      <div class="age-emoji">&#9876;&#65039;</div>
+      <div class="age-range">Ages 8&ndash;12</div>
+      <div class="age-name">Warrior Kids</div>
+      <p class="age-desc">Deeper Bible study, real answers to real questions, and a growing understanding of what it means to walk with victory in Christ.</p>
+    </div>
+  </div>
+</section>
+
+<section class="expect" id="what-to-expect">
+  <div class="section-label-gold">What to Expect</div>
+  <h2 class="expect-h2">Here is what happens<br><em>when your family walks in.</em></h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><div class="step-title">Check In</div><p class="step-body">Stop at the Kids Zone check-in table when you arrive. We get your child set up with a name tag and give you a matching pickup tag.</p></div>
+    <div class="step"><div class="step-num">02</div><div class="step-title">Meet the Team</div><p class="step-body">You will meet your child's leader for the day. Every volunteer knows your child's name before service starts.</p></div>
+    <div class="step"><div class="step-num">03</div><div class="step-title">Kids Zone Begins</div><p class="step-body">While you enjoy the main service, your kids are learning the same Word in an age-appropriate, engaging way. Not babysitting. Formation.</p></div>
+    <div class="step"><div class="step-num">04</div><div class="step-title">Secure Pickup</div><p class="step-body">After service, return to Kids Zone with your pickup tag. Your child is only released to the person with the matching number.</p></div>
+  </div>
+</section>
+
+<section class="safety">
+  <div class="section-label-dark">Safety &amp; Security</div>
+  <div class="safety-grid">
+    <div>
+      <h2 class="safety-h2">Your child's safety<br>is not an <em>afterthought.</em></h2>
+      <p class="safety-body">We take child protection seriously. Every policy exists because your children matter to God and they matter to us.</p>
+    </div>
+    <div class="safety-items">
+      <div class="safety-item"><div class="s-icon">&#9989;</div><div><div class="s-title">Background Checked Volunteers</div><p class="s-body">Every Kids Zone volunteer undergoes a background check before working with children.</p></div></div>
+      <div class="safety-item"><div class="s-icon">&#128274;</div><div><div class="s-title">Secure Check-In &amp; Pickup</div><p class="s-body">Matching number tags for drop-off and pickup. Your child is only released to the person with the correct tag.</p></div></div>
+      <div class="safety-item"><div class="s-icon">&#128101;</div><div><div class="s-title">Two-Adult Rule</div><p class="s-body">No child is ever alone with a single adult. At least two adults are present at all times.</p></div></div>
+      <div class="safety-item"><div class="s-icon">&#128241;</div><div><div class="s-title">Parent Contact</div><p class="s-body">If your child needs you during service, we reach you immediately. We have your number and we will use it.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div>
+    <h2 class="faq-h2">Questions<br>parents<br><em>always ask.</em></h2>
+    <p class="faq-sub">We want you to walk in with confidence. Here are the most common questions from first-time families.</p>
+  </div>
+  <div class="faq-list">
+    <div><div class="faq-q">Can my child stay with me?</div><p class="faq-a">Absolutely. You are always welcome to keep your child with you in the main service. We will never pressure you.</p></div>
+    <div><div class="faq-q">What if my child has never been?</div><p class="faq-a">Arrive 10 minutes early. We will walk you through check-in, introduce your child to their leader, and make sure everyone is comfortable.</p></div>
+    <div><div class="faq-q">What curriculum do you use?</div><p class="faq-a">We teach directly from Scripture, tied to the Sunday message when possible so families can continue the conversation at home.</p></div>
+    <div><div class="faq-q">My child has special needs. Can they participate?</div><p class="faq-a">Yes. Email us before Sunday at info@gatheringctx.org so we can make sure your child is supported well.</p></div>
+    <div><div class="faq-q">Are snacks provided?</div><p class="faq-a">Please let us know about any allergies at check-in. We want every child safe and comfortable.</p></div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <h2>Ready to bring<br><em>your family?</em></h2>
+  <p>We would love to meet your kids this Sunday. Doors open at 4:30 PM. Kids Zone check-in starts at 4:30.</p>
+  <a href="https://gathering-kids-zone.netlify.app" target="_blank" rel="noopener" class="btn-black">Launch Kids Zone App</a>
+  <a href="mailto:info@gatheringctx.org" class="btn-outline-black">Questions? Email Us</a>
+</section>
+
+<footer>
+  <div class="footer-brand"><sup>the</sup>gathering &middot; Kids Gathering Zone</div>
+  <div class="footer-links">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/visit" class="footer-link">Plan Your Visit</a>
+    <a href="/our-story" class="footer-link">Our Story</a>
+    <a href="/privacy" class="footer-link">Privacy</a>
+  </div>
+</footer>
+</body>
+</html>
