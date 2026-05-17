@@ -4,14 +4,21 @@
 [functions]
   directory = "netlify/functions"
 
+# /kids serves the Kids Gathering Zone parent info page
 [[redirects]]
   from = "/kids"
+  to = "/kids.html"
+  status = 200
+
+# Kids Zone app direct link
+[[redirects]]
+  from = "/kids-app"
   to = "https://gathering-kids-zone.netlify.app"
   status = 301
-  
 
+# Keep deep links into kids zone working
 [[redirects]]
-  from = "/kids/*"
+  from = "/kids-app/*"
   to = "https://gathering-kids-zone.netlify.app/:splat"
   status = 301
   force = true
