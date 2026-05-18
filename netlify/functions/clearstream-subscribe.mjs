@@ -1,52 +1,32 @@
 export default async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response(null, { status: 204 });
+    return new Response(null, { status: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' } });
   }
   try {
-    const body = await req.json();
-    const { name, mobile, list = 'visit' } = body;
-    if (!mobile) {
-      return new Response(JSON.stringify({ error: 'Mobile number required' }), {
-        status: 400, headers: { 'Content-Type': 'application/json' }
-      });
-    }
-    const apiKey = Netlify.env.get('CLEARSTREAM_API_KEY');
+    const { name, mobile, list = 'visit' } = await req.json();
+    if (!mobile) return new Response(JSON.stringify({ error: 'Phone required' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+
+    const apiKey = process.env.CLEARSTREAM_API_KEY;
+    if (!apiKey) return new Response(JSON.stringify({ error: 'API key missing' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+
     const listMap = {
-      visit: Netlify.env.get('CLEARSTREAM_LIST_VISIT'),
-      new: Netlify.env.get('CLEARSTREAM_LIST_NEW'),
-      victory: Netlify.env.get('CLEARSTREAM_LIST_VICTORY'),
+      visit:   process.env.CLEARSTREAM_LIST_VISIT   || '409377',
+      new:     process.env.CLEARSTREAM_LIST_NEW     || '409376',
+      victory: process.env.CLEARSTREAM_LIST_VICTORY || '409374',
     };
-    const listId = listMap[list] || listMap['visit'];
-    const cleanMobile = mobile.replace(/\D/g, '');
-    const nameParts = (name || '').trim().split(' ');
-    const payload = {
-      mobile: cleanMobile,
-      ...(nameParts[0] && { first_name: nameParts[0] }),
-      ...(nameParts[1] && { last_name: nameParts.slice(1).join(' ') }),
-      ...(listId && { lists: [parseInt(listId)] }),
-    };
-    const response = await fetch('https://api.getclearstream.com/v1/subscribers', {
+    const listId = listMap[list.toLowerCase()] || listMap.visit;
+    const cleanPhone = mobile.replace(/\D/g, '');
+    const e164 = cleanPhone.startsWith('1') ? '+' + cleanPhone : '+1' + cleanPhone;
+
+    const res = await fetch('https://api.getclearstream.com/v1/subscribers', {
       method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + apiKey,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/json', 'X-Api-Key': apiKey },
+      body: JSON.stringify({ mobile_number: e164, first_name: name?.split(' ')[0] || '', last_name: name?.split(' ').slice(1).join(' ') || '', lists: [{ id: parseInt(listId) }] })
     });
-    const data = await response.json();
-    if (!response.ok) {
-      return new Response(JSON.stringify({ error: 'Failed to subscribe', detail: data }), {
-        status: 400, headers: { 'Content-Type': 'application/json' }
-      });
-    }
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200, headers: { 'Content-Type': 'application/json' }
-    });
+    const data = await res.json().catch(() => ({}));
+    return new Response(JSON.stringify({ success: res.ok, data }), { status: res.ok ? 200 : 400, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500, headers: { 'Content-Type': 'application/json' }
-    });
+    return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
 };
 export const config = { path: '/api/clearstream-subscribe' };
