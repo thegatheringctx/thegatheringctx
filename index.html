@@ -662,30 +662,77 @@
  </div>
  <p class="hero-location">Cleburne, Texas &middot; Est. 2026</p>
  <p class="hero-tagline"><em>Walk with victory.</em> Not to it.</p>
- <p style="font-size:clamp(.85rem,1.5vw,1.05rem);color:rgba(255,255,255,.6);font-weight:300;letter-spacing:.01em;margin-top:-.5rem;margin-bottom:2rem;max-width:480px;line-height:1.8;">A Spirit-led church in Cleburne, TX making disciples who are confident and empowered to make disciples.</p>
- <div class="hero-btns">
+ <p style="font-size:clamp(.85rem,1.5vw,1.05rem);color:rgba(255,255,255,.6);font-weight:300;letter-spacing:.01em;margin-top:-.5rem;margin-bottom:2rem;max-width:540px;line-height:1.9;">A Spirit-led church in Cleburne, TX making disciples who are confident and empowered to make disciples.</p>
+
+ <div class="hero-btns" style="margin-bottom:2rem;">
  <a href="/visit" class="btn-solid">Plan a Visit</a>
  <a href="/our-story" class="btn-outline">Our Story</a>
  </div>
- <p style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:2rem;">Or text <strong style="color:rgba(255,255,255,.7);">VISIT</strong> to <a href="sms:+18175184773" style="color:rgba(255,255,255,.7);text-decoration:none;font-weight:500;">(817) 518-4773</a></p>
+
+ <!-- DUAL CAPTURE FORM -->
+ <div id="hero-capture" style="max-width:480px;width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:1.5rem;margin-bottom:2rem;">
+   <p style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#c8a96e;margin-bottom:1rem;">Stay Connected &mdash; We will reach out.</p>
+   <div style="display:flex;flex-direction:column;gap:.75rem;">
+     <input id="hc-name" type="text" placeholder="Your name" style="padding:.9rem 1.2rem;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:.9rem;outline:none;width:100%;" required/>
+     <input id="hc-email" type="email" placeholder="Email address" style="padding:.9rem 1.2rem;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:.9rem;outline:none;width:100%;"/>
+     <div style="display:flex;gap:.5rem;">
+       <input id="hc-phone" type="tel" placeholder="Phone (for Sunday texts)" style="padding:.9rem 1.2rem;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:.9rem;outline:none;flex:1;"/>
+       <button id="hc-btn" onclick="heroCapture()" style="background:#c8a96e;color:#000;border:none;padding:.9rem 1.5rem;font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;cursor:pointer;white-space:nowrap;transition:opacity .2s;">I&rsquo;m In &rarr;</button>
+     </div>
+     <p id="hc-msg" style="font-size:.75rem;color:#c8a96e;display:none;text-align:center;"></p>
+     <p style="font-size:.68rem;color:rgba(255,255,255,.3);line-height:1.6;">By submitting, you agree to receive texts from The Gathering CTX. Msg &amp; data rates may apply. Reply STOP to opt out. <a href="/privacy" style="color:rgba(255,255,255,.4);">Privacy Policy</a></p>
+   </div>
+ </div>
+
+ <p style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:2rem;">Or text <strong style="color:rgba(255,255,255,.7);">VISIT</strong> to <a href="sms:+18175184773" style="color:rgba(255,255,255,.7);text-decoration:none;">(817) 518-4773</a></p>
+
  <div class="hero-service-time"><span class="hero-time">5:00</span><div class="hero-service-details"><div class="hero-day">Every Sunday</div><div class="hero-venue">Cleburne Conference Center</div><div class="hero-doors">Doors Open 4:30 PM</div></div></div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker">
- <div class="ticker-inner">
- <span class="ticker-item"><span class="ticker-dot"></span>Thanks be to God, who gives us the victory &middot; 1 Corinthians 15:57</span>
- <span class="ticker-item"><span class="ticker-dot"></span>Sundays at 5:00 PM &middot; Cleburne Conference Center</span>
- <span class="ticker-item"><span class="ticker-dot"></span>All are welcome &middot; Come as you are</span>
- <span class="ticker-item"><span class="ticker-dot"></span>We do not walk to victory. We walk with it</span>
- <span class="ticker-item"><span class="ticker-dot"></span>He disarmed rulers and authorities, triumphing in the cross &middot; Col 2:15</span>
- <span class="ticker-item"><span class="ticker-dot"></span>Thanks be to God, who gives us the victory &middot; 1 Corinthians 15:57</span>
- <span class="ticker-item"><span class="ticker-dot"></span>Sundays at 5:00 PM &middot; Cleburne Conference Center</span>
- <span class="ticker-item"><span class="ticker-dot"></span>All are welcome &middot; Come as you are</span>
- <span class="ticker-item"><span class="ticker-dot"></span>We do not walk to victory. We walk with it</span>
- <span class="ticker-item"><span class="ticker-dot"></span>He disarmed rulers and authorities, triumphing in the cross &middot; Col 2:15</span>
- </div>
-</div>
+<!-- FEATURED SERMON -->
+<section style="background:#000;padding:0 6rem 5rem;border-bottom:1px solid rgba(255,255,255,.06);">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <div style="font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:#c8a96e;margin-bottom:.4rem;">This Week&rsquo;s Message</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,2vw,1.6rem);font-weight:300;color:rgba(255,255,255,.9);">The Word goes with you.</div>
+      </div>
+      <a href="/sermons" style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#c8a96e'" onmouseout="this.style.color='rgba(255,255,255,.4)'">All Messages &rarr;</a>
+    </div>
+    <div id="featured-sermon-player" style="border:1px solid rgba(255,255,255,.08);overflow:hidden;">
+      <div id="buzzsprout-player" style="min-height:200px;"></div>
+    </div>
+    <div style="margin-top:1.2rem;display:flex;gap:1.5rem;flex-wrap:wrap;">
+      <a href="https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293" target="_blank" rel="noopener" style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s;" onmouseover="this.style.color='#c8a96e'" onmouseout="this.style.color='rgba(255,255,255,.35)'">&#9835; Subscribe on Apple Podcasts</a>
+      <a href="https://open.spotify.com/show/2608288" target="_blank" rel="noopener" style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s;" onmouseover="this.style.color='#c8a96e'" onmouseout="this.style.color='rgba(255,255,255,.35)'">&#9835; Spotify</a>
+      <a href="https://feeds.buzzsprout.com/2608288.rss" target="_blank" rel="noopener" style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s;" onmouseover="this.style.color='#c8a96e'" onmouseout="this.style.color='rgba(255,255,255,.35)'">&#9835; RSS Feed</a>
+    </div>
+  </div>
+</section>
+<script>
+// Load latest sermon via Buzzsprout RSS
+(function(){
+  fetch('https://feeds.buzzsprout.com/2608288.rss')
+    .then(r=>r.text())
+    .then(xml=>{
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(xml,'application/xml');
+      const item = doc.querySelector('item');
+      if(!item) return;
+      const title = item.querySelector('title')?.textContent || 'Latest Message';
+      const enclosure = item.querySelector('enclosure');
+      const audioUrl = enclosure?.getAttribute('url');
+      const episodeId = audioUrl?.match(/\/([0-9]+)-/)?.[1];
+      if(episodeId) {
+        document.getElementById('buzzsprout-player').innerHTML =
+          '<iframe src="https://www.buzzsprout.com/2608288/'+episodeId+'?client_source=small_player&iframe=true&referrer=https://gatheringctx.org" frameborder="0" scrolling="no" style="width:100%;height:200px;background:#000;" title="'+title+'"></iframe>';
+        if(typeof gtag!=='undefined') gtag('event','sermon_auto_loaded',{event_category:'content',event_label:title});
+      }
+    }).catch(()=>{
+      document.getElementById('buzzsprout-player').innerHTML = '<div style="padding:2rem;text-align:center;"><a href="/sermons" style="color:#c8a96e;text-decoration:none;font-size:.9rem;letter-spacing:.1em;">Listen to the Latest Message &rarr;</a></div>';
+    });
+})();
+</script>
 
 <!-- ABOUT -->
 <div class="welcome" id="about">
@@ -1157,6 +1204,44 @@
 </section>
 
 
+<!-- PRAYER REQUEST -->
+<section style="background:#0a0a0a;padding:7rem 6rem;border-top:1px solid rgba(255,255,255,.08);">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <div style="font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:#c8a96e;margin-bottom:1.5rem;">Prayer</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.15;letter-spacing:-.01em;margin-bottom:1.2rem;">We believe in the<br><em style="font-style:italic;color:#c8a96e;">power of prayer.</em></h2>
+    <p style="font-size:.92rem;line-height:1.9;color:rgba(255,255,255,.5);margin-bottom:3rem;">Submit your request and our team prays over every one. You are not alone in this.</p>
+    <form id="prayer-form" style="display:flex;flex-direction:column;gap:.75rem;text-align:left;">
+      <input id="pr-name" type="text" placeholder="Your name" style="padding:1rem 1.5rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:.9rem;outline:none;width:100%;"/>
+      <textarea id="pr-request" placeholder="Share your prayer request..." rows="4" style="padding:1rem 1.5rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:.9rem;outline:none;width:100%;resize:vertical;"></textarea>
+      <button id="pr-btn" onclick="submitPrayer(event)" style="background:#c8a96e;color:#000;border:none;padding:1.1rem;font-family:'Nunito Sans',sans-serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:opacity .2s;">Submit Prayer Request &rarr;</button>
+      <p id="pr-msg" style="font-size:.82rem;color:#c8a96e;display:none;text-align:center;padding-top:.5rem;"></p>
+    </form>
+  </div>
+</section>
+<script>
+async function submitPrayer(e) {
+  e.preventDefault();
+  const btn = document.getElementById('pr-btn');
+  const msg = document.getElementById('pr-msg');
+  const name = document.getElementById('pr-name').value.trim();
+  const request = document.getElementById('pr-request').value.trim();
+  if (!name || !request) { msg.textContent = 'Please fill in your name and prayer request.'; msg.style.display='block'; return; }
+  btn.textContent = 'Submitting...'; btn.style.opacity='.6';
+  try {
+    await fetch('/api/prayer-request', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({name, request})
+    });
+  } catch(err) {}
+  msg.textContent = '\u2713 Received. Our team will pray over this. You are not alone.';
+  msg.style.display='block';
+  document.getElementById('pr-name').value = '';
+  document.getElementById('pr-request').value = '';
+  btn.textContent = 'Submit Prayer Request \u2192'; btn.style.opacity='1';
+  if(typeof gtag!=='undefined') gtag('event','prayer_submitted',{event_category:'engagement'});
+}
+</script>
+
 <!-- FOOTER -->
 
   
@@ -1389,5 +1474,70 @@ document.getElementById('sermon-sub-form')?.addEventListener('submit', function(
 
 <div id="fb-root"></div>
 
+
+<script>
+// ── HERO CAPTURE ──────────────────────────────────────────
+async function heroCapture() {
+  const btn = document.getElementById('hc-btn');
+  const msg = document.getElementById('hc-msg');
+  const name = document.getElementById('hc-name').value.trim();
+  const email = document.getElementById('hc-email').value.trim();
+  const phone = document.getElementById('hc-phone').value.trim();
+  if (!name) { msg.textContent = 'Please enter your name.'; msg.style.display='block'; return; }
+  if (!email && !phone) { msg.textContent = 'Add an email or phone so we can reach you.'; msg.style.display='block'; return; }
+  btn.textContent = 'Sending...'; btn.style.opacity = '.6';
+  const promises = [];
+  if (email) {
+    promises.push(fetch('/api/subscribe', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({name, email, group:'General'})
+    }).catch(()=>{}));
+    if(typeof gtag!=='undefined') gtag('event','email_capture',{event_category:'hero',event_label:name});
+  }
+  if (phone) {
+    promises.push(fetch('/api/clearstream-subscribe', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({name, mobile:phone, list:'visit'})
+    }).catch(()=>{}));
+    if(typeof gtag!=='undefined') gtag('event','phone_capture',{event_category:'hero',event_label:name});
+  }
+  await Promise.all(promises);
+  msg.textContent = '\u2713 You are in! Check your phone or email from us soon.';
+  msg.style.color = '#c8a96e';
+  msg.style.display = 'block';
+  document.getElementById('hc-name').value = '';
+  document.getElementById('hc-email').value = '';
+  document.getElementById('hc-phone').value = '';
+  btn.textContent = "I\u2019m In \u2192"; btn.style.opacity = '1';
+  if(typeof gtag!=='undefined') gtag('event','hero_capture_complete',{event_category:'conversion'});
+}
+
+// ── GA EVENT TRACKING ───────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  // Track step card clicks
+  document.querySelectorAll('.step-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const name = card.querySelector('.step-name')?.textContent;
+      if(typeof gtag!=='undefined') gtag('event','step_card_click',{event_category:'navigation',event_label:name});
+    });
+  });
+  // Track sermon plays
+  document.querySelectorAll('.sermon-player iframe, iframe[src*="buzzsprout"]').forEach(iframe => {
+    if(typeof gtag!=='undefined') gtag('event','sermon_player_view',{event_category:'content'});
+  });
+  // Track give clicks
+  document.querySelectorAll('a[href*="giving"]').forEach(a => {
+    a.addEventListener('click', () => {
+      if(typeof gtag!=='undefined') gtag('event','give_click',{event_category:'conversion'});
+    });
+  });
+  // Track visit page clicks
+  document.querySelectorAll('a[href="/visit"]').forEach(a => {
+    a.addEventListener('click', () => {
+      if(typeof gtag!=='undefined') gtag('event','visit_click',{event_category:'conversion'});
+    });
+  });
+});
+</script>
 </body>
 </html>
