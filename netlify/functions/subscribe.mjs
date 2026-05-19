@@ -1,64 +1,99 @@
-const MAILERLITE_API = "https://connect.mailerlite.com/api";
-const GROUPS = { sermons: "Sermon Subscribers", devotionals: "Devotional Subscribers" };
+import { Handler } from "@netlify/functions";
 
-async function getOrCreateGroup(apiKey, name) {
-  console.log("[subscribe] Listing groups, looking for: " + name);
-  const res = await fetch(MAILERLITE_API + "/groups?limit=100", {
-    headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" }
-  });
-  const json = await res.json();
-  console.log("[subscribe] Groups status=" + res.status + " count=" + (json.data||[]).length + " raw=" + JSON.stringify(json).substring(0,300));
-  const existing = (json.data || []).find(g => g.name === name);
-  if (existing) { console.log("[subscribe] Found group id=" + existing.id); return existing.id; }
+const ML_API = "https://connect.mailerlite.com/api";
 
-  console.log("[subscribe] Creating group: " + name);
-  const create = await fetch(MAILERLITE_API + "/groups", {
-    method: "POST",
-    headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" },
-    body: JSON.stringify({ name })
-  });
-  const created = await create.json();
-  console.log("[subscribe] Create status=" + create.status + " result=" + JSON.stringify(created).substring(0,300));
-  return created?.data?.id || null;
-}
-
-export default async (req) => {
-  const headers = { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" };
-  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers });
-  if (req.method !== "POST") return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers });
-
-  let email, list;
-  try {
-    const body = await req.json();
-    email = body.email; list = body.list || "sermons";
-  } catch { return new Response(JSON.stringify({ error: "Invalid request body" }), { status: 400, headers }); }
-
-  if (!email || !email.includes("@")) return new Response(JSON.stringify({ error: "Valid email required" }), { status: 400, headers });
-
-  const apiKey = process.env.MAILERLITE_API_KEY;
-  console.log("[subscribe] Request: email=" + email + " list=" + list + " apiKeyPresent=" + !!apiKey + " apiKeyLen=" + (apiKey||"").length);
-
-  const groupName = GROUPS[list] || GROUPS.sermons;
-
-  try {
-    const groupId = await getOrCreateGroup(apiKey, groupName);
-    if (!groupId) throw new Error("Could not get or create group '" + groupName + "'");
-
-    console.log("[subscribe] Adding subscriber to groupId=" + groupId);
-    const addRes = await fetch(MAILERLITE_API + "/subscribers", {
-      method: "POST",
-      headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" },
-      body: JSON.stringify({ email, groups: [groupId] })
-    });
-    const addJson = await addRes.json();
-    console.log("[subscribe] Add subscriber status=" + addRes.status + " result=" + JSON.stringify(addJson).substring(0,300));
-
-    if (!addRes.ok) throw new Error("MailerLite error: " + JSON.stringify(addJson).substring(0,100));
-    return new Response(JSON.stringify({ success: true }), { status: 200, headers });
-  } catch (err) {
-    console.log("[subscribe] CAUGHT ERROR: " + err.message);
-    return new Response(JSON.stringify({ error: err.message }), { status: 500, headers });
-  }
+// MailerLite group IDs -- update these after confirming in dashboard
+const GROUPS = {
+  "new-here":    process.env.ML_GROUP_NEW_HERE    || process.env.MAILERLITE_GROUP_NEW,
+  "visitor":     process.env.ML_GROUP_VISITOR     || process.env.MAILERLITE_GROUP_VISIT,
+  "general":     process.env.ML_GROUP_GENERAL     || process.env.MAILERLITE_GROUP_GENERAL,
+  "sermon":      process.env.ML_GROUP_SERMON      || process.env.MAILERLITE_GROUP_SERMON,
+  "devotional":  process.env.ML_GROUP_DEVOTIONAL  || process.env.MAILERLITE_GROUP_DEVOTIONAL,
 };
 
-export const config = { path: "/api/subscribe" };
+export const handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method not allowed" };
+  }
+
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  };
+
+  try {
+    const body = JSON.parse(event.body || "{}");
+    const { email, name, type = "general", phone } = body;
+
+    if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: "Valid email required" }) };
+    }
+
+    const apiKey = process.env.MAILERLITE_API_KEY;
+    if (!apiKey) {
+      return { statusCode: 500, headers, body: JSON.stringify({ error: "API key not configured" }) };
+    }
+
+    // Build subscriber payload
+    const subscriberData = {
+      email: email.toLowerCase().trim(),
+      fields: {},
+      status: "active",
+    };
+    if (name) {
+      const parts = name.trim().split(" ");
+      subscriberData.fields.name = parts[0];
+      if (parts.length > 1) subscriberData.fields.last_name = parts.slice(1).join(" ");
+    }
+    if (phone) subscriberData.fields.phone = phone;
+
+    // Upsert subscriber
+    const subRes = await fetch(`${ML_API}/subscribers`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(subscriberData),
+    });
+
+    if (!subRes.ok) {
+      const err = await subRes.text();
+      console.error("ML subscriber error:", err);
+      return { statusCode: 500, headers, body: JSON.stringify({ error: "Subscriber creation failed" }) };
+    }
+
+    const sub = await subRes.json();
+    const subId = sub.data?.id;
+
+    // Assign to group(s)
+    const groupsToAssign = [GROUPS["general"]]; // Always add to general
+    if (GROUPS[type] && GROUPS[type] !== GROUPS["general"]) {
+      groupsToAssign.push(GROUPS[type]);
+    }
+
+    for (const groupId of groupsToAssign.filter(Boolean)) {
+      await fetch(`${ML_API}/subscribers/${subId}/groups/${groupId}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+      });
+    }
+
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({
+        success: true,
+        message: "Subscribed successfully",
+        type,
+      }),
+    };
+  } catch (err) {
+    console.error("Subscribe error:", err);
+    return { statusCode: 500, headers, body: JSON.stringify({ error: "Internal error" }) };
+  }
+};
