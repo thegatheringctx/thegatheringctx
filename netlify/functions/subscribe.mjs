@@ -2,19 +2,20 @@ import { Handler } from "@netlify/functions";
 
 const ML_API = "https://connect.mailerlite.com/api";
 
-// MailerLite group IDs -- update these after confirming in dashboard
+// Confirmed MailerLite group IDs
 const GROUPS = {
-  "new-here":    process.env.ML_GROUP_NEW_HERE    || process.env.MAILERLITE_GROUP_NEW,
-  "visitor":     process.env.ML_GROUP_VISITOR     || process.env.MAILERLITE_GROUP_VISIT,
-  "general":     process.env.ML_GROUP_GENERAL     || process.env.MAILERLITE_GROUP_GENERAL,
-  "sermon":      process.env.ML_GROUP_SERMON      || process.env.MAILERLITE_GROUP_SERMON,
-  "devotional":  process.env.ML_GROUP_DEVOTIONAL  || process.env.MAILERLITE_GROUP_DEVOTIONAL,
+  "new-here":   "187839987092292840",
+  "visitor":    "187839987092292840", // routes to New Here
+  "general":    "187839987092292840", // default to New Here
+  "sermon":     "186005510465521606",
+  "devotional": "186005699107489474",
 };
 
 export const handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method not allowed" };
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 200, headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Content-Type" } };
   }
+  if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method not allowed" };
 
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -30,67 +31,54 @@ export const handler = async (event) => {
     }
 
     const apiKey = process.env.MAILERLITE_API_KEY;
-    if (!apiKey) {
-      return { statusCode: 500, headers, body: JSON.stringify({ error: "API key not configured" }) };
-    }
+    if (!apiKey) return { statusCode: 500, headers, body: JSON.stringify({ error: "API key not configured" }) };
 
-    // Build subscriber payload
-    const subscriberData = {
-      email: email.toLowerCase().trim(),
-      fields: {},
-      status: "active",
-    };
+    // Build subscriber
+    const subData = { email: email.toLowerCase().trim(), fields: {}, status: "active" };
     if (name) {
       const parts = name.trim().split(" ");
-      subscriberData.fields.name = parts[0];
-      if (parts.length > 1) subscriberData.fields.last_name = parts.slice(1).join(" ");
+      subData.fields.name = parts[0];
+      if (parts.length > 1) subData.fields.last_name = parts.slice(1).join(" ");
     }
-    if (phone) subscriberData.fields.phone = phone;
+    if (phone) subData.fields.phone = phone;
 
     // Upsert subscriber
-    const subRes = await fetch(`${ML_API}/subscribers`, {
+    const subRes = await fetch(ML_API + "/subscribers", {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(subscriberData),
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(subData),
     });
 
     if (!subRes.ok) {
       const err = await subRes.text();
       console.error("ML subscriber error:", err);
-      return { statusCode: 500, headers, body: JSON.stringify({ error: "Subscriber creation failed" }) };
+      // Try to continue -- subscriber may already exist
     }
 
     const sub = await subRes.json();
-    const subId = sub.data?.id;
+    const subId = sub?.data?.id;
 
-    // Assign to group(s)
-    const groupsToAssign = [GROUPS["general"]]; // Always add to general
-    if (GROUPS[type] && GROUPS[type] !== GROUPS["general"]) {
-      groupsToAssign.push(GROUPS[type]);
-    }
-
-    for (const groupId of groupsToAssign.filter(Boolean)) {
+    if (subId) {
+      // Always add to New Here
+      const groupId = GROUPS[type] || GROUPS["new-here"];
       await fetch(`${ML_API}/subscribers/${subId}/groups/${groupId}`, {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
+        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       });
+
+      // If sermon or devotional, also add to that specific group
+      if (type === "sermon" || type === "devotional") {
+        await fetch(`${ML_API}/subscribers/${subId}/groups/${GROUPS[type]}`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+        });
+      }
     }
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({
-        success: true,
-        message: "Subscribed successfully",
-        type,
-      }),
+      body: JSON.stringify({ success: true, message: "Subscribed successfully", type }),
     };
   } catch (err) {
     console.error("Subscribe error:", err);
