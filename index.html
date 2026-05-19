@@ -509,6 +509,18 @@
   .footer-bottom-link{color:rgba(255,255,255,0.35);text-decoration:none;}
   @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:40px;}}
   @media(max-width:600px){.footer-inner{grid-template-columns:1fr;}.site-footer{padding:48px 24px 24px;}}
+  
+    .dev-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+    .dev-card { display:flex; flex-direction:column; background:#111; padding:28px; border:1px solid #1e1e1e; }
+    .dev-card h3 { font-size:1rem; font-weight:400; margin-bottom:8px; line-height:1.4; }
+    .dev-card p { font-size:0.82rem; color:rgba(255,255,255,0.45); line-height:1.7; margin-bottom:16px; flex:1; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
+    .dev-card a { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:#b8935a; text-decoration:none; margin-top:auto; }
+    @media(max-width:900px){ .dev-grid { grid-template-columns:1fr 1fr; } }
+    @media(max-width:600px){ .dev-grid { grid-template-columns:1fr; } }
+    section.gallery { max-height:600px; overflow:hidden; }
+    section.gallery img { object-fit:cover; }
+    .hero { will-change:auto; }
+    .hero-bg { will-change:auto; }
   </style>
  <!-- Analytics -->
  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
