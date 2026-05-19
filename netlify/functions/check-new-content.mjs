@@ -1,4 +1,9 @@
 // check-new-content.mjs
+
+// Confirmed MailerLite group IDs (May 2026)
+const ML_GROUP_SERMON = '186005510465521606';
+const ML_GROUP_DEVOTIONAL = '186005699107489474';
+const ML_GROUP_NEW_HERE = '187839987092292840';
 // Runs daily at 10 AM UTC — checks for new sermons + devotionals and emails subscribers
 
 export default async (req) => {
