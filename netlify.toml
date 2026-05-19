@@ -4,21 +4,131 @@
 [functions]
   directory = "netlify/functions"
 
-# /kids serves the Kids Gathering Zone parent info page
+# Clean URLs
 [[redirects]]
   from = "/kids"
   to = "/kids.html"
   status = 200
 
-# Kids Zone app direct link
+[[redirects]]
+  from = "/new-here"
+  to = "/new-here.html"
+  status = 200
+
+[[redirects]]
+  from = "/visit"
+  to = "/visit.html"
+  status = 200
+
+[[redirects]]
+  from = "/our-story"
+  to = "/our-story.html"
+  status = 200
+
+[[redirects]]
+  from = "/belong"
+  to = "/belong.html"
+  status = 200
+
+[[redirects]]
+  from = "/formed"
+  to = "/formed.html"
+  status = 200
+
+[[redirects]]
+  from = "/generosity"
+  to = "/generosity.html"
+  status = 200
+
+[[redirects]]
+  from = "/small-gatherings"
+  to = "/small-gatherings.html"
+  status = 200
+
+[[redirects]]
+  from = "/sermons"
+  to = "/sermons.html"
+  status = 200
+
+# Individual sermon pages /sermons/[episode-id]
+[[redirects]]
+  from = "/sermons/*"
+  to = "/sermon-template.html"
+  status = 200
+
+[[redirects]]
+  from = "/devotionals"
+  to = "/devotionals.html"
+  status = 200
+
+# Individual devotional pages /devotionals/[slug]
+[[redirects]]
+  from = "/devotionals/*"
+  to = "/devotional-template.html"
+  status = 200
+
+[[redirects]]
+  from = "/announcements"
+  to = "/announcements.html"
+  status = 200
+
+[[redirects]]
+  from = "/ephesians"
+  to = "/ephesians.html"
+  status = 200
+
+[[redirects]]
+  from = "/church-cleburne-tx"
+  to = "/church-cleburne-tx.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/serve"
+  to = "/serve.html"
+  status = 200
+
+[[redirects]]
+  from = "/prayer"
+  to = "/prayer.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+# Kids Zone app
 [[redirects]]
   from = "/kids-app"
   to = "https://gathering-kids-zone.netlify.app"
   status = 301
 
-# Keep deep links into kids zone working
 [[redirects]]
   from = "/kids-app/*"
   to = "https://gathering-kids-zone.netlify.app/:splat"
   status = 301
   force = true
+
+# Custom 404
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
