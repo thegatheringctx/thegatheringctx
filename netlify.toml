@@ -132,3 +132,33 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[redirects]]
+  from = "/spirit-filled-church-cleburne"
+  to = "/spirit-filled-church-cleburne.html"
+  status = 200
+
+[[redirects]]
+  from = "/church-near-burleson"
+  to = "/church-near-burleson.html"
+  status = 200
+
+[[redirects]]
+  from = "/church-near-joshua-tx"
+  to = "/church-near-joshua-tx.html"
+  status = 200
+
+[[redirects]]
+  from = "/bible-church-johnson-county"
+  to = "/bible-church-johnson-county.html"
+  status = 200
+
+[[redirects]]
+  from = "/what-to-expect"
+  to = "/what-to-expect.html"
+  status = 200
+
+[[redirects]]
+  from = "/gallery"
+  to = "/gallery.html"
+  status = 200
