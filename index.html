@@ -473,6 +473,20 @@
   .logo-badge{font-size:.38rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.2);border-radius:3px;padding:1px 4px;display:inline-block;margin-top:3px;text-decoration:none;cursor:pointer;transition:color .2s,border-color .2s}.logo-badge:hover{color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.5)}
   .nav-links li{list-style:none}
   .nav-links li::before{display:none}
+  
+    .hero { position:relative; height:100vh; min-height:620px; display:flex; align-items:flex-end; overflow:hidden; }
+    .hero-slide { position:absolute; inset:0; opacity:0; transition:opacity 1.8s ease-in-out; }
+    .hero-slide-active { opacity:1; }
+    .hero-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(170deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.0) 35%,rgba(0,0,0,0.55) 72%,rgba(0,0,0,0.9) 100%); }
+    .hero-content { position:relative; z-index:2; padding:0 56px 80px; max-width:840px; }
+    .hero-eyebrow { font-family:sans-serif; font-size:0.65rem; letter-spacing:0.22em; text-transform:uppercase; color:#b8935a; margin-bottom:20px; }
+    .hero-title { font-size:clamp(3rem,7.5vw,6rem); font-weight:300; line-height:1.0; letter-spacing:-0.01em; margin-bottom:36px; color:#fff; }
+    .hero-title-em { font-style:italic; color:rgba(255,255,255,0.38); display:block; }
+    .hero-actions { display:flex; align-items:center; gap:28px; }
+    .btn-primary { font-family:sans-serif; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; background:#fff; color:#0a0a0a; padding:13px 30px; text-decoration:none; font-weight:500; }
+    .btn-ghost { font-family:sans-serif; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.65); text-decoration:none; }
+    .btn-ghost:hover { color:#fff; }
+    @media(max-width:700px){ .hero-content { padding:0 28px 60px; } .hero-title { font-size:clamp(2.6rem,10vw,3.6rem); } }
   </style>
  <!-- Analytics -->
  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
@@ -638,45 +652,19 @@
       <a href="https://pushpay.com/g/thegatheringctx" target="_blank" class="drawer-give">GIVE</a>
     </div>
   </nav>
-  <script>function toggleNavDrawer(){var h=document.getElementById('navHam'),d=document.getElementById('navDrawer'),o=document.getElementById('navOverlay');h.classList.toggle('open');d.classList.toggle('open');o.classList.toggle('open');}</script>
-  <script>function toggleNavDrawer(){var h=document.getElementById('navHam'),d=document.getElementById('navDrawer'),o=document.getElementById('navOverlay');h.classList.toggle('open');d.classList.toggle('open');o.classList.toggle('open');}</script>
-
-<!-- MOBILE NAV -->
-<div class="nav-mobile" id="mobileNav">
- <span class="close-btn" onclick="document.getElementById('mobileNav').classList.remove('open')">&times; </span>
- <a href="#about" onclick="document.getElementById('mobileNav').classList.remove('open')">About</a>
- <a href="#gallery" onclick="document.getElementById('mobileNav').classList.remove('open')">Gallery</a>
- <a href="#devotionals" onclick="document.getElementById('mobileNav').classList.remove('open')">Devotionals</a>
- <a href="#convictions" onclick="document.getElementById('mobileNav').classList.remove('open')">Convictions</a>
- <a href="#events" onclick="document.getElementById('mobileNav').classList.remove('open')">Events</a>
- <a href="#visit" onclick="document.getElementById('mobileNav').classList.remove('open')">Visit</a>
- <a href="#contact" onclick="document.getElementById('mobileNav').classList.remove('open')">Contact</a>
- 
-          <a href="https://gatheringctx.churchcenter.com/giving" target="_blank">Give</a>
-</div>
-
-<!-- HERO -->
-<section class="hero">
- <div class="hero-logo">
- <div style="font-size:clamp(3.5rem,9vw,8rem);font-weight:200;letter-spacing:-.02em;line-height:1;filter:drop-shadow(0 0 48px rgba(255,255,255,.18))"><sup style="font-size:.28em;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.55);vertical-align:super;margin-right:.1em">the</sup>gathering</div>
- </div>
- <p class="hero-location">Cleburne, Texas &middot; Est. 2026</p>
- <p class="hero-tagline"><em>Walk with victory.</em> Not to it.</p>
- <p style="font-size:clamp(.85rem,1.5vw,1.05rem);color:rgba(255,255,255,.6);font-weight:300;letter-spacing:.01em;margin-top:-.5rem;margin-bottom:2rem;max-width:540px;line-height:1.9;">A Spirit-led church in Cleburne, TX making disciples who are confident and empowered to make disciples.</p>
-
- <div class="hero-btns" style="margin-bottom:2rem;">
- <a href="/visit" class="btn-solid">Plan a Visit</a>
- <a href="/our-story" class="btn-outline">Our Story</a>
- </div>
-
- <!-- DUAL CAPTURE FORM -->
- <div id="hero-capture" style="max-width:480px;width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:1.5rem;margin-bottom:2rem;">
-   <p style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#c8a96e;margin-bottom:1rem;">Stay Connected &mdash; We will reach out.</p>
-   <div style="display:flex;flex-direction:column;gap:.75rem;">
-     <input id="hc-name" type="text" placeholder="Your name" style="padding:.9rem 1.2rem;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:.9rem;outline:none;width:100%;" required/>
-     <input id="hc-email" type="email" placeholder="Email address" style="padding:.9rem 1.2rem;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:.9rem;outline:none;width:100%;"/>
-     <div style="display:flex;gap:.5rem;">
-       <input id="hc-phone" type="tel" placeholder="Phone (for Sunday texts)" style="padding:.9rem 1.2rem;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:.9rem;outline:none;flex:1;"/>
+  <script>function tog<section class="hero">
+  <div class="hero-slide hero-slide-active" style="background-image:url('/hero-worship.jpg');background-size:cover;background-position:center 25%;"></div>
+  <div class="hero-slide" style="background-image:url('/hero-room.jpg');background-size:cover;background-position:center 40%;"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Cleburne, Texas &nbsp;&middot;&nbsp; Sundays at 5 PM</p>
+    <h1 class="hero-title">Walk with victory.<br><em class="hero-title-em">Not to it.</em></h1>
+    <div class="hero-actions">
+      <a href="/visit" class="btn-primary">Plan a Visit</a>
+      <a href="/our-story" class="btn-ghost">Our Story</a>
+    </div>
+  </div>
+</section>(for Sunday texts)" style="padding:.9rem 1.2rem;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito Sans',sans-serif;font-size:.9rem;outline:none;flex:1;"/>
        <button id="hc-btn" onclick="heroCapture()" style="background:#c8a96e;color:#000;border:none;padding:.9rem 1.5rem;font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;cursor:pointer;white-space:nowrap;transition:opacity .2s;">I&rsquo;m In &rarr;</button>
      </div>
      <p id="hc-msg" style="font-size:.75rem;color:#c8a96e;display:none;text-align:center;"></p>
@@ -1538,6 +1526,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+</script>
+<script>
+(function(){
+  var slides = document.querySelectorAll('.hero-slide');
+  var cur = 0;
+  if(slides.length < 2) return;
+  setInterval(function(){
+    slides[cur].classList.remove('hero-slide-active');
+    cur = (cur+1) % slides.length;
+    slides[cur].classList.add('hero-slide-active');
+  }, 6000);
+})();
 </script>
 </body>
 </html>
