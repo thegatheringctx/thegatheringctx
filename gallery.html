@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | The Gathering CTX</title>
+  <meta name="description" content="Photos from The Gathering CTX in Cleburne, TX. A Spirit-led church community formed by the Word, led by the Spirit, walking in the victory Christ has already won.">
+  <link rel="canonical" href="https://gatheringctx.org/gallery">
+  <link rel="stylesheet" href="/style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageGallery","name":"The Gathering CTX Gallery","url":"https://gatheringctx.org/gallery","author":{"@type":"Person","name":"Kendra","url":"https://www.instagram.com/captured.by.kendra_"}}</script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:#0a0a0a;color:#fff;font-family:sans-serif;}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid #111;position:sticky;top:0;z-index:50;background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);}
+    .nav-logo{font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:#fff;text-decoration:none;line-height:1.4;}
+    .nav-logo span{display:block;font-size:0.52rem;opacity:0.4;letter-spacing:0.3em;}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;}
+    .nav-links a:hover{color:#fff;}
+    .nav-give{border:1px solid rgba(255,255,255,0.3);padding:8px 18px;color:#fff !important;}
+    .gallery-hero{padding:80px 48px 60px;max-width:800px;}
+    .gallery-label{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#b8935a;margin-bottom:20px;}
+    .gallery-title{font-size:clamp(2.4rem,5vw,4rem);font-weight:300;line-height:1.05;margin-bottom:20px;font-family:Georgia,serif;}
+    .gallery-title em{font-style:italic;color:rgba(255,255,255,0.38);}
+    .gallery-desc{font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.5);max-width:520px;}
+    .gallery-credit{margin-top:16px;font-size:0.75rem;color:rgba(255,255,255,0.3);}
+    .gallery-credit a{color:#b8935a;text-decoration:none;}
+    .gallery-grid{columns:3;column-gap:3px;padding:0 3px 3px;}
+    .gallery-item{break-inside:avoid;margin-bottom:3px;position:relative;overflow:hidden;cursor:pointer;}
+    .gallery-item img{width:100%;display:block;transition:transform 0.5s ease,opacity 0.3s;background:#111;}
+    .gallery-item:hover img{transform:scale(1.03);opacity:0.85;}
+    .lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.96);align-items:center;justify-content:center;}
+    .lightbox.open{display:flex;}
+    .lightbox-img{max-width:90vw;max-height:90vh;object-fit:contain;}
+    .lightbox-close{position:absolute;top:24px;right:32px;font-size:1.8rem;color:rgba(255,255,255,0.6);cursor:pointer;background:none;border:none;}
+    .lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.5);font-size:2rem;cursor:pointer;padding:16px;}
+    .lightbox-prev{left:16px;}.lightbox-next{right:16px;}
+    .lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+    .site-footer{background:#080808;border-top:1px solid #1a1a1a;padding:72px 48px 32px;color:#fff;}
+    .footer-inner{display:grid;grid-template-columns:1.8fr 1.2fr 1.2fr 1fr;gap:48px;max-width:1200px;margin:0 auto 48px;}
+    .footer-logo{text-decoration:none;color:#fff;display:block;margin-bottom:16px;}
+    .footer-the{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;display:block;}
+    .footer-gathering{font-size:1.1rem;letter-spacing:0.2em;text-transform:uppercase;}
+    .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:20px;font-family:Georgia,serif;}
+    .footer-tagline em{font-style:italic;}
+    .footer-social{display:flex;gap:16px;}
+    .footer-social a{color:rgba(255,255,255,0.4);transition:color 0.2s;text-decoration:none;}
+    .footer-social a:hover{color:#b8935a;}
+    .footer-info-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:16px;display:block;}
+    .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.8;display:block;}
+    .footer-link{text-decoration:none;transition:color 0.2s;}
+    .footer-link:hover{color:#fff;}
+    .footer-map-link{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#b8935a;text-decoration:none;display:inline-block;margin-top:12px;}
+    .footer-nav{display:flex;flex-direction:column;gap:2px;}
+    .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.4);text-decoration:none;line-height:1.9;transition:color 0.2s;}
+    .footer-nav-link:hover{color:#fff;}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding-top:32px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;}
+    .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.2);}
+    .footer-bottom-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+    @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:40px;}.gallery-grid{columns:2;}}
+    @media(max-width:600px){.footer-inner{grid-template-columns:1fr;}.site-footer{padding:48px 24px 24px;}.gallery-hero{padding:60px 24px 40px;}.nav{padding:16px 24px;}.gallery-grid{columns:1;}}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a href="/" class="nav-logo"><span>THE</span>GATHERING</a>
+  <div class="nav-links">
+    <a href="/visit">Visit</a>
+    <a href="/sermons">Sermons</a>
+    <a href="/our-story">Our Story</a>
+    <a href="/generosity" class="nav-give">Give</a>
+  </div>
+</nav>
+<div class="gallery-hero">
+  <p class="gallery-label">The Gathering CTX</p>
+  <h1 class="gallery-title">Life together.<br><em>In the Spirit.</em></h1>
+  <p class="gallery-desc">A glimpse of what Sunday looks like at The Gathering. Real people, real worship, real community. Come see for yourself.</p>
+  <p class="gallery-credit">Photography by <a href="https://www.instagram.com/captured.by.kendra_" target="_blank" rel="noopener">@captured.by.kendra_</a></p>
+</div>
+<div class="gallery-grid" id="galleryGrid"></div>
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">&#8592;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-next" onclick="lightboxNav(1)">&#8594;</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="footer-logo"><span class="footer-the">THE</span><span class="footer-gathering">gathering</span></a>
+      <p class="footer-tagline"><em>Walk with victory.</em> Not to it.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-info-label">Join Us</span>
+      <span class="footer-info-line">Sundays at 5:00 PM</span>
+      <span class="footer-info-line">Cleburne Conference Center</span>
+      <span class="footer-info-line">1501 W Henderson St</span>
+      <span class="footer-info-line">Cleburne, TX 76033</span>
+      <a href="https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX+76033" target="_blank" rel="noopener" class="footer-map-link">Get Directions &rarr;</a>
+    </div>
+    <div>
+      <span class="footer-info-label">Connect</span>
+      <a href="tel:+16822865640" class="footer-info-line footer-link">(682) 286-5640</a>
+      <a href="mailto:info@gatheringctx.org" class="footer-info-line footer-link">info@gatheringctx.org</a>
+      <span class="footer-info-line" style="margin-top:12px">Text VISIT to (817) 518-4773</span>
+    </div>
+    <div class="footer-nav">
+      <span class="footer-info-label">Site</span>
+      <a href="/visit" class="footer-nav-link">Plan a Visit</a>
+      <a href="/sermons" class="footer-nav-link">Sermons</a>
+      <a href="/devotionals" class="footer-nav-link">Devotionals</a>
+      <a href="/kids" class="footer-nav-link">Kids</a>
+      <a href="/our-story" class="footer-nav-link">Our Story</a>
+      <a href="/gallery" class="footer-nav-link">Gallery</a>
+      <a href="/privacy" class="footer-nav-link">Privacy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX &nbsp;&middot;&nbsp; <a href="/privacy" class="footer-bottom-link">Privacy Policy</a></p>
+    <p style="font-style:italic">Photography by <a href="https://www.instagram.com/captured.by.kendra_" target="_blank" rel="noopener" class="footer-bottom-link">@captured.by.kendra_</a></p>
+  </div>
+</footer>
+<script>
+const photos=[
+  {src:'/hero-worship.jpg',alt:'Worship at The Gathering CTX'},
+  {src:'/hero-room.jpg',alt:'Full room worship at The Gathering CTX'},
+  {src:'/gather-01.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-02.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-03.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-04.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-05.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-06.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-07.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-08.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-09.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-10.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-11.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-12.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-13.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-14.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-15.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/gather-16.jpg',alt:'Community at The Gathering CTX'},
+  {src:'/img_2641.jpeg',alt:'The Gathering CTX'},
+  {src:'/img_2644.jpeg',alt:'The Gathering CTX'},
+  {src:'/img_2650.jpeg',alt:'The Gathering CTX'},
+  {src:'/img_2658.jpeg',alt:'The Gathering CTX'},
+  {src:'/img_2659.jpeg',alt:'The Gathering CTX'},
+  {src:'/img_2679.jpeg',alt:'The Gathering CTX'},
+  {src:'/img_2705.jpeg',alt:'The Gathering CTX'},
+  {src:'/img_2708.jpeg',alt:'The Gathering CTX'},
+  {src:'/img_2709.jpeg',alt:'The Gathering CTX'},
+  {src:'/img_2710.jpeg',alt:'The Gathering CTX'}
+];
+let cur=0;
+const grid=document.getElementById('galleryGrid');
+photos.forEach((p,i)=>{
+  const item=document.createElement('div');item.className='gallery-item';item.onclick=()=>openLightbox(i);
+  const img=document.createElement('img');img.src=p.src;img.alt=p.alt;img.loading='lazy';
+  item.appendChild(img);grid.appendChild(item);
+});
+function openLightbox(i){cur=i;document.getElementById('lightboxImg').src=photos[i].src;document.getElementById('lightboxCounter').textContent=(i+1)+' of '+photos.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function lightboxNav(d){cur=(cur+d+photos.length)%photos.length;openLightbox(cur);}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('lightbox').classList.contains('open'))return;if(e.key==='ArrowLeft')lightboxNav(-1);if(e.key==='ArrowRight')lightboxNav(1);if(e.key==='Escape')closeLightbox();});
+</script>
+</body>
+</html>
