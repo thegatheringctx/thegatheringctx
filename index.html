@@ -693,8 +693,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-slide hero-slide-active" style="background-image:url('/hero-worship.jpg');background-size:cover;background-position:center 25%;"></div>
-  <div class="hero-slide" style="background-image:url('/hero-room.jpg');background-size:cover;background-position:center 40%;"></div>
+  <div class="hero-bg" style="position:absolute;inset:0;background-image:url('/hero-worship.jpg');background-size:cover;background-position:center 25%;"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Cleburne, Texas &nbsp;&middot;&nbsp; Sundays at 5 PM</p>
@@ -1569,6 +1568,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-<script>(function(){var s=document.querySelectorAll('.hero-slide'),c=0;if(s.length<2)return;setInterval(function(){s[c].classList.remove('hero-slide-active');c=(c+1)%s.length;s[c].classList.add('hero-slide-active');},6000);}());</script>
+
 </body>
 </html>
