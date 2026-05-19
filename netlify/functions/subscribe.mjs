@@ -2,11 +2,10 @@ import { Handler } from "@netlify/functions";
 
 const ML_API = "https://connect.mailerlite.com/api";
 
-// Confirmed MailerLite group IDs
 const GROUPS = {
+  "general":    "187839975766623446",
   "new-here":   "187839987092292840",
-  "visitor":    "187839987092292840", // routes to New Here
-  "general":    "187839987092292840", // default to New Here
+  "visitor":    "187839987092292840",
   "sermon":     "186005510465521606",
   "devotional": "186005699107489474",
 };
@@ -17,10 +16,7 @@ export const handler = async (event) => {
   }
   if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method not allowed" };
 
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
-  };
+  const headers = { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" };
 
   try {
     const body = JSON.parse(event.body || "{}");
@@ -33,7 +29,6 @@ export const handler = async (event) => {
     const apiKey = process.env.MAILERLITE_API_KEY;
     if (!apiKey) return { statusCode: 500, headers, body: JSON.stringify({ error: "API key not configured" }) };
 
-    // Build subscriber
     const subData = { email: email.toLowerCase().trim(), fields: {}, status: "active" };
     if (name) {
       const parts = name.trim().split(" ");
@@ -42,44 +37,33 @@ export const handler = async (event) => {
     }
     if (phone) subData.fields.phone = phone;
 
-    // Upsert subscriber
     const subRes = await fetch(ML_API + "/subscribers", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(subData),
     });
 
-    if (!subRes.ok) {
-      const err = await subRes.text();
-      console.error("ML subscriber error:", err);
-      // Try to continue -- subscriber may already exist
-    }
-
     const sub = await subRes.json();
     const subId = sub?.data?.id;
 
     if (subId) {
-      // Always add to New Here
-      const groupId = GROUPS[type] || GROUPS["new-here"];
-      await fetch(`${ML_API}/subscribers/${subId}/groups/${groupId}`, {
+      // Always add to General
+      await fetch(`${ML_API}/subscribers/${subId}/groups/${GROUPS["general"]}`, {
         method: "POST",
         headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       });
 
-      // If sermon or devotional, also add to that specific group
-      if (type === "sermon" || type === "devotional") {
-        await fetch(`${ML_API}/subscribers/${subId}/groups/${GROUPS[type]}`, {
+      // Add to specific group if different from general
+      const specificGroup = GROUPS[type];
+      if (specificGroup && specificGroup !== GROUPS["general"]) {
+        await fetch(`${ML_API}/subscribers/${subId}/groups/${specificGroup}`, {
           method: "POST",
           headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
         });
       }
     }
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({ success: true, message: "Subscribed successfully", type }),
-    };
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true, type }) };
   } catch (err) {
     console.error("Subscribe error:", err);
     return { statusCode: 500, headers, body: JSON.stringify({ error: "Internal error" }) };
