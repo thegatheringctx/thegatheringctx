@@ -4,13 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What We Believe | The Gathering CTX | Cleburne, TX</title>
-  <meta name="description" content="What The Gathering CTX believes about the Bible, Jesus, the Holy Spirit, salvation, the church, and more. A Spirit-led, Word-driven church in Cleburne, TX.">
+  <meta name="description" content="The Statement of Faith of The Gathering CTX, adopted March 9, 2026. A Spirit-led, Word-driven church in Cleburne, TX.">
   <link rel="canonical" href="https://gatheringctx.org/beliefs">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@graph":[
-    {"@type":["Church","LocalBusiness"],"@id":"https://gatheringctx.org/#church","name":"The Gathering CTX","url":"https://gatheringctx.org","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"},"telephone":"+16822865640","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"16:30","closes":"19:00"}},
-    {"@type":"WebPage","url":"https://gatheringctx.org/beliefs","name":"What We Believe | The Gathering CTX","description":"The statement of faith and core beliefs of The Gathering CTX in Cleburne, TX.","isPartOf":{"@id":"https://gatheringctx.org/#website"}}
-  ]}
+  {"@context":"https://schema.org","@graph":[{"@type":["Church","LocalBusiness"],"name":"The Gathering CTX","url":"https://gatheringctx.org","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"},"telephone":"+16822865640","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"16:30","closes":"19:00"}},{"@type":"WebPage","url":"https://gatheringctx.org/beliefs","name":"Statement of Faith | The Gathering CTX"}]}
   </script>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -18,7 +15,6 @@
     body{background:#0a0a0a;color:#fff;font-family:'Georgia',serif;-webkit-font-smoothing:antialiased;}
     a{color:inherit;text-decoration:none;}
     :root{--gold:#b8935a;--border:#1a1a1a;--muted:rgba(255,255,255,0.45);--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
-
     .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(10,10,10,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04);}
     .nav-logo{font-family:var(--sans);line-height:1;}
     .nav-the{display:block;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.38;}
@@ -27,34 +23,30 @@
     .nav-links a{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.62);transition:color 0.2s;}
     .nav-links a:hover{color:#fff;}
     .nav-give{background:#fff;color:#0a0a0a !important;padding:9px 22px;font-weight:600 !important;}
-
-    .page-hero{padding:140px 56px 80px;max-width:860px;}
+    .page-hero{padding:140px 56px 64px;max-width:860px;}
     .page-label{font-family:var(--sans);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
     .page-title{font-size:clamp(2.8rem,6vw,5rem);font-weight:300;line-height:1.0;margin-bottom:24px;}
     .page-title em{font-style:italic;color:rgba(255,255,255,0.35);display:block;}
-    .page-intro{font-family:var(--sans);font-size:1rem;line-height:1.85;color:var(--muted);max-width:620px;}
-
+    .page-intro{font-family:var(--sans);font-size:0.95rem;line-height:1.85;color:var(--muted);max-width:580px;}
+    .adopted{font-family:var(--sans);font-size:0.72rem;letter-spacing:0.08em;color:rgba(255,255,255,0.25);margin-top:20px;font-style:italic;}
     .beliefs-body{max-width:1100px;margin:0 auto;padding:0 56px 96px;}
-    .belief-block{padding:56px 0;border-top:1px solid var(--border);}
-    .belief-block:first-child{border-top:none;}
+    .belief-block{padding:52px 0;border-top:1px solid var(--border);}
     .belief-num{font-family:var(--sans);font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
-    .belief-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;line-height:1.15;margin-bottom:24px;}
+    .belief-title{font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:300;line-height:1.15;margin-bottom:24px;}
     .belief-body{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
     .belief-text{font-family:var(--sans);font-size:0.92rem;line-height:1.9;color:var(--muted);}
     .belief-text p{margin-bottom:14px;}
     .belief-text p:last-child{margin-bottom:0;}
-    .belief-scriptures{border-left:2px solid var(--border);padding-left:28px;}
+    .belief-scripture-block{border-left:2px solid var(--border);padding-left:28px;}
     .scripture-label{font-family:var(--sans);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
-    .scripture-ref{font-family:var(--sans);font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:2;display:block;}
-
+    .scripture-quote{font-family:'Georgia',serif;font-size:0.9rem;font-style:italic;line-height:1.75;color:rgba(255,255,255,0.65);margin-bottom:10px;}
+    .scripture-ref{font-family:var(--sans);font-size:0.75rem;color:var(--gold);display:block;}
     .cta-band{background:#111;border-top:1px solid var(--border);padding:80px 56px;text-align:center;}
     .cta-band h2{font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:16px;}
     .cta-band p{font-family:var(--sans);font-size:0.9rem;color:var(--muted);margin-bottom:36px;}
     .cta-btns{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
     .btn-white{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;background:#fff;color:#0a0a0a;padding:14px 32px;font-weight:600;display:inline-block;}
     .btn-outline{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);border:1px solid rgba(255,255,255,0.2);padding:14px 32px;display:inline-block;}
-    .btn-outline:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
-
     .site-footer{background:#060606;border-top:1px solid var(--border);padding:72px 56px 32px;}
     .footer-inner{display:grid;grid-template-columns:1.8fr 1.2fr 1.2fr 1fr;gap:48px;max-width:1200px;margin:0 auto 56px;}
     .f-the{display:block;font-family:var(--sans);font-size:0.52rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;}
@@ -68,30 +60,13 @@
     .footer-bottom{max-width:1200px;margin:0 auto;padding-top:28px;border-top:1px solid #111;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
     .footer-bottom p{font-family:var(--sans);font-size:0.65rem;color:rgba(255,255,255,0.18);}
     .footer-bottom a{color:rgba(255,255,255,0.28);}
-
-    @media(max-width:900px){
-      .nav{padding:0 24px;}
-      .nav-links a:not(.nav-give){display:none;}
-      .page-hero{padding:120px 28px 60px;}
-      .beliefs-body{padding:0 28px 72px;}
-      .belief-body{grid-template-columns:1fr;}
-      .belief-scriptures{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:24px;margin-top:8px;}
-      .cta-band{padding:60px 28px;}
-      .footer-inner{grid-template-columns:1fr 1fr;gap:40px;}
-      .site-footer{padding:56px 28px 28px;}
-    }
-    @media(max-width:580px){
-      .footer-inner{grid-template-columns:1fr;}
-    }
+    @media(max-width:900px){.nav{padding:0 24px;}.nav-links a:not(.nav-give){display:none;}.page-hero{padding:120px 28px 60px;}.beliefs-body{padding:0 28px 72px;}.belief-body{grid-template-columns:1fr;}.belief-scripture-block{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:24px;margin-top:8px;}.cta-band{padding:60px 28px;}.footer-inner{grid-template-columns:1fr 1fr;gap:40px;}.site-footer{padding:56px 28px 28px;}}
+    @media(max-width:580px){.footer-inner{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
-
 <nav class="nav">
-  <a href="/" class="nav-logo">
-    <span class="nav-the">The</span>
-    <span class="nav-name">Gathering</span>
-  </a>
+  <a href="/" class="nav-logo"><span class="nav-the">The</span><span class="nav-name">Gathering</span></a>
   <div class="nav-links">
     <a href="/visit">Visit</a>
     <a href="/sermons">Sermons</a>
@@ -103,157 +78,178 @@
 <div class="page-hero">
   <p class="page-label">Statement of Faith</p>
   <h1 class="page-title">What We<br><em>Believe.</em></h1>
-  <p class="page-intro">These are the convictions that anchor everything at The Gathering CTX. Not a checklist -- a foundation. Adopted March 9, 2026.</p>
+  <p class="page-intro">The convictions that anchor everything at The Gathering CTX. Not a checklist -- a foundation. We hold these truths from Scripture with joy, humility, and conviction.</p>
+  <p class="adopted">Adopted by the Board of Directors of Gathering in Victory Inc. &nbsp;&middot;&nbsp; March 9, 2026</p>
 </div>
 
 <div class="beliefs-body">
 
   <div class="belief-block">
-    <p class="belief-num">01</p>
-    <h2 class="belief-title">The Bible</h2>
+    <p class="belief-num">I &nbsp;&middot;&nbsp; The Holy Scriptures</p>
+    <h2 class="belief-title">The Holy Scriptures</h2>
     <div class="belief-body">
       <div class="belief-text">
-        <p>We believe the Bible is the inspired, inerrant, and infallible Word of God. Every word of Scripture -- both Old and New Testaments -- is breathed out by God and is therefore fully trustworthy and authoritative in all that it affirms.</p>
-        <p>Scripture is the final authority for what we believe and how we live. It is not just historically reliable or spiritually helpful -- it is the living Word of the living God, and it has the power to transform every person who receives it with faith.</p>
-        <p>We preach through books of the Bible verse by verse because we believe the text itself has the agenda. Our job is not to use Scripture to say what we want to say -- it is to let Scripture say what God wants to say.</p>
+        <p>The Holy Bible, sixty-six books of the Old and New Testaments, is the inspired, inerrant, and infallible Word of God. Scripture alone is the supreme and final authority in all matters of faith and practice.</p>
+        <p>We preach through books of the Bible verse by verse because we believe the text has the agenda. Our job is not to use Scripture to say what we want -- it is to let Scripture say what God wants. It is alive, active, and more than enough.</p>
       </div>
-      <div class="belief-scriptures">
-        <p class="scripture-label">Key Scriptures</p>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"All Scripture is breathed out by God and profitable for teaching, for reproof, for correction, and for training in righteousness."</p>
         <span class="scripture-ref">2 Timothy 3:16&ndash;17</span>
-        <span class="scripture-ref">2 Peter 1:20&ndash;21</span>
+        <p class="scripture-quote" style="margin-top:20px">"Your word is a lamp to my feet and a light to my path."</p>
         <span class="scripture-ref">Psalm 119:105</span>
-        <span class="scripture-ref">Hebrews 4:12</span>
-        <span class="scripture-ref">John 17:17</span>
       </div>
     </div>
   </div>
 
   <div class="belief-block">
-    <p class="belief-num">02</p>
-    <h2 class="belief-title">God -- Father, Son, and Holy Spirit</h2>
+    <p class="belief-num">II &nbsp;&middot;&nbsp; The Nature of God</p>
+    <h2 class="belief-title">The Nature of God</h2>
     <div class="belief-body">
       <div class="belief-text">
-        <p>We believe in one God who exists eternally in three Persons: Father, Son, and Holy Spirit. Each Person is fully God, distinct in role, united in essence. The Trinity is not a theological puzzle -- it is the nature of the God who made us, saved us, and dwells in us.</p>
-        <p>God the Father is sovereign over all creation. He is holy, loving, and just. He is not distant -- He is near, and He is good.</p>
-        <p>Jesus Christ is fully God and fully man. He was born of a virgin, lived a sinless life, died on the cross as the atoning sacrifice for sin, rose bodily from the dead on the third day, ascended to the right hand of the Father, and will return in glory. There is no other name by which we must be saved.</p>
-        <p>The Holy Spirit is fully God. He convicts of sin, regenerates the lost, indwells every believer, and empowers the Church for mission. He is not merely a force -- He is a Person, and He is present and active today.</p>
+        <p>We believe in one God, eternally existing in three Persons: Father, Son, and Holy Spirit, co-equal, co-eternal, co-substantial. Creator and Sustainer of all things, worthy of all worship.</p>
+        <p>God the Father is sovereign, holy, loving, and just. He is not distant -- He is near. Jesus Christ is fully God and fully man, born of a virgin, sinless in life, crucified for our sin, bodily risen, ascended, and returning in glory. The Holy Spirit is fully God, active and present today.</p>
       </div>
-      <div class="belief-scriptures">
-        <p class="scripture-label">Key Scriptures</p>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"Go therefore and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit."</p>
         <span class="scripture-ref">Matthew 28:19</span>
-        <span class="scripture-ref">John 1:1&ndash;14</span>
-        <span class="scripture-ref">John 14:16&ndash;17</span>
-        <span class="scripture-ref">2 Corinthians 13:14</span>
+        <p class="scripture-quote" style="margin-top:20px">"For in him the whole fullness of deity dwells bodily."</p>
         <span class="scripture-ref">Colossians 2:9</span>
-        <span class="scripture-ref">Acts 4:12</span>
-        <span class="scripture-ref">1 Corinthians 15:3&ndash;4</span>
       </div>
     </div>
   </div>
 
   <div class="belief-block">
-    <p class="belief-num">03</p>
-    <h2 class="belief-title">Salvation</h2>
+    <p class="belief-num">III &nbsp;&middot;&nbsp; Jesus Christ</p>
+    <h2 class="belief-title">Jesus Christ</h2>
     <div class="belief-body">
       <div class="belief-text">
-        <p>We believe that every human being is made in the image of God, but that all have sinned and fallen short of His glory. Sin is not just bad behavior -- it is a condition of the heart that separates us from God and leads to death.</p>
-        <p>Salvation is by grace alone, through faith alone, in Christ alone. It cannot be earned, inherited, or achieved. God, in His mercy, sent His Son to bear our sin on the cross. Those who repent and trust in Jesus are forgiven, justified, and adopted into God's family.</p>
-        <p>Salvation is the beginning of a new life -- not just a transaction but a transformation. The one who is saved is being made new, conformed to the image of Christ, and walking in the victory He has already won.</p>
+        <p>The eternal Son of God, born of a virgin, lived sinlessly, died as a substitutionary atonement for sin, rose bodily from the dead, ascended to the right hand of the Father, and will return personally and visibly in power and glory.</p>
+        <p>There is salvation in no one else. Jesus is not one way among many -- He is the way, the truth, and the life. His resurrection is the foundation of our faith and the guarantee of our victory.</p>
       </div>
-      <div class="belief-scriptures">
-        <p class="scripture-label">Key Scriptures</p>
-        <span class="scripture-ref">Romans 3:23</span>
-        <span class="scripture-ref">Romans 6:23</span>
-        <span class="scripture-ref">Ephesians 2:8&ndash;9</span>
-        <span class="scripture-ref">John 3:16&ndash;17</span>
-        <span class="scripture-ref">Romans 10:9&ndash;10</span>
-        <span class="scripture-ref">2 Corinthians 5:17</span>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"And there is salvation in no one else, for there is no other name under heaven given among men by which we must be saved."</p>
+        <span class="scripture-ref">Acts 4:12</span>
+        <p class="scripture-quote" style="margin-top:20px">"But thanks be to God, who gives us the victory through our Lord Jesus Christ."</p>
         <span class="scripture-ref">1 Corinthians 15:57</span>
       </div>
     </div>
   </div>
 
   <div class="belief-block">
-    <p class="belief-num">04</p>
-    <h2 class="belief-title">The Holy Spirit and Spiritual Gifts</h2>
+    <p class="belief-num">IV &nbsp;&middot;&nbsp; The Holy Spirit</p>
+    <h2 class="belief-title">The Holy Spirit</h2>
     <div class="belief-body">
       <div class="belief-text">
-        <p>We are continuationist. We believe all the gifts of the Holy Spirit described in 1 Corinthians 12&ndash;14 are active and available to the Church today. The same Spirit who moved in Acts is moving now.</p>
-        <p>We believe in the baptism of the Holy Spirit as an empowering work of the Spirit in and for the life of the believer. We make room for prophecy, healing, tongues, and all the gifts described in Scripture -- not as spectacle, but as Spirit-empowered means of building up the body and advancing the kingdom.</p>
-        <p>We hold these convictions with humility. The Spirit and the Word always work together. We test everything by Scripture. But we refuse to be cessationist -- to tell the Spirit He is done doing what He said He would do.</p>
+        <p>We are continuationist. We believe all the gifts of the Holy Spirit described in Scripture are active and available to the Church today. The same Spirit who moved in Acts is moving now.</p>
+        <p>The Holy Spirit convicts of sin, regenerates the lost, indwells every believer, and empowers the Church for mission. We make room for prophecy, healing, tongues, and every gift described in 1 Corinthians 12&ndash;14. The Spirit and the Word always work together. We test everything by Scripture -- but we will not tell the Spirit He is done doing what He said He would do.</p>
       </div>
-      <div class="belief-scriptures">
-        <p class="scripture-label">Key Scriptures</p>
-        <span class="scripture-ref">1 Corinthians 12:4&ndash;11</span>
-        <span class="scripture-ref">Acts 1:8</span>
-        <span class="scripture-ref">Acts 2:1&ndash;4</span>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"The Helper, the Holy Spirit, whom the Father will send in my name, he will teach you all things and bring to your remembrance all that I have said to you."</p>
+        <span class="scripture-ref">John 14:26</span>
+        <p class="scripture-quote" style="margin-top:20px">"Earnestly desire the spiritual gifts."</p>
         <span class="scripture-ref">1 Corinthians 14:1</span>
-        <span class="scripture-ref">Romans 8:26&ndash;27</span>
-        <span class="scripture-ref">Ephesians 4:11&ndash;13</span>
-        <span class="scripture-ref">1 Thessalonians 5:19&ndash;21</span>
       </div>
     </div>
   </div>
 
   <div class="belief-block">
-    <p class="belief-num">05</p>
+    <p class="belief-num">V &nbsp;&middot;&nbsp; Humanity &amp; Sin</p>
+    <h2 class="belief-title">Humanity &amp; Sin</h2>
+    <div class="belief-body">
+      <div class="belief-text">
+        <p>Humanity was created in the image of God -- with dignity, worth, and purpose. Through Adam's disobedience, all people are born with a sinful nature, in need of redemption only possible through faith in Jesus Christ.</p>
+        <p>Sin is not just bad behavior. It is a condition of the heart that separates us from God and leads to death. Every person is a sinner in need of grace. No one is beyond the reach of that grace.</p>
+      </div>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"For all have sinned and fall short of the glory of God, and are justified by his grace as a gift, through the redemption that is in Christ Jesus."</p>
+        <span class="scripture-ref">Romans 3:23&ndash;24</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="belief-block">
+    <p class="belief-num">VI &nbsp;&middot;&nbsp; Salvation</p>
+    <h2 class="belief-title">Salvation</h2>
+    <div class="belief-body">
+      <div class="belief-text">
+        <p>Salvation is by grace alone, through faith alone, in Christ alone. It is the gift of God, received through genuine repentance and faith in Jesus Christ. It cannot be earned, inherited, or achieved.</p>
+        <p>All who believe are justified, born again, and granted eternal life. Salvation is not just a transaction -- it is a transformation. The one who is saved is being made new and walking in the victory Christ has already won.</p>
+      </div>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"For by grace you have been saved through faith. And this is not your own doing; it is the gift of God, not a result of works, so that no one may boast."</p>
+        <span class="scripture-ref">Ephesians 2:8&ndash;9</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="belief-block">
+    <p class="belief-num">VII &nbsp;&middot;&nbsp; Baptism</p>
+    <h2 class="belief-title">Baptism</h2>
+    <div class="belief-body">
+      <div class="belief-text">
+        <p>We practice baptism by immersion as a public declaration of faith -- an outward sign of an inward transformation. Baptism does not save, but it is an act of obedience and a bold public statement that you belong to Jesus.</p>
+        <p>We baptize believers, not infants. If you have trusted Jesus and have never been baptized, we would love to talk with you about it. It is one of the most powerful moments in the life of a follower of Christ.</p>
+      </div>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"We were buried therefore with him by baptism into death, in order that, just as Christ was raised from the dead by the glory of the Father, we too might walk in newness of life."</p>
+        <span class="scripture-ref">Romans 6:4</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="belief-block">
+    <p class="belief-num">VIII &nbsp;&middot;&nbsp; The Lord's Supper</p>
+    <h2 class="belief-title">The Lord's Supper</h2>
+    <div class="belief-body">
+      <div class="belief-text">
+        <p>We observe the Lord's Supper regularly as a remembrance of Christ's body broken and blood shed for us. It is a proclamation of His death until He comes again -- a moment to re-center, re-orient, and re-commit to following Him.</p>
+        <p>It is open to all who have trusted in Jesus Christ as Savior and Lord. We do not take it lightly. We take it with gratitude.</p>
+      </div>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"For as often as you eat this bread and drink the cup, you proclaim the Lord's death until he comes."</p>
+        <span class="scripture-ref">1 Corinthians 11:26</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="belief-block">
+    <p class="belief-num">IX &nbsp;&middot;&nbsp; The Church</p>
     <h2 class="belief-title">The Church</h2>
     <div class="belief-body">
       <div class="belief-text">
-        <p>We believe the universal Church is the body of Christ, made up of all who have been redeemed by Him. The local church is God's primary vehicle for making disciples, proclaiming the gospel, and advancing His kingdom on earth.</p>
-        <p>The Gathering CTX is an elder-led, independent, non-denominational church. We love the whole Church and partner broadly with the Body of Christ. We hold a high view of local church membership, community, accountability, and mission.</p>
-        <p>We practice two ordinances: water baptism (by immersion, as a public declaration of faith) and the Lord's Supper (regularly observed as a remembrance of Christ's body and blood until He returns).</p>
+        <p>The universal Church is the body of Christ, made up of all who have been redeemed by Him. The local church is God's primary vehicle for making disciples, proclaiming the gospel, and advancing His kingdom.</p>
+        <p>The Gathering CTX is an elder-led, independent, non-denominational church. We hold a high view of local church membership, community, accountability, and mission. We love the whole Church and partner broadly with the Body of Christ.</p>
       </div>
-      <div class="belief-scriptures">
-        <p class="scripture-label">Key Scriptures</p>
-        <span class="scripture-ref">Matthew 16:18</span>
-        <span class="scripture-ref">Ephesians 4:11&ndash;16</span>
-        <span class="scripture-ref">Acts 2:42&ndash;47</span>
-        <span class="scripture-ref">1 Timothy 3:1&ndash;13</span>
-        <span class="scripture-ref">Matthew 28:18&ndash;20</span>
-        <span class="scripture-ref">Romans 6:3&ndash;4</span>
-        <span class="scripture-ref">1 Corinthians 11:23&ndash;26</span>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"And they devoted themselves to the apostles' teaching and the fellowship, to the breaking of bread and the prayers."</p>
+        <span class="scripture-ref">Acts 2:42</span>
       </div>
     </div>
   </div>
 
   <div class="belief-block">
-    <p class="belief-num">06</p>
-    <h2 class="belief-title">Marriage and Family</h2>
+    <p class="belief-num">X &nbsp;&middot;&nbsp; Human Sexuality &amp; Life</p>
+    <h2 class="belief-title">Human Sexuality &amp; Life</h2>
     <div class="belief-body">
       <div class="belief-text">
-        <p>We believe marriage is a covenant between one man and one woman, as established by God in creation and affirmed by Jesus in the Gospels. Marriage is designed to reflect the covenant relationship between Christ and His Church.</p>
-        <p>We believe human beings are created male and female, in the image of God. Biological sex is a gift and a design, not an identity to be redefined or rejected.</p>
-        <p>We hold these convictions with love, not condemnation. Every person -- regardless of background, history, or struggle -- is made in the image of God, loved by God, and welcome at The Gathering.</p>
+        <p>We believe marriage is a covenant between one man and one woman, as established by God in creation and affirmed by Jesus. We believe human life is sacred from conception to natural death. Every person bears the image of God.</p>
+        <p>We hold these convictions with love, not condemnation. Every person -- regardless of background, history, or struggle -- is made in the image of God, loved by God, and welcome at The Gathering. Grace is not the absence of truth. Truth is not the absence of grace.</p>
       </div>
-      <div class="belief-scriptures">
-        <p class="scripture-label">Key Scriptures</p>
-        <span class="scripture-ref">Genesis 1:27&ndash;28</span>
+      <div class="belief-scripture-block">
+        <p class="scripture-label">Key Scripture</p>
+        <p class="scripture-quote">"Therefore a man shall leave his father and his mother and hold fast to his wife, and they shall become one flesh."</p>
         <span class="scripture-ref">Genesis 2:24</span>
-        <span class="scripture-ref">Matthew 19:4&ndash;6</span>
-        <span class="scripture-ref">Ephesians 5:25&ndash;33</span>
-        <span class="scripture-ref">1 Corinthians 7:2</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="belief-block">
-    <p class="belief-num">07</p>
-    <h2 class="belief-title">The Return of Christ and Eternity</h2>
-    <div class="belief-body">
-      <div class="belief-text">
-        <p>We believe in the personal, bodily return of Jesus Christ. He will return in glory, as He promised, to judge the living and the dead and to make all things new.</p>
-        <p>Those who have trusted in Christ will spend eternity with Him in the new creation -- a place of perfect joy, wholeness, and the unhindered presence of God. Those who have rejected Christ will face eternal separation from God.</p>
-        <p>This is not a minor doctrine. It shapes how we live, how we love, and how we preach. Every sermon we preach has eternity in the room. We are not trying to make people comfortable -- we are calling them to a decision that matters forever.</p>
-      </div>
-      <div class="belief-scriptures">
-        <p class="scripture-label">Key Scriptures</p>
-        <span class="scripture-ref">John 14:3</span>
-        <span class="scripture-ref">Acts 1:11</span>
-        <span class="scripture-ref">1 Thessalonians 4:16&ndash;17</span>
-        <span class="scripture-ref">Revelation 21:1&ndash;5</span>
-        <span class="scripture-ref">Matthew 25:31&ndash;46</span>
-        <span class="scripture-ref">Hebrews 9:27&ndash;28</span>
+        <p class="scripture-quote" style="margin-top:20px">"So God created man in his own image, in the image of God he created him; male and female he created them."</p>
+        <span class="scripture-ref">Genesis 1:27</span>
       </div>
     </div>
   </div>
@@ -304,6 +300,5 @@
     <p>&copy; 2026 The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX &nbsp;&middot;&nbsp; <a href="/privacy">Privacy Policy</a></p>
   </div>
 </footer>
-
 </body>
 </html>
