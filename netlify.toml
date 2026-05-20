@@ -162,6 +162,3 @@
   from = "/gallery"
   to = "/gallery.html"
   status = 200
-
-[functions.sms-scheduler]
-  schedule = "@daily"
