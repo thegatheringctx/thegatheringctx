@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sermons | The Gathering CTX</title>
+  <title>Sermons | The Gathering CTX | Cleburne, TX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
@@ -152,10 +152,18 @@
   .footer-bottom-link{color:rgba(255,255,255,0.35);text-decoration:none;}
   @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:40px;}}
   @media(max-width:600px){.footer-inner{grid-template-columns:1fr;}.site-footer{padding:48px 24px 24px;}}
-  </style>
+  
+  .page-photo-hero{width:100%;height:460px;background-size:cover;background-position:center;position:relative;}
+  .page-photo-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.05),rgba(0,0,0,0.55));}
+  .page-photo-duo{display:grid;grid-template-columns:1fr 1fr;height:380px;gap:2px;}
+  .page-photo-duo div{background-size:cover;background-position:center;}
+  @media(max-width:700px){.page-photo-hero{height:280px;}.page-photo-duo{grid-template-columns:1fr;height:auto;}.page-photo-duo div{height:220px;}}
+</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":["Church","LocalBusiness"],"@id":"https://gatheringctx.org/#church","name":"The Gathering CTX","url":"https://gatheringctx.org","image":"https://gatheringctx.org/hero-worship.jpg","description":"A Spirit-led church in Cleburne, TX making disciples who are confident and empowered to make disciples.","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"},"telephone":"+16822865640","email":"info@gatheringctx.org","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"16:30","closes":"19:00"},"hasMap":"https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX+76033","sameAs":["https://www.facebook.com/thegatheringctx","https://www.instagram.com/thegatheringctx","https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293"]},{"@type":"WebSite","@id":"https://gatheringctx.org/#website","url":"https://gatheringctx.org","name":"The Gathering CTX"}]}
 </script>
+  <meta name="description" content="Listen to sermons from The Gathering CTX in Cleburne, TX. Verse-by-verse expository preaching through books of the Bible. Currently in Ephesians.">
+  <link rel="canonical" href="https://gatheringctx.org/sermons">
 </head>
 <body>
 
@@ -172,6 +180,7 @@
   </div>
   <div class="nav-burger" onclick="document.getElementById('mobileNav').classList.toggle('open')"><span></span><span></span><span></span></div>
 </nav>
+<div class="page-photo-hero" style="background-image:url('/hero-worship.jpg');background-position:center 20%;"><div class="page-photo-hero-overlay"></div></div>
 <div class="nav-mobile" id="mobileNav">
   <span class="close-btn" onclick="document.getElementById('mobileNav').classList.remove('open')">&#215;</span>
   <a href="/" onclick="document.getElementById('mobileNav').classList.remove('open')">Home</a>
