@@ -1,5 +1,3 @@
-import { Handler } from "@netlify/functions";
-
 const ML_API = "https://connect.mailerlite.com/api";
 
 // Email sequences
