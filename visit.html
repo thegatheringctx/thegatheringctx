@@ -10,73 +10,73 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--black:#000;--off:#f5f0e8;--gold:#c8a96e;--w08:rgba(255,255,255,.08);--w30:rgba(255,255,255,.3);--w55:rgba(255,255,255,.55);--w80:rgba(255,255,255,.8);--k70:rgba(0,0,0,.7);--k40:rgba(0,0,0,.4)}
+:root{ black:#000; off:#f5f0e8; gold:#c8a96e; w08:rgba(255,255,255,.08); w30:rgba(255,255,255,.3); w55:rgba(255,255,255,.55); w80:rgba(255,255,255,.8); k70:rgba(0,0,0,.7); k40:rgba(0,0,0,.4)}
 html{scroll-behavior:smooth}
-body{background:var(--black);color:#fff;font-family:'Nunito Sans',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var( black);color:#fff;font-family:'Nunito Sans',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
-nav.scrolled{background:rgba(0,0,0,.92);border-color:var(--w08);backdrop-filter:blur(8px)}
+nav.scrolled{background:rgba(0,0,0,.92);border-color:var( w08);backdrop-filter:blur(8px)}
 .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;letter-spacing:.05em;text-decoration:none;color:#fff}
 .nav-brand sup{font-size:.55em;vertical-align:super;margin-right:.15em}
-.nav-back{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--w55);text-decoration:none;transition:color .2s}
+.nav-back{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var( w55);text-decoration:none;transition:color .2s}
 .nav-back:hover{color:#fff}
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 6rem 7rem;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(200,169,110,.07) 0%,transparent 65%);pointer-events:none}
-.eyebrow{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
+.eyebrow{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var( gold);margin-bottom:2rem}
 .hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:.95;letter-spacing:-.03em;margin-bottom:3rem}
-.hero-h1 em{font-style:italic;color:var(--gold)}
-.vitals{display:flex;gap:0;border-top:1px solid var(--w08);padding-top:2rem;flex-wrap:wrap}
+.hero-h1 em{font-style:italic;color:var( gold)}
+.vitals{display:flex;gap:0;border-top:1px solid var( w08);padding-top:2rem;flex-wrap:wrap}
 .vital{padding:0 3rem 0 0}
-.vital+.vital{border-left:1px solid var(--w08);padding-left:3rem}
-.vital-label{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
-.vital-val{font-size:1rem;color:var(--w80);font-weight:300;line-height:1.5}
-.expect{background:var(--off);padding:9rem 6rem}
+.vital+.vital{border-left:1px solid var( w08);padding-left:3rem}
+.vital-label{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var( gold);margin-bottom:.5rem}
+.vital-val{font-size:1rem;color:var( w80);font-weight:300;line-height:1.5}
+.expect{background:var( off);padding:9rem 6rem}
 .section-label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;margin-bottom:4rem}
-.section-label-dark{color:var(--k40)}
-.section-label-gold{color:var(--gold)}
+.section-label-dark{color:var( k40)}
+.section-label-gold{color:var( gold)}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start}
 .expect-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;line-height:1.15;color:#000;letter-spacing:-.01em}
 .expect-h2 em{font-style:italic;color:#5c4b2a}
-.expect-body{font-size:.95rem;line-height:2.1;color:var(--k70);margin-top:2rem}
+.expect-body{font-size:.95rem;line-height:2.1;color:var( k70);margin-top:2rem}
 .expect-items{display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.08)}
-.expect-item{background:var(--off);padding:2rem 2.5rem;border-left:2px solid transparent;transition:border-color .3s}
+.expect-item{background:var( off);padding:2rem 2.5rem;border-left:2px solid transparent;transition:border-color .3s}
 .expect-item:hover{border-left-color:#5c4b2a}
 .item-label{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#5c4b2a;margin-bottom:.5rem}
 .item-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:#000;margin-bottom:.4rem}
-.item-body{font-size:.85rem;line-height:1.85;color:var(--k70)}
-.flow{background:#0a0a0a;padding:9rem 6rem;border-top:1px solid var(--w08)}
+.item-body{font-size:.85rem;line-height:1.85;color:var( k70)}
+.flow{background:#0a0a0a;padding:9rem 6rem;border-top:1px solid var( w08)}
 .flow-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.15;letter-spacing:-.01em;margin-bottom:4rem}
-.flow-h2 em{font-style:italic;color:var(--gold)}
-.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--w08)}
+.flow-h2 em{font-style:italic;color:var( gold)}
+.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var( w08)}
 .flow-step{background:#0a0a0a;padding:2.5rem 2rem;border-top:2px solid transparent;transition:border-color .3s}
-.flow-step:hover{border-top-color:var(--gold)}
+.flow-step:hover{border-top-color:var( gold)}
 .flow-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(200,169,110,.25);line-height:1;margin-bottom:1rem}
-.flow-title{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
-.flow-body{font-size:.88rem;line-height:1.85;color:var(--w55)}
-.faq{background:var(--black);padding:9rem 6rem;border-top:1px solid var(--w08);display:grid;grid-template-columns:1fr 1fr;gap:8rem}
+.flow-title{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var( gold);margin-bottom:.6rem}
+.flow-body{font-size:.88rem;line-height:1.85;color:var( w55)}
+.faq{background:var( black);padding:9rem 6rem;border-top:1px solid var( w08);display:grid;grid-template-columns:1fr 1fr;gap:8rem}
 .faq-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.15;letter-spacing:-.01em}
-.faq-h2 em{font-style:italic;color:var(--gold)}
-.faq-sub{font-size:.95rem;line-height:2;color:var(--w55);margin-top:1.5rem}
+.faq-h2 em{font-style:italic;color:var( gold)}
+.faq-sub{font-size:.95rem;line-height:2;color:var( w55);margin-top:1.5rem}
 .faq-list{display:flex;flex-direction:column;gap:2rem}
-.faq-q{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
-.faq-a{font-size:.92rem;line-height:1.85;color:var(--w80)}
-.cta-band{background:var(--off);padding:8rem 6rem;text-align:center}
+.faq-q{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var( gold);margin-bottom:.5rem}
+.faq-a{font-size:.92rem;line-height:1.85;color:var( w80)}
+.cta-band{background:var( off);padding:8rem 6rem;text-align:center}
 .cta-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:#000;line-height:1.2;margin-bottom:1.5rem}
 .cta-h2 em{font-style:italic;color:#5c4b2a}
-.cta-body{font-size:.95rem;line-height:2;color:var(--k70);max-width:520px;margin:0 auto 2.5rem}
+.cta-body{font-size:.95rem;line-height:2;color:var( k70);max-width:520px;margin:0 auto 2.5rem}
 .btn-dark{display:inline-block;background:#000;color:#fff;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;padding:1.2rem 3rem;transition:opacity .2s;margin:.5rem}
 .btn-dark:hover{opacity:.8}
 .btn-outline-dark{display:inline-block;border:1px solid rgba(0,0,0,.3);color:#000;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:1.2rem 3rem;transition:all .2s;margin:.5rem}
 .btn-outline-dark:hover{background:#000;color:#fff}
-footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
-.footer-brand{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:400;color:var(--w55)}
+footer{background:#000;border-top:1px solid var( w08);padding:3rem 6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:400;color:var( w55)}
 .footer-links{display:flex;gap:2rem;flex-wrap:wrap}
-.footer-link{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w30);text-decoration:none;transition:color .2s}
+.footer-link{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var( w30);text-decoration:none;transition:color .2s}
 .footer-link:hover{color:#fff}
 @media(max-width:900px){
   nav{padding:1.2rem 2rem}
   .hero{padding:8rem 2rem 5rem}
   .vitals{flex-direction:column;gap:1.5rem}
-  .vital+.vital{border-left:none;padding-left:0;border-top:1px solid var(--w08);padding-top:1.5rem}
+  .vital+.vital{border-left:none;padding-left:0;border-top:1px solid var( w08);padding-top:1.5rem}
   .expect{padding:6rem 2rem}
   .two-col{grid-template-columns:1fr;gap:3rem}
   .flow{padding:6rem 2rem}
@@ -273,7 +273,7 @@ document.getElementById('visit-form')?.addEventListener('submit', async function
 window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)});
 </script>
 
-  <!-- WHAT TO EXPECT -->
+  <!  WHAT TO EXPECT  >
   <section style="padding:4rem 2rem;max-width:780px;margin:0 auto">
     <div style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#c9a84c;margin-bottom:1rem;font-family:system-ui,sans-serif">WHAT TO EXPECT</div>
     <h2 style="font-size:clamp(1.75rem,4vw,2.75rem);font-weight:400;margin-bottom:1rem">No surprises.<br><em style="color:#c9a84c;font-style:italic">Just welcome.</em></h2>
