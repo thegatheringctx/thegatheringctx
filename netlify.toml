@@ -162,3 +162,12 @@
   from = "/gallery"
   to = "/gallery.html"
   status = 200
+[[redirects]]
+  from = "/beliefs"
+  to = "/beliefs.html"
+  status = 200
+
+[[redirects]]
+  from = "/what-we-believe"
+  to = "/beliefs.html"
+  status = 200
