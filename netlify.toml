@@ -171,3 +171,13 @@
   from = "/what-we-believe"
   to = "/beliefs.html"
   status = 200
+
+[[redirects]]
+  from = "/leadership"
+  to = "/leadership.html"
+  status = 200
+
+[[redirects]]
+  from = "/small-groups"
+  to = "/small-groups.html"
+  status = 200
