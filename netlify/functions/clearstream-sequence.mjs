@@ -1,5 +1,3 @@
-import { Handler } from "@netlify/functions";
-
 const CS_API = "https://api.clearstream.io/v1";
 const API_KEY = process.env.CLEARSTREAM_API_KEY;
 
