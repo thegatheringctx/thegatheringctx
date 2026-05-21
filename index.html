@@ -285,6 +285,25 @@
     .footer-inner{gap:20px;}
   }
 </style>
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gatheringctx.org">
+  <meta property="og:title" content="The Gathering CTX | Church in Cleburne, TX">
+  <meta property="og:description" content="A Spirit-led church in Cleburne, TX walking in the victory Christ has already won. Sundays at 5 PM. Come as you are.">
+  <meta property="og:image" content="https://gatheringctx.org/Alexus-120.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="The Gathering CTX">
+  <meta property="og:locale" content="en_US">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Gathering CTX | Church in Cleburne, TX">
+  <meta name="twitter:description" content="Walk with victory. Not to it. Sundays at 5 PM in Cleburne, TX.">
+  <meta name="twitter:image" content="https://gatheringctx.org/Alexus-120.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Event","name":"Sunday Worship Service - The Gathering CTX","description":"Join us for Spirit-led worship, expository preaching, and real community. Come as you are.","startDate":"2026-05-25T17:00:00-05:00","endDate":"2026-05-25T18:30:00-05:00","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","location":{"@type":"Place","name":"Cleburne Conference Center","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"}},"organizer":{"@type":"Organization","name":"The Gathering CTX","url":"https://gatheringctx.org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://gatheringctx.org/visit"},"image":"https://gatheringctx.org/Alexus-120.jpg","url":"https://gatheringctx.org/visit"}
+</script>
 </head>
 <body>
 
@@ -568,16 +587,21 @@ async function handleConnect(e){
     e.target.querySelector('input').value='';
   }catch(err){btn.textContent='Try again';}
 }
-async function handlePrayer(e){
+function handlePrayer(e){
   e.preventDefault();
-  const data=Object.fromEntries(new FormData(e.target));
-  const btn=e.target.querySelector('button');
-  btn.textContent='Sending...';
-  try{
-    await fetch('/api/prayer-request',{--method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    document.getElementById('prayer-success').style.display='block';
-    e.target.reset();btn.textContent='Send My Request';
-  }catch(err){btn.textContent='Try again';}
+  const form = e.target;
+  const btn = form.querySelector('button');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  const body = new URLSearchParams(new FormData(form)).toString();
+  fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body})
+    .then(() => {
+      document.getElementById('prayer-success').style.display = 'block';
+      form.reset();
+      btn.textContent = 'Send My Request';
+      btn.disabled = false;
+    })
+    .catch(() => { btn.textContent = 'Try again'; btn.disabled = false; });
 }
 </script>
 </body>
