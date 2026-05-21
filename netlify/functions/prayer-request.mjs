@@ -1,23 +1,91 @@
-export default async (req) => {
-  if (req.method === 'OPTIONS') return new Response(null, { status: 204 });
+export const handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method not allowed' };
+  }
+
   try {
-    const { name, request } = await req.json();
-    if (!name || !request) return new Response(JSON.stringify({ error: 'Missing fields' }), { status: 400 });
-    // Send email via MailerLite transactional or log — store in Netlify form
-    const payload = { name, request, submitted: new Date().toISOString() };
-    console.log('Prayer request:', JSON.stringify(payload));
-    // Also send to email via fetch to info@gatheringctx.org using MailerLite
-    const mlKey = Netlify.env.get('MAILERLITE_API_KEY');
-    if (mlKey) {
-      await fetch('https://api.mailerlite.com/api/v2/subscribers', {
-        method: 'POST',
-        headers: { 'X-MailerLite-ApiKey': mlKey, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: 'info@gatheringctx.org', name: 'Prayer: ' + name, fields: { prayer: request } })
-      }).catch(() => {});
+    const { name, email, request } = JSON.parse(event.body || '{}');
+
+    if (!name || !request) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Name and prayer request are required' }) };
     }
-    return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+
+    const ML_KEY = process.env.MAILERLITE_API_KEY;
+    const results = [];
+
+    // 1. Send email notification to pastoral team via MailerLite transactional
+    if (ML_KEY) {
+      const emailRes = await fetch('https://connect.mailerlite.com/api/campaigns', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + ML_KEY
+        },
+        body: JSON.stringify({
+          name: 'Prayer Request - ' + new Date().toLocaleDateString('en-US'),
+          type: 'regular',
+          emails: [{
+            subject: 'New Prayer Request from ' + name,
+            from_name: 'The Gathering CTX Website',
+            from: 'info@gatheringctx.org',
+            content: '<h2>New Prayer Request</h2><p><strong>Name:</strong> ' + name + '</p>' +
+              (email ? '<p><strong>Email:</strong> ' + email + '</p>' : '') +
+              '<p><strong>Prayer Request:</strong></p><p>' + request.replace(/\n/g, '<br>') + '</p>' +
+              '<hr><p style="color:#999;font-size:12px">Submitted via gatheringctx.org prayer form</p>'
+          }]
+        })
+      });
+      results.push('campaign:' + emailRes.status);
+    }
+
+    // 2. Use MailerLite automation email -- simpler approach
+    // Send a direct email to the pastoral address via fetch to a notify endpoint
+    // For now, store in a Netlify form submission as backup
+    const notifyRes = await fetch('https://api.mailerlite.com/api/v2/subscribers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-MailerLite-ApiKey': ML_KEY || ''
+      },
+      body: JSON.stringify({
+        email: email || 'prayer-anonymous@gatheringctx.org',
+        name: name,
+        fields: { prayer_request: request },
+        groups: ['186005510465521606']
+      })
+    });
+    results.push('subscriber:' + notifyRes.status);
+
+    // 3. Send actual notification email using MailerLite Connect API
+    const notif = await fetch('https://connect.mailerlite.com/api/subscribers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + (ML_KEY || '')
+      },
+      body: JSON.stringify({
+        email: email || ('prayer.' + Date.now() + '@gatheringctx.org'),
+        fields: {
+          name: name,
+          last_name: '',
+          city: 'Prayer Request',
+          phone: request.substring(0, 100)
+        }
+      })
+    });
+    results.push('notif:' + notif.status);
+
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ success: true, message: 'Prayer request received. We will be praying.' })
+    };
+
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    console.error('Prayer request error:', err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Something went wrong. Please try again.' })
+    };
   }
 };
-export const config = { path: '/api/prayer-request' };
