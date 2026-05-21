@@ -181,3 +181,42 @@
   from = "/small-groups"
   to = "/small-groups.html"
   status = 200
+[[redirects]]
+  from = "/events"
+  to = "/events.html"
+  status = 200
+
+[[redirects]]
+  from = "/resources"
+  to = "/resources.html"
+  status = 200
+
+[[redirects]]
+  from = "/baptism"
+  to = "/baptism.html"
+  status = 200
+
+[[redirects]]
+  from = "/philippians"
+  to = "/philippians.html"
+  status = 200
+
+[[redirects]]
+  from = "/church-near-burleson"
+  to = "/church-near-burleson.html"
+  status = 200
+
+[[redirects]]
+  from = "/church-near-joshua-tx"
+  to = "/church-near-joshua-tx.html"
+  status = 200
+
+[[redirects]]
+  from = "/church-near-alvarado"
+  to = "/church-near-alvarado.html"
+  status = 200
+
+[[redirects]]
+  from = "/church-near-godley-tx"
+  to = "/church-near-godley-tx.html"
+  status = 200
