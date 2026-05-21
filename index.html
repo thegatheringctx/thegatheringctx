@@ -500,9 +500,11 @@
   <p class="sec-label">Prayer</p>
   <h2 class="p-title">We believe in it. Let us pray for you.</h2>
   <p class="p-sub">Send us your prayer request and our team will pray over it this week.</p>
-  <form class="prayer-form" onsubmit="handlePrayer(event)">
+  <form class="prayer-form" name="prayer-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handlePrayer(event)">
+    <input type="hidden" name="form-name" value="prayer-request">
+    <p style="display:none"><input name="bot-field"></p>
     <input class="p-input" type="text" name="name" placeholder="Your name" required>
-    <input class="p-input" type="email" name="email" placeholder="Your email">
+    <input class="p-input" type="email" name="email" placeholder="Your email (optional)">
     <textarea class="p-textarea" name="request" placeholder="Share your prayer request..." required></textarea>
     <button class="p-btn" type="submit">Send My Request</button>
     <p class="p-msg" id="prayer-success">We received your request. Our team will be praying.</p>
