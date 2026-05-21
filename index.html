@@ -203,7 +203,88 @@
     .testimony-quote::before{content:'"';font-size:1.8rem;color:var(--gold);line-height:0;vertical-align:-0.4rem;margin-right:4px;}
     .testimony-name{font-family:var(--sans);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);}
     @media(max-width:900px){.testimonies{padding:64px 28px;}.testimonies-grid{grid-template-columns:1fr;}}
-  </style>
+  
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;margin-left:12px;}
+  .nav-hamburger span{display:block;width:24px;height:2px;background:#fff;transition:all 0.25s;}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-hamburger.open span:nth-child(2){opacity:0;}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .nav-mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(16px);border-bottom:1px solid #1a1a1a;z-index:99;padding:20px 24px 32px;flex-direction:column;}
+  .nav-mobile-menu.open{display:flex;}
+  .nav-mobile-menu a{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;}
+  .nav-mobile-menu a:last-child{border-bottom:none;}
+  .nav-mobile-menu .mob-give{color:#b8935a;font-weight:600;border-bottom:none;margin-top:4px;}
+  @media(max-width:1100px){
+    .steps-grid{grid-template-columns:repeat(3,1fr)!important;gap:24px!important;}
+  }
+  @media(max-width:900px){
+    .nav{padding:0 20px;height:64px;}
+    .nav-links{display:none!important;}
+    .nav-hamburger{display:flex;}
+    .hero{min-height:500px;}
+    .hero-body{padding:0 24px 52px;}
+    .hero-title{font-size:clamp(2.4rem,9vw,3.6rem);}
+    .hero-actions{gap:16px;flex-wrap:wrap;}
+    .connect-strip{flex-direction:column;padding:36px 24px;gap:24px;}
+    .connect-form{width:100%;}
+    .connect-input{flex:1;min-width:0;width:auto;}
+    .sermon{grid-template-columns:1fr;}
+    .sermon-left{padding:44px 24px 28px;border-right:none;border-bottom:1px solid #1a1a1a;}
+    .sermon-right{padding:28px 24px 44px;}
+    .welcome{grid-template-columns:1fr;}
+    .welcome-left{padding:52px 24px;order:2;}
+    .welcome-photo{min-height:280px;order:1;}
+    .scripture{padding:52px 24px;}
+    .scripture-q{font-size:1.1rem;}
+    .convictions{padding:60px 24px;}
+    .conv-grid{grid-template-columns:1fr;}
+    .conv-item{padding:32px 24px;}
+    .foundations{padding:0 24px 60px;padding-top:40px;}
+    .found-grid{grid-template-columns:1fr;}
+    .found-item{padding:32px 24px;}
+    .testimonies{padding:52px 24px;}
+    .testimonies-grid{grid-template-columns:1fr;}
+    .testimony{padding:28px 20px;}
+    .steps{padding:60px 24px;}
+    .steps-grid{grid-template-columns:1fr 1fr!important;gap:20px!important;}
+    .photos{grid-template-columns:1fr!important;height:auto;}
+    .photos img{height:260px!important;}
+    .photos img:nth-child(2),.photos img:nth-child(3){display:none;}
+    .kids{grid-template-columns:1fr;}
+    .kids-photo{min-height:260px;}
+    .kids-content{padding:48px 24px;}
+    .prayer{padding:60px 24px;}
+    .site-footer{padding:48px 24px 24px;}
+    .footer-inner{grid-template-columns:1fr 1fr;gap:32px;}
+    .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+    .testimonies-title{font-size:1.8rem;}
+    .sec-title{font-size:clamp(1.6rem,5vw,2.4rem);}
+  }
+  @media(max-width:700px){
+    .hero-title{font-size:clamp(1.9rem,9vw,2.6rem);}
+    .btn-white,.btn-dark{padding:12px 22px;font-size:0.62rem;}
+    .steps-grid{grid-template-columns:1fr!important;}
+    .footer-inner{grid-template-columns:1fr;gap:24px;}
+    .conv-item{padding:28px 20px;}
+    .found-item{padding:28px 20px;}
+    .kids-content{padding:40px 20px;}
+    .k-cta{flex-direction:column;}
+    .cta-btns{flex-direction:column;align-items:center;}
+    .belief-body{grid-template-columns:1fr;}
+    .belief-scripture-block{border-left:none;border-top:1px solid #1a1a1a;padding-left:0;padding-top:20px;margin-top:8px;}
+    .page-hero{padding:100px 24px 52px;}
+  }
+  @media(max-width:480px){
+    .hero-title{font-size:1.8rem;}
+    .hero-eyebrow{font-size:0.52rem;}
+    .connect-strip{padding:28px 20px;}
+    .connect-btn{padding:13px 14px;font-size:0.6rem;}
+    .testimony-quote{font-size:0.88rem;}
+    .testimony{padding:22px 18px;}
+    .conv-num,.found-num{font-size:0.52rem;}
+    .footer-inner{gap:20px;}
+  }
+</style>
 </head>
 <body>
 
