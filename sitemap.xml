@@ -12,10 +12,12 @@
   <url><loc>https://gatheringctx.org/formed</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/small-gatherings</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/generosity</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/gallery</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://gatheringctx.org/what-to-expect</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/spirit-filled-church-cleburne</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/baptism</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/resources</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/events</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/philippians</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gatheringctx.org/church-near-burleson</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/church-near-joshua-tx</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/bible-church-johnson-county</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/church-near-alvarado</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/church-near-godley-tx</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
