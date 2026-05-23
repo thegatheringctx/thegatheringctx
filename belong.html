@@ -319,14 +319,40 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Belong & Become | The Gathering CTX | Cleburne, TX","url":"https://gatheringctx.org/belong","description":"Belong & Become is The Gathering CTX vision and partnership class. One session. Learn who we are and what your next step looks like. Cleburne, TX.","isPartOf":{"@type":"WebSite","name":"The Gathering CTX","url":"https://gatheringctx.org"}}</script>
 </head>
 <body>
-
-<!  NAV  >
-<nav id="nav">
-  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
-  <a href="/" class="nav-back">&larr; Back to Home</a>
+<nav class="site-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04);">
+  <a href="/" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1;text-decoration:none;color:#fff;">
+    <span style="display:block;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.38;">The</span>
+    <span style="font-size:0.9rem;letter-spacing:0.22em;text-transform:uppercase;">Gathering</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:36px;">
+    <a href="/new-here" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;border:1px solid rgba(255,255,255,0.2);padding:8px 16px;">I'M NEW</a>
+    <a href="/visit" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">VISIT</a>
+    <a href="/kids" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">KIDS</a>
+    <a href="/sermons" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">SERMONS</a>
+    <a href="/devotionals" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">DEVOTIONALS</a>
+    <a href="/resources" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">RESOURCES</a>
+    <a href="/generosity" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;background:#fff;color:#0a0a0a;padding:10px 20px;font-weight:600;text-decoration:none;">GIVE</a>
+  </div>
 </nav>
-
-<!  HERO  >
+<button id="mob-btn" onclick="var m=document.getElementById('mob-menu');m.style.display=m.style.display==='flex'?'none':'flex';this.classList.toggle('open');" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:fixed;top:18px;right:20px;z-index:101;">
+  <span style="display:block;width:24px;height:2px;background:#fff;transition:all 0.25s;"></span>
+  <span style="display:block;width:24px;height:2px;background:#fff;transition:all 0.25s;"></span>
+  <span style="display:block;width:24px;height:2px;background:#fff;transition:all 0.25s;"></span>
+</button>
+<div id="mob-menu" style="display:none;position:fixed;top:72px;left:0;right:0;background:rgba(10,10,10,0.98);z-index:99;padding:16px 24px 28px;flex-direction:column;border-bottom:1px solid #1a1a1a;">
+  <a href="/new-here" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">I'm New</a>
+  <a href="/visit" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Plan a Visit</a>
+  <a href="/our-story" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Our Story</a>
+  <a href="/sermons" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Sermons</a>
+  <a href="/devotionals" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Devotionals</a>
+  <a href="/kids" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Kids</a>
+  <a href="/belong" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Belong &amp; Become</a>
+  <a href="/formed" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Formed &amp; Sent</a>
+  <a href="/events" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Events</a>
+  <a href="/resources" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Resources</a>
+  <a href="/generosity" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:#b8935a;font-weight:600;padding:13px 0;display:block;text-decoration:none;border-bottom:none;">Give</a>
+</div>
+<style>@media(max-width:900px){.site-nav div{display:none!important;}#mob-btn{display:flex!important;}}</style>
 <section class="hero">
   <div class="hero-eyebrow">Vision &amp; Partnership Class</div>
   <h1 class="hero-h1">Belong<br><em>&amp; Become.</em></h1>
