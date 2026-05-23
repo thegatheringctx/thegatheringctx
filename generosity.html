@@ -126,20 +126,31 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Generosity Is Worship | The Gathering CTX | Cleburne, TX","url":"https://gatheringctx.org/generosity","description":"We do not give out of pressure, we give out of worship. Generosity at The Gathering CTX flows from hearts transformed by repentance and faith. Cleburne TX.","isPartOf":{"@type":"WebSite","name":"The Gathering CTX","url":"https://gatheringctx.org"}}</script>
 </head>
 <body>
-<nav class="site-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04);">
-  <a href="/" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1;text-decoration:none;color:#fff;">
-    <span style="display:block;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.38;">The</span>
-    <span style="font-size:0.9rem;letter-spacing:0.22em;text-transform:uppercase;">Gathering</span>
-  </a>
-  <div style="display:flex;align-items:center;gap:36px;">
-    <a href="/new-here" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;border:1px solid rgba(255,255,255,0.2);padding:8px 16px;">I'M NEW</a>
-    <a href="/visit" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">VISIT</a>
-    <a href="/kids" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">KIDS</a>
-    <a href="/sermons" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">SERMONS</a>
-    <a href="/devotionals" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">DEVOTIONALS</a>
-    <a href="/resources" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">RESOURCES</a>
-    <a href="/generosity" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;background:#fff;color:#0a0a0a;padding:10px 20px;font-weight:600;text-decoration:none;">GIVE</a>
+<nav class="nav">
+  <a href="/" class="nav-brand"><span class="nav-the">the</span><span class="nav-name">gathering</span></a>
+  <div class="nav-links">
+    <a href="/new-here">I'm New</a>
+    <a href="/visit">Visit</a>
+    <a href="/kids">Kids</a>
+    <a href="/sermons">Sermons</a>
+    <a href="/devotionals">Devotionals</a>
+    <a href="/resources">Resources</a>
+    <a href="/generosity" class="nav-give-btn">Give</a>
   </div>
+  <button class="nav-hamburger" id="nav-ham" aria-label="Open menu" onclick="this.classList.toggle('open');var m=document.getElementById('mob-nav');m.style.display=m.style.display==='flex'?'none':'flex';"><span></span><span></span><span></span></button>
+</nav>
+<nav style="display:none;position:fixed;top:72px;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(16px);border-bottom:1px solid #1a1a1a;z-index:99;padding:20px 24px 32px;flex-direction:column;" id="mob-nav">
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/new-here">I'm New</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/visit">Plan a Visit</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/our-story">Our Story</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/sermons">Sermons</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/devotionals">Devotionals</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/kids">Kids</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/belong">Belong &amp; Become</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/formed">Formed &amp; Sent</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/events">Events</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/resources">Resources</a>
+  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:#b8935a;font-weight:600;padding:14px 0;display:block;text-decoration:none;border-bottom:none;" href="/generosity">Give</a>
 </nav>
 <button id="mob-btn" onclick="var m=document.getElementById('mob-menu');m.style.display=m.style.display==='flex'?'none':'flex';this.classList.toggle('open');" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:fixed;top:18px;right:20px;z-index:101;">
   <span style="display:block;width:24px;height:2px;background:#fff;transition:all 0.25s;"></span>
