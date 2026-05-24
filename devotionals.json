@@ -1,6 +1,16 @@
 {
   "devotionals": [
     {
+      "id": "pentecost-the-fire-fell",
+      "title": "The Fire Fell",
+      "series": "Pentecost Sunday",
+      "date": "May 25, 2026",
+      "scripture": "Acts 2:1-4",
+      "excerpt": "Heaven did not send a letter. Heaven sent a fire. The same Spirit who fell in that upper room dwells in you right now.",
+      "file": "devotional-pentecost.html",
+      "published": true
+    },
+    {
       "id": "ephesians-6-stand",
       "title": "Stand",
       "series": "Ephesians - Week 6",
