@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Fire Fell. Ages 8-12 | Kids Gathering Zone</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap');
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark: #0f0a2e; --card: #1a1445; --card2: #1d1750;
+      --gold: #f5c842; --teal: #3ecfcf; --coral: #ff6b6b;
+      --green: #4ecb71; --purple: #a78bfa; --text: #ffffff;
+      --muted: rgba(255,255,255,0.55); --rule: rgba(255,255,255,0.1);
+    }
+    html { font-size: 16px; }
+    body { font-family: 'Nunito', sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: rgba(15,10,46,0.97); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 10; }
+    .nav-logo { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px; color: var(--gold); text-decoration: none; }
+    .nav-back { font-size: 12px; font-weight: 700; color: var(--muted); text-decoration: none; }
+    .nav-back:hover { color: #fff; }
+
+    .hero { text-align: center; padding: 40px 20px 28px; max-width: 620px; margin: 0 auto; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--coral); color: #fff; font-size: 11px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px; }
+    .hero h1 { font-family: 'Fredoka One', cursive; font-size: clamp(34px, 9vw, 56px); color: #fff; line-height: 1.05; margin-bottom: 6px; }
+    .hero h1 span { color: var(--gold); }
+    .hero .sub { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    .direct-address { background: var(--card2); border: 1px solid var(--coral); border-radius: 14px; padding: 16px 20px; font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 10px; }
+    .direct-address span { color: var(--gold); }
+
+    .points-banner { background: rgba(255,107,107,0.1); border: 1px solid var(--coral); border-radius: 12px; padding: 12px 18px; display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 16px 32px; max-width: 580px; margin-left: auto; margin-right: auto; }
+    .points-banner span { font-size: 13px; font-weight: 700; color: var(--coral); }
+
+    .content { max-width: 620px; margin: 0 auto; padding: 0 16px 60px; }
+
+    .day-card { background: var(--card); border: 1px solid var(--rule); border-radius: 20px; margin-bottom: 20px; overflow: hidden; }
+    .day-header { display: flex; align-items: center; gap: 14px; padding: 18px 20px 14px; border-bottom: 1px solid var(--rule); }
+    .day-num { width: 44px; height: 44px; border-radius: 10px; background: var(--coral); color: #fff; font-family: 'Fredoka One', cursive; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .day-info { flex: 1; }
+    .day-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .day-title { font-family: 'Fredoka One', cursive; font-size: 20px; color: #fff; line-height: 1.2; }
+    .day-read { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
+    .day-body { padding: 18px 20px; }
+
+    .verse-block { background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 14px 16px; margin-bottom: 16px; }
+    .verse-block .vb-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .verse-block p { font-size: 14px; font-style: italic; line-height: 1.65; color: rgba(255,255,255,0.88); }
+    .verse-block .vb-ref { font-size: 11px; font-weight: 700; color: var(--gold); margin-top: 8px; }
+
+    .body-text { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.82); margin-bottom: 14px; }
+    .body-text strong { color: var(--gold); font-weight: 800; }
+
+    .greek-box { background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.3); border-radius: 12px; padding: 14px 16px; margin: 16px 0; }
+    .greek-box .gb-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--coral); margin-bottom: 8px; }
+    .greek-box .gb-word { font-size: 22px; font-style: italic; color: var(--coral); margin-bottom: 2px; font-family: serif; }
+    .greek-box .gb-trans { font-size: 12px; font-weight: 700; color: rgba(255,107,107,0.7); margin-bottom: 8px; letter-spacing: 0.5px; }
+    .greek-box .gb-def { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.8); }
+
+    .callout { background: rgba(245,200,66,0.07); border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 16px 0; font-size: 15px; font-weight: 700; font-style: italic; color: rgba(255,255,255,0.88); line-height: 1.6; }
+
+    .think-section { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+    .think-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .think-section ol { list-style: none; padding: 0; counter-reset: think; }
+    .think-section ol li { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.8); padding: 8px 0; border-bottom: 1px solid var(--rule); display: flex; gap: 10px; counter-increment: think; }
+    .think-section ol li:last-child { border-bottom: none; }
+    .think-section ol li::before { content: counter(think); font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--teal); flex-shrink: 0; width: 20px; padding-top: 1px; }
+
+    .declaration { background: linear-gradient(135deg, #1e3a6e, #122550); border: 1px solid rgba(62,207,207,0.4); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+    .decl-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .declaration p { font-size: 15px; font-weight: 700; line-height: 1.75; color: #fff; }
+    .declaration .final-sig { font-size: 14px; font-weight: 900; color: var(--gold); margin-top: 10px; }
+
+    footer { border-top: 1px solid var(--rule); padding: 30px 20px; text-align: center; }
+    footer .logo { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--gold); margin-bottom: 6px; }
+    footer p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    footer a { color: var(--teal); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://gatheringctx.org" class="nav-logo">&#9889; thegathering</a>
+  <a href="https://gatheringctx.org/kids" class="nav-back">&#8592; Kids Zone</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">&#128293; Ages 8&ndash;12 &middot; Pentecost</div>
+  <h1>The Fire <span>Fell.</span> &#128293;</h1>
+  <p class="sub">5 days in Acts 2 &middot; Just for you</p>
+  <div class="direct-address">
+    Hey. This one is written <span>just for you.</span> Not for your parents to read to you. For you. Pick a quiet moment each day, open your Bible, and go deep. By the end of the week you will have walked through one of the most important events in all of history. Let's go.
+  </div>
+</div>
+
+<div class="points-banner">
+  <span>&#128293;</span>
+  <span>Complete all 5 days to earn +50 Pentecost Fire points!</span>
+  <span>&#128293;</span>
+</div>
+
+<div class="content">
+
+  <!-- DAY 1 -->
+  <div class="day-card" id="day-1">
+    <div class="day-header">
+      <div class="day-num">1</div>
+      <div class="day-info">
+        <p class="day-label">Day 1</p>
+        <p class="day-title">God Said It 800 Years Before It Happened</p>
+        <p class="day-read">Read: Joel 2:28&ndash;29 / Acts 2:14&ndash;16</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;And it shall come to pass afterward, that I will pour out my Spirit on all flesh; your sons and your daughters shall prophesy, your old men shall dream dreams, and your young men shall see visions.&rdquo;</p>
+        <p class="vb-ref">Joel 2:28, ESV</p>
+      </div>
+      <p class="body-text">Joel wrote this around 830 BC. Think about that. Eight hundred years before Pentecost. Before the upper room. Before the fire sat on anyone's head. For eight centuries, God's people read this promise and waited. Grandfather told grandson. Mother told daughter. One day God said. One day.</p>
+      <p class="body-text">And then Acts 2 happened. Peter stood up before a massive crowd and said: THIS IS THAT. What you have been waiting for is standing right in the middle of you. The Holy Spirit came. Right on time. God's timing is always exact.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word</p>
+        <p class="gb-word">ekcheō (&#7952;&#954;&#967;&#941;&#969;)</p>
+        <p class="gb-trans">to pour out</p>
+        <p class="gb-def">Not carefully. Not cautiously. The image is of a vessel tipped completely upside down until it is empty. Every last drop. Nothing held back. God did not give the Holy Spirit like a pharmacist measuring a dose. He poured. And here is what you need to understand: that pour has not stopped. Two thousand years later, the river is still flowing.</p>
+      </div>
+
+      <p class="body-text">Here is something most people miss. When the Spirit fell, 3,000 people were saved in one day (Acts 2:41). But go back to Exodus 32:28. When Moses came down from Sinai and found Israel worshipping an idol, 3,000 people died. Same number. Opposite result. The Law produced death. The Spirit produces life. That is the entire gospel in one comparison.</p>
+
+      <div class="callout">The question is not whether God is still pouring. The question is whether you are positioned to receive.</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>God kept His promise for 800 years before fulfilling it. What does that tell you about how God thinks about time?</li>
+          <li>Is there a promise God has given you, or your family, that you are still waiting to see? What does trusting God look like while you wait?</li>
+          <li>The Law killed 3,000. The Spirit saved 3,000. What is the difference between following rules and having the Spirit inside you?</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>God keeps every promise He makes. The pour has not stopped. I am positioned to receive everything God wants to give me.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" id="day-2">
+    <div class="day-header">
+      <div class="day-num">2</div>
+      <div class="day-info">
+        <p class="day-label">Day 2</p>
+        <p class="day-title">The Leavened Offering. God Receives the Broken Ones.</p>
+        <p class="day-read">Read: Acts 2:1&ndash;4 / Leviticus 23:17</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;And they were all filled with the Holy Spirit and began to speak in other tongues as the Spirit gave them utterance.&rdquo;</p>
+        <p class="vb-ref">Acts 2:4, ESV</p>
+      </div>
+      <p class="body-text">Here is a layer of Pentecost that almost nobody talks about. In Leviticus 23:17, God gave specific instructions for the Pentecost offering: two loaves of bread baked WITH leaven. With yeast. That is the only feast in the entire Jewish calendar where God required leaven in the offering.</p>
+      <p class="body-text">Why does that matter? In the Bible, leaven is almost always a symbol of sin. It spreads quietly through everything, corrupting as it goes. On every other major feast, God said: remove the leaven. Be pure. No sin here. But on Pentecost? God said: bring the leavened ones. Bake it in. Offer it to me.</p>
+
+      <div class="callout">God required the leavened loaves at Pentecost because He knew what kind of harvest was coming. Not the perfect ones. The sinners. The broken ones. He received them all.</div>
+
+      <p class="body-text">On the day the Spirit fell, three thousand people were swept into the kingdom. Every one of them leavened. Marked by sin and failure. And God said: bring them to Me. He accepted the leavened offering. That includes you. Whatever has made you feel disqualified? The fire does not check credentials.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word</p>
+        <p class="gb-word">pimplēmi (&#960;&#943;&#956;&#960;&#955;&#951;&#956;&#953;)</p>
+        <p class="gb-trans">to fill completely</p>
+        <p class="gb-def">Not partially. Not topped off. The image is a container fully submerged in water. Every interior space, every corner, every hidden part completely flooded. Nothing inside untouched. Acts 2:4 says they were ALL filled. Not the most spiritual ones. All. The leavened offering, completely received and completely filled.</p>
+      </div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Is there something in your life that has made you feel like you do not qualify for God's fullness? How does the leavened offering change that?</li>
+          <li>God did not clean up the offering before accepting it. He accepted it as it was and then filled it completely. What does that tell you about how God receives people?</li>
+          <li>The pour is for all flesh, regardless of age, status, or background. Who in your life needs to hear that the fire does not check credentials?</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>I am not disqualified. God accepts the leavened ones. He received me as I was and He fills me completely. Nothing inside me is untouched by the Holy Spirit.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" id="day-3">
+    <div class="day-header">
+      <div class="day-num">3</div>
+      <div class="day-info">
+        <p class="day-label">Day 3</p>
+        <p class="day-title">The Power Already Inside You</p>
+        <p class="day-read">Read: Acts 1:8 / Romans 8:11</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;But you will receive power when the Holy Spirit has come upon you, and you will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth.&rdquo;</p>
+        <p class="vb-ref">Acts 1:8, ESV</p>
+      </div>
+      <p class="body-text">The disciples are asking Jesus about strategy. When are you restoring the kingdom? What is the plan? And Jesus basically says: wrong question. Stop thinking about the schedule. Think about the source. Not a plan. A Person. Placed inside you.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word</p>
+        <p class="gb-word">dunamis (&#948;&#973;&#957;&#945;&#956;&#953;&#962;)</p>
+        <p class="gb-trans">power, ability, might</p>
+        <p class="gb-def">Dunamis is not the explosion. The explosion is the release. Dunamis is the stored, latent capacity already present. The charge already set, waiting to be needed. When Jesus says you will receive dunamis, He is not describing a feeling. He is describing a permanent, resident capacity inside you, available whether you feel it or not. This is where we get the word "dynamite." But dunamis is bigger than dynamite. It is the same power that raised Jesus from the dead.</p>
+      </div>
+
+      <p class="body-text">Think about a backup power generator. On a normal day you forget it is there. No noise. No sign it exists. But the moment the grid fails, it kicks on. Life continues. Because the power was there the whole time. That is the Holy Spirit in a believer. <strong>The pressure does not create the power. The pressure reveals what was already there.</strong></p>
+
+      <p class="body-text">Romans 8:11 in the Greek is a first-class conditional, which means it assumes the truth of what follows. It reads: SINCE the Spirit who raised Jesus dwells in you. Not "if." Since. Already done. Settled. Stop begging for what you already have.</p>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Can you think of a situation where you were still standing after something hard and the only explanation was not your own strength?</li>
+          <li>Romans 8:11 says the same power that raised Jesus from the dead is inside you right now. What changes about how you face this week if you actually believe that?</li>
+          <li>Where in your life are you trying to solve a power problem with a strategy solution?</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>I carry dunamis. Resurrection power. The same power that raised Jesus from the dead lives in me right now. The pressure does not create the power. It reveals what was already there.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" id="day-4">
+    <div class="day-header">
+      <div class="day-num">4</div>
+      <div class="day-info">
+        <p class="day-label">Day 4</p>
+        <p class="day-title">The One Called Alongside You</p>
+        <p class="day-read">Read: John 14:16&ndash;17</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;And I will ask the Father, and he will give you another Helper, to be with you forever, even the Spirit of truth, whom the world cannot receive, because it neither sees him nor knows him. You know him, for he dwells with you and will be in you.&rdquo;</p>
+        <p class="vb-ref">John 14:16&ndash;17, ESV</p>
+      </div>
+      <p class="body-text">The Holy Spirit is not a force. Not an atmosphere. Not just a feeling you get at church. He is a Person. And Jesus gave Him a specific title that tells you exactly what He does and why He came.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word</p>
+        <p class="gb-word">paraklētos (&#960;&#945;&#961;&#940;&#954;&#955;&#951;&#964;&#959;&#962;)</p>
+        <p class="gb-trans">one called alongside</p>
+        <p class="gb-def">From para (alongside) and klētos (called). In the Roman legal system, the paraklētos was the advocate. When you were accused and charges were stacked against you, the paraklētos came and stood beside you. He spoke on your behalf. He knew the law better than your accuser and used it for you, not against you. That is the Holy Spirit. When the enemy piles on accusations, the paraklētos steps in. He is not neutral. He is on your side.</p>
+      </div>
+
+      <p class="body-text">Jesus says the paraklētos will be with you forever. Not for a season. Not until you fail. Not until something better comes along. Forever. You are not alone in any room you walk into. You are not navigating any hard situation by yourself. The One called alongside is there. He is not tired of being there. He does not leave.</p>
+
+      <div class="callout">You are not alone. You are not alone in school. You are not alone at home when things are hard. You are not alone at 2 a.m. The paraklētos is called to stay. Forever.</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Where in your life have you been operating as though you are completely alone? What changes if the paraklētos is actually there in that situation?</li>
+          <li>The Holy Spirit is described as your advocate, someone who uses the truth for you, not against you. What accusations have you been believing about yourself that the Spirit would push back against?</li>
+          <li>Jesus says the Helper will be with you forever. How does forever change the way you relate to the Spirit?</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>I am not alone. The paraklētos stands beside me in every hard situation. He is not going to miss what I am going through. He does not leave. The One called alongside is here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card" id="day-5">
+    <div class="day-header">
+      <div class="day-num">5</div>
+      <div class="day-info">
+        <p class="day-label">Day 5</p>
+        <p class="day-title">Pentecost Changed the Address. The Temple Is You.</p>
+        <p class="day-read">Read: 1 Corinthians 3:16 / Acts 2:4</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;Do you not know that you are God's temple and that God's Spirit dwells in you?&rdquo;</p>
+        <p class="vb-ref">1 Corinthians 3:16, ESV</p>
+      </div>
+      <p class="body-text">Paul is writing to people who have already heard the gospel, been baptized, and are going to church. And he still has to ask them: do you not know? That tells you something important. You can be genuinely saved and still not fully understand what happened to you. Let's trace it.</p>
+      <p class="body-text">In the wilderness, God's glory filled the Tabernacle (Exodus 40:34). The average Israelite could not get anywhere near where God lived. Then Solomon built the Temple. The glory came so powerfully that the priests could not even stand to do their job (1 Kings 8:11). And there was still a veil. A curtain that said: this far and no further. The Holy of Holies. Off limits to almost everyone.</p>
+      <p class="body-text">Then Jesus died. Matthew 27:51. The veil tore from top to bottom. God tore it, not people. And fifty days later, Pentecost did not just empower a group of disciples. Pentecost changed the address. God stopped living in buildings. He moved into people.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word</p>
+        <p class="gb-word">ekklēsia (&#7952;&#954;&#954;&#955;&#951;&#963;&#943;&#945;)</p>
+        <p class="gb-trans">the called-out assembly, the Church</p>
+        <p class="gb-def">Called out of darkness, out of the world, out of bondage. Called out and called together. The Church was not born in a committee meeting or a building program. She was born in fire, in prayer, in unity, in power. And what the Church did, it turned the Roman Empire upside down. Not with an army. Not with political power. With people filled with the Holy Spirit who refused to stop talking about Jesus.</p>
+      </div>
+
+      <p class="body-text">You do not go to church. You ARE the Church. The temple is not behind a curtain anymore. The temple is you. Everywhere you walk this week, the address of God goes with you. Your school. Your neighborhood. The gas station. The place where your friends are. The house where the fire lives is you. Go let it show.</p>
+
+      <div class="callout">Pentecost changed the address. God stopped living in buildings and moved into people. The temple is not behind a curtain anymore. The temple is you.</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Paul had to ask believers: "Do you not know you are God's temple?" Are you actually living like the address has changed? What would look different this week if you did?</li>
+          <li>The veil tore from top to bottom, meaning God tore it, not people. What does that tell you about who is responsible for your access to God?</li>
+          <li>Where specifically is God sending you this week with the fire inside you? Name one place and one person.</li>
+        </ol>
+      </div>
+
+      <div class="declaration">
+        <p class="decl-label">&#9889; Your Declaration</p>
+        <p>I am filled with the Holy Spirit of the Living God. The same power that raised Jesus from the dead lives in me. I am not powerless. I carry dunamis. I am not alone. The paraklētos stands beside me. Pentecost changed the address and the address is me. I am the Church. The fire fell then. The fire is falling now. And the fire lives in me.</p>
+        <p class="final-sig">I walk with victory, not to it, in Jesus' name. Amen. &#9889;</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="logo">&#9889; Kids Gathering Zone</div>
+  <p>The Gathering CTX &middot; Cleburne, TX &middot; gatheringctx.org</p>
+  <p>Sundays at 5:00 PM &middot; Cleburne Conference Center</p>
+</footer>
+
+</body>
+</html>
