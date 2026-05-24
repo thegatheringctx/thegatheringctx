@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kids Games Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--dark:#0f0a2e;--card:#1a1445;--gold:#f5c842;--teal:#3ecfcf;--coral:#ff6b6b;--green:#4ecb71;--purple:#a78bfa}
+body{font-family:'Nunito',sans-serif;background:var(--dark);color:#fff;min-height:100vh;padding:1rem}
+.demo-note{background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.4);border-radius:12px;padding:.75rem 1rem;font-size:.8rem;color:#ff8a8a;margin-bottom:1rem;text-align:center;font-weight:700}
+h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.3rem}
+.tab-row{display:flex;gap:.5rem;margin-bottom:1.25rem}
+.tab{flex:1;padding:.6rem;border:none;border-radius:12px;font-family:'Fredoka One',cursive;font-size:.9rem;cursor:pointer;transition:.15s}
+.tab.active{background:var(--gold);color:var(--dark)}
+.tab:not(.active){background:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
+
+/* ── Trivia ─────────────────────────────────────── */
+.trivia-header{text-align:center;margin-bottom:1.25rem}
+.trivia-score{font-family:'Fredoka One',cursive;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.3rem}
+.trivia-score span{color:var(--gold)}
+.q-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.1rem;margin-bottom:1rem}
+.q-num{font-size:.65rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem}
+.q-text{font-size:.95rem;line-height:1.55;font-weight:700;margin-bottom:.9rem}
+.q-ref{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.9rem}
+.choices{display:flex;flex-direction:column;gap:.45rem}
+.choice{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:.65rem .9rem;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;text-align:left;color:#fff;transition:.15s}
+.choice:hover{background:rgba(255,255,255,.14)}
+.choice.correct{background:rgba(78,203,113,.25);border-color:#4ecb71;color:#6fdc9a}
+.choice.wrong{background:rgba(255,107,107,.2);border-color:#ff6b6b;color:#ff8a8a}
+.choice.disabled{cursor:default}
+.feedback{display:none;background:rgba(255,255,255,.05);border-radius:10px;padding:.7rem .9rem;font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.75);margin-top:.5rem}
+.feedback.show{display:block}
+.feedback strong{color:var(--gold)}
+.next-btn{width:100%;margin-top:.75rem;padding:.75rem;border:none;border-radius:12px;background:var(--gold);color:var(--dark);font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;display:none}
+.next-btn.show{display:block}
+.trivia-done{text-align:center;padding:1.5rem 0;display:none}
+.trivia-done.show{display:block}
+.done-score{font-family:'Fredoka One',cursive;font-size:2.5rem;color:var(--gold);margin-bottom:.3rem}
+.done-label{color:rgba(255,255,255,.5);font-size:.82rem;margin-bottom:1rem}
+.done-msg{font-size:.95rem;font-weight:700;margin-bottom:1.25rem}
+.replay-btn{padding:.65rem 1.4rem;border:none;border-radius:99px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;font-family:'Fredoka One',cursive;font-size:.9rem;cursor:pointer}
+
+/* ── Scramble ────────────────────────────────────── */
+.scramble-word{text-align:center;margin:1rem 0}
+.scrambled{font-family:'Fredoka One',cursive;font-size:2.2rem;color:var(--purple);letter-spacing:.25em;margin-bottom:.5rem}
+.scramble-hint{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:1rem}
+.letter-row{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.letter-tile{width:44px;height:52px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;color:rgba(255,255,255,.4);transition:.15s;user-select:none}
+.letter-tile.filled{background:rgba(167,139,250,.2);border-color:var(--purple);color:#fff}
+.guess-row{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.guess-slot{width:44px;height:52px;background:rgba(255,255,255,.05);border:2px dashed rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;cursor:pointer;transition:.15s;user-select:none}
+.guess-slot.has-letter{background:rgba(167,139,250,.25);border:2px solid var(--purple)}
+.guess-slot.correct-slot{background:rgba(78,203,113,.3);border-color:#4ecb71;color:#6fdc9a}
+.scramble-actions{display:flex;gap:.5rem;justify-content:center;margin-bottom:.75rem}
+.sc-btn{padding:.5rem 1.1rem;border:none;border-radius:99px;font-family:'Fredoka One',cursive;font-size:.85rem;cursor:pointer}
+.sc-btn.check{background:var(--gold);color:var(--dark)}
+.sc-btn.clear{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff}
+.sc-btn.skip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:.75rem}
+.sc-feedback{text-align:center;min-height:1.5rem;font-size:.88rem;font-weight:700;margin-bottom:.5rem}
+.sc-pts{color:var(--gold)}
+.sc-progress{display:flex;gap:.3rem;justify-content:center;margin-bottom:1rem}
+.sc-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15)}
+.sc-dot.done{background:var(--green)}
+.sc-dot.current{background:var(--purple)}
+</style>
+</head>
+<body>
+<div class="demo-note">&#128269; Preview — this is exactly how it will look in the Kids Zone app</div>
+
+<div class="tab-row">
+  <button class="tab active" onclick="showTab('trivia')">&#9889; Bible Quiz</button>
+  <button class="tab" onclick="showTab('scramble')">&#128253; Word Scramble</button>
+</div>
+
+<!-- TRIVIA TAB -->
+<div id="tab-trivia">
+  <div class="trivia-header">
+    <div class="trivia-score">Question <span id="q-counter">1</span> of <span id="q-total">8</span> &nbsp;·&nbsp; <span id="q-pts" style="color:var(--gold)">0</span> pts</div>
+  </div>
+  <div id="q-card" class="q-card"></div>
+  <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question &#8594;</button>
+  <div class="trivia-done" id="trivia-done">
+    <div style="font-size:3rem;margin-bottom:.5rem">&#127881;</div>
+    <div class="done-score" id="done-score"></div>
+    <div class="done-label">out of <span id="done-total"></span> pts possible</div>
+    <div class="done-msg" id="done-msg"></div>
+    <button class="replay-btn" onclick="startTrivia()">Play Again &#8635;</button>
+  </div>
+</div>
+
+<!-- SCRAMBLE TAB -->
+<div id="tab-scramble" style="display:none">
+  <div class="sc-progress" id="sc-progress"></div>
+  <div class="scramble-word">
+    <div class="scrambled" id="sc-scrambled"></div>
+    <div class="scramble-hint" id="sc-hint"></div>
+  </div>
+  <div class="letter-row" id="sc-letters"></div>
+  <div class="guess-row" id="sc-guess"></div>
+  <div class="scramble-actions">
+    <button class="sc-btn check" onclick="checkScramble()">Check &#10003;</button>
+    <button class="sc-btn clear" onclick="clearGuess()">Clear</button>
+    <button class="sc-btn skip" onclick="skipWord()">Skip</button>
+  </div>
+  <div class="sc-feedback" id="sc-feedback"></div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {q:"What sound came from heaven on the day of Pentecost?",ref:"Acts 2:2",choices:["Mighty rushing wind","Thunder and lightning","A trumpet blast","A choir of angels"],correct:0,explain:"A sound like a mighty rushing wind filled the entire house where they were sitting."},
+  {q:"What appeared and rested on each person on Pentecost?",ref:"Acts 2:3",choices:["Doves","Tongues of fire","White robes","Bright clouds"],correct:1,explain:"Divided tongues of fire appeared and rested on each one of them."},
+  {q:"The prophet Joel predicted the Holy Spirit being poured out. About how many years before Pentecost did he write it?",ref:"Joel 2:28",choices:["100 years","500 years","800 years","2,000 years"],correct:2,explain:"Joel wrote around 830 BC — about 800 years before Pentecost happened!"},
+  {q:"How many people were saved on the day of Pentecost?",ref:"Acts 2:41",choices:["120","500","1,000","3,000"],correct:3,explain:"About 3,000 people were added that day — the same number that died at Sinai when the Law came. The Spirit gives life!"},
+  {q:"What title did Jesus give the Holy Spirit in John 14:16?",ref:"John 14:16",choices:["The Comforter","The Helper / Paraclete","The Fire","The Witness"],correct:1,explain:"Jesus called Him the Parakletos — the One called alongside you. Not from a distance. Right beside you."},
+  {q:"Paul says in 1 Corinthians 3:16 that you are God's what?",ref:"1 Cor 3:16",choices:["Servant","Student","Temple","Friend"],correct:2,explain:"You are God's temple — the Spirit of God lives in you. The address changed at Pentecost!"},
+  {q:"What did Jesus tell the disciples to do before the Holy Spirit came?",ref:"Acts 1:4",choices:["Pray and fast for 40 days","Wait in Jerusalem","Go to every nation","Baptize everyone"],correct:1,explain:"He told them to wait in Jerusalem for the promise of the Father — the Holy Spirit."},
+  {q:"What does the Greek word 'dunamis' (Acts 1:8) mean?",ref:"Acts 1:8",choices:["Wisdom","Love","Power","Peace"],correct:2,explain:"Dunamis means power — the root of our word 'dynamite.' The Spirit brings explosive kingdom power!"}
+];
+
+const WORDS = [
+  {word:"PENTECOST",scrambled:"CPNTTSEOOE",hint:"The day the Spirit came 🔥"},
+  {word:"HOLY SPIRIT",scrambled:"IHLSOYRTIP",hint:"The Helper Jesus promised 🕊"},
+  {word:"PARACLETE",scrambled:"AALEPCRET",hint:"Greek: called alongside you"},
+  {word:"TEMPLE",scrambled:"MELTPE",hint:"What YOU are (1 Cor 3:16)"},
+  {word:"DUNAMIS",scrambled:"SIADUNM",hint:"Greek word for power ⚡"},
+  {word:"JOEL",scrambled:"EJOL",hint:"He prophesied 800 years early"},
+  {word:"JERUSALEM",scrambled:"AAJEERLSMU",hint:"Where they waited for the Spirit"},
+  {word:"FIRE",scrambled:"RIFE",hint:"Appeared as tongues of ___"}
+];
+
+// ── TRIVIA ─────────────────────────────────────────
+let qIdx=0, score=0, answered=false;
+
+function startTrivia(){
+  qIdx=0;score=0;answered=false;
+  document.getElementById('trivia-done').classList.remove('show');
+  document.getElementById('q-card').style.display='';
+  document.getElementById('next-btn').classList.remove('show');
+  document.getElementById('q-total').textContent=QUESTIONS.length;
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered=false;
+  const q=QUESTIONS[qIdx];
+  document.getElementById('q-counter').textContent=qIdx+1;
+  document.getElementById('q-pts').textContent=score;
+  document.getElementById('next-btn').classList.remove('show');
+  document.getElementById('q-card').innerHTML=
+    '<div class="q-num">Question '+(qIdx+1)+' of '+QUESTIONS.length+'</div>'+
+    '<div class="q-text">'+q.q+'</div>'+
+    '<div class="q-ref">'+q.ref+'</div>'+
+    '<div class="choices">'+
+    q.choices.map((c,i)=>'<button class="choice" data-idx="'+i+'" onclick="answer('+i+')">'+c+'</button>').join('')+
+    '</div>'+
+    '<div class="feedback" id="feedback">'+q.explain+'</div>';
+}
+
+function answer(idx){
+  if(answered)return;answered=true;
+  const q=QUESTIONS[qIdx];
+  const btns=document.querySelectorAll('.choice');
+  btns.forEach(b=>b.classList.add('disabled'));
+  btns[idx].classList.add(idx===q.correct?'correct':'wrong');
+  btns[q.correct].classList.add('correct');
+  if(idx===q.correct){score+=10;}
+  document.getElementById('feedback').classList.add('show');
+  document.getElementById('q-pts').textContent=score;
+  document.getElementById('next-btn').classList.add('show');
+  document.getElementById('next-btn').textContent=qIdx<QUESTIONS.length-1?'Next Question ➔':'See My Score!';
+}
+
+function nextQuestion(){
+  qIdx++;
+  if(qIdx>=QUESTIONS.length){
+    document.getElementById('q-card').style.display='none';
+    document.getElementById('next-btn').classList.remove('show');
+    const pct=score/(QUESTIONS.length*10)*100;
+    document.getElementById('done-score').textContent=score;
+    document.getElementById('done-total').textContent=QUESTIONS.length*10;
+    document.getElementById('done-msg').textContent=
+      pct===100?'🏆 Perfect score! You are a Pentecost pro!':
+      pct>=80?'🔥 On fire! You know your stuff!':
+      pct>=60?'⚡ Good work — keep reading your devos!':
+      '📖 Keep digging — God\'s Word has treasure!';
+    document.getElementById('trivia-done').classList.add('show');
+  } else { renderQuestion(); }
+}
+
+// ── SCRAMBLE ───────────────────────────────────────
+let scIdx=0,guessLetters=[],sourceTiles=[],scDone=[];
+
+function startScramble(){
+  scIdx=0;guessLetters=[];sourceTiles=[];scDone=[];
+  renderScramble();
+}
+
+function renderScramble(){
+  const w=WORDS[scIdx];
+  const cleanWord=w.word.replace(/\s/g,'');
+  guessLetters=new Array(cleanWord.length).fill(null);
+  // Spread scrambled letters
+  const letters=w.scrambled.replace(/\s/g,'').split('');
+  sourceTiles=letters.map(l=>({l,used:false}));
+
+  // Progress dots
+  const prog=document.getElementById('sc-progress');
+  prog.innerHTML=WORDS.map((_,i)=>
+    '<div class="sc-dot'+(i<scDone.length?' done':i===scIdx?' current':'')+'"></div>'
+  ).join('');
+
+  document.getElementById('sc-scrambled').textContent=w.scrambled;
+  document.getElementById('sc-hint').textContent=w.hint;
+  document.getElementById('sc-feedback').textContent='';
+  renderTiles();
+}
+
+function renderTiles(){
+  const w=WORDS[scIdx];
+  const cleanWord=w.word.replace(/\s/g,'');
+  // Source letters
+  const lRow=document.getElementById('sc-letters');
+  lRow.innerHTML=sourceTiles.map((t,i)=>
+    '<div class="letter-tile'+(t.used?' filled':'')+'" onclick="useTile('+i+')" style="'+(t.used?'opacity:.3;cursor:default':'')+'">'+(t.used?'':t.l)+'</div>'
+  ).join('');
+  // Guess slots
+  const gRow=document.getElementById('sc-guess');
+  gRow.innerHTML=guessLetters.map((l,i)=>
+    '<div class="guess-slot'+(l?' has-letter':'')+'" onclick="removeTile('+i+')">'+(l||'')+'</div>'
+  ).join('');
+}
+
+function useTile(tIdx){
+  if(sourceTiles[tIdx].used)return;
+  const slot=guessLetters.findIndex(l=>!l);
+  if(slot===-1)return;
+  guessLetters[slot]=sourceTiles[tIdx].l;
+  sourceTiles[tIdx].used=true;
+  renderTiles();
+}
+
+function removeTile(slot){
+  if(!guessLetters[slot])return;
+  const letter=guessLetters[slot];
+  const srcIdx=sourceTiles.findIndex(t=>t.l===letter&&t.used);
+  if(srcIdx>-1)sourceTiles[srcIdx].used=false;
+  guessLetters[slot]=null;
+  renderTiles();
+}
+
+function clearGuess(){
+  guessLetters=guessLetters.map((_,i)=>{return null;});
+  sourceTiles=sourceTiles.map(t=>({...t,used:false}));
+  renderTiles();
+  document.getElementById('sc-feedback').textContent='';
+}
+
+function checkScramble(){
+  const w=WORDS[scIdx];
+  const cleanWord=w.word.replace(/\s/g,'');
+  const guess=guessLetters.join('');
+  const fb=document.getElementById('sc-feedback');
+  if(guess.length<cleanWord.length){fb.innerHTML='<span style="color:rgba(255,255,255,.4)">Fill in all the letters first!</span>';return;}
+  if(guess===cleanWord){
+    fb.innerHTML='<span class="sc-pts">+10 pts!</span> &#127881; That\'s right!';
+    scDone.push(scIdx);
+    setTimeout(advanceScramble,1200);
+  } else {
+    fb.innerHTML='<span style="color:#ff8a8a">Not quite — try again!</span>';
+  }
+}
+
+function skipWord(){scDone.push(null);advanceScramble();}
+
+function advanceScramble(){
+  scIdx++;
+  if(scIdx>=WORDS.length){
+    const got=scDone.filter(x=>x!==null).length;
+    document.getElementById('sc-feedback').innerHTML=
+      '<div style="text-align:center;padding:.5rem 0">&#127881; <strong style="color:var(--gold)">'+got+'/'+WORDS.length+'</strong> words! +'+(got*10)+' pts!</div>';
+    setTimeout(startScramble,2500);
+  } else { renderScramble(); }
+}
+
+// ── TABS ───────────────────────────────────────────
+function showTab(id){
+  document.getElementById('tab-trivia').style.display=id==='trivia'?'':'none';
+  document.getElementById('tab-scramble').style.display=id==='scramble'?'':'none';
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===(id==='trivia'?0:1)));
+}
+
+startTrivia();
+startScramble();
+</script>
+</body>
+</html>
