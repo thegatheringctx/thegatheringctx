@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Leadership | The Gathering CTX | Cleburne, TX</title>
-  <meta name="description" content="Meet the leadership of The Gathering CTX in Cleburne, TX. Pastor Billy Philips leads a Word-anchored, Spirit-dependent church making disciples who make disciples.">
+  <meta name="description" content="Leadership at The Gathering CTX is not a title. It is what happens when ordinary people say yes to Jesus and walk in what He has already won.">
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://gatheringctx.org/leadership"/>
   <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
@@ -13,131 +13,300 @@
     :root{--black:#0a0a0a;--white:#fff;--gold:#c9a84c;--muted:rgba(255,255,255,.55);--border:rgba(255,255,255,.1)}
     body{background:var(--black);color:var(--white);font-family:'Georgia',serif;line-height:1.6}
     a{color:inherit;text-decoration:none}
+
+    /* NAV */
     .site-nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,10,.96);backdrop-filter:blur(8px);z-index:100}
     .nav-logo{display:flex;flex-direction:column;line-height:1}
     .logo-the{font-size:.5rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:system-ui,sans-serif}
     .logo-gathering{font-size:.9rem;letter-spacing:.06em;color:#fff;font-family:system-ui,sans-serif;font-weight:300}
     .back-home{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:system-ui,sans-serif;transition:color .2s}
     .back-home:hover{color:#fff}
-    .hero{padding:5rem 2rem 3rem;max-width:900px;margin:0 auto}
-    .eyebrow{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-family:system-ui,sans-serif}
-    .hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:400;line-height:1.1;margin-bottom:1.5rem}
-    .hero h1 em{color:var(--gold);font-style:italic}
-    .hero-sub{font-size:1.1rem;color:var(--muted);max-width:600px;line-height:1.7;font-family:system-ui,sans-serif}
-    .pastor-section{max-width:900px;margin:0 auto;padding:3rem 2rem 4rem}
-    .pastor-card{display:grid;grid-template-columns:280px 1fr;gap:4rem;align-items:start}
-    @media(max-width:700px){.pastor-card{grid-template-columns:1fr}}
-    .pastor-photo{width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,#1a1a2e,#16213e);border-radius:4px;display:flex;align-items:center;justify-content:center}
-    .pastor-photo-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:1rem;color:rgba(255,255,255,.3);text-align:center;padding:2rem}
-    .pastor-photo-placeholder span{font-size:3rem}
-    .pastor-photo-placeholder p{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-family:system-ui,sans-serif}
-    .pastor-info{padding-top:.5rem}
-    .pastor-name{font-size:2.25rem;font-weight:400;margin-bottom:.25rem}
-    .pastor-title{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;font-family:system-ui,sans-serif}
-    .pastor-bio p{font-size:1rem;color:rgba(255,255,255,.8);margin-bottom:1.25rem;line-height:1.8;font-family:system-ui,sans-serif}
-    .pastor-bio p:last-child{margin-bottom:0}
-    .pastor-quote{border-left:2px solid var(--gold);padding-left:1.5rem;margin:2rem 0;font-size:1.15rem;font-style:italic;color:rgba(255,255,255,.7);line-height:1.6}
-    .values-section{background:#0f0f0f;padding:4rem 2rem;margin-top:2rem}
-    .values-inner{max-width:900px;margin:0 auto}
-    .values-section h2{font-size:1.75rem;font-weight:400;margin-bottom:.5rem}
-    .values-section .sub{font-size:.95rem;color:var(--muted);margin-bottom:3rem;font-family:system-ui,sans-serif}
-    .values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
-    .value-card{border:1px solid var(--border);border-radius:4px;padding:1.75rem}
-    .value-num{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;font-family:system-ui,sans-serif}
-    .value-title{font-size:1.1rem;margin-bottom:.75rem}
-    .value-text{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;font-family:system-ui,sans-serif}
-    .cta{max-width:900px;margin:4rem auto;padding:0 2rem 5rem;text-align:center}
-    .cta h2{font-size:2rem;font-weight:400;margin-bottom:1rem}
+
+    /* HERO */
+    .hero-wrap{position:relative;height:580px;overflow:hidden}
+    .hero-img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:brightness(.55)}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.1) 0%,rgba(10,10,10,.75) 100%)}
+    .hero-text{position:absolute;bottom:0;left:0;right:0;padding:3.5rem 2rem;max-width:860px;margin:0 auto}
+    .eyebrow{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-family:system-ui,sans-serif;display:block}
+    .hero-text h1{font-size:clamp(2.25rem,5.5vw,4rem);font-weight:400;line-height:1.1;margin-bottom:1.25rem}
+    .hero-text h1 em{color:var(--gold);font-style:italic}
+    .hero-text p{font-size:1.05rem;color:rgba(255,255,255,.75);max-width:560px;line-height:1.75;font-family:system-ui,sans-serif}
+    @media(max-width:700px){.hero-wrap{height:420px}.hero-text h1{font-size:2rem}}
+
+    /* DECLARATION */
+    .declaration{max-width:800px;margin:0 auto;padding:5rem 2rem;text-align:center}
+    .declaration-scripture{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;font-family:system-ui,sans-serif}
+    .declaration blockquote{font-size:clamp(1.25rem,2.5vw,1.7rem);font-weight:400;line-height:1.5;font-style:italic;color:rgba(255,255,255,.9);margin-bottom:1rem}
+    .declaration-ref{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:system-ui,sans-serif}
+
+    /* BODY TEXT SECTIONS */
+    .content-section{max-width:780px;margin:0 auto;padding:0 2rem 5rem}
+    .content-section h2{font-size:clamp(1.6rem,3vw,2.25rem);font-weight:400;margin-bottom:1.25rem;line-height:1.2}
+    .content-section h2 em{color:var(--gold);font-style:italic}
+    .content-section p{font-size:1rem;color:rgba(255,255,255,.75);line-height:1.85;margin-bottom:1.25rem;font-family:system-ui,sans-serif}
+    .content-section p:last-child{margin-bottom:0}
+    .section-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-family:system-ui,sans-serif;display:block}
+
+    /* PHOTO BAND */
+    .photo-band{display:grid;grid-template-columns:1fr 1fr 1fr;height:360px;gap:3px;margin:0 0 5rem}
+    .photo-band-wide{display:grid;grid-template-columns:2fr 1fr;height:420px;gap:3px;margin:0 0 5rem}
+    .photo-tile{overflow:hidden}
+    .photo-tile img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85);transition:filter .4s}
+    .photo-tile img:hover{filter:brightness(1)}
+    @media(max-width:700px){
+      .photo-band{grid-template-columns:1fr;height:auto}
+      .photo-band .photo-tile{height:260px}
+      .photo-band-wide{grid-template-columns:1fr;height:auto}
+      .photo-band-wide .photo-tile{height:280px}
+    }
+
+    /* DIVIDER */
+    .divider{border:none;border-top:1px solid var(--border);max-width:780px;margin:0 auto 5rem}
+
+    /* CALLED CARDS */
+    .called-section{background:#0f0f0f;padding:5rem 2rem}
+    .called-inner{max-width:900px;margin:0 auto}
+    .called-section h2{font-size:clamp(1.6rem,3vw,2.1rem);font-weight:400;margin-bottom:.5rem}
+    .called-section .sub{font-size:.95rem;color:var(--muted);margin-bottom:3rem;font-family:system-ui,sans-serif;line-height:1.7}
+    .called-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+    .called-card{border:1px solid var(--border);border-radius:4px;padding:1.75rem}
+    .called-card .num{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;font-family:system-ui,sans-serif;display:block}
+    .called-card h3{font-size:1.05rem;margin-bottom:.75rem;font-weight:400}
+    .called-card p{font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.75;font-family:system-ui,sans-serif}
+
+    /* PASTORAL NOTE */
+    .pastoral-note{max-width:780px;margin:0 auto;padding:5rem 2rem;border-top:1px solid var(--border)}
+    .pastoral-note p{font-size:.9rem;color:rgba(255,255,255,.45);line-height:1.85;font-family:system-ui,sans-serif}
+    .pastoral-note p strong{color:rgba(255,255,255,.65);font-weight:400}
+
+    /* CTA */
+    .cta{max-width:780px;margin:0 auto;padding:1rem 2rem 5rem;text-align:center}
+    .cta h2{font-size:1.9rem;font-weight:400;margin-bottom:1rem}
     .cta p{color:var(--muted);margin-bottom:2rem;font-family:system-ui,sans-serif}
     .btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
     .btn-primary{display:inline-block;padding:.85rem 2rem;border:1px solid #fff;font-family:system-ui,sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;transition:all .2s}
     .btn-primary:hover{background:#fff;color:#000}
     .btn-secondary{display:inline-block;padding:.85rem 2rem;border:1px solid rgba(255,255,255,.25);font-family:system-ui,sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.65);transition:all .2s}
     .btn-secondary:hover{border-color:#fff;color:#fff}
-    footer{background:#050505;border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:system-ui,sans-serif;font-size:.75rem;color:rgba(255,255,255,.35)}
-    footer a{color:rgba(255,255,255,.5)}
-    footer a:hover{color:#fff}
+
+    /* FOOTER */
+    .site-footer{background:#080808;border-top:1px solid #1a1a1a;padding:72px 48px 32px;color:#fff;font-family:sans-serif}
+    .footer-inner{display:grid;grid-template-columns:1.8fr 1.2fr 1.2fr 1fr;gap:48px;max-width:1200px;margin:0 auto 48px}
+    .footer-logo{text-decoration:none;color:#fff;display:block;margin-bottom:16px}
+    .footer-the{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;display:block}
+    .footer-gathering{font-size:1.1rem;letter-spacing:0.2em;text-transform:uppercase}
+    .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:20px;font-family:Georgia,serif;font-style:italic}
+    .footer-social{display:flex;gap:16px}
+    .footer-social a{color:rgba(255,255,255,0.4);transition:color 0.2s;text-decoration:none}
+    .footer-social a:hover{color:#b8935a}
+    .footer-info-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:16px;display:block}
+    .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.8;display:block}
+    .footer-link{text-decoration:none;transition:color 0.2s}
+    .footer-link:hover{color:#fff}
+    .footer-map-link{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#b8935a;text-decoration:none;display:inline-block;margin-top:12px}
+    .footer-nav{display:flex;flex-direction:column;gap:2px}
+    .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.4);text-decoration:none;line-height:1.9;transition:color 0.2s}
+    .footer-nav-link:hover{color:#fff}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding-top:32px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+    .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.2)}
+    .footer-bottom-link{color:rgba(255,255,255,0.35);text-decoration:none}
+    @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:40px}}
+    @media(max-width:600px){.footer-inner{grid-template-columns:1fr}.site-footer{padding:48px 24px 24px}}
   
-  .site-footer{background:#080808;border-top:1px solid #1a1a1a;padding:72px 48px 32px;color:#fff;font-family:sans-serif;}
-  .footer-inner{display:grid;grid-template-columns:1.8fr 1.2fr 1.2fr 1fr;gap:48px;max-width:1200px;margin:0 auto 48px;}
-  .footer-logo{text-decoration:none;color:#fff;display:block;margin-bottom:16px;}
-  .footer-the{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;display:block;}
-  .footer-gathering{font-size:1.1rem;letter-spacing:0.2em;text-transform:uppercase;}
-  .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:20px;font-family:Georgia,serif;font-style:italic;}
-  .footer-social{display:flex;gap:16px;}
-  .footer-social a{color:rgba(255,255,255,0.4);transition:color 0.2s;text-decoration:none;}
-  .footer-social a:hover{color:#b8935a;}
-  .footer-info-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:16px;display:block;}
-  .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.8;display:block;}
-  .footer-link{text-decoration:none;transition:color 0.2s;}
-  .footer-link:hover{color:#fff;}
-  .footer-map-link{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#b8935a;text-decoration:none;display:inline-block;margin-top:12px;}
-  .footer-nav{display:flex;flex-direction:column;gap:2px;}
-  .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.4);text-decoration:none;line-height:1.9;transition:color 0.2s;}
-  .footer-nav-link:hover{color:#fff;}
-  .footer-bottom{max-width:1200px;margin:0 auto;padding-top:32px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
-  .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.2);}
-  .footer-bottom-link{color:rgba(255,255,255,0.35);text-decoration:none;}
-  @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:40px;}}
-  @media(max-width:600px){.footer-inner{grid-template-columns:1fr;}.site-footer{padding:48px 24px 24px;}}
-  
-  .page-photo-hero{width:100%;height:480px;background-size:cover;background-position:center;position:relative;margin-top:72px;}
-  .page-photo-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.1),rgba(0,0,0,0.5));}
-  .page-photo-duo{display:grid;grid-template-columns:1fr 1fr;height:400px;gap:2px;}
-  .page-photo-duo div{background-size:cover;background-position:center;}
-  .page-photo-inline{width:100%;height:360px;background-size:cover;background-position:center;margin:48px 0;}
-  @media(max-width:700px){.page-photo-hero{height:300px;}.page-photo-duo{grid-template-columns:1fr;height:auto;}.page-photo-duo div{height:260px;}.page-photo-inline{height:240px;}}
+    /* TEACHING PASTORS */
+    .pastors-section{max-width:900px;margin:0 auto;padding:4rem 2rem 2rem}
+    .pastors-section .section-label{display:block;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-family:system-ui,sans-serif}
+    .pastors-section h2{font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:400;margin-bottom:.5rem}
+    .pastors-section .sub{font-size:.95rem;color:var(--muted);margin-bottom:2.5rem;font-family:system-ui,sans-serif;line-height:1.7}
+    .pastor-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+    @media(max-width:600px){.pastor-row{grid-template-columns:1fr}}
+    .pastor-card-mini{border:1px solid var(--border);border-radius:4px;padding:1.75rem}
+    .pastor-card-mini h3{font-size:1rem;font-weight:400;margin-bottom:.25rem}
+    .pastor-card-mini .ptitle{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-family:system-ui,sans-serif;display:block}
+    .pastor-card-mini p{font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.75;font-family:system-ui,sans-serif}
+
+    /* ELDERS */
+    .elders-section{max-width:900px;margin:0 auto;padding:1rem 2rem 4rem}
+    .elders-section h3{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem;font-family:system-ui,sans-serif;font-weight:400}
+    .elders-list{display:flex;flex-wrap:wrap;gap:.75rem}
+    .elder-chip{border:1px solid var(--border);border-radius:100px;padding:.4rem 1.1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:rgba(255,255,255,.55)}
+    .elder-note{font-size:.8rem;color:rgba(255,255,255,.3);font-family:system-ui,sans-serif;margin-top:1rem;line-height:1.6}
+
+    /* TESTIMONY */
+    .testimony-section{background:#0f0f0f;padding:5rem 2rem}
+    .testimony-inner{max-width:700px;margin:0 auto;text-align:center}
+    .testimony-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;font-family:system-ui,sans-serif;display:block}
+    .testimony-quote{font-size:clamp(1rem,2vw,1.2rem);font-style:italic;color:rgba(255,255,255,.8);line-height:1.9;margin-bottom:2rem;font-family:Georgia,serif}
+    .testimony-attr{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);font-family:system-ui,sans-serif}
+    .testimony-divider{width:32px;height:1px;background:var(--gold);margin:0 auto 2rem}
+
+    /* GOVERNANCE LAYERS */
+    .gov-layer{border-top:1px solid var(--border);padding:2rem 0;display:grid;grid-template-columns:200px 1fr;gap:2.5rem;align-items:start}
+    @media(max-width:650px){.gov-layer{grid-template-columns:1fr;gap:1rem}}
+    .gov-layer-label{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-family:system-ui,sans-serif;padding-top:.2rem;line-height:1.5}
+    .gov-layer-body p{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.85;font-family:system-ui,sans-serif;margin-bottom:1rem}
+    .gov-layer-body p:last-child{margin-bottom:0}
+    .gov-anchor{font-size:.75rem !important;color:rgba(255,255,255,.3) !important;font-style:italic}
 </style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":["Church","LocalBusiness"],"@id":"https://gatheringctx.org/#church","name":"The Gathering CTX","url":"https://gatheringctx.org","image":"https://gatheringctx.org/hero-worship.jpg","description":"A Spirit-led church in Cleburne, TX making disciples who are confident and empowered to make disciples.","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"},"telephone":"+16822865640","email":"info@gatheringctx.org","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"16:30","closes":"19:00"},"hasMap":"https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX+76033","sameAs":["https://www.facebook.com/thegatheringctx","https://www.instagram.com/thegatheringctx","https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293"]},{"@type":"WebSite","@id":"https://gatheringctx.org/#website","url":"https://gatheringctx.org","name":"The Gathering CTX"}]}
-</script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[{"@type":["Church","LocalBusiness"],"@id":"https://gatheringctx.org/#church","name":"The Gathering CTX","url":"https://gatheringctx.org","description":"A Spirit-led church in Cleburne, TX making disciples who are confident and empowered to make disciples.","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"},"telephone":"+16822865640","email":"info@gatheringctx.org","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"16:30","closes":"19:00"},"sameAs":["https://www.facebook.com/thegatheringctx","https://www.instagram.com/thegatheringctx","https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293"]},{"@type":"WebSite","@id":"https://gatheringctx.org/#website","url":"https://gatheringctx.org","name":"The Gathering CTX"}]}
+  </script>
 </head>
 <body>
+
 <nav class="site-nav">
   <a href="/" class="nav-logo"><span class="logo-the">THE</span><span class="logo-gathering">gathering</span></a>
   <a href="/" class="back-home">Back to Home</a>
 </nav>
-<section class="hero">
-  <div class="eyebrow">Our Leadership</div>
-  <h1>Formed by the Word.<br><em>Led by the Spirit.</em></h1>
-  <p class="hero-sub">Leadership at The Gathering CTX is not a platform. It is a stewardship. We are ordinary people who have encountered an extraordinary God and cannot stop talking about it.</p>
+
+<!-- HERO: Full congregation worship photo -->
+<div class="hero-wrap">
+  <img src="/leadership-hero.jpg" alt="The Gathering CTX congregation in worship" class="hero-img">
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <span class="eyebrow">Leadership</span>
+    <h1>This is who<br>leads here.</h1>
+    <p>Every person in this room. Every hand raised. Every life surrendered to Jesus. This is the leadership of The Gathering CTX.</p>
+  </div>
+</div>
+
+<!-- OPENING DECLARATION -->
+<div class="declaration">
+  <div class="declaration-scripture">1 Peter 2:9, ESV</div>
+  <blockquote>"But you are a chosen race, a royal priesthood, a holy nation, a people for his own possession, that you may proclaim the excellencies of him who called you out of darkness into his marvelous light."</blockquote>
+  <div class="declaration-ref">The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX</div>
+</div>
+
+<!-- SECTION 1: The moment you said yes -->
+<section class="content-section">
+  <span class="section-label">The Calling</span>
+  <h2>The moment you said yes to Jesus,<br>you accepted a <em>leadership role.</em></h2>
+  <p>Most churches have a leadership page that lists names and titles. We are doing something different, because we believe the Bible does something different. Peter writes to ordinary people, not apostles or elders, and calls them a royal priesthood. That word priesthood meant something to his readers. Priests do not just receive ministry. They carry it. They bring it to others.</p>
+  <p>When you stepped across the line of faith and said yes to Christ, God did not just save you from something. He commissioned you for something. You became part of a people whose purpose is to proclaim who He is in every room you walk into.</p>
+  <p>That is not a metaphor. It is a calling. And it is yours.</p>
 </section>
-<section class="pastor-section">
-  <div class="pastor-card">
-    <div class="pastor-photo"><div class="pastor-photo-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg><p>Photo coming soon</p></div></div>
-    <div class="pastor-info">
-      <h2 class="pastor-name">Billy Philips</h2>
-      <p class="pastor-title">Lead Pastor · The Gathering CTX</p>
-      <div class="pastor-bio">
-        <p>Pastor Billy Philips is the founding pastor of The Gathering CTX in Cleburne, Texas. He planted The Gathering out of a deep conviction that the Church was never meant to gather hoping to win someday, but to gather standing in what Christ has already finished.</p>
-        <p>His preaching is Word-driven, Spirit-led, and identity-first. He believes the greatest need of the hour is not more programs or better branding, but disciples who actually know who they are in Christ and walk like it.</p>
-        <p>The Gathering held its first service on March 15, 2026 in a barn in Blum, Texas. What began as faith became a family, and that family has been growing ever since.</p>
-        <blockquote class="pastor-quote">"We do not walk toward victory. We walk with it. Christ has already won. Our job is to believe it, embody it, and proclaim it."</blockquote>
-        <p>Pastor Billy and the team at The Gathering CTX are committed to raising up disciples who carry the presence and proclamation of Jesus into every room they walk into.</p>
+
+<!-- PHOTO BAND: 3 congregation photos -->
+<div class="photo-band">
+  <div class="photo-tile"><img src="/leadership-02.jpg" alt="The Gathering CTX congregation in worship"></div>
+  <div class="photo-tile"><img src="/leadership-03.jpg" alt="People worshipping at The Gathering CTX"></div>
+  <div class="photo-tile"><img src="/leadership-04.jpg" alt="The Gathering CTX community gathered together"></div>
+</div>
+
+<!-- SECTION 2: What Ephesians 4 says -->
+<section class="content-section">
+  <span class="section-label">Ephesians 4:11-12, ESV</span>
+  <h2>The gifts were given to <em>equip you,</em><br>not replace you.</h2>
+  <p>Paul writes that Christ gave apostles, prophets, evangelists, shepherds, and teachers to the church. But notice what he says they are for: "to equip the saints for the work of ministry." The work of ministry is yours. The gifts exist to prepare you to do it. No pastor or teacher was given to do the work for the body. They were given to strengthen the body so the body can carry the work together.</p>
+  <p>This is not a small distinction. It changes everything about how we understand the church. You are not the audience. You are not the recipient waiting to be served. You are the sent one, being equipped to go.</p>
+</section>
+
+<!-- WIDE PHOTO PAIR -->
+<div class="photo-band-wide">
+  <div class="photo-tile"><img src="/leadership-05.jpg" alt="Worship at The Gathering CTX" style="object-position:center 40%"></div>
+  <div class="photo-tile"><img src="/leadership-hero.jpg" alt="The congregation of The Gathering CTX" style="object-position:center 20%"></div>
+</div>
+
+<!-- SECTION 3: What this looks like -->
+<section class="content-section">
+  <span class="section-label">Matthew 28:18-20</span>
+  <h2>The Great Commission<br>was not given to the <em>eleven.</em></h2>
+  <p>When Jesus stood on that mountain in Galilee and said "Go therefore and make disciples of all nations," He was not assigning a task to a committee. He was speaking to a people. A community. A body that would scatter into every corner of the world and carry what they had received.</p>
+  <p>That commission has not expired. It did not pass from the eleven to a professional class of ministers. It was given to the church, which means it was given to you. You are the mission. You are the sent one. Sunday is where we gather the strength. Monday through Saturday is where we live the commission.</p>
+</section>
+
+<!-- WHAT LEADERSHIP LOOKS LIKE -->
+<div class="called-section">
+  <div class="called-inner">
+    <h2>What this looks like at The Gathering</h2>
+    <p class="sub">Leadership does not require a title. It requires surrender. Here is what it looks like when ordinary people walk in what Christ has already won.</p>
+    <div class="called-grid">
+      <div class="called-card">
+        <span class="num">01</span>
+        <h3>In Your Home</h3>
+        <p>The most significant church you will ever lead gathers around your dinner table. The way you love your spouse, raise your children, and open your home to others is not separate from your faith. It is the expression of it.</p>
+      </div>
+      <div class="called-card">
+        <span class="num">02</span>
+        <h3>In Your Neighborhood</h3>
+        <p>Your neighbors were not placed next to you by accident. Knowing their names, showing up in their hard moments, and pointing them toward Jesus when they are ready -- that is leadership. That is priesthood.</p>
+      </div>
+      <div class="called-card">
+        <span class="num">03</span>
+        <h3>In Your Workplace</h3>
+        <p>Every room you walk into as a believer, you carry the presence of the Holy Spirit into. How you work, how you handle conflict, how you treat people who cannot benefit you -- that is a proclamation. You are always leading something.</p>
+      </div>
+      <div class="called-card">
+        <span class="num">04</span>
+        <h3>In This Room</h3>
+        <p>When you gather on Sunday and someone next to you is falling apart, you have a role to play. When someone walks in for the first time and feels out of place, you are the welcome they needed. You are not a seat filler. You are the church.</p>
       </div>
     </div>
   </div>
-</section>
-<section class="values-section">
-  <div class="values-inner">
-    <h2>What We Believe About Leadership</h2>
-    <p class="sub">The way we lead flows from who we believe Jesus is and what He has already accomplished.</p>
-    <div class="values-grid">
-      <div class="value-card"><div class="value-num">01</div><h3 class="value-title">Servant Authority</h3><p class="value-text">Leadership at The Gathering is relational and functional, not positional. We lead by example. The greatest among you will be your servant.</p></div>
-      <div class="value-card"><div class="value-num">02</div><h3 class="value-title">Word-Anchored</h3><p class="value-text">Every decision, direction, and declaration flows from Scripture. We do not lead by trend or preference. We lead by the Word of God as the supreme and final authority.</p></div>
-      <div class="value-card"><div class="value-num">03</div><h3 class="value-title">Spirit-Dependent</h3><p class="value-text">We pray first, not last. We acknowledge that apart from the Holy Spirit, our leadership produces nothing of eternal value. Every meeting and sermon begins in prayer.</p></div>
-      <div class="value-card"><div class="value-num">04</div><h3 class="value-title">Raising Others</h3><p class="value-text">We are not building a church around a leader. We are building a church that produces leaders. Our goal is disciples who make disciples at every level.</p></div>
+</div>
+
+<!-- GOVERNANCE STRUCTURE -->
+<section class="pastors-section">
+  <span class="section-label">How We Are Led</span>
+  <h2>A structure built to <em>serve the body,</em><br>not manage it.</h2>
+  <p class="sub">The Gathering CTX is governed by a three-layer structure drawn from Scripture and formalized in our bylaws. Each layer has a distinct role. None of them exist to concentrate authority. All of them exist to protect and release the priesthood of all believers.</p>
+
+  <div class="gov-layer">
+    <div class="gov-layer-label">Teaching Pastors</div>
+    <div class="gov-layer-body">
+      <p>Teaching Pastors serve the congregation through expository preaching, prayer, and pastoral care. Their role is not positional authority over the body -- it is stewardship of the Word entrusted to them for the body's benefit. They preach to equip, not to lead from a distance. They are among the congregation, not above it.</p>
+      <p class="gov-anchor">Rooted in Ephesians 4:11-12 and Acts 20:28</p>
+    </div>
+  </div>
+
+  <div class="gov-layer">
+    <div class="gov-layer-label">Elders</div>
+    <div class="gov-layer-body">
+      <p>Elders provide spiritual oversight -- doctrine, prayer, shepherding, and mission direction. The Gathering CTX holds to a plurality of elders model, meaning no single person holds unchecked authority. Elders are nominated, publicly presented to Partners, and affirmed by a two-thirds congregational vote. They serve while biblically qualified and are subject to annual review.</p>
+      <p>The elder board is currently being formally established. We are moving deliberately and in alignment with the qualifications Scripture requires.</p>
+      <p class="gov-anchor">Rooted in 1 Timothy 3 and Titus 1</p>
+    </div>
+  </div>
+
+  <div class="gov-layer">
+    <div class="gov-layer-label">Board of Directors</div>
+    <div class="gov-layer-body">
+      <p>The Board of Directors carries fiduciary and legal responsibility for Gathering in Victory Inc., the Texas nonprofit through which The Gathering CTX operates. This includes budget approval, financial controls, compliance, and major expenditure decisions. At our current stage, Elders and Directors are the same individuals, providing aligned spiritual and financial oversight with full accountability to the congregation.</p>
+      <p class="gov-anchor">Governing document: Bylaws of Gathering in Victory Inc., adopted March 9, 2026</p>
+    </div>
+  </div>
+
+  <div class="gov-layer">
+    <div class="gov-layer-label">Partners</div>
+    <div class="gov-layer-body">
+      <p>Voting authority at The Gathering CTX belongs to Partners -- those who profess faith in Jesus Christ, have been baptized or are pursuing baptism, agree with our Statement of Faith, and have demonstrated consistent participation in the life of the church. Partners vote to affirm elders, approve major financial decisions, and participate in any bylaw changes that affect the congregation.</p>
+      <p>This is not church management. This is the body of Christ taking responsibility for itself, which is exactly what the New Testament describes.</p>
+      <p class="gov-anchor">Congregational affirmation consistent with Acts 6 and 1 Corinthians 12</p>
     </div>
   </div>
 </section>
-<section class="cta">
-  <h2>Want to Connect?</h2>
-  <p>We would love to hear from you. Reach out directly or join us this Sunday at 5 PM.</p>
-  <div class="btn-row">
-    <a href="mailto:info@gatheringctx.org" class="btn-primary">Email Us</a>
-    <a href="/visit" class="btn-secondary">Plan a Visit</a>
+
+<!-- TESTIMONY -->
+<section class="testimony-section">
+  <div class="testimony-inner">
+    <span class="testimony-label">From the Congregation</span>
+    <div class="testimony-divider"></div>
+    <p class="testimony-quote">"Since sitting under your teaching, my spirit is finding rest. Rest in the form of encouragement that the theology and doctrine I know to be true are coming through your preaching. It is putting me back on solid ground. The Word God uses you to bring stays with me and I meditate on it throughout the week. Not only me but my family, those I do life with."</p>
+    <p class="testimony-attr">A Partner, 75 years in the faith</p>
   </div>
 </section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Come find your place.</h2>
+  <p>We gather Sundays at 5:00 PM at the Cleburne Conference Center. The door is open. There is a seat with your name on it and a role that only you can fill.</p>
+  <div class="btn-row">
+    <a href="/visit" class="btn-primary">Plan a Visit</a>
+    <a href="/new-here" class="btn-secondary">New Here</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
@@ -181,5 +350,6 @@
     <p style="font-style:italic">Photography by <a href="https://www.instagram.com/captured.by.kendra_" target="_blank" rel="noopener" class="footer-bottom-link">@captured.by.kendra_</a></p>
   </div>
 </footer>
+
 </body>
 </html>
