@@ -468,9 +468,9 @@ async function handleSub(e,list){
   try{
     var r=await fetch('/api/subscribe',{--method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({--email:em,list:list})});
     var data=await r.json();
-    if(r.ok&&data.success){msg.className='sub-msg ok';msg.textContent='✓ Subscribed! Check your inbox.';f.reset();}
+    if(r.ok&&data.success){msg.className='sub-msg ok';msg.textContent='Subscribed! Check your inbox.';f.reset();}
     else throw new Error(data.error||'Something went wrong.');
-  }catch(err){msg.className='sub-msg err';msg.textContent='✗ '+err.message;}
+  }catch(err){msg.className='sub-msg err';msg.textContent='Something went wrong: '+err.message;}
   finally{btn.disabled=false;btn.textContent='Subscribe →';}
 }
 </script>
