@@ -1,23 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://gatheringctx.org/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://gatheringctx.org/visit</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://gatheringctx.org/new-here</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://gatheringctx.org/our-story</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://gatheringctx.org/beliefs</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://gatheringctx.org/sermons</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://gatheringctx.org/devotionals</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://gatheringctx.org/kids</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://gatheringctx.org/belong</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/formed</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/small-gatherings</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/generosity</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/baptism</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://gatheringctx.org/resources</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://gatheringctx.org/events</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://gatheringctx.org/philippians</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://gatheringctx.org/church-near-burleson</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/church-near-joshua-tx</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/church-near-alvarado</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/church-near-godley-tx</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Core pages -->
+  <url><loc>https://gatheringctx.org/</loc><lastmod>2026-05-28</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://gatheringctx.org/visit</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://gatheringctx.org/new-here</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://gatheringctx.org/sermons</loc><lastmod>2026-05-28</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://gatheringctx.org/devotionals</loc><lastmod>2026-05-28</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://gatheringctx.org/kids</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/generosity</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/events</loc><lastmod>2026-05-28</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- About / identity -->
+  <url><loc>https://gatheringctx.org/our-story</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/beliefs</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/leadership</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/what-to-expect</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/baptism</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/gallery</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Growth / discipleship -->
+  <url><loc>https://gatheringctx.org/belong</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/formed</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/small-gatherings</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/small-groups</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/resources</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Sermon series -->
+  <url><loc>https://gatheringctx.org/ephesians</loc><lastmod>2026-05-28</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/philippians</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Devotional pages -->
+  <url><loc>https://gatheringctx.org/devotional-pentecost</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-easter-sunday</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-palm-sunday</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-ephesians-1</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-ephesians-2</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-ephesians-3</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-ephesians-4</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-ephesians-5</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-ephesians-6</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/family-devotional-ephesians</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- Local SEO landing pages -->
+  <url><loc>https://gatheringctx.org/church-cleburne-tx</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/spirit-filled-church-cleburne</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gatheringctx.org/bible-church-johnson-county</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/church-near-burleson</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/church-near-joshua-tx</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/church-near-alvarado</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/church-near-godley-tx</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Legal -->
+  <url><loc>https://gatheringctx.org/privacy</loc><lastmod>2026-05-28</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+
 </urlset>
