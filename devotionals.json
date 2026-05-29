@@ -1,6 +1,16 @@
 {
   "devotionals": [
     {
+      "id": "philippians-1-joy-in-chains",
+      "title": "Joy in Chains",
+      "series": "Philippians \u00b7 Week 1",
+      "date": "May 31, 2026",
+      "scripture": "Philippians 1:1-30",
+      "excerpt": "Paul wrote about joy sixteen times from a prison cell. This is not a feeling you chase. This is a settled reality you receive.",
+      "file": "devotional-philippians-1.html",
+      "published": false
+    },
+    {
       "id": "pentecost-the-fire-fell",
       "title": "The Fire Fell",
       "series": "Pentecost Sunday",
@@ -23,17 +33,17 @@
     {
       "id": "ephesians-5-walk-love-light-wisdom",
       "title": "Walk in Love, Light, and Wisdom",
-      "series": "Ephesians · Week 5",
+      "series": "Ephesians \u00b7 Week 5",
       "date": "May 10, 2026",
       "scripture": "Ephesians 5:1-33",
-      "excerpt": "Be imitators of God, as beloved children. Walk in love, light, and wisdom — not as the world walks, but as children of the Father.",
+      "excerpt": "Be imitators of God, as beloved children. Walk in love, light, and wisdom \u2014 not as the world walks, but as children of the Father.",
       "file": "devotional-ephesians-5.html",
       "published": true
     },
     {
       "id": "ephesians-4-walk-worthy",
       "title": "Walk Worthy",
-      "series": "Ephesians · Week 4",
+      "series": "Ephesians \u00b7 Week 4",
       "date": "May 3, 2026",
       "scripture": "Ephesians 4:1-16",
       "excerpt": "God does not give you identity so you can sit still. He gives you identity so you have something worth walking in.",
