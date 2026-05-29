@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joy in Chains | Philippians Week 1 | The Gathering CTX</title>
+  <meta name="description" content="Paul wrote about joy sixteen times from a prison cell. This is not a feeling you chase. This is a settled reality you receive. A five-day devotional from Philippians 1. The Gathering CTX, Cleburne, TX." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --page-bg:  #EEE8DC;
+      --nav-bg:   #F6F2EC;
+      --card-bg:  #F4F0E6;
+      --burgundy: #6B1C1C;
+      --gold:     #B8852A;
+      --gold-it:  #C49030;
+      --body:     #2A1A10;
+      --soft:     #4A3828;
+      --muted:    #8C7A68;
+      --rule:     #D4CAB8;
+      --num:      #DDD5C4;
+    }
+    html { font-size: 18px; scroll-behavior: smooth; }
+    body { font-family: 'EB Garamond', Georgia, serif; background: var(--page-bg); color: var(--body); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    .site-nav { background: var(--nav-bg); border-bottom: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { text-decoration: none; display: flex; align-items: baseline; gap: 1px; }
+    .nav-logo .the { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--gold); position: relative; top: -4px; margin-right: 1px; }
+    .nav-logo .gathering { font-family: 'EB Garamond', Georgia, serif; font-size: 20px; color: var(--body); }
+    .nav-back { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+    .nav-back:hover { color: var(--body); }
+
+    /* ARTICLE */
+    .article { max-width: 720px; margin: 0 auto; padding: 0 28px 100px; }
+
+    /* HERO */
+    .hero { text-align: center; padding: 72px 0 60px; border-bottom: 1px solid var(--rule); margin-bottom: 60px; }
+    .series-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(44px, 8vw, 72px); font-weight: 600; line-height: 1.08; color: var(--burgundy); margin-bottom: 10px; letter-spacing: -0.5px; }
+    .hero-sub { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 22px; color: var(--gold-it); margin-bottom: 20px; }
+    .hero-scripture { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 18px; color: var(--gold-it); margin-bottom: 12px; }
+    .hero-date { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+
+    /* SERIES IMAGE */
+    .series-img { width: 100%; max-width: 540px; margin: 0 auto 48px; display: block; border-radius: 4px; }
+
+    /* INTRO */
+    .intro { margin-bottom: 52px; }
+    .intro p { font-size: 19px; line-height: 1.85; color: var(--soft); margin-bottom: 20px; }
+
+    /* SCRIPTURE READING */
+    .scripture-reading { border-left: 3px solid var(--gold); background: var(--card-bg); padding: 28px 32px; margin-bottom: 72px; }
+    .sr-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .scripture-reading blockquote { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.7; color: var(--gold-it); margin-bottom: 14px; }
+    .scripture-reading cite { font-family: 'Inter', sans-serif; font-size: 11px; font-style: normal; font-weight: 500; letter-spacing: 1px; color: var(--muted); }
+
+    /* DAY BLOCKS */
+    .day-block { margin-bottom: 72px; padding-top: 64px; border-top: 1px solid var(--rule); }
+    .day-block:first-of-type { border-top: none; padding-top: 0; }
+    .day-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .day-tag { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+    .day-ref { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 1px; color: var(--muted); }
+    .day-theme { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 18px; color: var(--muted); margin-bottom: 32px; }
+    .sec-num { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 96px; font-weight: 700; line-height: 1; color: var(--num); margin-bottom: -20px; letter-spacing: -4px; }
+    .sec-heading { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 600; line-height: 1.25; color: var(--burgundy); margin-bottom: 28px; }
+
+    /* SCRIPTURE QUOTE */
+    .scripture-quote { border-left: 2px solid var(--rule); padding: 0 0 0 22px; margin-bottom: 28px; }
+    .scripture-quote blockquote { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 18px; line-height: 1.75; color: var(--soft); margin-bottom: 10px; }
+    .scripture-quote cite { font-family: 'Inter', sans-serif; font-size: 11px; font-style: normal; font-weight: 500; letter-spacing: 1px; color: var(--muted); }
+
+    /* BODY */
+    .sec-body p { font-size: 18px; line-height: 1.9; color: var(--soft); margin-bottom: 20px; }
+    .sec-body p:last-child { margin-bottom: 0; }
+    .sec-body strong { color: var(--body); font-weight: 500; }
+
+    /* GREEK STUDY */
+    .greek-study { background: var(--card-bg); border-left: 3px solid var(--gold); padding: 18px 22px; margin: 24px 0; font-size: 17px; line-height: 1.85; color: var(--soft); }
+    .gk-label { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+    .gk-word { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 20px; color: var(--body); font-weight: 500; }
+    .gk-trans { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--muted); }
+
+    /* PULL QUOTE */
+    .pull-quote { margin: 36px 0; padding: 0 32px; }
+    .pull-quote p { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 22px; line-height: 1.5; color: var(--burgundy); }
+
+    /* REFLECT */
+    .reflect { background: var(--card-bg); padding: 28px 32px; margin-top: 36px; }
+    .reflect-heading { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .reflect p { font-size: 17px; line-height: 1.8; color: var(--soft); margin-bottom: 14px; }
+    .reflect p:last-child { margin-bottom: 0; }
+
+    /* PRAYER */
+    .prayer-block { margin-top: 72px; padding-top: 64px; border-top: 1px solid var(--rule); }
+    .prayer-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .prayer-block p { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; line-height: 1.9; color: var(--soft); margin-bottom: 18px; }
+    .prayer-block p:last-child { margin-bottom: 0; }
+
+    /* DECLARATION */
+    .declaration { margin-top: 52px; padding: 32px; background: var(--burgundy); color: #F6F2EC; }
+    .declaration p { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; line-height: 1.85; margin-bottom: 12px; }
+    .declaration p:last-child { margin-bottom: 0; font-style: italic; }
+
+    /* FOOTER */
+    .site-footer { border-top: 1px solid var(--rule); padding: 48px 40px; text-align: center; margin-top: 80px; }
+    .footer-logo { font-family: 'EB Garamond', Georgia, serif; font-size: 22px; color: var(--body); margin-bottom: 12px; }
+    .footer-logo .the { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--gold); position: relative; top: -3px; margin-right: 2px; }
+    .site-footer p { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .site-footer a { color: var(--muted); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="https://gatheringctx.org" class="nav-logo"><span class="the">the</span><span class="gathering">gathering</span></a>
+  <a href="https://gatheringctx.org/devotionals" class="nav-back">&#8592; All Devotionals</a>
+</nav>
+
+<div class="article">
+
+  <header class="hero">
+    <p class="series-label">Philippians &middot; Week 1 &middot; May 31, 2026</p>
+    <h1 class="hero-title">Joy in Chains</h1>
+    <p class="hero-sub">Finding unshakeable joy when life falls apart.</p>
+    <p class="hero-scripture">Philippians 1:1&ndash;30</p>
+    <p class="hero-date">May 31, 2026</p>
+  </header>
+
+  <div class="intro">
+    <p>Paul wrote the word joy sixteen times in this letter. He wrote it from a prison cell, chained to a Roman soldier, waiting on Caesar to decide if he would live or die. Sixteen times.</p>
+    <p>This is not a feeling you manufacture when things go well. This is a settled reality that nothing in this world can reach. This week we are going to find out where it comes from and how to walk in it.</p>
+    <p>Take one day at a time. Read slowly. The text is not in a hurry.</p>
+  </div>
+
+  <div class="scripture-reading">
+    <p class="sr-label">Scripture Reading</p>
+    <blockquote>&ldquo;I thank my God in all my remembrance of you, always in every prayer of mine for you all making my prayer with joy, because of your partnership in the gospel from the first day until now. And I am sure of this, that he who began a good work in you will bring it to completion at the day of Jesus Christ.&rdquo;</blockquote>
+    <cite>Philippians 1:3&ndash;6 &middot; ESV</cite>
+  </div>
+
+
+  <!-- DAY 1 -->
+  <div class="day-block">
+    <div class="day-meta">
+      <span class="day-tag">Day 1</span>
+      <span class="day-ref">Philippians 1:3&ndash;6</span>
+    </div>
+    <p class="day-theme">The God Who Does Not Quit</p>
+    <span class="sec-num">01</span>
+    <h2 class="sec-heading">He Who Began a Good Work Will Bring It to Completion</h2>
+
+    <div class="scripture-quote">
+      <blockquote>&ldquo;And I am sure of this, that he who began a good work in you will bring it to completion at the day of Jesus Christ.&rdquo;</blockquote>
+      <cite>Philippians 1:6 &middot; ESV</cite>
+    </div>
+
+    <div class="sec-body">
+      <p>Paul is not writing this from a study lined with books and quiet. He is in a Roman prison, chained to a guard, waiting on a verdict from Caesar that could end his life. From there, he writes the most certain sentence in this letter. Not certain about his release. Not certain about his trial. Certain about this: God finishes what He starts.</p>
+      <p>The Philippians might have looked at Paul in chains and wondered if the mission had stalled. If something had gone wrong. Paul answers them directly and he answers us now. Nothing has gone wrong. The same God who called you is keeping you. The same God who saved you is sanctifying you.</p>
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">epitele&#333; (&#7952;&#960;&#953;&#964;&#949;&#955;&#941;&#969;)</span> <span class="gk-trans">to complete, to bring to its intended end.</span> The word was used for finishing a construction project, completing a sacrifice, bringing a task through to its conclusion. God is not a contractor who walks off the job when the materials get difficult. He is the builder who sees every project through to the last detail. What He starts, He finishes. No exceptions.
+    </div>
+
+    <div class="sec-body">
+      <p>That hard season you are carrying right now. The one that feels like silence. Like God has moved on. It is not evidence He has given up. It may be the season He is doing His deepest work. The chisel is not abandonment. The chisel is craftsmanship.</p>
+      <p>You are not a project He abandoned halfway through. You are a work He is completing.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>Your struggles are not evidence that God gave up on you. They are proof that He is still at work.</p>
+    </div>
+
+    <div class="reflect">
+      <h3 class="reflect-heading">Reflect</h3>
+      <p>What part of your life feels unfinished or like it has gone off the rails? Name it honestly before God today. Then speak Philippians 1:6 over it by name.</p>
+      <p>Paul was certain of completion even in chains. What does it look like for you to hold that certainty in your own difficult season right now?</p>
+    </div>
+  </div>
+
+
+  <!-- DAY 2 -->
+  <div class="day-block">
+    <div class="day-meta">
+      <span class="day-tag">Day 2</span>
+      <span class="day-ref">Philippians 1:12&ndash;14</span>
+    </div>
+    <p class="day-theme">Chains That Advance the Gospel</p>
+    <span class="sec-num">02</span>
+    <h2 class="sec-heading">What the Enemy Meant as a Cage, God Used as a Pulpit</h2>
+
+    <div class="scripture-quote">
+      <blockquote>&ldquo;I want you to know, brothers, that what has happened to me has really served to advance the gospel, so that it has become known throughout the whole imperial guard and to all the rest that my imprisonment is for Christ.&rdquo;</blockquote>
+      <cite>Philippians 1:12&ndash;13 &middot; ESV</cite>
+    </div>
+
+    <div class="sec-body">
+      <p>Every few hours a new Roman soldier rotated in, chained to Paul's wrist. He could not walk away. He could not tune Paul out. For hours at a stretch, guard after guard heard Paul pray, heard him sing, heard him speak about Jesus. The gospel was moving through Rome's elite military unit. Not in spite of Paul's chains. Because of them.</p>
+      <p>The very thing designed to stop the message became the vehicle for its advance. And verse 14 adds another layer: other believers, watching Paul's courage in chains, were becoming bolder themselves. His imprisonment was producing boldness in people who had never been arrested. His suffering was functioning as a megaphone.</p>
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">prokop&#275; (&#960;&#961;&#959;&#954;&#959;&#960;&#942;)</span> <span class="gk-trans">advance, forward movement, progress.</span> A military term. An army cutting through obstacles, pressing forward, gaining ground. Paul borrows it deliberately. The gospel is not stalled. It is advancing. Through a prison cell. Through a man in chains. Through the very circumstances that looked like the end of the mission. Paul uses this same word again in verse 25 for the Philippians' own growth in faith. His confinement and their advancement are not two separate stories. They are the same story.
+    </div>
+
+    <div class="sec-body">
+      <p>God does not waste your chains. The diagnosis that has you confined. The financial pressure with no visible exit. The closed door that makes no sense. The season you cannot understand. These are not outside God's reach. They may be exactly the environments He is using to put the gospel somewhere it could never have gone any other way.</p>
+      <p>Paul could not have gained an audience with the Praetorian Guard through any platform or invitation. No strategy would have put him in that room. Chains did. Stop measuring your chains by what they are keeping you from. Start asking what they might be making possible.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>God does not waste your chains. The very thing meant to silence you may be the vehicle He uses to reach someone else.</p>
+    </div>
+
+    <div class="reflect">
+      <h3 class="reflect-heading">Reflect</h3>
+      <p>Is there a situation in your life right now that looks like pure loss? Is there any evidence, however small, that God might be using it for something beyond what you can see?</p>
+      <p>Paul's chains made other believers bolder. How has watching someone else endure hardship with faith made you stronger?</p>
+    </div>
+  </div>
+
+
+  <!-- DAY 3 -->
+  <div class="day-block">
+    <div class="day-meta">
+      <span class="day-tag">Day 3</span>
+      <span class="day-ref">Philippians 1:19&ndash;24</span>
+    </div>
+    <p class="day-theme">The Math That Changes Everything</p>
+    <span class="sec-num">03</span>
+    <h2 class="sec-heading">To Live Is Christ. To Die Is Gain. Either Way, I Win.</h2>
+
+    <div class="scripture-quote">
+      <blockquote>&ldquo;For to me to live is Christ, and to die is gain.&rdquo;</blockquote>
+      <cite>Philippians 1:21 &middot; ESV</cite>
+    </div>
+
+    <div class="sec-body">
+      <p>Paul is staring at a possible execution. Caesar could sign the order. The sword could fall. And Paul says: either way, I win. This is not bravado. It is not denial. It is resurrection mathematics, and the answer always comes out positive.</p>
+      <p>Most people read &ldquo;to live is Christ&rdquo; as &ldquo;I live for Christ&rdquo; as though Christ were simply the cause Paul has devoted himself to. But in the Greek, Paul writes: to zen Christos. The living is Christ. Christ is the content of the life, not just the object of the devotion. This is the same ground he stands on in Galatians 2:20: it is no longer I who live, but Christ who lives in me. Not imitation. Union. The risen life of Jesus, expressed through a human body.</p>
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">kerdos (&#954;&#941;&#961;&#948;&#959;&#962;)</span> <span class="gk-trans">gain, profit, financial advantage.</span> A commercial term. Paul is doing resurrection mathematics. If I live, Christ is expressed through me. If I die, union with Christ is complete. Either way, I come out ahead. Death for the believer is not loss. It is the moment we receive in full what we have only tasted in part. The veil of this body removed. The union unmediated.
+    </div>
+
+    <div class="sec-body">
+      <p>And then notice what Paul does with this. He chooses to stay. Not for himself. For the people he loves. &ldquo;But to remain in the flesh is more necessary on your account.&rdquo; A man who knows that death is gain and still chooses to stay for the sake of others. That is not self-preservation. That is love. That is Christlikeness at its most complete.</p>
+      <p>Here is the freedom this unlocks. When death itself is gain, nothing lesser can threaten you. Your reputation. Your comfort. Your health. Your life. None of it, taken by the enemy, touches the life that is Christ in you. This is where Paul's courage comes from. Not human strength. The math.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>What do you threaten a man with when death itself is gain? What do you take from someone whose life is Christ? Paul discovered the answer and it unlocked a freedom no chain could hold.</p>
+    </div>
+
+    <div class="reflect">
+      <h3 class="reflect-heading">Reflect</h3>
+      <p>What is the enemy currently threatening you with? Run it through the math of Philippians 1:21. Does it still land as a real threat when held against &ldquo;to live is Christ and to die is gain&rdquo;?</p>
+      <p>Paul distinguishes between living for Christ and living as Christ in him. What is the practical difference in how you approach your day?</p>
+    </div>
+  </div>
+
+
+  <!-- DAY 4 -->
+  <div class="day-block">
+    <div class="day-meta">
+      <span class="day-tag">Day 4</span>
+      <span class="day-ref">Philippians 1:27&ndash;30</span>
+    </div>
+    <p class="day-theme">Citizens of a Higher Kingdom</p>
+    <span class="sec-num">04</span>
+    <h2 class="sec-heading">Your Manner of Life Is Your Witness</h2>
+
+    <div class="scripture-quote">
+      <blockquote>&ldquo;Only let your manner of life be worthy of the gospel of Christ, so that whether I come and see you or am absent, I may hear of you that you are standing firm in one spirit, with one mind striving side by side for the faith of the gospel.&rdquo;</blockquote>
+      <cite>Philippians 1:27 &middot; ESV</cite>
+    </div>
+
+    <div class="sec-body">
+      <p>The word Paul uses for &ldquo;manner of life&rdquo; was not abstract to the Philippians. They felt it in their bones. Philippi was a Roman colony, and Roman citizenship was the source of social standing, legal protection, and personal identity. Citizens carried themselves differently. They had responsibilities and a posture that reflected their allegiance to Rome.</p>
+      <p>Paul takes that word and turns it completely. You are citizens of a higher kingdom. Your primary allegiance is not to Rome, not to Philippi, not to any earthly power structure. You belong to a kingdom that does not rise and fall with Caesar. And your conduct, every day, in every room, should reflect that citizenship.</p>
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">politeuomai (&#960;&#959;&#955;&#953;&#964;&#949;&#973;&#959;&#956;&#945;&#953;)</span> <span class="gk-trans">to live as a citizen, to conduct oneself according to one's citizenship.</span> Paul returns to this root in Philippians 3:20 with the noun politeuma: &ldquo;our citizenship is in heaven.&rdquo; This is not a one-time illustration. It is a sustained theological argument across the whole letter. The Philippians' Roman citizenship was their greatest source of pride. Paul is calling them to a citizenship that relativizes even that.
+    </div>
+
+    <div class="sec-body">
+      <p>Then Paul gives them the specifics. One spirit. One mind. Striving side by side. That is a military image, soldiers with shields locked, advancing together, protecting one another. The Christian life is not a solo project. It is a team.</p>
+      <p>And then: do not be frightened. Fear sends a message to your opponents. It tells them you do not actually believe what you say you believe. But steady, Spirit-rooted courage is a sermon in itself. And verse 29 names something we rarely celebrate: it has been granted to you to suffer for His sake. The word translated &ldquo;granted&rdquo; is charizomai, the grace word. Suffering for Christ is not a punishment or a mistake. It is a grace given.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>Courage is a witness. When you refuse to be frightened by opposition, you are preaching a sermon that no words can match.</p>
+    </div>
+
+    <div class="reflect">
+      <h3 class="reflect-heading">Reflect</h3>
+      <p>Where does your daily conduct most reflect your heavenly citizenship? Where does it most contradict it? Be specific about a real situation this week.</p>
+      <p>Paul describes suffering for Christ as a grace given, not a burden imposed. How does that reframe something hard you are currently walking through?</p>
+    </div>
+  </div>
+
+
+  <!-- DAY 5 -->
+  <div class="day-block">
+    <div class="day-meta">
+      <span class="day-tag">Day 5</span>
+      <span class="day-ref">Philippians 1:18</span>
+    </div>
+    <p class="day-theme">Joy That Cannot Be Stolen</p>
+    <span class="sec-num">05</span>
+    <h2 class="sec-heading">Yes. And I Will Rejoice.</h2>
+
+    <div class="scripture-quote">
+      <blockquote>&ldquo;Yes, and I will rejoice.&rdquo;</blockquote>
+      <cite>Philippians 1:18 &middot; ESV</cite>
+    </div>
+
+    <div class="sec-body">
+      <p>Four words. Paul has just finished listing everything working against him. Rivals preaching from envy. Imprisonment. An uncertain trial. Real opposition from every direction. And then: yes. And I will rejoice.</p>
+      <p>The Greek words for joy in Philippians are chara and chair&#333;. Paul deploys them sixteen times in this one letter. Not once from a comfortable chair. Every single time from a cell, in chains, facing possible execution. This is the same word the angel used announcing the birth of Jesus: I bring you good news of great joy. This is the joy Jesus promises in John 15 that He wants to be in us, and that he wants to be full. This is not happiness that rides the wave of favorable circumstances. It is a settled orientation of the whole person toward God in Christ, available regardless of what the world is doing around you.</p>
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">char&#257; / chair&#333; (&#967;&#945;&#961;&#940; / &#967;&#945;&#943;&#961;&#969;)</span> <span class="gk-trans">joy / to rejoice.</span> In Philippians, Paul deploys these words sixteen times from a prison cell, in the face of possible execution, surrounded by opposition. Biblical joy is not an emotion produced by favorable circumstances. It is a settled orientation of the whole person toward God in Christ, available regardless of what the world is doing around you. The Philippians were not being asked to feel better. They were being called to a joy that no circumstance can reach.
+    </div>
+
+    <div class="sec-body">
+      <p>You cannot manufacture this joy. You cannot talk yourself into it. It is a fruit of the Spirit. A byproduct of genuine union with Christ. And once you have it, circumstances can rage, things can shift, the worst can come. And they cannot reach it. It lives in a place they cannot touch.</p>
+      <p>Paul wrote Philippians from a dungeon. He could only have written it from there. Because the joy he is describing becomes visible when everything else is stripped away. When the comfortable things are gone and the settled thing remains. That remaining thing is Christ. And from Christ, joy. Unshakeable. Unstealable. Yours.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>Joy is not the reward for getting out of prison. Joy is the weapon that opens prison doors.</p>
+    </div>
+
+    <div class="reflect">
+      <h3 class="reflect-heading">Reflect</h3>
+      <p>Is your joy right now settled in Christ or tied to your circumstances? Be honest. Then ask God for the joy that Paul describes, the kind that persists when circumstances have nothing good to offer.</p>
+      <p>Paul says &ldquo;I will rejoice&rdquo; as a declaration, not a feeling he is waiting to arrive. What would it look like for you to make that same declaration today?</p>
+    </div>
+  </div>
+
+
+  <!-- PRAYER OF IDENTITY -->
+  <div class="prayer-block">
+    <p class="prayer-label">A Prayer of Identity</p>
+    <p>Father, I receive what Your Word says about me today.</p>
+    <p>I am a work You started and will finish. Epitele&#333;. You do not abandon projects. You complete them.</p>
+    <p>I am one whose chains You are using for advancement. Prokop&#275;. Nothing in my life is wasted. Not the hard season. Not the closed door. Not the thing I cannot explain.</p>
+    <p>For me to live is Christ and to die is gain. Kerdos. There is no outcome in which I lose. No threat that lands. No fear that sticks.</p>
+    <p>I am a citizen of heaven, conducting myself worthy of the gospel I carry. Politeuomai. My life matches the message.</p>
+    <p>I am not defined by what confines me. I am defined by whose I am.</p>
+    <p>He who began a good work in me will bring it to completion. I walk with victory, not to it, in Jesus&rsquo; name. Amen.</p>
+  </div>
+
+  <!-- CLOSING DECLARATION -->
+  <div class="declaration">
+    <p>He who began a good work in me will bring it to completion!</p>
+    <p>My chains are advancing the gospel! What the enemy meant for destruction, God is using for advancement!</p>
+    <p>For me to live is Christ and to die is gain. I cannot be threatened!</p>
+    <p>I am not defined by my prison. I am defined by my purpose!</p>
+    <p>I am a citizen of heaven, living worthy of the gospel I carry!</p>
+    <p>I have joy that no circumstance can reach. I rejoice in the Lord always.</p>
+    <p><em>I walk with victory, not to it, in Jesus&rsquo; name. Amen!</em></p>
+  </div>
+
+</div><!-- /article -->
+
+<footer class="site-footer">
+  <div class="footer-logo"><span class="the">the</span>gathering</div>
+  <p>Sundays at 5:00 PM &middot; Cleburne Conference Center &middot; <a href="https://gatheringctx.org">gatheringctx.org</a></p>
+  <p style="margin-top:6px"><a href="https://gatheringctx.org/devotionals">&#8592; All Devotionals</a></p>
+</footer>
+
+</body>
+</html>
