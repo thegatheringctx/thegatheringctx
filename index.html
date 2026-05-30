@@ -28,7 +28,7 @@
     .nav-links{display:flex;align-items:center;gap:32px;}
     .nav-links a{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.62);transition:color 0.2s;}
     .nav-links a:hover{color:#fff;}
-    .nav-new{font-size:0.6rem !important;--border:1px solid rgba(255,255,255,0.25);padding:6px 14px;}
+    /* nav-new pill removed - I'm New now matches standard nav link style */
     .nav-give{background:#fff;color:#0a0a0a !important;padding:9px 22px;font-weight:600 !important;}
 
     /* HERO */
@@ -309,7 +309,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Event","name":"Sunday Worship Service - The Gathering CTX","description":"Join us for Spirit-led worship, expository preaching, and real community. Come as you are.","startDate":"2026-05-25T17:00:00-05:00","endDate":"2026-05-25T18:30:00-05:00","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","location":{"@type":"Place","name":"Cleburne Conference Center","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"}},"organizer":{"@type":"Organization","name":"The Gathering CTX","url":"https://gatheringctx.org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://gatheringctx.org/visit"},"image":"https://gatheringctx.org/Alexus-120.jpg","url":"https://gatheringctx.org/visit"}
 </script>
-<!-- build: 2026-05-28 18:46:42 -->
+<!-- build: 2026-05-30 12:00:00 -->
 </head>
 <body>
 
@@ -319,24 +319,22 @@
     <span class="nav-name">Gathering</span>
   </a>
   <div class="nav-links">
-    <a href="/new-here" class="nav-new">I'm New</a>
-    <a href="/visit">Visit</a>
+    <a href="/new-here">I'm New</a>
+    <a href="/belong">Connect</a>
     <a href="/kids">Kids</a>
     <a href="/sermons">Sermons</a>
     <a href="/devotionals">Devotionals</a>
-          <a href="/resources">Resources</a>
     <a href="/generosity" class="nav-give">Give</a>
   </div>
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile-menu" id="nav-mobile-menu">
-  <a href="/new-here" class="nav-new">I'm New</a>
-  <a href="/visit">Visit</a>
+  <a href="/new-here">I'm New</a>
+  <a href="/belong">Connect</a>
   <a href="/kids">Kids Zone</a>
   <a href="/sermons">Sermons</a>
   <a href="/devotionals">Devotionals</a>
-  <a href="/resources">Resources</a>
-  <a href="https://tithe.ly/give_new/www/#/tithely/give-one-time/1325789" class="nav-give" target="_blank">Give</a>
+  <a href="https://tithe.ly/give_new/www/#/tithely/give-one-time/1325789" class="mob-give" target="_blank">Give</a>
 </div>
 
 <section class="hero">
@@ -637,15 +635,14 @@
     </div>
     <div>
       <span class="f-col-label">Site</span>
-      <a href="/visit" class="f-col-link">Plan a Visit</a>
+      <a href="/new-here" class="f-col-link">I'm New</a>
+      <a href="/belong" class="f-col-link">Belong &amp; Become</a>
+      <a href="/formed" class="f-col-link">Formed &amp; Sent</a>
       <a href="/sermons" class="f-col-link">Sermons</a>
       <a href="/devotionals" class="f-col-link">Devotionals</a>
       <a href="/kids" class="f-col-link">Kids</a>
       <a href="/our-story" class="f-col-link">Our Story</a>
-      <a href="/gallery" class="f-col-link">Gallery</a>
       <a href="/beliefs" class="f-col-link">What We Believe</a>
-      <a href="/leadership" class="f-col-link">Leadership</a>
-          <a href="/baptism">Baptism</a>
       <a href="/generosity" class="f-col-link">Give</a>
       <a href="/privacy" class="f-col-link">Privacy</a>
     </div>
