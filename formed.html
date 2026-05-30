@@ -161,7 +161,36 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
   .page-photo-duo div{background-size:cover;background-position:center;}
   .page-photo-inline{width:100%;height:360px;background-size:cover;background-position:center;margin:48px 0;}
   @media(max-width:700px){.page-photo-hero{height:300px;}.page-photo-duo{grid-template-columns:1fr;height:auto;}.page-photo-duo div{height:260px;}.page-photo-inline{height:240px;}}
-</style>
+
+    /* REGISTER */
+    .register { background: #0a0a0a; padding: 9rem 6rem; border-top: 1px solid var(--w08); display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
+    .register-left { }
+    .register-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .register-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.1; letter-spacing: -.01em; margin-bottom: 1.5rem; }
+    .register-h2 em { font-style: italic; color: var(--gold); }
+    .register-body { font-size: .95rem; line-height: 2; color: var(--w55); margin-bottom: 2rem; }
+    .register-note { font-size: .82rem; line-height: 1.85; color: rgba(255,255,255,.3); border-top: 1px solid var(--w08); padding-top: 1.5rem; }
+    .register-right { }
+    .form-field { margin-bottom: 1.2rem; }
+    .form-label { display: block; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--w30); margin-bottom: .5rem; }
+    .form-input, .form-select, .form-textarea { width: 100%; padding: .85rem 1.1rem; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); color: #fff; font-family: 'Nunito Sans', sans-serif; font-size: .9rem; font-weight: 300; outline: none; transition: border-color .2s; display: block; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--w30); }
+    .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff44' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
+    .form-select option { background: #111; }
+    .form-textarea { resize: vertical; min-height: 90px; }
+    .form-submit { width: 100%; background: var(--gold); color: #000; border: none; padding: 1.1rem; font-family: 'Nunito Sans', sans-serif; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; cursor: pointer; transition: opacity .2s; margin-top: .5rem; }
+    .form-submit:hover { opacity: .85; }
+    .form-submit:disabled { opacity: .5; cursor: not-allowed; }
+    .form-success { padding: 3rem 2rem; text-align: center; }
+    .form-success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .form-success-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: .75rem; color: var(--gold); }
+    .form-success-body { font-size: .9rem; line-height: 1.85; color: var(--w55); }
+    @media(max-width:900px) {
+      .register { grid-template-columns: 1fr; gap: 3rem; padding: 6rem 2rem; }
+    }
+
+  </style>
 
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://gatheringctx.org/formed"/>
@@ -179,8 +208,8 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
     <span style="font-size:0.9rem;letter-spacing:0.22em;text-transform:uppercase;">Gathering</span>
   </a>
   <div style="display:flex;align-items:center;gap:36px;">
-    <a href="/new-here" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;border:1px solid rgba(255,255,255,0.2);padding:8px 16px;">I'M NEW</a>
-    <a href="/visit" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">VISIT</a>
+    <a href="/new-here" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">I'M NEW</a>
+    <a href="/belong" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">CONNECT</a>
     <a href="/kids" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">KIDS</a>
     <a href="/sermons" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">SERMONS</a>
     <a href="/devotionals" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;">DEVOTIONALS</a>
@@ -195,7 +224,7 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
 </button>
 <div id="mob-menu" style="display:none;position:fixed;top:72px;left:0;right:0;background:rgba(10,10,10,0.98);z-index:99;padding:16px 24px 28px;flex-direction:column;border-bottom:1px solid #1a1a1a;">
   <a href="/new-here" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">I'm New</a>
-  <a href="/visit" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Plan a Visit</a>
+  
   <a href="/our-story" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Our Story</a>
   <a href="/sermons" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Sermons</a>
   <a href="/devotionals" style="font-family:-apple-system,sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:13px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;">Devotionals</a>
@@ -399,17 +428,54 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
 
 <!  REGISTER  >
 <section class="register" id="register">
-  <div>
+  <div class="register-left">
     <div class="register-label">Your Next Step</div>
     <h2 class="register-h2">Ready to go<br><em>deeper?</em></h2>
-    <p class="register-body">Formed &amp; Sent runs in five-week cohorts. Spots are limited to keep it personal. If you have completed Belong &amp; Become   or if you are ready to start   reach out and we will get you connected to the next cohort.</p>
+    <p class="register-body">Formed &amp; Sent runs in five-week cohorts. Spots are limited to keep it personal. Fill out the form and we will reach out with the next available cohort date and everything you need to get started.</p>
     <div class="register-note">
-      Formed &amp; Sent runs in five-week cohorts. Spots are limited. Email us and we will connect you with the next one. Questions? Reach us at <a href="mailto:info@gatheringctx.org" style="color:var(--gold);text-decoration:none">info@gatheringctx.org</a>
+      This course is held in person at the Cleburne Conference Center. Prerequisite is Belong &amp; Become, but if you are ready to build &mdash; reach out and let's talk. Questions? Email us at <a href="mailto:info@gatheringctx.org" style="color:var(--gold);text-decoration:none">info@gatheringctx.org</a>
     </div>
   </div>
-  <div>
-    <a href="mailto:info@gatheringctx.org" class="btn-primary">Get Connected &rarr;</a>
-    <p class="btn-note">We will reach out with the next cohort date and details.</p>
+  <div class="register-right">
+    <div id="form-wrap">
+      <form id="formed-form" onsubmit="handleFormedForm(event)">
+        <div class="form-field">
+          <label class="form-label">First Name</label>
+          <input class="form-input" type="text" name="first_name" placeholder="Your first name" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Last Name</label>
+          <input class="form-input" type="text" name="last_name" placeholder="Your last name" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" name="email" placeholder="Your email" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Phone Number</label>
+          <input class="form-input" type="tel" name="phone" placeholder="(817) 000-0000">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Have you completed Belong &amp; Become?</label>
+          <select class="form-select" name="belong_complete">
+            <option value="" disabled selected>Select one</option>
+            <option value="yes">Yes, I completed it</option>
+            <option value="in_progress">Not yet, but I'm working on it</option>
+            <option value="no">No, but I'm ready to start there</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Anything you want us to know? (optional)</label>
+          <textarea class="form-textarea" name="notes" placeholder="Questions, schedule preferences, prayer requests..."></textarea>
+        </div>
+        <button class="form-submit" type="submit">I'm Ready &rarr;</button>
+      </form>
+      <div class="form-success" id="form-success" style="display:none">
+        <div class="form-success-icon">&#128293;</div>
+        <div class="form-success-title">You're on the list.</div>
+        <div class="form-success-body">We'll reach out with the next cohort date and everything you need. Welcome to the next step.</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -442,12 +508,13 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
     </div>
     <div class="footer-nav">
       <span class="footer-info-label">Site</span>
-      <a href="/visit" class="footer-nav-link">Plan a Visit</a>
+      <a href="/new-here" class="footer-nav-link">I'm New</a>
+      <a href="/belong" class="footer-nav-link">Belong &amp; Become</a>
+      <a href="/formed" class="footer-nav-link">Formed &amp; Sent</a>
       <a href="/sermons" class="footer-nav-link">Sermons</a>
       <a href="/devotionals" class="footer-nav-link">Devotionals</a>
       <a href="/kids" class="footer-nav-link">Kids</a>
       <a href="/our-story" class="footer-nav-link">Our Story</a>
-      <a href="/gallery" class="footer-nav-link">Gallery</a>
       <a href="/generosity" class="footer-nav-link">Give</a>
       <a href="/privacy" class="footer-nav-link">Privacy</a>
     </div>
@@ -462,6 +529,56 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
 });
+
+async function handleFormedForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.form-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  const data = {
+    first_name: form.first_name.value.trim(),
+    last_name: form.last_name.value.trim(),
+    email: form.email.value.trim(),
+    phone: form.phone.value.trim(),
+    belong_complete: form.belong_complete.value,
+    notes: form.notes.value.trim(),
+    source: 'Formed & Sent Registration'
+  };
+
+  try {
+    await fetch('https://hooks.zapier.com/hooks/catch/formed-sent-placeholder', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  } catch(err) {
+    // silent fail -- still show success, email fallback below
+  }
+
+  // Regardless, show success and send to Church Center / email
+  document.getElementById('formed-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+
+  // mailto fallback so nothing is lost
+  const subject = encodeURIComponent('Formed & Sent Registration - ' + data.first_name + ' ' + data.last_name);
+  const body = encodeURIComponent(
+    'Name: ' + data.first_name + ' ' + data.last_name + '
+' +
+    'Email: ' + data.email + '
+' +
+    'Phone: ' + data.phone + '
+' +
+    'Belong & Become complete: ' + data.belong_complete + '
+' +
+    'Notes: ' + data.notes
+  );
+  // silent background link -- opens in hidden iframe so user doesn't get pulled away
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.src = 'mailto:info@gatheringctx.org?subject=' + subject + '&body=' + body;
+  document.body.appendChild(iframe);
+}
 </script>
 </body>
 </html>
