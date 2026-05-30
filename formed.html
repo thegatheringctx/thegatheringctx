@@ -437,44 +437,14 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
     </div>
   </div>
   <div class="register-right">
-    <div id="form-wrap">
-      <form id="formed-form" onsubmit="handleFormedForm(event)">
-        <div class="form-field">
-          <label class="form-label">First Name</label>
-          <input class="form-input" type="text" name="first_name" placeholder="Your first name" required>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Last Name</label>
-          <input class="form-input" type="text" name="last_name" placeholder="Your last name" required>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Email Address</label>
-          <input class="form-input" type="email" name="email" placeholder="Your email" required>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Phone Number</label>
-          <input class="form-input" type="tel" name="phone" placeholder="(817) 000-0000">
-        </div>
-        <div class="form-field">
-          <label class="form-label">Have you completed Belong &amp; Become?</label>
-          <select class="form-select" name="belong_complete">
-            <option value="" disabled selected>Select one</option>
-            <option value="yes">Yes, I completed it</option>
-            <option value="in_progress">Not yet, but I'm working on it</option>
-            <option value="no">No, but I'm ready to start there</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Anything you want us to know? (optional)</label>
-          <textarea class="form-textarea" name="notes" placeholder="Questions, schedule preferences, prayer requests..."></textarea>
-        </div>
-        <button class="form-submit" type="submit">I'm Ready &rarr;</button>
-      </form>
-      <div class="form-success" id="form-success" style="display:none">
-        <div class="form-success-icon">&#128293;</div>
-        <div class="form-success-title">You're on the list.</div>
-        <div class="form-success-body">We'll reach out with the next cohort date and everything you need. Welcome to the next step.</div>
-      </div>
+    <div style="margin-top:0">
+      <a
+        href="https://gatheringctx.churchcenter.com/people/forms/1239005"
+        target="_blank"
+        rel="noopener"
+        style="display:inline-block;background:#fff;color:#000;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;padding:1.2rem 3rem;transition:opacity .2s;margin-bottom:1.5rem"
+      >I'm Ready &rarr;</a>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.8">You'll be taken to our secure Planning Center form.<br>Your information goes directly into our church database.</p>
     </div>
   </div>
 </section>
@@ -530,55 +500,6 @@ window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
 });
 
-async function handleFormedForm(e) {
-  e.preventDefault();
-  const form = e.target;
-  const btn = form.querySelector('.form-submit');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  const data = {
-    first_name: form.first_name.value.trim(),
-    last_name: form.last_name.value.trim(),
-    email: form.email.value.trim(),
-    phone: form.phone.value.trim(),
-    belong_complete: form.belong_complete.value,
-    notes: form.notes.value.trim(),
-    source: 'Formed & Sent Registration'
-  };
-
-  try {
-    await fetch('https://hooks.zapier.com/hooks/catch/formed-sent-placeholder', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    });
-  } catch(err) {
-    // silent fail -- still show success, email fallback below
-  }
-
-  // Regardless, show success and send to Church Center / email
-  document.getElementById('formed-form').style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
-
-  // mailto fallback so nothing is lost
-  const subject = encodeURIComponent('Formed & Sent Registration - ' + data.first_name + ' ' + data.last_name);
-  const body = encodeURIComponent(
-    'Name: ' + data.first_name + ' ' + data.last_name + '
-' +
-    'Email: ' + data.email + '
-' +
-    'Phone: ' + data.phone + '
-' +
-    'Belong & Become complete: ' + data.belong_complete + '
-' +
-    'Notes: ' + data.notes
-  );
-  // silent background link -- opens in hidden iframe so user doesn't get pulled away
-  const iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
-  iframe.src = 'mailto:info@gatheringctx.org?subject=' + subject + '&body=' + body;
-  document.body.appendChild(iframe);
-}
 </script>
 </body>
 </html>
