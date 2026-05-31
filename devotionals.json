@@ -3,18 +3,18 @@
     {
       "id": "philippians-1-joy-in-chains",
       "title": "Joy in Chains",
-      "series": "Philippians \u00b7 Week 1",
+      "series": "Philippians Week 1",
       "date": "May 31, 2026",
       "scripture": "Philippians 1:1-30",
       "excerpt": "Paul wrote about joy sixteen times from a prison cell. This is not a feeling you chase. This is a settled reality you receive.",
       "file": "devotional-philippians-1.html",
-      "published": false
+      "published": true
     },
     {
       "id": "pentecost-the-fire-fell",
       "title": "The Fire Fell",
       "series": "Pentecost Sunday",
-      "date": "May 25, 2026",
+      "date": "May 24, 2026",
       "scripture": "Acts 2:1-4",
       "excerpt": "Heaven did not send a letter. Heaven sent a fire. The same Spirit who fell in that upper room dwells in you right now.",
       "file": "devotional-pentecost.html",
@@ -23,8 +23,8 @@
     {
       "id": "ephesians-6-stand",
       "title": "Stand",
-      "series": "Ephesians - Week 6",
-      "date": "May 18, 2026",
+      "series": "Ephesians Week 6",
+      "date": "May 17, 2026",
       "scripture": "Ephesians 6:1-24",
       "excerpt": "Six weeks. One letter. One story. From the heavenly places to the household to the battlefield. Having done all, stand.",
       "file": "devotional-ephesians-6.html",
@@ -33,30 +33,70 @@
     {
       "id": "ephesians-5-walk-love-light-wisdom",
       "title": "Walk in Love, Light, and Wisdom",
-      "series": "Ephesians \u00b7 Week 5",
+      "series": "Ephesians Week 5",
       "date": "May 10, 2026",
       "scripture": "Ephesians 5:1-33",
-      "excerpt": "Be imitators of God, as beloved children. Walk in love, light, and wisdom \u2014 not as the world walks, but as children of the Father.",
+      "excerpt": "Be imitators of God, as beloved children. Walk in love, light, and wisdom.",
       "file": "devotional-ephesians-5.html",
       "published": true
     },
     {
       "id": "ephesians-4-walk-worthy",
       "title": "Walk Worthy",
-      "series": "Ephesians \u00b7 Week 4",
+      "series": "Ephesians Week 4",
       "date": "May 3, 2026",
-      "scripture": "Ephesians 4:1-16",
-      "excerpt": "God does not give you identity so you can sit still. He gives you identity so you have something worth walking in.",
+      "scripture": "Ephesians 4:1-32",
+      "excerpt": "The therefore has arrived. Walk worthy of the calling to which you have been called.",
       "file": "devotional-ephesians-4.html",
       "published": true
     },
     {
-      "id": "palm-sunday-2026",
+      "id": "ephesians-3-mystery-is-out",
+      "title": "The Mystery Is Out",
+      "series": "Ephesians Week 3",
+      "date": "Apr 26, 2026",
+      "scripture": "Ephesians 3:1-21",
+      "excerpt": "For thousands of years it was hidden. Now Paul reveals it: Jew and Gentile, one body, one family.",
+      "file": "devotional-ephesians-3.html",
+      "published": true
+    },
+    {
+      "id": "ephesians-2-brought-near",
+      "title": "Brought Near by the Blood",
+      "series": "Ephesians Week 2",
+      "date": "Apr 19, 2026",
+      "scripture": "Ephesians 2:1-22",
+      "excerpt": "You were far. Now you are near. Not because you earned it. Because He bled for it. The wall is gone.",
+      "file": "devotional-ephesians-2.html",
+      "published": true
+    },
+    {
+      "id": "ephesians-1-blessed-before-you-breathed",
+      "title": "Blessed Before You Breathed",
+      "series": "Ephesians Week 1",
+      "date": "Apr 12, 2026",
+      "scripture": "Ephesians 1:1-14",
+      "excerpt": "Before the foundation of the world, He chose you. Blessed, adopted, redeemed, forgiven, sealed.",
+      "file": "devotional-ephesians-1.html",
+      "published": true
+    },
+    {
+      "id": "easter-he-got-up",
+      "title": "He Got Up, And Everything Changed",
+      "series": "Easter Sunday",
+      "date": "Apr 5, 2026",
+      "scripture": "Matthew 28:1-10",
+      "excerpt": "Three days in the tomb. Then Sunday morning. The resurrection is not just a doctrine to believe. It is a power to live from.",
+      "file": "devotional-easter-sunday.html",
+      "published": true
+    },
+    {
+      "id": "palm-sunday-the-king-is-here",
       "title": "The King Is Here",
       "series": "Palm Sunday",
-      "date": "March 29, 2026",
+      "date": "Mar 29, 2026",
       "scripture": "Matthew 21:1-11",
-      "excerpt": "Will you still follow Him when He does not fit your plan?",
+      "excerpt": "They waved branches and shouted. He did not come to overthrow Rome. He came to overthrow death.",
       "file": "devotional-palm-sunday.html",
       "published": true
     }
