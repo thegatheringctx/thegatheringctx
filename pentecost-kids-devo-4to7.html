@@ -3,36 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Fire Fell. Ages 4-7 | Kids Gathering Zone</title>
+  <title>Joy in Chains. Ages 4-7 | Kids Gathering Zone</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap');
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --dark: #0f0a2e; --card: #1a1445; --card2: #211960;
-      --gold: #f5c842; --gold2: #ffe27a; --teal: #3ecfcf;
-      --coral: #ff6b6b; --green: #4ecb71; --text: #ffffff;
-      --muted: rgba(255,255,255,0.6); --rule: rgba(255,255,255,0.1);
-    }
+    :root { --dark: #0f0a2e; --card: #1a1445; --gold: #f5c842; --teal: #3ecfcf; --green: #4ecb71; --coral: #ff6b6b; --purple: #a78bfa; --muted: rgba(255,255,255,0.6); --rule: rgba(255,255,255,0.1); }
     html { font-size: 16px; }
-    body { font-family: 'Nunito', sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-
+    body { font-family: 'Nunito', sans-serif; background: var(--dark); color: #fff; min-height: 100vh; -webkit-font-smoothing: antialiased; }
     nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: rgba(15,10,46,0.95); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 10; }
     .nav-logo { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px; color: var(--gold); text-decoration: none; }
     .nav-back { font-size: 12px; font-weight: 700; color: var(--muted); text-decoration: none; }
-    .nav-back:hover { color: #fff; }
-
     .hero { text-align: center; padding: 40px 20px 30px; max-width: 600px; margin: 0 auto; }
-    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--coral); color: #fff; font-size: 11px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
-    .hero h1 { font-family: 'Fredoka One', cursive; font-size: clamp(30px, 8vw, 50px); color: var(--gold); line-height: 1.1; margin-bottom: 8px; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--purple); color: #fff; font-size: 11px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
+    .hero h1 { font-family: 'Fredoka One', cursive; font-size: clamp(28px, 8vw, 48px); color: var(--gold); line-height: 1.1; margin-bottom: 8px; }
     .hero .sub { font-size: 15px; color: var(--muted); margin-bottom: 20px; }
     .verse-hero { background: var(--card); border: 1px solid var(--rule); border-radius: 16px; padding: 18px 20px; font-size: 15px; font-style: italic; line-height: 1.65; color: rgba(255,255,255,0.88); margin-bottom: 8px; }
-    .verse-ref { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
-
-    .points-banner { background: linear-gradient(135deg, #2a1f6e, #1a1445); border: 1px solid var(--coral); border-radius: 14px; padding: 14px 20px; display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 20px 32px; max-width: 560px; margin-left: auto; margin-right: auto; }
-    .points-banner span { font-size: 13px; font-weight: 700; color: var(--coral); }
-
+    .verse-ref { font-size: 12px; font-weight: 700; color: var(--gold); }
+    .points-banner { background: linear-gradient(135deg, #2a1f6e, #1a1445); border: 1px solid var(--purple); border-radius: 14px; padding: 14px 20px; display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 20px 32px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .points-banner span { font-size: 13px; font-weight: 700; color: var(--purple); }
     .content { max-width: 600px; margin: 0 auto; padding: 0 16px 60px; }
-
     .day-card { background: var(--card); border: 1px solid var(--rule); border-radius: 20px; margin-bottom: 20px; overflow: hidden; }
     .day-header { display: flex; align-items: center; gap: 14px; padding: 18px 20px 14px; border-bottom: 1px solid var(--rule); }
     .day-num { width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: var(--dark); font-family: 'Fredoka One', cursive; font-size: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -40,276 +29,246 @@
     .day-info .day-title { font-family: 'Fredoka One', cursive; font-size: 20px; color: #fff; line-height: 1.2; }
     .day-emoji { font-size: 28px; margin-left: auto; flex-shrink: 0; }
     .day-body { padding: 18px 20px; }
-
     .verse-block { background: rgba(255,255,255,0.06); border-left: 3px solid var(--teal); border-radius: 0 10px 10px 0; padding: 14px 16px; margin-bottom: 16px; }
     .verse-block .vb-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
     .verse-block p { font-size: 14px; font-style: italic; line-height: 1.65; color: rgba(255,255,255,0.88); }
     .verse-block .vb-ref { font-size: 11px; font-weight: 700; color: var(--teal); margin-top: 8px; }
-
     .body-text { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.85); margin-bottom: 14px; }
     .body-text strong { color: var(--gold); }
-
     .talk-section { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
     .talk-label { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
     .talk-section ul { list-style: none; padding: 0; }
     .talk-section ul li { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.82); padding: 6px 0; display: flex; gap: 8px; }
-    .talk-section ul li::before { content: "&#128172;"; font-size: 14px; flex-shrink: 0; }
-
+    .talk-section ul li::before { content: "💬"; font-size: 13px; flex-shrink: 0; }
     .declaration { background: linear-gradient(135deg, #1e6b4a, #155236); border: 1px solid var(--green); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
     .decl-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
     .declaration p { font-size: 15px; font-weight: 700; line-height: 1.7; color: #fff; }
     .declaration .sig { font-size: 13px; font-weight: 900; color: var(--green); margin-top: 8px; }
-
     .activity-card { background: rgba(245,200,66,0.08); border: 1px dashed var(--gold); border-radius: 14px; padding: 14px 16px; }
     .activity-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
     .activity-card p { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.8); }
-
     .parent-note { background: rgba(62,207,207,0.08); border: 1px solid rgba(62,207,207,0.25); border-radius: 12px; padding: 12px 14px; margin-top: 12px; }
     .pn-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
     .parent-note p { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.7); font-style: italic; }
-
     footer { border-top: 1px solid var(--rule); padding: 30px 20px; text-align: center; }
     footer .logo { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--gold); margin-bottom: 6px; }
     footer p { font-size: 12px; color: var(--muted); line-height: 1.6; }
-    footer a { color: var(--teal); text-decoration: none; }
   </style>
 </head>
 <body>
-
 <nav>
   <a href="https://gatheringctx.org" class="nav-logo">&#9889; thegathering</a>
   <a href="https://gatheringctx.org/kids" class="nav-back">&#8592; Kids Zone</a>
 </nav>
-
 <div class="hero">
-  <div class="badge">&#128293; Ages 4&ndash;7 &middot; Pentecost</div>
-  <h1>The Fire Fell! &#128293;</h1>
-  <p class="sub">5 days with your family &middot; Acts 2:1&ndash;4</p>
-  <div class="verse-hero">&ldquo;And they were all filled with the Holy Spirit.&rdquo;</div>
-  <p class="verse-ref">Acts 2:4, ESV</p>
+  <div class="badge">&#128522; Ages 4&ndash;7 &middot; Philippians Week 1</div>
+  <h1>Joy All the Time! &#127881;</h1>
+  <p class="sub">5 days with your family &middot; Philippians 1</p>
+  <div class="verse-hero">&ldquo;I will rejoice. Yes, and I will rejoice.&rdquo;</div>
+  <p class="verse-ref">Philippians 1:18, ESV</p>
 </div>
-
 <div class="points-banner">
-  <span>&#128293;</span>
+  <span>&#127881;</span>
   <span>Read together with your grown-up and earn +10 points each day!</span>
-  <span>&#128293;</span>
+  <span>&#127881;</span>
 </div>
-
 <div class="content">
 
-  <!-- DAY 1 -->
-  <div class="day-card" id="day-1">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">1</div>
-      <div class="day-info">
-        <p class="day-label">Day 1</p>
-        <p class="day-title">God Made a Big Promise and He Kept It!</p>
-      </div>
-      <div class="day-emoji">&#127775;</div>
+      <div class="day-info"><p class="day-label">Day 1</p><p class="day-title">God Always Finishes What He Starts!</p></div>
+      <div class="day-emoji">&#127381;</div>
     </div>
     <div class="day-body">
       <div class="verse-block">
         <p class="vb-label">&#128214; The Bible Says</p>
-        <p>&ldquo;I will pour out my Spirit on all flesh.&rdquo;</p>
-        <p class="vb-ref">Joel 2:28, ESV</p>
+        <p>&ldquo;He who began a good work in you will bring it to completion at the day of Jesus Christ.&rdquo;</p>
+        <p class="vb-ref">Philippians 1:6, ESV</p>
       </div>
-      <p class="body-text">A long, long time ago, before your great-great-great-great-grandparents were even born, God made a promise. He said: one day I am going to pour out my Holy Spirit on everyone. Not just on special people. On ALL people.</p>
-      <p class="body-text">And do you know what? <strong>God kept that promise.</strong> On the very first Pentecost Sunday, the Holy Spirit came down from heaven like fire and wind. Everyone there felt it. Everyone. God always does what He says He will do!</p>
+      <p class="body-text">Have you ever started building something with blocks and then someone knocked it over before you could finish? That is so frustrating! But here is something amazing about God: <strong>He ALWAYS finishes what He starts.</strong></p>
+      <p class="body-text">A man named Paul wrote this verse from prison. He was in a jail cell, which is a hard, scary place to be. But even from jail, Paul knew something important. God started something good in him. And God was not going to stop working until it was completely done.</p>
+      <p class="body-text"><strong>That is true for you too!</strong> God started something good in you the moment He made you. And He is still working on you every single day. He will not stop until the job is completely finished!</p>
       <div class="talk-section">
         <p class="talk-label">&#128172; Let's Talk About It</p>
         <ul>
-          <li>Can you think of a promise someone kept for you? How did that feel?</li>
-          <li>Why is it so good to know that God always keeps His promises?</li>
+          <li>Can you think of something you started and finished? How did it feel when it was done?</li>
+          <li>How does it feel to know God will never stop working on you?</li>
         </ul>
       </div>
       <div class="declaration">
         <p class="decl-label">&#9889; Say It Out Loud!</p>
-        <p>God always keeps His promises! The Holy Spirit is real and He is here! I walk with Jesus, and THAT means I win!</p>
+        <p>God started something good in me and He will finish it! He never gives up on me! I walk with Jesus, and THAT means I win!</p>
         <p class="sig">Amen! &#127881;</p>
       </div>
       <div class="activity-card">
         <p class="activity-label">&#9997;&#65039; Family Activity</p>
-        <p>Draw a picture of a big campfire with the word "PROMISE" written in the flames. God kept His promise with fire!</p>
+        <p>Start drawing a picture together and do not finish it today. Come back tomorrow and finish it. Talk about how God is like that. He started you and He will always come back to finish the good work!</p>
       </div>
       <div class="parent-note">
         <p class="pn-label">&#128065; Parent Note</p>
-        <p>Help your child understand that Pentecost is the birthday of the Church. God's promise in Joel 2 was fulfilled in Acts 2. God's timing is always perfect.</p>
+        <p>This is the foundational truth of Philippians 1:6. God's sanctifying work is ongoing and guaranteed. Help your child understand that God's investment in them is permanent, not conditional on their behavior.</p>
       </div>
     </div>
   </div>
 
-  <!-- DAY 2 -->
-  <div class="day-card" id="day-2">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">2</div>
-      <div class="day-info">
-        <p class="day-label">Day 2</p>
-        <p class="day-title">The Fire and the Wind and the Sound!</p>
-      </div>
-      <div class="day-emoji">&#128168;</div>
+      <div class="day-info"><p class="day-label">Day 2</p><p class="day-title">Paul Sang in Jail!</p></div>
+      <div class="day-emoji">&#127925;</div>
     </div>
     <div class="day-body">
       <div class="verse-block">
         <p class="vb-label">&#128214; The Bible Says</p>
-        <p>&ldquo;And suddenly there came from heaven a sound like a mighty rushing wind, and it filled the entire house where they were sitting.&rdquo;</p>
-        <p class="vb-ref">Acts 2:2, ESV</p>
+        <p>&ldquo;Always in every prayer of mine for you all making my prayer with joy.&rdquo;</p>
+        <p class="vb-ref">Philippians 1:4, ESV</p>
       </div>
-      <p class="body-text">Imagine sitting in a room with your friends. And then suddenly, <strong>WHOOOOSH!</strong> A sound like a giant wind fills the whole house. Then you see something amazing: little flames of fire that float and rest right on top of each person's head!</p>
-      <p class="body-text">That is what happened on Pentecost Sunday! And here is a cool secret: in the Bible, the word for "wind" is also the word for "Spirit." So when that mighty wind came, <strong>it was God's Spirit arriving!</strong> The Holy Spirit is like the wind. You cannot see it, but you can feel it and see what it does!</p>
+      <p class="body-text">A long time ago, Paul and his friend Silas were thrown into a really dark, cold jail. Their feet were locked in heavy chains. It hurt. It was scary. It was the middle of the night.</p>
+      <p class="body-text">And do you know what they did? <strong>They sang!</strong> They sang songs to God right there in the dark. And then something amazing happened. An earthquake came! The doors flew open! The chains fell off!</p>
+      <p class="body-text">The singing came BEFORE the miracle. Paul was not happy because everything was going well. Paul was happy because <strong>God was with him no matter what.</strong> That is real joy. Joy that does not need everything to be perfect first!</p>
       <div class="talk-section">
         <p class="talk-label">&#128172; Let's Talk About It</p>
         <ul>
-          <li>Have you ever felt a big wind? What did it feel like?</li>
-          <li>If you could not see the Holy Spirit but you could feel Him, what do you think that would feel like?</li>
+          <li>When was a time things felt hard or scary? What helped you feel better?</li>
+          <li>Do you think you could sing to God even when things are hard?</li>
         </ul>
       </div>
       <div class="declaration">
         <p class="decl-label">&#9889; Say It Out Loud!</p>
-        <p>The Holy Spirit is real just like the wind is real! I can feel God even when I cannot see Him! I walk with Jesus, and THAT means I win!</p>
+        <p>I can have joy even when things are hard! God is with me no matter what! I walk with Jesus, and THAT means I win!</p>
         <p class="sig">Amen! &#127881;</p>
       </div>
       <div class="activity-card">
         <p class="activity-label">&#9997;&#65039; Family Activity</p>
-        <p>Blow on your hand. Feel the air? Now blow on a piece of paper and watch it move. The Holy Spirit is like that. You cannot see Him, but He is real and He moves things!</p>
+        <p>Sing your favorite worship song together right now, even if nobody feels like it! See what happens to the room when you choose to sing to God!</p>
       </div>
       <div class="parent-note">
         <p class="pn-label">&#128065; Parent Note</p>
-        <p>John 3:8 uses the same wind-Spirit connection. Jesus told Nicodemus "the wind blows where it wishes and you hear its sound." This is a beautiful biblical metaphor, not metaphysics. Keep it concrete and fun.</p>
+        <p>The Acts 16 account is concrete and engaging for children. The miracle followed the praise. This plants the seed that worship is not a response to good circumstances but a weapon in hard ones.</p>
       </div>
     </div>
   </div>
 
-  <!-- DAY 3 -->
-  <div class="day-card" id="day-3">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">3</div>
-      <div class="day-info">
-        <p class="day-label">Day 3</p>
-        <p class="day-title">God Put Special Power Inside You!</p>
-      </div>
-      <div class="day-emoji">&#9889;</div>
+      <div class="day-info"><p class="day-label">Day 3</p><p class="day-title">Even the Hard Stuff Can Help Other People!</p></div>
+      <div class="day-emoji">&#128170;</div>
     </div>
     <div class="day-body">
       <div class="verse-block">
         <p class="vb-label">&#128214; The Bible Says</p>
-        <p>&ldquo;You will receive power when the Holy Spirit has come upon you.&rdquo;</p>
-        <p class="vb-ref">Acts 1:8, ESV</p>
+        <p>&ldquo;What has happened to me has really served to advance the gospel.&rdquo;</p>
+        <p class="vb-ref">Philippians 1:12, ESV</p>
       </div>
-      <p class="body-text">Before Jesus went back to heaven, He told His friends something really important. He said: I am going to send the Holy Spirit, and when He comes, you will have <strong>POWER!</strong></p>
-      <p class="body-text">Not power to fly like a superhero. But power to love people, to be brave, to tell people about Jesus, and to do hard things you could not do on your own. The Holy Spirit is like a battery that never runs out! And the amazing thing is, if you love Jesus, that power already lives inside you right now!</p>
+      <p class="body-text">While Paul was in jail, the guards had to be right next to him all day. They could not leave. And Paul used that time to tell them all about Jesus! The hard thing that happened to Paul, being put in jail, actually helped MORE people hear about God!</p>
+      <p class="body-text">Sometimes when something hard happens to us, <strong>God uses it to help someone else.</strong> Maybe you got sick and a friend came to visit and you got to tell them about Jesus. Maybe something scary happened and your braveness helped another kid feel less scared.</p>
+      <p class="body-text">God does not waste the hard things. He uses them!</p>
       <div class="talk-section">
         <p class="talk-label">&#128172; Let's Talk About It</p>
         <ul>
-          <li>Can you think of something hard that you needed help doing?</li>
-          <li>How does it feel to know God's power is already inside you?</li>
+          <li>Has anything hard ever happened that ended up helping someone else?</li>
+          <li>Can you think of someone you could encourage this week?</li>
         </ul>
       </div>
       <div class="declaration">
         <p class="decl-label">&#9889; Say It Out Loud!</p>
-        <p>God's power lives inside me! The Holy Spirit helps me be brave and kind! I walk with Jesus, and THAT means I win!</p>
+        <p>God uses the hard things to help other people! My story can help someone else! I walk with Jesus, and THAT means I win!</p>
         <p class="sig">Amen! &#127881;</p>
       </div>
       <div class="activity-card">
         <p class="activity-label">&#9997;&#65039; Family Activity</p>
-        <p>Find a flashlight or a nightlight. When it is off, it cannot help anyone. When it is ON and plugged in, it shines! The Holy Spirit is like being plugged into God's power. Draw a shining light!</p>
+        <p>Write or draw a card for someone who is going through something hard right now. Tell them God loves them and does not waste hard things!</p>
       </div>
       <div class="parent-note">
         <p class="pn-label">&#128065; Parent Note</p>
-        <p>Affirm that the Holy Spirit's power is for everyday life. Not just big moments. Help your child name one specific situation this week where they can depend on the Spirit's help.</p>
+        <p>Paul's chains reached the Praetorian Guard. Help your child see that their difficulties, big or small, can become a testimony that points others to Jesus.</p>
       </div>
     </div>
   </div>
 
-  <!-- DAY 4 -->
-  <div class="day-card" id="day-4">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">4</div>
-      <div class="day-info">
-        <p class="day-label">Day 4</p>
-        <p class="day-title">You Are Never Ever Alone!</p>
-      </div>
-      <div class="day-emoji">&#129309;</div>
+      <div class="day-info"><p class="day-label">Day 4</p><p class="day-title">Be Brave Like a Good Team!</p></div>
+      <div class="day-emoji">&#127947;</div>
     </div>
     <div class="day-body">
       <div class="verse-block">
         <p class="vb-label">&#128214; The Bible Says</p>
-        <p>&ldquo;And I will ask the Father, and he will give you another Helper, to be with you forever.&rdquo;</p>
-        <p class="vb-ref">John 14:16, ESV</p>
+        <p>&ldquo;Standing firm in one spirit, with one mind striving side by side for the faith of the gospel.&rdquo;</p>
+        <p class="vb-ref">Philippians 1:27, ESV</p>
       </div>
-      <p class="body-text">Have you ever felt scared or alone? Maybe in the dark at night, or at a new place where you did not know anyone? Jesus knows that feeling. And He made a promise: <strong>I will send you a Helper who will ALWAYS be with you.</strong></p>
-      <p class="body-text">That Helper is the Holy Spirit! He is not your friend for just one day. He is not your friend just at church. He is with you FOREVER. At school. At the grocery store. In your bedroom. When you are happy and when you are sad. He is always, always there. <strong>You are never alone.</strong></p>
+      <p class="body-text">Paul told his friends: stand together! Stay brave together! Do not give up! He used a picture of soldiers standing side by side with their shields up, protecting each other. That sounds like a really good team!</p>
+      <p class="body-text">Being a Christian is like being on the best team ever. <strong>We help each other. We cheer each other on. We do not let each other fall down alone.</strong> When one person on the team is scared, the others stand next to them and say: we are right here. You are not alone!</p>
+      <p class="body-text">Your family is part of that team. Your church is part of that team. We stand together!</p>
       <div class="talk-section">
         <p class="talk-label">&#128172; Let's Talk About It</p>
         <ul>
-          <li>Is there a place where you sometimes feel scared or alone?</li>
-          <li>How does it feel to know the Holy Spirit is there with you in that place right now?</li>
+          <li>Who is on your team? Who helps you stay brave?</li>
+          <li>Is there someone on your team who needs you to stand next to them this week?</li>
         </ul>
       </div>
       <div class="declaration">
         <p class="decl-label">&#9889; Say It Out Loud!</p>
-        <p>The Holy Spirit is always with me! I am never alone! God is my Helper forever! I walk with Jesus, and THAT means I win!</p>
+        <p>I am part of God's team! I stand with my brothers and sisters! We are brave together! I walk with Jesus, and THAT means I win!</p>
         <p class="sig">Amen! &#127881;</p>
       </div>
       <div class="activity-card">
         <p class="activity-label">&#9997;&#65039; Family Activity</p>
-        <p>Draw a picture of a place where you sometimes feel alone or scared. Then draw a big bright light or flame right next to you in that place to represent the Holy Spirit being there with you.</p>
+        <p>Stand side by side with your family and link arms. Say together: "We stand together. We do not fall alone." Then pray for each person in your family by name.</p>
       </div>
       <div class="parent-note">
         <p class="pn-label">&#128065; Parent Note</p>
-        <p>Pray with your child specifically about the place they mentioned. Let them hear you talk to the Holy Spirit as a Person who is present. This builds the foundation for a real prayer life.</p>
+        <p>The military image of striving side by side is perfect for this age. Community and belonging are core developmental needs. Help your child identify their people and pray for them specifically.</p>
       </div>
     </div>
   </div>
 
-  <!-- DAY 5 -->
-  <div class="day-card" id="day-5">
+  <div class="day-card">
     <div class="day-header">
       <div class="day-num">5</div>
-      <div class="day-info">
-        <p class="day-label">Day 5</p>
-        <p class="day-title">You Are the Church. The Fire Lives in YOU!</p>
-      </div>
-      <div class="day-emoji">&#9968;&#65039;</div>
+      <div class="day-info"><p class="day-label">Day 5</p><p class="day-title">Choose Joy Every Single Day!</p></div>
+      <div class="day-emoji">&#127881;</div>
     </div>
     <div class="day-body">
       <div class="verse-block">
         <p class="vb-label">&#128214; The Bible Says</p>
-        <p>&ldquo;Do you not know that you are God's temple and that God's Spirit dwells in you?&rdquo;</p>
-        <p class="vb-ref">1 Corinthians 3:16, ESV</p>
+        <p>&ldquo;I will rejoice. Yes, and I will rejoice.&rdquo;</p>
+        <p class="vb-ref">Philippians 1:18, ESV</p>
       </div>
-      <p class="body-text">A long time ago, God lived in a special building called the Temple. Only certain people could get close to where God was. But then Jesus changed EVERYTHING.</p>
-      <p class="body-text">Now God does not live in a building. <strong>God lives in people.</strong> In YOU, if you love Jesus! You are God's temple. That means everywhere you go today, you carry God's presence with you. To school. To the park. To your neighbor's house. <strong>Wherever you go, the fire goes with you!</strong></p>
-      <p class="body-text">The Church is not just the building we meet in on Sundays. The Church is all of us together. We are all carrying the fire. And together we let it shine!</p>
+      <p class="body-text">Did you notice what Paul said? <strong>I WILL rejoice.</strong> He did not say I will rejoice if things get better. He did not say I will rejoice when I get out of jail. He said I WILL. It was a choice. He chose joy.</p>
+      <p class="body-text">And then he said it again! <em>Yes, and I will rejoice.</em> Like he really meant it! Joy is not just a feeling that happens to you when everything is good. Joy is something you can CHOOSE. Because Jesus is always with you. And nothing can change that.</p>
+      <p class="body-text">Every morning when you wake up, you can choose: <strong>today I will rejoice!</strong> Not because everything is perfect. But because Jesus is with you. That is the best reason of all.</p>
       <div class="talk-section">
         <p class="talk-label">&#128172; Let's Talk About It</p>
         <ul>
-          <li>Where are you going this week where you can bring the fire?</li>
-          <li>What is one way you can let God's love shine through you this week?</li>
+          <li>What is one thing you are happy about right now, even if today has been hard?</li>
+          <li>How can you choose joy tomorrow morning the moment you wake up?</li>
         </ul>
       </div>
       <div class="declaration">
         <p class="decl-label">&#9889; Say It Out Loud!</p>
-        <p>I am God's temple! The Holy Spirit lives in me! Wherever I go the fire goes with me! I walk with Jesus, and THAT means I win!</p>
+        <p>I choose joy every day! Not because everything is perfect, but because Jesus is with me! I walk with Jesus, and THAT means I win!</p>
         <p class="sig">Amen! &#127881;</p>
       </div>
       <div class="activity-card">
         <p class="activity-label">&#9997;&#65039; Family Prayer</p>
-        <p>Pray together: "Holy Spirit, thank You for living in us. Thank You that we are never alone. Help us shine Your light wherever we go this week. In Jesus' name, Amen!"</p>
+        <p>Pray together: "God, thank You that joy is something we can choose. Help us choose joy tomorrow morning, even before anything has happened yet. You are good all the time. In Jesus' name, Amen!"</p>
       </div>
       <div class="parent-note">
         <p class="pn-label">&#128065; Parent Note</p>
-        <p>You made it through all five days! This week send your child out each morning with: "Remember, the fire goes with you." It is a simple declaration that builds identity as a Spirit-carrier.</p>
+        <p>You made it through all five days! This week, start each morning with your child by asking: are you going to choose joy today? It builds a habit of volitional praise that will carry them through life.</p>
       </div>
     </div>
   </div>
 
 </div>
-
 <footer>
   <div class="logo">&#9889; Kids Gathering Zone</div>
   <p>The Gathering CTX &middot; Cleburne, TX &middot; gatheringctx.org</p>
   <p>Sundays at 5:00 PM &middot; Cleburne Conference Center</p>
 </footer>
-
 </body>
 </html>
