@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gathering CTX — Admin</title>
+<style>
+  :root {
+    --navy: #1a1a2e;
+    --navy-mid: #16213e;
+    --navy-light: #0f3460;
+    --gold: #f5c842;
+    --gold-dim: #c9a227;
+    --gold-soft: rgba(245,200,66,0.12);
+    --white: #ffffff;
+    --off-white: #f0eeea;
+    --gray: #8a8a9a;
+    --gray-light: #2a2a3e;
+    --red: #e05252;
+    --green: #52c07a;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --font: 'Georgia', serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--off-white);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+  }
+
+  /* ── LOGIN ── */
+  #login-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .login-box {
+    background: var(--navy-mid);
+    border: 1px solid var(--gold-soft);
+    border-radius: 16px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+  }
+  .login-box .cross {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .login-box h1 {
+    font-family: var(--font);
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .login-box p {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 32px;
+  }
+  .login-box input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--navy);
+    border: 1px solid var(--gray-light);
+    border-radius: var(--radius-sm);
+    color: var(--white);
+    font-size: 15px;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .login-box input:focus { border-color: var(--gold); }
+  .login-box .login-err {
+    color: var(--red);
+    font-size: 13px;
+    margin-bottom: 12px;
+    display: none;
+  }
+
+  /* ── LAYOUT ── */
+  #app { display: none; min-height: 100vh; }
+
+  .topbar {
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--gold-soft);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .topbar-brand span:first-child {
+    color: var(--gold);
+    font-size: 20px;
+  }
+  .topbar-brand strong {
+    font-family: var(--font);
+    font-size: 16px;
+    color: var(--white);
+  }
+  .topbar-brand em {
+    font-size: 11px;
+    color: var(--gray);
+    font-style: normal;
+    margin-left: 4px;
+  }
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .schedule-badge {
+    background: var(--gold-soft);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .logout-btn {
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+  .logout-btn:hover { color: var(--red); }
+
+  .main {
+    display: flex;
+    min-height: calc(100vh - 56px);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 200px;
+    background: var(--navy-mid);
+    border-right: 1px solid var(--gold-soft);
+    padding: 20px 0;
+    flex-shrink: 0;
+  }
+  .sidebar-section {
+    padding: 0 12px;
+    margin-bottom: 8px;
+  }
+  .sidebar-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray);
+    padding: 0 8px;
+    margin-bottom: 6px;
+    margin-top: 16px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--gray);
+    transition: all 0.15s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+  .nav-item:hover { background: var(--gold-soft); color: var(--off-white); }
+  .nav-item.active { background: var(--gold-soft); color: var(--gold); border-left: 2px solid var(--gold); }
+  .nav-item .icon { font-size: 15px; width: 18px; text-align: center; }
+
+  /* ── CONTENT ── */
+  .content {
+    flex: 1;
+    padding: 32px;
+    max-width: 900px;
+    overflow-y: auto;
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .panel-header {
+    margin-bottom: 28px;
+  }
+  .panel-header h2 {
+    font-family: var(--font);
+    font-size: 24px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .panel-header p {
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--navy-mid);
+    border: 1px solid var(--gray-light);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── FORM ELEMENTS ── */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .form-row.single { grid-template-columns: 1fr; }
+  .form-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  label {
+    font-size: 12px;
+    color: var(--gray);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  input[type=text],
+  input[type=date],
+  input[type=url],
+  input[type=number],
+  select,
+  textarea {
+    background: var(--navy);
+    border: 1px solid var(--gray-light);
+    border-radius: var(--radius-sm);
+    color: var(--white);
+    font-size: 14px;
+    font-family: var(--font-sans);
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+  select option { background: var(--navy-mid); }
+
+  .hint {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  /* ── TABS (for kids devos) ── */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .tab {
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--gray);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    transition: all 0.15s;
+  }
+  .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    padding: 11px 22px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .btn-primary:hover { background: var(--gold-dim); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-secondary {
+    background: var(--gray-light);
+    color: var(--off-white);
+  }
+  .btn-secondary:hover { background: #3a3a52; }
+  .btn-danger {
+    background: transparent;
+    color: var(--red);
+    border: 1px solid var(--red);
+  }
+  .btn-success {
+    background: var(--green);
+    color: var(--navy);
+  }
+  .btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
+  }
+
+  /* ── STATUS / TOAST ── */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 500;
+    display: none;
+    z-index: 9999;
+    max-width: 320px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  #toast.success { background: var(--green); color: var(--navy); }
+  #toast.error { background: var(--red); color: var(--white); }
+  #toast.info { background: var(--gold); color: var(--navy); }
+
+  /* ── SCHEDULE VIEW ── */
+  .schedule-list { display: flex; flex-direction: column; gap: 10px; }
+  .schedule-item {
+    background: var(--navy);
+    border: 1px solid var(--gray-light);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .schedule-item .si-title { font-size: 14px; color: var(--white); }
+  .schedule-item .si-time { font-size: 12px; color: var(--gold); }
+  .schedule-item .si-type {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray);
+    background: var(--gray-light);
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--gray);
+    font-size: 14px;
+  }
+  .empty-state .es-icon { font-size: 32px; margin-bottom: 12px; }
+
+  /* ── QUICK STATS ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--gray-light);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-card .stat-num {
+    font-size: 28px;
+    font-family: var(--font);
+    color: var(--gold);
+    font-weight: bold;
+  }
+  .stat-card .stat-label {
+    font-size: 11px;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  /* ── PUBLISH CONTROLS ── */
+  .publish-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: var(--navy);
+    border-radius: var(--radius-sm);
+    margin-top: 12px;
+  }
+  .publish-control input[type=datetime-local] {
+    flex: 1;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--navy-mid);
+    border: 1px solid var(--gold-soft);
+    border-radius: 16px;
+    padding: 32px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .modal-title {
+    font-family: var(--font);
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .modal-close {
+    float: right;
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: -4px;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .content { padding: 20px 16px; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-row.triple { grid-template-columns: 1fr 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="cross">✝</div>
+    <h1>The Gathering CTX</h1>
+    <p>Ministry Admin Panel</p>
+    <input type="password" id="pw-input" placeholder="Enter admin password" autocomplete="current-password">
+    <div class="login-err" id="login-err">Incorrect password. Try again.</div>
+    <button class="btn btn-primary" style="width:100%" onclick="tryLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-brand">
+      <span>✝</span>
+      <strong>The Gathering CTX</strong>
+      <em>Admin</em>
+    </div>
+    <div class="topbar-right">
+      <span class="schedule-badge" onclick="openScheduleModal()">📅 View Schedule</span>
+      <button class="logout-btn" onclick="logout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Weekly Production</div>
+        <button class="nav-item active" onclick="showPanel('thursday', this)">
+          <span class="icon">🗓</span> Thursday Drop
+        </button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Content</div>
+        <button class="nav-item" onclick="showPanel('sermon', this)">
+          <span class="icon">📖</span> Sermon
+        </button>
+        <button class="nav-item" onclick="showPanel('devotional', this)">
+          <span class="icon">📝</span> Adult Devo
+        </button>
+        <button class="nav-item" onclick="showPanel('kids', this)">
+          <span class="icon">⭐</span> Kids Devos
+        </button>
+        <button class="nav-item" onclick="showPanel('podcast', this)">
+          <span class="icon">🎙</span> Podcast
+        </button>
+        <button class="nav-item" onclick="showPanel('events', this)">
+          <span class="icon">📅</span> Events
+        </button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Tools</div>
+        <button class="nav-item" onclick="showPanel('publish', this)">
+          <span class="icon">⚡</span> Publish Now
+        </button>
+        <button class="nav-item" onclick="showPanel('dashboard', this)">
+          <span class="icon">📊</span> Dashboard
+        </button>
+      </div>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <div class="content">
+
+      <!-- ===== THURSDAY DROP ===== -->
+      <div class="panel active" id="panel-thursday">
+        <div class="panel-header">
+          <h2>Thursday Production Drop</h2>
+          <p>Add everything at once. Scheduling is handled automatically.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📅 Sunday Date</div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Preaching This Sunday</label>
+              <input type="date" id="th-sunday-date">
+              <span class="hint">Sermon publishes Saturday 5pm CT. Devotionals and kids devos publish Sunday 7pm CT.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📖 Sermon</div>
+          <div class="form-row">
+            <div class="field">
+              <label>Series</label>
+              <input type="text" id="th-series" placeholder="Philippians — Joy Unshakeable">
+            </div>
+            <div class="field">
+              <label>Week Number</label>
+              <input type="number" id="th-week-num" min="1" placeholder="3">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Sermon Title</label>
+              <input type="text" id="th-title" placeholder="Work It Out — And Walk It Out">
+            </div>
+            <div class="field">
+              <label>Subtitle</label>
+              <input type="text" id="th-subtitle" placeholder="The Gospel Moves from Theology to Monday Morning">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Passage</label>
+              <input type="text" id="th-passage" placeholder="Philippians 2:12 to 30">
+            </div>
+            <div class="field">
+              <label>Slug (URL)</label>
+              <input type="text" id="th-slug" placeholder="philippians-wk3">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Big Idea (one sentence)</label>
+              <input type="text" id="th-bigidea" placeholder="The mind of Christ is not a sermon point. It is a life.">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Preview Text (shown on sermon list)</label>
+              <textarea id="th-preview" rows="2" placeholder="Paul translates the Christ Hymn into skin and bone. Two men prove the theology is real."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📝 Adult Devotional</div>
+          <div class="form-row">
+            <div class="field">
+              <label>Devo Title</label>
+              <input type="text" id="th-devo-title" placeholder="Work It Out — And Walk It Out">
+            </div>
+            <div class="field">
+              <label>Devo Slug</label>
+              <input type="text" id="th-devo-slug" placeholder="phil-wk3-adult-devo">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Intro Paragraphs</label>
+              <textarea id="th-devo-intro" rows="3" placeholder="Opening context for the 5-day devotional..."></textarea>
+            </div>
+          </div>
+          <div id="devo-days-quick"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⭐ Kids Devos — Ages 4 to 7</div>
+          <div class="form-row triple">
+            <div class="field">
+              <label>Day 1 Title</label>
+              <input type="text" id="k47-d1-title" placeholder="Day 1 title">
+            </div>
+            <div class="field">
+              <label>Day 2 Title</label>
+              <input type="text" id="k47-d2-title" placeholder="Day 2 title">
+            </div>
+            <div class="field">
+              <label>Day 3 Title</label>
+              <input type="text" id="k47-d3-title" placeholder="Day 3 title">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Day 4 Title</label>
+              <input type="text" id="k47-d4-title" placeholder="Day 4 title">
+            </div>
+            <div class="field">
+              <label>Day 5 Title</label>
+              <input type="text" id="k47-d5-title" placeholder="Day 5 title">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Day 1 Content (paste full devo text)</label>
+              <textarea id="k47-d1-content" rows="4" placeholder="Day 1 devotional content..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⚔️ Kids Devos — Ages 8 to 12</div>
+          <div class="form-row triple">
+            <div class="field">
+              <label>Day 1 Title</label>
+              <input type="text" id="k812-d1-title" placeholder="Day 1 title">
+            </div>
+            <div class="field">
+              <label>Day 2 Title</label>
+              <input type="text" id="k812-d2-title" placeholder="Day 2 title">
+            </div>
+            <div class="field">
+              <label>Day 3 Title</label>
+              <input type="text" id="k812-d3-title" placeholder="Day 3 title">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Day 4 Title</label>
+              <input type="text" id="k812-d4-title" placeholder="Day 4 title">
+            </div>
+            <div class="field">
+              <label>Day 5 Title</label>
+              <input type="text" id="k812-d5-title" placeholder="Day 5 title">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Day 1 Content (paste full devo text)</label>
+              <textarea id="k812-d1-content" rows="4" placeholder="Day 1 devotional content..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎙 Podcast Episode (optional — add now or later)</div>
+          <div class="form-row">
+            <div class="field">
+              <label>Buzzsprout Episode URL</label>
+              <input type="url" id="th-podcast-url" placeholder="https://www.buzzsprout.com/2608288/episodes/...">
+            </div>
+            <div class="field">
+              <label>Episode Number</label>
+              <input type="number" id="th-podcast-ep" placeholder="12">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Episode Description</label>
+              <textarea id="th-podcast-desc" rows="3" placeholder="Podcast episode description..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="submitThursday()" id="th-submit-btn">
+            📅 Schedule Everything
+          </button>
+          <span style="font-size:12px;color:var(--gray)">Sermon → Saturday 5pm CT &nbsp;|&nbsp; Devos → Sunday 7pm CT</span>
+        </div>
+      </div>
+
+      <!-- ===== SERMON (standalone) ===== -->
+      <div class="panel" id="panel-sermon">
+        <div class="panel-header">
+          <h2>Add Sermon</h2>
+          <p>Add a single sermon with custom scheduling.</p>
+        </div>
+        <div class="card">
+          <div class="form-row">
+            <div class="field">
+              <label>Series</label>
+              <input type="text" id="s-series" placeholder="Philippians — Joy Unshakeable">
+            </div>
+            <div class="field">
+              <label>Week Number</label>
+              <input type="number" id="s-week" min="1">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Title</label>
+              <input type="text" id="s-title">
+            </div>
+            <div class="field">
+              <label>Subtitle</label>
+              <input type="text" id="s-subtitle">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Passage</label>
+              <input type="text" id="s-passage" placeholder="Philippians 2:12 to 30">
+            </div>
+            <div class="field">
+              <label>Preached On</label>
+              <input type="date" id="s-preached">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Slug (URL)</label>
+              <input type="text" id="s-slug">
+            </div>
+            <div class="field">
+              <label>Speaker</label>
+              <input type="text" id="s-speaker" value="Pastor Billy Philips">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Big Idea</label>
+              <input type="text" id="s-bigidea">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Preview Text</label>
+              <textarea id="s-preview" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Podcast URL (Buzzsprout)</label>
+              <input type="url" id="s-podcast-url">
+            </div>
+          </div>
+          <div class="publish-control">
+            <label style="white-space:nowrap">Publish at:</label>
+            <input type="datetime-local" id="s-publish-at">
+            <button class="btn btn-secondary" onclick="setNow('s-publish-at')">Now</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="submitSermon()">Save Sermon</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ADULT DEVO (standalone) ===== -->
+      <div class="panel" id="panel-devotional">
+        <div class="panel-header">
+          <h2>Adult Devotional</h2>
+          <p>Add a 5-day adult devotional linked to a sermon.</p>
+        </div>
+        <div class="card">
+          <div class="form-row">
+            <div class="field">
+              <label>Title</label>
+              <input type="text" id="d-title">
+            </div>
+            <div class="field">
+              <label>Slug</label>
+              <input type="text" id="d-slug">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Series</label>
+              <input type="text" id="d-series">
+            </div>
+            <div class="field">
+              <label>Week Number</label>
+              <input type="number" id="d-week">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Passage</label>
+              <input type="text" id="d-passage">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Intro Paragraphs</label>
+              <textarea id="d-intro" rows="4"></textarea>
+            </div>
+          </div>
+
+          <!-- Days 1-5 -->
+          <div id="devo-day-fields"></div>
+
+          <div class="form-row single" style="margin-top:16px">
+            <div class="field">
+              <label>Reflect Questions</label>
+              <textarea id="d-reflect" rows="3" placeholder="Three questions separated by line breaks..."></textarea>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Prayer of Identity</label>
+              <textarea id="d-prayer" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Closing Declaration</label>
+              <textarea id="d-declaration" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="publish-control">
+            <label style="white-space:nowrap">Publish at:</label>
+            <input type="datetime-local" id="d-publish-at">
+            <button class="btn btn-secondary" onclick="setNow('d-publish-at')">Now</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="submitDevo()">Save Devotional</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== KIDS DEVOS ===== -->
+      <div class="panel" id="panel-kids">
+        <div class="panel-header">
+          <h2>Kids Devotionals</h2>
+          <p>Add kids devos for both age groups for the week.</p>
+        </div>
+        <div class="card">
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab('k47', this)">Ages 4 to 7</button>
+            <button class="tab" onclick="switchTab('k812', this)">Ages 8 to 12</button>
+          </div>
+
+          <div class="tab-panel active" id="tab-k47">
+            <div id="kids-fields-47"></div>
+          </div>
+          <div class="tab-panel" id="tab-k812">
+            <div id="kids-fields-812"></div>
+          </div>
+
+          <div class="publish-control">
+            <label style="white-space:nowrap">Publish at:</label>
+            <input type="datetime-local" id="k-publish-at">
+            <button class="btn btn-secondary" onclick="setNow('k-publish-at')">Now</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="submitKids()">Save Kids Devos</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PODCAST ===== -->
+      <div class="panel" id="panel-podcast">
+        <div class="panel-header">
+          <h2>Podcast Episode</h2>
+          <p>Add a podcast episode. Can be linked to an existing sermon.</p>
+        </div>
+        <div class="card">
+          <div class="form-row">
+            <div class="field">
+              <label>Episode Title</label>
+              <input type="text" id="p-title">
+            </div>
+            <div class="field">
+              <label>Episode Number</label>
+              <input type="number" id="p-ep-num">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Buzzsprout URL</label>
+              <input type="url" id="p-buz-url" placeholder="https://www.buzzsprout.com/...">
+            </div>
+            <div class="field">
+              <label>Apple Podcasts URL</label>
+              <input type="url" id="p-apple-url">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Spotify URL</label>
+              <input type="url" id="p-spotify-url">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Description</label>
+              <textarea id="p-desc" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="publish-control">
+            <label style="white-space:nowrap">Publish at:</label>
+            <input type="datetime-local" id="p-publish-at">
+            <button class="btn btn-secondary" onclick="setNow('p-publish-at')">Now</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="submitPodcast()">Save Episode</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== EVENTS ===== -->
+      <div class="panel" id="panel-events">
+        <div class="panel-header">
+          <h2>Events</h2>
+          <p>Add upcoming events shown on the site.</p>
+        </div>
+        <div class="card">
+          <div class="form-row">
+            <div class="field">
+              <label>Event Title</label>
+              <input type="text" id="ev-title">
+            </div>
+            <div class="field">
+              <label>Event Date</label>
+              <input type="date" id="ev-date">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Time</label>
+              <input type="text" id="ev-time" value="5:00 PM">
+            </div>
+            <div class="field">
+              <label>Location</label>
+              <input type="text" id="ev-location" value="Cleburne Conference Center">
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Description</label>
+              <textarea id="ev-desc" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>Registration URL (optional)</label>
+              <input type="url" id="ev-reg">
+            </div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="submitEvent()">Add Event</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PUBLISH NOW ===== -->
+      <div class="panel" id="panel-publish">
+        <div class="panel-header">
+          <h2>Publish Now</h2>
+          <p>Force-publish any scheduled item immediately.</p>
+        </div>
+        <div class="card">
+          <div class="form-row">
+            <div class="field">
+              <label>Content Type</label>
+              <select id="pn-table">
+                <option value="sermons">Sermon</option>
+                <option value="devotionals">Adult Devotional</option>
+                <option value="devos">Kids Devo</option>
+                <option value="podcast_episodes">Podcast Episode</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Item ID</label>
+              <input type="text" id="pn-id" placeholder="UUID from Supabase">
+            </div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-success" onclick="publishNow()">⚡ Publish Now</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <div class="card-title">🗓 Upcoming Schedule</div>
+          <div id="publish-schedule-list"><div class="empty-state"><div class="es-icon">📅</div>Loading schedule...</div></div>
+        </div>
+      </div>
+
+      <!-- ===== DASHBOARD ===== -->
+      <div class="panel" id="panel-dashboard">
+        <div class="panel-header">
+          <h2>Dashboard</h2>
+          <p>Quick view of what is live and what is coming.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-num" id="stat-sermons">–</div>
+            <div class="stat-label">Sermons</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-devos">–</div>
+            <div class="stat-label">Devotionals</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-kids">–</div>
+            <div class="stat-label">Kids Devos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-podcasts">–</div>
+            <div class="stat-label">Episodes</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📅 Queued Content</div>
+          <div id="dashboard-queue"></div>
+        </div>
+      </div>
+
+    </div><!-- .content -->
+  </div><!-- .main -->
+</div><!-- #app -->
+
+<!-- SCHEDULE MODAL -->
+<div class="modal-overlay" id="schedule-modal">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <div class="modal-title">📅 Publishing Schedule</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-schedule-content"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+const SUPABASE_URL = 'https://ktuapfiexhlladgkuauc.supabase.co'
+const EDGE_FN = `${SUPABASE_URL}/functions/v1/weekly-content-deploy`
+const ADMIN_PASSWORD = 'gathering2026'
+
+// ── AUTH ──────────────────────────────────────────
+function tryLogin() {
+  const pw = document.getElementById('pw-input').value
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none'
+    document.getElementById('app').style.display = 'block'
+    initApp()
+  } else {
+    document.getElementById('login-err').style.display = 'block'
+    document.getElementById('pw-input').value = ''
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') tryLogin()
+})
+function logout() {
+  document.getElementById('login-screen').style.display = 'flex'
+  document.getElementById('app').style.display = 'none'
+  document.getElementById('pw-input').value = ''
+}
+
+// ── INIT ──────────────────────────────────────────
+function initApp() {
+  buildDevoDayFields()
+  buildKidsFields()
+  loadDashboard()
+  loadPublishSchedule()
+  // Set default Sunday date to next Sunday
+  const d = new Date()
+  const day = d.getDay()
+  const daysUntilSunday = day === 0 ? 7 : 7 - day
+  d.setDate(d.getDate() + daysUntilSunday)
+  const yyyy = d.getFullYear()
+  const mm = String(d.getMonth()+1).padStart(2,'0')
+  const dd = String(d.getDate()).padStart(2,'0')
+  const sundayStr = `${yyyy}-${mm}-${dd}`
+  document.getElementById('th-sunday-date').value = sundayStr
+}
+
+function buildDevoDayFields() {
+  const container = document.getElementById('devo-day-fields')
+  let html = ''
+  for (let i = 1; i <= 5; i++) {
+    html += `
+      <div style="margin-bottom:16px;padding-top:16px;border-top:1px solid var(--gray-light)">
+        <div style="font-size:12px;color:var(--gold);margin-bottom:10px;font-weight:600">DAY ${i}</div>
+        <div class="form-row">
+          <div class="field">
+            <label>Day ${i} Title</label>
+            <input type="text" id="d-d${i}-title">
+          </div>
+          <div class="field">
+            <label>Day ${i} Scripture Ref</label>
+            <input type="text" id="d-d${i}-scripture" placeholder="Philippians 2:12 to 13">
+          </div>
+        </div>
+        <div class="form-row single">
+          <div class="field">
+            <label>Day ${i} Content</label>
+            <textarea id="d-d${i}-content" rows="4"></textarea>
+          </div>
+        </div>
+      </div>`
+  }
+  container.innerHTML = html
+}
+
+function buildKidsFields() {
+  buildKidsGroup('47', 'kids-fields-47', 'Ages 4 to 7')
+  buildKidsGroup('812', 'kids-fields-812', 'Ages 8 to 12')
+}
+function buildKidsGroup(prefix, containerId, label) {
+  const container = document.getElementById(containerId)
+  let html = `
+    <div class="form-row">
+      <div class="field">
+        <label>Series</label>
+        <input type="text" id="k${prefix}-series" placeholder="Philippians">
+      </div>
+      <div class="field">
+        <label>Week Number</label>
+        <input type="number" id="k${prefix}-week" min="1">
+      </div>
+    </div>`
+  for (let i = 1; i <= 5; i++) {
+    html += `
+      <div style="margin-bottom:16px;padding-top:16px;border-top:1px solid var(--gray-light)">
+        <div style="font-size:12px;color:var(--gold);margin-bottom:10px;font-weight:600">DAY ${i}</div>
+        <div class="form-row">
+          <div class="field">
+            <label>Title</label>
+            <input type="text" id="k${prefix}-d${i}-title">
+          </div>
+          <div class="field">
+            <label>Scripture</label>
+            <input type="text" id="k${prefix}-d${i}-scripture">
+          </div>
+        </div>
+        <div class="form-row single">
+          <div class="field">
+            <label>Content</label>
+            <textarea id="k${prefix}-d${i}-content" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Activity / Question</label>
+            <input type="text" id="k${prefix}-d${i}-activity">
+          </div>
+          <div class="field">
+            <label>Prayer</label>
+            <input type="text" id="k${prefix}-d${i}-prayer">
+          </div>
+        </div>
+      </div>`
+  }
+  container.innerHTML = html
+}
+
+// ── NAVIGATION ────────────────────────────────────
+function showPanel(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'))
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'))
+  document.getElementById('panel-' + name).classList.add('active')
+  if (btn) btn.classList.add('active')
+  if (name === 'publish') loadPublishSchedule()
+  if (name === 'dashboard') loadDashboard()
+}
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'))
+  document.querySelectorAll('.tab-panel').forEach(t => t.classList.remove('active'))
+  btn.classList.add('active')
+  document.getElementById('tab-' + tabId).classList.add('active')
+}
+
+// ── API CALL ──────────────────────────────────────
+async function callEdge(action, data) {
+  const res = await fetch(EDGE_FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action, data })
+  })
+  return res.json()
+}
+
+// ── TOAST ─────────────────────────────────────────
+function toast(msg, type = 'success') {
+  const t = document.getElementById('toast')
+  t.textContent = msg
+  t.className = type
+  t.style.display = 'block'
+  setTimeout(() => { t.style.display = 'none' }, 4000)
+}
+
+// ── HELPERS ───────────────────────────────────────
+function val(id) { return (document.getElementById(id)?.value || '').trim() }
+function setNow(id) {
+  const now = new Date()
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
+  document.getElementById(id).value = now.toISOString().slice(0,16)
+}
+function slug(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')
+}
+function formatDT(iso) {
+  if (!iso) return 'Not scheduled'
+  const d = new Date(iso)
+  return d.toLocaleString('en-US', { weekday:'short', month:'short', day:'numeric', hour:'numeric', minute:'2-digit', timeZoneName:'short', timeZone:'America/Chicago' })
+}
+
+// ── THURSDAY PRODUCTION ───────────────────────────
+async function submitThursday() {
+  const btn = document.getElementById('th-submit-btn')
+  const sundayDate = val('th-sunday-date')
+  if (!sundayDate) { toast('Select a Sunday date first.', 'error'); return }
+
+  btn.disabled = true
+  btn.textContent = 'Scheduling...'
+
+  const seriesVal = val('th-series')
+  const titleVal = val('th-title')
+  const slugVal = val('th-slug') || slug(titleVal)
+
+  const sermon = {
+    title: titleVal,
+    subtitle: val('th-subtitle'),
+    series: seriesVal,
+    week_number: parseInt(val('th-week-num')) || null,
+    passage: val('th-passage'),
+    big_idea: val('th-bigidea'),
+    preview_text: val('th-preview'),
+    slug: slugVal,
+    speaker: 'Pastor Billy Philips',
+  }
+
+  const devotional = {
+    title: val('th-devo-title') || titleVal,
+    slug: val('th-devo-slug') || slug(val('th-devo-title') || titleVal) + '-devo',
+    series: seriesVal,
+    passage: val('th-passage'),
+    intro_paragraphs: val('th-devo-intro'),
+  }
+
+  // Kids devos — build array for both age groups
+  const kidsDevos = []
+  const groups = [
+    { prefix: 'k47', ageGroup: '4-7', label: 'Little Warriors' },
+    { prefix: 'k812', ageGroup: '8-12', label: 'Warrior Kids' },
+  ]
+  for (const g of groups) {
+    for (let i = 1; i <= 5; i++) {
+      const t = val(`${g.prefix}-d${i}-title`)
+      if (t) {
+        kidsDevos.push({
+          id: `${g.ageGroup}-d${i}-${sundayDate}`,
+          age_group: g.ageGroup,
+          title: t,
+          scripture: val(`${g.prefix}-d${i}-scripture`),
+          content: val(`${g.prefix}-d${i}-content`),
+          activity: val(`${g.prefix}-d${i}-activity`),
+          prayer: val(`${g.prefix}-d${i}-prayer`),
+          sort_order: i,
+          series: seriesVal,
+          week_number: parseInt(val('th-week-num')) || null,
+        })
+      }
+    }
+  }
+
+  // Podcast (optional)
+  let podcast = null
+  const podUrl = val('th-podcast-url')
+  if (podUrl) {
+    podcast = {
+      title: titleVal,
+      buzzsprout_url: podUrl,
+      episode_number: parseInt(val('th-podcast-ep')) || null,
+      description: val('th-podcast-desc'),
+    }
+  }
+
+  try {
+    const result = await callEdge('thursday_production', {
+      sunday_date: sundayDate,
+      sermon,
+      devotional,
+      kids_devos: kidsDevos.length > 0 ? kidsDevos : undefined,
+      podcast,
+    })
+
+    if (result.success) {
+      const sch = result.schedule
+      toast(`Done! Sermon live Saturday 5pm CT. Devos live Sunday 7pm CT.`, 'success')
+      loadDashboard()
+    } else {
+      toast('Error: ' + (result.error || 'Unknown error'), 'error')
+    }
+  } catch (e) {
+    toast('Network error. Check connection.', 'error')
+  }
+
+  btn.disabled = false
+  btn.textContent = '📅 Schedule Everything'
+}
+
+// ── SERMON STANDALONE ─────────────────────────────
+async function submitSermon() {
+  const titleVal = val('s-title')
+  if (!titleVal) { toast('Sermon title required.', 'error'); return }
+  const data = {
+    title: titleVal,
+    subtitle: val('s-subtitle'),
+    series: val('s-series'),
+    week_number: parseInt(val('s-week')) || null,
+    passage: val('s-passage'),
+    preached_on: val('s-preached'),
+    slug: val('s-slug') || slug(titleVal),
+    speaker: val('s-speaker') || 'Pastor Billy Philips',
+    big_idea: val('s-bigidea'),
+    preview_text: val('s-preview'),
+    podcast_url: val('s-podcast-url'),
+    active: false,
+    publish_at: val('s-publish-at') ? new Date(val('s-publish-at')).toISOString() : null,
+  }
+  const r = await callEdge('add_sermon', data)
+  r.success ? toast('Sermon saved.') : toast('Error: ' + r.error, 'error')
+}
+
+// ── DEVOTIONAL STANDALONE ────────────────────────
+async function submitDevo() {
+  const titleVal = val('d-title')
+  if (!titleVal) { toast('Title required.', 'error'); return }
+  const data = {
+    title: titleVal,
+    slug: val('d-slug') || slug(titleVal),
+    series: val('d-series'),
+    week_number: parseInt(val('d-week')) || null,
+    passage: val('d-passage'),
+    intro_paragraphs: val('d-intro'),
+    day_1_title: val('d-d1-title'), day_1_scripture: val('d-d1-scripture'), day_1_content: val('d-d1-content'),
+    day_2_title: val('d-d2-title'), day_2_scripture: val('d-d2-scripture'), day_2_content: val('d-d2-content'),
+    day_3_title: val('d-d3-title'), day_3_scripture: val('d-d3-scripture'), day_3_content: val('d-d3-content'),
+    day_4_title: val('d-d4-title'), day_4_scripture: val('d-d4-scripture'), day_4_content: val('d-d4-content'),
+    day_5_title: val('d-d5-title'), day_5_scripture: val('d-d5-scripture'), day_5_content: val('d-d5-content'),
+    reflect_questions: val('d-reflect'),
+    prayer_of_identity: val('d-prayer'),
+    closing_declaration: val('d-declaration'),
+    active: false,
+    publish_at: val('d-publish-at') ? new Date(val('d-publish-at')).toISOString() : null,
+  }
+  const r = await callEdge('add_devotional', data)
+  r.success ? toast('Devotional saved.') : toast('Error: ' + r.error, 'error')
+}
+
+// ── KIDS DEVOS STANDALONE ─────────────────────────
+async function submitKids() {
+  const devos = []
+  const groups = [
+    { prefix: 'k47', ageGroup: '4-7' },
+    { prefix: 'k812', ageGroup: '8-12' },
+  ]
+  for (const g of groups) {
+    for (let i = 1; i <= 5; i++) {
+      const t = val(`k${g.prefix.replace('k','')}-d${i}-title`)
+      if (t) {
+        devos.push({
+          id: `${g.ageGroup}-d${i}-${Date.now()}`,
+          age_group: g.ageGroup,
+          title: t,
+          scripture: val(`k${g.prefix.replace('k','')}-d${i}-scripture`),
+          content: val(`k${g.prefix.replace('k','')}-d${i}-content`),
+          activity: val(`k${g.prefix.replace('k','')}-d${i}-activity`),
+          prayer: val(`k${g.prefix.replace('k','')}-d${i}-prayer`),
+          sort_order: i,
+          series: val(`k${g.prefix.replace('k','')}-series`),
+          week_number: parseInt(val(`k${g.prefix.replace('k','')}-week`)) || null,
+          active: false,
+          publish_at: val('k-publish-at') ? new Date(val('k-publish-at')).toISOString() : null,
+        })
+      }
+    }
+  }
+  if (devos.length === 0) { toast('No kids devo content entered.', 'error'); return }
+  const r = await callEdge('add_kids_devos', devos)
+  r.success ? toast(`${devos.length} kids devos saved.`) : toast('Error: ' + r.error, 'error')
+}
+
+// ── PODCAST ───────────────────────────────────────
+async function submitPodcast() {
+  const r = await callEdge('add_podcast', {
+    title: val('p-title'),
+    episode_number: parseInt(val('p-ep-num')) || null,
+    buzzsprout_url: val('p-buz-url'),
+    apple_url: val('p-apple-url'),
+    spotify_url: val('p-spotify-url'),
+    description: val('p-desc'),
+    active: false,
+    publish_at: val('p-publish-at') ? new Date(val('p-publish-at')).toISOString() : null,
+  })
+  r.success ? toast('Podcast episode saved.') : toast('Error: ' + r.error, 'error')
+}
+
+// ── EVENT ─────────────────────────────────────────
+async function submitEvent() {
+  const t = val('ev-title')
+  if (!t) { toast('Event title required.', 'error'); return }
+  const r = await callEdge('add_event', {
+    title: t,
+    event_date: val('ev-date'),
+    event_time: val('ev-time'),
+    location: val('ev-location'),
+    description: val('ev-desc'),
+    registration_url: val('ev-reg') || null,
+    active: true,
+  })
+  r.success ? toast('Event added.') : toast('Error: ' + r.error, 'error')
+}
+
+// ── PUBLISH NOW ───────────────────────────────────
+async function publishNow() {
+  const table = val('pn-table')
+  const id = val('pn-id')
+  if (!id) { toast('Enter an item ID.', 'error'); return }
+  const r = await callEdge('publish_now', { table, id })
+  if (r.success) {
+    toast('Published immediately.')
+    loadPublishSchedule()
+  } else {
+    toast('Error: ' + r.error, 'error')
+  }
+}
+
+// ── SCHEDULE / DASHBOARD ──────────────────────────
+async function loadPublishSchedule() {
+  const r = await callEdge('get_schedule', {})
+  const container = document.getElementById('publish-schedule-list')
+  if (!r.success) { container.innerHTML = '<div class="empty-state">Could not load schedule.</div>'; return }
+
+  const all = [
+    ...( r.scheduled.sermons || []).map(x => ({...x, type:'Sermon'})),
+    ...(r.scheduled.devotionals || []).map(x => ({...x, type:'Devotional'})),
+    ...(r.scheduled.kids_devos || []).map(x => ({...x, type:`Kids ${x.age_group}`})),
+    ...(r.scheduled.podcast_episodes || []).map(x => ({...x, type:'Podcast'})),
+  ].sort((a,b) => new Date(a.publish_at) - new Date(b.publish_at))
+
+  if (all.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="es-icon">✅</div>Nothing queued. Everything is live.</div>'
+    return
+  }
+
+  container.innerHTML = all.map(item => `
+    <div class="schedule-item">
+      <div>
+        <div class="si-title">${item.title || 'Untitled'}</div>
+        <div class="si-time">${formatDT(item.publish_at)}</div>
+      </div>
+      <span class="si-type">${item.type}</span>
+    </div>`).join('')
+}
+
+async function loadDashboard() {
+  try {
+    const [sRes, dRes, kRes, pRes] = await Promise.all([
+      callEdge('get_sermon_archive', {}),
+      callEdge('get_current_devotional', {}),
+      callEdge('get_kids_devos', {}),
+      callEdge('get_schedule', {}),
+    ])
+
+    document.getElementById('stat-sermons').textContent = sRes.data?.length ?? '–'
+    document.getElementById('stat-devos').textContent = dRes.data ? '1 live' : '0'
+    document.getElementById('stat-kids').textContent = kRes.data?.length ?? '–'
+
+    const sch = pRes.scheduled
+    const total = (sch?.sermons?.length||0) + (sch?.devotionals?.length||0) +
+      (sch?.kids_devos?.length||0) + (sch?.podcast_episodes?.length||0)
+    document.getElementById('stat-podcasts').textContent = total + ' queued'
+
+    const queue = document.getElementById('dashboard-queue')
+    if (total === 0) {
+      queue.innerHTML = '<div class="empty-state"><div class="es-icon">✅</div>No content queued. Everything is published.</div>'
+    } else {
+      const all = [
+        ...(sch.sermons||[]).map(x=>({...x,type:'Sermon'})),
+        ...(sch.devotionals||[]).map(x=>({...x,type:'Devotional'})),
+        ...(sch.kids_devos||[]).map(x=>({...x,type:`Kids ${x.age_group}`})),
+        ...(sch.podcast_episodes||[]).map(x=>({...x,type:'Podcast'})),
+      ].sort((a,b) => new Date(a.publish_at)-new Date(b.publish_at))
+
+      queue.innerHTML = all.map(item => `
+        <div class="schedule-item">
+          <div>
+            <div class="si-title">${item.title||'Untitled'}</div>
+            <div class="si-time">${formatDT(item.publish_at)}</div>
+          </div>
+          <span class="si-type">${item.type}</span>
+        </div>`).join('')
+    }
+  } catch(e) {
+    console.error(e)
+  }
+}
+
+// ── SCHEDULE MODAL ────────────────────────────────
+async function openScheduleModal() {
+  document.getElementById('schedule-modal').classList.add('open')
+  const content = document.getElementById('modal-schedule-content')
+  content.innerHTML = '<div class="empty-state">Loading...</div>'
+  const r = await callEdge('get_schedule', {})
+  if (!r.success) { content.innerHTML = '<div class="empty-state">Error loading schedule.</div>'; return }
+
+  const all = [
+    ...(r.scheduled.sermons||[]).map(x=>({...x,type:'Sermon'})),
+    ...(r.scheduled.devotionals||[]).map(x=>({...x,type:'Devotional'})),
+    ...(r.scheduled.kids_devos||[]).map(x=>({...x,type:`Kids ${x.age_group}`})),
+    ...(r.scheduled.podcast_episodes||[]).map(x=>({...x,type:'Podcast'})),
+  ].sort((a,b) => new Date(a.publish_at)-new Date(b.publish_at))
+
+  if (all.length === 0) {
+    content.innerHTML = '<div class="empty-state"><div class="es-icon">✅</div>Nothing queued right now.</div>'
+    return
+  }
+  content.innerHTML = '<div class="schedule-list">' + all.map(item => `
+    <div class="schedule-item">
+      <div>
+        <div class="si-title">${item.title||'Untitled'}</div>
+        <div class="si-time">${formatDT(item.publish_at)}</div>
+      </div>
+      <span class="si-type">${item.type}</span>
+    </div>`).join('') + '</div>'
+}
+function closeModal() {
+  document.getElementById('schedule-modal').classList.remove('open')
+}
+document.getElementById('schedule-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal()
+})
+</script>
+</body>
+</html>
