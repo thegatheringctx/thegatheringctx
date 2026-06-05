@@ -1042,6 +1042,40 @@
           <div class="card-title">🗓 Upcoming Schedule</div>
           <div id="publish-schedule-list"><div class="empty-state"><div class="es-icon">📅</div>Loading schedule...</div></div>
         </div>
+
+        <div class="card" style="margin-top:20px">
+          <div class="card-title">✏️ Edit / Delete Item</div>
+          <div class="form-row">
+            <div class="field">
+              <label>Content Type</label>
+              <select id="ed-table">
+                <option value="sermons">Sermon</option>
+                <option value="devotionals">Adult Devotional</option>
+                <option value="devos">Kids Devo</option>
+                <option value="podcast_episodes">Podcast Episode</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Item ID</label>
+              <input type="text" id="ed-id" placeholder="UUID from Supabase">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>New Title (optional)</label>
+              <input type="text" id="ed-title" placeholder="Leave blank to keep existing">
+            </div>
+            <div class="field">
+              <label>Reschedule Publish At (optional)</label>
+              <input type="datetime-local" id="ed-publish-at">
+            </div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-secondary" onclick="editItem()">Save Changes</button>
+            <button class="btn btn-danger" onclick="confirmDelete()">Delete Item</button>
+          </div>
+          <div id="ed-msg" style="margin-top:12px;font-size:13px"></div>
+        </div>
       </div>
 
       <!-- ===== DASHBOARD ===== -->
@@ -1486,6 +1520,45 @@ async function publishNow() {
     loadPublishSchedule()
   } else {
     toast('Error: ' + r.error, 'error')
+  }
+}
+
+async function editItem() {
+  const table = val('ed-table');
+  const id = val('ed-id');
+  const msg = document.getElementById('ed-msg');
+  if (!id) { msg.style.color='var(--red)'; msg.textContent='Enter an item ID.'; return; }
+
+  const updates = {};
+  const title = val('ed-title');
+  const publishAt = val('ed-publish-at');
+  if (title) updates.title = title;
+  if (publishAt) updates.publish_at = new Date(publishAt).toISOString();
+
+  if (!Object.keys(updates).length) { msg.style.color='var(--red)'; msg.textContent='Nothing to update.'; return; }
+
+  const r = await callEdge('edit_item', { table, id, updates });
+  if (r.success) {
+    msg.style.color='var(--green)'; msg.textContent='Updated successfully.';
+    loadPublishSchedule();
+  } else {
+    msg.style.color='var(--red)'; msg.textContent='Error: ' + (r.error || 'Unknown error');
+  }
+}
+
+async function confirmDelete() {
+  const table = val('ed-table');
+  const id = val('ed-id');
+  const msg = document.getElementById('ed-msg');
+  if (!id) { msg.style.color='var(--red)'; msg.textContent='Enter an item ID.'; return; }
+  if (!confirm('Delete this item permanently? This cannot be undone.')) return;
+  const r = await callEdge('delete_item', { table, id });
+  if (r.success) {
+    msg.style.color='var(--green)'; msg.textContent='Deleted.';
+    document.getElementById('ed-id').value = '';
+    loadPublishSchedule();
+  } else {
+    msg.style.color='var(--red)'; msg.textContent='Error: ' + (r.error || 'Unknown error');
   }
 }
 

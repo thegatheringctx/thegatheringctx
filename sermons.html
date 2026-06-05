@@ -179,10 +179,10 @@
 </head>
 <body>
 <nav class="nav">
-  <a href="/" class="nav-brand"><span class="nav-the">the</span><span class="nav-name">gathering</span></a>
+  <a href="/" class="nav-brand"><span class="nav-the">The</span><span class="nav-name">Gathering</span></a>
   <div class="nav-links">
     <a href="/new-here">I'm New</a>
-    <a href="/visit">Visit</a>
+    <a href="/belong">Connect</a>
     <a href="/kids">Kids</a>
     <a href="/sermons">Sermons</a>
     <a href="/devotionals">Devotionals</a>
@@ -251,167 +251,117 @@
 </div>
 
 <section class="sermon-section">
-  <div class="sermon-list">
+  <!-- Series filter -->
+<div id="series-filter" style="padding:1.5rem 3rem 0;display:flex;gap:.75rem;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.06)">
+  <button class="filter-btn active" data-series="all" onclick="filterSermons('all', this)">All</button>
+</div>
 
-    <div class="sermon-card">
+<div class="sermon-list" id="sermon-list">
+  <div style="padding:3rem;color:rgba(255,255,255,0.3);font-size:.85rem">Loading sermons...</div>
+</div>
+
+<style>
+.filter-btn{padding:.4rem 1rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;border-radius:2px;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{border-color:var(--gold,#c9a84c);color:var(--gold,#c9a84c);background:rgba(201,168,76,.08)}
+</style>
+
+<script>
+let _allSermons = [];
+
+function filterSermons(series, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const list = document.getElementById('sermon-list');
+  const filtered = series === 'all' ? _allSermons : _allSermons.filter(s => s.series === series);
+  renderSermons(filtered, list);
+}
+
+function renderSermons(sermons, list) {
+  if (!sermons.length) {
+    list.innerHTML = '<div style="padding:3rem;color:rgba(255,255,255,0.3);text-align:center">No sermons found.</div>';
+    return;
+  }
+  list.innerHTML = sermons.map(s => {
+    const date = s.preached_on ? new Date(s.preached_on + 'T12:00:00') : null;
+    const month = date ? date.toLocaleString('en-US',{month:'short'}).toUpperCase() : '';
+    const day = date ? date.getDate() : '';
+    const year = date ? date.getFullYear() : '';
+
+    let playerHtml = '';
+    if (s.podcast_url) {
+      const match = s.podcast_url.match(/episodes\/(\d+)/);
+      if (match) {
+        const epId = match[1];
+        playerHtml = `<div class="sermon-player"><div id="bp-${epId}"></div></div>`;
+      } else {
+        playerHtml = `<div class="sermon-player"><audio controls preload="none" style="width:100%;max-width:500px"><source src="${s.podcast_url}" type="audio/mpeg"></audio></div>`;
+      }
+    }
+
+    return `<div class="sermon-card">
       <div class="sermon-date">
-        <span class="sermon-week">Week 1</span>
-        <span class="sermon-day">May 31, 2026</span>
+        <span class="sermon-month">${month}</span>
+        <span class="sermon-day">${day}</span>
+        <span class="sermon-year">${year}</span>
       </div>
       <div class="sermon-info">
-        <span class="sermon-series">Philippians &middot; Week 1</span>
-        <h3 class="sermon-title">Philippians 1 &#8212; Joy in Chains</h3>
-        <p class="sermon-scripture">Philippians 1:1&#8211;30</p>
-        <div class="sermon-player">
-          <div id="buzzsprout-player-19277793"></div>
-          <script src="https://www.buzzsprout.com/2608288/19277793-philippians-1-joy-in-chains-05-31-26.js?container_id=buzzsprout-player-19277793&player=small" type="text/javascript" charset="utf-8"></script>
-        </div>
+        <span class="sermon-series">${s.series || ''}</span>
+        <h3 class="sermon-title">${s.title || ''}</h3>
+        <p class="sermon-meta">${s.passage || ''} &middot; ${s.speaker || 'Pastor Billy Philips'}</p>
+        ${s.preview_text ? `<p style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.75;margin-top:.4rem">${s.preview_text}</p>` : ''}
+        ${playerHtml}
       </div>
-    </div>
-    <div class="sermon-card">
-      <div class="sermon-date">
-        <span class="sermon-week">Pentecost</span>
-        <span class="sermon-day">May 24, 2026</span>
-      </div>
-      <div class="sermon-info">
-        <h3 class="sermon-title">Pentecost &#8212; Let The Fire Fall</h3>
-        <p class="sermon-scripture">Acts 2:1&#8211;4</p>
-        <div class="sermon-player">
-          <div id="buzzsprout-player-19245223"></div>
-          <script src="https://www.buzzsprout.com/2608288/19245223-pentecost-let-the-fire-fall-05-24-26.js?container_id=buzzsprout-player-19245223&player=small" type="text/javascript" charset="utf-8"></script>
-        </div>
-      </div>
-    </div>
-    <div class="sermon-card">
-      <div class="sermon-date">
-        <span class="sermon-week">Week 6</span>
-        <span class="sermon-day">May 18, 2026</span>
-      </div>
-      <div class="sermon-info">
-        <h3 class="sermon-title">Ephesians 6 &#8212; Stand</h3>
-        <p class="sermon-scripture">Ephesians 6:1&#8211;24</p>
-        <div class="sermon-player">
-          <div id="buzzsprout-player-19199574"></div>
-          <script src="https://www.buzzsprout.com/2608288/19199574.js?container_id=buzzsprout-player-19199574&player=small" type="text/javascript" charset="utf-8"></script>
-        </div>
-        <div class="sermon-actions">
-          <a href="https://www.buzzsprout.com/2608288/episodes/19199574.mp3?download=true" class="sermon-link">Download MP3</a>
-        </div>
-      </div>
-    </div>
-    <div class="sermon-card">
-      <div class="sermon-date">
-        <span class="sermon-week">Week 5</span>
-        <span class="sermon-day">May 11, 2026</span>
-      </div>
-      <div class="sermon-info">
-        <h3 class="sermon-title">Walk in Love, Light, Wisdom &amp; the Holy Marriage</h3>
-        <p class="sermon-scripture">Ephesians 5:1&#8211;33</p>
-        <div class="sermon-player">
-          <div id="buzzsprout-player-19161537"></div>
-          <script src="https://www.buzzsprout.com/2608288/19161537.js?container_id=buzzsprout-player-19161537&player=small" type="text/javascript" charset="utf-8"></script>
-        </div>
-        <div class="sermon-actions">
-          <a href="https://www.buzzsprout.com/2608288/episodes/19161537.mp3?download=true" class="sermon-link">Download MP3</a>
-        </div>
-      </div>
-    </div>
-    <div class="sermon-card">
-      <div class="sermon-date">
-        <span class="sermon-month">May</span>
-        <span class="sermon-day">3</span>
-        <span class="sermon-year">2026</span>
-      </div>
-      <div class="sermon-info">
-        <span class="sermon-series">Ephesians &middot; Week 4</span>
-        <div class="sermon-title">Ephesians 4 - Walk Worthy Inside and Out</div>
-        <div class="sermon-meta">Pastor Billy Philips &middot; Cleburne Conference Center</div>
-        <span class="sermon-scripture">Ephesians 4</span>
-        <div class="sermon-player">
-          <audio controls preload="none">
-            <source src="https://www.buzzsprout.com/2608288/episodes/19125538-ephesians-4-walk-worthy-inside-and-out-05-03-26.mp3" type="audio/mpeg">
-          </audio>
-          <a href="https://www.buzzsprout.com/2608288/episodes/19125538-ephesians-4-walk-worthy-inside-and-out-05-03-26.mp3?download=true" class="sermon-download">Download MP3</a>
-        </div>
-      </div>
-    </div>
-<div class="sermon-card">
-      <div class="sermon-date">
-        <span class="sermon-month">Apr</span>
-        <span class="sermon-day">26</span>
-        <span class="sermon-year">2026</span>
-      </div>
-      <div class="sermon-info">
-        <span class="sermon-series">Ephesians &middot; Week 3</span>
-        <div class="sermon-title">Ephesians 3 - The Mystery Is Out</div>
-        <div class="sermon-meta">Pastor Billy Philips &middot; Cleburne Conference Center</div>
-        <span class="sermon-scripture">Ephesians 3</span>
-        <div class="sermon-player">
-          <audio controls preload="none">
-            <source src="https://www.buzzsprout.com/2608288/episodes/19087134-ephesians-3-the-mystery-is-out-04-26-26.mp3" type="audio/mpeg">
-          </audio>
-          <a href="https://www.buzzsprout.com/2608288/episodes/19087134-ephesians-3-the-mystery-is-out-04-26-26.mp3?download=true" class="sermon-download">Download MP3</a>
-        </div>
-      </div>
-    </div>
-    <div class="sermon-card">
-      <div class="sermon-date">
-        <span class="sermon-month">Apr</span>
-        <span class="sermon-day">19</span>
-        <span class="sermon-year">2026</span>
-      </div>
-      <div class="sermon-info">
-        <span class="sermon-series">Ephesians &middot; Week 2</span>
-        <div class="sermon-title">Ephesians 2 - Brought Near by the Blood</div>
-        <div class="sermon-meta">Ben Philips &middot; Cleburne Conference Center</div>
-        <span class="sermon-scripture">Ephesians 2:11-22</span>
-        <div class="sermon-player">
-          <audio controls preload="none">
-            <source src="https://www.buzzsprout.com/2608288/episodes/19049916-ephesians-2-brought-near-by-the-blood-04-19-26.mp3" type="audio/mpeg">
-          </audio>
-          <a href="https://www.buzzsprout.com/2608288/episodes/19049916-ephesians-2-brought-near-by-the-blood-04-19-26.mp3?download=true" class="sermon-download">Download MP3</a>
-        </div>
-      </div>
-    </div>
-<div class="sermon-card">
-      <div class="sermon-date">
-        <span class="sermon-month">Apr</span>
-        <span class="sermon-day">13</span>
-        <span class="sermon-year">2026</span>
-      </div>
-      <div class="sermon-info">
-        <span class="sermon-series">Ephesians &middot; Week 1</span>
-        <div class="sermon-title">The Gathering - Week 1 - Ephesians</div>
-        <div class="sermon-meta">Pastor Billy Philips &middot; Cleburne Conference Center</div>
-        <span class="sermon-scripture">Ephesians 1:1-14</span>
-        <div class="sermon-player">
-          <audio controls preload="none">
-            <source src="https://www.buzzsprout.com/2608288/episodes/19008173-the-gathering-week-1-ephesians-4-12-2026.mp3" type="audio/mpeg">
-          </audio>
-          <a href="https://www.buzzsprout.com/2608288/episodes/19008173-the-gathering-week-1-ephesians-4-12-2026.mp3?download=true" class="sermon-download">Download MP3</a>
-        </div>
-      </div>
-    </div>
-<div class="sermon-card">
-      <div class="sermon-date">
-        <span class="sermon-month">Apr</span>
-        <span class="sermon-day">05</span>
-        <span class="sermon-year">2026</span>
-      </div>
-      <div class="sermon-info">
-        <span class="sermon-series">Easter Sunday</span>
-        <div class="sermon-title">Easter Sunday - He Is Risen</div>
-        <div class="sermon-meta">Pastor Billy Philips &middot; Cleburne Conference Center</div>
-        <span class="sermon-scripture">Matthew 28:1-10</span>
-        <div class="sermon-player">
-          <audio controls preload="none">
-            <source src="https://www.buzzsprout.com/2608288/episodes/18972694-easter-sunday-april-5th-2026.mp3" type="audio/mpeg">
-          </audio>
-          <a href="https://www.buzzsprout.com/2608288/episodes/18972694-easter-sunday-april-5th-2026.mp3?download=true" class="sermon-download">Download MP3</a>
-        </div>
-      </div>
-    </div>
-    </div>
+    </div>`;
+  }).join('');
+
+  // Load Buzzsprout embeds after rendering
+  sermons.forEach(s => {
+    if (s.podcast_url) {
+      const match = s.podcast_url.match(/episodes\/(\d+)/);
+      if (match) {
+        const epId = match[1];
+        if (document.getElementById('bp-' + epId)) {
+          const sc = document.createElement('script');
+          sc.src = `https://www.buzzsprout.com/2608288/${epId}.js?container_id=bp-${epId}&player=small`;
+          sc.charset = 'utf-8';
+          document.body.appendChild(sc);
+        }
+      }
+    }
+  });
+}
+
+(async () => {
+  try {
+    const res = await fetch('https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/weekly-content-deploy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'get_sermon_archive', data: {} })
+    });
+    const data = await res.json();
+    _allSermons = data.data || [];
+
+    // Build series filter buttons
+    const seriesSet = [...new Set(_allSermons.map(s => s.series).filter(Boolean))];
+    const filterDiv = document.getElementById('series-filter');
+    seriesSet.forEach(series => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.dataset.series = series;
+      btn.textContent = series;
+      btn.onclick = () => filterSermons(series, btn);
+      filterDiv.appendChild(btn);
+    });
+    if (seriesSet.length <= 1) filterDiv.style.display = 'none';
+
+    renderSermons(_allSermons, document.getElementById('sermon-list'));
+  } catch(e) {
+    document.getElementById('sermon-list').innerHTML =
+      '<div style="padding:3rem;color:rgba(255,255,255,0.3)">Could not load sermons.</div>';
+    console.error(e);
+  }
+})();
+</script>
   </div>
 </section>
 
