@@ -8,3 +8,269 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+--page-bg: #EEE8DC;
+--nav-bg: #F6F2EC;
+--card-bg: #F4F0E6;
+--burgundy: #6B1C1C;
+--gold: #B8852A;
+--gold-it: #C49030;
+--body: #2A1A10;
+--soft: #4A3828;
+--muted: #8C7A68;
+--rule: #D4CAB8;
+--num: #DDD5C4;
+}
+html { font-size: 18px; scroll-behavior: smooth; }
+body { font-family: 'EB Garamond', Georgia, serif; background: var(--page-bg); color: var(--body); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+.site-nav { background: var(--nav-bg); border-bottom: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; position: sticky; top: 0; z-index: 100; }
+.nav-logo { text-decoration: none; display: flex; align-items: baseline; gap: 1px; }
+.nav-logo .the { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--gold); position: relative; top: -4px; margin-right: 1px; }
+.nav-logo .gathering { font-family: 'EB Garamond', Georgia, serif; font-size: 20px; color: var(--body); }
+.nav-back { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.nav-back:hover { color: var(--body); }
+.article { max-width: 720px; margin: 0 auto; padding: 0 28px 100px; }
+.hero { text-align: center; padding: 72px 0 60px; border-bottom: 1px solid var(--rule); margin-bottom: 60px; }
+.series-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(44px, 8vw, 72px); font-weight: 600; line-height: 1.08; color: var(--burgundy); margin-bottom: 10px; letter-spacing: -0.5px; }
+.hero-sub { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 22px; color: var(--gold-it); margin-bottom: 20px; }
+.hero-scripture { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 18px; color: var(--gold-it); margin-bottom: 12px; }
+.hero-date { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.intro { margin-bottom: 52px; }
+.intro p { font-size: 19px; line-height: 1.85; color: var(--soft); margin-bottom: 20px; }
+.scripture-reading { border-left: 3px solid var(--gold); background: var(--card-bg); padding: 28px 32px; margin-bottom: 72px; }
+.sr-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.scripture-reading blockquote { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.7; color: var(--gold-it); margin-bottom: 14px; }
+.scripture-reading cite { font-family: 'Inter', sans-serif; font-size: 11px; font-style: normal; font-weight: 500; letter-spacing: 1px; color: var(--muted); }
+.day-block { margin-bottom: 72px; padding-top: 64px; border-top: 1px solid var(--rule); }
+.day-block:first-of-type { border-top: none; padding-top: 0; }
+.day-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.day-tag { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.day-ref { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 1px; color: var(--muted); }
+.day-theme { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 18px; color: var(--muted); margin-bottom: 32px; }
+.sec-num { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 96px; font-weight: 700; line-height: 1; color: var(--num); margin-bottom: -20px; letter-spacing: -4px; }
+.sec-heading { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 600; line-height: 1.25; color: var(--burgundy); margin-bottom: 28px; }
+.scripture-quote { border-left: 2px solid var(--rule); padding: 0 0 0 22px; margin-bottom: 28px; }
+.scripture-quote blockquote { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 18px; line-height: 1.75; color: var(--soft); margin-bottom: 10px; }
+.scripture-quote cite { font-family: 'Inter', sans-serif; font-size: 11px; font-style: normal; font-weight: 500; letter-spacing: 1px; color: var(--muted); }
+.sec-body p { font-size: 18px; line-height: 1.9; color: var(--soft); margin-bottom: 20px; }
+.sec-body p:last-child { margin-bottom: 0; }
+.sec-body strong { color: var(--body); font-weight: 500; }
+.greek-study { background: var(--card-bg); border-left: 3px solid var(--gold); padding: 18px 22px; margin: 24px 0; font-size: 17px; line-height: 1.85; color: var(--soft); }
+.gk-label { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+.gk-word { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 20px; color: var(--body); font-weight: 500; }
+.gk-trans { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--muted); }
+.pull-quote { margin: 36px 0; padding: 0 32px; }
+.pull-quote p { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 22px; line-height: 1.5; color: var(--burgundy); }
+.reflect { background: var(--card-bg); padding: 28px 32px; margin-top: 36px; }
+.reflect-heading { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.reflect p { font-size: 17px; line-height: 1.8; color: var(--soft); margin-bottom: 14px; }
+.reflect p:last-child { margin-bottom: 0; }
+.prayer-block { margin-top: 72px; padding-top: 64px; border-top: 1px solid var(--rule); }
+.prayer-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.prayer-block p { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; line-height: 1.9; color: var(--soft); margin-bottom: 18px; }
+.prayer-block p:last-child { margin-bottom: 0; }
+.declaration { margin-top: 52px; padding: 32px; background: var(--burgundy); color: #F6F2EC; }
+.declaration p { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; line-height: 1.85; margin-bottom: 12px; }
+.declaration p:last-child { margin-bottom: 0; font-style: italic; }
+.site-footer { border-top: 1px solid var(--rule); padding: 48px 40px; text-align: center; margin-top: 80px; }
+.footer-logo { font-family: 'EB Garamond', Georgia, serif; font-size: 22px; color: var(--body); margin-bottom: 12px; }
+.footer-logo .the { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--gold); position: relative; top: -3px; margin-right: 2px; }
+.site-footer p { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); line-height: 1.7; }
+.site-footer a { color: var(--muted); text-decoration: none; }
+@media (max-width: 600px) {
+  .site-nav { padding: 0 20px; }
+  .article { padding: 0 18px 80px; }
+  .hero { padding: 48px 0 40px; }
+  .sec-num { font-size: 64px; }
+  .sec-heading { font-size: 22px; }
+  .scripture-reading { padding: 20px; }
+  .reflect { padding: 20px; }
+  .declaration { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="https://gatheringctx.org" class="nav-logo"><span class="the">the</span><span class="gathering">gathering</span></a>
+  <a href="https://gatheringctx.org/devotionals" class="nav-back">&#8592; All Devotionals</a>
+</nav>
+
+<div class="article">
+
+<header class="hero">
+  <p class="series-label">Philippians &middot; Week 2 &middot; June 8, 2026</p>
+  <h1 class="hero-title">The Mind That Emptied Itself</h1>
+  <p class="hero-sub">When God chose down instead of up.</p>
+  <p class="hero-scripture">Philippians 2:1&ndash;11</p>
+  <p class="hero-date">June 8, 2026</p>
+</header>
+
+<div class="intro">
+  <p>Paul has been writing from a prison cell. Last week he told us about joy in chains. He told us that chains advance the gospel. He told us that for him to live is Christ and to die is gain.</p>
+  <p>Now he turns a corner. He has heard something from Epaphroditus. There is a fracture in the Philippian church. Not a scandal. Not heresy. Something more subtle and more dangerous: pride. Selfish ambition. Believers looking out for themselves at the expense of each other.</p>
+  <p>And Paul&rsquo;s answer is not a policy. It is not a conflict resolution strategy. His answer is a Person. Look at Jesus, he says. As the mind you are invited to carry. Take one day at a time. Read slowly.</p>
+</div>
+
+<div class="scripture-reading">
+  <p class="sr-label">Scripture Reading</p>
+  <blockquote>&ldquo;Have this mind among yourselves, which is yours in Christ Jesus, who, though he was in the form of God, did not count equality with God a thing to be grasped, but emptied himself, by taking the form of a servant, being born in the likeness of men. And being found in human form, he humbled himself by becoming obedient to the point of death, even death on a cross.&rdquo;</blockquote>
+  <cite>Philippians 2:5&ndash;8 &middot; ESV</cite>
+</div>
+
+<div class="day-block">
+  <div class="day-meta"><span class="day-tag">Day 1</span><span class="day-ref">Philippians 2:1&ndash;2</span></div>
+  <p class="day-theme">The Ground Beneath Unity</p>
+  <span class="sec-num">01</span>
+  <h2 class="sec-heading">Since All of This Is True, Live Accordingly</h2>
+  <div class="scripture-quote">
+    <blockquote>&ldquo;So if there is any encouragement in Christ, any comfort from love, any participation in the Spirit, any affection and sympathy, complete my joy by being of the same mind, having the same love, being in full accord and of one mind.&rdquo;</blockquote>
+    <cite>Philippians 2:1&ndash;2 &middot; ESV</cite>
+  </div>
+  <div class="sec-body">
+    <p>Paul does not ask you to manufacture unity. He asks you to live from it. The ground is already established. There is encouragement in Christ. There is comfort from love. There is participation in the Spirit. The word &ldquo;if&rdquo; here carries the Greek force of &ldquo;since.&rdquo; Since all of this is true, live accordingly.</p>
+    <p>The problem in Philippi was not that people did not know God. The problem was that knowing God had not yet shaped how they treated each other.</p>
+    <p>Unity is not agreement on every point. It is shared submission to the One who is Lord of every point.</p>
+  </div>
+  <div class="pull-quote"><p>You cannot build a unified church from a group of people competing to be the most important person in the room.</p></div>
+  <div class="reflect">
+    <h3 class="reflect-heading">Reflect</h3>
+    <p>Where are you substituting theological knowledge about God for the actual experience of God&rsquo;s comfort shaping how you treat people?</p>
+    <p>Is there a relationship right now where you are moving from self-protection instead of from security?</p>
+    <p>What would it mean today to live from the ground of &ldquo;encouragement in Christ&rdquo; rather than the anxiety of your circumstances?</p>
+  </div>
+</div>
+<div class="day-block">
+  <div class="day-meta"><span class="day-tag">Day 2</span><span class="day-ref">Philippians 2:3&ndash;4</span></div>
+  <p class="day-theme">The Vocabulary of Humility</p>
+  <span class="sec-num">02</span>
+  <h2 class="sec-heading">Nothing. Not Less. Nothing.</h2>
+  <div class="scripture-quote">
+    <blockquote>&ldquo;Do nothing from selfish ambition or conceit, but in humility count others more significant than yourselves.&rdquo;</blockquote>
+    <cite>Philippians 2:3 &middot; ESV</cite>
+  </div>
+  <div class="greek-study">
+    <span class="gk-label">Greek Word</span>
+    <span class="gk-word">eritheia (&#7952;&#961;&#953;&#952;&#949;&#943;&#945;)</span> <span class="gk-trans">selfish ambition.</span> Originally described a day laborer who worked only for pay, with no loyalty to the work itself. It evolved to mean serving for what you can get out of it. Ministry for applause. Relationships for utility.
+  </div>
+  <div class="greek-study">
+    <span class="gk-label">Greek Word</span>
+    <span class="gk-word">kenodoxia (&#954;&#949;&#957;&#959;&#948;&#959;&#958;&#943;&#945;)</span> <span class="gk-trans">conceit, empty glory.</span> The pursuit of a reputation that does not actually exist.
+  </div>
+  <div class="sec-body">
+    <p>Do nothing from those two roots. Not less. Nothing. The alternative is tapeinophrosyne, humility of mind. Paul takes a Roman insult and turns it into the highest virtue. Humility is the accurate assessment of who you are before God. That accuracy makes you free.</p>
+  </div>
+  <div class="pull-quote"><p>Humility is not thinking less of yourself. It is thinking of yourself less.</p></div>
+  <div class="reflect">
+    <h3 class="reflect-heading">Reflect</h3>
+    <p>Be honest: where are you currently serving from eritheia, looking for what you get out of it?</p>
+    <p>What reputation are you currently working to maintain?</p>
+    <p>Who needs you to count them more significant right now?</p>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-meta"><span class="day-tag">Day 3</span><span class="day-ref">Philippians 2:5&ndash;8</span></div>
+  <p class="day-theme">The God Who Let Go</p>
+  <span class="sec-num">03</span>
+  <h2 class="sec-heading">He Did Not Drift Into This. He Chose It.</h2>
+  <div class="scripture-quote">
+    <blockquote>&ldquo;...who, though he was in the form of God, did not count equality with God a thing to be grasped, but emptied himself, by taking the form of a servant.&rdquo;</blockquote>
+    <cite>Philippians 2:6&ndash;7 &middot; ESV</cite>
+  </div>
+  <div class="greek-study">
+    <span class="gk-label">Greek Word</span>
+    <span class="gk-word">morph&#275; (&#956;&#959;&#961;&#966;&#942;)</span> <span class="gk-trans">essential nature.</span> Not appearance. Jesus was God in essence.
+  </div>
+  <div class="greek-study">
+    <span class="gk-label">Greek Word</span>
+    <span class="gk-word">keno&#333; (&#954;&#949;&#957;&#972;&#969;)</span> <span class="gk-trans">to empty, to pour out.</span> Jesus set aside the independent exercise of His divine rights.
+  </div>
+  <div class="sec-body">
+    <p>What He let go was not His nature. What He let go was His grip on His rights. Jesus was most fully Himself at the basin, at the table, and at the cross. He did not lose His identity when He became a servant. He demonstrated it.</p>
+  </div>
+  <div class="pull-quote"><p>Jesus did not lose His identity when He became a servant. He demonstrated it.</p></div>
+  <div class="reflect">
+    <h3 class="reflect-heading">Reflect</h3>
+    <p>What are you currently grasping with both hands that is keeping you from serving?</p>
+    <p>How does Jesus willingly choosing down challenge your definition of strength?</p>
+    <p>Where do you need to choose the low place on purpose this week?</p>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-meta"><span class="day-tag">Day 4</span><span class="day-ref">Philippians 2:9&ndash;11</span></div>
+  <p class="day-theme">Therefore</p>
+  <span class="sec-num">04</span>
+  <h2 class="sec-heading">The Bottom Is Where God Does His Best Work</h2>
+  <div class="scripture-quote">
+    <blockquote>&ldquo;Therefore God has highly exalted him and bestowed on him the name that is above every name.&rdquo;</blockquote>
+    <cite>Philippians 2:9 &middot; ESV</cite>
+  </div>
+  <div class="greek-study">
+    <span class="gk-label">Greek Word</span>
+    <span class="gk-word">huperupso&#333; (&#8017;&#960;&#949;&#961;&#965;&#968;&#972;&#969;)</span> <span class="gk-trans">hyper-exaltation.</span> God elevated Jesus to a position no created being has ever occupied.
+  </div>
+  <div class="sec-body">
+    <p>God did not exalt Jesus in spite of the cross. He exalted Him because of the cross. He does not skip the valley. He transforms it.</p>
+  </div>
+  <div class="pull-quote"><p>The road to exaltation runs through the low place.</p></div>
+  <div class="reflect">
+    <h3 class="reflect-heading">Reflect</h3>
+    <p>Are you in a low place right now? Have you brought trust there or resentment?</p>
+    <p>How does the therefore of Jesus&rsquo; exaltation change how you see your hard season?</p>
+    <p>What does the therefore mean for where you are right now?</p>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-meta"><span class="day-tag">Day 5</span><span class="day-ref">Philippians 2:5</span></div>
+  <p class="day-theme">This Mind Is Already Yours</p>
+  <span class="sec-num">05</span>
+  <h2 class="sec-heading">Stop Grasping. Start Giving.</h2>
+  <div class="scripture-quote">
+    <blockquote>&ldquo;Have this mind among yourselves, which is yours in Christ Jesus.&rdquo;</blockquote>
+    <cite>Philippians 2:5 &middot; ESV</cite>
+  </div>
+  <div class="sec-body">
+    <p>Paul does not give you a program. He gives you a Person. Have this mind because it is yours in Christ Jesus. You do not have to manufacture it. It is already yours. You are not trying to become something. You are learning to live from what you already are.</p>
+    <p>Stop grasping. Start giving. Not giving to earn. Giving freely because the One who gave everything is the One who lives in you.</p>
+  </div>
+  <div class="pull-quote"><p>You are not trying to become something. You are learning to live from what you already are.</p></div>
+  <div class="reflect">
+    <h3 class="reflect-heading">Reflect</h3>
+    <p>Which day hit you hardest and why?</p>
+    <p>What is one specific thing you will do differently this week?</p>
+    <p>If the people closest to you described your posture, would they see the mind of Christ?</p>
+  </div>
+</div>
+
+<div class="prayer-block">
+  <p class="prayer-label">A Prayer of Identity</p>
+  <p>Father, I receive what Your Word says about me today.</p>
+  <p>The ground has been established. There is encouragement in Christ. There is comfort from love. There is participation in the Spirit. I live from that ground today, not toward it.</p>
+  <p>I release eritheia and kenodoxia. I have nothing to prove. You have already assigned my worth.</p>
+  <p>Jesus poured Himself out. That is the mind I carry. Already mine in Christ. I open my hands around whatever I have been holding too tightly.</p>
+  <p>The therefore is coming. I trust the arc. You transform valleys.</p>
+  <p>I walk with victory, not to it, in Jesus&rsquo; name. Amen.</p>
+</div>
+
+<div class="declaration">
+  <p>I have the mind of Christ! I do not grasp for status. I release it!</p>
+  <p>I do not compete for significance. I carry it already!</p>
+  <p>Jesus emptied Himself and God exalted Him, and I am a co-heir with Christ!</p>
+  <p>I choose the low place because the God of the high place has already claimed me!</p>
+  <p>Every knee will bow to Jesus Christ, and that Lord is my Lord!</p>
+  <p><em>I walk with victory, not to it, in Jesus&rsquo; name. Amen!</em></p>
+</div>
+</div>
+<footer class="site-footer">
+  <div class="footer-logo"><span class="the">the</span>gathering</div>
+  <p>Sundays at 5:00 PM &middot; Cleburne Conference Center &middot; <a href="https://gatheringctx.org">gatheringctx.org</a></p>
+  <p style="margin-top:6px"><a href="https://gatheringctx.org/devotionals">&#8592; All Devotionals</a></p>
+</footer>
+</body>
+</html>
