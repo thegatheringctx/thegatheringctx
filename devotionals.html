@@ -147,9 +147,9 @@
     <a href="/resources">Resources</a>
     <a href="/generosity" class="nav-give-btn">Give</a>
   </div>
-  <button class="nav-hamburger" id="nav-ham" aria-label="Open menu" onclick="this.classList.toggle('open');var m=document.getElementById('mob-nav');m.style.display=m.style.display==='flex'?'none':'flex';"><span></span><span></span><span></span></button>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" onclick="this.classList.toggle('open');var m=document.getElementById('nav-mobile-menu');m.classList.toggle('open');"><span></span><span></span><span></span></button>
 </nav>
-<nav style="display:none;position:fixed;top:72px;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(16px);border-bottom:1px solid #1a1a1a;z-index:99;padding:20px 24px 32px;flex-direction:column;" id="mob-nav">
+<div id="nav-mobile-menu" class="nav-mobile-menu">
   <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/new-here">I'm New</a>
   <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/visit">Plan a Visit</a>
   <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/our-story">Our Story</a>
