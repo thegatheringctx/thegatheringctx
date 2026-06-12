@@ -4943,14 +4943,14 @@ function enterDisplayMode(){
 
 
 var GAMES_OLDER=[
-  {id:'scramble',   emoji:'🔤', title:'Word Scramble',      bg:'linear-gradient(135deg,#3D1FA8,#6C52E3,#9B59B6)'},
-  {id:'fitb',       emoji:'📜', title:'Fill the Blank',      bg:'linear-gradient(135deg,#065F46,#00C07A,#10B981)'},
-  {id:'guesser',    emoji:'🕵️', title:'Who Am I?',           bg:'linear-gradient(135deg,#7C2D12,#FF5A36,#F97316)'},
-  {id:'tf',         emoji:'⚡', title:'True or False',        bg:'linear-gradient(135deg,#78350F,#F5A623,#FBBF24)'},
-  {id:'match',      emoji:'🃏', title:'Memory Match',         bg:'linear-gradient(135deg,#831843,#FF3E8D,#EC4899)'},
-  {id:'wheel',      emoji:'🎡', title:'Spin the Wheel',       bg:'linear-gradient(135deg,#1E3A8A,#29AEFF,#38BDF8)'},
-  {id:'sword-spirit',  emoji:'⚔️', title:'Sword of Truth',   bg:'linear-gradient(135deg,#78350F,#C9A84C,#FBBF24)'},
-  {id:'shield-defense',emoji:'🛡️', title:'Shield Defense',   bg:'linear-gradient(135deg,#1E1B4B,#6C52E3,#818CF8)'},
+  {id:'scramble',   emoji:'🔤', title:'Word Scramble',      bg:'linear-gradient(135deg,#3D1FA8 0%,#6C52E3 60%,#9B59B6 100%)'},
+  {id:'fitb',       emoji:'✍️', title:'Fill the Blank',     bg:'linear-gradient(135deg,#065F46 0%,#00C07A 60%,#10B981 100%)'},
+  {id:'guesser',    emoji:'🕵️', title:'Who Am I?',          bg:'linear-gradient(135deg,#7C2D12 0%,#FF5A36 60%,#F97316 100%)'},
+  {id:'tf',         emoji:'⚡', title:'True or False',       bg:'linear-gradient(135deg,#78350F 0%,#F5A623 60%,#FBBF24 100%)'},
+  {id:'match',      emoji:'🃏', title:'Memory Match',        bg:'linear-gradient(135deg,#831843 0%,#FF3E8D 60%,#EC4899 100%)'},
+  {id:'wheel',      emoji:'🎡', title:'Spin the Wheel',      bg:'linear-gradient(135deg,#1E3A8A 0%,#29AEFF 60%,#38BDF8 100%)'},
+  {id:'sword-spirit',  emoji:'⚔️', title:'Sword of Truth',  bg:'linear-gradient(135deg,#3B1500 0%,#C9A84C 60%,#FBBF24 100%)'},
+  {id:'shield-defense',emoji:'🛡️', title:'Shield Defense',  bg:'linear-gradient(135deg,#1E1B4B 0%,#6C52E3 60%,#818CF8 100%)'},
 ];
 // ── LITTLE WARRIORS (4-7) GAMES ──────────────────────
 var GAMES_YOUNG=[
@@ -6541,7 +6541,294 @@ function renderAvatarPicker(){
     .avpick-opt{cursor:pointer;border-radius:20px;border:3px solid transparent;padding:12px 8px;text-align:center;transition:all 0.2s;background:rgba(19,25,41,0.8);}
     .avpick-opt:hover,.avpick-opt.sel{border-color:#C9A84C;box-shadow:0 0 20px rgba(201,168,76,0.4);transform:scale(1.05);}
     .avpick-opt .av-label{font-size:11px;font-weight:800;margin-top:6px;color:#E8E4F0;letter-spacing:.05em;}
-  </style>
+  
+/* ═══════════════════════════════════════════════════════
+   UI OVERHAUL v2 — Complete visual upgrade
+   ═══════════════════════════════════════════════════════ */
+
+/* ── GLOBAL: wider max-width, better padding ── */
+.page{
+  max-width:500px!important;
+  padding:0 1rem 5rem!important;
+  padding-top:.75rem!important;
+}
+#p-land{max-width:100%!important;padding:0!important;}
+
+/* ── DASHBOARD HEADER ── */
+.page-nav{
+  padding:.6rem 0!important;
+  margin-bottom:.5rem!important;
+  border-bottom:1px solid rgba(255,255,255,.08)!important;
+}
+.nav-logo{font-size:13px!important;letter-spacing:.5px!important;opacity:.6;}
+.pts-chip{
+  background:linear-gradient(135deg,rgba(245,200,66,.2),rgba(201,168,76,.1))!important;
+  border:1.5px solid rgba(245,200,66,.35)!important;
+  color:#f5c842!important;font-weight:800!important;
+  font-size:13px!important;padding:5px 14px!important;
+}
+
+/* ── TAB BAR: taller touch targets, bolder active ── */
+.kid-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(3,1fr)!important;
+  gap:6px!important;
+  margin-bottom:1rem!important;
+}
+.ktb{
+  border-radius:18px!important;
+  padding:12px 4px 10px!important;
+  transition:all .15s cubic-bezier(.34,1.56,.64,1)!important;
+  border:1.5px solid rgba(255,255,255,.1)!important;
+  background:rgba(255,255,255,.06)!important;
+}
+.ktb:active{transform:scale(.94)!important;}
+.ktb .kti{font-size:22px!important;margin-bottom:4px!important;}
+.ktb .ktl{font-size:9px!important;letter-spacing:.4px!important;opacity:.7;}
+.ktb.act-teal,.ktb.act-coral,.ktb.act-purple,.ktb.act-sky,.ktb.act-gold,.ktb.act-pink{
+  box-shadow:0 4px 16px rgba(0,0,0,.3)!important;
+  transform:translateY(-1px);
+}
+.ktb.act-teal{background:linear-gradient(135deg,#00C07A,#008f5a)!important;border-color:#00C07A!important;}
+.ktb.act-coral{background:linear-gradient(135deg,#FF5A36,#d93e1e)!important;border-color:#FF5A36!important;}
+.ktb.act-purple{background:linear-gradient(135deg,#6C52E3,#4A30C0)!important;border-color:#6C52E3!important;}
+.ktb.act-sky{background:linear-gradient(135deg,#29AEFF,#0080d0)!important;border-color:#29AEFF!important;}
+.ktb.act-gold{background:linear-gradient(135deg,#F5C842,#C9A030)!important;border-color:#F5C842!important;}
+.ktb.act-pink{background:linear-gradient(135deg,#FF3E8D,#c4005e)!important;border-color:#FF3E8D!important;}
+.ktb.act-teal .kti,.ktb.act-teal .ktl,
+.ktb.act-coral .kti,.ktb.act-coral .ktl,
+.ktb.act-purple .kti,.ktb.act-purple .ktl,
+.ktb.act-sky .kti,.ktb.act-sky .ktl,
+.ktb.act-gold .kti,.ktb.act-gold .ktl,
+.ktb.act-pink .kti,.ktb.act-pink .ktl{color:#fff!important;opacity:1!important;}
+
+/* ── DASHBOARD GREETING ── */
+#d-greeting-name,#dash-n{
+  font-family:Bangers,cursive!important;
+  font-size:1.8rem!important;letter-spacing:.06em!important;
+  color:#f5c842!important;
+}
+
+/* ── GAME CARDS — big beautiful tap targets ── */
+.games-grid{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:12px!important;
+  margin-bottom:1rem!important;
+}
+.game-card{
+  border-radius:24px!important;
+  aspect-ratio:.85!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:1rem .5rem 1.2rem!important;
+  position:relative!important;
+  overflow:hidden!important;
+  cursor:pointer!important;
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s!important;
+  box-shadow:0 6px 20px rgba(0,0,0,.3)!important;
+}
+.game-card:active{transform:scale(.93)!important;}
+.game-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.4) 100%);
+  z-index:1;pointer-events:none;
+}
+.game-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:40%;
+  background:linear-gradient(to bottom,rgba(255,255,255,.12),transparent);
+  z-index:1;pointer-events:none;border-radius:24px 24px 0 0;
+}
+.gc-emoji{
+  font-size:64px!important;
+  position:relative!important;
+  top:0!important;left:0!important;
+  transform:none!important;
+  z-index:2!important;
+  margin-bottom:.5rem!important;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))!important;
+  display:block!important;
+}
+.gc-body{
+  position:relative!important;
+  z-index:3!important;
+  padding:0!important;
+  width:100%!important;
+  text-align:center!important;
+}
+.gc-title{
+  font-family:Bangers,cursive!important;
+  font-size:1.05rem!important;
+  font-weight:400!important;
+  letter-spacing:.06em!important;
+  line-height:1.2!important;
+  color:#fff!important;
+  text-shadow:0 2px 8px rgba(0,0,0,.5)!important;
+  margin-bottom:4px!important;
+}
+.gc-pts{
+  font-size:10px!important;
+  font-weight:800!important;
+  color:rgba(255,255,255,.75)!important;
+  background:rgba(0,0,0,.25)!important;
+  border-radius:99px!important;
+  padding:2px 10px!important;
+  display:inline-block!important;
+  letter-spacing:.06em!important;
+}
+
+/* ── GAME BACK BUTTON ── */
+.game-back{
+  background:rgba(255,255,255,.12)!important;
+  border:1.5px solid rgba(255,255,255,.2)!important;
+  border-radius:99px!important;
+  padding:8px 18px!important;
+  font-size:13px!important;font-weight:700!important;
+  color:#fff!important;cursor:pointer!important;
+  margin-bottom:1rem!important;
+  display:inline-flex!important;align-items:center!important;gap:6px!important;
+  transition:all .15s!important;
+}
+.game-back:active{background:rgba(255,255,255,.22)!important;}
+
+/* ── BATTLE ARENA HEADER ── */
+#games-hub > div:first-child{
+  padding-bottom:.75rem!important;
+  border-bottom:1px solid rgba(255,255,255,.08)!important;
+  margin-bottom:.75rem!important;
+}
+
+/* ── CARD SECTIONS: rounded dark cards ── */
+.missions-card,.sections-card,
+[id^="d-"][class*="card"],[class*="boss"],[class*="challenge"]{
+  border-radius:20px!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  background:rgba(255,255,255,.04)!important;
+  overflow:hidden!important;
+}
+
+/* ── STREAK CARD ── */
+#d-streak-card,div[id="streak-card"]{
+  background:linear-gradient(135deg,rgba(108,82,227,.15),rgba(29,7,91,.2))!important;
+  border:1.5px solid rgba(108,82,227,.3)!important;
+  border-radius:20px!important;
+}
+
+/* ── BOSS BATTLE CARD ── */
+#boss-battle-card > div{
+  border-radius:20px!important;
+  overflow:hidden!important;
+}
+
+/* ── BUTTON STYLES ── */
+.kz-btn-main{
+  background:linear-gradient(135deg,#f5c842,#C9A030)!important;
+  color:#0A0628!important;
+  font-family:Bangers,cursive!important;
+  font-size:1.1rem!important;
+  letter-spacing:.08em!important;
+  border:none!important;
+  border-radius:99px!important;
+  padding:14px 28px!important;
+  cursor:pointer!important;
+  box-shadow:0 4px 20px rgba(245,200,66,.4)!important;
+  transition:all .15s cubic-bezier(.34,1.56,.64,1)!important;
+  display:block!important;width:100%!important;
+}
+.kz-btn-main:active{transform:scale(.95)!important;}
+
+/* ── SECTION HEADINGS in dark mode ── */
+.section-title,.eyebrow,.big-title{color:#fff!important;}
+.section-title{
+  font-family:Bangers,cursive!important;
+  font-size:1.1rem!important;
+  letter-spacing:.06em!important;
+  color:#f5c842!important;
+}
+
+/* ── WEEKLY MISSIONS HEADER ── */
+.missions-card > div:first-child{
+  background:linear-gradient(90deg,rgba(245,200,66,.1),transparent)!important;
+  padding:.75rem 1rem!important;
+  margin:-.75rem -1rem .75rem!important;
+}
+
+/* ── LEADERBOARD ROWS ── */
+.lb-kid-item,.hov-row{
+  border-radius:14px!important;
+  padding:10px 12px!important;
+  margin-bottom:6px!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  background:rgba(255,255,255,.04)!important;
+  border-bottom:none!important;
+}
+.lb-kid-item.me{
+  background:rgba(0,192,122,.12)!important;
+  border:1.5px solid rgba(0,192,122,.3)!important;
+}
+
+/* ── TOAST: more prominent ── */
+#ti{
+  background:linear-gradient(135deg,#f5c842,#C9A030)!important;
+  color:#0A0628!important;
+  font-weight:900!important;
+  box-shadow:0 8px 24px rgba(245,200,66,.4)!important;
+  font-size:14px!important;
+  padding:12px 24px!important;
+}
+
+/* ── STORE CARDS in dark mode ── */
+.store-card{
+  background:rgba(255,255,255,.06)!important;
+  border:1.5px solid rgba(255,255,255,.1)!important;
+  border-radius:20px!important;
+}
+.store-name,.store-desc{color:#fff!important;}
+.store-desc{opacity:.65!important;}
+.store-img-box{background:rgba(255,255,255,.1)!important;}
+
+/* ── PRAYER WALL INPUTS ── */
+input[type=text],input[type=password],textarea,select{
+  background:rgba(255,255,255,.08)!important;
+  border:1.5px solid rgba(255,255,255,.15)!important;
+  color:#fff!important;border-radius:14px!important;
+}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.35)!important;}
+input:focus,textarea:focus{border-color:#f5c842!important;outline:none!important;}
+
+/* ── SCROLLBAR (hide on mobile) ── */
+::-webkit-scrollbar{width:0;height:0;}
+
+/* ── CHOICE CARDS (entry screen) ── */
+.choice-card{
+  border-radius:20px!important;
+  padding:1.2rem .75rem!important;
+  transition:all .15s cubic-bezier(.34,1.56,.64,1)!important;
+  background:rgba(255,255,255,.06)!important;
+  border:2px solid rgba(255,255,255,.1)!important;
+}
+.choice-card:active{transform:scale(.94)!important;}
+.cc-label{
+  font-family:Bangers,cursive!important;
+  font-size:1rem!important;
+  letter-spacing:.05em!important;
+  color:#fff!important;
+}
+.cc-icon{font-size:2rem!important;}
+
+/* ── PROGRESS BARS in dark mode ── */
+.prog-track{background:rgba(255,255,255,.1)!important;border:none!important;}
+
+/* ── RESPONSIVE: full width on narrow screens ── */
+@media(max-width:400px){
+  .games-grid{gap:8px!important;}
+  .gc-emoji{font-size:52px!important;}
+  .gc-title{font-size:.9rem!important;}
+  .ktb{border-radius:14px!important;padding:10px 2px 8px!important;}
+}
+</style>
   <div style="grid-column:1/-1;text-align:center;margin-bottom:12px">
     <div style="font-family:'Bangers',cursive;font-size:1.4rem;color:#C9A84C;letter-spacing:.1em">CHOOSE YOUR WARRIOR</div>
     <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px">You can customize your armor as you grow!</div>
