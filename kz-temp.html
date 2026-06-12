@@ -226,15 +226,15 @@ input,select,textarea{color:var(--text);}
 .ws-slot.filled{background:var(--purple);border-color:var(--purple);color:#fff;border-style:solid;}
 @keyframes ws-shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-7px);}75%{transform:translateX(7px);}};
 /* Memory Match */
-.match-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:1rem 0;}
+.match-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1rem 0;}
 .match-card{aspect-ratio:1;border-radius:14px;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .35s;user-select:none;}
 .match-card.flipped,.match-card.done{transform:rotateY(180deg);}
 .match-card.done{opacity:.55;pointer-events:none;}
 .mc-front,.mc-back{position:absolute;inset:0;border-radius:14px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;}
-.mc-front{background:linear-gradient(135deg,var(--purple),#3b1ea0);color:#fff;font-size:24px;}
-.mc-back{background:var(--white);border:2px solid var(--border);color:var(--text);transform:rotateY(180deg);font-size:10px;font-weight:700;text-align:center;line-height:1.3;padding:5px;}
-.mc-back.ma{border-color:var(--teal);background:#E8FFF5;color:#085041;}
-.mc-back.mb{border-color:var(--gold);background:#FFF8E6;color:#7A3800;}
+.mc-front{background:linear-gradient(135deg,#6C52E3,#3b1ea0);color:#fff;font-size:28px;box-shadow:0 4px 16px rgba(108,82,227,0.4);}
+.mc-back{background:rgba(19,25,41,0.95);border:2px solid rgba(255,255,255,0.15);color:#E8E4F0;transform:rotateY(180deg);font-size:11px;font-weight:800;text-align:center;line-height:1.35;padding:6px;}
+.mc-back.ma{border-color:#00C07A;background:rgba(0,192,122,0.2);color:#7FFFD4;}
+.mc-back.mb{border-color:#29AEFF;background:rgba(41,174,255,0.2);color:#7DD3FC;}
 /* T/F */
 .tf-question{font-size:16px;font-weight:700;line-height:1.5;text-align:center;margin:1.25rem 0;padding:1.25rem;background:var(--white);border-radius:20px;border:2px solid var(--border);}
 .tf-btns{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1rem;}
@@ -1163,7 +1163,26 @@ input:focus,select:focus,textarea:focus{
 .atk-card{animation:w-pulse-gold 3s ease-in-out infinite !important;}
 
 /* ════ END VICTORY WARRIOR ACADEMY UPGRADE ════ */
-  </style>
+  
+/* ═══════════════════════════════════════════
+   VICTORY ANIMATIONS & GAME FEEL
+   ═══════════════════════════════════════════ */
+@keyframes pts-pop{0%{transform:scale(0.5) translateY(0);opacity:1;}60%{transform:scale(1.4) translateY(-30px);opacity:1;}100%{transform:scale(1) translateY(-60px);opacity:0;}}
+@keyframes screen-flash{0%,100%{background:transparent;}50%{background:rgba(245,200,66,0.15);}}
+@keyframes bounce-in{0%{transform:scale(0.3);opacity:0;}60%{transform:scale(1.1);}80%{transform:scale(0.95);}100%{transform:scale(1);opacity:1;}}
+@keyframes shake-no{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-6px);}80%{transform:translateX(6px);}}
+@keyframes float-up{0%{transform:translateY(0);opacity:1;}100%{transform:translateY(-80px);opacity:0;}}
+@keyframes confetti-fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(120px) rotate(720deg);opacity:0;}}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 12px rgba(245,200,66,0.3);}50%{box-shadow:0 0 30px rgba(245,200,66,0.8);}}
+@keyframes correct-flash{0%,100%{background:inherit;}30%{background:rgba(0,192,122,0.35)!important;}}
+@keyframes wrong-flash{0%,100%{background:inherit;}30%{background:rgba(255,90,54,0.35)!important;}}
+.anim-bounce-in{animation:bounce-in 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+.anim-shake{animation:shake-no 0.4s ease forwards;}
+.anim-glow{animation:glow-pulse 1.5s ease-in-out infinite;}
+.pts-float{position:fixed;pointer-events:none;font-family:Bangers,cursive;font-size:1.8rem;color:#f5c842;text-shadow:0 0 10px rgba(245,200,66,0.6);z-index:9999;animation:pts-pop 1s ease-out forwards;}
+.confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:9998;animation:confetti-fall 1s ease-in forwards;}
+
+</style>
 </head>
 <body>
 
@@ -4040,6 +4059,7 @@ function yWhoRender(){
 }
 function yWhoAnswer(chosen,correct){
   const ok=chosen===correct;if(ok)yWhoScore++;
+  if(ok){showConfetti(window.innerWidth/2,200,8);showPointsPop(5,window.innerWidth/2-30,180);}
   document.querySelectorAll('[onclick^="yWhoAnswer"]').forEach(b=>b.style.pointerEvents='none');
   const fb=document.getElementById('y-who-fb');
   fb.style.display='block';fb.style.background=ok?'#E8FFF5':'#FFF0EC';fb.style.color=ok?'#085041':'#7A2010';
@@ -4090,6 +4110,7 @@ function yTFRender(){
 }
 function yTFAnswer(chosen,correct){
   const ok=chosen===correct;if(ok)yTFScore++;
+  if(ok){showConfetti(window.innerWidth/2,200,8);showPointsPop(5,window.innerWidth/2-30,180);}
   document.querySelectorAll('[onclick^="yTFAnswer"]').forEach(b=>b.style.pointerEvents='none');
   const fb=document.getElementById('ytf-fb');
   fb.style.display='block';fb.style.background=ok?'#E8FFF5':'#FFF0EC';fb.style.color=ok?'#085041':'#7A2010';
@@ -4184,6 +4205,7 @@ function yCountRender(){
 }
 function yCountAnswer(chosen,correct){
   const ok=chosen===correct;if(ok)yCountScore++;
+  if(ok){showConfetti(window.innerWidth/2,200,8);showPointsPop(5,window.innerWidth/2-30,180);}
   document.querySelectorAll('[onclick^="yCountAnswer"]').forEach(b=>b.style.pointerEvents='none');
   const fb=document.getElementById('y-count-fb');
   fb.style.display='block';fb.style.background=ok?'#E8FFF5':'#FFF0EC';fb.style.color=ok?'#085041':'#7A2010';
@@ -4229,6 +4251,7 @@ function yFillRender(){
 }
 function yFillAnswer(chosen,correct){
   const ok=chosen===correct;if(ok)yFillScore++;
+  if(ok){showConfetti(window.innerWidth/2,200,8);showPointsPop(5,window.innerWidth/2-30,180);}
   document.querySelectorAll('[onclick^="yFillAnswer"]').forEach(b=>b.style.pointerEvents='none');
   const fb=document.getElementById('y-fill-fb');
   fb.style.display='block';fb.style.background=ok?'#E8FFF5':'#FFF0EC';fb.style.color=ok?'#085041':'#7A2010';
@@ -4238,14 +4261,18 @@ function yFillAnswer(chosen,correct){
 
 // ── Y-GAME 6: SPIN THE WHEEL JR. ────────────────────
 var Y_WHEEL=[
-  {emoji:'🎵',color:'#6C52E3',ch:'Sing "Jesus Loves Me"!',tip:'Sing it as loud as you can!'},
-  {emoji:'🙏',color:'#00C07A',ch:'Say a prayer out loud!',tip:'Just talk to God, He is always listening!'},
-  {emoji:'🤗',color:'#FF5A36',ch:'Give someone nearby a hug!',tip:'Spread God\'s love right now!'},
-  {emoji:'📖',color:'#F5A623',ch:'Name one thing God made!',tip:'Look around, God made everything you see!'},
-  {emoji:'💪',color:'#29AEFF',ch:'Jump 5 times and say "God is good!"',tip:'Each jump = one "God is good!"'},
-  {emoji:'⭐',color:'#FF3E8D',ch:'Tell someone "Jesus loves you!"',tip:'That\'s the best news in the world!'},
-  {emoji:'🦁',color:'#7CC800',ch:'Roar like Daniel\'s lions!',tip:'Then say "But God protected Daniel!" 🦁'},
-  {emoji:'❤️',color:'#085041',ch:'Say 3 things you\'re thankful for!',tip:'God loves to hear our thankful hearts!'},
+  {emoji:'🎵',color:'#6C52E3',ch:'Sing "Jesus Loves Me" as loud as you can!',tip:'God loves to hear your voice!'},
+  {emoji:'🙏',color:'#00C07A',ch:'Say a thank-you prayer out loud right now!',tip:'Thank God for 3 things!'},
+  {emoji:'🤗',color:'#FF5A36',ch:'Give someone nearby a high five for Jesus!',tip:"Spread God's love right now!"},
+  {emoji:'📖',color:'#F5A623',ch:'Name one amazing thing God made!',tip:'Look around — God made everything you see!'},
+  {emoji:'💪',color:'#29AEFF',ch:'Jump 5 times and shout "God is GOOD!" each jump!',tip:"That's 5 truths about God!"},
+  {emoji:'⭐',color:'#FF3E8D',ch:'Tell someone nearby "Jesus loves you!"',tip:"That's the best news in the world!"},
+  {emoji:'🦁',color:'#7CC800',ch:'Roar like a lion and say "Daniel was brave!"',tip:'Then say "God protected him!" 🦁'},
+  {emoji:'❤️',color:'#C952E3',ch:'Say 3 things you are thankful God gave you!',tip:'God loves our thankful hearts!'},
+  {emoji:'🌈',color:'#E3A452',ch:'Name what the rainbow means!',tip:"It's God's promise to Noah — and to us!"},
+  {emoji:'🐟',color:'#2952E3',ch:'Make a fish shape with your hands and say John 3:16!',tip:'"For God so loved the world..."'},
+  {emoji:'✨',color:'#52E3C9',ch:'Spin around and shout "God made me SPECIAL!"',tip:'Psalm 139 — fearfully and wonderfully made!'},
+  {emoji:'🏆',color:'#E35252',ch:'Name your favorite Bible hero and one thing they did!',tip:'David, Moses, Esther, Jesus — you pick!'},
 ];
 function initYWheel(){wheelDeg=0;wheelSpinning=false;yWheelRender();}
 function yWheelRender(){
@@ -4335,6 +4362,54 @@ var WS_WORDS=[
   {word:'ARMOR',hint:'Put on the full blank of God — Ephesians 6',emoji:'🛡️'},
 ];
 let wsPool=[],wsRoundIdx=0,wsAnswer=[],wsWord='';
+
+// ═══════════════════════════════════════════
+// ANIMATION HELPERS
+// ═══════════════════════════════════════════
+function showPointsPop(pts, x, y) {
+  const el = document.createElement('div');
+  el.className = 'pts-float';
+  el.textContent = '+' + pts + ' pts!';
+  el.style.left = (x || window.innerWidth/2 - 40) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1000);
+}
+
+function showConfetti(x, y, count) {
+  const colors = ['#f5c842','#ff6b1a','#00C07A','#29AEFF','#FF3E8D','#6C52E3'];
+  count = count || 18;
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.background = colors[i % colors.length];
+    el.style.left = ((x || window.innerWidth/2) + (Math.random()-0.5)*120) + 'px';
+    el.style.top = (y || 200) + 'px';
+    el.style.animationDelay = (Math.random()*0.3) + 's';
+    el.style.animationDuration = (0.7 + Math.random()*0.6) + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1400);
+  }
+}
+
+function flashCorrect(el) {
+  if (!el) return;
+  el.style.animation = 'correct-flash 0.5s ease';
+  setTimeout(() => el.style.animation = '', 500);
+}
+
+function flashWrong(el) {
+  if (!el) return;
+  el.style.animation = 'shake-no 0.4s ease, wrong-flash 0.5s ease';
+  setTimeout(() => el.style.animation = '', 500);
+}
+
+function celebrateWin(pts, msg) {
+  showConfetti(window.innerWidth/2, 150, 30);
+  if (pts) showPointsPop(pts, window.innerWidth/2 - 40, 120);
+  if (S.currentKid?.id && pts) awardPoints(S.currentKid.id, pts, 'game', msg||'Game win!');
+}
+
 function initScramble(){wsPool=[...WS_WORDS].sort(()=>Math.random()-.5).slice(0,5);wsRoundIdx=0;wsNextRound();}
 function wsNextRound(){
   if(wsRoundIdx>=wsPool.length){
@@ -4369,8 +4444,10 @@ function wsTap(i){
     const guess=wsAnswer.join('');
     const fb=document.getElementById('ws-fb');
     if(guess===wsWord){
-      if(fb){fb.style.display='block';fb.style.background='#E8FFF5';fb.style.color='#085041';fb.textContent='🎉 Correct! '+wsWord+', nice work!';}
-      setTimeout(()=>{wsRoundIdx++;wsNextRound();},1500);
+      if(fb){fb.style.display='block';fb.style.background='rgba(0,192,122,0.2)';fb.style.color='#7FFFD4';fb.style.border='1.5px solid #00C07A';fb.textContent='🎉 Correct! '+wsWord+' — nice work!';}
+      showConfetti(window.innerWidth/2,200,12);
+      showPointsPop(5,window.innerWidth/2-30,180);
+      setTimeout(()=>{wsRoundIdx++;wsNextRound();},1600);
     } else {
       if(fb){fb.style.display='block';fb.style.background='#FFF0EC';fb.style.color='#7A2010';fb.textContent='❌ Not quite, try again!';}
       setTimeout(()=>{wsAnswer=Array(wsWord.length).fill(null);document.querySelectorAll('.ws-tile').forEach(t=>{t.dataset.used='0';t.classList.remove('used');});document.querySelectorAll('.ws-slot').forEach(s=>{s.textContent='';s.classList.remove('filled');});fb.style.display='none';},1200);
@@ -4433,6 +4510,7 @@ function fitbRender(){
 function fitbAnswer(chosen,correct){
   const ok=chosen===correct;if(ok)fitbScore++;
   document.querySelectorAll('.sg-opt').forEach(b=>{b.style.pointerEvents='none';if(b.textContent===correct)b.classList.add('correct');else if(b.textContent===chosen&&!ok)b.classList.add('wrong');});
+  if(ok){showConfetti(window.innerWidth/2,200,10);showPointsPop(5,window.innerWidth/2-30,180);}
   const fb=document.getElementById('fitb-fb');
   fb.style.display='block';fb.style.background=ok?'#E8FFF5':'#FFF0EC';fb.style.color=ok?'#085041':'#7A2010';
   fb.textContent=ok?`✅ "${correct}" is right! Great memory!`:`❌ The missing word is "${correct}"`;
@@ -4466,6 +4544,7 @@ let cgPool=[],cgCharIdx=0,cgClues=0,cgChar=null;
 function initGuesser(){cgPool=[...CG_CHARS].sort(()=>Math.random()-.5);cgCharIdx=0;cgRound();}
 function cgRound(){
   if(cgCharIdx>=cgPool.length){
+    celebrateWin(15,'Bible guesser complete!');
     document.getElementById('games-hub').innerHTML=`<button class="game-back" onclick="renderGames()">← Games</button><div style="text-align:center;padding:2rem 1rem"><div style="font-size:56px;margin-bottom:.75rem">🕵️</div><div style="font-size:22px;font-weight:900;margin-bottom:.5rem">Bible Detective!</div><p style="font-size:14px;color:var(--muted);margin-bottom:1.5rem">You guessed all the Bible characters!</p><button onclick="initGuesser()" style="background:linear-gradient(135deg,var(--coral),#c42f10);color:#fff;border:none;border-radius:100px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-bottom:.75rem">🔄 Play Again</button><button onclick="renderGames()" style="background:var(--cream);border:1.5px solid var(--border);border-radius:100px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;width:100%">← All Games</button></div>`;
     return;
   }
@@ -4494,6 +4573,7 @@ function cgMoreClue(){
 function cgAnswer(chosen){
   const ok=chosen===cgChar.name;
   document.querySelectorAll('.cg-opt').forEach(b=>{b.style.pointerEvents='none';if(b.textContent===cgChar.name)b.classList.add('correct');else if(b.textContent===chosen&&!ok)b.classList.add('wrong');});
+  if(ok){showConfetti(window.innerWidth/2,200,10);showPointsPop(5,window.innerWidth/2-30,180);}
   const fb=document.getElementById('cg-fb');
   fb.style.display='block';fb.style.background=ok?'#E8FFF5':'#FFF0EC';fb.style.color=ok?'#085041':'#7A2010';
   fb.textContent=ok?`✅ Yes! I am ${cgChar.name}! ${cgChar.emoji} Amazing!`:`❌ I am ${cgChar.name}! ${cgChar.emoji} Try the next one!`;
@@ -4560,7 +4640,14 @@ function tfAnswer(chosen,correct){
   const fb=document.getElementById('tf-fb');
   fb.style.display='block';fb.style.borderColor=ok?'var(--teal)':'var(--coral)';
   fb.innerHTML=`<div style="font-size:22px;margin-bottom:.3rem">${ok?'✅':'❌'}</div>${tfPool[tfIdx].f}`;
-  setTimeout(()=>{tfIdx++;tfRender();},2000);
+  if(ok){
+    showConfetti(window.innerWidth/2, 200, 12);
+    showPointsPop(5, window.innerWidth/2-30, 180);
+  } else {
+    const btns = document.querySelectorAll('.tf-btn');
+    if(btns[0]) btns[0].style.animation='shake-no 0.4s ease';
+  }
+  setTimeout(()=>{tfIdx++;tfRender();},2200);
 }
 
 // ── GAME 5: MEMORY MATCH ──────────────────────────────
@@ -4602,7 +4689,7 @@ function matchRender(){
       <div style="font-size:13px;font-weight:700">🃏 Memory Match</div>
       <div style="font-size:12px;color:var(--muted);font-weight:600">Moves: <span id="match-moves">0</span></div>
     </div>
-    <div style="font-size:11px;color:var(--muted);margin-bottom:.75rem;text-align:center">Match each verse fragment to its Bible reference!</div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:.75rem;text-align:center">Flip cards to match verses with their Bible reference! 📖</div>
     <div class="match-grid" id="match-grid"></div>
     <div id="match-win" style="display:none;text-align:center;background:linear-gradient(135deg,var(--teal),#006f52);border-radius:20px;color:#fff;padding:1.5rem;margin-top:1rem">
       <div style="font-size:40px">🏆</div>
@@ -4614,7 +4701,15 @@ function matchRender(){
 }
 function matchGridRender(){
   const el=document.getElementById('match-grid');if(!el)return;
-  el.innerHTML=matchCards.map((c,i)=>`<div class="match-card ${(matchFlipped.includes(i)||c.matched)?'flipped':''} ${c.matched?'done':''}" onclick="matchTap(${i})"><div class="mc-front">✝️</div><div class="mc-back ${c.matched?(c.side==='a'?'ma':'mb'):''}" style="font-size:${c.txt.length>15?'9px':'10px'}">${c.txt}</div></div>`).join('');
+  el.innerHTML=matchCards.map((c,i)=>{
+    const emojis=['✝️','📖','⭐','🙏','💡','❤️','🔑','🌟','🏆','🔥','🕊️','💪'];
+    const frontEmoji = emojis[c.pid % emojis.length];
+    const fs = c.txt.length > 20 ? '9px' : c.txt.length > 12 ? '10px' : '12px';
+    return `<div class="match-card ${(matchFlipped.includes(i)||c.matched)?'flipped':''} ${c.matched?'done':''}" onclick="matchTap(${i})">
+      <div class="mc-front">${frontEmoji}</div>
+      <div class="mc-back ${c.matched?(c.side==='a'?'ma':'mb'):''}" style="font-size:${fs}">${c.txt}</div>
+    </div>`;
+  }).join('');
 }
 function matchTap(idx){
   if(matchLocked||matchFlipped.includes(idx)||matchCards[idx].matched)return;
@@ -4626,11 +4721,14 @@ function matchTap(idx){
     if(matchCards[a].pid===matchCards[b].pid){
       matchCards[a].matched=true;matchCards[b].matched=true;matchDone++;
       matchFlipped=[];matchLocked=false;matchGridRender();
+      showConfetti(window.innerWidth/2, 250, 8);
       if(matchDone===6){
+        celebrateWin(10,'Memory match!');
         setTimeout(()=>{
           const win=document.getElementById('match-win');if(win)win.style.display='block';
           const msg=document.getElementById('match-msg');
           if(msg)msg.textContent=matchMoves<=8?'Incredible! Only '+matchMoves+' moves!':matchMoves<=12?'Nice job! '+matchMoves+' moves.':'You did it in '+matchMoves+' moves!';
+          showConfetti(window.innerWidth/2, 200, 25);
         },400);
       }
     } else {
