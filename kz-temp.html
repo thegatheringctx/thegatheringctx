@@ -52,7 +52,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{background:#0f0a2e;background-image:radial-gradient(ellipse at 20% 0%,#3d1a7a 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,#0a4a3a 0%,transparent 60%);background-attachment:fixed;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--text);font-size:14px;line-height:1.5;min-height:100vh;}
-.page{display:none;padding:1rem;min-height:100vh;max-width:680px;margin:0 auto;color:#fff;}
+.page{display:none;padding:1rem;min-height:100vh;max-width:680px;margin:0 auto;color:#fff;background:#0A0628;}
+#p-land{background:transparent!important;}
 .card{color:var(--text);}
 .card label,.card .form-group label{color:var(--text);}
 .card *{color:inherit;}
@@ -1567,6 +1568,114 @@ input:focus,select:focus,textarea:focus{
   color:#00C07A!important;
 }
 
+
+/* ═══════════════════════════════════════════════════════
+   MOTION SYSTEM
+   ═══════════════════════════════════════════════════════ */
+
+/* Landing warrior float + sword swing */
+@keyframes warrior-float{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  30%{transform:translateY(-12px) rotate(-1deg);}
+  70%{transform:translateY(-6px) rotate(1deg);}
+}
+@keyframes warrior-breathe{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.025);}
+}
+@keyframes sword-glow-pulse{
+  0%,100%{filter:drop-shadow(0 8px 30px rgba(108,82,227,0.4)) drop-shadow(0 0 0px rgba(147,197,253,0));}
+  50%{filter:drop-shadow(0 8px 30px rgba(108,82,227,0.6)) drop-shadow(0 0 20px rgba(147,197,253,0.4));}
+}
+.wl-hero-svg{
+  animation:warrior-float 4s ease-in-out infinite, sword-glow-pulse 3s ease-in-out infinite;
+}
+
+/* Sparks drift */
+@keyframes spark-drift-1{0%{transform:translate(0,0) rotate(0deg) scale(1);opacity:.8;}50%{transform:translate(-8px,-18px) rotate(15deg) scale(1.2);opacity:1;}100%{transform:translate(4px,-6px) rotate(-5deg) scale(.9);opacity:.6;}}
+@keyframes spark-drift-2{0%{transform:translate(0,0) rotate(0deg);opacity:.7;}50%{transform:translate(12px,-22px) rotate(-20deg) scale(1.3);opacity:1;}100%{transform:translate(-4px,-8px) rotate(10deg);opacity:.5;}}
+@keyframes spark-drift-3{0%{transform:translate(0,0) scale(1);opacity:.6;}50%{transform:translate(-15px,-10px) scale(1.4);opacity:.9;}100%{transform:translate(6px,-4px) scale(.8);opacity:.4;}}
+.wl-sp1{animation:spark-drift-1 3s ease-in-out infinite;}
+.wl-sp2{animation:spark-drift-2 3.5s ease-in-out infinite;}
+.wl-sp3{animation:spark-drift-3 2.8s ease-in-out infinite;}
+
+/* Floating particles background on landing */
+@keyframes particle-rise{
+  0%{transform:translateY(0) translateX(0) scale(0);opacity:0;}
+  10%{opacity:.6;}
+  90%{opacity:.3;}
+  100%{transform:translateY(-80vh) translateX(var(--drift)) scale(1.5);opacity:0;}
+}
+.wl-particle{
+  position:absolute;border-radius:50%;pointer-events:none;
+  animation:particle-rise var(--dur,8s) linear infinite var(--delay,0s);
+  bottom:0;
+}
+
+/* Points badge celebration */
+@keyframes pts-celebrate{0%{transform:scale(1);}20%{transform:scale(1.25) rotate(-3deg);}40%{transform:scale(1.1) rotate(3deg);}60%{transform:scale(1.2) rotate(-2deg);}80%{transform:scale(1.05);}100%{transform:scale(1);}}
+.pts-celebrating{animation:pts-celebrate .6s cubic-bezier(.34,1.56,.64,1)!important;}
+
+/* Game card entrance animation */
+@keyframes card-entrance{0%{transform:scale(0.85) translateY(20px);opacity:0;}100%{transform:scale(1) translateY(0);opacity:1;}}
+.game-card{animation:card-entrance .4s cubic-bezier(.34,1.56,.64,1) both;}
+.game-card:nth-child(1){animation-delay:.05s;}
+.game-card:nth-child(2){animation-delay:.1s;}
+.game-card:nth-child(3){animation-delay:.15s;}
+.game-card:nth-child(4){animation-delay:.2s;}
+.game-card:nth-child(5){animation-delay:.25s;}
+.game-card:nth-child(6){animation-delay:.3s;}
+.game-card:nth-child(7){animation-delay:.35s;}
+.game-card:nth-child(8){animation-delay:.4s;}
+
+/* Hall of Victory - rank 1 golden aura */
+@keyframes gold-aura{0%,100%{box-shadow:0 0 15px rgba(245,200,66,0.3),0 4px 20px rgba(0,0,0,0.3);}50%{box-shadow:0 0 35px rgba(245,200,66,0.6),0 4px 20px rgba(0,0,0,0.3);}}
+.hov-rank1-row{animation:gold-aura 2.5s ease-in-out infinite!important;}
+
+/* Tab icon pulse on activity */
+@keyframes tab-pulse{0%{transform:scale(1);}50%{transform:scale(1.15);}100%{transform:scale(1);}}
+.ktb-new-activity .ktb-icon{animation:tab-pulse .5s cubic-bezier(.34,1.56,.64,1) 3;}
+
+/* Screen flash effects */
+@keyframes correct-flash{0%{background:rgba(0,192,122,0);}20%{background:rgba(0,192,122,0.15);}100%{background:rgba(0,192,122,0);}}
+@keyframes wrong-flash{0%{background:rgba(255,90,54,0);}20%{background:rgba(255,90,54,0.15);}100%{background:rgba(255,90,54,0);}}
+.flash-correct{animation:correct-flash .5s ease!important;}
+.flash-wrong{animation:wrong-flash .4s ease!important;}
+
+/* Dashboard warrior idle */
+@keyframes dash-warrior-idle{
+  0%,100%{transform:scale(1) translateY(0);}
+  50%{transform:scale(1.03) translateY(-4px);}
+}
+#dash-warrior-svg{animation:dash-warrior-idle 3s ease-in-out infinite;}
+
+/* CTA button pulse to draw attention */
+@keyframes cta-pulse{0%,100%{box-shadow:0 6px 24px rgba(245,200,66,0.35);}50%{box-shadow:0 8px 40px rgba(245,200,66,0.65),0 0 0 8px rgba(245,200,66,0.1);}}
+.wl-cta{animation:cta-pulse 2.5s ease-in-out infinite!important;}
+
+/* Score popup animation */
+@keyframes score-pop-up{0%{transform:translateY(0) scale(0.5);opacity:1;}100%{transform:translateY(-60px) scale(1);opacity:0;}}
+
+/* Leaderboard entry slide-in */
+@keyframes lb-slide-in{0%{transform:translateX(-20px);opacity:0;}100%{transform:translateX(0);opacity:1;}}
+
+/* Armor unlock ceremony entrance */
+@keyframes armor-entrance{0%{transform:scale(0) rotate(-180deg);opacity:0;}60%{transform:scale(1.15) rotate(5deg);opacity:1;}100%{transform:scale(1) rotate(0);opacity:1;}}
+
+/* Mission checkmark pop */
+@keyframes mission-complete{0%{transform:scale(1);}40%{transform:scale(1.08);}60%{transform:scale(0.96);}100%{transform:scale(1);}}
+
+/* Victory banner wave */
+@keyframes banner-wave{0%,100%{transform:skewX(-2deg);}50%{transform:skewX(2deg);}}
+
+/* Streak fire pulse */
+@keyframes fire-pulse{0%,100%{text-shadow:0 0 8px rgba(255,90,54,0.6);}50%{text-shadow:0 0 20px rgba(255,90,54,1),0 0 40px rgba(245,200,66,0.5);}}
+
+/* Boss shake for low timer */
+@keyframes boss-shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-3px) rotate(-1deg);}75%{transform:translateX(3px) rotate(1deg);}}
+
+/* Floating sparkle for warrior on dashboard */
+@keyframes float-sparkle{0%,100%{transform:translate(0,0) scale(1);opacity:.7;}50%{transform:translate(var(--sx,5px),var(--sy,-10px)) scale(1.3);opacity:1;}}
 </style>
 </head>
 <body>
@@ -4671,11 +4780,6 @@ async function awardGamePoints(gameName, bonus){
 // ══════════════════════════════════════════════════════════════════════════
 // WEEKLY MISSIONS SYSTEM
 // ══════════════════════════════════════════════════════════════════════════
-var WEEKLY_MISSIONS = [
-  {id:'wm-game3', label:'Win 3 games this week', icon:'⚔️', pts:30, check:function(kid,txs){ return txs.filter(t=>t.kidId===kid.id&&t.category==='games'&&t.createdAt>weekStart()).length>=3; }},
-  {id:'wm-devo',  label:'Read a devotional',     icon:'📖', pts:20, check:function(kid,txs){ return txs.some(t=>t.kidId===kid.id&&t.category==='reading'&&t.createdAt>weekStart()); }},
-  {id:'wm-sunday',label:'Check in on Sunday',    icon:'🏛️', pts:50, check:function(kid,txs){ return txs.some(t=>t.kidId===kid.id&&(t.category==='sunday'||t.category==='attendance')&&t.createdAt>weekStart()); }},
-];
 function weekStart(){ const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-d.getDay()); return d.getTime(); }
 function renderMissions(){
   const el=document.getElementById('missions-panel');if(!el)return;
@@ -6394,14 +6498,14 @@ function weekKey(){
   const d=new Date();const jan1=new Date(d.getFullYear(),0,1);
   return d.getFullYear()+'-W'+Math.ceil(((d-jan1)/86400000+jan1.getDay()+1)/7);
 }
+function wmCheckGames(kid,txs){var ws=weekStart();return txs.filter(function(t){return t.kidId===kid.id&&t.category==='games'&&t.createdAt>ws;}).length>=3;}
+function wmCheckDevo(kid,txs){var ws=weekStart();return txs.some(function(t){return t.kidId===kid.id&&t.category==='reading'&&t.createdAt>ws;});}
+function wmCheckSunday(kid,txs){var ws=weekStart();return txs.some(function(t){return t.kidId===kid.id&&(t.category==='sunday'||t.category==='attendance')&&t.createdAt>ws;});}
 var WEEKLY_MISSIONS=[
-  {key:'checkin5',   label:'Check in 5 days this week',     pts:30,  target:5,  icon:'🔥'},
-  {key:'devo2',      label:'Read 2 devotionals',             pts:20,  target:2,  icon:'📖'},
-  {key:'quiz3',      label:'Complete the Bible challenge 3 times', pts:20, target:3, icon:'⚡'},
-  {key:'verse',      label:'Memorize your verse',            pts:15,  target:1,  icon:'📜'},
-  {key:'sunday',     label:'Attend Sunday service',          pts:25,  target:1,  icon:'⛪'},
+  {id:'wm-game3', label:'Win 3 games this week', icon:'⚔️', pts:30, check:wmCheckGames},
+  {id:'wm-devo',  label:'Read a devotional',     icon:'📖', pts:20, check:wmCheckDevo},
+  {id:'wm-sunday',label:'Check in on Sunday',    icon:'🏛️', pts:50, check:wmCheckSunday},
 ];
-
 function getMissionProgress(kid){
   const wk=weekKey();
   const progress={};
@@ -7751,5 +7855,142 @@ function gTab(id,btn){
   </div>
   <div style="color:rgba(255,255,255,.4);font-size:11px">&copy; 2026 The Gathering CTX · Kids Gathering Zone</div>
 </footer>
+<script>
+
+// ═══════════════════════════════════════════════════════
+// MOTION ENGINE
+// ═══════════════════════════════════════════════════════
+
+// Floating particles on landing
+function spawnLandingParticles(){
+  const screen=document.querySelector('.wl-screen');
+  if(!screen||screen.querySelector('.wl-particle'))return;
+  const colors=['rgba(108,82,227,0.6)','rgba(201,168,76,0.6)','rgba(0,192,122,0.5)','rgba(255,90,54,0.4)','rgba(147,197,253,0.5)'];
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='wl-particle';
+    const size=Math.random()*4+2;
+    const delay=Math.random()*8;
+    const dur=Math.random()*6+6;
+    const left=Math.random()*100;
+    const drift=(Math.random()-0.5)*60;
+    p.style.cssText=`width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${left}%;--drift:${drift}px;--dur:${dur}s;--delay:-${delay}s;`;
+    screen.appendChild(p);
+  }
+}
+
+// Screen flash for correct/wrong
+function flashScreen(type){
+  const body=document.body;
+  body.classList.remove('flash-correct','flash-wrong');
+  void body.offsetWidth; // reflow
+  body.classList.add(type==='correct'?'flash-correct':'flash-wrong');
+  setTimeout(()=>body.classList.remove('flash-correct','flash-wrong'),500);
+}
+
+// Points badge celebration
+function celebratePts(){
+  const pb=document.querySelector('.pts-chip,.pts-badge');
+  if(!pb)return;
+  pb.classList.remove('pts-celebrating');
+  void pb.offsetWidth;
+  pb.classList.add('pts-celebrating');
+}
+
+// Floating score popup
+function popScore(pts,x,y){
+  const el=document.createElement('div');
+  el.textContent='+'+pts+'⚡';
+  el.style.cssText=`position:fixed;left:${x}px;top:${y}px;font-family:Bangers,cursive;font-size:1.6rem;color:#f5c842;pointer-events:none;z-index:9999;text-shadow:0 2px 8px rgba(0,0,0,0.5);animation:score-pop-up .9s cubic-bezier(.25,.46,.45,.94) forwards;`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),950);
+}
+
+// Trigger correct answer motion
+function motionCorrect(pts){
+  flashScreen('correct');
+  const cx=window.innerWidth/2, cy=window.innerHeight*0.4;
+  if(pts) popScore(pts,cx-30,cy);
+  celebrateWin&&celebrateWin(0,'');
+}
+
+// Trigger wrong answer motion
+function motionWrong(){
+  flashScreen('wrong');
+  const hub=document.getElementById('games-hub');
+  if(hub){hub.style.animation='boss-shake .35s ease';setTimeout(()=>hub.style.animation='',400);}
+}
+
+// Dashboard warrior idle sparkles
+function addDashSparkles(){
+  const wa=document.getElementById('dash-avatar');
+  if(!wa||wa.querySelector('.dash-spark'))return;
+  const sparks=['⚡','✨','🔥','⭐'];
+  for(let i=0;i<3;i++){
+    const s=document.createElement('div');
+    s.className='dash-spark';
+    const angle=Math.random()*360;
+    const dist=50+Math.random()*30;
+    const sx=(Math.random()-0.5)*20;
+    const sy=-10-Math.random()*15;
+    s.style.cssText=`position:absolute;font-size:${0.8+Math.random()*0.6}rem;pointer-events:none;--sx:${sx}px;--sy:${sy}px;animation:float-sparkle ${2+Math.random()*2}s ease-in-out infinite ${i*0.8}s;top:${10+Math.random()*60}%;left:${Math.random()*100}%;z-index:5;`;
+    s.textContent=sparks[Math.floor(Math.random()*sparks.length)];
+    wa.style.position='relative';
+    wa.appendChild(s);
+  }
+}
+
+// Animate leaderboard rows on render
+function animateLbRows(){
+  document.querySelectorAll('.hov-row,.hov-podium').forEach((row,i)=>{
+    row.style.animation=`lb-slide-in .35s ease ${i*0.05}s both`;
+  });
+  // Gold aura on rank 1
+  const firstRow=document.querySelector('.hov-row');
+  if(firstRow) firstRow.classList.add('hov-rank1-row');
+}
+
+// Hook into tab switches to animate content
+const _origKidTab=typeof kidTab==='function'?kidTab:null;
+if(_origKidTab){
+  kidTab=function(tab,cls){
+    _origKidTab(tab,cls);
+    setTimeout(()=>{
+      if(tab==='lb') animateLbRows();
+      if(tab==='games'){
+        document.querySelectorAll('.game-card').forEach((c,i)=>{
+          c.style.animation='';void c.offsetWidth;
+          c.style.animation=`card-entrance .4s cubic-bezier(.34,1.56,.64,1) ${i*0.05}s both`;
+        });
+      }
+    },50);
+  };
+}
+
+// Init motion on page load and after login
+function initMotion(){
+  spawnLandingParticles();
+  // Animate CTA button attention sequence after 2s
+  setTimeout(()=>{
+    const cta=document.querySelector('.wl-cta');
+    if(cta) cta.style.animation='cta-pulse 2.5s ease-in-out infinite';
+  },2000);
+}
+
+// Run on DOMContentLoaded  
+document.addEventListener('DOMContentLoaded',initMotion);
+setTimeout(initMotion,500);
+
+// Hook into renderKidDash to add sparkles
+const _origRKD=typeof renderKidDash==='function'?renderKidDash:null;
+if(_origRKD){
+  renderKidDash=function(){
+    _origRKD();
+    setTimeout(addDashSparkles,200);
+  };
+}
+
+
+</script>
 </body>
 </html>
