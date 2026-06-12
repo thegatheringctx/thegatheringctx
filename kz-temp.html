@@ -1355,6 +1355,216 @@ input:focus,select:focus,textarea:focus{
 .pts-float{position:fixed;pointer-events:none;font-family:Bangers,cursive;font-size:1.8rem;color:#f5c842;text-shadow:0 0 10px rgba(245,200,66,0.6);z-index:9999;animation:pts-pop 1s ease-out forwards;}
 .confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:9998;animation:confetti-fall 1s ease-in forwards;}
 
+
+/* ═══════════════════════════════════════════════════════
+   WARRIOR LANDING PAGE
+   ═══════════════════════════════════════════════════════ */
+.wl-screen{
+  min-height:100vh;
+  background:linear-gradient(165deg,#0A0628 0%,#130F3A 40%,#0D1F4A 70%,#0A2818 100%);
+  display:flex;flex-direction:column;align-items:center;
+  padding:1rem 1.1rem 2rem;position:relative;overflow:hidden;
+}
+.wl-glow{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;}
+.wl-glow-1{width:280px;height:280px;background:rgba(108,82,227,0.22);top:-60px;right:-60px;}
+.wl-glow-2{width:220px;height:220px;background:rgba(0,192,122,0.12);bottom:80px;left:-60px;}
+
+.wl-badge{
+  display:inline-flex;align-items:center;
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+  border-radius:99px;padding:.32rem .9rem;font-size:.72rem;color:rgba(255,255,255,0.7);
+  font-weight:600;letter-spacing:.04em;margin-top:.25rem;margin-bottom:.6rem;
+}
+.wl-badge-dot{
+  width:7px;height:7px;background:#00C07A;border-radius:50%;
+  margin-right:7px;flex-shrink:0;box-shadow:0 0 6px #00C07A;
+}
+.wl-wordmark-block{text-align:center;margin-bottom:.3rem;}
+.wl-eyebrow-sm{
+  font-size:.72rem;letter-spacing:.35em;color:rgba(255,255,255,0.45);
+  text-transform:uppercase;margin-bottom:2px;
+}
+.wl-wordmark{
+  font-size:clamp(40px,9vw,56px);font-weight:800;letter-spacing:.02em;
+  line-height:1;font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+.wl-kids-sup{
+  font-size:clamp(16px,3.5vw,22px);color:#5dade2;font-weight:700;
+  margin-left:3px;vertical-align:super;
+}
+
+/* Hero warrior */
+.wl-hero-wrap{position:relative;width:100%;max-width:260px;margin:0 auto .3rem;}
+.wl-hero-halo{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.14) 0%,transparent 70%);
+  pointer-events:none;
+}
+.wl-hero-svg{width:100%;height:auto;filter:drop-shadow(0 8px 30px rgba(108,82,227,0.4));}
+.wl-spark{
+  position:absolute;font-size:1.4rem;animation:wl-spark-float 3s ease-in-out infinite;
+  pointer-events:none;filter:drop-shadow(0 0 6px rgba(245,200,66,0.6));
+}
+.wl-sp1{top:8%;right:2%;animation-delay:0s;}
+.wl-sp2{top:20%;left:0%;animation-delay:1.1s;}
+.wl-sp3{bottom:10%;right:5%;animation-delay:2s;}
+@keyframes wl-spark-float{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-10px) rotate(8deg);}}
+
+/* Victory tagline */
+.wl-victory-tag{text-align:center;margin-bottom:.8rem;}
+.wl-vt-main{
+  font-family:Bangers,cursive;font-size:1.8rem;color:#f5c842;letter-spacing:.08em;
+  text-shadow:0 0 20px rgba(245,200,66,0.4);line-height:1;
+}
+.wl-vt-sub{font-size:.75rem;color:rgba(255,255,255,0.45);margin-top:.2rem;font-weight:600;letter-spacing:.04em;}
+
+/* CTA */
+.wl-cta{
+  width:100%;max-width:380px;
+  background:linear-gradient(135deg,#f5c842,#C9A84C);
+  color:#0A0628;border:none;border-radius:99px;
+  padding:1rem;font-size:1.05rem;font-weight:900;cursor:pointer;
+  letter-spacing:.03em;font-family:Bangers,cursive;font-size:1.2rem;letter-spacing:.08em;
+  box-shadow:0 6px 24px rgba(245,200,66,0.35);
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s;
+  margin-bottom:.7rem;display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.wl-cta:active{transform:scale(0.95);}
+
+/* Secondary row */
+.wl-sec-row{display:flex;gap:.5rem;margin-bottom:.9rem;width:100%;max-width:380px;}
+.wl-sec{
+  flex:1;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);
+  border-radius:99px;padding:.55rem .5rem;font-size:.78rem;font-weight:700;
+  color:rgba(255,255,255,0.75);cursor:pointer;
+  transition:background .15s;white-space:nowrap;
+}
+.wl-sec:hover{background:rgba(255,255,255,0.15);}
+
+/* Feature grid */
+.wl-feats{
+  display:flex;gap:.5rem;margin-bottom:.9rem;width:100%;max-width:380px;justify-content:center;
+}
+.wl-feat{
+  flex:1;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);
+  border-radius:18px;padding:.75rem .3rem;text-align:center;cursor:pointer;
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1),background .15s;
+}
+.wl-feat:active{transform:scale(0.9);}
+.wl-feat span{font-size:1.6rem;display:block;margin-bottom:.3rem;}
+.wl-feat div{font-size:.68rem;font-weight:800;color:rgba(255,255,255,0.65);letter-spacing:.04em;}
+
+/* Verse card */
+.wl-verse-card{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  border-radius:18px;padding:.9rem 1rem;text-align:center;max-width:380px;width:100%;
+}
+.wl-verse-q{font-size:.82rem;color:rgba(255,255,255,0.65);line-height:1.6;font-style:italic;}
+.wl-verse-r{font-size:.65rem;font-weight:800;color:#C9A84C;letter-spacing:.12em;margin-top:.4rem;}
+
+/* ═══════════════════════════════════════════════════════
+   HALL OF VICTORY LEADERBOARD
+   ═══════════════════════════════════════════════════════ */
+.hov-wrap{width:100%;padding:.25rem 0;}
+.hov-header{
+  text-align:center;margin-bottom:1rem;position:relative;
+}
+.hov-title{
+  font-family:Bangers,cursive;font-size:2rem;color:#f5c842;
+  letter-spacing:.1em;text-shadow:0 0 20px rgba(245,200,66,0.35);line-height:1;
+}
+.hov-sub{font-size:.72rem;color:rgba(255,255,255,0.45);font-weight:700;letter-spacing:.12em;margin-top:.2rem;}
+.hov-trophy-row{display:flex;justify-content:center;align-items:flex-end;gap:.5rem;margin-bottom:1.1rem;}
+/* Podium spots */
+.hov-podium{text-align:center;position:relative;}
+.hov-podium-1{order:2;}
+.hov-podium-2{order:1;}
+.hov-podium-3{order:3;}
+.hov-warrior-art{
+  width:60px;height:72px;margin:0 auto .3rem;display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.hov-warrior-art.rank1{width:76px;height:90px;}
+.hov-rank-badge{
+  width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:Bangers,cursive;font-size:1rem;font-weight:700;
+  margin:0 auto .3rem;position:relative;
+  box-shadow:0 3px 10px rgba(0,0,0,0.3);
+}
+.hov-rank-badge.gold{background:linear-gradient(135deg,#f5c842,#C9A84C);color:#0A0628;width:40px;height:40px;font-size:1.2rem;box-shadow:0 0 16px rgba(245,200,66,0.5);}
+.hov-rank-badge.silver{background:linear-gradient(135deg,#C0C0C0,#888);color:#fff;}
+.hov-rank-badge.bronze{background:linear-gradient(135deg,#CD7F32,#8B4500);color:#fff;}
+.hov-podium-name{font-size:.72rem;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px;}
+.hov-podium-pts{font-size:.65rem;color:rgba(255,255,255,0.5);font-weight:700;}
+.hov-podium-block{
+  border-radius:12px 12px 0 0;display:flex;align-items:flex-end;justify-content:center;
+  padding:.3rem .5rem;font-family:Bangers,cursive;font-size:1.2rem;color:rgba(255,255,255,0.6);
+  min-width:64px;
+}
+.hov-pb-1{height:52px;background:linear-gradient(to top,rgba(245,200,66,0.3),rgba(245,200,66,0.1));border:1.5px solid rgba(245,200,66,0.3);}
+.hov-pb-2{height:36px;background:linear-gradient(to top,rgba(192,192,192,0.2),rgba(192,192,192,0.05));border:1.5px solid rgba(192,192,192,0.2);}
+.hov-pb-3{height:26px;background:linear-gradient(to top,rgba(205,127,50,0.2),rgba(205,127,50,0.05));border:1.5px solid rgba(205,127,50,0.2);}
+
+/* Lower ranks */
+.hov-list{display:flex;flex-direction:column;gap:.4rem;}
+.hov-row{
+  display:flex;align-items:center;gap:.7rem;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;padding:.65rem .8rem;
+  transition:border-color .15s;
+}
+.hov-row.me{
+  background:rgba(245,200,66,0.08);border-color:rgba(245,200,66,0.3);
+  box-shadow:0 0 12px rgba(245,200,66,0.1);
+}
+.hov-row-rank{
+  font-family:Bangers,cursive;font-size:1.1rem;color:rgba(255,255,255,0.4);
+  letter-spacing:.04em;min-width:22px;text-align:center;
+}
+.hov-row-rank.me-rank{color:#f5c842;}
+.hov-row-name{flex:1;font-size:.88rem;font-weight:700;color:#E8E4F0;}
+.hov-row-you{font-size:.68rem;color:#00C07A;font-weight:700;margin-left:.3rem;}
+.hov-row-pts{font-family:Bangers,cursive;font-size:1rem;color:#00C07A;letter-spacing:.04em;}
+.hov-row-pts.me-pts{color:#f5c842;}
+.hov-row.me .hov-row-name{color:#fff;}
+
+/* ═══════════════════════════════════════════════════════
+   DASHBOARD NAV REDESIGN - warrior header
+   ═══════════════════════════════════════════════════════ */
+.page-nav{
+  background:rgba(10,6,40,0.95)!important;
+  border-bottom:1.5px solid rgba(201,168,76,0.2)!important;
+}
+.nav-logo{
+  font-family:Bangers,cursive!important;font-size:1.1rem!important;
+  letter-spacing:.08em!important;color:#f5c842!important;
+}
+.nav-logo span{color:rgba(255,255,255,0.6)!important;}
+.pts-chip{
+  background:rgba(245,200,66,0.15)!important;border:1.5px solid rgba(245,200,66,0.3)!important;
+  color:#f5c842!important;font-family:Bangers,cursive!important;letter-spacing:.06em!important;
+  font-size:.85rem!important;
+}
+
+/* Tab bar warrior style */
+.ktb{
+  background:rgba(255,255,255,0.06)!important;
+  border:1.5px solid rgba(255,255,255,0.08)!important;
+  border-radius:12px!important;
+  transition:all .15s cubic-bezier(.34,1.56,.64,1)!important;
+}
+.ktb.act-gold{
+  background:linear-gradient(135deg,rgba(245,200,66,0.2),rgba(201,168,76,0.1))!important;
+  border-color:rgba(245,200,66,0.4)!important;
+  color:#f5c842!important;
+}
+.ktb.act-teal{
+  background:rgba(0,192,122,0.12)!important;
+  border-color:rgba(0,192,122,0.3)!important;
+  color:#00C07A!important;
+}
+
 </style>
 </head>
 <body>
@@ -1376,68 +1586,163 @@ input:focus,select:focus,textarea:focus{
 
 <!-- ═══════════════════ LANDING ═══════════════════ -->
 <div id="p-land" class="page active">
+  <div class="wl-screen">
+    <!-- atmospheric glows -->
+    <div class="wl-glow wl-glow-1"></div>
+    <div class="wl-glow wl-glow-2"></div>
 
-  <!-- HERO -->
-  <div class="kz-hero">
-    <span class="kz-deco" style="top:7%;left:4%;animation-delay:0s">&#9889;</span>
-    <span class="kz-deco" style="top:10%;right:6%;animation-delay:1.1s;font-size:3.5rem">&#127942;</span>
-    <span class="kz-deco" style="top:38%;left:2%;animation-delay:2s;font-size:3.8rem">&#128214;</span>
-    <span class="kz-deco" style="bottom:28%;right:3%;animation-delay:1.5s;font-size:3.2rem">&#127775;</span>
-    <span class="kz-deco" style="bottom:16%;left:5%;animation-delay:.7s;font-size:2.8rem">&#127881;</span>
-    <div class="kz-badge">&#128293; The Gathering CTX &middot; Cleburne, TX</div>
-    <div style="text-align:center;font-family:-apple-system,BlinkMacSystemFont,sans-serif;margin-bottom:4px"><span style="font-size:13px;letter-spacing:4px;display:block;margin-bottom:2px"><span style="color:#e74c3c">t</span><span style="color:#2ecc71">h</span><span style="color:#3498db">e</span></span><span style="font-size:clamp(38px,8vw,52px);font-weight:700;letter-spacing:1px;line-height:1"><span style="color:#e74c3c">g</span><span style="color:#f39c12">a</span><span style="color:#2ecc71">t</span><span style="color:#9b59b6">h</span><span style="color:#3498db">e</span><span style="color:#f39c12">r</span><span style="color:#e74c3c">i</span><span style="color:#2ecc71">n</span><span style="color:#f1c40f">g</span></span><sup style="font-size:clamp(16px,3.5vw,22px);color:#5dade2;font-weight:700;margin-left:3px">kids</sup></div>
-    <div class="kz-verse"><p>"Be strong and courageous. Do not be afraid, for the Lord your God is with you."</p><cite>JOSHUA 1:9</cite></div>
-    <button class="kz-btn-main" onclick="show('p-kentry')">&#9889; I'm a Kid, Let's Go!</button>
-    <div class="kz-btn-row">
-      <button class="kz-btn-sm" onclick="show('p-plogin')">&#128106; Parent</button>
-      <button class="kz-btn-sm" onclick="showHowTo()">&#10067; How It Works</button>
-      <button class="kz-btn-sm" onclick="show('p-alogin')">&#128737; Admin</button>
+    <!-- church pill -->
+    <div class="wl-badge">
+      <span class="wl-badge-dot"></span>The Gathering CTX &middot; Cleburne, TX
     </div>
-    <div class="kz-hint">&#8595; explore below &#8595;</div>
-  </div>
 
-  <div class="kz-features">
-    <div class="kz-feat-label">What's in the Zone</div>
-    <div class="kz-grid">
-      <div class="kz-card" style="background:linear-gradient(135deg,#C0392B,#922B21)" onclick="landingRoute('devos')">
-        <span class="kz-card-ico">&#128214;</span><div class="kz-card-lbl">Weekly</div><div class="kz-card-ttl">Family Devos</div></div>
-      <div class="kz-card" style="background:linear-gradient(135deg,#1565C0,#0D47A1)" onclick="landingRoute('games')">
-        <span class="kz-card-ico">&#127918;</span><div class="kz-card-lbl">Play</div><div class="kz-card-ttl">Bible Games</div></div>
-      <div class="kz-card" style="background:linear-gradient(135deg,#6A1B9A,#4A148C)" onclick="landingRoute('quiz')">
-        <span class="kz-card-ico">&#129504;</span><div class="kz-card-lbl">Test Yourself</div><div class="kz-card-ttl">Bible Quiz</div></div>
-      <div class="kz-card" style="background:linear-gradient(135deg,#E65100,#BF360C)" onclick="landingRoute('store')">
-        <span class="kz-card-ico">&#127873;</span><div class="kz-card-lbl">Redeem Points</div><div class="kz-card-ttl">Prize Store</div></div>
-      <div class="kz-card" style="background:linear-gradient(135deg,#1a6b3a,#0d5c2e)" onclick="landingRoute('explore')">
-        <span class="kz-card-ico">&#127775;</span><div class="kz-card-lbl">Big Questions</div><div class="kz-card-ttl">Learn &amp; Explore</div></div>
-      <div class="kz-card" style="background:linear-gradient(135deg,#00838F,#006064)" onclick="showHowTo()">
-        <span class="kz-card-ico">&#10067;</span><div class="kz-card-lbl">New Here?</div><div class="kz-card-ttl">How It Works</div></div>
-      <div class="kz-card kz-card-wide" style="background:linear-gradient(135deg,#F57F17,#E65100)" onclick="landingRoute('points')">
-        <span class="kz-card-ico">&#9889;</span><div class="kz-card-lbl">Leaderboard</div><div class="kz-card-ttl">Points &amp; Streaks</div></div>
+    <!-- wordmark -->
+    <div class="wl-wordmark-block">
+      <div class="wl-eyebrow-sm">the</div>
+      <div class="wl-wordmark">
+        <span style="color:#e74c3c">g</span><span style="color:#f39c12">a</span><span style="color:#2ecc71">t</span><span style="color:#9b59b6">h</span><span style="color:#3498db">e</span><span style="color:#f39c12">r</span><span style="color:#e74c3c">i</span><span style="color:#2ecc71">n</span><span style="color:#f1c40f">g</span><sup class="wl-kids-sup">kids</sup>
+      </div>
+    </div>
+
+    <!-- warrior hero SVG -->
+    <div class="wl-hero-wrap">
+      <div class="wl-hero-halo"></div>
+      <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg" class="wl-hero-svg">
+        <defs>
+          <linearGradient id="bladeGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#93C5FD"/>
+            <stop offset="50%" stop-color="#DBEAFE"/>
+            <stop offset="100%" stop-color="#93C5FD"/>
+          </linearGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- Ground shadow -->
+        <ellipse cx="140" cy="305" rx="85" ry="12" fill="rgba(0,0,0,0.3)"/>
+        <!-- Cape -->
+        <path d="M100,148 C76,170 60,225 64,290 L104,276 C98,242 104,205 118,180Z" fill="#8B0000"/>
+        <path d="M180,148 C204,170 220,225 216,290 L176,276 C182,242 176,205 162,180Z" fill="#8B0000"/>
+        <path d="M100,148 C84,158 76,176 72,196" stroke="rgba(255,120,120,0.25)" stroke-width="2" fill="none"/>
+        <!-- Legs -->
+        <rect x="110" y="258" width="22" height="50" rx="9" fill="#2A2560"/>
+        <rect x="148" y="258" width="22" height="50" rx="9" fill="#2A2560"/>
+        <rect x="114" y="261" width="6" height="36" rx="3" fill="rgba(255,255,255,0.1)"/>
+        <rect x="152" y="261" width="6" height="36" rx="3" fill="rgba(255,255,255,0.1)"/>
+        <!-- Boot gold trim -->
+        <rect x="108" y="292" width="26" height="9" rx="4" fill="#C9A84C"/>
+        <rect x="146" y="292" width="26" height="9" rx="4" fill="#C9A84C"/>
+        <!-- Torso armor -->
+        <rect x="102" y="160" width="76" height="106" rx="14" fill="#1E1B4B"/>
+        <!-- Breastplate -->
+        <ellipse cx="140" cy="198" rx="20" ry="26" fill="#C9A84C" opacity=".9"/>
+        <rect x="137" y="184" width="6" height="28" rx="2" fill="#fff" opacity=".85"/>
+        <rect x="130" y="194" width="20" height="6" rx="2" fill="#fff" opacity=".85"/>
+        <!-- Armor detail lines -->
+        <line x1="102" y1="230" x2="178" y2="230" stroke="rgba(201,168,76,0.3)" stroke-width="1.5"/>
+        <!-- Shoulder guards -->
+        <ellipse cx="99" cy="166" rx="21" ry="13" fill="#2A2560"/>
+        <ellipse cx="181" cy="166" rx="21" ry="13" fill="#2A2560"/>
+        <ellipse cx="99" cy="162" rx="14" ry="8" fill="#C9A84C" opacity=".85"/>
+        <ellipse cx="181" cy="162" rx="14" ry="8" fill="#C9A84C" opacity=".85"/>
+        <!-- Belt -->
+        <rect x="102" y="250" width="76" height="14" rx="4" fill="#C9A84C"/>
+        <rect x="133" y="248" width="14" height="18" rx="3" fill="#F5D76E"/>
+        <!-- SHIELD (left) -->
+        <g transform="translate(-4,8) rotate(-12,66,205)">
+          <rect x="48" y="180" width="38" height="48" rx="11" fill="#1E3A8A"/>
+          <rect x="51" y="183" width="32" height="42" rx="9" fill="#2563EB"/>
+          <line x1="67" y1="186" x2="67" y2="220" stroke="#60A5FA" stroke-width="2" opacity=".7"/>
+          <line x1="53" y1="204" x2="81" y2="204" stroke="#60A5FA" stroke-width="2" opacity=".7"/>
+          <circle cx="67" cy="204" r="7" fill="#1D4ED8"/>
+          <circle cx="67" cy="204" r="4" fill="#93C5FD"/>
+        </g>
+        <!-- SWORD (right) with flame -->
+        <g transform="translate(6,0) rotate(22,202,190)">
+          <!-- flame glow -->
+          <ellipse cx="202" cy="140" rx="10" ry="18" fill="rgba(251,191,36,0.3)" filter="url(#glow)"/>
+          <!-- blade -->
+          <rect x="198" y="105" width="8" height="90" rx="3" fill="url(#bladeGrad)"/>
+          <rect x="198" y="105" width="8" height="90" rx="3" fill="rgba(147,197,253,0.2)"/>
+          <!-- crossguard -->
+          <rect x="188" y="190" width="26" height="7" rx="3" fill="#C9A84C"/>
+          <!-- handle -->
+          <rect x="199" y="197" width="6" height="28" rx="3" fill="#78350F"/>
+          <!-- pommel -->
+          <ellipse cx="202" cy="228" rx="8" ry="6" fill="#C9A84C"/>
+          <!-- flames -->
+          <path d="M200,130 C196,118 208,112 204,102 C212,116 211,130 204,133Z" fill="#F59E0B" opacity=".8"/>
+          <path d="M203,122 C199,112 212,108 208,98 C216,112 214,124 207,127Z" fill="#FDE68A" opacity=".55"/>
+          <path d="M198,140 C193,128 206,122 202,113 C210,125 208,138 201,141Z" fill="#F97316" opacity=".6"/>
+        </g>
+        <!-- Neck -->
+        <rect x="131" y="134" width="18" height="28" rx="6" fill="#D4A574"/>
+        <!-- HEAD -->
+        <ellipse cx="140" cy="118" rx="33" ry="34" fill="#D4A574"/>
+        <!-- Helmet shell -->
+        <path d="M108,110 C108,72 172,72 172,110 L172,102 C172,66 108,66 108,102Z" fill="#1E1B4B"/>
+        <path d="M108,102 L108,116 C108,96 172,96 172,116 L172,102Z" fill="#2A2560"/>
+        <!-- Gold helm trim -->
+        <path d="M108,110 Q140,118 172,110" stroke="#C9A84C" stroke-width="2.5" fill="none"/>
+        <!-- Plume -->
+        <path d="M140,70 C135,52 130,37 133,22 C136,32 140,42 144,32 C147,22 148,40 142,70Z" fill="#C9A84C"/>
+        <!-- Face area -->
+        <ellipse cx="140" cy="120" rx="23" ry="21" fill="#E8C99A"/>
+        <!-- Eyes -->
+        <ellipse cx="132" cy="115" rx="5" ry="6" fill="#fff"/>
+        <ellipse cx="148" cy="115" rx="5" ry="6" fill="#fff"/>
+        <ellipse cx="133" cy="116" rx="3" ry="3.5" fill="#2D1B00"/>
+        <ellipse cx="149" cy="116" rx="3" ry="3.5" fill="#2D1B00"/>
+        <ellipse cx="134" cy="115" rx="1" ry="1.5" fill="#fff" opacity=".7"/>
+        <ellipse cx="150" cy="115" rx="1" ry="1.5" fill="#fff" opacity=".7"/>
+        <!-- Smile -->
+        <path d="M133,128 Q140,135 147,128" stroke="#7C5230" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Cheeks -->
+        <ellipse cx="127" cy="124" rx="6" ry="4" fill="#FF9080" opacity=".28"/>
+        <ellipse cx="153" cy="124" rx="6" ry="4" fill="#FF9080" opacity=".28"/>
+        <!-- Helm cheek guards -->
+        <path d="M117,112 L111,130 C117,135 119,128 121,125Z" fill="#1E1B4B"/>
+        <path d="M163,112 L169,130 C163,135 161,128 159,125Z" fill="#1E1B4B"/>
+        <!-- Sparkling gold accents -->
+        <circle cx="78" cy="238" r="2.5" fill="#C9A84C" opacity=".5"><animate attributeName="opacity" values=".3;.9;.3" dur="2.2s" repeatCount="indefinite"/></circle>
+        <circle cx="207" cy="175" r="3" fill="#6C52E3" opacity=".6"><animate attributeName="opacity" values=".4;1;.4" dur="1.7s" repeatCount="indefinite"/></circle>
+        <circle cx="118" cy="286" r="2" fill="#00C07A" opacity=".5"><animate attributeName="opacity" values=".4;.9;.4" dur="2.5s" repeatCount="indefinite"/></circle>
+      </svg>
+      <div class="wl-spark wl-sp1">⚡</div>
+      <div class="wl-spark wl-sp2">✨</div>
+      <div class="wl-spark wl-sp3">🔥</div>
+    </div>
+
+    <!-- tagline -->
+    <div class="wl-victory-tag">
+      <div class="wl-vt-main">I walk with victory!</div>
+      <div class="wl-vt-sub">Not to it. In Jesus' name.</div>
+    </div>
+
+    <!-- primary CTA -->
+    <button class="wl-cta" onclick="show('p-kentry')">
+      <span>⚡</span> I'm a Warrior, Let's Go!
+    </button>
+
+    <!-- secondary row -->
+    <div class="wl-sec-row">
+      <button class="wl-sec" onclick="show('p-plogin')">👨‍👩‍👧 Parent</button>
+      <button class="wl-sec" onclick="showHowTo()">❓ How It Works</button>
+      <button class="wl-sec" onclick="show('p-alogin')">🛡 Admin</button>
+    </div>
+
+    <!-- feature grid -->
+    <div class="wl-feats">
+      <div class="wl-feat" onclick="landingRoute('devos')"><span>📖</span><div>Devos</div></div>
+      <div class="wl-feat" onclick="landingRoute('games')"><span>⚔️</span><div>Battle</div></div>
+      <div class="wl-feat" onclick="landingRoute('warrior')"><span>🛡️</span><div>Armor</div></div>
+      <div class="wl-feat" onclick="landingRoute('lb')"><span>🏆</span><div>Ranks</div></div>
+    </div>
+
+    <!-- verse -->
+    <div class="wl-verse-card">
+      <div class="wl-verse-q">"Be strong and courageous. Do not be afraid, for the Lord your God is with you."</div>
+      <div class="wl-verse-r">JOSHUA 1:9</div>
     </div>
   </div>
-<div style="padding:2rem 1.25rem 1.5rem;text-align:center"><div style="font-family:Fredoka One,cursive;font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1.1rem">Kids Declaration</div><div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:1.75rem 1.4rem;max-width:340px;margin:0 auto"><div style="font-family:Fredoka One,cursive;font-size:1.2rem;color:#fff;line-height:2;">I am filled with the Holy Spirit!<br>I carry God's fire wherever I go!<br>I am not ordinary!<br>The same power that raised Jesus lives in me!<br>I walk with Jesus, and THAT means I WIN!</div><div style="font-family:Fredoka One,cursive;font-size:1.6rem;color:#F4A820;margin-top:1.1rem;letter-spacing:.08em">AMEN!</div></div></div>
-
-
-
-
-  <!-- APOLOGETICS PREVIEW -->
-  <div style="margin-bottom:.75rem">
-    <div class="eyebrow">🤔 Big Questions</div>
-    <div class="big-title">Real questions, <em>real answers.</em></div>
-    <p class="sub" style="margin-top:.4rem">Tap any question below, no sign-in needed.</p>
-  </div>
-  <div class="apol-preview" id="land-apol"></div>
-
-  <!-- WARRIOR CTA -->
-  <div class="warrior-cta">
-    <div style="font-size:36px;margin-bottom:.5rem">⚔️</div>
-    <div style="font-size:20px;font-weight:900;margin-bottom:.4rem">You already are a warrior.</div>
-    <p style="font-size:13px;opacity:.9;line-height:1.6;margin-bottom:1.25rem">Christ already won the victory. This is your space to grow, earn, and walk in it. Sunday evenings at 5 PM, Cleburne Conference Center.</p>
-    <button class="kh-btn-main" style="color:var(--coral);max-width:260px;margin:0 auto" onclick="show('p-kentry')">Get My Warrior PIN ⚡</button>
-  </div>
-
-  <p style="text-align:center;font-size:11px;color:var(--muted);margin-top:.5rem;margin-bottom:2rem;font-weight:600;letter-spacing:.3px;text-transform:uppercase">Sundays at 5 pm · Cleburne Conference Center</p>
-</div>
 
 <!-- ═══════════════════ KID ENTRY ═══════════════════ -->
 <div id="p-kentry" class="page">
@@ -5305,20 +5610,74 @@ function renderKLeaderboard(){
   const k=S.currentKid;
   const sorted=[...S.kids].sort((a,b)=>b.points-a.points);
   const el=document.getElementById('k-leaderboard');if(!el)return;
-  el.innerHTML=sorted.length?sorted.map((kid,i)=>{
+  const myRank=sorted.findIndex(x=>x.id===k.id)+1;
+
+  // Podium top 3
+  const top3=sorted.slice(0,3);
+  const rest=sorted.slice(3);
+
+  // Helper: small warrior avatar SVG for leaderboard
+  function miniWarrior(kid,size,isGold){
+    const g=kid.gender||'male';
+    const armor=getArmorUnlocked(kid);
+    const hasHelmet=armor.includes('helmet');
+    const hasSword=armor.includes('sword');
+    const col=isGold?'#C9A84C':'#6C52E3';
+    return buildWarriorSVG(g,armor,size,false);
+  }
+
+  const podiumHTML=`
+  <div class="hov-trophy-row">
+    ${top3[1]?`
+    <div class="hov-podium hov-podium-2">
+      <div class="hov-rank-badge silver">2</div>
+      <div style="width:56px;height:56px;margin:0 auto">${miniWarrior(top3[1],56,false)}</div>
+      <div class="hov-podium-name">${top3[1].firstName}</div>
+      <div class="hov-podium-pts">${top3[1].points} pts</div>
+      <div class="hov-podium-block hov-pb-2">2</div>
+    </div>`:``}
+    ${top3[0]?`
+    <div class="hov-podium hov-podium-1">
+      <div style="font-size:1.4rem;text-align:center;margin-bottom:.2rem">👑</div>
+      <div class="hov-rank-badge gold">1</div>
+      <div style="width:72px;height:72px;margin:0 auto">${miniWarrior(top3[0],72,true)}</div>
+      <div class="hov-podium-name">${top3[0].firstName}</div>
+      <div class="hov-podium-pts">${top3[0].points} pts</div>
+      <div class="hov-podium-block hov-pb-1">1</div>
+    </div>`:``}
+    ${top3[2]?`
+    <div class="hov-podium hov-podium-3">
+      <div class="hov-rank-badge bronze">3</div>
+      <div style="width:52px;height:52px;margin:0 auto">${miniWarrior(top3[2],52,false)}</div>
+      <div class="hov-podium-name">${top3[2].firstName}</div>
+      <div class="hov-podium-pts">${top3[2].points} pts</div>
+      <div class="hov-podium-block hov-pb-3">3</div>
+    </div>`:``}
+  </div>`;
+
+  const restHTML=rest.map((kid,i)=>{
+    const rank=i+4;
     const isMe=kid.id===k.id;
-    const rnk=i===0?'gold':i===1?'silver':i===2?'bronze':'';
-    return`<div class="lb-kid-item ${isMe?'me':''}">
-      <div class="lb-kid-rank ${rnk}">${i+1}</div>
-      <div style="width:36px;height:36px;flex-shrink:0">${renderWarriorAvatar(kid,36,false)}</div>
-      <div style="flex:1;min-width:0">
-        <div style="font-size:13px;font-weight:700">${kid.firstName} ${kid.lastName}${isMe?' <span style=\"font-size:10px;color:var(--teal);font-weight:400\">(you!)</span>':''}</div>
-        <div style="font-size:10px;color:var(--muted)">${kid.ageGroup} group</div>
-      </div>
-      <div style="font-size:16px;font-weight:700;color:var(--teal)">${kid.points}</div>
+    return`<div class="hov-row ${isMe?'me':''}">
+      <div class="hov-row-rank ${isMe?'me-rank':''}">${rank}</div>
+      <div style="width:36px;height:36px;flex-shrink:0">${miniWarrior(kid,36,false)}</div>
+      <div class="hov-row-name">${kid.firstName} ${kid.lastName}${isMe?'<span class="hov-row-you">YOU</span>':''}</div>
+      <div class="hov-row-pts ${isMe?'me-pts':''}">⚡${kid.points}</div>
     </div>`;
-  }).join(''):'<div class="empty">No explorers yet, be the first!</div>';
+  }).join('');
+
+  el.innerHTML=sorted.length?`
+  <div class="hov-wrap">
+    <div class="hov-header">
+      <div class="hov-title">HALL OF VICTORY</div>
+      <div class="hov-sub">WARRIORS WHO STAND STRONG</div>
+      ${myRank>0?`<div style="margin-top:.4rem;font-size:.72rem;color:rgba(255,255,255,0.4);font-weight:700">Your rank: #${myRank} of ${sorted.length}</div>`:''}
+    </div>
+    ${podiumHTML}
+    ${rest.length?`<div class="hov-list">${restHTML}</div>`:''}
+  </div>`:'<div class="empty">No warriors yet — be first!</div>';
 }
+
 
 // ── ANNOUNCEMENTS ──
 let dismissedAnns=new Set();
