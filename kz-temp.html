@@ -4524,7 +4524,7 @@ async function toggleDevo(id){
 }
 
 function renderKApol(){document.getElementById('k-apol-list').innerHTML=buildApol('ka');}
-function renderLandApol(){document.getElementById('land-apol').innerHTML=buildApol('la');}
+function renderLandApol(){const el=document.getElementById('land-apol');if(el)el.innerHTML=buildApol('la');}
 
 // ── VERSE OF THE DAY ──────────────────────────────────
 var DAILY_VERSES=[
@@ -6542,8 +6542,8 @@ function showGuestScreen(tab) {
 var _origLR=typeof landingRoute==="function"?landingRoute:null;
 var _origShow=show;
 show=function(id){
-  _origShow(id);
   if(id==="p-klogin"&&typeof buildKlKeypad==="function")buildKlKeypad();
+  _origShow(id);
   if(id==="p-ksignup"){
     _suPin=[];_suAgeGroup="";_suFirstName="";_suLastName="";
     if(typeof buildSuKeypad==="function")buildSuKeypad();
