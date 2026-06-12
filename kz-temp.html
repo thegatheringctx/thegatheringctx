@@ -2793,8 +2793,10 @@ function initSwordSpirit(){
 }
 
 function renderSwordGame(){
+  clearInterval(swordGameState.interval);
   const hub=document.getElementById('games-hub');if(!hub)return;
   const G=swordGameState;
+  swordGameState.timeLeft=12;
   const lie=SWORD_LIES[G.round%SWORD_LIES.length];
   const wrongIdx=Math.floor(Math.random()*SWORD_TRUTHS.length);
   const opts=[lie.truth, SWORD_TRUTHS[wrongIdx]].sort(()=>Math.random()-.5);
@@ -2819,9 +2821,9 @@ function renderSwordGame(){
     <div style="font-size:11px;color:rgba(255,255,255,0.45)">Slash the lie with God's truth!</div>
   </div>
   <div style="display:flex;justify-content:space-between;align-items:center;margin:.5rem 0">
-    <div style="font-size:13px;font-weight:700;color:#C9A84C">⚡ Score: ${G.score}</div>
+    <div style="font-size:13px;font-weight:700;color:#C9A84C">⚡ ${G.score} pts</div>
     <div style="font-size:13px;color:#FF6B1A">${'❤️'.repeat(G.lives)}</div>
-    <div style="font-size:11px;color:rgba(255,255,255,0.4)">Round ${G.round+1}/${SWORD_LIES.length}</div>
+    <div style="display:flex;align-items:center;gap:.5rem"><div id="sword-timer" style="font-family:Bangers,cursive;font-size:1rem;color:#F5A623;letter-spacing:.04em">12s</div><div style="font-size:11px;color:rgba(255,255,255,0.4)">${G.round+1}/${SWORD_LIES.length}</div></div>
   </div>
   <div class="sword-lie">
     <span class="lie-label">⚠️ THE LIE</span>
@@ -2834,6 +2836,28 @@ function renderSwordGame(){
   </div>`).join('')}
   `;
 }
+  // Countdown timer pressure
+  clearInterval(swordGameState.interval);
+  swordGameState.timeLeft=12;
+  swordGameState.interval=setInterval(()=>{
+    swordGameState.timeLeft--;
+    const t=document.getElementById('sword-timer');
+    if(t){
+      t.textContent=swordGameState.timeLeft+'s';
+      if(swordGameState.timeLeft<=4){t.style.color='#FF5A36';t.style.animation='boss-shake .2s infinite';}
+      else if(swordGameState.timeLeft<=7){t.style.color='#F5A623';}
+    }
+    if(swordGameState.timeLeft<=0){
+      clearInterval(swordGameState.interval);
+      swordGameState.lives--;
+      if(swordGameState.lives<=0){
+        setTimeout(()=>{
+          const h=document.getElementById('games-hub');if(!h)return;
+          h.innerHTML='<button class="game-back" onclick="renderGames()">← Games</button><div style="text-align:center;padding:2rem 1rem"><div style="font-size:56px">💪</div><div style="font-family:Bangers,cursive;font-size:1.8rem;color:#FF6B1A;letter-spacing:.1em">KEEP FIGHTING!</div><div style="margin:1rem 0;font-size:13px;color:rgba(255,255,255,0.6)">Score: '+swordGameState.score+' pts</div><button onclick="initSwordSpirit()" style="background:linear-gradient(135deg,#C9A84C,#8B4500);color:#fff;border:none;border-radius:99px;padding:14px;font-weight:700;cursor:pointer;width:100%;margin-bottom:.75rem;font-family:Bangers,cursive">⚔️ TRY AGAIN</button><button onclick="renderGames()" style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;border-radius:99px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;width:100%">← All Games</button></div>';
+        },400);
+      } else { setTimeout(renderSwordGame,500); }
+    }
+  },1000);
 
 function swordAnswer(correct, optIdx){
   const G=swordGameState;
@@ -2841,7 +2865,7 @@ function swordAnswer(correct, optIdx){
   const opts=hub.querySelectorAll('.truth-opt');
   
   if(correct){
-    G.score+=10;G.round++;
+    clearInterval(swordGameState.interval);G.score+=10;G.round++;
     opts[optIdx].style.background='rgba(16,185,129,0.2)';
     opts[optIdx].style.borderColor='#10B981';
     opts[optIdx].style.color='#6FDFB0';
@@ -4599,283 +4623,314 @@ function celebrateWin(pts, msg) {
 
 function initScramble(){wsPool=[...WS_WORDS].sort(()=>Math.random()-.5).slice(0,5);wsRoundIdx=0;wsNextRound();}
 function wsNextRound(){
+  clearInterval(wsTimer);
   if(wsRoundIdx>=wsPool.length){
-    celebrateWin(15,'Word Scramble!');
-    document.getElementById('games-hub').innerHTML=`
+    clearInterval(wsTimer);
+    const bonus=Math.max(0,wsTimeLeft||0);
+    awardGamePoints('Word Scramble',wsScore);
+    celebrateWin(wsScore,'Word Scramble!');
+    const hub=document.getElementById('games-hub');
+    hub.innerHTML=`
     <button class="game-back" onclick="renderGames()">← Games</button>
     <div style="text-align:center;padding:2rem 1rem">
       <div style="font-size:64px;margin-bottom:.5rem">🏆</div>
-      <div style="font-family:Bangers,cursive;font-size:2rem;color:#f5c842;letter-spacing:.08em">WORD MASTER!</div>
-      <div style="font-size:.9rem;color:rgba(255,255,255,0.6);margin:.5rem 0 1.5rem">You unscrambled all ${wsPool.length} Bible words!</div>
-      <button onclick="initScramble()" style="background:linear-gradient(135deg,#6C52E3,#4430B0);color:#fff;border:none;border-radius:99px;padding:14px 32px;font-size:15px;font-weight:900;cursor:pointer;width:100%;margin-bottom:.75rem;font-family:Bangers,cursive;letter-spacing:.08em;font-size:1.1rem">⚡ PLAY AGAIN</button>
+      <div style="font-family:Bangers,cursive;font-size:2.2rem;color:#f5c842;letter-spacing:.08em;line-height:1">WORD MASTER!</div>
+      <div style="font-size:.9rem;color:rgba(255,255,255,0.5);margin:.5rem 0 .25rem">Score: <strong style="color:#f5c842">${wsScore} pts</strong></div>
+      <div style="font-size:.8rem;color:rgba(255,255,255,0.4);margin-bottom:1.5rem">All ${wsPool.length} words cracked!</div>
+      <button onclick="initScramble()" style="background:linear-gradient(135deg,#6C52E3,#4430B0);color:#fff;border:none;border-radius:99px;padding:14px 32px;font-family:Bangers,cursive;letter-spacing:.08em;font-size:1.1rem;cursor:pointer;width:100%;margin-bottom:.75rem">⚡ PLAY AGAIN</button>
       <button onclick="renderGames()" style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;border-radius:99px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;width:100%">← All Games</button>
     </div>`;
     return;
   }
   const item=wsPool[wsRoundIdx];wsWord=item.word;wsAnswer=Array(wsWord.length).fill(null);
+  wsTimeLeft=25;wsScore=wsScore||0;
   const scrambled=wsWord.split('').sort(()=>Math.random()-.5);
   const hub=document.getElementById('games-hub');
   hub.innerHTML=`
-    <button class="game-back" onclick="renderGames()">← Games</button>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem">
-      <div style="font-family:Bangers,cursive;font-size:1.3rem;color:#6C52E3;letter-spacing:.08em">🔤 WORD SCRAMBLE</div>
-      <div style="font-size:.75rem;color:rgba(255,255,255,0.4);font-weight:700">${wsRoundIdx+1} / ${wsPool.length}</div>
+    <button class="game-back" onclick="clearInterval(wsTimer);renderGames()">← Games</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+      <div style="font-family:Bangers,cursive;font-size:1.25rem;color:#6C52E3;letter-spacing:.08em">🔤 SCRAMBLE</div>
+      <div style="display:flex;align-items:center;gap:.6rem">
+        <div style="font-size:.75rem;color:rgba(255,255,255,0.4);font-weight:700">${wsRoundIdx+1}/${wsPool.length}</div>
+        <div id="ws-timer" style="font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842;letter-spacing:.04em;min-width:2.2rem;text-align:right">:25</div>
+      </div>
     </div>
-    <div class="game-progress"><div class="game-progress-fill" style="width:${(wsRoundIdx/wsPool.length)*100}%"></div></div>
-    <div style="text-align:center;margin:.5rem 0 .75rem">
+    <div id="ws-tbar" style="height:5px;border-radius:99px;background:rgba(255,255,255,0.1);margin-bottom:.75rem;overflow:hidden"><div id="ws-tfill" style="height:100%;border-radius:99px;width:100%;background:linear-gradient(90deg,#6C52E3,#f5c842);transition:width .9s linear"></div></div>
+    <div style="text-align:center;margin:.25rem 0 .7rem">
       <div style="font-size:52px;line-height:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4))">${item.emoji}</div>
     </div>
-    <div style="background:rgba(108,82,227,0.15);border:1.5px solid rgba(108,82,227,0.4);border-radius:16px;padding:.8rem 1rem;margin-bottom:.9rem;text-align:center">
-      <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;color:rgba(108,82,227,0.7);margin-bottom:.3rem">💡 CLUE</div>
-      <div style="font-size:.92rem;font-weight:700;color:#E8E4F0;line-height:1.4">${item.hint}</div>
+    <div style="background:rgba(108,82,227,0.15);border:1.5px solid rgba(108,82,227,0.4);border-radius:16px;padding:.7rem 1rem;margin-bottom:.8rem;text-align:center">
+      <div style="font-size:.6rem;font-weight:800;letter-spacing:.14em;color:rgba(108,82,227,0.7);margin-bottom:.25rem">💡 CLUE</div>
+      <div style="font-size:.9rem;font-weight:700;color:#E8E4F0;line-height:1.4">${item.hint}</div>
     </div>
     <div class="ws-answer" id="ws-ans">${Array(wsWord.length).fill(0).map((_,i)=>`<div class="ws-slot" id="wsa-${i}"></div>`).join('')}</div>
-    <div style="text-align:center;font-size:.72rem;color:rgba(255,255,255,0.35);margin:.3rem 0 .6rem;letter-spacing:.05em">TAP LETTERS TO SPELL THE WORD ↓</div>
+    <div style="text-align:center;font-size:.68rem;color:rgba(255,255,255,0.3);margin:.25rem 0 .5rem;letter-spacing:.06em">TAP LETTERS IN ORDER ↓</div>
     <div class="ws-word" id="ws-tiles">${scrambled.map((l,i)=>`<div class="ws-tile" id="wst-${i}" data-letter="${l}" data-used="0" onclick="wsTap(${i})">${l}</div>`).join('')}</div>
-    <div id="ws-fb" style="display:none;margin-top:.75rem;padding:.9rem;border-radius:16px;font-size:14px;font-weight:800;text-align:center;letter-spacing:.02em"></div>
-    <div style="text-align:center;margin-top:.75rem">
-      <button onclick="wsClear()" style="background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);border-radius:99px;padding:8px 20px;font-size:12px;font-weight:700;cursor:pointer;color:rgba(255,255,255,0.6)">↺ Clear</button>
+    <div id="ws-fb" style="display:none;margin-top:.6rem;padding:.8rem;border-radius:16px;border:1.5px solid;font-size:.85rem;font-weight:800;text-align:center"></div>
+    <div style="text-align:center;margin-top:.6rem">
+      <button onclick="wsClear()" style="background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);border-radius:99px;padding:7px 20px;font-size:.75rem;font-weight:700;cursor:pointer;color:rgba(255,255,255,0.55)">↺ Clear</button>
     </div>`;
+  // Start countdown
+  wsTimer=setInterval(()=>{
+    wsTimeLeft--;
+    const t=document.getElementById('ws-timer');
+    const tf=document.getElementById('ws-tfill');
+    if(t) t.textContent=':'+String(wsTimeLeft).padStart(2,'0');
+    if(tf) tf.style.width=(wsTimeLeft/25*100)+'%';
+    if(wsTimeLeft<=5 && t){ t.style.color='#FF5A36'; t.style.animation='boss-shake .2s infinite'; }
+    if(wsTimeLeft<=0){
+      clearInterval(wsTimer);
+      const fb=document.getElementById('ws-fb');
+      if(fb){fb.style.display='block';fb.style.background='rgba(255,90,54,0.15)';fb.style.borderColor='#FF5A36';fb.style.color='#FFB0A0';fb.textContent='⏰ Time up! The word was '+wsWord+'.';}
+      setTimeout(()=>{wsRoundIdx++;wsNextRound();},1800);
+    }
+  },1000);
 }
-
+var wsTimer=null,wsTimeLeft=25,wsScore=0;
 
 function wsTap(i){
   const tile=document.getElementById('wst-'+i);
   if(!tile||tile.dataset.used==='1')return;
-  const slot=wsAnswer.indexOf(null);if(slot===-1)return;
-  wsAnswer[slot]=tile.dataset.letter;
-  tile.dataset.used='1';tile.classList.add('used');
-  const slotEl=document.getElementById('wsa-'+slot);
-  if(slotEl){slotEl.textContent=tile.dataset.letter;slotEl.classList.add('filled');}
+  const letter=tile.dataset.letter;
+  const nextEmpty=wsAnswer.indexOf(null);
+  if(nextEmpty<0)return;
+  wsAnswer[nextEmpty]=letter;
+  tile.dataset.used='1';
+  tile.classList.add('used');
+  const slot=document.getElementById('wsa-'+nextEmpty);
+  if(slot){slot.textContent=letter;slot.classList.add('filled');slot.style.animation='slot-pop .2s cubic-bezier(.34,1.56,.64,1)';}
+  // Check if complete
   if(!wsAnswer.includes(null)){
     const guess=wsAnswer.join('');
     const fb=document.getElementById('ws-fb');
     if(guess===wsWord){
-      if(fb){fb.style.display='block';fb.style.background='rgba(0,192,122,0.2)';fb.style.color='#7FFFD4';fb.style.border='1.5px solid #00C07A';fb.textContent='🎉 Correct! '+wsWord+' — nice work!';}
-      showConfetti(window.innerWidth/2,200,12);
-      showPointsPop(5,window.innerWidth/2-30,180);
-      setTimeout(()=>{wsRoundIdx++;wsNextRound();},1600);
+      clearInterval(wsTimer);
+      const pts=5+Math.ceil((wsTimeLeft/25)*10);
+      wsScore+=pts;
+      if(fb){
+        fb.style.display='block';
+        fb.style.background='rgba(0,192,122,0.12)';
+        fb.style.borderColor='#00C07A';
+        fb.style.color='#7FFFD4';
+        fb.textContent='✅ '+wsWord+'! +'+pts+' pts';
+      }
+      // Flash slots green
+      document.querySelectorAll('.ws-slot').forEach(s=>{s.style.background='rgba(0,192,122,0.25)';s.style.borderColor='#00C07A';});
+      setTimeout(()=>{wsRoundIdx++;wsNextRound();},1200);
     } else {
-      if(fb){fb.style.display='block';fb.style.background='rgba(255,90,54,0.15)';fb.style.color='#FFB0A0';fb.style.border='1.5px solid rgba(255,90,54,0.4)';fb.innerHTML='❌ Not quite — try again!';}
-      setTimeout(()=>{wsAnswer=Array(wsWord.length).fill(null);document.querySelectorAll('.ws-tile').forEach(t=>{t.dataset.used='0';t.classList.remove('used');});document.querySelectorAll('.ws-slot').forEach(s=>{s.textContent='';s.classList.remove('filled');});fb.style.display='none';},1200);
+      if(fb){
+        fb.style.display='block';
+        fb.style.background='rgba(255,90,54,0.12)';
+        fb.style.borderColor='#FF5A36';
+        fb.style.color='#FFB0A0';
+        fb.textContent='❌ Not quite — try again!';
+      }
+      document.getElementById('ws-ans').style.animation='ws-shake .4s ease';
+      setTimeout(()=>{
+        document.getElementById('ws-ans').style.animation='';
+        wsClear(true);
+        if(fb) fb.style.display='none';
+      },700);
     }
   }
 }
-function wsClear(){wsAnswer=Array(wsWord.length).fill(null);document.querySelectorAll('.ws-tile').forEach(t=>{t.dataset.used='0';t.classList.remove('used');});document.querySelectorAll('.ws-slot').forEach(s=>{s.textContent='';s.classList.remove('filled');});}
 
-// ── GAME 2: FILL THE BLANK ────────────────────────────
-var FITB_POOL=[
-  {pre:'For God so',blank:'LOVED',post:'the world that he gave his one and only Son.',opts:['LOVED','SAVED','FOUND','MADE'],ref:'John 3:16'},
-  {pre:'I can do all things through',blank:'CHRIST',post:'who strengthens me.',opts:['CHRIST','GOD','FAITH','HOPE'],ref:'Philippians 4:13'},
-  {pre:'In the beginning',blank:'GOD',post:'created the heavens and the earth.',opts:['GOD','MAN','LIGHT','ANGELS'],ref:'Genesis 1:1'},
-  {pre:'Be strong and',blank:'COURAGEOUS',post:'Do not be afraid or discouraged.',opts:['COURAGEOUS','FAITHFUL','PATIENT','THANKFUL'],ref:'Joshua 1:9'},
-  {pre:'The Lord is my shepherd; I shall',blank:'NOT WANT',post:'.',opts:['NOT WANT','NOT FEAR','NOT FALL','NOT FAIL'],ref:'Psalm 23:1'},
-  {pre:'Trust in the Lord with all your',blank:'HEART',post:'and lean not on your own understanding.',opts:['HEART','MIND','SOUL','STRENGTH'],ref:'Proverbs 3:5'},
-  {pre:'Your word is a',blank:'LAMP',post:'to my feet and a light to my path.',opts:['LAMP','GUIDE','MAP','TORCH'],ref:'Psalm 119:105'},
-  {pre:'Do not be',blank:'ANXIOUS',post:'about anything, but in every situation pray.',opts:['ANXIOUS','AFRAID','ANGRY','ASHAMED'],ref:'Philippians 4:6'},
-  {pre:'God is',blank:'LOVE',post:'Whoever lives in love lives in God.',opts:['LOVE','GOOD','GREAT','KIND'],ref:'1 John 4:16'},
-  {pre:'Jesus said: I am the',blank:'WAY',post:'the truth and the life.',opts:['WAY','DOOR','LIGHT','BREAD'],ref:'John 14:6'},
-  {pre:'If anyone is in Christ, the new',blank:'CREATION',post:'has come; the old has gone.',opts:['CREATION','LIFE','HEART','SPIRIT'],ref:'2 Corinthians 5:17'},
-  {pre:'Even though I walk through the darkest',blank:'VALLEY',post:'I will fear no evil.',opts:['VALLEY','NIGHT','STORM','TRIAL'],ref:'Psalm 23:4'},
-  {pre:'For I know the plans I have for you,',blank:'DECLARES',post:'the Lord, plans to prosper you.',opts:['DECLARES','SAYS','PROMISES','TELLS'],ref:'Jeremiah 29:11'},
-  {pre:'And we know that in all things God works for the',blank:'GOOD',post:'of those who love him.',opts:['GOOD','BEST','GLORY','PLAN'],ref:'Romans 8:28'},
-  {pre:'The fruit of the Spirit is love, joy,',blank:'PEACE',post:'forbearance, kindness, goodness.',opts:['PEACE','HOPE','TRUTH','FAITH'],ref:'Galatians 5:22'},
-  {pre:'Pray',blank:'CONTINUALLY',post:'give thanks in all circumstances.',opts:['CONTINUALLY','ALWAYS','DAILY','HUMBLY'],ref:'1 Thessalonians 5:17-18'},
-  {pre:'The heavens declare the',blank:'GLORY',post:'of God; the skies proclaim his handiwork.',opts:['GLORY','POWER','GRACE','MIGHT'],ref:'Psalm 19:1'},
-  {pre:'Ask and it will be given to you;',blank:'SEEK',post:'and you will find.',opts:['SEEK','SEARCH','KNOCK','PRAY'],ref:'Matthew 7:7'},
-  {pre:'For the wages of sin is death, but the gift of God is',blank:'ETERNAL LIFE',post:'in Christ Jesus.',opts:['ETERNAL LIFE','SALVATION','FORGIVENESS','GRACE'],ref:'Romans 6:23'},
-  {pre:'I have been',blank:'CRUCIFIED',post:'with Christ and I no longer live, but Christ lives in me.',opts:['CRUCIFIED','SAVED','BAPTIZED','FILLED'],ref:'Galatians 2:20'},
-  {pre:'The Lord is my',blank:'STRENGTH',post:'and my shield; my heart trusts in him.',opts:['STRENGTH','SHIELD','ROCK','LIGHT'],ref:'Psalm 28:7'},
-  {pre:'Greater',blank:'LOVE',post:'has no one than this: to lay down life for friends.',opts:['LOVE','GIFT','GRACE','FAITH'],ref:'John 15:13'},
-  {pre:'God has not given us a spirit of',blank:'FEAR',post:'but of power, love, and a sound mind.',opts:['FEAR','DOUBT','SHAME','PRIDE'],ref:'2 Timothy 1:7'},
-  {pre:'Cast all your',blank:'ANXIETY',post:'on him because he cares for you.',opts:['ANXIETY','BURDENS','SINS','WORRIES'],ref:'1 Peter 5:7'},
-  {pre:'I walk in',blank:'VICTORY',post:'not toward it, in Jesus name.',opts:['VICTORY','FAITH','GRACE','HOPE'],ref:'The Gathering Declaration'},
-];
-let fitbPool=[],fitbIdx=0,fitbScore=0;
-function initFITB(){fitbPool=[...FITB_POOL].sort(()=>Math.random()-.5).slice(0,6);fitbIdx=0;fitbScore=0;fitbRender();}
+function wsClear(silent){
+  wsAnswer.fill(null);
+  document.querySelectorAll('.ws-slot').forEach(s=>{s.textContent='';s.classList.remove('filled');s.style.background='';s.style.borderColor='';s.style.animation='';});
+  document.querySelectorAll('.ws-tile').forEach(t=>{t.dataset.used='0';t.classList.remove('used');t.style.animation='';});
+  if(!silent){const fb=document.getElementById('ws-fb');if(fb)fb.style.display='none';}
+}
+
+
+function initFITB(){
+  const pool=[...FITB_POOL].sort(()=>Math.random()-.5).slice(0,6);
+  window._fitbPool=pool;window._fitbIdx=0;window._fitbScore=0;
+  fitbRender();
+}
 function fitbRender(){
-  const hub=document.getElementById('games-hub');
-  if(fitbIdx>=fitbPool.length){
-    if(fitbScore>=4) celebrateWin(10,'Fill in the Blank!');
+  const hub=document.getElementById('games-hub');if(!hub)return;
+  const pool=window._fitbPool||[];const idx=window._fitbIdx||0;
+  if(idx>=pool.length){
+    const score=window._fitbScore||0;
+    if(score>=4) awardGamePoints('Fill the Blank',score*5);
+    if(score>=4) celebrateWin(score*5,'Fill in the Blank!');
     hub.innerHTML=`
     <button class="game-back" onclick="renderGames()">← Games</button>
     <div style="text-align:center;padding:2rem 1rem">
-      <div style="font-size:64px;margin-bottom:.5rem">${fitbScore===6?'🏆':fitbScore>=4?'🔥':'📖'}</div>
-      <div style="font-family:Bangers,cursive;font-size:2rem;color:#00C07A;letter-spacing:.08em">${fitbScore}/6 CORRECT!</div>
-      <div style="font-size:.85rem;color:rgba(255,255,255,0.55);margin:.5rem 0 1.5rem">${fitbScore===6?'Perfect! The Word of God lives in you!':fitbScore>=4?'Great work! Keep hiding His Word in your heart.':'Keep reading — the Word grows in you daily!'}</div>
+      <div style="font-size:64px;margin-bottom:.5rem">${score===pool.length?'🏆':score>=4?'🔥':'📖'}</div>
+      <div style="font-family:Bangers,cursive;font-size:2rem;color:#00C07A;letter-spacing:.08em">${score}/${pool.length} CORRECT!</div>
+      <div style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:.5rem 0 1.5rem">${score===pool.length?'Perfect! The Word lives in you!':score>=4?'Great work! Keep hiding His Word in your heart.':'Keep reading — the Word grows in you daily!'}</div>
       <button onclick="initFITB()" style="background:linear-gradient(135deg,#047857,#00C07A);color:#fff;border:none;border-radius:99px;padding:14px 32px;font-family:Bangers,cursive;letter-spacing:.08em;font-size:1.1rem;cursor:pointer;width:100%;margin-bottom:.75rem">📜 PLAY AGAIN</button>
       <button onclick="renderGames()" style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;border-radius:99px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;width:100%">← All Games</button>
     </div>`;
     return;
   }
-  const q=fitbPool[fitbIdx];
+  const q=pool[idx];
   const opts=[...q.opts].sort(()=>Math.random()-.5);
   hub.innerHTML=`
     <button class="game-back" onclick="renderGames()">← Games</button>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
-      <div style="font-family:Bangers,cursive;font-size:1.3rem;color:#00C07A;letter-spacing:.08em">📜 FILL THE BLANK</div>
-      <div style="font-size:.75rem;color:rgba(255,255,255,0.4);font-weight:700">${fitbIdx+1} / 6</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+      <div style="font-family:Bangers,cursive;font-size:1.25rem;color:#00C07A;letter-spacing:.08em">📜 FILL THE BLANK</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,0.4);font-weight:700">${idx+1}/${pool.length}</div>
     </div>
-    <div class="game-progress"><div class="game-progress-fill" style="width:${(fitbIdx/6)*100}%;background:linear-gradient(90deg,#00C07A,#10B981)"></div></div>
-    <div style="background:rgba(0,192,122,0.08);border:1.5px solid rgba(0,192,122,0.2);border-radius:20px;padding:1.25rem 1rem;margin:.75rem 0;text-align:center">
-      <div style="font-size:.7rem;font-weight:800;letter-spacing:.12em;color:rgba(0,192,122,0.6);margin-bottom:.5rem">${q.ref}</div>
-      <div style="font-size:1rem;font-weight:700;color:#E8E4F0;line-height:1.6">
-        ${q.pre} <span style="background:rgba(0,192,122,0.2);border:1.5px dashed #00C07A;border-radius:8px;padding:2px 14px;color:#7FFFD4;letter-spacing:.08em">____</span> ${q.post}
+    <div class="game-progress"><div class="game-progress-fill" style="width:${(idx/pool.length)*100}%;background:linear-gradient(90deg,#00C07A,#10B981)"></div></div>
+    <div id="fitb-verse-box" style="background:rgba(0,192,122,0.08);border:1.5px solid rgba(0,192,122,0.2);border-radius:20px;padding:1.1rem 1rem;margin:.75rem 0;text-align:center;transition:all .3s">
+      <div style="font-size:.65rem;font-weight:800;letter-spacing:.12em;color:rgba(0,192,122,0.5);margin-bottom:.5rem">${q.ref}</div>
+      <div id="fitb-verse-text" style="font-size:.95rem;font-weight:700;color:#E8E4F0;line-height:1.7">
+        ${q.pre} <span id="fitb-blank" style="background:rgba(0,192,122,0.2);border:1.5px dashed #00C07A;border-radius:8px;padding:2px 16px;color:#7FFFD4;letter-spacing:.08em">____</span> ${q.post}
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:.5rem">
-      ${opts.map(o=>`<button class="sg-opt" onclick="fitbAnswer('${o}','${q.blank}')">${o}</button>`).join('')}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:.25rem">
+      ${opts.map(o=>`<button class="sg-opt" onclick="fitbAnswer('${o.replace(/'/g,"\\'")}','${q.blank.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}
     </div>
-    <div id="fitb-fb" style="display:none;margin-top:.75rem;padding:.9rem;border-radius:16px;border:1.5px solid;text-align:center;font-size:.85rem;font-weight:700;line-height:1.5"></div>`;
+    <div id="fitb-fb" style="display:none;margin-top:.6rem;padding:.8rem;border-radius:14px;border:1.5px solid;text-align:center;font-size:.85rem;font-weight:700;line-height:1.5"></div>`;
 }
-
-
-function fitbAnswer(chosen,correct){
-  const ok=chosen===correct;if(ok)fitbScore++;
-  document.querySelectorAll('.sg-opt').forEach(b=>{b.style.pointerEvents='none';if(b.textContent===correct)b.classList.add('correct');else if(b.textContent===chosen&&!ok)b.classList.add('wrong');});
-  if(ok){showConfetti(window.innerWidth/2,200,10);showPointsPop(5,window.innerWidth/2-30,180);}
+function fitbAnswer(chosen,correct,btn){
+  const ok=chosen===correct;
+  document.querySelectorAll('.sg-opt').forEach(b=>b.style.pointerEvents='none');
+  const blank=document.getElementById('fitb-blank');
+  const vbox=document.getElementById('fitb-verse-box');
   const fb=document.getElementById('fitb-fb');
-  fb.style.display='block';fb.style.background=ok?'rgba(0,192,122,0.12)':'rgba(255,90,54,0.12)';fb.style.borderColor=ok?'#00C07A':'#FF5A36';fb.style.color=ok?'#7FFFD4':'#FFB0A0';
-  fb.textContent=ok?`✅ "${correct}" — that's the Word!`:`❌ The missing word is "${correct}"`;
-  setTimeout(()=>{fitbIdx++;fitbRender();},1600);
+  if(ok){
+    window._fitbScore=(window._fitbScore||0)+1;
+    if(blank){blank.textContent=correct;blank.style.background='rgba(0,192,122,0.25)';blank.style.borderColor='#00C07A';blank.style.borderStyle='solid';blank.style.color='#7FFFD4';}
+    if(btn){btn.style.background='rgba(0,192,122,0.2)';btn.style.borderColor='#00C07A';}
+    if(fb){fb.style.display='block';fb.style.background='rgba(0,192,122,0.1)';fb.style.borderColor='#00C07A';fb.style.color='#7FFFD4';fb.textContent='✅ "'+correct+'" — that\'s the Word!';}
+  } else {
+    if(blank){blank.style.background='rgba(255,90,54,0.2)';blank.style.borderColor='#FF5A36';blank.style.borderStyle='solid';}
+    if(vbox){vbox.style.borderColor='rgba(255,90,54,0.4)';vbox.style.background='rgba(255,90,54,0.06)';}
+    if(btn){btn.style.background='rgba(255,90,54,0.15)';btn.style.borderColor='#FF5A36';}
+    if(fb){fb.style.display='block';fb.style.background='rgba(255,90,54,0.1)';fb.style.borderColor='#FF5A36';fb.style.color='#FFB0A0';fb.innerHTML='❌ The word was <strong style="color:#FFB0A0">'+correct+'</strong>.';}
+    // flash wrong then reset blank
+    setTimeout(()=>{
+      if(blank){blank.textContent='____';blank.style.background='rgba(0,192,122,0.2)';blank.style.borderColor='#00C07A';blank.style.borderStyle='dashed';blank.style.color='#7FFFD4';}
+      if(vbox){vbox.style.borderColor='rgba(0,192,122,0.2)';vbox.style.background='rgba(0,192,122,0.08)';}
+    },800);
+  }
+  window._fitbIdx=(window._fitbIdx||0)+1;
+  setTimeout(fitbRender, ok?1200:2000);
 }
 
-// ── GAME 3: CHARACTER GUESSER ─────────────────────────
-var CG_CHARS=[
-  {name:'Moses',clues:['I parted the Red Sea','I talked to God in a burning bush','I received the Ten Commandments','I led Israel out of Egypt'],emoji:'🌊'},
-  {name:'David',clues:['I killed a giant with a sling','I wrote many Psalms','I was a shepherd who became a king','I danced before the Lord'],emoji:'🎵'},
-  {name:'Noah',clues:['I built a giant boat','I saved animals two by two','God put a rainbow in the sky for me','I was 600 years old in the flood'],emoji:'🌈'},
-  {name:'Daniel',clues:["I refused the king's food",'I interpreted the king dreams','I was thrown in a den of lions','I prayed three times a day'],emoji:'🦁'},
-  {name:'Mary',clues:["I was chosen to be Jesus' mother",'An angel named Gabriel visited me','I said yes to God','I treasured things in my heart'],emoji:'👑'},
-  {name:'Peter',clues:['I was a fisherman Jesus called first','I walked on water briefly','I denied Jesus three times','I preached on Pentecost'],emoji:'🐟'},
-  {name:'Paul',clues:['I used to persecute Christians','I met Jesus on the road to Damascus','I was blinded by a great light','I wrote letters to many churches'],emoji:'✉️'},
-  {name:'Esther',clues:['I became queen and saved my people','I said for such a time as this','I fasted before approaching the king','I was raised by my cousin Mordecai'],emoji:'👸'},
-  {name:'Joseph',clues:['My brothers sold me into slavery','I had a coat of many colors','I interpreted Pharaoh dreams','I saved Egypt from famine'],emoji:'🌾'},
-  {name:'Elijah',clues:['I challenged 450 prophets to a contest','Fire came down from heaven for me','I was fed by ravens','I heard God in a still small voice'],emoji:'🔥'},
-  {name:'Solomon',clues:['I was the wisest man in the world','I asked God for wisdom not riches','I built the first Temple in Jerusalem','My mother was Bathsheba'],emoji:'🏛️'},
-  {name:'Jonah',clues:['I ran from God call','I was swallowed by a big fish','I spent three days in the belly','I finally went to Nineveh'],emoji:'🐋'},
-  {name:'Ruth',clues:['I said where you go I will go','I left my homeland for my mother-in-law','I gleaned grain in the fields','I married Boaz'],emoji:'🌾'},
-  {name:'Gideon',clues:['I led 300 men against a huge army','God told me to reduce my army','I used torches and trumpets','I asked for a sign with a fleece'],emoji:'⚔️'},
-  {name:'Abraham',clues:['I was willing to sacrifice my son','God called me to leave my homeland','I was 100 when my son was born','I am the father of many nations'],emoji:'⭐'},
-  {name:'Deborah',clues:['I was a female judge of Israel','I led Israel in battle','I sat under a palm tree to judge','I am one of the few women leaders in the Old Testament'],emoji:'👩'},
-  {name:'Samson',clues:['My strength came from my hair','I killed 1000 men with a jawbone','Delilah betrayed me','I pushed down the Philistine temple pillars'],emoji:'💪'},
-  {name:'Joshua',clues:['I led Israel into the Promised Land','The walls of Jericho fell when we marched','I told Israel to choose who they would serve','I was Moses assistant'],emoji:'🏰'},
-  {name:'Zacchaeus',clues:['I was too short to see Jesus in the crowd','I climbed a sycamore tree','I was a dishonest tax collector','Jesus came to my house and changed my life'],emoji:'🌳'},
-  {name:'John',clues:['I was called the disciple Jesus loved','I wrote the Gospel of John','I wrote Revelation on the island of Patmos','I was with Jesus at the Last Supper'],emoji:'📖'},
-];
-let cgPool=[],cgCharIdx=0,cgClues=0,cgChar=null;
-function initGuesser(){cgPool=[...CG_CHARS].sort(()=>Math.random()-.5);cgCharIdx=0;cgRound();}
-function cgRound(){
-  if(cgCharIdx>=cgPool.length){
-    celebrateWin(15,'Bible guesser complete!');
-    document.getElementById('games-hub').innerHTML=`<button class="game-back" onclick="renderGames()">← Games</button><div style="text-align:center;padding:2rem 1rem"><div style="font-size:56px;margin-bottom:.75rem">🕵️</div><div style="font-size:22px;font-weight:900;margin-bottom:.5rem">Bible Detective!</div><p style="font-size:14px;color:var(--muted);margin-bottom:1.5rem">You guessed all the Bible characters!</p><button onclick="initGuesser()" style="background:linear-gradient(135deg,var(--coral),#c42f10);color:#fff;border:none;border-radius:100px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-bottom:.75rem">🔄 Play Again</button><button onclick="renderGames()" style="background:var(--cream);border:1.5px solid var(--border);border-radius:100px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;width:100%">← All Games</button></div>`;
-    return;
-  }
-  cgChar=cgPool[cgCharIdx];cgClues=1;cgRenderGuesser();
+
+function initGuesser(){
+  const pool=[...CG_CHARS].sort(()=>Math.random()-.5);
+  window._cgPool=pool;window._cgIdx=0;window._cgScore=0;
+  cgRenderGuesser();
+}
+function cgMoreClue(){
+  window._cgClues=(window._cgClues||1)+1;
+  cgRenderGuesser();
 }
 function cgRenderGuesser(){
-  const hub=document.getElementById('games-hub');
-  const opts=[...cgChar.opts].sort(()=>Math.random()-.5);
-  hub.innerHTML=`
-    <button class="game-back" onclick="renderGames()">← Games</button>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
-      <div style="font-family:Bangers,cursive;font-size:1.3rem;color:#FF5A36;letter-spacing:.08em">🕵️ WHO AM I?</div>
-      <div style="font-size:.75rem;color:rgba(255,255,255,0.4);font-weight:700">${cgCharIdx+1} / ${cgPool.length}</div>
-    </div>
-    <div class="game-progress"><div class="game-progress-fill" style="width:${(cgCharIdx/cgPool.length)*100}%;background:linear-gradient(90deg,#FF5A36,#F5A623)"></div></div>
-    <div style="text-align:center;margin:.6rem 0 .75rem">
-      <div style="font-size:52px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4));line-height:1">${cgChar.emoji}</div>
-      <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;color:rgba(255,90,54,0.6);margin-top:.3rem">MYSTERY FIGURE ${cgClues === 1 ? '— 1 CLUE SHOWN' : '— '+cgClues+' CLUES SHOWN'}</div>
-    </div>
-    <div id="cg-clues">${cgChar.clues.slice(0,cgClues).map((c,i)=>`
-      <div class="cg-clue" style="animation-delay:${i*0.08}s">
-        <div class="cg-num">${i+1}</div>
-        <div style="font-size:.88rem;line-height:1.5;color:#E8E4F0;font-weight:600">${c}</div>
-      </div>`).join('')}</div>
-    ${cgClues<cgChar.clues.length ? `
-    <button onclick="cgMoreClue()" style="background:rgba(255,90,54,0.12);border:1.5px solid rgba(255,90,54,0.3);color:#FFB0A0;border-radius:99px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer;width:100%;margin:.5rem 0">
-      🔍 Reveal Another Clue (hint costs nothing)
-    </button>` : ''}
-    <div style="font-size:.65rem;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,0.3);text-align:center;margin:.6rem 0 .4rem">⬇ WHO IS IT?</div>
-    <div class="cg-opts">${opts.map(o=>`<button class="cg-opt" onclick="cgAnswer('${o}')">${o}</button>`).join('')}</div>
-    <div id="cg-fb" style="display:none;margin-top:.75rem;padding:1rem;border-radius:16px;border:1.5px solid;text-align:center;font-size:.88rem;font-weight:700;line-height:1.5"></div>`;
-}
-
-
-function cgMoreClue(){
-  if(cgClues<cgChar.clues.length){cgClues++;cgRenderGuesser();}
-}
-function cgAnswer(chosen){
-  const ok=chosen===cgChar.name;
-  document.querySelectorAll('.cg-opt').forEach(b=>{b.style.pointerEvents='none';if(b.textContent===cgChar.name)b.classList.add('correct');else if(b.textContent===chosen&&!ok)b.classList.add('wrong');});
-  if(ok){showConfetti(window.innerWidth/2,200,10);showPointsPop(5,window.innerWidth/2-30,180);}
-  const fb=document.getElementById('cg-fb');
-  fb.style.display='block';fb.style.background=ok?'#E8FFF5':'#FFF0EC';fb.style.color=ok?'#085041':'#7A2010';
-  fb.textContent=ok?`✅ Yes! I am ${cgChar.name}! ${cgChar.emoji} Amazing!`:`❌ I am ${cgChar.name}! ${cgChar.emoji} Try the next one!`;
-  setTimeout(()=>{cgCharIdx++;cgRound();},1800);
-}
-
-// ── GAME 4: TRUE OR FALSE ─────────────────────────────
-var TF_POOL=[
-  {q:'Jesus was born in Bethlehem.',a:true,exp:'Yes! Matthew 2:1 — Jesus was born in Bethlehem of Judea.'},
-  {q:'Moses parted the Red Sea.',a:true,exp:'Yes! God used Moses to part the Red Sea so Israel could escape Egypt.'},
-  {q:'David killed Goliath with a sword.',a:false,exp:'No! David killed Goliath with a sling and a stone — 1 Samuel 17.'},
-  {q:'Noah put 10 of every animal on the ark.',a:false,exp:'No! God said 2 of every kind — Genesis 7.'},
-  {q:'Paul wrote the book of Revelation.',a:false,exp:'No! John wrote Revelation while exiled on the island of Patmos.'},
-  {q:'Jesus raised Lazarus from the dead.',a:true,exp:'Yes! Jesus called Lazarus out of the tomb — John 11.'},
-  {q:'The Bible has 66 books.',a:true,exp:'Yes! 39 in the Old Testament and 27 in the New Testament.'},
-  {q:"Samson's strength came from his armor.",a:false,exp:'No! His strength came from his hair — Judges 16.'},
-  {q:'Peter walked on water.',a:true,exp:'Yes! Peter walked on water toward Jesus then started to sink — Matthew 14.'},
-  {q:'Jonah was in the fish for 40 days.',a:false,exp:'No! Jonah was in the fish for THREE days and nights — Jonah 1:17.'},
-  {q:'Mary Magdalene was the first person to see Jesus after the resurrection.',a:true,exp:'Yes! John 20 — Mary Magdalene was first to see the risen Jesus.'},
-  {q:"The Holy Spirit appeared as a dove at Jesus' baptism.",a:true,exp:'Yes! Matthew 3:16 — the Spirit descended like a dove.'},
-  {q:'Elijah defeated 450 prophets of Baal.',a:true,exp:'Yes! On Mount Carmel — fire came from heaven for Elijah — 1 Kings 18.'},
-  {q:'Abraham had only one son.',a:false,exp:'No! He had Ishmael first, then Isaac, and then more sons with Keturah.'},
-  {q:'Esther was a Jewish queen who saved her people.',a:true,exp:'Yes! Esther risked her life to approach the king and save the Jews.'},
-  {q:'The Ten Commandments were given on Mount Sinai.',a:true,exp:'Yes! God gave Moses the commandments on Mount Sinai — Exodus 20.'},
-  {q:"Joseph's brothers liked him more than anyone.",a:false,exp:'No! They were jealous of him and sold him into slavery — Genesis 37.'},
-  {q:'Goliath was from the Philistines.',a:true,exp:'Yes! Goliath was a Philistine warrior — 1 Samuel 17.'},
-  {q:'Jesus turned water into grape juice.',a:false,exp:'No! He turned water into wine at the wedding in Cana — John 2.'},
-  {q:'Paul was originally named Saul.',a:true,exp:'Yes! He was Saul of Tarsus who persecuted Christians before meeting Jesus.'},
-  {q:'Daniel was thrown into a furnace of fire.',a:false,exp:'No! That was Shadrach, Meshach, and Abednego. Daniel was in the lions den.'},
-  {q:'Jesus fed 5,000 people with 2 loaves and 2 fish.',a:false,exp:'No! He used 5 loaves and 2 fish — Matthew 14:17.'},
-  {q:'Solomon built the first Temple in Jerusalem.',a:true,exp:'Yes! King Solomon built the first Temple for God — 1 Kings 6.'},
-  {q:'The Bible never specifies what kind of fruit was in the Garden of Eden.',a:true,exp:'Correct! The Bible just says fruit — it never says it was an apple.'},
-  {q:'Jesus had 12 disciples.',a:true,exp:'Yes! Jesus chose 12 disciples to be his closest followers.'},
-  {q:"Ruth said where you go I will go to her mother-in-law Naomi.",a:true,exp:'Yes! Ruth 1:16 — one of the most beautiful statements of loyalty.'},
-  {q:'God told Gideon to make his army bigger before the battle.',a:false,exp:'No! God told Gideon to REDUCE his army from 32,000 down to 300 — Judges 7.'},
-  {q:'Jesus was baptized in the Jordan River.',a:true,exp:'Yes! John baptized Jesus in the Jordan River — Matthew 3:13.'},
-  {q:'Zacchaeus was tall so he climbed a tree to see Jesus.',a:false,exp:'No! Zacchaeus was SHORT — Luke 19.'},
-  {q:"The walls of Jericho fell when Israel marched around them.",a:true,exp:'Yes! Israel marched for 7 days then shouted and the walls fell — Joshua 6.'},
-];
-let tfPool=[],tfIdx=0,tfScore=0;
-function initTF(){tfPool=[...TF_POOL].sort(()=>Math.random()-.5).slice(0,8);tfIdx=0;tfScore=0;tfRender();}
-function tfRender(){
-  const hub=document.getElementById('games-hub');
-  if(tfIdx>=tfPool.length){
-    if(tfScore>=5) celebrateWin(tfScore>=7?15:10,'True or False!');
+  const hub=document.getElementById('games-hub');if(!hub)return;
+  const pool=window._cgPool||CG_CHARS;
+  const idx=window._cgIdx||0;
+  if(idx>=pool.length){
+    const score=window._cgScore||0;
+    if(score>0) awardGamePoints('Who Am I',score);
+    if(score>=50) celebrateWin(score,'Who Am I?');
     hub.innerHTML=`
     <button class="game-back" onclick="renderGames()">← Games</button>
     <div style="text-align:center;padding:2rem 1rem">
-      <div style="font-size:64px;margin-bottom:.5rem">${tfScore>=7?'🏆':tfScore>=5?'🔥':'💪'}</div>
-      <div style="font-family:Bangers,cursive;font-size:2rem;color:${tfScore>=7?'#f5c842':tfScore>=5?'#FF5A36':'#6C52E3'};letter-spacing:.08em">${tfScore}/8 CORRECT!</div>
-      <div style="font-size:.85rem;color:rgba(255,255,255,0.55);margin:.5rem 0 1.5rem">${tfScore===8?'PERFECT! Bible genius unlocked!':tfScore>=6?'Solid! Keep studying the Word.':'Keep reading your Bible every day!'}</div>
+      <div style="font-size:64px;margin-bottom:.5rem">${score>=80?'🏆':score>=50?'🕵️':'📖'}</div>
+      <div style="font-family:Bangers,cursive;font-size:2rem;color:#FF5A36;letter-spacing:.08em">CASE CLOSED!</div>
+      <div style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:.5rem 0 .25rem">Total: <strong style="color:#f5c842">${score} pts</strong></div>
+      <div style="font-size:.8rem;color:rgba(255,255,255,0.35);margin-bottom:1.5rem">${score>=80?'Detective genius! You know your Bible heroes.':score>=50?'Sharp! Keep studying the stories.':'Keep reading — they\'ll be familiar soon!'}</div>
+      <button onclick="initGuesser()" style="background:linear-gradient(135deg,#FF5A36,#c42f10);color:#fff;border:none;border-radius:99px;padding:14px 32px;font-family:Bangers,cursive;letter-spacing:.08em;font-size:1.1rem;cursor:pointer;width:100%;margin-bottom:.75rem">🕵️ PLAY AGAIN</button>
+      <button onclick="renderGames()" style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;border-radius:99px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;width:100%">← All Games</button>
+    </div>`;
+    return;
+  }
+  const char=pool[idx];
+  const clues=window._cgClues||1;
+  const pts=Math.max(10, 100-(clues-1)*15);
+  const opts=[...char.opts].sort(()=>Math.random()-.5);
+  hub.innerHTML=`
+    <button class="game-back" onclick="renderGames()">← Games</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+      <div style="font-family:Bangers,cursive;font-size:1.25rem;color:#FF5A36;letter-spacing:.08em">🕵️ WHO AM I?</div>
+      <div style="font-size:.75rem;color:rgba(255,255,255,0.4);font-weight:700">${idx+1}/${pool.length}</div>
+    </div>
+    <div class="game-progress"><div class="game-progress-fill" style="width:${(idx/pool.length)*100}%;background:linear-gradient(90deg,#FF5A36,#F5A623)"></div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:.6rem 0">
+      <div style="background:rgba(245,200,66,0.12);border:1.5px solid rgba(245,200,66,0.3);border-radius:10px;padding:.35rem .8rem;font-family:Bangers,cursive;font-size:1rem;color:#f5c842;letter-spacing:.06em">⚡ ${pts} PTS</div>
+      <div style="font-size:.72rem;color:rgba(255,255,255,0.35);text-align:right">Guess with fewer clues<br>= more points!</div>
+    </div>
+    <div id="cg-clues">${char.clues.slice(0,clues).map((c,i)=>`
+      <div class="cg-clue" style="animation-delay:${i*0.07}s">
+        <div class="cg-num">${i+1}</div>
+        <div style="font-size:.88rem;line-height:1.5;color:#E8E4F0;font-weight:600">${c}</div>
+      </div>`).join('')}</div>
+    ${clues<char.clues.length?`
+    <button onclick="cgMoreClue()" style="background:rgba(255,90,54,0.1);border:1.5px solid rgba(255,90,54,0.25);color:#FF9080;border-radius:99px;padding:.5rem 1rem;font-size:.78rem;font-weight:700;cursor:pointer;width:100%;margin:.5rem 0;letter-spacing:.03em">
+      🔍 Another clue (−15 pts, ${pts-15} pts remaining)
+    </button>`:'<div style="height:.5rem"></div>'}
+    <div style="font-size:.62rem;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,0.25);text-align:center;margin:.4rem 0">⬇ WHO IS IT?</div>
+    <div class="cg-opts">${opts.map(o=>`<button class="cg-opt" onclick="cgAnswer('${o.replace(/'/g,"\\'")}','${char.name.replace(/'/g,"\\'")}',${pts})">${o}</button>`).join('')}</div>
+    <div id="cg-fb" style="display:none;margin-top:.75rem;padding:.9rem;border-radius:16px;border:1.5px solid;text-align:center;font-size:.88rem;font-weight:700;line-height:1.5"></div>`;
+}
+function cgAnswer(chosen,correct,pts){
+  const ok=chosen===correct;
+  document.querySelectorAll('.cg-opt').forEach(b=>{
+    b.style.pointerEvents='none';
+    if(b.textContent===correct)b.classList.add('correct');
+    else if(b.textContent===chosen&&!ok)b.classList.add('wrong');
+  });
+  if(ok){window._cgScore=(window._cgScore||0)+pts;if(pts>=70)celebrateWin(pts,'');}
+  window._cgIdx=(window._cgIdx||0)+1;
+  window._cgClues=1;
+  const fb=document.getElementById('cg-fb');
+  if(fb){
+    fb.style.display='block';
+    fb.style.background=ok?'rgba(0,192,122,0.12)':'rgba(255,90,54,0.12)';
+    fb.style.borderColor=ok?'#00C07A':'#FF5A36';
+    fb.style.color=ok?'#7FFFD4':'#FFB0A0';
+    fb.innerHTML=ok?`✅ Yes! <strong>${correct}</strong>! +${pts} pts!`:`❌ That was <strong>${correct}</strong>. Keep going!`;
+  }
+  setTimeout(cgRenderGuesser, 1600);
+}
+
+
+function initTF(){
+  const pool=[...TF_POOL].sort(()=>Math.random()-.5).slice(0,8);
+  window._tfPool=pool;window._tfIdx=0;window._tfScore=0;window._tfStreak=0;
+  tfRender();
+}
+function tfRender(){
+  const hub=document.getElementById('games-hub');
+  if(!hub)return;
+  const pool=window._tfPool||[];const idx=window._tfIdx||0;const streak=window._tfStreak||0;
+  if(idx>=pool.length){
+    const score=window._tfScore||0;
+    if(score>=5) awardGamePoints('True or False',score);
+    if(score>=5) celebrateWin(score,'True or False!');
+    hub.innerHTML=`
+    <button class="game-back" onclick="renderGames()">← Games</button>
+    <div style="text-align:center;padding:2rem 1rem">
+      <div style="font-size:64px;margin-bottom:.5rem">${score>=7?'🏆':score>=5?'🔥':'💪'}</div>
+      <div style="font-family:Bangers,cursive;font-size:2rem;color:${score>=7?'#f5c842':score>=5?'#FF5A36':'#6C52E3'};letter-spacing:.08em">${score}/${pool.length} CORRECT!</div>
+      <div style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:.5rem 0 1.5rem">${score===pool.length?'PERFECT! Flawless!':score>=6?'Strong! Keep studying.':'Keep reading the Word!'}</div>
       <button onclick="initTF()" style="background:linear-gradient(135deg,#F5A623,#d47e00);color:#fff;border:none;border-radius:99px;padding:14px 32px;font-family:Bangers,cursive;letter-spacing:.08em;font-size:1.1rem;cursor:pointer;width:100%;margin-bottom:.75rem">⚡ PLAY AGAIN</button>
       <button onclick="renderGames()" style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;border-radius:99px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;width:100%">← All Games</button>
     </div>`;
     return;
   }
-  const q=tfPool[tfIdx];
+  const q=pool[idx];
+  const onFire=streak>=3;
   hub.innerHTML=`
     <button class="game-back" onclick="renderGames()">← Games</button>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
-      <div style="font-family:Bangers,cursive;font-size:1.3rem;color:#F5A623;letter-spacing:.08em">⚡ TRUE OR FALSE</div>
-      <div style="font-size:.75rem;color:rgba(255,255,255,0.4);font-weight:700">${tfIdx+1} / 8</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+      <div style="font-family:Bangers,cursive;font-size:1.25rem;color:#F5A623;letter-spacing:.08em">⚡ TRUE OR FALSE</div>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        ${onFire?`<div style="font-family:Bangers,cursive;font-size:1rem;color:#FF5A36;animation:boss-shake .3s infinite">🔥 ${streak}x STREAK!</div>`:''}
+        <div style="font-size:.75rem;color:rgba(255,255,255,0.4);font-weight:700">${idx+1}/8</div>
+      </div>
     </div>
-    <div class="game-progress"><div class="game-progress-fill" style="width:${(tfIdx/8)*100}%;background:linear-gradient(90deg,#F5A623,#f5c842)"></div></div>
-    <div style="display:flex;gap:4px;justify-content:center;margin:.5rem 0 .75rem">
-      ${Array(8).fill(0).map((_,i)=>`<div style="width:28px;height:5px;border-radius:99px;background:${i<tfIdx?'#F5A623':i===tfIdx?'rgba(245,166,35,0.5)':'rgba(255,255,255,0.1)'}"></div>`).join('')}
+    <div style="display:flex;gap:3px;margin-bottom:.75rem">
+      ${Array(pool.length).fill(0).map((_,i)=>`<div style="flex:1;height:5px;border-radius:99px;background:${i<idx?'#F5A623':i===idx?'rgba(245,166,35,0.4)':'rgba(255,255,255,0.1)'}"></div>`).join('')}
     </div>
+    ${onFire?`<div style="background:linear-gradient(135deg,rgba(255,90,54,0.15),rgba(245,166,35,0.15));border:1.5px solid rgba(255,90,54,0.35);border-radius:14px;padding:.5rem;text-align:center;font-size:.78rem;font-weight:800;color:#FF5A36;margin-bottom:.6rem;letter-spacing:.05em">🔥 ON FIRE! Keep the streak going — bonus points incoming!</div>`:''}
     <div class="tf-question" style="animation:clue-appear .3s ease">${q.q}</div>
     <div class="tf-btns">
       <button class="tf-btn tf-t" onclick="tfAnswer(true,${q.a})">
@@ -4887,51 +4942,30 @@ function tfRender(){
         <span class="tf-label">FALSE</span>
       </button>
     </div>
-    <div id="tf-fb" style="display:none;padding:1rem;border-radius:16px;border:1.5px solid;text-align:center;font-size:.85rem;font-weight:700;line-height:1.5"></div>`;
+    <div id="tf-fb" style="display:none;padding:.9rem;border-radius:16px;border:1.5px solid;text-align:center;font-size:.85rem;font-weight:700;line-height:1.5;margin-top:.5rem"></div>`;
 }
-
-
-function tfAnswer(chosen,correct){
-  const ok=chosen===correct;if(ok)tfScore++;
+function tfAnswer(ans, correct){
+  const pool=window._tfPool||[];const idx=window._tfIdx||0;
+  const ok=(ans===correct);
+  const streak=window._tfStreak||0;
+  const multiplier=streak>=3?2:1;
+  if(ok){window._tfScore=(window._tfScore||0)+(multiplier>1?15:10);window._tfStreak=(streak||0)+1;}
+  else{window._tfStreak=0;}
+  window._tfIdx=idx+1;
   document.querySelectorAll('.tf-btn').forEach(b=>b.style.pointerEvents='none');
   const fb=document.getElementById('tf-fb');
-  fb.style.display='block';
-  fb.style.borderColor=ok?'#00C07A':'#FF5A36';
-  fb.style.background=ok?'rgba(0,192,122,0.12)':'rgba(255,90,54,0.12)';
-  fb.style.color=ok?'#7FFFD4':'#FFB0A0';
-  fb.innerHTML=`<div style="font-size:1.1rem;font-weight:900;margin-bottom:.3rem">${ok?'✅ Correct!':'❌ Not this time!'}</div><div style="font-size:.82rem;opacity:.85;line-height:1.5">${tfPool[tfIdx].exp||''}</div>`;
-  if(ok){
-    showConfetti(window.innerWidth/2, 200, 12);
-    showPointsPop(5, window.innerWidth/2-30, 180);
-  } else {
-    const btns = document.querySelectorAll('.tf-btn');
-    if(btns[0]) btns[0].style.animation='shake-no 0.4s ease';
+  if(fb){
+    fb.style.display='block';
+    fb.style.background=ok?'rgba(0,192,122,0.12)':'rgba(255,90,54,0.12)';
+    fb.style.borderColor=ok?'#00C07A':'#FF5A36';
+    fb.style.color=ok?'#7FFFD4':'#FFB0A0';
+    const streakMsg=(ok&&window._tfStreak>=3)?' 🔥 STREAK BONUS! +15 pts!':ok?' +10 pts!':'';
+    fb.innerHTML=`<div style="font-size:1rem;font-weight:900">${ok?'✅ Correct!':'❌ Nope!'}</div><div style="font-size:.8rem;opacity:.85;margin-top:.3rem">${pool[idx]&&pool[idx].exp||''}${streakMsg}</div>`;
   }
-  setTimeout(()=>{tfIdx++;tfRender();},2200);
+  setTimeout(tfRender, ok?1100:1600);
 }
 
-// ── GAME 5: MEMORY MATCH ──────────────────────────────
-var MATCH_PAIRS=[
-  {a:'❤️ "For God\nso loved"',b:'John 3:16'},
-  {a:'💪 "Be strong\nand courageous"',b:'Joshua 1:9'},
-  {a:'🐑 "The Lord is\nmy shepherd"',b:'Psalm 23:1'},
-  {a:'🌟 "Trust in\nthe Lord"',b:'Proverbs 3:5'},
-  {a:'⚡ "I can do\nall things"',b:'Phil. 4:13'},
-  {a:'🌍 "In the\nbeginning God"',b:'Genesis 1:1'},
-  {a:'💡 "Your word is\na lamp"',b:'Psalm 119:105'},
-  {a:'🙏 "Pray without\nceasing"',b:'1 Thess. 5:17'},
-  {a:'🔑 "I am the Way\nthe Truth the Life"',b:'John 14:6'},
-  {a:'🎁 "The gift of God\nis eternal life"',b:'Romans 6:23'},
-  {a:'🌈 "Plans to prosper\nnot to harm you"',b:'Jer. 29:11'},
-  {a:'🕊️ "Peace that passes\nall understanding"',b:'Phil. 4:7'},
-  {a:'🌱 "New creation\nold has gone"',b:'2 Cor. 5:17'},
-  {a:'⚔️ "Sword of\nthe Spirit"',b:'Eph. 6:17'},
-  {a:'🔥 "Spirit of God\nlives in you"',b:'Romans 8:11'},
-  {a:'🌊 "Red Sea parted\nfor Israel"',b:'Exodus 14'},
-  {a:'👑 "Esther saved\nher people"',b:'Esther 4:14'},
-  {a:'🏆 "Walk in\nvictory"',b:'The Gathering'},
-];
-let matchCards=[],matchFlipped=[],matchDone=0,matchLocked=false,matchMoves=0;
+
 function initMatch(){
   matchDone=0;matchLocked=false;matchMoves=0;matchFlipped=[];
   const pairs=MATCH_PAIRS.sort(()=>Math.random()-.5).slice(0,6);
