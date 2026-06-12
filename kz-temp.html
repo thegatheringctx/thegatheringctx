@@ -5611,75 +5611,49 @@ function renderKLeaderboard(){
   const sorted=[...S.kids].sort((a,b)=>b.points-a.points);
   const el=document.getElementById('k-leaderboard');if(!el)return;
   const myRank=sorted.findIndex(x=>x.id===k.id)+1;
-
-  // Podium top 3
   const top3=sorted.slice(0,3);
   const rest=sorted.slice(3);
+  const goldColor='#f5c842',silverColor='#C0C0C0',bronzeColor='#CD7F32';
+  const rankColors=['',''+goldColor,''+silverColor,''+bronzeColor];
+  const rankBgs=['','rgba(245,200,66,0.12)','rgba(192,192,192,0.08)','rgba(205,127,50,0.08)'];
+  const rankBorders=['','rgba(245,200,66,0.35)','rgba(192,192,192,0.25)','rgba(205,127,50,0.25)'];
 
-  // Helper: small warrior avatar SVG for leaderboard
-  function miniWarrior(kid,size,isGold){
-    const g=kid.gender||'male';
-    const armor=getArmorUnlocked(kid);
-    const hasHelmet=armor.includes('helmet');
-    const hasSword=armor.includes('sword');
-    const col=isGold?'#C9A84C':'#6C52E3';
-    return buildWarriorSVG(g,armor,size,false);
-  }
-
-  const podiumHTML=`
-  <div class="hov-trophy-row">
-    ${top3[1]?`
-    <div class="hov-podium hov-podium-2">
-      <div class="hov-rank-badge silver">2</div>
-      <div style="width:56px;height:56px;margin:0 auto">${miniWarrior(top3[1],56,false)}</div>
-      <div class="hov-podium-name">${top3[1].firstName}</div>
-      <div class="hov-podium-pts">${top3[1].points} pts</div>
-      <div class="hov-podium-block hov-pb-2">2</div>
-    </div>`:``}
-    ${top3[0]?`
-    <div class="hov-podium hov-podium-1">
-      <div style="font-size:1.4rem;text-align:center;margin-bottom:.2rem">👑</div>
-      <div class="hov-rank-badge gold">1</div>
-      <div style="width:72px;height:72px;margin:0 auto">${miniWarrior(top3[0],72,true)}</div>
-      <div class="hov-podium-name">${top3[0].firstName}</div>
-      <div class="hov-podium-pts">${top3[0].points} pts</div>
-      <div class="hov-podium-block hov-pb-1">1</div>
-    </div>`:``}
-    ${top3[2]?`
-    <div class="hov-podium hov-podium-3">
-      <div class="hov-rank-badge bronze">3</div>
-      <div style="width:52px;height:52px;margin:0 auto">${miniWarrior(top3[2],52,false)}</div>
-      <div class="hov-podium-name">${top3[2].firstName}</div>
-      <div class="hov-podium-pts">${top3[2].points} pts</div>
-      <div class="hov-podium-block hov-pb-3">3</div>
-    </div>`:``}
-  </div>`;
+  const topHTML=top3.map((kid,i)=>{
+    const rank=i+1;
+    const isMe=kid.id===k.id;
+    const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),38,false);
+    return`<div style="display:flex;align-items:center;gap:.7rem;background:${rankBgs[rank]};border:1.5px solid ${rankBorders[rank]};border-radius:16px;padding:.65rem .8rem;margin-bottom:.4rem${isMe?';box-shadow:0 0 12px rgba(245,200,66,0.15)':''}">
+      <div style="font-family:Bangers,cursive;font-size:1.2rem;color:${rankColors[rank]};min-width:28px;text-align:center">${rank}</div>
+      <div style="width:38px;height:38px;flex-shrink:0">${svg}</div>
+      <div style="flex:1;font-size:.9rem;font-weight:800;color:#fff">${kid.firstName} ${kid.lastName}${isMe?'<span style="font-size:.65rem;color:#00C07A;margin-left:.3rem">YOU</span>':''}</div>
+      <div style="font-family:Bangers,cursive;font-size:1rem;color:${rank===1?goldColor:'#00C07A'}">&#9889;${kid.points}</div>
+    </div>`;
+  }).join('');
 
   const restHTML=rest.map((kid,i)=>{
     const rank=i+4;
     const isMe=kid.id===k.id;
-    return`<div class="hov-row ${isMe?'me':''}">
-      <div class="hov-row-rank ${isMe?'me-rank':''}">${rank}</div>
-      <div style="width:36px;height:36px;flex-shrink:0">${miniWarrior(kid,36,false)}</div>
-      <div class="hov-row-name">${kid.firstName} ${kid.lastName}${isMe?'<span class="hov-row-you">YOU</span>':''}</div>
-      <div class="hov-row-pts ${isMe?'me-pts':''}">⚡${kid.points}</div>
+    const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),32,false);
+    return`<div style="display:flex;align-items:center;gap:.7rem;background:${isMe?'rgba(245,200,66,0.07)':'rgba(255,255,255,0.04)'};border:1px solid rgba(255,255,255,${isMe?'.18':'.06'});border-radius:14px;padding:.55rem .75rem;margin-bottom:.35rem">
+      <div style="font-family:Bangers,cursive;font-size:1rem;color:rgba(255,255,255,0.35);min-width:24px;text-align:center">${rank}</div>
+      <div style="width:32px;height:32px;flex-shrink:0">${svg}</div>
+      <div style="flex:1;font-size:.85rem;font-weight:700;color:${isMe?'#fff':'#E8E4F0'}">${kid.firstName} ${kid.lastName}${isMe?'<span style="font-size:.62rem;color:#f5c842;margin-left:.3rem">YOU</span>':''}</div>
+      <div style="font-family:Bangers,cursive;font-size:.9rem;color:${isMe?'#f5c842':'#00C07A'}">&#9889;${kid.points}</div>
     </div>`;
   }).join('');
 
   el.innerHTML=sorted.length?`
-  <div class="hov-wrap">
-    <div class="hov-header">
-      <div class="hov-title">HALL OF VICTORY</div>
-      <div class="hov-sub">WARRIORS WHO STAND STRONG</div>
-      ${myRank>0?`<div style="margin-top:.4rem;font-size:.72rem;color:rgba(255,255,255,0.4);font-weight:700">Your rank: #${myRank} of ${sorted.length}</div>`:''}
-    </div>
-    ${podiumHTML}
-    ${rest.length?`<div class="hov-list">${restHTML}</div>`:''}
-  </div>`:'<div class="empty">No warriors yet — be first!</div>';
+  <div style="text-align:center;padding:.5rem 0 1rem">
+    <div style="font-family:Bangers,cursive;font-size:2rem;color:#f5c842;letter-spacing:.1em;text-shadow:0 0 20px rgba(245,200,66,0.35)">HALL OF VICTORY</div>
+    <div style="font-size:.68rem;font-weight:800;color:rgba(255,255,255,0.4);letter-spacing:.14em;margin-top:.2rem">WARRIORS WHO STAND STRONG</div>
+    ${myRank>0?`<div style="font-size:.7rem;color:rgba(255,255,255,0.35);margin-top:.3rem;font-weight:700">Your rank: #${myRank} of ${sorted.length}</div>`:''}
+  </div>
+  ${topHTML}
+  ${rest.length?restHTML:''}
+  `:'<div class="empty">No warriors yet — be first!</div>';
 }
 
 
-// ── ANNOUNCEMENTS ──
 let dismissedAnns=new Set();
 function renderAnnouncements(){
   const active=S.announcements.filter(a=>a.active&&!dismissedAnns.has(a.id));
