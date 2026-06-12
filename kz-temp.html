@@ -2073,7 +2073,16 @@ input:focus,select:focus,textarea:focus{
     </div>
     <div class="card" style="margin-top:1rem"><div class="section-title"><i class="ti ti-clock" style="color:var(--teal);margin-right:5px" aria-hidden="true"></i>Recent activity</div><ul class="tx-list" id="d-tx"></ul></div>
     <div class="card"><div class="section-title"><i class="ti ti-trophy" style="color:var(--gold);margin-right:5px" aria-hidden="true"></i>Reward zone</div><div id="d-rewards"></div></div>
+  
+  <!-- Weekly Missions -->
+  <div style="margin:.75rem 0 .5rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+      <div style="font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842;letter-spacing:.06em">⚡ WEEKLY MISSIONS</div>
+      <div style="font-size:.68rem;color:rgba(255,255,255,0.35);font-weight:700">RESETS MONDAY</div>
+    </div>
+    <div id="missions-panel"></div>
   </div>
+</div>
 
   <div id="kt-tab-store" style="display:none">
     <div style="margin-bottom:1rem">
@@ -2255,7 +2264,7 @@ input:focus,select:focus,textarea:focus{
 <!-- ═══════════════════ PARENT DASHBOARD ═══════════════════ -->
 <div id="p-pdash" class="page">
   <div class="page-nav"><div class="nav-logo">parent <span>portal</span></div><button class="btn-xs" onclick="parentLogout()">Sign out</button></div>
-  <div class="parent-hero-card">
+  <div class="parent-hero-card" id="parent-hero-card">
     <div style="position:absolute;right:-15px;bottom:-15px;font-size:90px;opacity:.06;pointer-events:none"><i class="ti ti-star" aria-hidden="true"></i></div>
     <div style="font-size:10px;opacity:.6;margin-bottom:4px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">Gathering Kids · Parent View</div>
     <div style="display:flex;align-items:center;gap:10px">
@@ -2958,8 +2967,15 @@ function lppb(){S.loginPin=S.loginPin.slice(0,-1);updDots('lpd',S.loginPin);}
 function plp(d){if(S.parentPin.length<4){S.parentPin+=d;updDots('ppd',S.parentPin);}}
 function plpb(){S.parentPin=S.parentPin.slice(0,-1);updDots('ppd',S.parentPin);}
 
+function selectGender(g,btn){
+  window._suGender=g;
+  document.querySelectorAll('#su-gender-m,#su-gender-f').forEach(b=>{
+    b.style.border='2px solid rgba(255,255,255,.18)';b.style.background='rgba(255,255,255,.1)';
+  });
+  btn.style.border='2px solid #f5c842';btn.style.background='rgba(245,200,66,0.2)';
+}
 function signupStep1(){const first=document.getElementById('su-first').value.trim(),last=document.getElementById('su-last').value.trim(),age=parseInt(document.getElementById('su-age').value);msg('su-err','',false);if(!first||!last){msg('su-err','Please enter your first and last name!');return;}if(!age){msg('su-err','Please pick your age!');return;}S.signupTmp={first,last,age};S.newPin='';updDots('pd','');show('p-klogin');}
-async function signupFinish(){const pName=document.getElementById('pa-name').value.trim();msg('pa-err','',false);if(!pName){msg('pa-err','Please enter the parent or guardian name.');return;}if(S.newPin.length<4){msg('pa-err','Please enter all 4 digits of your family PIN.');return;}const t=S.signupTmp,id=genId();const kid={id,firstName:t.first,lastName:t.last,age:t.age,ageGroup:t.age<=7?'4-7':'8-12',points:0,pin:S.newPin,parentName:pName,joinedAt:Date.now()};S.kids.push(kid);await sv('kids',S.kids);S.currentKid=kid;document.getElementById('wlc-n').textContent=t.first;document.getElementById('wlc-id').textContent=id;show('p-kwelcome');}
+async function signupFinish(){const pName=document.getElementById('pa-name').value.trim();msg('pa-err','',false);if(!pName){msg('pa-err','Please enter the parent or guardian name.');return;}if(S.newPin.length<4){msg('pa-err','Please enter all 4 digits of your family PIN.');return;}const t=S.signupTmp,id=genId();const kid={id,firstName:t.first,lastName:t.last,age:t.age,ageGroup:t.age<=7?'4-7':'8-12',points:0,pin:S.newPin,parentName:pName,joinedAt:Date.now(),gender:window._suGender||null};S.kids.push(kid);await sv('kids',S.kids);S.currentKid=kid;document.getElementById('wlc-n').textContent=t.first;document.getElementById('wlc-id').textContent=id;show('p-kwelcome');}
 function kidLogin(){const raw=document.getElementById('li-id').value.trim().toUpperCase();msg('li-err','',false);const kid=S.kids.find(k=>k.id===raw);if(!kid){msg('li-err',"We couldn't find that ID. Double-check with your parent!");return;}if(S.loginPin!==kid.pin){msg('li-err','Incorrect family PIN. Try again!');return;}S.currentKid=kid;S.loginPin='';updDots('lpd','');goKidDash();}
 function goKidDash(){
   renderKidDash();show('p-kdash');
@@ -3040,6 +3056,7 @@ function renderKidDash(){
   renderBadges();renderVerseCollection();renderAnnouncements();
   checkStreakMilestone(getStreak().count);
   renderStreak();renderDailyOps();renderQOTD();renderBossCard();renderMonthlyChallenge();
+  setTimeout(renderMissions,100);
 }
 
 // ── STREAK & DAILY SYSTEM ──────────────────────────────
@@ -4629,11 +4646,192 @@ async function awardGamePoints(gameName, bonus){
   const pts=(bonus||0)+10;
   const idx=S.kids.findIndex(x=>x.id===k.id);if(idx<0)return;
   S.kids[idx].points+=pts;S.currentKid=S.kids[idx];
-  S.transactions.push({id:'tx'+Date.now(),kidId:k.id,points:pts,category:'games',note:gameName+' win! 🎮',createdAt:Date.now()});
-  await sv('kids',S.kids);await sv('transactions',S.transactions);
+  const tx={id:'tx'+Date.now()+Math.random().toString(36).slice(2),kidId:k.id,points:pts,category:'games',note:gameName+' win! 🎮',createdAt:Date.now()};
+  S.transactions.push(tx);
+  // Direct single insert to Supabase (bypasses bulk upsert issues)
+  if(sb){
+    try {
+      await Promise.all([
+        sb.from('transactions').insert({id:tx.id,kid_id:tx.kidId,points:tx.points,category:tx.category,note:tx.note,created_at:tx.createdAt}),
+        sb.from('kids').upsert({id:k.id,first_name:k.firstName,last_name:k.lastName,age:k.age,age_group:k.ageGroup,points:k.points,pin:k.pin,parent_name:k.parentName,joined_at:k.joinedAt,gender:k.gender||null})
+      ]);
+    } catch(e){console.warn('awardGamePoints save:',e.message);}
+  }
+  try{localStorage.setItem('kgz_kids',JSON.stringify(S.kids));localStorage.setItem('kgz_transactions',JSON.stringify(S.transactions));}catch(e){}
+  // Update points badge immediately
+  const pb=document.getElementById('pts-badge');if(pb)pb.textContent='⭐ '+S.kids[idx].points+' pts';
+  // Check for armor unlocks
+  const prevPts=(S.kids[idx].points-pts);
+  if(typeof checkArmorUnlocks==='function') checkArmorUnlocks(prevPts, S.kids[idx].points, S.kids[idx]);
   toast('🎮 '+gameName+' WIN! +'+pts+' pts ⚡');
   renderKidDash();
 }
+
+
+// ══════════════════════════════════════════════════════════════════════════
+// WEEKLY MISSIONS SYSTEM
+// ══════════════════════════════════════════════════════════════════════════
+var WEEKLY_MISSIONS = [
+  {id:'wm-game3', label:'Win 3 games this week', icon:'⚔️', pts:30, check:function(kid,txs){ return txs.filter(t=>t.kidId===kid.id&&t.category==='games'&&t.createdAt>weekStart()).length>=3; }},
+  {id:'wm-devo',  label:'Read a devotional',     icon:'📖', pts:20, check:function(kid,txs){ return txs.some(t=>t.kidId===kid.id&&t.category==='reading'&&t.createdAt>weekStart()); }},
+  {id:'wm-sunday',label:'Check in on Sunday',    icon:'🏛️', pts:50, check:function(kid,txs){ return txs.some(t=>t.kidId===kid.id&&(t.category==='sunday'||t.category==='attendance')&&t.createdAt>weekStart()); }},
+];
+function weekStart(){ const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-d.getDay()); return d.getTime(); }
+function renderMissions(){
+  const el=document.getElementById('missions-panel');if(!el)return;
+  const k=S.currentKid;if(!k)return;
+  const txs=S.transactions||[];
+  el.innerHTML=WEEKLY_MISSIONS.map(m=>{
+    const done=m.check(k,txs);
+    return `<div style="display:flex;align-items:center;gap:.75rem;padding:.7rem .9rem;background:${done?'rgba(0,192,122,0.12)':'rgba(255,255,255,0.06)'};border:1.5px solid ${done?'#00C07A':'rgba(255,255,255,0.1)'};border-radius:14px;margin-bottom:.4rem">
+      <div style="font-size:1.4rem">${m.icon}</div>
+      <div style="flex:1">
+        <div style="font-size:.84rem;font-weight:800;color:${done?'#7FFFD4':'#E8E4F0'}">${m.label}</div>
+        <div style="font-size:.7rem;color:rgba(255,255,255,0.4);margin-top:1px">+${m.pts} pts</div>
+      </div>
+      <div style="font-size:1rem">${done?'✅':'⬜'}</div>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// SUNDAY MODE -- QR check-in + warrior reveal
+// ══════════════════════════════════════════════════════════════════════════
+function enterSundayMode(){
+  const k=S.currentKid;if(!k){show('p-kentry');return;}
+  // Check if already checked in today
+  const today=new Date();today.setHours(0,0,0,0);
+  const alreadyIn=(S.transactions||[]).some(t=>t.kidId===k.id&&t.category==='sunday'&&t.createdAt>today.getTime());
+  const hub=document.getElementById('games-hub');
+  if(!hub)return;
+  kidTab('sunday','act-gold');
+  if(alreadyIn){
+    hub.innerHTML=`
+      <div style="text-align:center;padding:2rem 1rem">
+        <div style="font-size:64px;margin-bottom:.5rem">⚔️</div>
+        <div style="font-family:Bangers,cursive;font-size:2rem;color:#f5c842;letter-spacing:.08em">WARRIOR IN THE HOUSE!</div>
+        <div style="font-size:.9rem;color:rgba(255,255,255,0.55);margin:.5rem 0 1rem">You're already checked in today, ${k.firstName}!</div>
+        <div style="width:100%;max-width:200px;margin:0 auto">${buildWarriorSVG(k.gender||'male',getArmorUnlocked(k),160,false)}</div>
+        <div style="font-size:.85rem;color:rgba(255,255,255,0.45);margin-top:1rem">Total points: <strong style="color:#f5c842">${k.points} ⚡</strong></div>
+      </div>`;
+    return;
+  }
+  // Award Sunday check-in points
+  awardSundayCheckin(k);
+}
+async function awardSundayCheckin(k){
+  const pts=50;
+  const idx=S.kids.findIndex(x=>x.id===k.id);
+  if(idx<0)return;
+  S.kids[idx].points+=pts;S.currentKid=S.kids[idx];
+  const tx={id:'tx'+Date.now()+Math.random().toString(36).slice(2),kidId:k.id,points:pts,category:'sunday',note:'Sunday check-in ⚡',createdAt:Date.now()};
+  S.transactions.push(tx);
+  if(sb){
+    try{
+      await Promise.all([
+        sb.from('transactions').insert({id:tx.id,kid_id:tx.kidId,points:tx.points,category:tx.category,note:tx.note,created_at:tx.createdAt}),
+        sb.from('kids').upsert({id:k.id,first_name:k.firstName,last_name:k.lastName,age:k.age,age_group:k.ageGroup,points:k.points,pin:k.pin,parent_name:k.parentName,joined_at:k.joinedAt,gender:k.gender||null})
+      ]);
+    }catch(e){console.warn('sunday checkin:',e.message);}
+  }
+  // BIG WARRIOR REVEAL
+  const hub=document.getElementById('games-hub');if(!hub)return;
+  const svg=buildWarriorSVG(S.kids[idx].gender||'male',getArmorUnlocked(S.kids[idx]),200,false);
+  hub.innerHTML=`
+    <div style="text-align:center;animation:clue-appear .5s ease">
+      <div style="font-size:.75rem;font-weight:800;letter-spacing:.2em;color:rgba(255,255,255,0.4);margin-bottom:.3rem">SUNDAY WARRIOR CHECK-IN</div>
+      <div style="font-family:Bangers,cursive;font-size:2.4rem;color:#f5c842;letter-spacing:.08em;text-shadow:0 0 20px rgba(245,200,66,0.4);line-height:1">${k.firstName.toUpperCase()} IS IN THE HOUSE!</div>
+      <div style="width:100%;max-width:220px;margin:1rem auto;filter:drop-shadow(0 8px 24px rgba(108,82,227,0.5))">${svg}</div>
+      <div style="background:linear-gradient(135deg,rgba(245,200,66,0.15),rgba(201,168,76,0.08));border:2px solid rgba(245,200,66,0.4);border-radius:20px;padding:1rem;margin:.5rem 0;display:inline-block;min-width:200px">
+        <div style="font-family:Bangers,cursive;font-size:2.5rem;color:#f5c842;letter-spacing:.06em">+${pts} ⚡</div>
+        <div style="font-size:.75rem;color:rgba(255,255,255,0.5);font-weight:700">WARRIOR POINTS EARNED!</div>
+      </div>
+      <div style="font-size:.78rem;color:rgba(255,255,255,0.4);margin-top:.5rem">Total: <strong style="color:#f5c842">${S.kids[idx].points} pts</strong></div>
+      <div style="margin-top:1rem;font-size:1rem;font-style:italic;color:rgba(255,255,255,0.5)">"I walk with victory, not to it, in Jesus' name!"</div>
+    </div>`;
+  celebrateWin(pts,'Sunday Check-In');
+  renderKidDash();
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// ARMOR UNLOCK CEREMONY
+// ══════════════════════════════════════════════════════════════════════════
+const ARMOR_THRESHOLDS = [
+  {pts:25,  piece:'belt',    name:'Belt of Truth',        ref:'Eph 6:14', emoji:'🔱'},
+  {pts:75,  piece:'shoes',   name:'Shoes of Peace',       ref:'Eph 6:15', emoji:'⚡'},
+  {pts:150, piece:'shield',  name:'Shield of Faith',      ref:'Eph 6:16', emoji:'🛡️'},
+  {pts:250, piece:'helmet',  name:'Helmet of Salvation',  ref:'Eph 6:17', emoji:'⛑️'},
+  {pts:400, piece:'sword',   name:'Sword of the Spirit',  ref:'Eph 6:17', emoji:'⚔️'},
+  {pts:600, piece:'breastplate',name:'Breastplate of Righteousness',ref:'Eph 6:14',emoji:'✝️'},
+];
+function checkArmorUnlocks(prevPts, newPts, kid){
+  const unlocked=ARMOR_THRESHOLDS.filter(a=>a.pts>prevPts&&a.pts<=newPts);
+  if(!unlocked.length)return;
+  const piece=unlocked[unlocked.length-1];
+  setTimeout(()=>showArmorCeremony(piece, kid), 800);
+}
+function showArmorCeremony(piece, kid){
+  const overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(10,6,40,0.96);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;animation:clue-appear .4s ease';
+  const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),180,false);
+  overlay.innerHTML=`
+    <div style="font-size:3rem;margin-bottom:.5rem;animation:bounce-in .6s cubic-bezier(.34,1.56,.64,1)">${piece.emoji}</div>
+    <div style="font-family:Bangers,cursive;font-size:1.4rem;color:rgba(255,255,255,0.5);letter-spacing:.18em;margin-bottom:.2rem">ARMOR UNLOCKED!</div>
+    <div style="font-family:Bangers,cursive;font-size:2.4rem;color:#f5c842;letter-spacing:.08em;text-shadow:0 0 20px rgba(245,200,66,0.5);line-height:1;margin-bottom:.5rem">${piece.name.toUpperCase()}</div>
+    <div style="font-size:.8rem;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:1rem">${piece.ref}</div>
+    <div style="width:180px;height:180px;filter:drop-shadow(0 8px 30px rgba(245,200,66,0.4))">${svg}</div>
+    <div style="font-size:.82rem;color:rgba(255,255,255,0.4);margin:1rem 0 1.5rem">Your warrior is growing stronger in the Lord's armor!</div>
+    <button onclick="this.parentElement.remove()" style="background:linear-gradient(135deg,#f5c842,#C9A84C);color:#0A0628;border:none;border-radius:99px;padding:14px 40px;font-family:Bangers,cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer;width:100%;max-width:300px">⚡ Let's Go!</button>`;
+  document.body.appendChild(overlay);
+  celebrateWin(0,'');
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// DISPLAY / LIVE LEADERBOARD MODE (for projector / TV)
+// ══════════════════════════════════════════════════════════════════════════
+function enterDisplayMode(){
+  const overlay=document.createElement('div');
+  overlay.id='display-mode-overlay';
+  overlay.style.cssText='position:fixed;inset:0;background:linear-gradient(165deg,#0A0628,#130F3A,#0A2818);z-index:99999;overflow:hidden;';
+  function buildDisplay(){
+    const sorted=[...S.kids].sort((a,b)=>b.points-a.points).slice(0,10);
+    return `
+    <div style="display:flex;flex-direction:column;height:100vh;padding:2rem;box-sizing:border-box">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <div style="font-family:Bangers,cursive;font-size:4rem;color:#f5c842;letter-spacing:.12em;text-shadow:0 0 30px rgba(245,200,66,0.4);line-height:1">HALL OF VICTORY</div>
+        <div style="font-size:.9rem;font-weight:800;letter-spacing:.2em;color:rgba(255,255,255,0.4)">THE GATHERING CTX · WARRIORS WHO STAND STRONG</div>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:.75rem;align-content:start">
+        ${sorted.map((kid,i)=>{
+          const rankColor=i===0?'#f5c842':i===1?'#C0C0C0':i===2?'#CD7F32':'rgba(255,255,255,0.4)';
+          const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),48,false);
+          return `<div style="display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,${i<3?'0.1':'0.05'});border:1.5px solid rgba(${i===0?'245,200,66,0.3':i<3?'255,255,255,0.15':'255,255,255,0.06'});border-radius:20px;padding:.85rem 1.2rem">
+            <div style="font-family:Bangers,cursive;font-size:2rem;color:${rankColor};min-width:2.2rem;text-align:center">${i+1}</div>
+            <div style="width:52px;height:52px;flex-shrink:0">${svg}</div>
+            <div style="flex:1">
+              <div style="font-family:Bangers,cursive;font-size:1.3rem;color:#fff;letter-spacing:.04em">${kid.firstName} ${kid.lastName}</div>
+            </div>
+            <div style="font-family:Bangers,cursive;font-size:1.8rem;color:${i===0?'#f5c842':'#00C07A'};letter-spacing:.04em">⚡${kid.points}</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div style="text-align:center;margin-top:1rem">
+        <div style="font-size:.75rem;color:rgba(255,255,255,0.3);font-weight:700;letter-spacing:.08em">I walk with victory, not to it, in Jesus' name!</div>
+        <button onclick="document.getElementById('display-mode-overlay').remove()" style="margin-top:.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.4);border-radius:99px;padding:.35rem 1rem;font-size:.7rem;cursor:pointer">Exit Display Mode</button>
+      </div>
+    </div>`;
+  }
+  overlay.innerHTML=buildDisplay();
+  document.body.appendChild(overlay);
+  // Auto-refresh every 30 seconds
+  const refreshInterval=setInterval(async()=>{
+    if(!document.getElementById('display-mode-overlay')){clearInterval(refreshInterval);return;}
+    await loadAll();
+    const o=document.getElementById('display-mode-overlay');
+    if(o)o.innerHTML=buildDisplay();
+  },30000);
+}
+
 
 var GAMES_OLDER=[
   {id:'scramble',   emoji:'🔤', title:'Word Scramble',      bg:'linear-gradient(135deg,#3D1FA8,#6C52E3,#9B59B6)'},
