@@ -3511,21 +3511,21 @@ function swordAnswer(correct, optIdx){
 var shieldGameState={score:0,round:0,lives:3};
 
 var SHIELD_ATTACKS=[
-  {attack:'Doubt',question:'Can God really do impossible things?',correct:'YES! Nothing is impossible with God! — Luke 1:37',wrong:"I'm not sure...",verse:'Luke 1:37'},
-  {attack:'Worry',question:'What do you do when you feel scared about the future?',correct:"Pray and trust God's plans for me! — Jeremiah 29:11",wrong:'Panic and give up',verse:'Jeremiah 29:11'},
-  {attack:'Pride',question:'You did something amazing. What do you say?',correct:'God gets the glory — I am just being who He made me! — 1 Cor. 10:31',wrong:'I am better than everyone!',verse:'1 Corinthians 10:31'},
-  {attack:'Temptation',question:'Someone dares you to do something wrong. What do you do?',correct:'God always provides a way out! — 1 Corinthians 10:13',wrong:'Just do it this one time',verse:'1 Corinthians 10:13'},
-  {attack:'Anger',question:'Someone was mean to you. What does God say?',correct:'Be kind and forgiving — Ephesians 4:32',wrong:'Get revenge!',verse:'Ephesians 4:32'},
-  {attack:'Loneliness',question:'You feel like you have no friends. What is true?',correct:'Jesus is with me ALWAYS — Matthew 28:20',wrong:'God does not see me',verse:'Matthew 28:20'},
-  {attack:'Failure',question:'You made a big mistake. What do you do?',correct:'Confess it accept forgiveness and start fresh! — 1 John 1:9',wrong:'Give up on God forever',verse:'1 John 1:9'},
-  {attack:'Comparison',question:'Your friend is better at everything. You feel jealous. What is true?',correct:'God made ME exactly right for His purpose! — Psalm 139:14',wrong:'I am worthless compared to them',verse:'Psalm 139:14'},
-  {attack:'Peer Pressure',question:'Everyone at school is doing something bad. What do you do?',correct:'Do not conform to this world — be transformed! — Romans 12:2',wrong:'Do it so I fit in',verse:'Romans 12:2'},
-  {attack:'Unforgiveness',question:'Someone hurt you badly. God says what?',correct:'Forgive as God has forgiven you — Colossians 3:13',wrong:'Never forgive them',verse:'Colossians 3:13'},
-  {attack:'Self-Doubt',question:'You think you are not talented enough to serve God. What is true?',correct:'God equips everyone He calls! — Hebrews 13:21',wrong:'I am useless to God',verse:'Hebrews 13:21'},
-  {attack:'Discouragement',question:'Things are really hard and you want to quit. What does God say?',correct:'Do not give up! Your labor in the Lord is never in vain! — 1 Cor. 15:58',wrong:'God must not care about me',verse:'1 Corinthians 15:58'},
-  {attack:'Materialism',question:'You really want what your friend has. What matters most?',correct:'Seek first the kingdom of God! — Matthew 6:33',wrong:'Get as much stuff as possible',verse:'Matthew 6:33'},
-  {attack:'Bitterness',question:'You are holding a grudge for weeks. God says...',correct:'Get rid of all bitterness — let God handle justice! — Ephesians 4:31',wrong:'Stay angry — they deserve it',verse:'Ephesians 4:31'},
-  {attack:'Fear of Death',question:'You are scared about what happens after you die. God says...',correct:'Whoever believes in Jesus has eternal life! — John 3:16',wrong:'Nobody knows what happens',verse:'John 3:16'},
+  {attack:'"You are not good enough for God."',truth:'God loves you while you were still a sinner!',ref:'Romans 5:8'},
+  {attack:'"God does not hear your prayers."',truth:'The Lord is near to all who call on him!',ref:'Psalm 145:18'},
+  {attack:'"You are too far gone to be forgiven."',truth:'If we confess our sins, he is faithful and will forgive us!',ref:'1 John 1:9'},
+  {attack:'"God has abandoned you."',truth:'I will never leave you nor forsake you!',ref:'Hebrews 13:5'},
+  {attack:'"You are weak and cannot do this."',truth:'I can do all things through Christ who strengthens me!',ref:'Philippians 4:13'},
+  {attack:'"God does not have a plan for you."',truth:'I know the plans I have for you — plans for welfare, not evil!',ref:'Jeremiah 29:11'},
+  {attack:'"The Bible cannot be trusted."',truth:'Your word is truth!',ref:'John 17:17'},
+  {attack:'"God is too busy to care about you."',truth:'Cast all your anxiety on him, because he cares for you!',ref:'1 Peter 5:7'},
+  {attack:'"Sin has too much power over you."',truth:'Greater is he that is in you than he that is in the world!',ref:'1 John 4:4'},
+  {attack:'"Your past mistakes define your future."',truth:'If anyone is in Christ, he is a new creation. The old has passed away!',ref:'2 Corinthians 5:17'},
+  {attack:'"Worrying will help you control things."',truth:'Do not be anxious about anything — bring it to God in prayer!',ref:'Philippians 4:6'},
+  {attack:'"Following Jesus means you will suffer loss."',truth:'For me to live is Christ, and to die is gain!',ref:'Philippians 1:21'},
+  {attack:'"You are alone in this battle."',truth:'The Lord your God is with you wherever you go. Be strong and courageous!',ref:'Joshua 1:9'},
+  {attack:'"God only loves people who are good."',truth:'While we were still sinners, Christ died for us!',ref:'Romans 5:8'},
+  {attack:'"Nothing can fix what is broken in you."',truth:'My God will supply every need of yours according to his riches in glory!',ref:'Philippians 4:19'},
 ];
 
 function initShieldDefense(){
@@ -5318,67 +5318,218 @@ function doYSpin(){
 // FILL THE BLANK — FITB_POOL (30 Philippians + Bible questions)
 // ═══════════════════════════════════════════════════════
 var FITB_POOL=[
-  {q:"I can do all things through ___ who strengthens me.",a:"Christ",opts:["Christ","God","Paul","Moses"],ref:"Phil 4:13"},
-  {q:"For to me to live is Christ, and to die is ___.",a:"gain",opts:["gain","loss","sin","nothing"],ref:"Phil 1:21"},
-  {q:"Do nothing from selfish ambition or ___, but in humility count others more significant.",a:"conceit",opts:["conceit","pride","fear","anger"],ref:"Phil 2:3"},
-  {q:"And the ___ of God, which surpasses all understanding, will guard your hearts.",a:"peace",opts:["peace","love","joy","grace"],ref:"Phil 4:7"},
-  {q:"Rejoice in the Lord ___; again I will say, rejoice.",a:"always",opts:["always","sometimes","today","forever"],ref:"Phil 4:4"},
-  {q:"Do not be ___ about anything, but in everything by prayer let your requests be made known to God.",a:"anxious",opts:["anxious","happy","proud","silent"],ref:"Phil 4:6"},
-  {q:"He who began a good work in you will bring it to ___ at the day of Jesus Christ.",a:"completion",opts:["completion","an end","perfection","rest"],ref:"Phil 1:6"},
-  {q:"Let your ___ be known to everyone. The Lord is at hand.",a:"reasonableness",opts:["reasonableness","kindness","strength","faith"],ref:"Phil 4:5"},
-  {q:"Whatever is ___, whatever is honorable, whatever is just — think about these things.",a:"true",opts:["true","good","bright","nice"],ref:"Phil 4:8"},
-  {q:"Work ___ your own salvation with fear and trembling.",a:"out",opts:["out","for","toward","through"],ref:"Phil 2:12"},
-  {q:"My God will supply every need of yours according to his ___ in glory in Christ Jesus.",a:"riches",opts:["riches","grace","power","love"],ref:"Phil 4:19"},
-  {q:"I count everything as ___ because of the surpassing worth of knowing Christ.",a:"loss",opts:["loss","gain","nothing","joy"],ref:"Phil 3:8"},
-  {q:"In the beginning, God created the ___ and the earth.",a:"heavens",opts:["heavens","sky","stars","light"],ref:"Gen 1:1"},
-  {q:"For God so loved the ___ that he gave his only Son.",a:"world",opts:["world","church","people","lost"],ref:"John 3:16"},
-  {q:"Be strong and ___, do not be afraid for the Lord your God is with you.",a:"courageous",opts:["courageous","quiet","patient","faithful"],ref:"Josh 1:9"},
-  {q:"The Lord is my ___, I shall not want.",a:"shepherd",opts:["shepherd","king","rock","shield"],ref:"Ps 23:1"},
-  {q:"Trust in the Lord with all your ___, and do not lean on your own understanding.",a:"heart",opts:["heart","mind","strength","soul"],ref:"Prov 3:5"},
-  {q:"For I know the plans I have for you, declares the Lord, plans for ___ and not for evil.",a:"welfare",opts:["welfare","riches","peace","hope"],ref:"Jer 29:11"},
-  {q:"Jesus said, I am the ___, the truth, and the life.",a:"way",opts:["way","door","light","vine"],ref:"John 14:6"},
-  {q:"For all have ___ and fall short of the glory of God.",a:"sinned",opts:["sinned","failed","fallen","stumbled"],ref:"Rom 3:23"},
-  {q:"If anyone is in Christ, he is a new ___. The old has passed away.",a:"creation",opts:["creation","person","man","being"],ref:"2 Cor 5:17"},
-  {q:"Cast all your ___ on him, because he cares for you.",a:"anxieties",opts:["anxieties","burdens","sins","fears"],ref:"1 Pet 5:7"},
-  {q:"Your word is a ___ to my feet and a light to my path.",a:"lamp",opts:["lamp","guide","sword","gift"],ref:"Ps 119:105"},
-  {q:"The joy of the Lord is your ___.",a:"strength",opts:["strength","hope","peace","shield"],ref:"Neh 8:10"},
-  {q:"Come to me, all who are ___ and heavy laden, and I will give you rest.",a:"weary",opts:["weary","lost","broken","poor"],ref:"Matt 11:28"},
-  {q:"No weapon that is fashioned against you shall ___.",a:"prosper",opts:["prosper","stand","prevail","win"],ref:"Isa 54:17"},
-  {q:"Greater is he that is ___ you than he that is in the world.",a:"in",opts:["in","with","for","beside"],ref:"1 John 4:4"},
-  {q:"I have learned in whatever situation I am to be ___.",a:"content",opts:["content","happy","strong","patient"],ref:"Phil 4:11"},
-  {q:"Press on toward the ___ for the prize of the upward call of God in Christ Jesus.",a:"goal",opts:["goal","finish","prize","crown"],ref:"Phil 3:14"},
-  {q:"Our ___ is in heaven, and from it we await a Savior, the Lord Jesus Christ.",a:"citizenship",opts:["citizenship","home","hope","life"],ref:"Phil 3:20"},
+  {pre:"I can do all things through",blank:"Christ",post:"who strengthens me.",opts:["Christ", "God", "Paul", "Moses"],ref:"Phil 4:13"},
+  {pre:"For to me to live is Christ, and to die is",blank:"gain",post:".",opts:["gain", "loss", "sin", "nothing"],ref:"Phil 1:21"},
+  {pre:"Do nothing from selfish ambition or",blank:"conceit",post:", but in humility count others more significant.",opts:["conceit", "pride", "fear", "anger"],ref:"Phil 2:3"},
+  {pre:"And the",blank:"peace",post:"of God, which surpasses all understanding, will guard your hearts.",opts:["peace", "love", "joy", "grace"],ref:"Phil 4:7"},
+  {pre:"Rejoice in the Lord",blank:"always",post:"; again I will say, rejoice.",opts:["always", "sometimes", "today", "forever"],ref:"Phil 4:4"},
+  {pre:"Do not be",blank:"anxious",post:"about anything, but in everything by prayer let your requests be made known to God.",opts:["anxious", "happy", "proud", "silent"],ref:"Phil 4:6"},
+  {pre:"He who began a good work in you will bring it to",blank:"completion",post:"at the day of Jesus Christ.",opts:["completion", "an end", "perfection", "rest"],ref:"Phil 1:6"},
+  {pre:"My God will supply every need of yours according to his",blank:"riches",post:"in glory in Christ Jesus.",opts:["riches", "grace", "power", "love"],ref:"Phil 4:19"},
+  {pre:"I count everything as",blank:"loss",post:"because of the surpassing worth of knowing Christ.",opts:["loss", "gain", "nothing", "joy"],ref:"Phil 3:8"},
+  {pre:"Our",blank:"citizenship",post:"is in heaven, and from it we await a Savior.",opts:["citizenship", "home", "hope", "life"],ref:"Phil 3:20"},
+  {pre:"In the beginning, God created the",blank:"heavens",post:"and the earth.",opts:["heavens", "sky", "stars", "light"],ref:"Gen 1:1"},
+  {pre:"For God so loved the",blank:"world",post:"that he gave his only Son.",opts:["world", "church", "people", "lost"],ref:"John 3:16"},
+  {pre:"Be strong and",blank:"courageous",post:", do not be afraid for the Lord your God is with you.",opts:["courageous", "quiet", "patient", "faithful"],ref:"Josh 1:9"},
+  {pre:"The Lord is my",blank:"shepherd",post:", I shall not want.",opts:["shepherd", "king", "rock", "shield"],ref:"Ps 23:1"},
+  {pre:"Trust in the Lord with all your",blank:"heart",post:", and do not lean on your own understanding.",opts:["heart", "mind", "strength", "soul"],ref:"Prov 3:5"},
+  {pre:"For I know the plans I have for you, plans for",blank:"welfare",post:"and not for evil.",opts:["welfare", "riches", "peace", "hope"],ref:"Jer 29:11"},
+  {pre:"Jesus said, I am the",blank:"way",post:", the truth, and the life.",opts:["way", "door", "light", "vine"],ref:"John 14:6"},
+  {pre:"For all have",blank:"sinned",post:"and fall short of the glory of God.",opts:["sinned", "failed", "fallen", "stumbled"],ref:"Rom 3:23"},
+  {pre:"If anyone is in Christ, he is a new",blank:"creation",post:". The old has passed away.",opts:["creation", "person", "man", "being"],ref:"2 Cor 5:17"},
+  {pre:"Cast all your",blank:"anxieties",post:"on him, because he cares for you.",opts:["anxieties", "burdens", "sins", "fears"],ref:"1 Pet 5:7"},
+  {pre:"Your word is a",blank:"lamp",post:"to my feet and a light to my path.",opts:["lamp", "guide", "sword", "gift"],ref:"Ps 119:105"},
+  {pre:"The joy of the Lord is your",blank:"strength",post:".",opts:["strength", "hope", "peace", "shield"],ref:"Neh 8:10"},
+  {pre:"Come to me, all who are",blank:"weary",post:"and heavy laden, and I will give you rest.",opts:["weary", "lost", "broken", "poor"],ref:"Matt 11:28"},
+  {pre:"No weapon that is fashioned against you shall",blank:"prosper",post:".",opts:["prosper", "stand", "prevail", "win"],ref:"Isa 54:17"},
+  {pre:"Greater is he that is",blank:"in",post:"you than he that is in the world.",opts:["in", "with", "for", "beside"],ref:"1 John 4:4"},
+  {pre:"I have learned in whatever situation I am to be",blank:"content",post:".",opts:["content", "happy", "strong", "patient"],ref:"Phil 4:11"},
+  {pre:"Press on toward the",blank:"goal",post:"for the prize of the upward call of God in Christ Jesus.",opts:["goal", "finish", "prize", "crown"],ref:"Phil 3:14"},
+  {pre:"Work",blank:"out",post:"your own salvation with fear and trembling.",opts:["out", "for", "toward", "through"],ref:"Phil 2:12"},
+  {pre:"Let your",blank:"reasonableness",post:"be known to everyone. The Lord is at hand.",opts:["reasonableness", "kindness", "strength", "faith"],ref:"Phil 4:5"},
+  {pre:"Whatever is",blank:"true",post:", whatever is honorable, whatever is just — think about these things.",opts:["true", "good", "bright", "nice"],ref:"Phil 4:8"},
 ];
+
 
 // ═══════════════════════════════════════════════════════
 // WHO AM I? — CG_CHARS (Bible character guesser, 25 chars)
 // ═══════════════════════════════════════════════════════
 var CG_CHARS=[
-  {name:"Moses",clues:["I was found in a basket on a river as a baby","I grew up in a palace but ran away to the desert","God spoke to me from a burning bush","I led two million people out of slavery in Egypt","I parted the Red Sea with my staff"],pts:100},
-  {name:"David",clues:["I killed a giant with a small stone as a teenager","I was a shepherd boy who played the harp","I became the greatest king of Israel","God called me a man after his own heart","I wrote many of the songs in the Bible called Psalms"],pts:100},
-  {name:"Paul",clues:["I used to arrest and hurt Christians before I believed","I was blinded by a bright light on the road to Damascus","I went on three long missionary journeys","I wrote many letters in the New Testament","I wrote the book of Philippians from a prison cell"],pts:100},
-  {name:"Esther",clues:["I was an orphan raised by my cousin","I became queen of Persia without revealing who I was","My cousin Mordecai discovered a plot against the king","I risked my life by approaching the king uninvited","My bravery saved my entire people from destruction"],pts:100},
-  {name:"Daniel",clues:["I was taken from Jerusalem to Babylon as a teenager","I refused to eat the king's food because of my faith","I could interpret dreams and visions","I was thrown into a den of lions for praying","God shut the lions' mouths and I survived the night"],pts:100},
-  {name:"Joseph",clues:["I had eleven brothers who were jealous of me","My father gave me a coat with many colors","My brothers sold me as a slave to merchants going to Egypt","I interpreted Pharaoh's dreams about seven fat and seven thin cows","I became second-in-command of all Egypt and saved many lives"],pts:100},
-  {name:"Ruth",clues:["I was from the country of Moab, not Israel","My husband died and I chose to stay with my mother-in-law","I said wherever you go I will go and your God will be my God","I worked in the fields picking up leftover grain","I married a man named Boaz and became an ancestor of Jesus"],pts:100},
-  {name:"Jonah",clues:["God told me to go to a great city called Nineveh","I ran the opposite direction and got on a ship","A great storm came and the sailors threw me overboard","A huge fish swallowed me and I was inside for three days","I finally obeyed God and the whole city repented"],pts:100},
-  {name:"Peter",clues:["I was a fisherman on the Sea of Galilee","Jesus said I would fish for people instead of fish","I walked on water toward Jesus but started to sink","I denied knowing Jesus three times on the night he was arrested","I preached on the day of Pentecost and 3,000 people believed"],pts:100},
-  {name:"Mary",clues:["I was a young woman living in Nazareth","An angel named Gabriel appeared to me","I was told I would have a child even though I was not married","My child was the Son of God","I was present at both the birth and crucifixion of Jesus"],pts:100},
-  {name:"Noah",clues:["God told me the world would be covered with water","I built a giant boat called an ark even though there was no flood yet","I loaded two of every kind of animal onto the boat","It rained for forty days and forty nights","God put a rainbow in the sky as a sign of his promise"],pts:100},
-  {name:"Abraham",clues:["God told me to leave my home country and go to a land I didn't know","God promised to make my family as numerous as the stars","I was 100 years old when my son Isaac was born","God tested me by asking me to sacrifice my son","I am called the father of faith in the Bible"],pts:100},
-  {name:"Elijah",clues:["I told evil King Ahab there would be no rain for years","Ravens brought me food in the wilderness by a stream","I challenged 450 false prophets to a contest on Mount Carmel","God sent fire from heaven to prove He was the true God","I was taken up to heaven in a chariot of fire"],pts:100},
-  {name:"Joshua",clues:["I was Moses' assistant and leader in training","God told me to be strong and courageous and not afraid","I led Israel across the Jordan River into the Promised Land","My army marched around Jericho for seven days","The walls of Jericho fell at the sound of trumpets and shouting"],pts:100},
-  {name:"Gideon",clues:["An angel called me a mighty warrior when I was hiding in fear","I asked God for a sign using a piece of wool called a fleece","God reduced my army from 32,000 down to just 300 men","My army defeated the Midianites with torches and clay pots","God showed that the victory belongs to him not to numbers"],pts:100},
-  {name:"Rahab",clues:["I lived in the city of Jericho that was about to be attacked","I hid two Israelite spies on my rooftop under stalks of flax","I helped the spies escape by lowering them from my window","I hung a red cord from my window as a sign of protection","My whole family was saved when Jericho fell and I am in Jesus lineage"],pts:100},
-  {name:"Samson",clues:["I was dedicated to God before I was born as a Nazirite","I had incredible physical strength that came from God","My long hair was the outward sign of my dedication to God","A woman named Delilah discovered my secret and I was captured","In the end I defeated more enemies in my death than in my life"],pts:100},
-  {name:"Nehemiah",clues:["I was the cupbearer to the Persian king Artaxerxes","I heard that the walls of Jerusalem were broken down and I wept","The king gave me permission to go rebuild the walls","I rebuilt the entire wall around Jerusalem in just 52 days","People mocked us but we prayed and kept building"],pts:100},
-  {name:"Philip (the Evangelist)",clues:["I was one of the seven chosen to serve food to widows","I preached in Samaria and many were healed and believed","An angel told me to go south on the road from Jerusalem to Gaza","I met an Ethiopian official reading from Isaiah in his chariot","I explained the Scripture and baptized him right there in the water"],pts:100},
-  {name:"Timothy",clues:["Paul called me his true child in the faith","My mother was Jewish and my father was Greek","I traveled with Paul on his missionary journeys","Paul sent me to check on churches he had planted","Paul wrote two letters in the New Testament directly to me"],pts:100},
-  {name:"Lydia",clues:["I was a businesswoman who sold purple cloth","I was from the city of Thyatira in Asia","I was praying with women by a river outside the city of Philippi","The Lord opened my heart to respond to Paul's message","My house became the first church in Philippi"],pts:100},
-  {name:"Epaphroditus",clues:["I was sent from the church in Philippi to help Paul in prison","Paul called me his brother, fellow worker, and fellow soldier","I became dangerously ill while serving Paul in Rome","I was distressed because you heard I was sick and worried about you","Paul sent me back to Philippi with his letter to the church"],pts:100},
-  {name:"Solomon",clues:["I was the son of King David and Bathsheba","I asked God for wisdom rather than wealth or long life","I built the first great Temple in Jerusalem","I wrote much of the book of Proverbs and Ecclesiastes","I was the wisest person who ever lived but turned away from God in old age"],pts:100},
-  {name:"Stephen",clues:["I was one of the seven chosen to serve the early church","I was known as a man full of faith and the Holy Spirit","I was brought before the Jewish council on false charges","I saw a vision of heaven with Jesus standing at God's right hand","I was the first Christian to be killed for his faith and I forgave those who stoned me"],pts:100},
-  {name:"Zacchaeus",clues:["I was the chief tax collector in Jericho","Tax collectors were despised because they cheated people","I was short so I climbed a sycamore tree to see Jesus","Jesus looked up and called me by name and invited himself to my house","I gave half my goods to the poor and paid back everyone I cheated fourfold"],pts:100},
+  {name:"Moses",clues:[
+      "I was found in a basket on a river as a baby",
+      "I grew up in a palace but ran away to the desert",
+      "God spoke to me from a burning bush",
+      "I led two million people out of slavery in Egypt",
+      "I parted the Red Sea with my staff"
+  ],pts:100,opts:["Moses","Abraham","Joseph","Joshua"]},
+  {name:"David",clues:[
+      "I killed a giant with a small stone as a teenager",
+      "I was a shepherd boy who played the harp",
+      "I became the greatest king of Israel",
+      "God called me a man after his own heart",
+      "I wrote many of the songs in the Bible called Psalms"
+  ],pts:100,opts:["David","Zacchaeus","Solomon","Joseph"]},
+  {name:"Paul",clues:[
+      "I used to arrest and hurt Christians before I believed",
+      "I was blinded by a bright light on the road to Damascus",
+      "I went on three long missionary journeys",
+      "I wrote many letters in the New Testament",
+      "I wrote the book of Philippians from a prison cell"
+  ],pts:100,opts:["Paul","Timothy","Ruth","Epaphroditus"]},
+  {name:"Esther",clues:[
+      "I was an orphan raised by my cousin",
+      "I became queen of Persia without revealing who I was",
+      "My cousin Mordecai discovered a plot against the king",
+      "I risked my life by approaching the king uninvited",
+      "My bravery saved my entire people from destruction"
+  ],pts:100,opts:["Esther","Paul","Joshua","David"]},
+  {name:"Daniel",clues:[
+      "I was taken from Jerusalem to Babylon as a teenager",
+      "I refused to eat the king's food because of my faith",
+      "I could interpret dreams and visions",
+      "I was thrown into a den of lions for praying",
+      "God shut the lions' mouths and I survived the night"
+  ],pts:100,opts:["Daniel","Peter","Paul","Epaphroditus"]},
+  {name:"Joseph",clues:[
+      "I had eleven brothers who were jealous of me",
+      "My father gave me a coat with many colors",
+      "My brothers sold me as a slave to merchants going to Egypt",
+      "I interpreted Pharaoh's dreams about seven fat and seven thin cows",
+      "I became second-in-command of all Egypt and saved many lives"
+  ],pts:100,opts:["Joseph","Paul","Lydia","Zacchaeus"]},
+  {name:"Ruth",clues:[
+      "I was from the country of Moab, not Israel",
+      "My husband died and I chose to stay with my mother-in-law",
+      "I said wherever you go I will go and your God will be my God",
+      "I worked in the fields picking up leftover grain",
+      "I married a man named Boaz and became an ancestor of Jesus"
+  ],pts:100,opts:["Ruth","Jonah","Stephen","Lydia"]},
+  {name:"Jonah",clues:[
+      "God told me to go to a great city called Nineveh",
+      "I ran the opposite direction and got on a ship",
+      "A great storm came and the sailors threw me overboard",
+      "A huge fish swallowed me and I was inside for three days",
+      "I finally obeyed God and the whole city repented"
+  ],pts:100,opts:["Jonah","Elijah","Timothy","David"]},
+  {name:"Peter",clues:[
+      "I was a fisherman on the Sea of Galilee",
+      "Jesus said I would fish for people instead of fish",
+      "I walked on water toward Jesus but started to sink",
+      "I denied knowing Jesus three times on the night he was arrested",
+      "I preached on the day of Pentecost and 3,000 people believed"
+  ],pts:100,opts:["Peter","Ruth","Abraham","Samson"]},
+  {name:"Mary",clues:[
+      "I was a young woman living in Nazareth",
+      "An angel named Gabriel appeared to me",
+      "I was told I would have a child even though I was not married",
+      "My child was the Son of God",
+      "I was present at both the birth and crucifixion of Jesus"
+  ],pts:100,opts:["Mary","Peter","Philip","Moses"]},
+  {name:"Noah",clues:[
+      "God told me the world would be covered with water",
+      "I built a giant boat called an ark even though there was no flood yet",
+      "I loaded two of every kind of animal onto the boat",
+      "It rained for forty days and forty nights",
+      "God put a rainbow in the sky as a sign of his promise"
+  ],pts:100,opts:["Noah","Paul","Joseph","Gideon"]},
+  {name:"Abraham",clues:[
+      "God told me to leave my home country and go to a land I did not know",
+      "God promised to make my family as numerous as the stars",
+      "I was 100 years old when my son Isaac was born",
+      "God tested me by asking me to sacrifice my son",
+      "I am called the father of faith in the Bible"
+  ],pts:100,opts:["Abraham","Noah","Joshua","Ruth"]},
+  {name:"Elijah",clues:[
+      "I told evil King Ahab there would be no rain for years",
+      "Ravens brought me food in the wilderness by a stream",
+      "I challenged 450 false prophets to a contest on Mount Carmel",
+      "God sent fire from heaven to prove He was the true God",
+      "I was taken up to heaven in a chariot of fire"
+  ],pts:100,opts:["Elijah","Philip","Lydia","Rahab"]},
+  {name:"Joshua",clues:[
+      "I was Moses' assistant and leader in training",
+      "God told me to be strong and courageous and not afraid",
+      "I led Israel across the Jordan River into the Promised Land",
+      "My army marched around Jericho for seven days",
+      "The walls of Jericho fell at the sound of trumpets and shouting"
+  ],pts:100,opts:["Joshua","Moses","David","Jonah"]},
+  {name:"Gideon",clues:[
+      "An angel called me a mighty warrior when I was hiding in fear",
+      "I asked God for a sign using a piece of wool called a fleece",
+      "God reduced my army from 32,000 down to just 300 men",
+      "My army defeated the Midianites with torches and clay pots",
+      "God showed that the victory belongs to him not to numbers"
+  ],pts:100,opts:["Gideon","Samson","Zacchaeus","Peter"]},
+  {name:"Rahab",clues:[
+      "I lived in the city of Jericho that was about to be attacked",
+      "I hid two Israelite spies on my rooftop",
+      "I helped the spies escape by lowering them from my window",
+      "I hung a red cord from my window as a sign of protection",
+      "My whole family was saved when Jericho fell"
+  ],pts:100,opts:["Rahab","Elijah","Epaphroditus","Samson"]},
+  {name:"Samson",clues:[
+      "I was dedicated to God before I was born as a Nazirite",
+      "I had incredible physical strength that came from God",
+      "My long hair was the outward sign of my dedication to God",
+      "A woman named Delilah discovered my secret and I was captured",
+      "In the end I defeated more enemies in my death than in my life"
+  ],pts:100,opts:["Samson","David","Epaphroditus","Noah"]},
+  {name:"Nehemiah",clues:[
+      "I was the cupbearer to the Persian king Artaxerxes",
+      "I heard that the walls of Jerusalem were broken down and I wept",
+      "The king gave me permission to go rebuild the walls",
+      "I rebuilt the entire wall around Jerusalem in just 52 days",
+      "People mocked us but we prayed and kept building"
+  ],pts:100,opts:["Nehemiah","Stephen","Solomon","Jonah"]},
+  {name:"Philip",clues:[
+      "I was one of the seven chosen to serve food to widows",
+      "I preached in Samaria and many were healed and believed",
+      "An angel told me to go south on the road from Jerusalem to Gaza",
+      "I met an Ethiopian official reading from Isaiah in his chariot",
+      "I explained the Scripture and baptized him right there in the water"
+  ],pts:100,opts:["Philip","Stephen","Nehemiah","Esther"]},
+  {name:"Timothy",clues:[
+      "Paul called me his true child in the faith",
+      "My mother was Jewish and my father was Greek",
+      "I traveled with Paul on his missionary journeys",
+      "Paul sent me to check on churches he had planted",
+      "Paul wrote two letters in the New Testament directly to me"
+  ],pts:100,opts:["Timothy","Abraham","Samson","Peter"]},
+  {name:"Lydia",clues:[
+      "I was a businesswoman who sold purple cloth",
+      "I was from the city of Thyatira in Asia",
+      "I was praying with women by a river outside the city of Philippi",
+      "The Lord opened my heart to respond to Paul's message",
+      "My house became the first church in Philippi"
+  ],pts:100,opts:["Lydia","Ruth","Moses","Gideon"]},
+  {name:"Epaphroditus",clues:[
+      "I was sent from the church in Philippi to help Paul in prison",
+      "Paul called me his brother, fellow worker, and fellow soldier",
+      "I became dangerously ill while serving Paul in Rome",
+      "I was distressed because the church heard I was sick",
+      "Paul sent me back to Philippi with his letter to the church"
+  ],pts:100,opts:["Epaphroditus","Mary","Gideon","Lydia"]},
+  {name:"Solomon",clues:[
+      "I was the son of King David",
+      "I asked God for wisdom rather than wealth or long life",
+      "I built the first great Temple in Jerusalem",
+      "I wrote much of the book of Proverbs and Ecclesiastes",
+      "I was the wisest person who ever lived but turned away from God in old age"
+  ],pts:100,opts:["Solomon","Rahab","Esther","Jonah"]},
+  {name:"Stephen",clues:[
+      "I was one of the seven chosen to serve the early church",
+      "I was known as a man full of faith and the Holy Spirit",
+      "I was brought before the Jewish council on false charges",
+      "I saw a vision of heaven with Jesus standing at God's right hand",
+      "I was the first Christian to be killed for his faith and I forgave those who stoned me"
+  ],pts:100,opts:["Stephen","Joshua","Samson","Ruth"]},
+  {name:"Zacchaeus",clues:[
+      "I was the chief tax collector in Jericho",
+      "Tax collectors were despised because they cheated people",
+      "I was short so I climbed a sycamore tree to see Jesus",
+      "Jesus looked up and called me by name and invited himself to my house",
+      "I gave half my goods to the poor and paid back everyone I cheated fourfold"
+  ],pts:100,opts:["Zacchaeus","Joseph","David","Solomon"]},
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -5889,6 +6040,20 @@ function tfAnswer(ans, correct){
 }
 
 
+var MATCH_PAIRS=[
+  {a:'"I can do all things through Christ"',b:'Philippians 4:13'},
+  {a:'"The Lord is my shepherd, I shall not want"',b:'Psalm 23:1'},
+  {a:'"For God so loved the world"',b:'John 3:16'},
+  {a:'"Be strong and courageous"',b:'Joshua 1:9'},
+  {a:'"I will never leave you nor forsake you"',b:'Hebrews 13:5'},
+  {a:'"Trust in the Lord with all your heart"',b:'Proverbs 3:5'},
+  {a:'"Your word is a lamp to my feet"',b:'Psalm 119:105'},
+  {a:'"Cast all your anxiety on him"',b:'1 Peter 5:7'},
+  {a:'"Greater is he that is in you"',b:'1 John 4:4'},
+  {a:'"The joy of the Lord is your strength"',b:'Nehemiah 8:10'},
+  {a:'"No weapon formed against you shall prosper"',b:'Isaiah 54:17'},
+  {a:'"All things work together for good"',b:'Romans 8:28'},
+];
 function initMatch(){
   matchDone=0;matchLocked=false;matchMoves=0;matchFlipped=[];
   const pairs=MATCH_PAIRS.sort(()=>Math.random()-.5).slice(0,6);
