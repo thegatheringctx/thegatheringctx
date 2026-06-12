@@ -4782,10 +4782,9 @@ async function awardGamePoints(gameName, bonus){
 // ══════════════════════════════════════════════════════════════════════════
 function weekStart(){ const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-d.getDay()); return d.getTime(); }
 function renderMissions(){
-  const el=document.getElementById('missions-panel');if(!el)return;
   const k=S.currentKid;if(!k)return;
   const txs=S.transactions||[];
-  el.innerHTML=WEEKLY_MISSIONS.map(m=>{
+  const html=WEEKLY_MISSIONS.map(m=>{
     const done=m.check(k,txs);
     return `<div style="display:flex;align-items:center;gap:.75rem;padding:.7rem .9rem;background:${done?'rgba(0,192,122,0.12)':'rgba(255,255,255,0.06)'};border:1.5px solid ${done?'#00C07A':'rgba(255,255,255,0.1)'};border-radius:14px;margin-bottom:.4rem">
       <div style="font-size:1.4rem">${m.icon}</div>
@@ -4793,9 +4792,15 @@ function renderMissions(){
         <div style="font-size:.84rem;font-weight:800;color:${done?'#7FFFD4':'#E8E4F0'}">${m.label}</div>
         <div style="font-size:.7rem;color:rgba(255,255,255,0.4);margin-top:1px">+${m.pts} pts</div>
       </div>
-      <div style="font-size:1rem">${done?'✅':'⬜'}</div>
+      <div style="font-size:1rem;animation:${done?'mission-complete .4s ease':'none'}">${done?'✅':'⬜'}</div>
     </div>`;
   }).join('');
+  // Write to both the old missions-list and the new missions-panel
+  ['missions-list','missions-panel'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});
+  // Show all-done bonus chip if all complete
+  const allDone=WEEKLY_MISSIONS.every(m=>m.check(k,txs));
+  const chip=document.getElementById('mission-bonus-chip');
+  if(chip)chip.style.display=allDone?'block':'none';
 }
 
 // ══════════════════════════════════════════════════════════════════════════
