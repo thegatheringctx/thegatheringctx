@@ -517,7 +517,7 @@ textarea{min-height:80px;resize:vertical;}
 .pin-key:hover{background:var(--cream);border-color:var(--teal);}
 
 /* ── KID DASHBOARD TABS ── */
-.kid-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-bottom:1.25rem;}
+.kid-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:.75rem;}
 .ktb{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);border-radius:16px;padding:10px 4px 8px;cursor:pointer;text-align:center;backdrop-filter:blur(4px);}
 .ktb .kti{font-size:20px;display:block;margin-bottom:3px;color:rgba(255,255,255,.5);}
 .ktb .ktl{font-size:9px;font-weight:700;color:rgba(255,255,255,.5);display:block;letter-spacing:.3px;text-transform:uppercase;}
@@ -6571,9 +6571,9 @@ function renderAvatarPicker(){
 /* ── TAB BAR: taller touch targets, bolder active ── */
 .kid-tabs{
   display:grid!important;
-  grid-template-columns:repeat(3,1fr)!important;
+  grid-template-columns:repeat(4,1fr)!important;
   gap:6px!important;
-  margin-bottom:1rem!important;
+  margin-bottom:.75rem!important;
 }
 .ktb{
   border-radius:18px!important;
@@ -6586,8 +6586,8 @@ function renderAvatarPicker(){
 .ktb .kti{font-size:22px!important;margin-bottom:4px!important;}
 .ktb .ktl{font-size:9px!important;letter-spacing:.4px!important;opacity:.7;}
 .ktb.act-teal,.ktb.act-coral,.ktb.act-purple,.ktb.act-sky,.ktb.act-gold,.ktb.act-pink{
-  box-shadow:0 4px 16px rgba(0,0,0,.3)!important;
-  transform:translateY(-1px);
+  box-shadow:0 4px 20px rgba(0,0,0,.4)!important;
+  transform:scale(1.02) translateY(-1px)!important;
 }
 .ktb.act-teal{background:linear-gradient(135deg,#00C07A,#008f5a)!important;border-color:#00C07A!important;}
 .ktb.act-coral{background:linear-gradient(135deg,#FF5A36,#d93e1e)!important;border-color:#FF5A36!important;}
@@ -6631,6 +6631,10 @@ function renderAvatarPicker(){
   box-shadow:0 6px 20px rgba(0,0,0,.3)!important;
 }
 .game-card:active{transform:scale(.93)!important;}
+.game-card:hover{
+  transform:translateY(-3px) scale(1.01)!important;
+  box-shadow:0 12px 32px rgba(0,0,0,.4)!important;
+}
 .game-card::before{
   content:'';position:absolute;inset:0;
   background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.4) 100%);
