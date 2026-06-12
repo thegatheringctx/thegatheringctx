@@ -1394,21 +1394,23 @@ input:focus,select:focus,textarea:focus{
 }
 
 /* Hero warrior */
-.wl-hero-wrap{position:relative;width:100%;max-width:260px;margin:0 auto .3rem;}
+.wl-hero-wrap{position:relative;width:100%;max-width:300px;margin:0 auto .1rem;}
 .wl-hero-halo{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:220px;height:220px;border-radius:50%;
-  background:radial-gradient(circle,rgba(201,168,76,0.14) 0%,transparent 70%);
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.2) 0%,rgba(108,82,227,0.1) 50%,transparent 70%);
   pointer-events:none;
+  animation:wl-halo-pulse 4s ease-in-out infinite;
 }
 .wl-hero-svg{width:100%;height:auto;filter:drop-shadow(0 8px 30px rgba(108,82,227,0.4));}
 .wl-spark{
-  position:absolute;font-size:1.4rem;animation:wl-spark-float 3s ease-in-out infinite;
-  pointer-events:none;filter:drop-shadow(0 0 6px rgba(245,200,66,0.6));
+  position:absolute;font-size:1.8rem;animation:wl-spark-float 3s ease-in-out infinite;
+  pointer-events:none;filter:drop-shadow(0 0 10px rgba(245,200,66,0.8));z-index:5;
 }
-.wl-sp1{top:8%;right:2%;animation-delay:0s;}
-.wl-sp2{top:20%;left:0%;animation-delay:1.1s;}
-.wl-sp3{bottom:10%;right:5%;animation-delay:2s;}
+.wl-sp1{top:5%;right:0%;animation-delay:0s;}
+.wl-sp2{top:18%;left:-2%;animation-delay:1.1s;}
+.wl-sp3{bottom:5%;right:2%;animation-delay:2s;}
+@keyframes wl-halo-pulse{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08);}}
 @keyframes wl-spark-float{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-10px) rotate(8deg);}}
 
 /* Victory tagline */
@@ -1607,105 +1609,274 @@ input:focus,select:focus,textarea:focus{
     <!-- warrior hero SVG -->
     <div class="wl-hero-wrap">
       <div class="wl-hero-halo"></div>
-      <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg" class="wl-hero-svg">
-        <defs>
-          <linearGradient id="bladeGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#93C5FD"/>
-            <stop offset="50%" stop-color="#DBEAFE"/>
-            <stop offset="100%" stop-color="#93C5FD"/>
-          </linearGradient>
-          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        </defs>
-        <!-- Ground shadow -->
-        <ellipse cx="140" cy="305" rx="85" ry="12" fill="rgba(0,0,0,0.3)"/>
-        <!-- Cape -->
-        <path d="M100,148 C76,170 60,225 64,290 L104,276 C98,242 104,205 118,180Z" fill="#8B0000"/>
-        <path d="M180,148 C204,170 220,225 216,290 L176,276 C182,242 176,205 162,180Z" fill="#8B0000"/>
-        <path d="M100,148 C84,158 76,176 72,196" stroke="rgba(255,120,120,0.25)" stroke-width="2" fill="none"/>
-        <!-- Legs -->
-        <rect x="110" y="258" width="22" height="50" rx="9" fill="#2A2560"/>
-        <rect x="148" y="258" width="22" height="50" rx="9" fill="#2A2560"/>
-        <rect x="114" y="261" width="6" height="36" rx="3" fill="rgba(255,255,255,0.1)"/>
-        <rect x="152" y="261" width="6" height="36" rx="3" fill="rgba(255,255,255,0.1)"/>
-        <!-- Boot gold trim -->
-        <rect x="108" y="292" width="26" height="9" rx="4" fill="#C9A84C"/>
-        <rect x="146" y="292" width="26" height="9" rx="4" fill="#C9A84C"/>
-        <!-- Torso armor -->
-        <rect x="102" y="160" width="76" height="106" rx="14" fill="#1E1B4B"/>
-        <!-- Breastplate -->
-        <ellipse cx="140" cy="198" rx="20" ry="26" fill="#C9A84C" opacity=".9"/>
-        <rect x="137" y="184" width="6" height="28" rx="2" fill="#fff" opacity=".85"/>
-        <rect x="130" y="194" width="20" height="6" rx="2" fill="#fff" opacity=".85"/>
-        <!-- Armor detail lines -->
-        <line x1="102" y1="230" x2="178" y2="230" stroke="rgba(201,168,76,0.3)" stroke-width="1.5"/>
-        <!-- Shoulder guards -->
-        <ellipse cx="99" cy="166" rx="21" ry="13" fill="#2A2560"/>
-        <ellipse cx="181" cy="166" rx="21" ry="13" fill="#2A2560"/>
-        <ellipse cx="99" cy="162" rx="14" ry="8" fill="#C9A84C" opacity=".85"/>
-        <ellipse cx="181" cy="162" rx="14" ry="8" fill="#C9A84C" opacity=".85"/>
-        <!-- Belt -->
-        <rect x="102" y="250" width="76" height="14" rx="4" fill="#C9A84C"/>
-        <rect x="133" y="248" width="14" height="18" rx="3" fill="#F5D76E"/>
-        <!-- SHIELD (left) -->
-        <g transform="translate(-4,8) rotate(-12,66,205)">
-          <rect x="48" y="180" width="38" height="48" rx="11" fill="#1E3A8A"/>
-          <rect x="51" y="183" width="32" height="42" rx="9" fill="#2563EB"/>
-          <line x1="67" y1="186" x2="67" y2="220" stroke="#60A5FA" stroke-width="2" opacity=".7"/>
-          <line x1="53" y1="204" x2="81" y2="204" stroke="#60A5FA" stroke-width="2" opacity=".7"/>
-          <circle cx="67" cy="204" r="7" fill="#1D4ED8"/>
-          <circle cx="67" cy="204" r="4" fill="#93C5FD"/>
-        </g>
-        <!-- SWORD (right) with flame -->
-        <g transform="translate(6,0) rotate(22,202,190)">
-          <!-- flame glow -->
-          <ellipse cx="202" cy="140" rx="10" ry="18" fill="rgba(251,191,36,0.3)" filter="url(#glow)"/>
-          <!-- blade -->
-          <rect x="198" y="105" width="8" height="90" rx="3" fill="url(#bladeGrad)"/>
-          <rect x="198" y="105" width="8" height="90" rx="3" fill="rgba(147,197,253,0.2)"/>
-          <!-- crossguard -->
-          <rect x="188" y="190" width="26" height="7" rx="3" fill="#C9A84C"/>
-          <!-- handle -->
-          <rect x="199" y="197" width="6" height="28" rx="3" fill="#78350F"/>
-          <!-- pommel -->
-          <ellipse cx="202" cy="228" rx="8" ry="6" fill="#C9A84C"/>
-          <!-- flames -->
-          <path d="M200,130 C196,118 208,112 204,102 C212,116 211,130 204,133Z" fill="#F59E0B" opacity=".8"/>
-          <path d="M203,122 C199,112 212,108 208,98 C216,112 214,124 207,127Z" fill="#FDE68A" opacity=".55"/>
-          <path d="M198,140 C193,128 206,122 202,113 C210,125 208,138 201,141Z" fill="#F97316" opacity=".6"/>
-        </g>
-        <!-- Neck -->
-        <rect x="131" y="134" width="18" height="28" rx="6" fill="#D4A574"/>
-        <!-- HEAD -->
-        <ellipse cx="140" cy="118" rx="33" ry="34" fill="#D4A574"/>
-        <!-- Helmet shell -->
-        <path d="M108,110 C108,72 172,72 172,110 L172,102 C172,66 108,66 108,102Z" fill="#1E1B4B"/>
-        <path d="M108,102 L108,116 C108,96 172,96 172,116 L172,102Z" fill="#2A2560"/>
-        <!-- Gold helm trim -->
-        <path d="M108,110 Q140,118 172,110" stroke="#C9A84C" stroke-width="2.5" fill="none"/>
-        <!-- Plume -->
-        <path d="M140,70 C135,52 130,37 133,22 C136,32 140,42 144,32 C147,22 148,40 142,70Z" fill="#C9A84C"/>
-        <!-- Face area -->
-        <ellipse cx="140" cy="120" rx="23" ry="21" fill="#E8C99A"/>
-        <!-- Eyes -->
-        <ellipse cx="132" cy="115" rx="5" ry="6" fill="#fff"/>
-        <ellipse cx="148" cy="115" rx="5" ry="6" fill="#fff"/>
-        <ellipse cx="133" cy="116" rx="3" ry="3.5" fill="#2D1B00"/>
-        <ellipse cx="149" cy="116" rx="3" ry="3.5" fill="#2D1B00"/>
-        <ellipse cx="134" cy="115" rx="1" ry="1.5" fill="#fff" opacity=".7"/>
-        <ellipse cx="150" cy="115" rx="1" ry="1.5" fill="#fff" opacity=".7"/>
-        <!-- Smile -->
-        <path d="M133,128 Q140,135 147,128" stroke="#7C5230" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <!-- Cheeks -->
-        <ellipse cx="127" cy="124" rx="6" ry="4" fill="#FF9080" opacity=".28"/>
-        <ellipse cx="153" cy="124" rx="6" ry="4" fill="#FF9080" opacity=".28"/>
-        <!-- Helm cheek guards -->
-        <path d="M117,112 L111,130 C117,135 119,128 121,125Z" fill="#1E1B4B"/>
-        <path d="M163,112 L169,130 C163,135 161,128 159,125Z" fill="#1E1B4B"/>
-        <!-- Sparkling gold accents -->
-        <circle cx="78" cy="238" r="2.5" fill="#C9A84C" opacity=".5"><animate attributeName="opacity" values=".3;.9;.3" dur="2.2s" repeatCount="indefinite"/></circle>
-        <circle cx="207" cy="175" r="3" fill="#6C52E3" opacity=".6"><animate attributeName="opacity" values=".4;1;.4" dur="1.7s" repeatCount="indefinite"/></circle>
-        <circle cx="118" cy="286" r="2" fill="#00C07A" opacity=".5"><animate attributeName="opacity" values=".4;.9;.4" dur="2.5s" repeatCount="indefinite"/></circle>
-      </svg>
+      <svg viewBox="0 0 260 370" xmlns="http://www.w3.org/2000/svg" class="wl-hero-svg">
+  <defs>
+    <linearGradient id="hg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B9DC3"/>
+      <stop offset="100%" stop-color="#4A5580"/>
+    </linearGradient>
+    <linearGradient id="hg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#8B5E00"/>
+    </linearGradient>
+    <linearGradient id="hg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#1E40AF"/>
+    </linearGradient>
+    <linearGradient id="hg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </linearGradient>
+    <linearGradient id="hg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8C99A"/>
+      <stop offset="100%" stop-color="#C4956A"/>
+    </linearGradient>
+    <linearGradient id="bladeLg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#BFDBFE"/>
+      <stop offset="50%" stop-color="#EFF6FF"/>
+      <stop offset="100%" stop-color="#BFDBFE"/>
+    </linearGradient>
+    <radialGradient id="glowRg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(201,168,76,0.5)"/>
+      <stop offset="100%" stop-color="rgba(201,168,76,0)"/>
+    </radialGradient>
+    <filter id="gf1" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gf2" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <!-- GROUND SHADOW -->
+  <ellipse cx="130" cy="358" rx="78" ry="10" fill="rgba(0,0,0,0.35)"/>
+
+  <!-- BACKGROUND GLOW HALO -->
+  <circle cx="130" cy="185" r="95" fill="url(#glowRg)" opacity=".7"/>
+
+  <!-- ═══ CAPE ═══ -->
+  <path d="M88,148 C62,172 46,228 50,305 L92,290 C86,252 92,210 108,183Z" 
+        fill="#7F1D1D" stroke="#991B1B" stroke-width="1"/>
+  <path d="M172,148 C198,172 214,228 210,305 L168,290 C174,252 168,210 152,183Z" 
+        fill="#7F1D1D" stroke="#991B1B" stroke-width="1"/>
+  <!-- Cape inner highlight -->
+  <path d="M88,148 C76,158 68,178 64,200" stroke="rgba(239,68,68,0.25)" stroke-width="2.5" fill="none"/>
+  <path d="M172,148 C184,158 192,178 196,200" stroke="rgba(239,68,68,0.25)" stroke-width="2.5" fill="none"/>
+
+  <!-- ═══ LEGS / GREAVES ═══ -->
+  <!-- Left leg -->
+  <rect x="100" y="265" width="26" height="58" rx="10" fill="#2D3160"/>
+  <rect x="100" y="265" width="26" height="58" rx="10" fill="url(#hg1)" opacity=".8"/>
+  <!-- Left leg highlight -->
+  <rect x="104" y="268" width="7" height="44" rx="4" fill="rgba(255,255,255,0.14)"/>
+  <!-- Left boot gold cuff -->
+  <rect x="98" y="305" width="30" height="10" rx="5" fill="url(#hg2)"/>
+  <rect x="100" y="306" width="26" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+
+  <!-- Right leg -->
+  <rect x="134" y="265" width="26" height="58" rx="10" fill="#2D3160"/>
+  <rect x="134" y="265" width="26" height="58" rx="10" fill="url(#hg1)" opacity=".8"/>
+  <!-- Right leg highlight -->
+  <rect x="138" y="268" width="7" height="44" rx="4" fill="rgba(255,255,255,0.14)"/>
+  <!-- Right boot gold cuff -->
+  <rect x="132" y="305" width="30" height="10" rx="5" fill="url(#hg2)"/>
+  <rect x="134" y="306" width="26" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+
+  <!-- ═══ TORSO ARMOR ═══ -->
+  <rect x="90" y="163" width="80" height="110" rx="16" fill="#1E1B4B"/>
+  <!-- Armor side panels -->
+  <rect x="90" y="175" width="16" height="90" rx="8" fill="#2D2A6B"/>
+  <rect x="154" y="175" width="16" height="90" rx="8" fill="#2D2A6B"/>
+  <!-- Gold chest stripes -->
+  <rect x="88" y="215" width="84" height="5" rx="2" fill="rgba(201,168,76,0.35)"/>
+  <rect x="88" y="228" width="84" height="3" rx="1" fill="rgba(201,168,76,0.2)"/>
+
+  <!-- BREASTPLATE CENTER EMBLEM -->
+  <ellipse cx="130" cy="198" rx="24" ry="30" fill="#C9A84C"/>
+  <ellipse cx="130" cy="196" rx="19" ry="24" fill="#1E1B4B"/>
+  <!-- Cross on breastplate -->
+  <rect x="127" y="180" width="6" height="32" rx="2" fill="#F5C842"/>
+  <rect x="118" y="191" width="24" height="6" rx="2" fill="#F5C842"/>
+  <!-- Cross inner glow -->
+  <rect x="128" y="181" width="4" height="30" rx="1" fill="rgba(255,255,255,0.3)"/>
+  <rect x="119" y="192" width="22" height="4" rx="1" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- ═══ BELT ═══ -->
+  <rect x="90" y="257" width="80" height="16" rx="5" fill="url(#hg2)"/>
+  <!-- Belt highlight -->
+  <rect x="92" y="258" width="76" height="5" rx="2" fill="rgba(255,255,255,0.2)"/>
+  <!-- Belt buckle -->
+  <rect x="121" y="255" width="18" height="20" rx="4" fill="#F5D76E"/>
+  <rect x="123" y="257" width="14" height="16" rx="2" fill="#C9A84C"/>
+  <rect x="128" y="262" width="4" height="6" rx="1" fill="#fff" opacity=".4"/>
+
+  <!-- ═══ SHOULDER PAULDRONS ═══ -->
+  <!-- Left pauldron -->
+  <ellipse cx="88" cy="170" rx="24" ry="15" fill="#2D2A6B"/>
+  <ellipse cx="88" cy="166" rx="17" ry="10" fill="url(#hg2)"/>
+  <ellipse cx="88" cy="164" rx="12" ry="7" fill="#F5C842" opacity=".9"/>
+  <rect x="76" y="168" width="24" height="5" rx="2" fill="#C9A84C"/>
+
+  <!-- Right pauldron -->
+  <ellipse cx="172" cy="170" rx="24" ry="15" fill="#2D2A6B"/>
+  <ellipse cx="172" cy="166" rx="17" ry="10" fill="url(#hg2)"/>
+  <ellipse cx="172" cy="164" rx="12" ry="7" fill="#F5C842" opacity=".9"/>
+  <rect x="160" y="168" width="24" height="5" rx="2" fill="#C9A84C"/>
+
+  <!-- ═══ SHIELD (left arm, angled outward) ═══ -->
+  <g transform="translate(-8,12) rotate(-18,62,215)">
+    <!-- Shield base -->
+    <rect x="40" y="185" width="44" height="56" rx="14" fill="#1E3A8A"/>
+    <!-- Shield face -->
+    <rect x="43" y="188" width="38" height="50" rx="12" fill="#2563EB"/>
+    <!-- Shield gradient overlay -->
+    <rect x="43" y="188" width="38" height="50" rx="12" fill="url(#hg3)" opacity=".8"/>
+    <!-- Shield cross -->
+    <line x1="62" y1="192" x2="62" y2="234" stroke="#93C5FD" stroke-width="2.5" opacity=".85"/>
+    <line x1="47" y1="213" x2="77" y2="213" stroke="#93C5FD" stroke-width="2.5" opacity=".85"/>
+    <!-- Shield center emblem -->
+    <circle cx="62" cy="213" r="8" fill="#1D4ED8"/>
+    <circle cx="62" cy="213" r="5" fill="#93C5FD"/>
+    <circle cx="62" cy="213" r="2.5" fill="#DBEAFE"/>
+    <!-- Shield rim gold -->
+    <rect x="40" y="185" width="44" height="56" rx="14" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
+    <!-- Shield highlight -->
+    <path d="M44,195 Q62,190 80,195" stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none"/>
+  </g>
+
+  <!-- ═══ SWORD (right arm, raised and angled) ═══ -->
+  <g transform="translate(10,-5) rotate(18,195,170)">
+    <!-- Flame glow behind sword -->
+    <ellipse cx="195" cy="120" rx="14" ry="26" fill="rgba(245,158,11,0.3)" filter="url(#gf2)"/>
+    <!-- Sword blade -->
+    <rect x="191" y="85" width="8" height="105" rx="3" fill="url(#bladeLg)"/>
+    <!-- Blade edge accent -->
+    <rect x="191" y="85" width="3" height="105" rx="1" fill="rgba(147,197,253,0.4)"/>
+    <!-- Blade tip -->
+    <path d="M191,85 L195,72 L199,85Z" fill="url(#bladeLg)"/>
+    <!-- Crossguard -->
+    <rect x="180" y="185" width="30" height="8" rx="4" fill="url(#hg2)"/>
+    <ellipse cx="180" cy="189" rx="5" ry="5" fill="#C9A84C"/>
+    <ellipse cx="210" cy="189" rx="5" ry="5" fill="#C9A84C"/>
+    <!-- Handle -->
+    <rect x="192" y="193" width="6" height="30" rx="3" fill="url(#hg4)"/>
+    <!-- Handle wrap lines -->
+    <line x1="191" y1="199" x2="199" y2="199" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    <line x1="191" y1="207" x2="199" y2="207" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    <line x1="191" y1="215" x2="199" y2="215" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    <!-- Pommel -->
+    <ellipse cx="195" cy="226" rx="9" ry="7" fill="url(#hg2)"/>
+    <ellipse cx="195" cy="225" rx="5" ry="4" fill="#F5D76E"/>
+    <!-- FLAMES on sword -->
+    <path d="M193,130 C188,115 202,108 197,96 C207,110 205,126 198,130Z" fill="#F59E0B" opacity=".85"/>
+    <path d="M197,120 C193,108 206,103 201,93 C210,107 208,120 202,124Z" fill="#FBBF24" opacity=".7"/>
+    <path d="M190,142 C185,128 200,122 195,110 C204,125 202,140 196,144Z" fill="#F97316" opacity=".65"/>
+    <path d="M194,112 C191,104 202,101 199,93 C207,104 205,114 199,117Z" fill="#FDE68A" opacity=".5"/>
+  </g>
+
+  <!-- ═══ NECK ═══ -->
+  <rect x="121" y="138" width="18" height="30" rx="7" fill="url(#hg5)"/>
+
+  <!-- ═══ HEAD ═══ -->
+  <!-- Head shape -->
+  <ellipse cx="130" cy="116" rx="36" ry="38" fill="url(#hg5)"/>
+  <!-- Ear left -->
+  <ellipse cx="94" cy="118" rx="7" ry="9" fill="#D4A574"/>
+  <ellipse cx="94" cy="118" rx="4" ry="6" fill="#C4956A"/>
+  <!-- Ear right -->
+  <ellipse cx="166" cy="118" rx="7" ry="9" fill="#D4A574"/>
+  <ellipse cx="166" cy="118" rx="4" ry="6" fill="#C4956A"/>
+
+  <!-- ═══ HELMET ═══ -->
+  <!-- Helmet dome -->
+  <path d="M94,104 C94,66 166,66 166,104 L164,96 C164,60 96,60 96,96Z" fill="#1E1B4B"/>
+  <!-- Helmet body down to ears -->
+  <path d="M94,104 L94,120 C94,100 166,100 166,120 L166,104 C166,86 94,86 94,104Z" fill="#2D2A6B"/>
+  <!-- Gold helmet rim -->
+  <path d="M94,106 Q130,114 166,106" stroke="#C9A84C" stroke-width="3" fill="none"/>
+  <!-- Helmet side guards (cheek pieces) -->
+  <path d="M96,108 L90,128 C96,134 99,126 102,122Z" fill="#1E1B4B"/>
+  <path d="M164,108 L170,128 C164,134 161,126 158,122Z" fill="#1E1B4B"/>
+  <!-- Gold trim on cheek guards -->
+  <path d="M96,108 L90,128" stroke="#C9A84C" stroke-width="1.5" opacity=".6"/>
+  <path d="M164,108 L170,128" stroke="#C9A84C" stroke-width="1.5" opacity=".6"/>
+  <!-- Forehead band -->
+  <path d="M100,98 Q130,92 160,98" stroke="#C9A84C" stroke-width="2" fill="none" opacity=".7"/>
+
+  <!-- CREST / PLUME (tall dramatic) -->
+  <path d="M130,64 C124,44 118,28 122,12 C126,24 130,36 134,24 C138,12 140,30 132,64Z" 
+        fill="url(#hg2)"/>
+  <path d="M130,64 C127,50 124,36 126,20" stroke="rgba(255,220,100,0.5)" stroke-width="2" fill="none"/>
+  <!-- Plume highlight -->
+  <path d="M132,62 C129,47 127,34 129,18" stroke="#F5D76E" stroke-width="1" fill="none" opacity=".4"/>
+
+  <!-- ═══ FACE ═══ -->
+  <!-- Face base (framed by helmet) -->
+  <ellipse cx="130" cy="118" rx="26" ry="24" fill="#E8C99A"/>
+  <ellipse cx="130" cy="120" rx="23" ry="21" fill="url(#hg5)"/>
+
+  <!-- Eyebrows (strong, heroic) -->
+  <path d="M116,108 Q122,104 128,108" stroke="#7C5230" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M132,108 Q138,104 144,108" stroke="#7C5230" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Eyes (big, expressive) -->
+  <!-- Left eye white -->
+  <ellipse cx="121" cy="116" rx="7" ry="8" fill="#fff"/>
+  <!-- Right eye white -->
+  <ellipse cx="139" cy="116" rx="7" ry="8" fill="#fff"/>
+  <!-- Left iris -->
+  <ellipse cx="122" cy="117" rx="4.5" ry="5.5" fill="#3B2000"/>
+  <!-- Right iris -->
+  <ellipse cx="140" cy="117" rx="4.5" ry="5.5" fill="#3B2000"/>
+  <!-- Iris color -->
+  <ellipse cx="122" cy="117" rx="3" ry="3.5" fill="#6B3A00"/>
+  <ellipse cx="140" cy="117" rx="3" ry="3.5" fill="#6B3A00"/>
+  <!-- Pupils -->
+  <ellipse cx="123" cy="117" rx="1.5" ry="2" fill="#111"/>
+  <ellipse cx="141" cy="117" rx="1.5" ry="2" fill="#111"/>
+  <!-- Eye highlights (sparkle) -->
+  <circle cx="124" cy="115" r="1.5" fill="#fff" opacity=".9"/>
+  <circle cx="142" cy="115" r="1.5" fill="#fff" opacity=".9"/>
+  <!-- Eye outline -->
+  <ellipse cx="121" cy="116" rx="7" ry="8" fill="none" stroke="#8B5E3C" stroke-width="1"/>
+  <ellipse cx="139" cy="116" rx="7" ry="8" fill="none" stroke="#8B5E3C" stroke-width="1"/>
+
+  <!-- Nose (cute) -->
+  <path d="M128,125 Q130,128 132,125" stroke="#A06B3C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- SMILE (big, heroic grin) -->
+  <path d="M118,131 Q130,140 142,131" stroke="#7C4A1A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Teeth hint -->
+  <path d="M121,133 Q130,139 139,133" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".7"/>
+
+  <!-- Rosy cheeks -->
+  <ellipse cx="111" cy="126" rx="8" ry="5" fill="#FF9080" opacity=".32"/>
+  <ellipse cx="149" cy="126" rx="8" ry="5" fill="#FF9080" opacity=".32"/>
+
+  <!-- ═══ ANIMATED SPARKLE DOTS ═══ -->
+  <circle cx="64" cy="244" r="3.5" fill="#C9A84C" opacity=".5">
+    <animate attributeName="opacity" values=".3;1;.3" dur="2.3s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="3;4.5;3" dur="2.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="208" cy="172" r="4" fill="#6C52E3" opacity=".6">
+    <animate attributeName="opacity" values=".4;1;.4" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="112" cy="292" r="2.5" fill="#00C07A" opacity=".5">
+    <animate attributeName="opacity" values=".3;.9;.3" dur="2.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="200" cy="88" r="3" fill="#F5C842" opacity=".6">
+    <animate attributeName="opacity" values=".4;1;.4" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;4;2" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Star sparkles near sword -->
+  <g opacity=".7" filter="url(#gf1)">
+    <path d="M215,95 L217,90 L219,95 L224,97 L219,99 L217,104 L215,99 L210,97Z" fill="#FDE68A" opacity=".8">
+      <animate attributeName="opacity" values=".5;1;.5" dur="1.2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>
+
       <div class="wl-spark wl-sp1">⚡</div>
       <div class="wl-spark wl-sp2">✨</div>
       <div class="wl-spark wl-sp3">🔥</div>
