@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work It Out, Walk It Out | Ages 8&ndash;12 | Philippians Week 3 | The Gathering CTX</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap');
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --dark: #0f0a2e; --card: #1a1445; --card2: #1d1750; --gold: #f5c842; --teal: #3ecfcf; --green: #4ecb71; --purple: #a78bfa; --muted: rgba(255,255,255,0.55); --rule: rgba(255,255,255,0.1); }
+    html { font-size: 16px; }
+    body { font-family: 'Nunito', sans-serif; background: var(--dark); color: #fff; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: rgba(15,10,46,0.97); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 10; }
+    .nav-logo { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px; color: var(--gold); text-decoration: none; }
+    .nav-back { font-size: 12px; font-weight: 700; color: var(--muted); text-decoration: none; }
+    .hero { text-align: center; padding: 40px 20px 28px; max-width: 620px; margin: 0 auto; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--purple); color: #fff; font-size: 11px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px; }
+    .hero h1 { font-family: 'Fredoka One', cursive; font-size: clamp(32px, 9vw, 54px); color: #fff; line-height: 1.05; margin-bottom: 6px; }
+    .hero h1 span { color: var(--gold); }
+    .hero .sub { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    .direct-address { background: var(--card2); border: 1px solid var(--purple); border-radius: 14px; padding: 16px 20px; font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 10px; }
+    .direct-address span { color: var(--gold); }
+    .points-banner { background: rgba(167,139,250,0.12); border: 1px solid var(--purple); border-radius: 12px; padding: 12px 18px; display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 16px 32px; max-width: 580px; margin-left: auto; margin-right: auto; }
+    .points-banner span { font-size: 13px; font-weight: 700; color: var(--purple); }
+    .content { max-width: 620px; margin: 0 auto; padding: 0 16px 60px; }
+    .day-card { background: var(--card); border: 1px solid var(--rule); border-radius: 20px; margin-bottom: 20px; overflow: hidden; }
+    .day-header { display: flex; align-items: center; gap: 14px; padding: 18px 20px 14px; border-bottom: 1px solid var(--rule); }
+    .day-num { width: 44px; height: 44px; border-radius: 10px; background: var(--purple); color: #fff; font-family: 'Fredoka One', cursive; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .day-info { flex: 1; }
+    .day-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .day-title { font-family: 'Fredoka One', cursive; font-size: 20px; color: #fff; line-height: 1.2; }
+    .day-read { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
+    .day-body { padding: 18px 20px; }
+    .verse-block { background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 14px 16px; margin-bottom: 16px; }
+    .verse-block .vb-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .verse-block p { font-size: 14px; font-style: italic; line-height: 1.65; color: rgba(255,255,255,0.88); }
+    .verse-block .vb-ref { font-size: 11px; font-weight: 700; color: var(--gold); margin-top: 8px; }
+    .body-text { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.82); margin-bottom: 14px; }
+    .body-text strong { color: var(--gold); font-weight: 800; }
+    .greek-box { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.3); border-radius: 12px; padding: 14px 16px; margin: 16px 0; }
+    .greek-box .gb-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--purple); margin-bottom: 8px; }
+    .greek-box .gb-word { font-size: 22px; font-style: italic; color: var(--purple); margin-bottom: 2px; font-family: serif; }
+    .greek-box .gb-trans { font-size: 12px; font-weight: 700; color: rgba(167,139,250,0.7); margin-bottom: 8px; letter-spacing: 0.5px; }
+    .greek-box .gb-def { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.8); }
+    .callout { background: rgba(245,200,66,0.07); border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 16px 0; font-size: 15px; font-weight: 700; font-style: italic; color: rgba(255,255,255,0.88); line-height: 1.6; }
+    .think-section { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+    .think-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .think-section ol { list-style: none; padding: 0; counter-reset: think; }
+    .think-section ol li { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.8); padding: 8px 0; border-bottom: 1px solid var(--rule); display: flex; gap: 10px; counter-increment: think; }
+    .think-section ol li:last-child { border-bottom: none; }
+    .think-section ol li::before { content: counter(think); font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--teal); flex-shrink: 0; width: 20px; padding-top: 1px; }
+    .declaration { background: linear-gradient(135deg, #1e3a6e, #122550); border: 1px solid rgba(62,207,207,0.4); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+    .decl-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .declaration p { font-size: 15px; font-weight: 700; line-height: 1.75; color: #fff; }
+    .declaration .final-sig { font-size: 14px; font-weight: 900; color: var(--gold); margin-top: 10px; }
+    footer { border-top: 1px solid var(--rule); padding: 30px 20px; text-align: center; }
+    footer .logo { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--gold); margin-bottom: 6px; }
+    footer p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="https://gatheringctx.org" class="nav-logo">&#9889; thegathering</a>
+  <a href="https://gatheringctx.org/kids" class="nav-back">&#8592; Kids Zone</a>
+</nav>
+<div class="hero">
+  <div class="badge">&#128517; Ages 8&ndash;12 &middot; Philippians Week 3</div>
+  <h1>Work It Out. <span>Walk It Out.</span></h1>
+  <p class="sub">5 days in Philippians 2:12&ndash;30 &middot; Just for you</p>
+  <div class="direct-address">
+    Hey. This one is written <span>just for you.</span> Last week God chose down. The most powerful Being in the cosmos went all the way to a cross. This week Paul brings it off the stage and into your Monday. Two men lived this. Watch what happened. Then ask yourself which one you are becoming.
+  </div>
+</div>
+<div class="points-banner">
+  <span>&#127381;</span>
+  <span>Complete all 5 days to earn +50 warrior points!</span>
+  <span>&#127381;</span>
+</div>
+<div class="content">
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">1</div>
+      <div class="day-info">
+        <p class="day-label">Day 1</p>
+        <p class="day-title">You Are Not the Power Source</p>
+        <p class="day-read">Read: Philippians 2:12&ndash;13</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;Work out your own salvation with fear and trembling, for it is God who works in you, both to will and to work for his good pleasure.&rdquo;</p>
+        <p class="vb-ref">Philippians 2:12&ndash;13, ESV</p>
+      </div>
+      <p class="body-text">Do not misread this verse. Paul is not telling you to earn your salvation. The phrase is work <em>out</em>, not work <em>for</em>. There is a universe of difference between those two words. Picture a metalsmith. The ore is already ore. He does not create it. He works it until it becomes what it was always meant to be. That is your assignment. The salvation God deposited in you is real. Now cooperate with bringing it to full expression.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word</p>
+        <p class="gb-word">katergazomai (&#954;&#945;&#964;&#949;&#961;&#947;&#940;&#950;&#959;&#956;&#945;&#953;)</p>
+        <p class="gb-trans">to work out, bring to full effect, accomplish thoroughly</p>
+        <p class="gb-def">Used for a craftsman working raw material into its finished form. The material is already there. The work is bringing it to completion. You are not producing something new. You are revealing what God already placed in you. And then the reason you can actually do it: energe&#333; (to energize from within). God is not watching from a distance. He is activating your will. He supplies both the wanting AND the doing.</p>
+      </div>
+
+      <p class="body-text">Passive Christianity says wait for God to do everything. Legalism says do everything yourself and hope God approves. Paul corrects both in one sentence. You are not the energy source. But you are the worker. The power is His. The cooperation is yours.</p>
+
+      <div class="callout">You are not manufacturing what God has to supply. You are cooperating with what He is already doing. That is the difference between striving and walking.</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Where in your life have you been waiting for motivation before cooperating with God, when the power was already available?</li>
+          <li>What is the difference in posture between striving (producing the fuel yourself) and walking (cooperating with what God supplies)?</li>
+          <li>Ask God for the want-to today, not just the ability. Watch what happens.</li>
+        </ol>
+      </div>
+      <div class="declaration">
+        <p class="decl-label">&#9889; Say It</p>
+        <p>God is working in me. I am working it out. I am not the fuel source. He is. I cooperate with what He is already doing inside me.</p>
+        <p class="final-sig">I walk with victory, not to it, in Jesus' name. &#9889;</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">2</div>
+      <div class="day-info">
+        <p class="day-label">Day 2</p>
+        <p class="day-title">The Grumble Is a Lie</p>
+        <p class="day-read">Read: Philippians 2:14&ndash;16</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;Do all things without grumbling or disputing, that you may shine as lights in the world.&rdquo;</p>
+        <p class="vb-ref">Philippians 2:14&ndash;15, ESV</p>
+      </div>
+      <p class="body-text">Paul's word for grumbling is gongusmoi: the exact word the Greek Old Testament uses for Israel in the wilderness. These were people who watched God split an entire sea and still complained when the road got hard. Their grumbling did not keep them out of Egypt. It kept them out of the Promised Land. They complained themselves out of their inheritance.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word</p>
+        <p class="gb-word">gongusmoi (&#947;&#959;&#947;&#947;&#965;&#963;&#956;&#959;&#943;)</p>
+        <p class="gb-trans">grumbling, murmuring, secret complaining</p>
+        <p class="gb-def">The same word the Septuagint (Greek Old Testament) uses for Israel's wilderness murmuring. Paul is not warning against being slightly annoyed. He is invoking an entire national tragedy. A generation that had supernatural provision and still died in the desert because of what came out of their mouths. Every grumble is a theological statement. It says God is not enough, His plan is failing, the present difficulty is the final word.</p>
+      </div>
+
+      <p class="body-text">Paul calls you to be asteres: actual stars. Stars burn in the dark. They do not wait for the darkness to leave before they shine. They burn in the middle of the dark and the dark cannot put them out. A black hole does the opposite: it pulls everything around it into the gravity of its complaint. You are at an age where you have more influence on the atmosphere of your classroom and friend group than you realize. Star or black hole. That is actually the daily choice.</p>
+
+      <div class="callout">Every complaint is a theological statement. It says God is not enough. Is that true?</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>What is the most persistent thing you complain about right now? What are you actually saying about God with that complaint?</li>
+          <li>Who in your life functions like a star, burning in hard circumstances without waiting for them to change?</li>
+          <li>What would it look like in your friend group this week to be the one who brings light instead of pulling people into complaint?</li>
+        </ol>
+      </div>
+      <div class="declaration">
+        <p class="decl-label">&#9889; Say It</p>
+        <p>I do not grumble about what I cannot control. I know who controls all things. I am a star. I burn in the dark. The dark cannot put me out.</p>
+        <p class="final-sig">I walk with victory, not to it, in Jesus' name. &#9889;</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">3</div>
+      <div class="day-info">
+        <p class="day-label">Day 3</p>
+        <p class="day-title">Poured Out and Glad</p>
+        <p class="day-read">Read: Philippians 2:17&ndash;18</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;Even if I am to be poured out as a drink offering upon the sacrifice and offering of your faith, I am glad and rejoice with you all.&rdquo;</p>
+        <p class="vb-ref">Philippians 2:17, ESV</p>
+      </div>
+      <p class="body-text">In Jewish temple worship the nesek was a libation of wine poured out over the main burnt offering. Not the central sacrifice. Secondary. An addition poured on top. Paul looks at his imprisonment, his possible execution, his entire role in the Philippian church, and says: I am the pour-over. Your faith is the main offering. I am supplemental to your story. And then the word that should stop everything: glad. Not resigned. Not performing. Glad.</p>
+      <p class="body-text">Paul planted this church. He has every right to make himself the center of it. Instead he makes himself secondary to their walk with God. This is not grim martyrdom. It is the fruit of finding something worth more than your own narrative. At your age, a lot of energy goes into being noticed, being credited, being seen. Paul shows you what it looks like when someone finally loosens their grip on all of that.</p>
+
+      <div class="callout">The poured-out life is not misery. It is the freedom of a person who holds nothing more tightly than they hold Christ.</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Is there something you did recently where you wanted credit but did not get it? How did that feel?</li>
+          <li>What is the difference between doing something for recognition and doing something because it is worth doing?</li>
+          <li>Where in your life could you make yourself secondary, be the drink offering, for someone else's flourishing?</li>
+        </ol>
+      </div>
+      <div class="declaration">
+        <p class="decl-label">&#9889; Say It</p>
+        <p>I loosen my grip on my own importance. I am willing to be poured out for others. The gladness is real because what I found is worth more than my own story.</p>
+        <p class="final-sig">I walk with victory, not to it, in Jesus' name. &#9889;</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">4</div>
+      <div class="day-info">
+        <p class="day-label">Day 4</p>
+        <p class="day-title">Would Your Name Come Up?</p>
+        <p class="day-read">Read: Philippians 2:19&ndash;24</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;For I have no one like him, who will be genuinely concerned for your welfare. For they all seek their own interests, not those of Jesus Christ.&rdquo;</p>
+        <p class="vb-ref">Philippians 2:20&ndash;21, ESV</p>
+      </div>
+      <p class="body-text">Paul invents a word for Timothy that appears nowhere else in all of Scripture. He coined it for this one person and no one else.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word</p>
+        <p class="gb-word">isopsuchos (&#7984;&#963;&#972;&#968;&#965;&#967;&#959;&#962;)</p>
+        <p class="gb-trans">equal-souled, like-minded, of the same spirit</p>
+        <p class="gb-def">A compound from isos (equal) and psyche (soul). Paul looked at every person available to him in Rome, the entire network of the early church, and said Timothy was the only one equal-souled with him. Not just intellectually aligned. Oriented the same direction at the level of the soul. They all seek their own interests. They all. Not some. Not most. All. In the church. In Rome. Everyone. Except one man.</p>
+      </div>
+
+      <p class="body-text">Here is the honest question: if Paul needed someone to send right now, someone he could trust to genuinely care for people, to give without agenda, to serve without positioning, would your name come up? Not your gifts. Not your potential. Your proven character. Timothy's greatness is his dokime: proven worth. The kind of quality you only find under pressure. Not what you claim. What comes out when things get hard.</p>
+
+      <div class="callout">Everyone in Rome was seeking their own. Timothy was seeking yours. That is the gospel with a face and a name.</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>If someone had to describe your character to a stranger the way Paul describes Timothy, what words would they use?</li>
+          <li>Where do you still tend to seek your own interests over the interests of Jesus Christ and others?</li>
+          <li>What would you need to start practicing now to build the kind of proven character Timothy had?</li>
+        </ol>
+      </div>
+      <div class="declaration">
+        <p class="decl-label">&#9889; Say It</p>
+        <p>I am becoming someone whose character can be trusted. I genuinely care for others, not to be seen, but because it is who I am in Christ. My name is worth sending.</p>
+        <p class="final-sig">I walk with victory, not to it, in Jesus' name. &#9889;</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">5</div>
+      <div class="day-info">
+        <p class="day-label">Day 5</p>
+        <p class="day-title">Push All the Chips In</p>
+        <p class="day-read">Read: Philippians 2:25&ndash;30</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="verse-block">
+        <p class="vb-label">&#128214; Read This</p>
+        <p>&ldquo;He nearly died for the work of Christ, risking his life to complete what was lacking in your service to me.&rdquo;</p>
+        <p class="vb-ref">Philippians 2:30, ESV</p>
+      </div>
+      <p class="body-text">The word risking his life is paraboleuomai. It appears nowhere else in the entire New Testament. Outside Scripture it described gambling, placing a dangerous bet, pushing all your chips to the center of the table. Epaphroditus did not serve faithfully from a safe distance. He pushed all the chips in. He crossed a sea, served a prisoner, nearly died, recovered, and his first thought upon recovering was that his friends back home were worried about him. Nearly dead, thinking about someone else's anxiety.</p>
+
+      <div class="greek-box">
+        <p class="gb-label">&#128218; Greek Word</p>
+        <p class="gb-word">paraboleuomai (&#960;&#945;&#961;&#945;&#946;&#959;&#955;&#949;&#973;&#959;&#956;&#945;&#953;)</p>
+        <p class="gb-trans">to risk, to gamble with, to expose to danger</p>
+        <p class="gb-def">This one word gave rise to a movement. In the third and fourth centuries, a group of Christians called the parabolani took their name from this verse. During plague years that killed five thousand people per day in Rome, while the empire fled, the parabolani went door to door. They nursed the sick. They held the hands of the dying. They buried the bodies everyone else left in the streets. When the plague ended, the Roman world looked at the church and said: your God must be real. Because nothing else explains what you just did.</p>
+      </div>
+
+      <p class="body-text">God does not forget the ones who push all the chips in. Epaphroditus's name is in a letter that has outlasted the Roman Empire. Two thousand years later we are still talking about him. One ordinary person who went all in. What would your school, your friend group, your family look like if you became someone who ran toward the hard things instead of away from them?</p>
+
+      <div class="callout">The parabolani did not get famous. They got faithful. And the empire never recovered from the witness.</div>
+
+      <div class="think-section">
+        <p class="think-label">&#129300; Think About It</p>
+        <ol>
+          <li>Where is God calling you to close a distance, a relationship, a risk, an act of service, that would actually cost you something real?</li>
+          <li>What is keeping you watching from the safe edge instead of stepping in?</li>
+          <li>Make one specific move toward closing that distance before next Sunday. Not a principle. One action.</li>
+        </ol>
+      </div>
+      <div class="declaration">
+        <p class="decl-label">&#9889; Say It</p>
+        <p>I close the distance. I do not watch from the sidelines. I push all the chips in for the work of Christ. God does not forget the ones who go all in. And I am going all in.</p>
+        <p class="final-sig">I walk with victory, not to it, in Jesus' name. &#9889;</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+<footer>
+  <div class="logo">&#9889; thegathering</div>
+  <p>Sundays at 5:00 PM &middot; Cleburne Conference Center<br><a href="https://gatheringctx.org" style="color:inherit">gatheringctx.org</a></p>
+</footer>
+</body>
+</html>
