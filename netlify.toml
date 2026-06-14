@@ -105,12 +105,12 @@
 # Kids Zone app
 [[redirects]]
   from = "/kids-app"
-  to = "https://gathering-kids-zone.netlify.app"
+  to = "https://kids.gatheringctx.org"
   status = 301
 
 [[redirects]]
   from = "/kids-app/*"
-  to = "https://gathering-kids-zone.netlify.app/:splat"
+  to = "https://kids.gatheringctx.org/:splat"
   status = 301
   force = true
 
