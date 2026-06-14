@@ -2966,7 +2966,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-14-v2';
+  const APP_VER = '2026-06-14-v3';
   if(localStorage.getItem('kgz_app_ver') !== APP_VER){
     ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
     localStorage.setItem('kgz_app_ver', APP_VER);
