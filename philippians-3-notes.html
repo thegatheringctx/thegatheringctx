@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Work It Out, Walk It Out | Philippians Week 3 | The Gathering CTX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --page-bg:  #EEE8DC;
+  --nav-bg:   #F6F2EC;
+  --card-bg:  #F4F0E6;
+  --burgundy: #6B1C1C;
+  --gold:     #B8852A;
+  --gold-it:  #C49030;
+  --body:     #2A1A10;
+  --soft:     #4A3828;
+  --muted:    #8C7A68;
+  --rule:     #D4CAB8;
+  --num:      #DDD5C4;
+}
+html { font-size: 18px; scroll-behavior: smooth; }
+body { font-family: 'EB Garamond', Georgia, serif; background: var(--page-bg); color: var(--body); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+.site-nav { background: var(--nav-bg); border-bottom: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; position: sticky; top: 0; z-index: 100; }
+.nav-logo { text-decoration: none; display: flex; align-items: baseline; gap: 1px; }
+.nav-logo .the { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--gold); position: relative; top: -4px; margin-right: 1px; }
+.nav-logo .gathering { font-family: 'EB Garamond', Georgia, serif; font-size: 20px; color: var(--body); }
+.nav-back { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.nav-back:hover { color: var(--body); }
+
+/* ARTICLE */
+.article { max-width: 720px; margin: 0 auto; padding: 0 28px 100px; }
+
+/* HERO */
+.hero { text-align: center; padding: 72px 0 60px; border-bottom: 1px solid var(--rule); margin-bottom: 60px; }
+.series-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(44px, 8vw, 72px); font-weight: 600; line-height: 1.08; color: var(--burgundy); margin-bottom: 10px; letter-spacing: -0.5px; }
+.hero-sub { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 22px; color: var(--gold-it); margin-bottom: 20px; }
+.hero-scripture { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 18px; color: var(--gold-it); margin-bottom: 12px; }
+.hero-date { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+
+/* SECTION LABELS */
+.section-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; margin-top: 60px; display: block; }
+.section-label:first-child { margin-top: 0; }
+
+/* KEY TRUTH */
+.key-truth { border-left: 3px solid var(--burgundy); padding: 0 0 0 24px; margin-bottom: 52px; }
+.key-truth p { font-size: 20px; line-height: 1.85; color: var(--soft); margin-bottom: 16px; }
+.key-truth p:last-child { margin-bottom: 0; }
+
+/* PRIMARY SCRIPTURE */
+.primary-scripture { border-left: 3px solid var(--gold); background: var(--card-bg); padding: 28px 32px; margin-bottom: 52px; }
+.primary-scripture blockquote { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.7; color: var(--gold-it); margin-bottom: 14px; }
+.primary-scripture cite { font-family: 'Inter', sans-serif; font-size: 11px; font-style: normal; font-weight: 500; letter-spacing: 1px; color: var(--muted); }
+
+/* CONTEXT */
+.context { margin-bottom: 52px; }
+.context p { font-size: 18px; line-height: 1.9; color: var(--soft); margin-bottom: 18px; }
+.context p:last-child { margin-bottom: 0; }
+
+/* IDENTITY DECLARATIONS */
+.identity-list { margin-bottom: 52px; list-style: none; }
+.identity-list li { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.identity-list li:last-child { border-bottom: none; }
+.check { color: var(--gold); font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.identity-text { font-size: 18px; line-height: 1.7; color: var(--soft); flex: 1; }
+.identity-ref { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: 0.5px; margin-top: 2px; display: block; }
+
+/* MOVEMENTS */
+.movement { margin-bottom: 60px; padding-top: 52px; border-top: 1px solid var(--rule); }
+.movement:first-of-type { border-top: none; padding-top: 0; }
+.movement-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.movement-tag { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.movement-ref { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 1px; color: var(--muted); }
+.movement-theme { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 18px; color: var(--muted); margin-bottom: 24px; }
+.movement-num { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 96px; font-weight: 700; line-height: 1; color: var(--num); margin-bottom: -20px; letter-spacing: -4px; }
+.movement-heading { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 600; line-height: 1.25; color: var(--burgundy); margin-bottom: 24px; }
+
+/* SCRIPTURE QUOTE */
+.scripture-quote { border-left: 2px solid var(--rule); padding: 0 0 0 22px; margin-bottom: 24px; }
+.scripture-quote blockquote { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 18px; line-height: 1.75; color: var(--soft); margin-bottom: 10px; }
+.scripture-quote cite { font-family: 'Inter', sans-serif; font-size: 11px; font-style: normal; font-weight: 500; letter-spacing: 1px; color: var(--muted); }
+
+/* BODY */
+.body-text p { font-size: 18px; line-height: 1.9; color: var(--soft); margin-bottom: 18px; }
+.body-text p:last-child { margin-bottom: 0; }
+
+/* GREEK STUDY */
+.greek-study { background: var(--card-bg); border-left: 3px solid var(--gold); padding: 18px 22px; margin: 20px 0; font-size: 17px; line-height: 1.85; color: var(--soft); }
+.gk-label { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+.gk-word { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 20px; color: var(--body); font-weight: 500; }
+.gk-trans { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--muted); }
+
+/* PULL QUOTE */
+.pull-quote { margin: 32px 0; padding: 0 32px; }
+.pull-quote p { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 22px; line-height: 1.5; color: var(--burgundy); }
+
+/* KEY QUOTES */
+.quotes-list { margin-bottom: 52px; }
+.quote-item { padding: 20px 0; border-bottom: 1px solid var(--rule); }
+.quote-item:last-child { border-bottom: none; }
+.quote-item p { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.5; color: var(--burgundy); }
+
+/* THIS WEEK */
+.this-week { margin-bottom: 52px; }
+.week-item { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+.week-item:last-child { border-bottom: none; }
+.week-num { font-family: 'Playfair Display', Georgia, serif; font-size: 32px; font-weight: 700; color: var(--num); flex-shrink: 0; line-height: 1; margin-top: 4px; min-width: 28px; }
+.week-text { font-size: 18px; line-height: 1.8; color: var(--soft); }
+.week-text strong { color: var(--body); font-weight: 500; }
+
+/* DECLARATION */
+.declaration { background: var(--burgundy); padding: 36px; margin-bottom: 52px; }
+.declaration p { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; line-height: 1.85; color: #F6F2EC; margin-bottom: 12px; }
+.declaration p:last-child { margin-bottom: 0; font-style: italic; }
+
+/* SCRIPTURE REFS */
+.scripture-refs { margin-bottom: 52px; }
+.scripture-refs p { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.9; color: var(--soft); }
+.scripture-refs strong { color: var(--body); }
+
+/* REFLECTION QUESTIONS */
+.reflection-list { margin-bottom: 52px; counter-reset: reflect; }
+.reflect-item { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--rule); counter-increment: reflect; }
+.reflect-item:last-child { border-bottom: none; }
+.reflect-item::before { content: counter(reflect); font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 600; color: var(--num); flex-shrink: 0; line-height: 1.2; min-width: 24px; }
+.reflect-item p { font-size: 17px; line-height: 1.8; color: var(--soft); }
+
+/* FOOTER */
+.site-footer { border-top: 1px solid var(--rule); padding: 48px 40px; text-align: center; margin-top: 80px; }
+.footer-logo { font-family: 'EB Garamond', Georgia, serif; font-size: 22px; color: var(--body); margin-bottom: 12px; }
+.footer-logo .the { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--gold); position: relative; top: -3px; margin-right: 2px; }
+.site-footer p { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); line-height: 1.7; }
+.site-footer a { color: var(--muted); text-decoration: none; }
+
+@media print {
+  .site-nav { position: static; }
+  .article { padding: 0 0 40px; }
+  .movement { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="https://gatheringctx.org" class="nav-logo"><span class="the">the</span><span class="gathering">gathering</span></a>
+  <a href="https://gatheringctx.org/sermons" class="nav-back">&#8592; All Messages</a>
+</nav>
+
+<div class="article">
+
+  <header class="hero">
+    <p class="series-label">Philippians &middot; Week 3 &middot; June 15, 2026</p>
+    <h1 class="hero-title">Work It Out, Walk It Out</h1>
+    <p class="hero-sub">The Gospel Moves from Theology to Monday Morning</p>
+    <p class="hero-scripture">Philippians 2:12&ndash;30</p>
+    <p class="hero-date">The Gathering CTX &middot; Joy Unshakeable Series</p>
+  </header>
+
+
+  <!-- KEY TRUTH -->
+  <span class="section-label">Key Truth</span>
+  <div class="key-truth">
+    <p>Paul has just given us the Christ Hymn. The God of the universe stepped off His throne, took the form of a servant, went all the way to a cross. Willingly. And God exalted Him to the highest place because of it.</p>
+    <p>Paul does not let that theology hang in the air. He brings it down. Down into Monday morning. Down into the kitchen. Down into how you treat the person who irritates you at work and the way you show up when showing up is the last thing you feel like doing.</p>
+    <p>This week Paul gives us the principle and then two men who lived it. Timothy and Epaphroditus. One who genuinely cared for others in a room full of self-seekers. One who gambled his life for a work he believed in. The question is not which one you admire. The question is which one you are becoming.</p>
+  </div>
+
+
+  <!-- PRIMARY SCRIPTURE -->
+  <span class="section-label">Primary Scripture</span>
+  <div class="primary-scripture">
+    <blockquote>&ldquo;Work out your own salvation with fear and trembling, for it is God who works in you, both to will and to work for his good pleasure.&rdquo;</blockquote>
+    <cite>Philippians 2:12&ndash;13 &middot; ESV</cite>
+  </div>
+
+
+  <!-- CONTEXT -->
+  <span class="section-label">Context</span>
+  <div class="context">
+    <p><strong>The Wilderness Generation.</strong> When Paul says do all things without grumbling or disputing, he uses the Greek word <em>gongusmoi</em> &mdash; the exact word the Septuagint uses for Israel&rsquo;s murmuring in the wilderness. The Exodus generation. The people who watched the Red Sea split, ate manna from the sky, drank water from a rock, and still complained every time the road got hard. That generation never saw the Promised Land. Not because of Egypt. Because of the grumbling.</p>
+    <p><strong>The Fellow Soldier.</strong> In Roman culture, calling a man your <em>sustratiotes</em> was the highest honor you could pay him. Not friend. Not colleague. Fellow soldier. The man standing beside you when everything went wrong. Paul gives Epaphroditus that title. One word. An entire biography.</p>
+    <p><strong>The Drink Offering.</strong> In Jewish temple worship, the <em>nesek</em> was wine poured out over the main burnt offering. Not the central sacrifice. Secondary. An addition. Paul planted the Philippian church. He had every right to position himself as its indispensable center. Instead he says: I am the pour-over. Your faith is the main offering. I am supplemental to your story. And he says it with joy.</p>
+    <p>The names have changed. The wilderness murmur is still real. The fellow soldier is still desperately needed. The willingness to be poured out is still the single clearest mark of a life fully surrendered to Jesus.</p>
+  </div>
+
+
+  <!-- WHO YOU ARE -->
+  <span class="section-label">Who You Are in Christ</span>
+  <ul class="identity-list">
+    <li>
+      <span class="check">&#10003;</span>
+      <div class="identity-text">You are a worker cooperating with the God who energizes you from within. You are not the fuel source. You are the worker. <span class="identity-ref">Philippians 2:13</span></div>
+    </li>
+    <li>
+      <span class="check">&#10003;</span>
+      <div class="identity-text">You are secure enough to hold your own importance loosely. You can be poured out and glad about it. <span class="identity-ref">Philippians 2:17</span></div>
+    </li>
+    <li>
+      <span class="check">&#10003;</span>
+      <div class="identity-text">You are someone who genuinely cares for others in a room full of self-seekers. The mind of Christ in you makes that possible. <span class="identity-ref">Philippians 2:20&ndash;21</span></div>
+    </li>
+    <li>
+      <span class="check">&#10003;</span>
+      <div class="identity-text">You are a person whose name God notices when you close the distance. He does not forget the ones who push all the chips in. <span class="identity-ref">Philippians 2:30</span></div>
+    </li>
+    <li>
+      <span class="check">&#10003;</span>
+      <div class="identity-text">You are someone who can be sent &mdash; becoming proven, not just proclaimed. <span class="identity-ref">Philippians 2:22</span></div>
+    </li>
+  </ul>
+
+
+  <!-- THE MESSAGE -->
+  <span class="section-label">The Message</span>
+
+  <!-- MOVEMENT 1 -->
+  <div class="movement">
+    <div class="movement-meta">
+      <span class="movement-tag">First Movement</span>
+      <span class="movement-ref">Philippians 2:12&ndash;13</span>
+    </div>
+    <p class="movement-theme">The Collaboration That Changes Everything</p>
+    <span class="movement-num">01</span>
+    <h2 class="movement-heading">God Works In. You Work Out.</h2>
+
+    <div class="scripture-quote">
+      <blockquote>&ldquo;Work out your own salvation with fear and trembling, for it is God who works in you, both to will and to work for his good pleasure.&rdquo;</blockquote>
+      <cite>Philippians 2:12&ndash;13 &middot; ESV</cite>
+    </div>
+
+    <div class="body-text">
+      <p>Do not misread this verse. Paul is not telling the Philippians to earn their salvation. The phrase is work out, not work for. There is a universe of difference between those two words.</p>
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">katergazomai (&#954;&#945;&#964;&#949;&#961;&#947;&#940;&#950;&#959;&#956;&#945;&#953;)</span> <span class="gk-trans">to work out, to bring to full effect.</span> The word was used for a metalsmith working raw ore into its finished form. The metal is already metal. The smith does not create it. He works it until it becomes what it was always meant to be. Paul is saying: the salvation God deposited in you is real. Now cooperate with bringing it to its full expression. Not to produce something new. To reveal what is already there.
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">energe&#333; (&#7952;&#957;&#949;&#961;&#947;&#941;&#969;)</span> <span class="gk-trans">to energize, to activate from within.</span> This is the root of our word energy. God is not watching from a distance hoping you figure it out. He is inside the process. He is energizing your will. He is supplying the power behind your obedience. Both to will and to work &mdash; God is behind the desire and the doing.
+    </div>
+
+    <div class="body-text">
+      <p>Seven hundred years before Paul wrote this sentence, Ezekiel heard God say: &ldquo;I will put my Spirit within you and cause you to walk in my statutes.&rdquo; God causes the obedience He commands. Passive Christianity says wait for God to do everything. Legalism says do everything yourself and hope God approves. Paul corrects both in one sentence.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>You are not manufacturing what God has to supply. You are cooperating with what He is already doing. That is the difference between striving and walking.</p>
+    </div>
+  </div>
+
+
+  <!-- MOVEMENT 2 -->
+  <div class="movement">
+    <div class="movement-meta">
+      <span class="movement-tag">Second Movement</span>
+      <span class="movement-ref">Philippians 2:14&ndash;18</span>
+    </div>
+    <p class="movement-theme">The Life That Refuses to Complain</p>
+    <span class="movement-num">02</span>
+    <h2 class="movement-heading">Shine Where You Are Planted</h2>
+
+    <div class="scripture-quote">
+      <blockquote>&ldquo;Do all things without grumbling or disputing, that you may be blameless and innocent, children of God without blemish in the midst of a crooked and twisted generation, among whom you shine as lights in the world.&rdquo;</blockquote>
+      <cite>Philippians 2:14&ndash;15 &middot; ESV</cite>
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">gongusmoi (&#947;&#959;&#947;&#947;&#965;&#963;&#956;&#959;&#943;)</span> <span class="gk-trans">grumbling, murmuring, secret complaining.</span> The exact word the Greek Old Testament uses for Israel&rsquo;s murmuring in the wilderness. Paul chose it on purpose. He is invoking the entire wilderness narrative as a warning. The grumble did not keep Israel out of Egypt. It kept them out of Canaan. Every complaint is a declaration that God is not good, that His plan is failing, that the present difficulty is the final word. None of that is true.
+    </div>
+
+    <div class="body-text">
+      <p>The contrast Paul offers is stunning. In the middle of a crooked and twisted generation, you shine as <em>asteres</em> &mdash; stars. Not candles. Stars. A star is surrounded by darkness. It does not wait for the darkness to go away before it burns. It burns in the middle of the dark and the dark cannot put it out.</p>
+      <p>Paul then plants his own flag in the text. Even if I am executed, he says, I am just the drink offering &mdash; the <em>nesek</em>. Your faith is the main offering. I am supplemental to your story. And then the word that should stop the room: he says it with joy. A man who has loosened his grip on his own role, his own importance, his own outcome. Poured out. And glad.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>Gratitude and glory occupy the same space. There is no room for both a dark spirit and a burning light.</p>
+    </div>
+  </div>
+
+
+  <!-- MOVEMENT 3 -->
+  <div class="movement">
+    <div class="movement-meta">
+      <span class="movement-tag">Third Movement</span>
+      <span class="movement-ref">Philippians 2:19&ndash;24</span>
+    </div>
+    <p class="movement-theme">The Gospel in a Human Face</p>
+    <span class="movement-num">03</span>
+    <h2 class="movement-heading">Timothy: What It Looks Like When the Mind of Christ Becomes a Life</h2>
+
+    <div class="scripture-quote">
+      <blockquote>&ldquo;For I have no one like him, who will be genuinely concerned for your welfare. For they all seek their own interests, not those of Jesus Christ.&rdquo;</blockquote>
+      <cite>Philippians 2:20&ndash;21 &middot; ESV</cite>
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">isopsuchos (&#7984;&#963;&#972;&#968;&#965;&#967;&#959;&#962;)</span> <span class="gk-trans">equal-souled, like-minded, of the same spirit.</span> A compound word built from isos (equal) and psyche (soul). Paul says literally: I have no one equal-souled with him. This word exists only here in all of Scripture. Paul created or chose it specifically for Timothy and for no one else. It means Timothy does not just agree with Paul intellectually. He shares Paul&rsquo;s soul-orientation. He looks at the world through the same lens.
+    </div>
+
+    <div class="body-text">
+      <p>For they all seek their own interests, not those of Jesus Christ. They all. Not some. Not most. All. Paul is writing from Rome where he has a network of believers around him. And he is saying: of all the people available, Timothy is the only one he could trust to genuinely care for you.</p>
+      <p>Timothy&rsquo;s greatness is not his gifting. It is his <em>dokime</em> &mdash; proven worth. Not proclaimed worth. Not potential. Proven. The kind of quality you discover under pressure, not just in the good seasons.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>Everyone in Rome was seeking their own. Timothy was seeking yours. That is the gospel made visible. That is the mind of Christ with a face and a name.</p>
+    </div>
+  </div>
+
+
+  <!-- MOVEMENT 4 -->
+  <div class="movement">
+    <div class="movement-meta">
+      <span class="movement-tag">Fourth Movement</span>
+      <span class="movement-ref">Philippians 2:25&ndash;30</span>
+    </div>
+    <p class="movement-theme">All the Chips In</p>
+    <span class="movement-num">04</span>
+    <h2 class="movement-heading">Epaphroditus: Some Faith Watches from a Distance. He Closed It.</h2>
+
+    <div class="scripture-quote">
+      <blockquote>&ldquo;He nearly died for the work of Christ, risking his life to complete what was lacking in your service to me.&rdquo;</blockquote>
+      <cite>Philippians 2:30 &middot; ESV</cite>
+    </div>
+
+    <div class="body-text">
+      <p>Paul gives Epaphroditus five titles in one sentence. Brother. Fellow worker. Fellow soldier. Your messenger. Minister to my need. That is not accidental. Paul is building a portrait one brushstroke at a time.</p>
+    </div>
+
+    <div class="greek-study">
+      <span class="gk-label">Greek Word</span>
+      <span class="gk-word">paraboleuomai (&#960;&#945;&#961;&#945;&#946;&#959;&#955;&#949;&#973;&#959;&#956;&#945;&#953;)</span> <span class="gk-trans">to risk, to gamble with, to expose to danger.</span> This word appears nowhere else in the entire New Testament. It was used outside of Scripture to describe gambling &mdash; the act of placing a dangerous bet. Epaphroditus did not just serve faithfully from a safe distance. He pushed all his chips to the center of the table. This one word gave rise to the parabolani in the third and fourth centuries &mdash; Christians who went door to door during plague years nursing the sick when everyone else fled. When the plague ended, the Roman world looked at the church and said: your God must be real. Because nothing else explains what you just did.
+    </div>
+
+    <div class="body-text">
+      <p>This is a man who signed up to serve, got desperately sick doing it, nearly died, recovered, and whose first thought upon recovering was that his friends were anxious about him. Nearly dead. And already thinking about someone else. God does not forget the ones who push all the chips in.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>Some faith watches from a safe distance. Epaphroditus closed the distance. The gospel produces risk-takers. Not because risk is the point. Because love is.</p>
+    </div>
+  </div>
+
+
+  <!-- KEY QUOTES -->
+  <span class="section-label">Key Quotes</span>
+  <div class="quotes-list">
+    <div class="quote-item"><p>&ldquo;You are not manufacturing what God has to supply. You are cooperating with what He is already doing. That is the difference between striving and walking.&rdquo;</p></div>
+    <div class="quote-item"><p>&ldquo;Every complaint is a theological statement. It says God is not enough, His plan is failing, the present difficulty is the final word. None of that is true.&rdquo;</p></div>
+    <div class="quote-item"><p>&ldquo;Gratitude and glory occupy the same space. There is no room for both a dark spirit and a burning light.&rdquo;</p></div>
+    <div class="quote-item"><p>&ldquo;Everyone in Rome was seeking their own. Timothy was seeking yours. That is the gospel made visible with a face and a name.&rdquo;</p></div>
+    <div class="quote-item"><p>&ldquo;God does not forget the ones who push all the chips in.&rdquo;</p></div>
+    <div class="quote-item"><p>&ldquo;Some faith watches from a safe distance. Epaphroditus closed the distance. The gospel produces risk-takers. Not because risk is the point. Because love is.&rdquo;</p></div>
+  </div>
+
+
+  <!-- THIS WEEK -->
+  <span class="section-label">This Week</span>
+  <div class="this-week">
+    <div class="week-item">
+      <span class="week-num">1</span>
+      <p class="week-text"><strong>Stop waiting for motivation.</strong> Passive Christianity says wait for your spiritual life to happen to you. Paul says it is already happening in you. Cooperate with what God is already doing. Get in the room with Him. Do the work, knowing He is supplying the energy.</p>
+    </div>
+    <div class="week-item">
+      <span class="week-num">2</span>
+      <p class="week-text"><strong>Stop grumbling.</strong> Every complaint is a declaration that God is not enough for your circumstances. And God is enough. Not because your circumstances are not hard. Because He is God. The wilderness generation was one step from the Promised Land and they talked themselves out of it. Don&rsquo;t be that generation.</p>
+    </div>
+    <div class="week-item">
+      <span class="week-num">3</span>
+      <p class="week-text"><strong>Close the distance.</strong> Find one person in your life who is carrying something heavy &mdash; not someone already in your close circle, someone at the edge of your comfortable reach. Make one specific move toward them before next Sunday. Not a principle. One action. Your name is not in Scripture. But God still notices the ones who push all the chips in.</p>
+    </div>
+  </div>
+
+
+  <!-- DECLARATION -->
+  <span class="section-label">Declaration</span>
+  <div class="declaration">
+    <p>God is working in me and I am working it out!</p>
+    <p>I do not grumble about what I cannot control because I know who controls all things!</p>
+    <p>I shine as a light in a crooked and twisted generation because the Source in me cannot be put out!</p>
+    <p>I genuinely care for others above myself because I carry the mind of Christ!</p>
+    <p>I close the distance. I do not watch from the sidelines.</p>
+    <p>I push all the chips in for the work of Christ because the gospel is worth everything I have.</p>
+    <p><em>I walk with victory, not to it, in Jesus&rsquo; name. Amen!</em></p>
+  </div>
+
+
+  <!-- ALL SCRIPTURE REFERENCES -->
+  <span class="section-label">All Scripture References</span>
+  <div class="scripture-refs">
+    <p><strong>Primary:</strong> Philippians 2:12&ndash;30</p>
+    <p><strong>Supporting:</strong> Ezekiel 36:27 (I will cause you to walk) &nbsp;&middot;&nbsp; Numbers 14:26&ndash;35 (wilderness generation) &nbsp;&middot;&nbsp; John 15:5 (apart from me you can do nothing) &nbsp;&middot;&nbsp; Romans 8:17 (co-heirs with Christ) &nbsp;&middot;&nbsp; Galatians 2:20 (Christ lives in me) &nbsp;&middot;&nbsp; Matthew 5:14&ndash;16 (light of the world)</p>
+  </div>
+
+
+  <!-- REFLECTION QUESTIONS -->
+  <span class="section-label">Reflection Questions</span>
+  <div class="reflection-list">
+    <div class="reflect-item"><p>Paul distinguishes between working <em>out</em> and working <em>for</em>. Where in your life have you been striving to produce something God has already deposited in you? What would cooperating instead of striving look like this week?</p></div>
+    <div class="reflect-item"><p>Gongusmoi &mdash; the grumble. Every complaint is a theological statement. What is the most persistent complaint in your life right now? What is it actually saying about God? Is that claim true?</p></div>
+    <div class="reflect-item"><p>Paul says even if he is executed he is glad to be the drink offering &mdash; secondary to the Philippians&rsquo; story. Where in your life are you protecting your importance, your credit, or your role at the expense of freely serving? What would it look like to loosen that grip?</p></div>
+    <div class="reflect-item"><p>For they all seek their own interests, not those of Jesus Christ. Paul says this of the church in Rome. How does that land? If Paul observed your last week, would your name come up as someone he could send?</p></div>
+    <div class="reflect-item"><p>Epaphroditus was nearly dead and already thinking about other people&rsquo;s anxiety. Name a specific person at the edge of your comfortable reach. What is one move you can make toward them before next Sunday?</p></div>
+    <div class="reflect-item"><p>The Christ Hymn in chapter 2 has now become the biography of three men &mdash; Paul, Timothy, and Epaphroditus. Which of them is most convicting for where you are right now? Why?</p></div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-logo"><span class="the">the</span>gathering</div>
+  <p>Sundays at 5:00 PM &middot; Cleburne Conference Center &middot; <a href="https://gatheringctx.org">gatheringctx.org</a></p>
+  <p style="margin-top:6px"><a href="https://gatheringctx.org/sermons">&#8592; All Messages</a></p>
+</footer>
+
+</body>
+</html>
