@@ -763,7 +763,7 @@ textarea{min-height:80px;resize:vertical;}
 
 <!-- ═══════════════════ KID ENTRY ═══════════════════ -->
 <div id="p-kentry" class="page">
-  <span class="back" onclick="show('p-land')"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
+  <span class="back" onclick="navBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
   <div style="text-align:center;margin-bottom:1.5rem">
     <div class="eyebrow">welcome, explorer</div>
     <div class="big-title">do you have a<br><em>gathering id?</em></div>
@@ -1007,7 +1007,7 @@ textarea{min-height:80px;resize:vertical;}
 
 <!-- ═══════════════════ PARENT LOGIN ═══════════════════ -->
 <div id="p-plogin" class="page">
-  <span class="back" onclick="show('p-land')"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
+  <span class="back" onclick="navBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
   <div style="margin-bottom:1.25rem">
     <div class="eyebrow">parent portal</div>
     <div class="big-title">stay connected <em>to your kid.</em></div>
@@ -1080,7 +1080,7 @@ textarea{min-height:80px;resize:vertical;}
 
 <!-- ═══════════════════ ADMIN LOGIN ═══════════════════ -->
 <div id="p-alogin" class="page">
-  <span class="back" onclick="show('p-land')"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
+  <span class="back" onclick="navBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
   <div style="margin-bottom:1.25rem"><div class="eyebrow">team access</div><div class="big-title">admin sign in.</div></div>
   <div class="card">
     <div class="form-group"><label>Admin password</label><input type="password" id="adm-pw" placeholder="••••••••" onkeydown="if(event.key==='Enter')adminLogin()"></div>
@@ -1091,7 +1091,7 @@ textarea{min-height:80px;resize:vertical;}
 
 <!-- ═══════════════════ ADMIN DASHBOARD ═══════════════════ -->
 <div id="p-land-explore" class="page">
-  <span class="back" onclick="show('p-land')"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
+  <span class="back" onclick="navBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
   <div style="margin-bottom:1rem">
     <div class="eyebrow">learn + explore</div>
     <div class="big-title">Big questions, <em>real answers.</em></div>
@@ -1106,7 +1106,7 @@ textarea{min-height:80px;resize:vertical;}
 </div>
 
 <div id="p-land-devos" class="page">
-  <span class="back" onclick="show('p-land')"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
+  <span class="back" onclick="navBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
   <div style="margin-bottom:1rem">
     <div class="eyebrow">family devotionals</div>
     <div class="big-title">This week's <em>word.</em></div>
@@ -1125,7 +1125,7 @@ textarea{min-height:80px;resize:vertical;}
 </div>
 
 <div id="p-forgot" class="page">
-  <span class="back" onclick="show('p-klogin')"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
+  <span class="back" onclick="navBack()"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
   <div style="margin-bottom:1.25rem">
     <div class="eyebrow">forgot your pin?</div>
     <div class="big-title">No worries, <em>we've got you.</em></div>
@@ -1519,6 +1519,12 @@ const ld = async(k,fb) => {
 
 // Load everything — localStorage first (instant), then Supabase (real)
 async function loadAll() {
+  // Version bump forces cache clear when app updates
+  const APP_VER = '2026-06-14-v2';
+  if(localStorage.getItem('kgz_app_ver') !== APP_VER){
+    ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
+    localStorage.setItem('kgz_app_ver', APP_VER);
+  }
   S.kids         = await ld('kids',[]);
   S.transactions = await ld('transactions',[]);
   S.groups       = await ld('groups',[]);
@@ -1537,7 +1543,7 @@ async function loadAll() {
       sb.from('groups').select('*'),
       sb.from('orders').select('*'),
       sb.from('store_items').select('*'),
-      sb.from('devos').select('*'),
+      sb.from('devos').select('*').eq('active',true).lte('publish_at',new Date().toISOString()).order('publish_at',{ascending:false}),
       sb.from('announcements').select('*'),
     ]);
     if (kids.data) {
@@ -1589,6 +1595,8 @@ async function loadAll() {
           prayer:d.prayer, parentNote:d.parent_note, active:d.active
         });
       });
+      S.devos['47'] = S.devos['47'].slice(0,5);
+      S.devos['812'] = S.devos['812'].slice(0,5);
       localStorage.setItem('kgz_devo-47',  JSON.stringify(S.devos['47']));
       localStorage.setItem('kgz_devo-812', JSON.stringify(S.devos['812']));
     }
@@ -1609,7 +1617,25 @@ async function loadAll() {
   }
 }
 
-function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');}
+var _navStack=[];
+function show(id,pushToStack){
+  if(pushToStack!==false){
+    const cur=document.querySelector('.page.active');
+    if(cur&&cur.id!==id) _navStack.push(cur.id);
+    if(_navStack.length>20) _navStack.shift();
+  }
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el) el.classList.add('active');
+}
+function navBack(){
+  if(_navStack.length>0){
+    const prev=_navStack.pop();
+    show(prev,false);
+  } else {
+    show('p-land',false);
+  }
+}
 function toast(m){const t=document.getElementById('ti');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
 function msg(id,m,show=true){const e=document.getElementById(id);if(!e)return;e.textContent=m;e.style.display=show?'block':'none';}
 function genId(){const ex=S.kids.map(k=>k.id);let id;do{id='KGZ-'+(Math.floor(1000+Math.random()*9000));}while(ex.includes(id));return id;}
