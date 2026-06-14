@@ -1688,7 +1688,7 @@ input:focus,select:focus,textarea:focus{
 <nav style="background:rgba(8,12,20,0.97);border-bottom:1px solid rgba(201,168,76,0.25);padding:.85rem 1.25rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);">
   <a href="https://gatheringctx.org" style="font-size:15px;font-weight:800;color:#C9A84C;text-decoration:none;letter-spacing:.04em;font-family:'Oswald',sans-serif;">THE GATHERING</a>
   <div style="display:flex;align-items:center;gap:10px">
-    <button id="sound-toggle-btn" onclick="toggleSound()" style="background:none;border:none;font-size:18px;cursor:pointer;padding:2px;line-height:1;opacity:0.7" title="Toggle sound">${soundEnabled?'🔊':'🔇'}</button>
+    <button id="sound-toggle-btn" onclick="toggleSound()" style="background:none;border:none;font-size:18px;cursor:pointer;padding:2px;line-height:1;opacity:0.7" title="Toggle sound">${localStorage.getItem('kgz_sound')==='0'?'🔇':'🔊'}</button>
     <a href="https://gatheringctx.org" style="font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;font-weight:600"><i class="ti ti-arrow-left" style="font-size:11px" aria-hidden="true"></i> back</a>
     <span style="background:linear-gradient(135deg,#C9A84C,#8B6B2A);color:#fff;border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:.3px;box-shadow:0 2px 10px rgba(201,168,76,0.3);">Kids Zone</span>
   </div>
@@ -6694,6 +6694,13 @@ function landingRoute(dest){
   } else if(dest==='explore'){
     document.getElementById('land-explore-apol').innerHTML=buildApol('le');
     show('p-land-explore');
+  } else if(dest==='lb'){
+    show('p-land');
+    setTimeout(()=>{
+      const k=S.currentKid;
+      if(k){kidTab('mz','act-teal');}
+      else{S.afterLoginTab='mz';show('p-kentry');}
+    },100);
   }
 }
 function landDevoAge(a){
@@ -6704,7 +6711,25 @@ function landDevoAge(a){
 function renderLandDevos(){
   const list=getCurDevos(landDevoAgeVal);
   const el=document.getElementById('land-devo-list');if(!el)return;
-  el.innerHTML=list.map((d,i)=>``).join('');
+  if(!list||!list.length){
+    el.innerHTML='<div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5);font-size:14px">No devotionals available yet.</div>';
+    return;
+  }
+  el.innerHTML=list.map((d,i)=>`
+    <div class="devo-card" onclick="toggleLandDevo('ld${landDevoAgeVal}-${i}')" id="ld${landDevoAgeVal}-${i}" style="background:rgba(255,255,255,0.07);border-radius:16px;padding:16px 18px;margin-bottom:12px;cursor:pointer;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">${d.scripture||''}</div>
+      <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:6px;">${d.title||''}</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.65);font-style:italic;line-height:1.5;">${(d.verse||'').slice(0,120)}${(d.verse||'').length>120?'...':''}</div>
+      <div class="devo-expanded" id="ld${landDevoAgeVal}-${i}-body" style="display:none;margin-top:14px;border-top:1px solid rgba(255,255,255,0.1);padding-top:14px;">
+        <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,0.85);margin-bottom:12px;">${d.content||''}</p>
+        ${d.activity?`<div style="background:rgba(245,200,66,0.1);border:1px dashed rgba(245,200,66,0.4);border-radius:10px;padding:12px;margin-bottom:10px;"><div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#f5c842;margin-bottom:6px;">Family Activity</div><p style="font-size:13px;color:rgba(255,255,255,0.8);">${d.activity}</p></div>`:''}
+        ${d.prayer?`<div style="background:rgba(62,207,207,0.08);border-left:3px solid var(--teal);padding:10px 14px;margin-bottom:10px;"><div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Prayer</div><p style="font-size:13px;color:rgba(255,255,255,0.8);font-style:italic;">${d.prayer}</p></div>`:''}
+      </div>
+    </div>`).join('');
+}
+function toggleLandDevo(id){
+  const body=document.getElementById(id+'-body');
+  if(body) body.style.display=body.style.display==='none'?'block':'none';
 }
 
 // ══════════════════════════════════════════════════════
