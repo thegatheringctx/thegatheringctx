@@ -2966,7 +2966,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-14-v3';
+  const APP_VER = '2026-06-14-v4';
   if(localStorage.getItem('kgz_app_ver') !== APP_VER){
     ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
     localStorage.setItem('kgz_app_ver', APP_VER);
@@ -4631,7 +4631,13 @@ async function confirmClaim(){
   renderKidDash();
 }
 
-function getCurDevos(age){return S.devos[age]||DEFAULT_DEVOS[age];}
+function getCurDevos(age){
+  try{
+    var cached=JSON.parse(localStorage.getItem('kgz_devo-'+age)||'[]');
+    if(cached&&cached.length>0) return cached;
+  }catch(e){}
+  return (S.devos&&S.devos[age])||DEFAULT_DEVOS[age];
+}
 function devoAge(a){S.devoAge=a;['47','812'].forEach(x=>document.getElementById('at-'+x).classList.toggle('active',x===a));renderDevos();}
 function renderDevos(){
   var content=document.getElementById("p-devo-content");
@@ -6695,11 +6701,8 @@ function landingRoute(dest){
     document.getElementById('land-explore-apol').innerHTML=buildApol('le');
     show('p-land-explore');
   } else if(dest==='lb'){
-    show('p-land');
-    setTimeout(()=>{
-      const k=S.currentKid;
-      if(k){kidTab('mz','act-teal');}
-      else{S.afterLoginTab='mz';show('p-kentry');}
+    S.afterLoginTab='mz';
+    show('p-kentry');
     },100);
   }
 }
