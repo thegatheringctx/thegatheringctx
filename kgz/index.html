@@ -2824,255 +2824,233 @@ var selectedGender='male';
 
 // SVG warrior generator -- cartoonish heroic big-head style
 function buildWarriorSVG(gender, armorPieces, size, animated, capeColor){
-  const isFemale = gender==='female';
-  const w=size||80, h=Math.round((size||80)*1.15);
-  const animClass = animated ? 'warrior-bounce' : '';
-  const sc = 1; // scale factor
+  var isFemale = gender==='female';
+  var w = size||80;
+  var h = Math.round((size||80)*1.15);
+  var animClass = animated ? 'warrior-bounce' : '';
 
-  // ── Colors ──────────────────────────────────────────────
-  const skin       = '#E8B887';
-  const skinShade  = '#D4956A';
-  const hairM      = '#4A3728';
-  const hairF      = '#6B3A1F';
-  const cape       = capeColor || '#1E3A8A'; // default blue like the image
-  const capeLight  = '#2952CC';
-  const tunB       = '#E8D5B0'; // plain linen tunic
-  const tunS       = '#D4BC8A';
+  // Colors
+  var skin      = '#E8B887';
+  var skinShade = '#D4956A';
+  var hairM     = '#4A3728';
+  var hairF     = '#6B3A1F';
+  var cape      = capeColor || '#1E3A8A';
+  var capeLt    = '#2952CC';
+  var tunB      = '#E8D5B0';
+  var tunS      = '#D4BC8A';
+  var silver    = '#C8C8D0';
+  var silverHi  = '#E8E8F0';
+  var silverSh  = '#9898A8';
+  var gold      = '#C9A84C';
+  var goldHi    = '#F5D76E';
 
-  // armor pieces
-  const hasBelt        = armorPieces.includes('belt');
-  const hasBreast      = armorPieces.includes('breastplate');
-  const hasBoots       = armorPieces.includes('boots');
-  const hasShield      = armorPieces.includes('shield');
-  const hasHelmet      = armorPieces.includes('helmet');
-  const hasSword       = armorPieces.includes('sword');
-  const isFullGlow     = armorPieces.includes('full');
-  const hasAnyArmor    = hasBelt||hasBreast||hasBoots||hasShield||hasHelmet||hasSword;
+  // Armor flags
+  var hasBelt    = armorPieces.indexOf('belt')       >= 0;
+  var hasBreast  = armorPieces.indexOf('breastplate')>= 0;
+  var hasBoots   = armorPieces.indexOf('boots')      >= 0;
+  var hasShield  = armorPieces.indexOf('shield')     >= 0;
+  var hasHelmet  = armorPieces.indexOf('helmet')     >= 0;
+  var hasSword   = armorPieces.indexOf('sword')      >= 0;
+  var isFullGlow = armorPieces.indexOf('full')       >= 0;
 
-  // armor colors (silver/gold like the image)
-  const silver   = '#C8C8D0';
-  const silverHi = '#E8E8F0';
-  const silverSh = '#9898A8';
-  const gold     = '#C9A84C';
-  const goldHi   = '#F5D76E';
+  // Gradient/filter defs
+  var defs = '<defs>'
+    + '<radialGradient id="sk'+size+'" cx="40%" cy="35%" r="60%">'
+    +   '<stop offset="0%" stop-color="'+skin+'"/>'
+    +   '<stop offset="100%" stop-color="'+skinShade+'"/>'
+    + '</radialGradient>'
+    + '<linearGradient id="sl'+size+'" x1="0" y1="0" x2="1" y2="1">'
+    +   '<stop offset="0%" stop-color="'+silverHi+'"/>'
+    +   '<stop offset="100%" stop-color="'+silverSh+'"/>'
+    + '</linearGradient>'
+    + '<linearGradient id="gl'+size+'" x1="0" y1="0" x2="0" y2="1">'
+    +   '<stop offset="0%" stop-color="'+goldHi+'"/>'
+    +   '<stop offset="100%" stop-color="'+gold+'"/>'
+    + '</linearGradient>'
+    + '<linearGradient id="cv'+size+'" x1="0" y1="0" x2="1" y2="1">'
+    +   '<stop offset="0%" stop-color="'+cape+'"/>'
+    +   '<stop offset="100%" stop-color="'+capeLt+'"/>'
+    + '</linearGradient>'
+    + (isFullGlow ? '<filter id="fg'+size+'"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' : '')
+    + '</defs>';
 
-  return `<svg viewBox="0 0 80 92" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg" class="${animClass}" style="display:block;overflow:visible">
-  <defs>
-    <radialGradient id="sk${size}" cx="40%" cy="35%" r="60%">
-      <stop offset="0%" stop-color="${skin}"/>
-      <stop offset="100%" stop-color="${skinShade}"/>
-    </radialGradient>
-    <linearGradient id="sl${size}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="${silverHi}"/>
-      <stop offset="100%" stop-color="${silverSh}"/>
-    </linearGradient>
-    <linearGradient id="gl${size}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="${goldHi}"/>
-      <stop offset="100%" stop-color="${gold}"/>
-    </linearGradient>
-    <linearGradient id="cv${size}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="${cape}"/>
-      <stop offset="100%" stop-color="${capeLight}"/>
-    </linearGradient>
-    ${isFullGlow ? '<filter id="fg'+size+'"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' : ''}
-  </defs>
+  // Cape
+  var capeEl = '<path d="M26 44 C16 52 12 70 14 86 L28 82 C24 68 26 56 32 48Z" fill="url(#cv'+size+')" opacity="0.92"/>'
+    + '<path d="M54 44 C64 52 68 70 66 86 L52 82 C56 68 54 56 48 48Z" fill="url(#cv'+size+')" opacity="0.92"/>'
+    + '<path d="M26 44 C22 48 20 54 18 62" stroke="'+capeLt+'" stroke-width="1" fill="none" opacity="0.4"/>'
+    + '<path d="M54 44 C58 48 60 54 62 62" stroke="'+capeLt+'" stroke-width="1" fill="none" opacity="0.4"/>';
 
-  <!-- ── GROUND SHADOW ── -->
-  <ellipse cx="40" cy="90" rx="22" ry="3" fill="rgba(0,0,0,0.20)"/>
+  // Legs
+  var legsEl = '<path d="M30 66 L28 86 L36 86 L38 70Z" fill="'+(hasBoots?silver:tunS)+'"/>'
+    + '<path d="M50 66 L52 86 L44 86 L42 70Z" fill="'+(hasBoots?silver:tunS)+'"/>';
+  if(hasBoots){
+    legsEl += '<rect x="27" y="72" width="10" height="14" rx="4" fill="url(#sl'+size+')"/>'
+      + '<rect x="43" y="72" width="10" height="14" rx="4" fill="url(#sl'+size+')"/>'
+      + '<rect x="29" y="74" width="3" height="9" rx="2" fill="rgba(255,255,255,0.3)"/>'
+      + '<rect x="45" y="74" width="3" height="9" rx="2" fill="rgba(255,255,255,0.3)"/>'
+      + '<rect x="26" y="82" width="12" height="4" rx="2" fill="url(#gl'+size+')"/>'
+      + '<rect x="42" y="82" width="12" height="4" rx="2" fill="url(#gl'+size+')"/>';
+  }
+  // Sandals always
+  legsEl += '<rect x="26" y="84" width="13" height="5" rx="2" fill="#8B6040"/>'
+    + '<rect x="41" y="84" width="13" height="5" rx="2" fill="#8B6040"/>'
+    + '<line x1="29" y1="84" x2="29" y2="89" stroke="#6B4020" stroke-width="1"/>'
+    + '<line x1="33" y1="84" x2="33" y2="89" stroke="#6B4020" stroke-width="1"/>'
+    + '<line x1="44" y1="84" x2="44" y2="89" stroke="#6B4020" stroke-width="1"/>'
+    + '<line x1="48" y1="84" x2="48" y2="89" stroke="#6B4020" stroke-width="1"/>';
 
-  <!-- ── CAPE / CLOAK (behind body) ── -->
-  <path d="M26 44 C16 52 12 70 14 86 L28 82 C24 68 26 56 32 48Z" fill="url(#cv${size})" opacity="0.92"/>
-  <path d="M54 44 C64 52 68 70 66 86 L52 82 C56 68 54 56 48 48Z" fill="url(#cv${size})" opacity="0.92"/>
-  <path d="M26 44 C22 48 20 54 18 62" stroke="${capeLight}" stroke-width="1" fill="none" opacity="0.4"/>
-  <path d="M54 44 C58 48 60 54 62 62" stroke="${capeLight}" stroke-width="1" fill="none" opacity="0.4"/>
+  // Body tunic
+  var bodyEl = '<rect x="26" y="44" width="28" height="26" rx="6" fill="'+tunB+'"/>'
+    + '<path d="M26 44 Q40 40 54 44" stroke="'+tunS+'" stroke-width="1" fill="none"/>'
+    + '<line x1="40" y1="46" x2="40" y2="68" stroke="'+tunS+'" stroke-width="0.8" opacity="0.6"/>';
 
-  <!-- ── LEGS (tunic skirt or armored greaves) ── -->
-  <!-- Skirt/tunic bottom -->
-  <path d="M30 66 L28 86 L36 86 L38 70Z" fill="${hasBoots?silver:tunS}"/>
-  <path d="M50 66 L52 86 L44 86 L42 70Z" fill="${hasBoots?silver:tunS}"/>
-  ${hasBoots ? `
-  <!-- Greaves (shin armor) -->
-  <rect x="27" y="72" width="10" height="14" rx="4" fill="url(#sl${size})"/>
-  <rect x="43" y="72" width="10" height="14" rx="4" fill="url(#sl${size})"/>
-  <!-- Greave highlight -->
-  <rect x="29" y="74" width="3" height="9" rx="2" fill="rgba(255,255,255,0.3)"/>
-  <rect x="45" y="74" width="3" height="9" rx="2" fill="rgba(255,255,255,0.3)"/>
-  <!-- Gold cuff -->
-  <rect x="26" y="82" width="12" height="4" rx="2" fill="url(#gl${size})"/>
-  <rect x="42" y="82" width="12" height="4" rx="2" fill="url(#gl${size})"/>
-  ` : ''}
-  <!-- Sandals always -->
-  <rect x="26" y="84" width="13" height="5" rx="2" fill="#8B6040"/>
-  <rect x="41" y="84" width="13" height="5" rx="2" fill="#8B6040"/>
-  <!-- Sandal straps -->
-  <line x1="29" y1="84" x2="29" y2="89" stroke="#6B4020" stroke-width="1"/>
-  <line x1="33" y1="84" x2="33" y2="89" stroke="#6B4020" stroke-width="1"/>
-  <line x1="44" y1="84" x2="44" y2="89" stroke="#6B4020" stroke-width="1"/>
-  <line x1="48" y1="84" x2="48" y2="89" stroke="#6B4020" stroke-width="1"/>
+  // Breastplate
+  var breastEl = '';
+  if(hasBreast){
+    breastEl = '<path d="M26 44 Q40 38 54 44 L52 66 Q40 70 28 66 Z" fill="url(#sl'+size+')" opacity="0.95"/>'
+      + '<path d="M40 40 L40 66" stroke="'+gold+'" stroke-width="1.5" fill="none" opacity="0.7"/>'
+      + '<path d="M28 52 Q40 49 52 52" stroke="rgba(255,255,255,0.25)" stroke-width="1" fill="none"/>'
+      + '<path d="M28 60 Q40 57 52 60" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/>'
+      + '<path d="M26 44 Q40 38 54 44 L52 66 Q40 70 28 66 Z" fill="none" stroke="'+gold+'" stroke-width="1.5"/>'
+      + '<ellipse cx="24" cy="46" rx="8" ry="6" fill="url(#sl'+size+')"/>'
+      + '<ellipse cx="24" cy="44" rx="6" ry="4" fill="'+goldHi+'" opacity="0.8"/>'
+      + '<ellipse cx="56" cy="46" rx="8" ry="6" fill="url(#sl'+size+')"/>'
+      + '<ellipse cx="56" cy="44" rx="6" ry="4" fill="'+goldHi+'" opacity="0.8"/>';
+  } else {
+    breastEl = '<rect x="18" y="44" width="10" height="14" rx="4" fill="'+tunS+'"/>'
+      + '<rect x="52" y="44" width="10" height="14" rx="4" fill="'+tunS+'"/>';
+  }
 
-  <!-- ── BODY / TUNIC ── -->
-  <rect x="26" y="44" width="28" height="26" rx="6" fill="${tunB}"/>
-  <path d="M26 44 Q40 40 54 44" stroke="${tunS}" stroke-width="1" fill="none"/>
-  <!-- Tunic center line -->
-  <line x1="40" y1="46" x2="40" y2="68" stroke="${tunS}" stroke-width="0.8" opacity="0.6"/>
+  // Belt
+  var beltEl = '';
+  if(hasBelt){
+    beltEl = '<rect x="25" y="64" width="30" height="7" rx="3" fill="'+gold+'"/>'
+      + '<rect x="37" y="64" width="6" height="7" rx="2" fill="'+goldHi+'"/>'
+      + '<rect x="38.5" y="65.5" width="3" height="4" rx="1" fill="'+gold+'"/>'
+      + '<rect x="26" y="64.5" width="28" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>';
+  } else {
+    beltEl = '<rect x="26" y="65" width="28" height="4" rx="2" fill="'+tunS+'" opacity="0.8"/>';
+  }
 
-  <!-- ── BREASTPLATE (armor over tunic) ── -->
-  ${hasBreast ? `
-  <path d="M26 44 Q40 38 54 44 L52 66 Q40 70 28 66 Z" fill="url(#sl${size})" opacity="0.95"/>
-  <!-- Breastplate center ridge -->
-  <path d="M40 40 L40 66" stroke="${gold}" stroke-width="1.5" fill="none" opacity="0.7"/>
-  <!-- Horizontal bands -->
-  <path d="M28 52 Q40 49 52 52" stroke="rgba(255,255,255,0.25)" stroke-width="1" fill="none"/>
-  <path d="M28 60 Q40 57 52 60" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/>
-  <!-- Gold trim edges -->
-  <path d="M26 44 Q40 38 54 44 L52 66 Q40 70 28 66 Z" fill="none" stroke="${gold}" stroke-width="1.5"/>
-  <!-- Shoulder pauldrons -->
-  <ellipse cx="24" cy="46" rx="8" ry="6" fill="url(#sl${size})"/>
-  <ellipse cx="24" cy="44" rx="6" ry="4" fill="${goldHi}" opacity="0.8"/>
-  <ellipse cx="56" cy="46" rx="8" ry="6" fill="url(#sl${size})"/>
-  <ellipse cx="56" cy="44" rx="6" ry="4" fill="${goldHi}" opacity="0.8"/>
-  ` : `
-  <!-- Shoulder cloth (plain) -->
-  <rect x="18" y="44" width="10" height="14" rx="4" fill="${tunS}"/>
-  <rect x="52" y="44" width="10" height="14" rx="4" fill="${tunS}"/>
-  `}
+  // Arms + hands
+  var armLX = hasShield ? '8' : '16';
+  var handLX = hasShield ? '13' : '21';
+  var armFill = hasBreast ? silver : tunB;
+  var armsEl = '<rect x="'+armLX+'" y="45" width="10" height="18" rx="4" fill="'+armFill+'"/>'
+    + '<rect x="54" y="45" width="10" height="18" rx="4" fill="'+armFill+'"/>';
+  if(hasBreast){
+    armsEl += '<rect x="'+(hasShield?'9':'17')+'" y="46" width="3" height="13" rx="2" fill="rgba(255,255,255,0.2)"/>'
+      + '<rect x="55" y="46" width="3" height="13" rx="2" fill="rgba(255,255,255,0.2)"/>';
+  }
+  armsEl += '<ellipse cx="'+handLX+'" cy="64" rx="5" ry="4.5" fill="url(#sk'+size+')"/>'
+    + '<ellipse cx="59" cy="64" rx="5" ry="4.5" fill="url(#sk'+size+')"/>';
 
-  <!-- ── BELT ── -->
-  ${hasBelt ? `
-  <rect x="25" y="64" width="30" height="7" rx="3" fill="${gold}"/>
-  <rect x="37" y="64" width="6" height="7" rx="2" fill="${goldHi}"/>
-  <rect x="38.5" y="65.5" width="3" height="4" rx="1" fill="${gold}"/>
-  <!-- Belt highlight -->
-  <rect x="26" y="64.5" width="28" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>
-  ` : `
-  <!-- Plain cord belt -->
-  <rect x="26" y="65" width="28" height="4" rx="2" fill="${tunS}" opacity="0.8"/>
-  `}
+  // Shield
+  var shieldEl = '';
+  if(hasShield){
+    shieldEl = '<g transform="translate(-4,2)">'
+      + '<path d="M4 52 L4 66 Q4 76 13 78 Q22 76 22 66 L22 52 Q13 47 4 52 Z" fill="'+cape+'" stroke="'+gold+'" stroke-width="1.8"/>'
+      + '<path d="M6 54 L6 65 Q6 73 13 74 Q20 73 20 65 L20 54 Q13 50 6 54 Z" fill="'+capeLt+'" opacity="0.7"/>'
+      + '<line x1="13" y1="53" x2="13" y2="73" stroke="'+goldHi+'" stroke-width="1.8" opacity="0.9"/>'
+      + '<line x1="6" y1="63" x2="20" y2="63" stroke="'+goldHi+'" stroke-width="1.8" opacity="0.9"/>'
+      + '<text x="13" y="71" font-size="4" text-anchor="middle" fill="'+goldHi+'" font-weight="bold" opacity="0.9">FAITH</text>'
+      + '</g>';
+  }
 
-  <!-- ── ARMS ── -->
-  <!-- Left arm (shield side) -->
-  <rect x="${hasShield?'8':'16'}" y="45" width="10" height="18" rx="4" fill="${hasBreast?silver:tunB}"/>
-  <!-- Right arm -->
-  <rect x="54" y="45" width="10" height="18" rx="4" fill="${hasBreast?silver:tunB}"/>
-  ${hasBreast ? `
-  <!-- Arm highlight -->
-  <rect x="${hasShield?'9':'17'}" y="46" width="3" height="13" rx="2" fill="rgba(255,255,255,0.2)"/>
-  <rect x="55" y="46" width="3" height="13" rx="2" fill="rgba(255,255,255,0.2)"/>
-  ` : ''}
-  <!-- Hands -->
-  <ellipse cx="${hasShield?'13':'21'}" cy="64" rx="5" ry="4.5" fill="url(#sk${size})"/>
-  <ellipse cx="59" cy="64" rx="5" ry="4.5" fill="url(#sk${size})"/>
+  // Sword
+  var swordEl = '';
+  if(hasSword){
+    swordEl = '<g transform="translate(2,-8) rotate(22,64,55)">'
+      + '<ellipse cx="64" cy="34" rx="5" ry="10" fill="rgba(245,158,11,0.35)"/>'
+      + '<rect x="62" y="18" width="4" height="34" rx="1.5" fill="'+silverHi+'"/>'
+      + '<rect x="62" y="18" width="2" height="34" rx="1" fill="rgba(200,220,255,0.5)"/>'
+      + '<path d="M62 18 L64 11 L66 18Z" fill="'+silverHi+'"/>'
+      + '<rect x="57" y="49" width="14" height="4" rx="2" fill="'+gold+'"/>'
+      + '<ellipse cx="57" cy="51" rx="3" ry="3" fill="'+gold+'"/>'
+      + '<ellipse cx="71" cy="51" rx="3" ry="3" fill="'+gold+'"/>'
+      + '<rect x="62" y="52" width="4" height="10" rx="2" fill="#8B4513"/>'
+      + '<path d="M63 36 C60 28 68 24 64 16 C70 26 68 36 65 38Z" fill="#F59E0B" opacity="0.85"/>'
+      + '<path d="M65 30 C63 24 70 21 67 14 C72 23 70 32 67 34Z" fill="#FDE68A" opacity="0.6"/>'
+      + '</g>';
+  }
 
-  <!-- ── SHIELD (Ephesians 6:16 -- Shield of Faith) ── -->
-  ${hasShield ? `
-  <g transform="translate(-4,2)">
-    <path d="M4 52 L4 66 Q4 76 13 78 Q22 76 22 66 L22 52 Q13 47 4 52 Z" fill="${cape}" stroke="${gold}" stroke-width="1.8"/>
-    <!-- Shield face -->
-    <path d="M6 54 L6 65 Q6 73 13 74 Q20 73 20 65 L20 54 Q13 50 6 54 Z" fill="${capeLight}" opacity="0.7"/>
-    <!-- Shield cross -->
-    <line x1="13" y1="53" x2="13" y2="73" stroke="${goldHi}" stroke-width="1.8" opacity="0.9"/>
-    <line x1="6" y1="63" x2="20" y2="63" stroke="${goldHi}" stroke-width="1.8" opacity="0.9"/>
-    <!-- FAITH text -->
-    <text x="13" y="71" font-size="4" text-anchor="middle" fill="${goldHi}" font-weight="bold" opacity="0.9">FAITH</text>
-  </g>
-  ` : ''}
+  // Neck + cape clasp
+  var neckEl = '<rect x="35" y="36" width="10" height="10" rx="3" fill="url(#sk'+size+')"/>'
+    + '<circle cx="40" cy="44" r="3" fill="'+gold+'" opacity="0.9"/>'
+    + '<circle cx="40" cy="44" r="1.5" fill="'+goldHi+'"/>';
 
-  <!-- ── SWORD (Ephesians 6:17 -- Sword of the Spirit) ── -->
-  ${hasSword ? `
-  <g transform="translate(2,-8) rotate(22,64,55)">
-    <!-- Flame glow -->
-    <ellipse cx="64" cy="34" rx="5" ry="10" fill="rgba(245,158,11,0.35)"/>
-    <!-- Blade -->
-    <rect x="62" y="18" width="4" height="34" rx="1.5" fill="${silverHi}"/>
-    <rect x="62" y="18" width="2" height="34" rx="1" fill="rgba(200,220,255,0.5)"/>
-    <!-- Tip -->
-    <path d="M62 18 L64 11 L66 18Z" fill="${silverHi}"/>
-    <!-- Crossguard -->
-    <rect x="57" y="49" width="14" height="4" rx="2" fill="${gold}"/>
-    <ellipse cx="57" cy="51" rx="3" ry="3" fill="${gold}"/>
-    <ellipse cx="71" cy="51" rx="3" ry="3" fill="${gold}"/>
-    <!-- Handle -->
-    <rect x="62" y="52" width="4" height="10" rx="2" fill="#8B4513"/>
-    <!-- Flames -->
-    <path d="M63 36 C60 28 68 24 64 16 C70 26 68 36 65 38Z" fill="#F59E0B" opacity="0.85"/>
-    <path d="M65 30 C63 24 70 21 67 14 C72 23 70 32 67 34Z" fill="#FDE68A" opacity="0.6"/>
-  </g>
-  ` : ''}
+  // Head
+  var headEl = '<ellipse cx="40" cy="22" rx="17" ry="18" fill="url(#sk'+size+')"'+(isFullGlow?' filter="url(#fg'+size+')"':'')+'/>'
+    + '<ellipse cx="23" cy="23" rx="3" ry="4" fill="'+skin+'"/>'
+    + '<ellipse cx="57" cy="23" rx="3" ry="4" fill="'+skin+'"/>';
 
-  <!-- ── NECK ── -->
-  <rect x="35" y="36" width="10" height="10" rx="3" fill="url(#sk${size})"/>
-  <!-- Cape clasp at neck -->
-  <circle cx="40" cy="44" r="3" fill="${gold}" opacity="0.9"/>
-  <circle cx="40" cy="44" r="1.5" fill="${goldHi}"/>
+  // Hair
+  var hairColor = isFemale ? hairF : hairM;
+  var hairEl = '';
+  if(isFemale){
+    hairEl = '<path d="M23 18 Q23 4 40 4 Q57 4 57 18 Q55 8 48 6 Q40 3 32 6 Q25 8 23 18 Z" fill="'+hairF+'"/>'
+      + '<path d="M23 18 Q19 28 21 38 L25 36 Q23 26 25 20 Z" fill="'+hairF+'"/>'
+      + '<path d="M57 18 Q61 28 59 38 L55 36 Q57 26 55 20 Z" fill="'+hairF+'"/>'
+      + '<path d="M50 10 Q58 16 56 26 L54 24 Q56 16 50 12Z" fill="'+hairF+'" opacity="0.7"/>';
+  } else {
+    hairEl = '<path d="M23 18 Q23 4 40 4 Q57 4 57 18 Q55 10 48 7 Q40 5 32 7 Q25 10 23 18 Z" fill="'+hairM+'"/>';
+  }
 
-  <!-- ── HEAD ── -->
-  <ellipse cx="40" cy="22" rx="17" ry="18" fill="url(#sk${size})" ${isFullGlow?'filter="url(#fg'+size+')"':''}/>
-  <!-- Ears -->
-  <ellipse cx="23" cy="23" rx="3" ry="4" fill="${skin}"/>
-  <ellipse cx="57" cy="23" rx="3" ry="4" fill="${skin}"/>
+  // Helmet
+  var helmetEl = '';
+  if(hasHelmet){
+    helmetEl = '<path d="M23 22 Q23 2 40 2 Q57 2 57 22 L55 20 Q55 6 40 6 Q25 6 25 20 Z" fill="'+silver+'"/>'
+      + '<path d="M23 22 L22 34 Q24 38 27 36 L28 26Z" fill="'+silver+'"/>'
+      + '<path d="M57 22 L58 34 Q56 38 53 36 L52 26Z" fill="'+silver+'"/>'
+      + '<path d="M23 22 Q40 28 57 22" stroke="'+gold+'" stroke-width="2.5" fill="none"/>'
+      + '<path d="M40 6 C36 -4 32 -10 34 -18 C37 -8 40 -2 43 -10 C45 -2 44 -8 40 6Z" fill="'+gold+'"/>'
+      + '<path d="M28 14 Q33 8 40 8" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" stroke-linecap="round"/>'
+      + '<rect x="23" y="21" width="34" height="4" rx="2" fill="'+gold+'" opacity="0.85"/>';
+  }
 
-  <!-- ── HAIR ── -->
-  ${isFemale ? `
-  <!-- Female: longer hair with ponytail -->
-  <path d="M23 18 Q23 4 40 4 Q57 4 57 18 Q55 8 48 6 Q40 3 32 6 Q25 8 23 18 Z" fill="${hairF}"/>
-  <!-- Side pieces flowing down -->
-  <path d="M23 18 Q19 28 21 38 L25 36 Q23 26 25 20 Z" fill="${hairF}"/>
-  <path d="M57 18 Q61 28 59 38 L55 36 Q57 26 55 20 Z" fill="${hairF}"/>
-  <!-- Ponytail hint behind head -->
-  <path d="M50 10 Q58 16 56 26 L54 24 Q56 16 50 12Z" fill="${hairF}" opacity="0.7"/>
-  ` : `
-  <!-- Male: short cut -->
-  <path d="M23 18 Q23 4 40 4 Q57 4 57 18 Q55 10 48 7 Q40 5 32 7 Q25 10 23 18 Z" fill="${hairM}"/>
-  `}
+  // Face
+  var faceEl = '<ellipse cx="40" cy="24" rx="13" ry="14" fill="url(#sk'+size+')"/>'
+    + '<path d="M32 18 Q35 16 38 18" stroke="'+hairColor+'" stroke-width="1.8" fill="none" stroke-linecap="round"/>'
+    + '<path d="M42 18 Q45 16 48 18" stroke="'+hairColor+'" stroke-width="1.8" fill="none" stroke-linecap="round"/>'
+    + '<ellipse cx="35" cy="22" rx="3.5" ry="4" fill="white"/>'
+    + '<ellipse cx="45" cy="22" rx="3.5" ry="4" fill="white"/>'
+    + '<circle cx="36" cy="23" r="2.2" fill="#2A1500"/>'
+    + '<circle cx="46" cy="23" r="2.2" fill="#2A1500"/>'
+    + '<circle cx="36.8" cy="22" r="0.9" fill="white"/>'
+    + '<circle cx="46.8" cy="22" r="0.9" fill="white"/>'
+    + '<ellipse cx="35" cy="22" rx="3.5" ry="4" fill="none" stroke="'+skinShade+'" stroke-width="0.7"/>'
+    + '<ellipse cx="45" cy="22" rx="3.5" ry="4" fill="none" stroke="'+skinShade+'" stroke-width="0.7"/>'
+    + '<path d="M38 28 Q40 31 42 28" stroke="'+skinShade+'" stroke-width="1" fill="none" stroke-linecap="round"/>'
+    + '<path d="M34 33 Q40 38 46 33" stroke="#C0784A" stroke-width="1.8" fill="none" stroke-linecap="round"/>'
+    + '<path d="M36 34 Q40 37 44 34" stroke="rgba(255,255,255,0.5)" stroke-width="1" fill="none" stroke-linecap="round"/>'
+    + '<ellipse cx="29" cy="28" rx="5" ry="3" fill="#FF9080" opacity="0.28"/>'
+    + '<ellipse cx="51" cy="28" rx="5" ry="3" fill="#FF9080" opacity="0.28"/>';
 
-  <!-- ── HELMET ── -->
-  ${hasHelmet ? `
-  <!-- Helmet dome -->
-  <path d="M23 22 Q23 2 40 2 Q57 2 57 22 L55 20 Q55 6 40 6 Q25 6 25 20 Z" fill="${silver}"/>
-  <!-- Cheek guards -->
-  <path d="M23 22 L22 34 Q24 38 27 36 L28 26Z" fill="${silver}"/>
-  <path d="M57 22 L58 34 Q56 38 53 36 L52 26Z" fill="${silver}"/>
-  <!-- Gold helmet rim -->
-  <path d="M23 22 Q40 28 57 22" stroke="${gold}" stroke-width="2.5" fill="none"/>
-  <!-- Crest plume -->
-  <path d="M40 6 C36 -4 32 -10 34 -18 C37 -8 40 -2 43 -10 C45 -2 44 -8 40 6Z" fill="${gold}"/>
-  <!-- Helmet highlight -->
-  <path d="M28 14 Q33 8 40 8" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Visor band -->
-  <rect x="23" y="21" width="34" height="4" rx="2" fill="${gold}" opacity="0.85"/>
-  ` : ''}
+  // Full glow halo
+  var glowEl = isFullGlow
+    ? '<ellipse cx="40" cy="8" rx="22" ry="6" fill="'+gold+'" opacity="0.35" filter="url(#fg'+size+')"/>'
+      + '<circle cx="40" cy="4" r="8" fill="none" stroke="'+goldHi+'" stroke-width="2" opacity="0.5"/>'
+    : '';
 
-  <!-- ── FACE ── -->
-  <ellipse cx="40" cy="24" rx="13" ry="14" fill="url(#sk${size})"/>
-  <!-- Eyebrows -->
-  <path d="M32 18 Q35 16 38 18" stroke="${isFemale?hairF:hairM}" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <path d="M42 18 Q45 16 48 18" stroke="${isFemale?hairF:hairM}" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <!-- Eyes -->
-  <ellipse cx="35" cy="22" rx="3.5" ry="4" fill="white"/>
-  <ellipse cx="45" cy="22" rx="3.5" ry="4" fill="white"/>
-  <circle cx="36" cy="23" r="2.2" fill="#2A1500"/>
-  <circle cx="46" cy="23" r="2.2" fill="#2A1500"/>
-  <circle cx="36.8" cy="22" r="0.9" fill="white"/>
-  <circle cx="46.8" cy="22" r="0.9" fill="white"/>
-  <!-- Eye outline -->
-  <ellipse cx="35" cy="22" rx="3.5" ry="4" fill="none" stroke="${skinShade}" stroke-width="0.7"/>
-  <ellipse cx="45" cy="22" rx="3.5" ry="4" fill="none" stroke="${skinShade}" stroke-width="0.7"/>
-  <!-- Nose -->
-  <path d="M38 28 Q40 31 42 28" stroke="${skinShade}" stroke-width="1" fill="none" stroke-linecap="round"/>
-  <!-- Smile (heroic grin matching the image) -->
-  <path d="M34 33 Q40 38 46 33" stroke="#C0784A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <path d="M36 34 Q40 37 44 34" stroke="rgba(255,255,255,0.5)" stroke-width="1" fill="none" stroke-linecap="round"/>
-  <!-- Rosy cheeks -->
-  <ellipse cx="29" cy="28" rx="5" ry="3" fill="#FF9080" opacity="0.28"/>
-  <ellipse cx="51" cy="28" rx="5" ry="3" fill="#FF9080" opacity="0.28"/>
-
-  <!-- ── FULL GLOW HALO ── -->
-  ${isFullGlow ? `
-  <ellipse cx="40" cy="8" rx="22" ry="6" fill="${gold}" opacity="0.35" filter="url(#fg${size})"/>
-  <circle cx="40" cy="4" r="8" fill="none" stroke="${goldHi}" stroke-width="2" opacity="0.5"/>
-  ` : ''}
-
-</svg>`;
+  return '<svg viewBox="0 0 80 92" width="'+w+'" height="'+h+'" xmlns="http://www.w3.org/2000/svg" class="'+animClass+'" style="display:block;overflow:visible">'
+    + defs
+    + '<!-- Ground shadow -->'
+    + '<ellipse cx="40" cy="90" rx="22" ry="3" fill="rgba(0,0,0,0.20)"/>'
+    + capeEl
+    + legsEl
+    + bodyEl
+    + breastEl
+    + beltEl
+    + armsEl
+    + shieldEl
+    + swordEl
+    + neckEl
+    + headEl
+    + hairEl
+    + helmetEl
+    + faceEl
+    + glowEl
+    + '</svg>';
 }
 
 
@@ -3379,21 +3357,6 @@ function refreshWarriorPreview(){
   // Always show both warriors, highlight selected
   if(mEl) mEl.innerHTML = buildWarriorSVG('male', [], 90, true, c);
   if(fEl) fEl.innerHTML = buildWarriorSVG('female', [], 90, true, c);
-}
-
-// Init warrior previews when avatar page opens
-var _origShow = show;
-function show(id, pushToStack){
-  _origShow(id, pushToStack);
-  if(id === 'p-kavatar'){
-    setTimeout(function(){
-      // Pre-select royal blue swatch
-      var firstSwatch = document.querySelector('.cape-swatch');
-      if(firstSwatch) firstSwatch.classList.add('selected');
-      pickGender(window._suGender || 'male');
-      refreshWarriorPreview();
-    }, 50);
-  }
 }
 
 function selectGender(g,btn){
@@ -7976,7 +7939,15 @@ show=function(id){
     var dots=document.querySelectorAll(".su-dot");
     dots.forEach(function(d){d.textContent="";d.style.borderColor="rgba(255,255,255,.18)";});
     var err1=document.getElementById("su-step1-err");if(err1)err1.textContent="";
-    document.querySelectorAll("#su-age-young,#su-age-older").forEach(function(b){b.style.background="rgba(255,255,255,.1)";b.style.borderColor="rgba(255,255,255,.18)";});
+    document.querySelectorAll("#su-age-young,#su-age-older").forEach(function(b){b.style.background="rgba(255,255,255,.1)";b.style.borderColor="rgba(255,255,255,.18)";}
+  if(id==="p-kavatar"){
+    setTimeout(function(){
+      var firstSwatch=document.querySelector('.cape-swatch');
+      if(firstSwatch)firstSwatch.classList.add('selected');
+      if(typeof pickGender==="function")pickGender(window._suGender||'male');
+      if(typeof refreshWarriorPreview==="function")refreshWarriorPreview();
+    },60);
+  });
   }
 };
 
@@ -9463,4 +9434,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781558031-kzfjdffloimoodoqcyqv -->
+<!-- deploy-1781559206-wxxwmqaydrbgizohoriv -->
