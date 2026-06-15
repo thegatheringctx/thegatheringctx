@@ -25,7 +25,7 @@
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:xrlm6n5fdpwklg34 -->
+<!-- uid:kd9cihn06rftd0jy -->
 <!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
@@ -2978,11 +2978,10 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-15-v9';
-  if(localStorage.getItem('kgz_app_ver') !== APP_VER){
-    ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
-    localStorage.setItem('kgz_app_ver', APP_VER);
-  }
+  const APP_VER = '2026-06-15-v10';
+  // Always clear devo cache on load to ensure fresh content
+  ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
+  localStorage.setItem('kgz_app_ver', APP_VER);
   S.kids         = await ld('kids',[]);
   S.transactions = await ld('transactions',[]);
   S.groups       = await ld('groups',[]);
@@ -6729,7 +6728,24 @@ function landDevoAge(a){
   renderLandDevos();
 }
 function renderLandDevos(){
-  const list=getCurDevos(landDevoAgeVal);
+  // Always fetch fresh from Supabase -- no localStorage dependency
+  const age=landDevoAgeVal||'47';
+  const el=document.getElementById('land-devo-list');
+  if(!el)return;
+  el.innerHTML='<div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5);font-size:14px">Loading...</div>';
+  const supaUrl=window._SUPA_URL+'/rest/v1/devos?active=eq.true&age_group=eq.'+age+'&order=sort_order.asc&select=id,title,scripture,verse,content,activity,prayer,parent_note';
+  fetch(supaUrl,{headers:{'apikey':window._SUPA_ANON,'Authorization':'Bearer '+window._SUPA_ANON}})
+    .then(function(r){return r.json();})
+    .then(function(rows){
+      var list=rows&&rows.length?rows:getCurDevos(age);
+      _doRenderLandDevos(list,age);
+    })
+    .catch(function(){_doRenderLandDevos(getCurDevos(age),age);});
+}
+function _doRenderLandDevos(list,landDevoAgeVal){
+  const el=document.getElementById('land-devo-list');if(!el)return;
+  // shadowed name -- use argument
+  const ageVal=landDevoAgeVal;
   const el=document.getElementById('land-devo-list');if(!el)return;
   if(!list||!list.length){
     el.innerHTML='<div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5);font-size:14px">No devotionals available yet.</div>';
