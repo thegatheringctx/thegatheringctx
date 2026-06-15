@@ -25,7 +25,7 @@
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:47ownr9assnb5lyd -->
+<!-- uid:3zvlr1xmswwsaxz3 -->
 <!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
@@ -58,9 +58,17 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{background:#06031a;background-image:radial-gradient(ellipse at 20% 0%,#3d1a7a 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,#0a4a3a 0%,transparent 60%);background-attachment:fixed;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--text);font-size:14px;line-height:1.5;min-height:100vh;}
 body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(1px 1px at 15% 25%,rgba(255,255,255,.7),transparent),radial-gradient(1px 1px at 75% 12%,rgba(255,255,255,.6),transparent),radial-gradient(1px 1px at 55% 65%,rgba(255,255,255,.5),transparent),radial-gradient(1px 1px at 8% 75%,rgba(255,255,255,.6),transparent),radial-gradient(1px 1px at 92% 68%,rgba(255,255,255,.4),transparent),radial-gradient(2px 2px at 38% 18%,rgba(245,200,66,.5),transparent),radial-gradient(1px 1px at 62% 88%,rgba(255,255,255,.7),transparent);pointer-events:none;z-index:0;animation:twinkle 3s ease-in-out infinite alternate;}
+
+@keyframes slideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{transform:scale(0.85);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes twinkle{0%{opacity:.3}100%{opacity:.9}}
 @keyframes pulse-gold{0%,100%{box-shadow:0 0 20px rgba(245,200,66,.2)}50%{box-shadow:0 0 30px rgba(245,200,66,.4)}}
 @keyframes trophy-pulse{0%,100%{filter:drop-shadow(0 0 15px rgba(245,200,66,.4))}50%{filter:drop-shadow(0 0 30px rgba(245,200,66,.8))}}
+.slide-up{animation:slideUp .35s cubic-bezier(.34,1.56,.64,1) both}
+.fade-in{animation:fadeIn .3s ease both}
+.pop-in{animation:popIn .3s cubic-bezier(.34,1.56,.64,1) both}
 .page{display:none;padding:1rem;min-height:100vh;max-width:680px;margin:0 auto;color:#fff;background:#06031a;position:relative;z-index:1;}
 #p-land{background:transparent!important;}
 .card{color:var(--text);}
@@ -450,7 +458,7 @@ input,select,textarea{color:var(--text);}
 .mission-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);}
 .mission-row:last-child{border-bottom:none;}
 .mission-check{width:28px;height:28px;border-radius:50%;border:2.5px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;}
-.mission-check.done{background:var(--teal);border-color:var(--teal);}
+.mission-check.done{background:linear-gradient(135deg,#3ecfcf,#2ab5b5);border-color:#3ecfcf;box-shadow:0 0 12px rgba(62,207,207,.5);}
 .mission-info{flex:1;}
 .mission-title{font-size:13px;font-weight:700;color:#fff;}
 .mission-prog{font-size:10px;color:rgba(255,255,255,.55);margin-top:1px;}
@@ -2970,7 +2978,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-15-v3';
+  const APP_VER = '2026-06-15-v4';
   if(localStorage.getItem('kgz_app_ver') !== APP_VER){
     ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
     localStorage.setItem('kgz_app_ver', APP_VER);
