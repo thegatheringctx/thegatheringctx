@@ -25,7 +25,7 @@
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:44w3cmai0w2wzhph -->
+<!-- uid:7rrlhe8808v59tsj -->
 <!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
@@ -451,7 +451,7 @@ input,select,textarea{color:var(--text);}
 .av-option.selected{border-color:#fff;transform:scale(1.06);}
 .av-option .av-emoji{font-size:30px;display:block;margin-bottom:4px;}
 .av-option .av-label{font-size:10px;font-weight:700;color:#fff;opacity:.85;}
-.av-display{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.av-display{width:44px;height:44px;border-radius:14px;box-shadow:0 0 0 2px rgba(255,255,255,.12),0 4px 12px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
 
 /* ── WEEKLY MISSIONS ── */
 .missions-card{border-radius:22px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);padding:1.1rem;margin-bottom:1rem;}
@@ -469,7 +469,7 @@ input,select,textarea{color:var(--text);}
 /* ── SUNDAY CODE ── */
 .sunday-card{border-radius:22px;box-shadow:0 6px 24px rgba(245,200,66,.3),0 0 0 1px rgba(245,200,66,.2);background:linear-gradient(135deg,#f5c842,#c47a00,#92400e);padding:1.25rem;margin-bottom:1rem;text-align:center;color:#fff;}
 .sunday-code-display{font-size:48px;font-weight:900;letter-spacing:8px;margin:.5rem 0;text-shadow:0 2px 8px rgba(0,0,0,.2);}
-.code-input{font-size:28px;font-weight:900;letter-spacing:6px;text-align:center;border:2.5px solid var(--border);border-radius:14px;padding:.75rem;width:100%;background:rgba(255,255,255,.08);color:#fff;font-family:monospace;}
+.code-input{font-size:28px;font-weight:900;letter-spacing:6px;text-align:center;border:2.5px solid var(--border);border-radius:14px;padding:.75rem;width:100%;background:rgba(255,255,255,.08);color:#fff;font-family:monospace;}.code-input:focus{border-color:rgba(62,207,207,.8);box-shadow:0 0 0 3px rgba(62,207,207,.15);outline:none;}
 .code-input::placeholder{color:rgba(255,255,255,.35);}
 
 /* ── NOTIFICATION BADGE ── */
@@ -525,7 +525,7 @@ textarea{min-height:80px;resize:vertical;}
 .pin-dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--border);background:transparent;transition:background .15s,border-color .15s;}
 .pin-dot.filled{background:var(--teal);border-color:var(--teal);}
 .pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:240px;margin:0 auto 1rem;}
-.pin-key{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:14px;font-size:20px;font-weight:700;cursor:pointer;text-align:center;color:var(--text);}
+.pin-key{background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.05));border:1.5px solid rgba(255,255,255,.2);border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.25);padding:14px;font-size:20px;font-weight:700;cursor:pointer;text-align:center;color:var(--text);}.pin-key:active{transform:scale(.9);background:rgba(62,207,207,.25);box-shadow:0 0 15px rgba(62,207,207,.3);}
 .pin-key:hover{background:var(--cream);border-color:var(--teal);}
 
 /* ── KID DASHBOARD TABS ── */
@@ -774,9 +774,9 @@ textarea{min-height:80px;resize:vertical;}
   .kz-deco{position:absolute;font-size:4.5rem;opacity:.07;pointer-events:none;animation:kzFloat 6s ease-in-out infinite;}
   @keyframes kzFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-16px) rotate(6deg)}}
   .kz-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:.35rem 1rem;font-family:"Fredoka One",cursive;font-size:.78rem;letter-spacing:.08em;color:rgba(255,255,255,.9);margin-bottom:1.25rem;}
-  .kz-title{font-family:"Fredoka One",cursive;font-size:clamp(3.8rem,19vw,7.5rem);line-height:.92;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.5);margin-bottom:.1rem;letter-spacing:-.02em;}
-  .kz-subtitle{font-family:"Fredoka One",cursive;font-size:clamp(1rem,4.5vw,1.8rem);color:rgba(255,255,255,.65);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.6rem;}
-  .kz-verse{background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:.85rem 1.2rem;margin-bottom:1.8rem;max-width:340px;}
+  .kz-title{font-family:"Fredoka One",cursive;font-size:clamp(3.8rem,19vw,7.5rem);line-height:.92;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.5),0 0 60px rgba(245,200,66,.15);margin-bottom:.1rem;letter-spacing:-.02em;}
+  .kz-subtitle{font-family:"Fredoka One",cursive;font-size:clamp(1rem,4.5vw,1.8rem);color:rgba(255,255,255,.85);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.6rem;}
+  .kz-verse{background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(245,200,66,.25);border-radius:16px;padding:.85rem 1.2rem;margin-bottom:1.8rem;max-width:340px;}
   .kz-verse p{font-style:italic;font-size:.92rem;color:rgba(255,255,255,.9);line-height:1.55;margin:0 0 .3rem;}
   .kz-verse cite{font-family:"Fredoka One",cursive;font-size:.68rem;letter-spacing:.15em;color:#F4A820;font-style:normal;}
   .kz-btn-main{background:#fff;color:#1a0a2e;border:none;border-radius:99px;padding:.9rem 2rem;font-family:"Fredoka One",cursive;font-size:1.1rem;cursor:pointer;width:100%;max-width:310px;margin-bottom:.65rem;box-shadow:0 8px 32px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;gap:.5rem;transition:transform .15s;}
@@ -2978,7 +2978,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-15-v6';
+  const APP_VER = '2026-06-15-v7';
   if(localStorage.getItem('kgz_app_ver') !== APP_VER){
     ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
     localStorage.setItem('kgz_app_ver', APP_VER);
