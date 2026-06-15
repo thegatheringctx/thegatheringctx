@@ -951,7 +951,7 @@ html,body{
 }
 /* Animated gold energy lines */
 .kids-hero::before{
-  content:'⚔️   🛡️   ⚡   🔥   ✝️   ⚡   🛡️   ⚔️' !important;
+  content:'' !important;
   position:absolute !important;
   top:8px !important;
   left:0 !important;
@@ -1326,7 +1326,7 @@ input:focus,select:focus,textarea:focus{
 
 /* ── VICTORY WARRIOR ACADEMY BADGE in dashboard ── */
 #p-kdash .page-nav::after{
-  content:'⚔️ Victory Warrior Academy ⚔️' !important;
+  content:'' !important;
   font-size:9px !important;
   letter-spacing:.15em !important;
   color:var(--w-gold) !important;
@@ -1843,186 +1843,149 @@ input:focus,select:focus,textarea:focus{
       <div class="wl-wordmark">Warrior Zone</div>
     </div>
 
-    <!-- warrior hero SVG (existing, preserved) -->
-    <div class="wl-hero-wrap">
+    <!-- WARRIOR HERO: Boy + Girl side by side, Ephesians 6 style -->
+    <div class="wl-hero-wrap" style="max-width:380px;position:relative;margin:0 auto -8px">
       <div class="wl-hero-halo"></div>
-      <svg viewBox="0 0 260 370" xmlns="http://www.w3.org/2000/svg" class="wl-hero-svg">
-  <defs>
-    <linearGradient id="hg1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#8B9DC3"/>
-      <stop offset="100%" stop-color="#4A5580"/>
-    </linearGradient>
-    <linearGradient id="hg2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#C9A84C"/>
-      <stop offset="100%" stop-color="#8B5E00"/>
-    </linearGradient>
-    <linearGradient id="hg3" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1E3A8A"/>
-      <stop offset="100%" stop-color="#1E40AF"/>
-    </linearGradient>
-    <linearGradient id="hg4" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#D97706"/>
-      <stop offset="100%" stop-color="#92400E"/>
-    </linearGradient>
-    <linearGradient id="hg5" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#E8C99A"/>
-      <stop offset="100%" stop-color="#C4956A"/>
-    </linearGradient>
-    <linearGradient id="bladeLg" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#BFDBFE"/>
-      <stop offset="50%" stop-color="#EFF6FF"/>
-      <stop offset="100%" stop-color="#BFDBFE"/>
-    </linearGradient>
-    <radialGradient id="glowRg" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="rgba(245,200,66,0.55)"/>
-      <stop offset="100%" stop-color="rgba(220,80,20,0)"/>
-    </radialGradient>
-    <filter id="gf1" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="gf2" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2"/>
-    </filter>
-  </defs>
 
-  <!-- GROUND SHADOW -->
-  <ellipse cx="130" cy="358" rx="78" ry="10" fill="rgba(0,0,0,0.35)"/>
+      <!-- Sky + castle background -->
+      <svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;position:absolute;top:0;left:0;z-index:0">
+        <!-- Sky gradient -->
+        <defs>
+          <linearGradient id="sky-g" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#87CEEB"/>
+            <stop offset="40%" stop-color="#FDB97D"/>
+            <stop offset="100%" stop-color="#F4A460"/>
+          </linearGradient>
+          <radialGradient id="sun-g" cx="50%" cy="30%" r="40%">
+            <stop offset="0%" stop-color="rgba(255,240,180,0.9)"/>
+            <stop offset="100%" stop-color="rgba(255,200,80,0)"/>
+          </radialGradient>
+        </defs>
+        <rect width="380" height="200" fill="url(#sky-g)"/>
+        <!-- Sun glow -->
+        <ellipse cx="190" cy="55" rx="90" ry="70" fill="url(#sun-g)"/>
+        <!-- Clouds -->
+        <g fill="rgba(255,255,255,0.85)">
+          <ellipse cx="60" cy="45" rx="35" ry="18"/>
+          <ellipse cx="85" cy="38" rx="28" ry="16"/>
+          <ellipse cx="40" cy="50" rx="22" ry="12"/>
+          <ellipse cx="310" cy="50" rx="38" ry="17"/>
+          <ellipse cx="335" cy="43" rx="30" ry="15"/>
+          <ellipse cx="290" cy="55" rx="24" ry="12"/>
+        </g>
+        <!-- Mountains -->
+        <path d="M0 140 L60 80 L120 120 L170 70 L230 110 L280 65 L340 95 L380 75 L380 200 L0 200Z" fill="#5B8A6A" opacity="0.6"/>
+        <path d="M0 160 L80 110 L140 140 L200 100 L260 130 L320 105 L380 120 L380 200 L0 200Z" fill="#4A7A5A" opacity="0.8"/>
+        <!-- Cobblestone path -->
+        <ellipse cx="190" cy="190" rx="80" ry="20" fill="#8B7355" opacity="0.6"/>
+        <!-- Castle -->
+        <g transform="translate(145,30)">
+          <!-- Main tower -->
+          <rect x="30" y="30" width="30" height="60" fill="#D4C4A0"/>
+          <rect x="25" y="22" width="40" height="14" fill="#C8B890"/>
+          <!-- Battlements -->
+          <rect x="26" y="16" width="8" height="8" fill="#C8B890"/>
+          <rect x="38" y="16" width="8" height="8" fill="#C8B890"/>
+          <rect x="50" y="16" width="8" height="8" fill="#C8B890"/>
+          <!-- Side towers -->
+          <rect x="10" y="42" width="22" height="48" fill="#C8B890"/>
+          <rect x="58" y="42" width="22" height="48" fill="#C8B890"/>
+          <!-- Tower tops -->
+          <rect x="6" y="36" width="30" height="10" fill="#B8A880"/>
+          <rect x="54" y="36" width="30" height="10" fill="#B8A880"/>
+          <!-- Gate arch -->
+          <path d="M35 90 Q45 78 55 90 L55 90 L35 90Z" fill="#6B5A3E"/>
+          <!-- Windows -->
+          <rect x="39" y="48" width="12" height="16" rx="6" fill="#6B5A3E" opacity="0.7"/>
+          <rect x="13" y="52" width="9" height="12" rx="4" fill="#6B5A3E" opacity="0.7"/>
+          <rect x="68" y="52" width="9" height="12" rx="4" fill="#6B5A3E" opacity="0.7"/>
+          <!-- CROSS on main tower -->
+          <rect x="43" y="28" width="4" height="18" rx="1" fill="#F5C842"/>
+          <rect x="38" y="34" width="14" height="4" rx="1" fill="#F5C842"/>
+          <!-- Flag -->
+          <line x1="45" y1="16" x2="45" y2="6" stroke="#8B7355" stroke-width="1"/>
+          <polygon points="45,6 55,9 45,12" fill="#1E3A8A"/>
+        </g>
+        <!-- Path to castle -->
+        <path d="M140 190 Q190 160 190 100 Q190 140 240 190" fill="none" stroke="#A0856A" stroke-width="12" opacity="0.4"/>
+        <!-- Flowers on ground -->
+        <g fill="#FFD700" opacity="0.7">
+          <circle cx="30" cy="185" r="4"/><circle cx="48" cy="178" r="3"/>
+          <circle cx="340" cy="180" r="4"/><circle cx="355" cy="188" r="3"/>
+        </g>
+        <g fill="#9B59B6" opacity="0.5">
+          <circle cx="22" cy="190" r="3"/><circle cx="360" cy="185" r="3"/>
+        </g>
+      </svg>
 
-  <!-- BACKGROUND GLOW HALO -->
-  <circle cx="130" cy="185" r="95" fill="url(#glowRg)" opacity=".7"/>
+      <!-- ARMOR SIGNPOST (right side) -->
+      <div style="position:absolute;right:-10px;top:20px;z-index:3">
+        <svg viewBox="0 0 110 200" width="90" height="160" xmlns="http://www.w3.org/2000/svg">
+          <!-- Post -->
+          <rect x="38" y="0" width="8" height="200" rx="3" fill="#8B6040"/>
+          <!-- Signs -->
+          <g font-size="7" font-weight="700" font-family="Arial" fill="#2A1500">
+            <rect x="42" y="8" width="65" height="16" rx="3" fill="#D4A870"/>
+            <text x="44" y="19">HELMET</text>
+            <text x="44" y="27" font-size="6">OF SALVATION</text>
+            <rect x="42" y="30" width="65" height="16" rx="3" fill="#C89A5A"/>
+            <text x="44" y="41">BREASTPLATE</text>
+            <text x="44" y="49" font-size="6">OF RIGHTEOUSNESS</text>
+            <rect x="42" y="52" width="65" height="14" rx="3" fill="#D4A870"/>
+            <text x="44" y="63">BELT OF TRUTH</text>
+            <rect x="42" y="72" width="65" height="14" rx="3" fill="#C89A5A"/>
+            <text x="44" y="83">SHIELD OF FAITH</text>
+            <rect x="42" y="92" width="65" height="14" rx="3" fill="#D4A870"/>
+            <text x="44" y="103">SWORD OF SPIRIT</text>
+            <rect x="42" y="112" width="65" height="14" rx="3" fill="#C89A5A"/>
+            <text x="44" y="123">SHOES OF PEACE</text>
+          </g>
+          <!-- Sign tips (arrow points) -->
+          <polygon points="107,16 112,20 107,24" fill="#D4A870"/>
+          <polygon points="107,38 112,42 107,46" fill="#C89A5A"/>
+          <polygon points="107,59 112,63 107,67" fill="#D4A870"/>
+          <polygon points="107,79 112,83 107,87" fill="#C89A5A"/>
+          <polygon points="107,99 112,103 107,107" fill="#D4A870"/>
+          <polygon points="107,119 112,123 107,127" fill="#C89A5A"/>
+        </svg>
+      </div>
 
-  <!-- CAPE -->
-  <path d="M88,148 C62,172 46,228 50,305 L92,290 C86,252 92,210 108,183Z" fill="#7F1D1D" stroke="#991B1B" stroke-width="1"/>
-  <path d="M172,148 C198,172 214,228 210,305 L168,290 C174,252 168,210 152,183Z" fill="#7F1D1D" stroke="#991B1B" stroke-width="1"/>
-  <path d="M88,148 C76,158 68,178 64,200" stroke="rgba(239,68,68,0.25)" stroke-width="2.5" fill="none"/>
-  <path d="M172,148 C184,158 192,178 196,200" stroke="rgba(239,68,68,0.25)" stroke-width="2.5" fill="none"/>
+      <!-- LEFT BANNER -->
+      <div style="position:absolute;left:-8px;top:25px;z-index:3">
+        <svg viewBox="0 0 60 140" width="50" height="120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="0" width="4" height="140" rx="2" fill="#8B6040"/>
+          <rect x="8" y="5" width="48" height="90" rx="4" fill="#1E3A8A"/>
+          <rect x="8" y="5" width="48" height="90" rx="4" fill="none" stroke="#C9A84C" stroke-width="2"/>
+          <!-- Lion emblem -->
+          <text x="32" y="40" font-size="22" text-anchor="middle" fill="#C9A84C" opacity="0.9">🦁</text>
+          <text x="32" y="60" font-size="6" font-weight="800" text-anchor="middle" fill="#C9A84C" font-family="Arial">BE STRONG</text>
+          <text x="32" y="70" font-size="6" font-weight="800" text-anchor="middle" fill="#C9A84C" font-family="Arial">IN THE LORD</text>
+          <text x="32" y="83" font-size="5" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-family="Arial">EPH 6:10</text>
+          <!-- Fringe -->
+          <g fill="#C9A84C" opacity="0.7">
+            <rect x="9" y="93" width="3" height="10" rx="1"/>
+            <rect x="15" y="93" width="3" height="8" rx="1"/>
+            <rect x="21" y="93" width="3" height="11" rx="1"/>
+            <rect x="27" y="93" width="3" height="9" rx="1"/>
+            <rect x="33" y="93" width="3" height="10" rx="1"/>
+            <rect x="39" y="93" width="3" height="8" rx="1"/>
+            <rect x="45" y="93" width="3" height="11" rx="1"/>
+            <rect x="51" y="93" width="3" height="9" rx="1"/>
+          </g>
+        </svg>
+      </div>
 
-  <!-- LEGS / GREAVES -->
-  <rect x="100" y="265" width="26" height="58" rx="10" fill="url(#hg1)"/>
-  <rect x="104" y="268" width="7" height="44" rx="4" fill="rgba(255,255,255,0.14)"/>
-  <rect x="98" y="305" width="30" height="10" rx="5" fill="url(#hg2)"/>
-  <rect x="134" y="265" width="26" height="58" rx="10" fill="url(#hg1)"/>
-  <rect x="138" y="268" width="7" height="44" rx="4" fill="rgba(255,255,255,0.14)"/>
-  <rect x="132" y="305" width="30" height="10" rx="5" fill="url(#hg2)"/>
+      <!-- TWO WARRIORS side by side -->
+      <div style="display:flex;justify-content:center;gap:8px;position:relative;z-index:2;padding-top:60px;padding-bottom:10px">
+        <div id="wl-boy-warrior" class="wl-warrior-char" style="flex:1;display:flex;justify-content:center;align-items:flex-end">
+          <!-- Boy warrior rendered by JS -->
+        </div>
+        <div id="wl-girl-warrior" class="wl-warrior-char" style="flex:1;display:flex;justify-content:center;align-items:flex-end">
+          <!-- Girl warrior rendered by JS -->
+        </div>
+      </div>
 
-  <!-- TORSO ARMOR -->
-  <rect x="90" y="163" width="80" height="110" rx="16" fill="#1E1B4B"/>
-  <rect x="90" y="175" width="16" height="90" rx="8" fill="#2D2A6B"/>
-  <rect x="154" y="175" width="16" height="90" rx="8" fill="#2D2A6B"/>
-  <rect x="88" y="215" width="84" height="5" rx="2" fill="rgba(201,168,76,0.35)"/>
-
-  <!-- BREASTPLATE CROSS EMBLEM -->
-  <ellipse cx="130" cy="198" rx="24" ry="30" fill="#C9A84C"/>
-  <ellipse cx="130" cy="196" rx="19" ry="24" fill="#1E1B4B"/>
-  <rect x="127" y="180" width="6" height="32" rx="2" fill="#F5C842"/>
-  <rect x="118" y="191" width="24" height="6" rx="2" fill="#F5C842"/>
-  <rect x="128" y="181" width="4" height="30" rx="1" fill="rgba(255,255,255,0.3)"/>
-
-  <!-- BELT -->
-  <rect x="90" y="257" width="80" height="16" rx="5" fill="url(#hg2)"/>
-  <rect x="121" y="255" width="18" height="20" rx="4" fill="#F5D76E"/>
-  <rect x="123" y="257" width="14" height="16" rx="2" fill="#C9A84C"/>
-
-  <!-- SHOULDER PAULDRONS -->
-  <ellipse cx="88" cy="170" rx="24" ry="15" fill="#2D2A6B"/>
-  <ellipse cx="88" cy="166" rx="17" ry="10" fill="url(#hg2)"/>
-  <ellipse cx="88" cy="164" rx="12" ry="7" fill="#F5C842" opacity=".9"/>
-  <ellipse cx="172" cy="170" rx="24" ry="15" fill="#2D2A6B"/>
-  <ellipse cx="172" cy="166" rx="17" ry="10" fill="url(#hg2)"/>
-  <ellipse cx="172" cy="164" rx="12" ry="7" fill="#F5C842" opacity=".9"/>
-
-  <!-- SHIELD -->
-  <g transform="translate(-8,12) rotate(-18,62,215)">
-    <rect x="40" y="185" width="44" height="56" rx="14" fill="url(#hg3)"/>
-    <rect x="43" y="188" width="38" height="50" rx="12" fill="#2563EB"/>
-    <line x1="62" y1="192" x2="62" y2="234" stroke="#93C5FD" stroke-width="2.5" opacity=".85"/>
-    <line x1="47" y1="213" x2="77" y2="213" stroke="#93C5FD" stroke-width="2.5" opacity=".85"/>
-    <circle cx="62" cy="213" r="5" fill="#93C5FD"/>
-    <rect x="40" y="185" width="44" height="56" rx="14" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
-  </g>
-
-  <!-- SWORD + FLAMES -->
-  <g transform="translate(10,-5) rotate(18,195,170)">
-    <ellipse cx="195" cy="120" rx="14" ry="26" fill="rgba(245,158,11,0.3)" filter="url(#gf2)"/>
-    <rect x="191" y="85" width="8" height="105" rx="3" fill="url(#bladeLg)"/>
-    <rect x="191" y="85" width="3" height="105" rx="1" fill="rgba(147,197,253,0.4)"/>
-    <path d="M191,85 L195,72 L199,85Z" fill="url(#bladeLg)"/>
-    <rect x="180" y="185" width="30" height="8" rx="4" fill="url(#hg2)"/>
-    <rect x="192" y="193" width="6" height="30" rx="3" fill="url(#hg4)"/>
-    <ellipse cx="195" cy="226" rx="9" ry="7" fill="url(#hg2)"/>
-    <!-- Flames -->
-    <path d="M193,130 C188,115 202,108 197,96 C207,110 205,126 198,130Z" fill="#F59E0B" opacity=".9"/>
-    <path d="M197,120 C193,108 206,103 201,93 C210,107 208,120 202,124Z" fill="#FBBF24" opacity=".75"/>
-    <path d="M190,142 C185,128 200,122 195,110 C204,125 202,140 196,144Z" fill="#F97316" opacity=".7"/>
-    <path d="M194,112 C191,104 202,101 199,93 C207,104 205,114 199,117Z" fill="#FDE68A" opacity=".6"/>
-  </g>
-
-  <!-- NECK -->
-  <rect x="121" y="138" width="18" height="30" rx="7" fill="url(#hg5)"/>
-
-  <!-- HEAD + FACE -->
-  <ellipse cx="130" cy="116" rx="36" ry="38" fill="url(#hg5)"/>
-  <ellipse cx="94" cy="118" rx="7" ry="9" fill="#D4A574"/>
-  <ellipse cx="166" cy="118" rx="7" ry="9" fill="#D4A574"/>
-
-  <!-- HELMET -->
-  <path d="M94,104 C94,66 166,66 166,104 L164,96 C164,60 96,60 96,96Z" fill="#1E1B4B"/>
-  <path d="M94,104 L94,120 C94,100 166,100 166,120 L166,104 C166,86 94,86 94,104Z" fill="#2D2A6B"/>
-  <path d="M94,106 Q130,114 166,106" stroke="#C9A84C" stroke-width="3" fill="none"/>
-  <path d="M96,108 L90,128 C96,134 99,126 102,122Z" fill="#1E1B4B"/>
-  <path d="M164,108 L170,128 C164,134 161,126 158,122Z" fill="#1E1B4B"/>
-  <path d="M96,108 L90,128" stroke="#C9A84C" stroke-width="1.5" opacity=".6"/>
-  <path d="M164,108 L170,128" stroke="#C9A84C" stroke-width="1.5" opacity=".6"/>
-  <path d="M100,98 Q130,92 160,98" stroke="#C9A84C" stroke-width="2" fill="none" opacity=".7"/>
-
-  <!-- CREST PLUME -->
-  <path d="M130,64 C124,44 118,28 122,12 C126,24 130,36 134,24 C138,12 140,30 132,64Z" fill="url(#hg2)"/>
-
-  <!-- FACE DETAIL -->
-  <ellipse cx="130" cy="118" rx="26" ry="24" fill="#E8C99A"/>
-  <ellipse cx="130" cy="120" rx="23" ry="21" fill="url(#hg5)"/>
-  <path d="M116,108 Q122,104 128,108" stroke="#7C5230" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <path d="M132,108 Q138,104 144,108" stroke="#7C5230" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <ellipse cx="121" cy="116" rx="7" ry="8" fill="#fff"/>
-  <ellipse cx="139" cy="116" rx="7" ry="8" fill="#fff"/>
-  <ellipse cx="122" cy="117" rx="3" ry="3.5" fill="#6B3A00"/>
-  <ellipse cx="140" cy="117" rx="3" ry="3.5" fill="#6B3A00"/>
-  <ellipse cx="123" cy="117" rx="1.5" ry="2" fill="#111"/>
-  <ellipse cx="141" cy="117" rx="1.5" ry="2" fill="#111"/>
-  <circle cx="124" cy="115" r="1.5" fill="#fff" opacity=".9"/>
-  <circle cx="142" cy="115" r="1.5" fill="#fff" opacity=".9"/>
-  <ellipse cx="121" cy="116" rx="7" ry="8" fill="none" stroke="#8B5E3C" stroke-width="1"/>
-  <ellipse cx="139" cy="116" rx="7" ry="8" fill="none" stroke="#8B5E3C" stroke-width="1"/>
-  <path d="M128,125 Q130,128 132,125" stroke="#A06B3C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M118,131 Q130,140 142,131" stroke="#7C4A1A" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <path d="M121,133 Q130,139 139,133" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".7"/>
-  <ellipse cx="111" cy="126" rx="8" ry="5" fill="#FF9080" opacity=".32"/>
-  <ellipse cx="149" cy="126" rx="8" ry="5" fill="#FF9080" opacity=".32"/>
-
-  <!-- ANIMATED SPARKLES -->
-  <circle cx="64" cy="244" r="3.5" fill="#C9A84C" opacity=".5">
-    <animate attributeName="opacity" values=".3;1;.3" dur="2.3s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="3;4.5;3" dur="2.3s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="208" cy="172" r="4" fill="#F97316" opacity=".6">
-    <animate attributeName="opacity" values=".4;1;.4" dur="1.8s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="3;5;3" dur="1.8s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="112" cy="292" r="2.5" fill="#F5C842" opacity=".5">
-    <animate attributeName="opacity" values=".3;.9;.3" dur="2.6s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="200" cy="88" r="3" fill="#F5C842" opacity=".6">
-    <animate attributeName="opacity" values=".4;1;.4" dur="1.5s" repeatCount="indefinite"/>
-    <animate attributeName="r" values="2;4;2" dur="1.5s" repeatCount="indefinite"/>
-  </circle>
-  <g opacity=".7" filter="url(#gf1)">
-    <path d="M215,95 L217,90 L219,95 L224,97 L219,99 L217,104 L215,99 L210,97Z" fill="#FDE68A" opacity=".8">
-      <animate attributeName="opacity" values=".5;1;.5" dur="1.2s" repeatCount="indefinite"/>
-    </path>
-  </g>
-</svg>
-
+      <!-- Floating sparks -->
       <div class="wl-spark wl-sp1">⚡</div>
       <div class="wl-spark wl-sp2">🔥</div>
       <div class="wl-spark wl-sp3">✨</div>
@@ -2109,14 +2072,69 @@ input:focus,select:focus,textarea:focus{
 <!-- ═══════════════════ AVATAR PICK ═══════════════════ -->
 <div id="p-kavatar" class="page">
   <span class="back" onclick="show('p-ksignup')"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
-  <div style="margin-bottom:1.25rem">
-    <div class="eyebrow">step 1.5, your warrior</div>
-    <div class="big-title" style="color:#fff">Pick your <em style="color:var(--gold)">warrior!</em></div>
-    <p style="font-size:13px;color:rgba(255,255,255,.6);margin-top:.4rem">This is how you'll appear on the leaderboard.</p>
+  <div style="margin-bottom:1rem">
+    <div class="eyebrow">your warrior</div>
+    <div class="big-title" style="color:#fff">Build your <em style="color:var(--gold)">warrior!</em></div>
+    <p style="font-size:13px;color:rgba(255,255,255,.6);margin-top:.3rem">Choose your warrior, cape color, and earn armor by completing quests.</p>
   </div>
-  <div class="avatar-grid" id="avatar-picker-grid"></div>
-  <button class="btn-block btn-block-teal" onclick="avatarNext()">Next, Parent Step <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+
+  <!-- ── WARRIOR PREVIEW ── -->
+  <div style="display:flex;justify-content:center;gap:20px;margin-bottom:1.2rem" id="warrior-preview-row">
+    <div style="text-align:center">
+      <div id="prev-male" style="cursor:pointer;padding:8px;border-radius:16px;border:3px solid rgba(245,200,66,0.5);background:rgba(245,200,66,0.1);transition:all .2s" onclick="pickGender('male')">
+        <div id="prev-male-svg" style="display:flex;justify-content:center"></div>
+        <div style="font-size:11px;font-weight:800;color:#f5c842;margin-top:6px;letter-spacing:.08em">WARRIOR BOY</div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <div id="prev-female" style="cursor:pointer;padding:8px;border-radius:16px;border:3px solid transparent;background:rgba(255,255,255,0.05);transition:all .2s" onclick="pickGender('female')">
+        <div id="prev-female-svg" style="display:flex;justify-content:center"></div>
+        <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.5);margin-top:6px;letter-spacing:.08em">WARRIOR GIRL</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CAPE COLOR ── -->
+  <div style="margin-bottom:1.2rem">
+    <div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:.6rem">Choose Cape Color</div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap" id="cape-color-row">
+      <div class="cape-swatch" data-color="#1E3A8A" style="background:#1E3A8A;border:3px solid #f5c842" onclick="pickCape('#1E3A8A',this)" title="Royal Blue"></div>
+      <div class="cape-swatch" data-color="#7C1D1D" style="background:#7C1D1D" onclick="pickCape('#7C1D1D',this)" title="Crimson"></div>
+      <div class="cape-swatch" data-color="#1A4731" style="background:#1A4731" onclick="pickCape('#1A4731',this)" title="Forest Green"></div>
+      <div class="cape-swatch" data-color="#4A1D8A" style="background:#4A1D8A" onclick="pickCape('#4A1D8A',this)" title="Purple"></div>
+      <div class="cape-swatch" data-color="#8A4A1D" style="background:#8A4A1D" onclick="pickCape('#8A4A1D',this)" title="Copper"></div>
+      <div class="cape-swatch" data-color="#1D5C8A" style="background:#1D5C8A" onclick="pickCape('#1D5C8A',this)" title="Sky Blue"></div>
+      <div class="cape-swatch" data-color="#6B1D4A" style="background:#6B1D4A" onclick="pickCape('#6B1D4A',this)" title="Magenta"></div>
+      <div class="cape-swatch" data-color="#1D4A1D" style="background:#1D4A1D" onclick="pickCape('#1D4A1D',this)" title="Emerald"></div>
+    </div>
+  </div>
+
+  <!-- ── ARMOR UNLOCK PREVIEW ── -->
+  <div style="background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.2);border-radius:16px;padding:.9rem 1rem;margin-bottom:1rem">
+    <div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#f5c842;margin-bottom:.6rem">⚔️ Earn Your Armor</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem">
+      <div style="font-size:11px;color:rgba(255,255,255,0.65)">🟡 Belt of Truth — answer a question</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.65)">🥈 Breastplate — 3-day streak</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.65)">👟 Boots — read a devotional</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.65)">🔵 Shield of Faith — win a quiz</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.65)">⚪ Helmet — 7-day streak</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.65)">⚔️ Sword — 250 pts</div>
+    </div>
+  </div>
+
+  <button class="btn-block btn-block-teal" onclick="avatarNext()">Continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
 </div>
+
+<style>
+.cape-swatch{
+  width:38px;height:38px;border-radius:50%;cursor:pointer;
+  border:3px solid transparent;transition:all .2s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 2px 8px rgba(0,0,0,0.4);
+}
+.cape-swatch:hover{transform:scale(1.15);}
+.cape-swatch.selected{border-color:#f5c842 !important;transform:scale(1.2);box-shadow:0 0 16px rgba(245,200,66,0.5);}
+</style>
+
 
 <!-- ═══════════════════ PARENT AUTH ═══════════════════ -->
 <div id="p-pauth" class="page">
@@ -2805,95 +2823,258 @@ var selectedAvatar='m-warrior';
 var selectedGender='male';
 
 // SVG warrior generator -- cartoonish heroic big-head style
-function buildWarriorSVG(gender, armorPieces, size, animated){
+function buildWarriorSVG(gender, armorPieces, size, animated, capeColor){
   const isFemale = gender==='female';
-  const w=size||80, h=size||80;
+  const w=size||80, h=Math.round((size||80)*1.15);
   const animClass = animated ? 'warrior-bounce' : '';
-  // Color palette
-  const skinTone = '#F5C5A3';
-  const hairColor = isFemale ? '#8B4513' : '#4A3728';
-  const tunicColor = '#1a2a5e';
-  const beltColor = armorPieces.includes('belt') ? '#C9A84C' : '#8B6914';
-  const breastplateColor = armorPieces.includes('breastplate') ? '#C0C0C0' : null;
-  const bootsColor = armorPieces.includes('boots') ? '#00C07A' : '#5C3D2E';
-  const shieldVisible = armorPieces.includes('shield');
-  const helmetVisible = armorPieces.includes('helmet');
-  const swordVisible = armorPieces.includes('sword');
-  const isFullGlow = armorPieces.includes('full');
+  const sc = 1; // scale factor
 
-  return `<svg viewBox="0 0 80 90" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg" class="${animClass}" style="display:block;overflow:visible">
+  // ── Colors ──────────────────────────────────────────────
+  const skin       = '#E8B887';
+  const skinShade  = '#D4956A';
+  const hairM      = '#4A3728';
+  const hairF      = '#6B3A1F';
+  const cape       = capeColor || '#1E3A8A'; // default blue like the image
+  const capeLight  = '#2952CC';
+  const tunB       = '#E8D5B0'; // plain linen tunic
+  const tunS       = '#D4BC8A';
+
+  // armor pieces
+  const hasBelt        = armorPieces.includes('belt');
+  const hasBreast      = armorPieces.includes('breastplate');
+  const hasBoots       = armorPieces.includes('boots');
+  const hasShield      = armorPieces.includes('shield');
+  const hasHelmet      = armorPieces.includes('helmet');
+  const hasSword       = armorPieces.includes('sword');
+  const isFullGlow     = armorPieces.includes('full');
+  const hasAnyArmor    = hasBelt||hasBreast||hasBoots||hasShield||hasHelmet||hasSword;
+
+  // armor colors (silver/gold like the image)
+  const silver   = '#C8C8D0';
+  const silverHi = '#E8E8F0';
+  const silverSh = '#9898A8';
+  const gold     = '#C9A84C';
+  const goldHi   = '#F5D76E';
+
+  return `<svg viewBox="0 0 80 92" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg" class="${animClass}" style="display:block;overflow:visible">
   <defs>
-    <radialGradient id="glow-g" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#C9A84C" stop-opacity="0.6"/><stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/></radialGradient>
-    <filter id="gold-glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    ${isFullGlow ? '<filter id="full-glow"><feGaussianBlur stdDeviation="3" result="blur"/><feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.8 0 0 0 0 0.65 0 0 0 0 0.3 0 0 0 1 0"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>' : ''}
+    <radialGradient id="sk${size}" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="${skin}"/>
+      <stop offset="100%" stop-color="${skinShade}"/>
+    </radialGradient>
+    <linearGradient id="sl${size}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${silverHi}"/>
+      <stop offset="100%" stop-color="${silverSh}"/>
+    </linearGradient>
+    <linearGradient id="gl${size}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${goldHi}"/>
+      <stop offset="100%" stop-color="${gold}"/>
+    </linearGradient>
+    <linearGradient id="cv${size}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${cape}"/>
+      <stop offset="100%" stop-color="${capeLight}"/>
+    </linearGradient>
+    ${isFullGlow ? '<filter id="fg'+size+'"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' : ''}
   </defs>
-  ${isFullGlow ? '<ellipse cx="40" cy="82" rx="28" ry="6" fill="url(#glow-g)" opacity="0.8"/>' : ''}
-  <!-- Body / Tunic -->
-  <rect x="24" y="50" width="32" height="28" rx="5" fill="${tunicColor}" ${isFullGlow?'filter="url(#full-glow)"':''}/>
-  <!-- Belt -->
-  <rect x="22" y="62" width="36" height="6" rx="3" fill="${beltColor}" opacity="0.95"/>
-  <rect x="37" y="63" width="6" height="4" rx="1" fill="${armorPieces.includes('belt')?'#FFD700':'#6B4E12'}"/>
-  <!-- Breastplate -->
-  ${breastplateColor ? `<path d="M24 50 Q40 45 56 50 L54 64 Q40 68 26 64 Z" fill="${breastplateColor}" opacity="0.85" stroke="#888" stroke-width="0.5"/>
-  <line x1="40" y1="48" x2="40" y2="64" stroke="#999" stroke-width="0.5" opacity="0.6"/>` : ''}
-  <!-- Legs -->
-  <rect x="27" y="76" width="10" height="12" rx="3" fill="${tunicColor==='#1a2a5e'?'#152050':tunicColor}"/>
-  <rect x="43" y="76" width="10" height="12" rx="3" fill="${tunicColor==='#1a2a5e'?'#152050':tunicColor}"/>
-  <!-- Boots -->
-  <rect x="25" y="84" width="14" height="6" rx="3" fill="${bootsColor}"/>
-  <rect x="41" y="84" width="14" height="6" rx="3" fill="${bootsColor}"/>
-  <!-- Arms -->
-  <rect x="${shieldVisible?'8':'14'}" y="51" width="11" height="20" rx="5" fill="${tunicColor}"/>
-  <rect x="55" y="51" width="11" height="20" rx="5" fill="${tunicColor}"/>
+
+  <!-- ── GROUND SHADOW ── -->
+  <ellipse cx="40" cy="90" rx="22" ry="3" fill="rgba(0,0,0,0.20)"/>
+
+  <!-- ── CAPE / CLOAK (behind body) ── -->
+  <path d="M26 44 C16 52 12 70 14 86 L28 82 C24 68 26 56 32 48Z" fill="url(#cv${size})" opacity="0.92"/>
+  <path d="M54 44 C64 52 68 70 66 86 L52 82 C56 68 54 56 48 48Z" fill="url(#cv${size})" opacity="0.92"/>
+  <path d="M26 44 C22 48 20 54 18 62" stroke="${capeLight}" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M54 44 C58 48 60 54 62 62" stroke="${capeLight}" stroke-width="1" fill="none" opacity="0.4"/>
+
+  <!-- ── LEGS (tunic skirt or armored greaves) ── -->
+  <!-- Skirt/tunic bottom -->
+  <path d="M30 66 L28 86 L36 86 L38 70Z" fill="${hasBoots?silver:tunS}"/>
+  <path d="M50 66 L52 86 L44 86 L42 70Z" fill="${hasBoots?silver:tunS}"/>
+  ${hasBoots ? `
+  <!-- Greaves (shin armor) -->
+  <rect x="27" y="72" width="10" height="14" rx="4" fill="url(#sl${size})"/>
+  <rect x="43" y="72" width="10" height="14" rx="4" fill="url(#sl${size})"/>
+  <!-- Greave highlight -->
+  <rect x="29" y="74" width="3" height="9" rx="2" fill="rgba(255,255,255,0.3)"/>
+  <rect x="45" y="74" width="3" height="9" rx="2" fill="rgba(255,255,255,0.3)"/>
+  <!-- Gold cuff -->
+  <rect x="26" y="82" width="12" height="4" rx="2" fill="url(#gl${size})"/>
+  <rect x="42" y="82" width="12" height="4" rx="2" fill="url(#gl${size})"/>
+  ` : ''}
+  <!-- Sandals always -->
+  <rect x="26" y="84" width="13" height="5" rx="2" fill="#8B6040"/>
+  <rect x="41" y="84" width="13" height="5" rx="2" fill="#8B6040"/>
+  <!-- Sandal straps -->
+  <line x1="29" y1="84" x2="29" y2="89" stroke="#6B4020" stroke-width="1"/>
+  <line x1="33" y1="84" x2="33" y2="89" stroke="#6B4020" stroke-width="1"/>
+  <line x1="44" y1="84" x2="44" y2="89" stroke="#6B4020" stroke-width="1"/>
+  <line x1="48" y1="84" x2="48" y2="89" stroke="#6B4020" stroke-width="1"/>
+
+  <!-- ── BODY / TUNIC ── -->
+  <rect x="26" y="44" width="28" height="26" rx="6" fill="${tunB}"/>
+  <path d="M26 44 Q40 40 54 44" stroke="${tunS}" stroke-width="1" fill="none"/>
+  <!-- Tunic center line -->
+  <line x1="40" y1="46" x2="40" y2="68" stroke="${tunS}" stroke-width="0.8" opacity="0.6"/>
+
+  <!-- ── BREASTPLATE (armor over tunic) ── -->
+  ${hasBreast ? `
+  <path d="M26 44 Q40 38 54 44 L52 66 Q40 70 28 66 Z" fill="url(#sl${size})" opacity="0.95"/>
+  <!-- Breastplate center ridge -->
+  <path d="M40 40 L40 66" stroke="${gold}" stroke-width="1.5" fill="none" opacity="0.7"/>
+  <!-- Horizontal bands -->
+  <path d="M28 52 Q40 49 52 52" stroke="rgba(255,255,255,0.25)" stroke-width="1" fill="none"/>
+  <path d="M28 60 Q40 57 52 60" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/>
+  <!-- Gold trim edges -->
+  <path d="M26 44 Q40 38 54 44 L52 66 Q40 70 28 66 Z" fill="none" stroke="${gold}" stroke-width="1.5"/>
+  <!-- Shoulder pauldrons -->
+  <ellipse cx="24" cy="46" rx="8" ry="6" fill="url(#sl${size})"/>
+  <ellipse cx="24" cy="44" rx="6" ry="4" fill="${goldHi}" opacity="0.8"/>
+  <ellipse cx="56" cy="46" rx="8" ry="6" fill="url(#sl${size})"/>
+  <ellipse cx="56" cy="44" rx="6" ry="4" fill="${goldHi}" opacity="0.8"/>
+  ` : `
+  <!-- Shoulder cloth (plain) -->
+  <rect x="18" y="44" width="10" height="14" rx="4" fill="${tunS}"/>
+  <rect x="52" y="44" width="10" height="14" rx="4" fill="${tunS}"/>
+  `}
+
+  <!-- ── BELT ── -->
+  ${hasBelt ? `
+  <rect x="25" y="64" width="30" height="7" rx="3" fill="${gold}"/>
+  <rect x="37" y="64" width="6" height="7" rx="2" fill="${goldHi}"/>
+  <rect x="38.5" y="65.5" width="3" height="4" rx="1" fill="${gold}"/>
+  <!-- Belt highlight -->
+  <rect x="26" y="64.5" width="28" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>
+  ` : `
+  <!-- Plain cord belt -->
+  <rect x="26" y="65" width="28" height="4" rx="2" fill="${tunS}" opacity="0.8"/>
+  `}
+
+  <!-- ── ARMS ── -->
+  <!-- Left arm (shield side) -->
+  <rect x="${hasShield?'8':'16'}" y="45" width="10" height="18" rx="4" fill="${hasBreast?silver:tunB}"/>
+  <!-- Right arm -->
+  <rect x="54" y="45" width="10" height="18" rx="4" fill="${hasBreast?silver:tunB}"/>
+  ${hasBreast ? `
+  <!-- Arm highlight -->
+  <rect x="${hasShield?'9':'17'}" y="46" width="3" height="13" rx="2" fill="rgba(255,255,255,0.2)"/>
+  <rect x="55" y="46" width="3" height="13" rx="2" fill="rgba(255,255,255,0.2)"/>
+  ` : ''}
   <!-- Hands -->
-  <circle cx="${shieldVisible?'13':'19'}" cy="73" r="5" fill="${skinTone}"/>
-  <circle cx="61" cy="73" r="5" fill="${skinTone}"/>
-  <!-- Shield -->
-  ${shieldVisible ? `<path d="M4 60 L4 72 Q4 80 13 82 Q22 80 22 72 L22 60 Q13 56 4 60 Z" fill="#29AEFF" stroke="#0050AA" stroke-width="1"/>
-  <text x="13" y="73" font-size="8" text-anchor="middle" fill="white" font-weight="bold">✝</text>` : ''}
-  <!-- Sword -->
-  ${swordVisible ? `<g transform="translate(55,30) rotate(30)">
-    <rect x="-2" y="-22" width="4" height="26" rx="1" fill="#C0C0C0" filter="url(#gold-glow)"/>
-    <rect x="-7" y="2" width="14" height="3" rx="1" fill="${beltColor}"/>
-    <rect x="-1" y="4" width="2" height="6" rx="1" fill="${beltColor}"/>
-  </g>` : ''}
-  <!-- Neck -->
-  <rect x="35" y="43" width="10" height="9" rx="3" fill="${skinTone}"/>
-  <!-- HEAD (big -- cartoon proportions) -->
-  <ellipse cx="40" cy="28" rx="18" ry="20" fill="${skinTone}" ${isFullGlow?'filter="url(#full-glow)"':''}/>
-  <!-- Hair -->
-  ${isFemale ? 
-    `<path d="M22 22 Q22 8 40 8 Q58 8 58 22 Q58 14 52 11 Q40 5 28 11 Z" fill="${hairColor}"/>
-    <path d="M22 22 Q18 32 20 40 L24 38 Q22 30 24 24 Z" fill="${hairColor}"/>
-    <path d="M58 22 Q62 32 60 40 L56 38 Q58 30 56 24 Z" fill="${hairColor}"/>` :
-    `<path d="M22 22 Q22 8 40 8 Q58 8 58 22 Q56 12 48 9 Q40 7 32 9 Q24 12 22 22 Z" fill="${hairColor}"/>`
-  }
-  <!-- Helmet -->
-  ${helmetVisible ? `<path d="M22 26 Q22 6 40 6 Q58 6 58 26 L55 26 Q55 10 40 10 Q25 10 25 26 Z" fill="#888" stroke="#666" stroke-width="0.5" opacity="0.9" filter="url(#gold-glow)"/>
-  <rect x="22" y="24" width="36" height="4" rx="2" fill="#AAA" opacity="0.9"/>
-  <rect x="36" y="6" width="8" height="4" rx="2" fill="${beltColor}"/>` : ''}
-  <!-- Eyes -->
-  <ellipse cx="33" cy="27" rx="3.5" ry="4" fill="white"/>
-  <ellipse cx="47" cy="27" rx="3.5" ry="4" fill="white"/>
-  <circle cx="34" cy="28" r="2.2" fill="#1a1a2e"/>
-  <circle cx="48" cy="28" r="2.2" fill="#1a1a2e"/>
-  <circle cx="34.8" cy="27" r="0.8" fill="white"/>
-  <circle cx="48.8" cy="27" r="0.8" fill="white"/>
-  <!-- Eyebrows -->
-  <path d="M30 22 Q33 20 36 22" stroke="${hairColor}" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <path d="M44 22 Q47 20 50 22" stroke="${hairColor}" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <!-- Nose -->
-  <path d="M38 31 Q40 34 42 31" stroke="#D4956A" stroke-width="1" fill="none" stroke-linecap="round"/>
-  <!-- Smile -->
-  <path d="M34 37 Q40 42 46 37" stroke="#C0784A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="${hasShield?'13':'21'}" cy="64" rx="5" ry="4.5" fill="url(#sk${size})"/>
+  <ellipse cx="59" cy="64" rx="5" ry="4.5" fill="url(#sk${size})"/>
+
+  <!-- ── SHIELD (Ephesians 6:16 -- Shield of Faith) ── -->
+  ${hasShield ? `
+  <g transform="translate(-4,2)">
+    <path d="M4 52 L4 66 Q4 76 13 78 Q22 76 22 66 L22 52 Q13 47 4 52 Z" fill="${cape}" stroke="${gold}" stroke-width="1.8"/>
+    <!-- Shield face -->
+    <path d="M6 54 L6 65 Q6 73 13 74 Q20 73 20 65 L20 54 Q13 50 6 54 Z" fill="${capeLight}" opacity="0.7"/>
+    <!-- Shield cross -->
+    <line x1="13" y1="53" x2="13" y2="73" stroke="${goldHi}" stroke-width="1.8" opacity="0.9"/>
+    <line x1="6" y1="63" x2="20" y2="63" stroke="${goldHi}" stroke-width="1.8" opacity="0.9"/>
+    <!-- FAITH text -->
+    <text x="13" y="71" font-size="4" text-anchor="middle" fill="${goldHi}" font-weight="bold" opacity="0.9">FAITH</text>
+  </g>
+  ` : ''}
+
+  <!-- ── SWORD (Ephesians 6:17 -- Sword of the Spirit) ── -->
+  ${hasSword ? `
+  <g transform="translate(2,-8) rotate(22,64,55)">
+    <!-- Flame glow -->
+    <ellipse cx="64" cy="34" rx="5" ry="10" fill="rgba(245,158,11,0.35)"/>
+    <!-- Blade -->
+    <rect x="62" y="18" width="4" height="34" rx="1.5" fill="${silverHi}"/>
+    <rect x="62" y="18" width="2" height="34" rx="1" fill="rgba(200,220,255,0.5)"/>
+    <!-- Tip -->
+    <path d="M62 18 L64 11 L66 18Z" fill="${silverHi}"/>
+    <!-- Crossguard -->
+    <rect x="57" y="49" width="14" height="4" rx="2" fill="${gold}"/>
+    <ellipse cx="57" cy="51" rx="3" ry="3" fill="${gold}"/>
+    <ellipse cx="71" cy="51" rx="3" ry="3" fill="${gold}"/>
+    <!-- Handle -->
+    <rect x="62" y="52" width="4" height="10" rx="2" fill="#8B4513"/>
+    <!-- Flames -->
+    <path d="M63 36 C60 28 68 24 64 16 C70 26 68 36 65 38Z" fill="#F59E0B" opacity="0.85"/>
+    <path d="M65 30 C63 24 70 21 67 14 C72 23 70 32 67 34Z" fill="#FDE68A" opacity="0.6"/>
+  </g>
+  ` : ''}
+
+  <!-- ── NECK ── -->
+  <rect x="35" y="36" width="10" height="10" rx="3" fill="url(#sk${size})"/>
+  <!-- Cape clasp at neck -->
+  <circle cx="40" cy="44" r="3" fill="${gold}" opacity="0.9"/>
+  <circle cx="40" cy="44" r="1.5" fill="${goldHi}"/>
+
+  <!-- ── HEAD ── -->
+  <ellipse cx="40" cy="22" rx="17" ry="18" fill="url(#sk${size})" ${isFullGlow?'filter="url(#fg'+size+')"':''}/>
   <!-- Ears -->
-  <ellipse cx="22" cy="29" rx="3" ry="4" fill="${skinTone}"/>
-  <ellipse cx="58" cy="29" rx="3" ry="4" fill="${skinTone}"/>
-  <!-- Full glow halo -->
-  ${isFullGlow ? `<ellipse cx="40" cy="10" rx="20" ry="5" fill="${beltColor}" opacity="0.4" filter="url(#gold-glow)"/>
-  <path d="M20 10 Q40 2 60 10" stroke="${beltColor}" stroke-width="2" fill="none" opacity="0.6"/>` : ''}
+  <ellipse cx="23" cy="23" rx="3" ry="4" fill="${skin}"/>
+  <ellipse cx="57" cy="23" rx="3" ry="4" fill="${skin}"/>
+
+  <!-- ── HAIR ── -->
+  ${isFemale ? `
+  <!-- Female: longer hair with ponytail -->
+  <path d="M23 18 Q23 4 40 4 Q57 4 57 18 Q55 8 48 6 Q40 3 32 6 Q25 8 23 18 Z" fill="${hairF}"/>
+  <!-- Side pieces flowing down -->
+  <path d="M23 18 Q19 28 21 38 L25 36 Q23 26 25 20 Z" fill="${hairF}"/>
+  <path d="M57 18 Q61 28 59 38 L55 36 Q57 26 55 20 Z" fill="${hairF}"/>
+  <!-- Ponytail hint behind head -->
+  <path d="M50 10 Q58 16 56 26 L54 24 Q56 16 50 12Z" fill="${hairF}" opacity="0.7"/>
+  ` : `
+  <!-- Male: short cut -->
+  <path d="M23 18 Q23 4 40 4 Q57 4 57 18 Q55 10 48 7 Q40 5 32 7 Q25 10 23 18 Z" fill="${hairM}"/>
+  `}
+
+  <!-- ── HELMET ── -->
+  ${hasHelmet ? `
+  <!-- Helmet dome -->
+  <path d="M23 22 Q23 2 40 2 Q57 2 57 22 L55 20 Q55 6 40 6 Q25 6 25 20 Z" fill="${silver}"/>
+  <!-- Cheek guards -->
+  <path d="M23 22 L22 34 Q24 38 27 36 L28 26Z" fill="${silver}"/>
+  <path d="M57 22 L58 34 Q56 38 53 36 L52 26Z" fill="${silver}"/>
+  <!-- Gold helmet rim -->
+  <path d="M23 22 Q40 28 57 22" stroke="${gold}" stroke-width="2.5" fill="none"/>
+  <!-- Crest plume -->
+  <path d="M40 6 C36 -4 32 -10 34 -18 C37 -8 40 -2 43 -10 C45 -2 44 -8 40 6Z" fill="${gold}"/>
+  <!-- Helmet highlight -->
+  <path d="M28 14 Q33 8 40 8" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Visor band -->
+  <rect x="23" y="21" width="34" height="4" rx="2" fill="${gold}" opacity="0.85"/>
+  ` : ''}
+
+  <!-- ── FACE ── -->
+  <ellipse cx="40" cy="24" rx="13" ry="14" fill="url(#sk${size})"/>
+  <!-- Eyebrows -->
+  <path d="M32 18 Q35 16 38 18" stroke="${isFemale?hairF:hairM}" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M42 18 Q45 16 48 18" stroke="${isFemale?hairF:hairM}" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- Eyes -->
+  <ellipse cx="35" cy="22" rx="3.5" ry="4" fill="white"/>
+  <ellipse cx="45" cy="22" rx="3.5" ry="4" fill="white"/>
+  <circle cx="36" cy="23" r="2.2" fill="#2A1500"/>
+  <circle cx="46" cy="23" r="2.2" fill="#2A1500"/>
+  <circle cx="36.8" cy="22" r="0.9" fill="white"/>
+  <circle cx="46.8" cy="22" r="0.9" fill="white"/>
+  <!-- Eye outline -->
+  <ellipse cx="35" cy="22" rx="3.5" ry="4" fill="none" stroke="${skinShade}" stroke-width="0.7"/>
+  <ellipse cx="45" cy="22" rx="3.5" ry="4" fill="none" stroke="${skinShade}" stroke-width="0.7"/>
+  <!-- Nose -->
+  <path d="M38 28 Q40 31 42 28" stroke="${skinShade}" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- Smile (heroic grin matching the image) -->
+  <path d="M34 33 Q40 38 46 33" stroke="#C0784A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M36 34 Q40 37 44 34" stroke="rgba(255,255,255,0.5)" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- Rosy cheeks -->
+  <ellipse cx="29" cy="28" rx="5" ry="3" fill="#FF9080" opacity="0.28"/>
+  <ellipse cx="51" cy="28" rx="5" ry="3" fill="#FF9080" opacity="0.28"/>
+
+  <!-- ── FULL GLOW HALO ── -->
+  ${isFullGlow ? `
+  <ellipse cx="40" cy="8" rx="22" ry="6" fill="${gold}" opacity="0.35" filter="url(#fg${size})"/>
+  <circle cx="40" cy="4" r="8" fill="none" stroke="${goldHi}" stroke-width="2" opacity="0.5"/>
+  ` : ''}
+
 </svg>`;
 }
+
 
 // Armor unlock system -- tied to Ephesians 6
 var ARMOR_PIECES = [
@@ -2930,11 +3111,11 @@ function getArmorUnlocked(kid){
 }
 
 function renderWarriorAvatar(kid, size, animated){
-  if(!kid) return buildWarriorSVG('male',[],size||60,animated);
+  if(!kid) return buildWarriorSVG('male',[],size||60,animated,null);
   const gender = kid.gender||kid.avatar||'male';
   const g = gender==='female'||gender==='f' ? 'female' : 'male';
   const armor = getArmorUnlocked(kid);
-  return buildWarriorSVG(g, armor, size||60, animated);
+  return buildWarriorSVG(g, armor, size||60, animated, kid.capeColor||null);
 }
 
 var AVATARS_EARLY=[
@@ -3164,6 +3345,57 @@ function lppb(){S.loginPin=S.loginPin.slice(0,-1);updDots('lpd',S.loginPin);}
 function plp(d){if(S.parentPin.length<4){S.parentPin+=d;updDots('ppd',S.parentPin);}}
 function plpb(){S.parentPin=S.parentPin.slice(0,-1);updDots('ppd',S.parentPin);}
 
+// ── WARRIOR BUILDER: Gender + Cape Color ──────────────────
+var _suCapeColor = '#1E3A8A'; // default royal blue
+
+function pickGender(g){
+  window._suGender = g;
+  // Update border states
+  var mDiv = document.getElementById('prev-male');
+  var fDiv = document.getElementById('prev-female');
+  var mLbl = mDiv ? mDiv.querySelector('div:last-child') : null;
+  var fLbl = fDiv ? fDiv.querySelector('div:last-child') : null;
+  if(mDiv) mDiv.style.borderColor = g==='male' ? 'rgba(245,200,66,0.8)' : 'transparent';
+  if(mDiv) mDiv.style.background  = g==='male' ? 'rgba(245,200,66,0.1)' : 'rgba(255,255,255,0.05)';
+  if(fDiv) fDiv.style.borderColor = g==='female' ? 'rgba(245,200,66,0.8)' : 'transparent';
+  if(fDiv) fDiv.style.background  = g==='female' ? 'rgba(245,200,66,0.1)' : 'rgba(255,255,255,0.05)';
+  if(mLbl) mLbl.style.color = g==='male' ? '#f5c842' : 'rgba(255,255,255,0.5)';
+  if(fLbl) fLbl.style.color = g==='female' ? '#f5c842' : 'rgba(255,255,255,0.5)';
+  refreshWarriorPreview();
+}
+
+function pickCape(color, el){
+  _suCapeColor = color;
+  document.querySelectorAll('.cape-swatch').forEach(s=>s.classList.remove('selected'));
+  if(el) el.classList.add('selected');
+  refreshWarriorPreview();
+}
+
+function refreshWarriorPreview(){
+  var g = window._suGender || 'male';
+  var c = _suCapeColor || '#1E3A8A';
+  var mEl = document.getElementById('prev-male-svg');
+  var fEl = document.getElementById('prev-female-svg');
+  // Always show both warriors, highlight selected
+  if(mEl) mEl.innerHTML = buildWarriorSVG('male', [], 90, true, c);
+  if(fEl) fEl.innerHTML = buildWarriorSVG('female', [], 90, true, c);
+}
+
+// Init warrior previews when avatar page opens
+var _origShow = show;
+function show(id, pushToStack){
+  _origShow(id, pushToStack);
+  if(id === 'p-kavatar'){
+    setTimeout(function(){
+      // Pre-select royal blue swatch
+      var firstSwatch = document.querySelector('.cape-swatch');
+      if(firstSwatch) firstSwatch.classList.add('selected');
+      pickGender(window._suGender || 'male');
+      refreshWarriorPreview();
+    }, 50);
+  }
+}
+
 function selectGender(g,btn){
   window._suGender=g;
   document.querySelectorAll('#su-gender-m,#su-gender-f').forEach(b=>{
@@ -3172,7 +3404,7 @@ function selectGender(g,btn){
   btn.style.border='2px solid #f5c842';btn.style.background='rgba(245,200,66,0.2)';
 }
 function signupStep1(){const first=document.getElementById('su-first').value.trim(),last=document.getElementById('su-last').value.trim(),age=parseInt(document.getElementById('su-age').value);msg('su-err','',false);if(!first||!last){msg('su-err','Please enter your first and last name!');return;}if(!age){msg('su-err','Please pick your age!');return;}S.signupTmp={first,last,age};S.newPin='';updDots('pd','');show('p-klogin');}
-async function signupFinish(){const pName=document.getElementById('pa-name').value.trim();msg('pa-err','',false);if(!pName){msg('pa-err','Please enter the parent or guardian name.');return;}if(S.newPin.length<4){msg('pa-err','Please enter all 4 digits of your family PIN.');return;}const t=S.signupTmp,id=genId();const kid={id,firstName:t.first,lastName:t.last,age:t.age,ageGroup:t.age<=7?'4-7':'8-12',points:0,pin:S.newPin,parentName:pName,joinedAt:Date.now(),gender:window._suGender||null};S.kids.push(kid);await sv('kids',S.kids);S.currentKid=kid.id;showKwelcome(kid);}
+async function signupFinish(){const pName=document.getElementById('pa-name').value.trim();msg('pa-err','',false);if(!pName){msg('pa-err','Please enter the parent or guardian name.');return;}if(S.newPin.length<4){msg('pa-err','Please enter all 4 digits of your family PIN.');return;}const t=S.signupTmp,id=genId();const kid={id,firstName:t.first,lastName:t.last,age:t.age,ageGroup:t.age<=7?'4-7':'8-12',points:0,pin:S.newPin,parentName:pName,joinedAt:Date.now(),gender:window._suGender||null,capeColor:window._suCapeColor||'#1E3A8A'};S.kids.push(kid);await sv('kids',S.kids);S.currentKid=kid.id;showKwelcome(kid);}
 function kidLogin(){const raw=document.getElementById('li-id').value.trim().toUpperCase();msg('li-err','',false);const kid=S.kids.find(k=>k.id===raw);if(!kid){msg('li-err',"We couldn't find that ID. Double-check with your parent!");return;}if(S.loginPin!==kid.pin){msg('li-err','Incorrect family PIN. Try again!');return;}S.currentKid=kid;S.loginPin='';updDots('lpd','');goKidDash();}
 function goKidDash(){
   renderKidDash();show('p-kdash');
@@ -3565,7 +3797,7 @@ function swordAnswer(correct, optIdx){
         awardGamePoints('Sword of the Spirit',G.score);
         hub.innerHTML=`<button class="game-back" onclick="renderGames()">← Games</button>
         <div style="text-align:center;padding:2rem 1rem">
-          ${buildWarriorSVG(S.currentKid?.gender||'male',getArmorUnlocked(S.currentKid),90,true)}
+          ${buildWarriorSVG(S.currentKid?.gender||'male',getArmorUnlocked(S.currentKid),90,true,S.currentKid?.capeColor||null)}
           <div style="font-family:'Bangers',cursive;font-size:2rem;color:#C9A84C;letter-spacing:.1em;margin:.5rem 0">VICTORY!</div>
           <div style="font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:1rem">You slashed every lie with God's truth!<br><strong style="color:#C9A84C">+${G.score} pts earned!</strong></div>
           <button onclick="initSwordSpirit()" style="background:linear-gradient(135deg,#C9A84C,#8B4500);color:#fff;border:none;border-radius:99px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-bottom:.75rem;font-family:'Bangers',cursive;letter-spacing:.08em">⚔️ PLAY AGAIN</button>
@@ -3896,7 +4128,7 @@ async function renderSundayModeScreen(){
       <div style="font-family:'Bangers',cursive;font-size:1.8rem;color:#C9A84C;letter-spacing:.1em;margin-bottom:.5rem">SUNDAY NOTES</div>
       <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:1.5rem">Sunday content loads here during service.<br>Check back Sunday at 5 PM!</div>
       <div style="display:inline-block;filter:drop-shadow(0 4px 20px rgba(201,168,76,0.2))">
-        ${buildWarriorSVG(k?.gender||'male',getArmorUnlocked(k),80,true)}
+        ${buildWarriorSVG(k?.gender||'male',getArmorUnlocked(k),80,true,k?.capeColor||null)}
       </div>
     </div>`;
     return;
@@ -3929,7 +4161,7 @@ async function renderSundayModeScreen(){
   <!-- Warrior ready pose -->
   <div style="text-align:center;margin-bottom:.75rem">
     <div style="display:inline-block;filter:drop-shadow(0 4px 20px rgba(201,168,76,0.25))" id="sunday-warrior">
-      ${buildWarriorSVG(k?.gender||'male',getArmorUnlocked(k),70,true)}
+      ${buildWarriorSVG(k?.gender||'male',getArmorUnlocked(k),70,true,k?.capeColor||null)}
     </div>
     <div style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:.1em;margin-top:4px">WARRIOR IN TRAINING</div>
   </div>
@@ -4143,7 +4375,7 @@ function showBossDefeatedCelebration(boss){
   <div style="text-align:center;padding:2rem;max-width:380px">
     <style>@keyframes victory-drop{from{transform:scale(0.5) translateY(-30px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}</style>
     <div style="animation:victory-drop .5s ease both;display:inline-block;margin-bottom:1rem">
-      ${buildWarriorSVG(k?.gender||'male',getArmorUnlocked(k),100,false)}
+      ${buildWarriorSVG(k?.gender||'male',getArmorUnlocked(k),100,false,k?.capeColor||null)}
     </div>
     <div style="margin-bottom:1rem;animation:victory-drop .5s ease .2s both;opacity:0">
       ${buildBossSVG(boss.id,0,70)}
@@ -4799,21 +5031,69 @@ function sgAnswer(chosen){
   renderSGDots();
   setTimeout(()=>{sgIdx++;renderSGDots();renderSGQ();},1800);
 }
+// Curated apologetics video library (kid-safe YouTube IDs)
+var APOL_VIDEOS = [
+  {cat:'God & Creation', label:'How did the universe begin?', ytId:'GlqVAFBsRY8'},
+  {cat:'Jesus', label:'Is Jesus really real?', ytId:'CiEbBJFqFGU'},
+  {cat:'The Bible', label:'Can we trust the Bible?', ytId:'qVJHe-hW0lk'},
+  {cat:'Science & Faith', label:'Does science disprove God?', ytId:'SbgMk3CBBBA'},
+];
+
 function buildApol(pfx){
   const cats=[...new Set(APOL.map(a=>a.cat))];
-  return cats.map(cat=>{
+  // Video section at top
+  var videoSection = '';
+  if(APOL_VIDEOS.length){
+    videoSection = '<div style="margin-bottom:1.5rem">' +
+      '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#f5c842;margin-bottom:.75rem;display:flex;align-items:center;gap:6px">' +
+        '<span style="background:#f5c842;color:#0A0420;border-radius:4px;padding:2px 6px;font-size:9px">▶ VIDEO</span> Apologetics Videos</div>' +
+      '<div style="display:flex;flex-direction:column;gap:.6rem">' +
+      APOL_VIDEOS.map(function(v){
+        return '<div onclick="toggleApolVideo('apv-'+v.ytId+'')" style="background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.2);border-radius:14px;overflow:hidden;cursor:pointer">' +
+          '<div style="display:flex;align-items:center;gap:10px;padding:.65rem .75rem">' +
+            '<div style="width:44px;height:36px;background:#0A0420;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">' +
+              '<svg width="18" height="18" viewBox="0 0 24 24" fill="#f5c842"><polygon points="5,3 19,12 5,21"/></svg></div>' +
+            '<div>' +
+              '<div style="font-size:12px;font-weight:800;color:#fff">' + v.label + '</div>' +
+              '<div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:2px">' + v.cat + ' · Tap to watch</div>' +
+            '</div>' +
+          '</div>' +
+          '<div id="apv-' + v.ytId + '" style="display:none;padding:0 10px 10px">' +
+            '<div style="position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;background:#000">' +
+              '<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:10px" ' +
+                'src="https://www.youtube-nocookie.com/embed/' + v.ytId + '?rel=0&modestbranding=1" ' +
+                'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
+                'allowfullscreen loading="lazy"></iframe>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('') +
+      '</div></div>';
+  }
+
+  var questionsSection = cats.map(cat=>{
     const items=APOL.filter(a=>a.cat===cat);
-    return`<div style="margin-bottom:1.25rem">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:.5rem;padding-left:.25rem">${cat}</div>
-      ${items.map((a,i)=>{
+    return\`<div style="margin-bottom:1.25rem">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:.5rem;padding-left:.25rem">\${cat}</div>
+      \${items.map((a,i)=>{
         const idx=APOL.indexOf(a);
-        return`<div class="apol-card" id="${pfx}${idx}" onclick="toggleApol('${pfx}${idx}')">
-          <div class="apol-q"><span>${a.q}</span><i class="ti ti-chevron-down apol-chev" aria-hidden="true"></i></div>
-          <div class="apol-a">${a.a}</div>
-        </div>`;
+        return\`<div class="apol-card" id="\${pfx}\${idx}" onclick="toggleApol('\${pfx}\${idx}')">
+          <div class="apol-q"><span>\${a.q}</span><i class="ti ti-chevron-down apol-chev" aria-hidden="true"></i></div>
+          <div class="apol-a">\${a.a}</div>
+        </div>\`;
       }).join('')}
-    </div>`;
+    </div>\`;
   }).join('');
+
+  return videoSection + questionsSection;
+}
+function toggleApolVideo(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var isOpen = el.style.display !== 'none';
+  // Close all other videos first
+  document.querySelectorAll('[id^="apv-"]').forEach(function(v){ v.style.display='none'; });
+  el.style.display = isOpen ? 'none' : 'block';
 }
 function toggleApol(id){document.getElementById(id).classList.toggle('open');}
 
@@ -4914,7 +5194,7 @@ function enterSundayMode(){
         <div style="font-size:64px;margin-bottom:.5rem">⚔️</div>
         <div style="font-family:Bangers,cursive;font-size:2rem;color:#f5c842;letter-spacing:.08em">WARRIOR IN THE HOUSE!</div>
         <div style="font-size:.9rem;color:rgba(255,255,255,0.55);margin:.5rem 0 1rem">You're already checked in today, ${k.firstName}!</div>
-        <div style="width:100%;max-width:200px;margin:0 auto">${buildWarriorSVG(k.gender||'male',getArmorUnlocked(k),160,false)}</div>
+        <div style="width:100%;max-width:200px;margin:0 auto">${buildWarriorSVG(k.gender||'male',getArmorUnlocked(k),160,false,k.capeColor||null)}</div>
         <div style="font-size:.85rem;color:rgba(255,255,255,0.45);margin-top:1rem">Total points: <strong style="color:#f5c842">${k.points} ⚡</strong></div>
       </div>`;
     return;
@@ -4939,7 +5219,7 @@ async function awardSundayCheckin(k){
   }
   // BIG WARRIOR REVEAL
   const hub=document.getElementById('games-hub');if(!hub)return;
-  const svg=buildWarriorSVG(S.kids[idx].gender||'male',getArmorUnlocked(S.kids[idx]),200,false);
+  const svg=buildWarriorSVG(S.kids[idx].gender||'male',getArmorUnlocked(S.kids[idx]),200,false,S.kids[idx].capeColor||null);
   hub.innerHTML=`
     <div style="text-align:center;animation:clue-appear .5s ease">
       <div style="font-size:.75rem;font-weight:800;letter-spacing:.2em;color:rgba(255,255,255,0.4);margin-bottom:.3rem">SUNDAY WARRIOR CHECK-IN</div>
@@ -4976,7 +5256,7 @@ function checkArmorUnlocks(prevPts, newPts, kid){
 function showArmorCeremony(piece, kid){
   const overlay=document.createElement('div');
   overlay.style.cssText='position:fixed;inset:0;background:rgba(10,6,40,0.96);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;animation:clue-appear .4s ease';
-  const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),180,false);
+  const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),180,false,kid.capeColor||null);
   overlay.innerHTML=`
     <div style="font-size:3rem;margin-bottom:.5rem;animation:bounce-in .6s cubic-bezier(.34,1.56,.64,1)">${piece.emoji}</div>
     <div style="font-family:Bangers,cursive;font-size:1.4rem;color:rgba(255,255,255,0.5);letter-spacing:.18em;margin-bottom:.2rem">ARMOR UNLOCKED!</div>
@@ -5007,7 +5287,7 @@ function enterDisplayMode(){
       <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:.75rem;align-content:start">
         ${sorted.map((kid,i)=>{
           const rankColor=i===0?'#f5c842':i===1?'#C0C0C0':i===2?'#CD7F32':'rgba(255,255,255,0.4)';
-          const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),48,false);
+          const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),48,false,kid.capeColor||null);
           return `<div style="display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,${i<3?'0.1':'0.05'});border:1.5px solid rgba(${i===0?'245,200,66,0.3':i<3?'255,255,255,0.15':'255,255,255,0.06'});border-radius:20px;padding:.85rem 1.2rem">
             <div style="font-family:Bangers,cursive;font-size:2rem;color:${rankColor};min-width:2.2rem;text-align:center">${i+1}</div>
             <div style="width:52px;height:52px;flex-shrink:0">${svg}</div>
@@ -6498,7 +6778,7 @@ function renderKLeaderboard(){
   const topHTML=top3.map((kid,i)=>{
     const rank=i+1;
     const isMe=kid.id===k.id;
-    const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),38,false);
+    const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),38,false,kid.capeColor||null);
     return`<div style="display:flex;align-items:center;gap:.7rem;background:${rankBgs[rank]};border:1.5px solid ${rankBorders[rank]};border-radius:16px;padding:.65rem .8rem;margin-bottom:.4rem${isMe?';box-shadow:0 0 12px rgba(245,200,66,0.15)':''}">
       <div style="font-family:Bangers,cursive;font-size:1.2rem;color:${rankColors[rank]};min-width:28px;text-align:center">${rank}</div>
       <div style="width:38px;height:38px;flex-shrink:0">${svg}</div>
@@ -6510,7 +6790,7 @@ function renderKLeaderboard(){
   const restHTML=rest.map((kid,i)=>{
     const rank=i+4;
     const isMe=kid.id===k.id;
-    const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),32,false);
+    const svg=buildWarriorSVG(kid.gender||'male',getArmorUnlocked(kid),32,false,kid.capeColor||null);
     return`<div style="display:flex;align-items:center;gap:.7rem;background:${isMe?'rgba(245,200,66,0.07)':'rgba(255,255,255,0.04)'};border:1px solid rgba(255,255,255,${isMe?'.18':'.06'});border-radius:14px;padding:.55rem .75rem;margin-bottom:.35rem">
       <div style="font-family:Bangers,cursive;font-size:1rem;color:rgba(255,255,255,0.35);min-width:24px;text-align:center">${rank}</div>
       <div style="width:32px;height:32px;flex-shrink:0">${svg}</div>
@@ -7616,6 +7896,18 @@ function toggleFAQ(i){
   ans.style.display=open?"none":"";
   icon.innerHTML=open?"&#43;":"&#8722;";
 }
+
+function initLandingWarriors(){
+  // Full Ephesians 6 armor set for the landing showcase warriors
+  var fullArmor = ['belt','breastplate','boots','shield','helmet','sword'];
+  var boyEl  = document.getElementById('wl-boy-warrior');
+  var girlEl = document.getElementById('wl-girl-warrior');
+  if(boyEl)  boyEl.innerHTML  = buildWarriorSVG('male',   fullArmor, 130, true,  '#1E3A8A');
+  if(girlEl) girlEl.innerHTML = buildWarriorSVG('female', fullArmor, 130, true,  '#1E3A8A');
+}
+document.addEventListener('DOMContentLoaded', function(){
+  setTimeout(initLandingWarriors, 100);
+});
 
 function initLandingParticles(){
   var screen=document.querySelector('.wl-screen');
@@ -9171,4 +9463,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781557186-pnmgwclzjrauktblsbmx -->
+<!-- deploy-1781558031-kzfjdffloimoodoqcyqv -->
