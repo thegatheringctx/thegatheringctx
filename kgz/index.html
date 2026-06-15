@@ -25,7 +25,7 @@
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:7rrlhe8808v59tsj -->
+<!-- uid:slfbyx0p5qji09lq -->
 <!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
@@ -2978,7 +2978,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-15-v7';
+  const APP_VER = '2026-06-15-v8';
   if(localStorage.getItem('kgz_app_ver') !== APP_VER){
     ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
     localStorage.setItem('kgz_app_ver', APP_VER);
@@ -7622,7 +7622,18 @@ function renderStore(){
   if(!el)return;
   var kid=S.kids.find(function(k){return k.id===S.currentKid;});
   var pts=kid?kid.points:0;
-  el.innerHTML=(DEFAULT_STORE||[]).map(function(item){
+  // Pull from Supabase store_items, fall back to DEFAULT_STORE
+  var supaUrl=window._SUPA_URL+'/rest/v1/store_items?active=eq.true&order=pts.asc&select=id,name,description,pts,type,img,amazon_url';
+  fetch(supaUrl,{headers:{'apikey':window._SUPA_ANON,'Authorization':'Bearer '+window._SUPA_ANON}})
+    .then(function(r){return r.json();})
+    .then(function(items){
+      if(items&&items.length>0){_renderStoreItems(el,pts,items.map(function(i){return {id:i.id,name:i.name,desc:i.description,pts:i.pts,type:i.type,img:i.img,url:i.amazon_url};}));}
+      else{_renderStoreItems(el,pts,DEFAULT_STORE||[]);}
+    })
+    .catch(function(){_renderStoreItems(el,pts,DEFAULT_STORE||[]);});
+}
+function _renderStoreItems(el,pts,items){
+  el.innerHTML=items.map(function(item){
     var canAfford=pts>=item.pts;
     return '<div style="background:#fff;border:1.5px solid #eee;border-radius:14px;padding:1rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.8rem;opacity:'+(canAfford?1:.55)+'">'+
       '<div style="flex:1"><div style="font-weight:800;font-size:.9rem;color:#5C1A1B;margin-bottom:.2rem">'+item.name+'</div>'+
