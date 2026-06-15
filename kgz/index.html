@@ -25,7 +25,7 @@
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:geatfm0s24ag -->
+<!-- uid:gr9h58c4hj -->
 <!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
@@ -2978,7 +2978,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-15-v14';
+  const APP_VER = '2026-06-15-v15';
   // Always clear devo cache on load to ensure fresh content
   ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
   localStorage.setItem('kgz_app_ver', APP_VER);
@@ -6735,7 +6735,7 @@ function renderLandDevos(){
   if(!el)return;
   var age=window._landDevoAge||'47';
   el.innerHTML='<div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5)">Loading...</div>';
-  var KEY=+GOOD_KEY+;
+  var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0dWFwZmlleGhsbGFkZ2t1YXVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MjI0MTgsImV4cCI6MjA5NDA5ODQxOH0.Dp9OIWU_D8ioGaITj9_fVeVfIL9dYaGwRUK4hrJ_YVM';
   fetch('https://ktuapfiexhlladgkuauc.supabase.co/rest/v1/devos?active=eq.true&age_group=eq.'+age+'&order=sort_order.asc',{
     headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}
   })
