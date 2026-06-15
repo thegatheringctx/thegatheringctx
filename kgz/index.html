@@ -25,7 +25,8 @@
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:xqmpqwsk3ml6tk7448d3s865h1btrm7t --><!-- kgz-build-1779591645694 -->
+<!-- uid:w36hx0jkjk626ntt -->
+<!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1454,11 +1455,14 @@ input:focus,select:focus,textarea:focus{
   display:flex;gap:.5rem;margin-bottom:.9rem;width:100%;max-width:380px;justify-content:center;
 }
 .wl-feat{
-  flex:1;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);
-  border-radius:18px;padding:.75rem .3rem;text-align:center;cursor:pointer;
-  transition:transform .15s cubic-bezier(.34,1.56,.64,1),background .15s;
+  flex:1;background:linear-gradient(145deg,rgba(255,255,255,0.1),rgba(255,255,255,0.04));
+  border:1.5px solid rgba(255,255,255,0.18);
+  border-radius:20px;padding:.85rem .3rem;text-align:center;cursor:pointer;
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s,background .15s;
+  box-shadow:0 4px 15px rgba(0,0,0,0.3);
 }
-.wl-feat:active{transform:scale(0.9);}
+.wl-feat:active{transform:scale(0.88);box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.wl-feat:hover{background:linear-gradient(145deg,rgba(255,255,255,0.15),rgba(255,255,255,0.07));box-shadow:0 6px 20px rgba(0,0,0,0.4);}
 .wl-feat span{font-size:1.6rem;display:block;margin-bottom:.3rem;}
 .wl-feat div{font-size:.68rem;font-weight:800;color:rgba(255,255,255,0.65);letter-spacing:.04em;}
 
@@ -2016,10 +2020,10 @@ input:focus,select:focus,textarea:focus{
 
     <!-- feature grid -->
     <div class="wl-feats">
-      <div class="wl-feat" onclick="landingRoute('devos')"><span>📖</span><div>Devos</div></div>
-      <div class="wl-feat" onclick="landingRoute('games')"><span>⚔️</span><div>Battle</div></div>
-      <div class="wl-feat" onclick="landingRoute('warrior')"><span>🛡️</span><div>Armor</div></div>
-      <div class="wl-feat" onclick="landingRoute('lb')"><span>🏆</span><div>Ranks</div></div>
+      <div class="wl-feat" onclick="landingRoute('devos')"><span style="font-size:1.6rem">📖</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Devos</div></div>
+      <div class="wl-feat" onclick="landingRoute('games')"><span style="font-size:1.6rem">⚔️</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Battle</div></div>
+      <div class="wl-feat" onclick="landingRoute('warrior')"><span style="font-size:1.6rem">🛡️</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Armor</div></div>
+      <div class="wl-feat" onclick="landingRoute('lb')"><span style="font-size:1.6rem">🏆</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Ranks</div></div>
     </div>
 
     <!-- verse -->
@@ -2967,7 +2971,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-14-v4';
+  const APP_VER = '2026-06-15-v1';
   if(localStorage.getItem('kgz_app_ver') !== APP_VER){
     ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
     localStorage.setItem('kgz_app_ver', APP_VER);
