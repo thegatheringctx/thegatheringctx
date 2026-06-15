@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Refreshing...</title>
+</head>
+<body>
+<script>
+// Nuke all devo-related localStorage
+['kgz_devo-47','kgz_devo-812','kgz_app_ver'].forEach(function(k){
+  localStorage.removeItem(k);
+});
+// Also clear any other kgz keys that may have stale data
+var keys = Object.keys(localStorage);
+keys.forEach(function(k){
+  if(k.indexOf('kgz_devo') === 0) localStorage.removeItem(k);
+});
+// Redirect to app with cache-bust param
+window.location.replace('/?cb=' + Date.now());
+</script>
+<p>Refreshing app...</p>
+</body>
+</html>
