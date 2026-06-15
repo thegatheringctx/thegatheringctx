@@ -43,7 +43,7 @@ DEFAULT_DEVOS["47"] = [
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:mn3f2khu5t -->
+<!-- uid:1781555561-fvnfvzrt -->
 <!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
@@ -2048,6 +2048,7 @@ input:focus,select:focus,textarea:focus{
       <div class="wl-feat" onclick="landingRoute('devos')"><span style="font-size:1.6rem">📖</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Devos</div></div>
       <div class="wl-feat" onclick="landingRoute('games')"><span style="font-size:1.6rem">⚔️</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Battle</div></div>
       <div class="wl-feat" onclick="landingRoute('warrior')"><span style="font-size:1.6rem">🛡️</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Armor</div></div>
+      <div class="wl-feat" onclick="landingRoute('training')" style="background:linear-gradient(135deg,rgba(245,200,66,.2),rgba(245,200,66,.05));border:2px solid rgba(245,200,66,.4)"><span style="font-size:1.6rem">⚔️</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#f5c842">Warrior<br>Training</div></div>
       <div class="wl-feat" onclick="landingRoute('lb')"><span style="font-size:1.6rem">🏆</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Ranks</div></div>
     </div>
 
@@ -6646,6 +6647,24 @@ self.addEventListener('fetch', e => {
   navigator.serviceWorker.register(url).catch(()=>{});
 }
 </script>
+
+  <!-- WARRIOR TRAINING PAGE -->
+  <div id="p-training" class="page" style="padding:0;background:#0a0a1a">
+    <div style="padding:16px 16px 0;display:flex;align-items:center;gap:12px;background:linear-gradient(180deg,#0f0a2e,transparent)">
+      <span class="back" onclick="navBack()" style="font-size:1.1rem;color:#f5c842">← back</span>
+      <div style="flex:1;text-align:center">
+        <div style="font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#f5c842">Warrior Training</div>
+        <div style="font-size:1rem;font-weight:900;color:#fff">Know What You Believe</div>
+      </div>
+    </div>
+
+    <!-- Episode selector -->
+    <div id="wt-ep-list" style="padding:12px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none"></div>
+
+    <!-- Comic panels -->
+    <div id="wt-comic" style="padding:0 12px 100px"></div>
+  </div>
+
 </body></html>`);
   w.document.close();w.print();
 }
@@ -8697,6 +8716,278 @@ if(_origRKD){
   };
 }
 
+
+
+// ===== WARRIOR TRAINING =====
+var WT_EPISODES = [
+  {
+    id: 'wt-ep1',
+    title: 'Does God Exist?',
+    subtitle: 'Episode 1',
+    icon: '🌟',
+    panels: [
+      {
+        type: 'intro',
+        bg: '#0d1b3e',
+        character: 'warrior',
+        bubble: 'Hey Warrior. Big question today. Someone told you God is not real. What do you do?',
+        kid: 'My friend says there is no proof God exists. I did not know what to say...',
+        scene: 'stars'
+      },
+      {
+        type: 'truth',
+        bg: '#0a1628',
+        title: 'LOOK AT THE UNIVERSE',
+        character: 'warrior-point',
+        bubble: 'Stand firm! Pull out your first weapon: CREATION.',
+        text: 'The universe had a beginning. Scientists call it the Big Bang. Everything that begins to exist has a cause. The universe began. So the universe has a cause greater than itself.',
+        verse: 'The heavens declare the glory of God. Psalm 19:1',
+        scene: 'cosmos'
+      },
+      {
+        type: 'truth',
+        bg: '#0d1f0d',
+        title: 'THE FINE-TUNED UNIVERSE',
+        character: 'warrior-sword',
+        bubble: 'Second weapon: DESIGN.',
+        text: 'If gravity were slightly stronger or weaker, no stars. No planets. No you. Scientists call this fine-tuning. The odds of this happening by accident are so small that it points to a Designer.',
+        verse: 'For his invisible attributes have been clearly perceived. Romans 1:20',
+        scene: 'dna'
+      },
+      {
+        type: 'truth',
+        bg: '#1a0d2e',
+        title: 'MORAL LAW',
+        character: 'warrior-shield',
+        bubble: 'Third weapon: MORALITY.',
+        text: 'Every person on earth knows some things are truly wrong -- cruelty, injustice, betrayal. If there is no God, there is no real right or wrong. Just opinions. But we all know evil is REAL. That knowing points to a Lawgiver.',
+        verse: 'He has put eternity into man's heart. Ecclesiastes 3:11',
+        scene: 'scales'
+      },
+      {
+        type: 'declaration',
+        bg: '#1a0a00',
+        character: 'warrior-victory',
+        bubble: 'Now say it out loud, Warrior!',
+        declaration: 'I know God is real because His fingerprints are EVERYWHERE I look! Creation points to a Creator. Design points to a Designer. Morality points to a Lawgiver. And His name is Jesus!',
+        scene: 'victory'
+      }
+    ]
+  },
+  {
+    id: 'wt-ep2',
+    title: 'Is the Bible True?',
+    subtitle: 'Episode 2',
+    icon: '📜',
+    panels: [
+      {
+        type: 'intro',
+        bg: '#0d1b3e',
+        character: 'warrior',
+        bubble: 'New mission, Warrior. Someone says the Bible is just a made-up book. Time to draw your sword.',
+        kid: 'My teacher said the Bible has been changed so many times we can't trust it. Is that true?',
+        scene: 'scroll'
+      },
+      {
+        type: 'truth',
+        bg: '#0a1628',
+        title: 'MORE COPIES THAN ANY BOOK',
+        character: 'warrior-point',
+        bubble: 'Weapon one: MANUSCRIPT EVIDENCE.',
+        text: 'We have over 5,800 Greek manuscripts of the New Testament alone. The next best ancient document -- Homer's Iliad -- has 643. More copies means more ways to cross-check. The Bible wins this battle by a landslide.',
+        verse: 'Your word is truth. John 17:17',
+        scene: 'manuscripts'
+      },
+      {
+        type: 'truth',
+        bg: '#0d1f0d',
+        title: 'PROPHECY FULFILLED',
+        character: 'warrior-sword',
+        bubble: 'Weapon two: FULFILLED PROPHECY.',
+        text: 'The Old Testament made over 300 specific predictions about Jesus -- his birthplace, how he would die, even that soldiers would gamble for his clothes. Written 700 years before he was born. All of it happened exactly.',
+        verse: 'Not one word has failed of all his good promise. 1 Kings 8:56',
+        scene: 'prophecy'
+      },
+      {
+        type: 'declaration',
+        bg: '#1a0a00',
+        character: 'warrior-victory',
+        bubble: 'Lock it in, Warrior!',
+        declaration: 'The Bible is the most verified ancient document in history! More manuscripts. More prophecy fulfilled. More lives changed. God's Word does not fail. It stands FOREVER!',
+        scene: 'victory'
+      }
+    ]
+  }
+];
+
+function renderWarriorTraining() {
+  var ep = window._wtEpisode || 0;
+  var epList = document.getElementById('wt-ep-list');
+  var comic = document.getElementById('wt-comic');
+  if (!epList || !comic) return;
+
+  // Render episode selector
+  epList.innerHTML = WT_EPISODES.map(function(e, i) {
+    var active = i === ep;
+    return '<div onclick="window._wtEpisode='+i+';renderWarriorTraining()" style="flex-shrink:0;padding:8px 14px;border-radius:20px;cursor:pointer;border:2px solid '+(active?'#f5c842':'rgba(255,255,255,.2)')+';background:'+(active?'rgba(245,200,66,.15)':'rgba(255,255,255,.05)')+';text-align:center;min-width:100px">'+
+      '<div style="font-size:1.2rem">'+e.icon+'</div>'+
+      '<div style="font-size:.65rem;font-weight:800;color:'+(active?'#f5c842':'rgba(255,255,255,.6)')+';margin-top:2px">'+e.subtitle+'</div>'+
+      '<div style="font-size:.7rem;font-weight:700;color:'+(active?'#fff':'rgba(255,255,255,.5)')+'">'+e.title+'</div>'+
+    '</div>';
+  }).join('');
+
+  // Render panels
+  var episode = WT_EPISODES[ep];
+  var html = '<div style="margin-top:8px">';
+
+  episode.panels.forEach(function(panel, pi) {
+    html += renderWTPanel(panel, pi);
+  });
+
+  html += '</div>';
+  comic.innerHTML = html;
+
+  // Animate panels in
+  setTimeout(function() {
+    var panels = comic.querySelectorAll('.wt-panel');
+    panels.forEach(function(p, i) {
+      p.style.opacity = '0';
+      p.style.transform = 'translateY(30px)';
+      setTimeout(function() {
+        p.style.transition = 'all 0.5s ease';
+        p.style.opacity = '1';
+        p.style.transform = 'translateY(0)';
+      }, i * 200);
+    });
+  }, 50);
+}
+
+function renderWTPanel(panel, idx) {
+  var warrior = drawWarriorSVG(panel.character || 'warrior');
+
+  if (panel.type === 'intro') {
+    return '<div class="wt-panel" style="background:'+panel.bg+';border-radius:20px;margin-bottom:12px;overflow:hidden;border:2px solid rgba(245,200,66,.3)">'+
+      '<div style="background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(62,207,207,.1));padding:3px 14px;display:flex;align-items:center;gap:6px">'+
+        '<span style="font-size:.65rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#f5c842">Panel '+(idx+1)+'</span>'+
+      '</div>'+
+      '<div style="padding:16px;display:flex;gap:12px;align-items:flex-start">'+
+        '<div style="flex-shrink:0">'+warrior+'</div>'+
+        '<div style="flex:1">'+
+          '<div style="background:rgba(245,200,66,.12);border:1.5px solid rgba(245,200,66,.4);border-radius:14px;border-bottom-left-radius:4px;padding:10px 12px;margin-bottom:10px">'+
+            '<div style="font-size:.72rem;font-weight:800;color:#f5c842;margin-bottom:4px">WARRIOR</div>'+
+            '<div style="font-size:.82rem;line-height:1.5;color:#fff">'+panel.bubble+'</div>'+
+          '</div>'+
+          '<div style="background:rgba(62,207,207,.1);border:1.5px solid rgba(62,207,207,.4);border-radius:14px;border-bottom-right-radius:4px;padding:10px 12px">'+
+            '<div style="font-size:.72rem;font-weight:800;color:#3ecfcf;margin-bottom:4px">YOU</div>'+
+            '<div style="font-size:.82rem;line-height:1.5;color:rgba(255,255,255,.85)">'+panel.kid+'</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }
+
+  if (panel.type === 'truth') {
+    return '<div class="wt-panel" style="background:'+panel.bg+';border-radius:20px;margin-bottom:12px;overflow:hidden;border:2px solid rgba(255,255,255,.15)">'+
+      '<div style="background:linear-gradient(90deg,#f5c842,#e8a000);padding:6px 14px">'+
+        '<div style="font-size:.7rem;font-weight:900;letter-spacing:2px;color:#0a0a1a">'+panel.title+'</div>'+
+      '</div>'+
+      '<div style="padding:14px;display:flex;gap:10px;align-items:flex-start">'+
+        '<div style="flex-shrink:0">'+warrior+'</div>'+
+        '<div style="flex:1">'+
+          '<div style="background:rgba(245,200,66,.1);border-left:3px solid #f5c842;padding:8px 12px;border-radius:0 10px 10px 0;margin-bottom:10px">'+
+            '<div style="font-size:.78rem;font-weight:800;color:#f5c842;font-style:italic">'+panel.bubble+'</div>'+
+          '</div>'+
+          '<div style="font-size:.8rem;line-height:1.65;color:rgba(255,255,255,.85);margin-bottom:10px">'+panel.text+'</div>'+
+          '<div style="background:rgba(62,207,207,.1);border-radius:10px;padding:8px 12px;border:1px solid rgba(62,207,207,.3)">'+
+            '<div style="font-size:.68rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#3ecfcf;margin-bottom:3px">SCRIPTURE</div>'+
+            '<div style="font-size:.78rem;color:#fff;font-style:italic">'+panel.verse+'</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }
+
+  if (panel.type === 'declaration') {
+    return '<div class="wt-panel" style="background:linear-gradient(135deg,#1a0a00,#2a1000);border-radius:20px;margin-bottom:12px;overflow:hidden;border:2px solid #f5c842;box-shadow:0 0 30px rgba(245,200,66,.2)">'+
+      '<div style="background:linear-gradient(90deg,#f5c842,#ff8c00);padding:8px 14px;text-align:center">'+
+        '<div style="font-size:.8rem;font-weight:900;letter-spacing:2px;color:#0a0a1a">⚔️ WARRIOR DECLARATION ⚔️</div>'+
+      '</div>'+
+      '<div style="padding:16px;text-align:center">'+
+        '<div style="margin-bottom:14px;display:flex;justify-content:center">'+warrior+'</div>'+
+        '<div style="font-size:.8rem;color:#f5c842;font-weight:800;margin-bottom:12px;font-style:italic">"'+panel.bubble+'"</div>'+
+        '<div style="background:rgba(245,200,66,.1);border:2px solid rgba(245,200,66,.5);border-radius:16px;padding:16px;font-size:.88rem;font-weight:800;color:#fff;line-height:1.6;letter-spacing:.3px">'+
+          panel.declaration+
+        '</div>'+
+        '<div style="margin-top:14px;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,200,66,.5)">Say it out loud. Speak it like a Warrior.</div>'+
+      '</div>'+
+    '</div>';
+  }
+
+  return '';
+}
+
+function drawWarriorSVG(type) {
+  // Chibi warrior SVG consistent with existing app character
+  var colors = {armor:'#4a5568',gold:'#f5c842',skin:'#fdbcb4',hair:'#c17f24',cape:'#8b1a1a',shield:'#2d5a9e',sword:'#e0e0e0',flame:'#ff6b35'};
+  var sword = type==='warrior-sword'||type==='warrior'||type==='warrior-victory';
+  var shield = type==='warrior-shield'||type==='warrior-point';
+
+  return '<svg width="70" height="90" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg">'+
+    // Cape
+    '<ellipse cx="35" cy="72" rx="22" ry="18" fill="'+colors.cape+'" opacity=".9"/>'+
+    // Body armor
+    '<rect x="20" y="42" width="30" height="28" rx="6" fill="'+colors.armor+'"/>'+
+    '<rect x="22" y="44" width="26" height="24" rx="4" fill="#5a6578"/>'+
+    // Gold chest piece
+    '<ellipse cx="35" cy="52" rx="8" ry="9" fill="'+colors.gold+'"/>'+
+    '<circle cx="35" cy="52" r="4" fill="#c8901a"/>'+
+    // Belt
+    '<rect x="20" y="66" width="30" height="5" rx="2" fill="'+colors.gold+'"/>'+
+    // Legs
+    '<rect x="22" y="70" width="11" height="16" rx="3" fill="'+colors.armor+'"/>'+
+    '<rect x="37" y="70" width="11" height="16" rx="3" fill="'+colors.armor+'"/>'+
+    // Boots
+    '<rect x="20" y="82" width="14" height="8" rx="3" fill="#2a2a2a"/>'+
+    '<rect x="36" y="82" width="14" height="8" rx="3" fill="#2a2a2a"/>'+
+    // Arms
+    '<rect x="8" y="44" width="12" height="20" rx="4" fill="'+colors.armor+'"/>'+
+    '<rect x="50" y="44" width="12" height="20" rx="4" fill="'+colors.armor+'"/>'+
+    // Hands
+    '<ellipse cx="14" cy="65" rx="6" ry="5" fill="'+colors.skin+'"/>'+
+    '<ellipse cx="56" cy="65" rx="6" ry="5" fill="'+colors.skin+'"/>'+
+    // Sword
+    (sword?'<rect x="4" y="30" width="3" height="32" rx="1.5" fill="'+colors.sword+'"/>'+
+    '<rect x="1" y="47" width="9" height="3" rx="1" fill="'+colors.gold+'"/>'+
+    '<rect x="4" y="27" width="3" height="6" rx="1" fill="'+colors.gold+'"/>'+
+    // Flame
+    '<ellipse cx="5.5" cy="30" rx="4" ry="7" fill="'+colors.flame+'" opacity=".8"/>'+
+    '<ellipse cx="5.5" cy="28" rx="2.5" ry="5" fill="#ffd700" opacity=".9"/>':'') +
+    // Shield
+    (shield?'<rect x="53" y="42" width="16" height="20" rx="5" fill="'+colors.shield+'"/>'+
+    '<rect x="55" y="44" width="12" height="16" rx="3" fill="#3a7ad4"/>'+
+    '<path d="M61 47 L65 56 L61 62 L57 56 Z" fill="'+colors.gold+'"/>':'') +
+    // Neck
+    '<rect x="30" y="33" width="10" height="10" rx="2" fill="'+colors.skin+'"/>'+
+    // Head
+    '<ellipse cx="35" cy="26" rx="16" ry="17" fill="'+colors.skin+'"/>'+
+    // Helmet
+    '<path d="M19 24 Q19 8 35 8 Q51 8 51 24 L49 26 Q45 14 35 14 Q25 14 21 26 Z" fill="'+colors.armor+'"/>'+
+    '<rect x="19" y="22" width="32" height="5" rx="2" fill="#3a4555"/>'+
+    // Helmet crest / gold
+    '<path d="M28 14 Q35 6 42 14" stroke="'+colors.gold+'" stroke-width="3" fill="none"/>'+
+    // Visor
+    '<rect x="22" y="23" width="26" height="4" rx="2" fill="'+colors.gold+'" opacity=".7"/>'+
+    // Eyes
+    '<circle cx="28" cy="28" r="3.5" fill="#fff"/>'+
+    '<circle cx="42" cy="28" r="3.5" fill="#fff"/>'+
+    '<circle cx="29" cy="28.5" r="2" fill="#3a2000"/>'+
+    '<circle cx="43" cy="28.5" r="2" fill="#3a2000"/>'+
+    '<circle cx="29.8" cy="27.8" r=".7" fill="#fff"/>'+
+    '<circle cx="43.8" cy="27.8" r=".7" fill="#fff"/>'+
+    // Smile
+    (type==='warrior-victory'?'<path d="M29 34 Q35 38 41 34" stroke="#c17f24" stroke-width="1.5" fill="none" stroke-linecap="round"/>':'<path d="M30 33 Q35 36 40 33" stroke="#c17f24" stroke-width="1.5" fill="none" stroke-linecap="round"/>') +
+  '</svg>';
+}
 
 </script>
 </body>
