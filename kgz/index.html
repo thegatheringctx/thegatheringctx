@@ -25,7 +25,7 @@
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:eqcv3l4ftq6814xc -->
+<!-- uid:44w3cmai0w2wzhph -->
 <!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
@@ -2978,7 +2978,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-15-v5';
+  const APP_VER = '2026-06-15-v6';
   if(localStorage.getItem('kgz_app_ver') !== APP_VER){
     ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
     localStorage.setItem('kgz_app_ver', APP_VER);
@@ -3084,7 +3084,7 @@ function show(id,pushToStack){
     if(_navStack.length>20) _navStack.shift();
   }
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');p.style.display='none';});
-  var _el=document.getElementById(id);if(_el){_el.classList.add('active');_el.style.display='block';}
+  var _el=document.getElementById(id);if(_el){_el.classList.add('active');_el.style.display='block';_el.classList.remove('slide-up');void _el.offsetWidth;_el.classList.add('slide-up');}
 function navBack(){
   if(_navStack.length>0){
     var prev=_navStack.pop();
