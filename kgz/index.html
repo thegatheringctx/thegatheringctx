@@ -1388,116 +1388,210 @@ input:focus,select:focus,textarea:focus{
 
 
 /* ═══════════════════════════════════════════════════════
-   WARRIOR LANDING PAGE
+   WARRIOR LANDING PAGE — CINEMATIC OVERHAUL v3
+   Reference: animated warrior knight, dark navy/gold/fire palette
    ═══════════════════════════════════════════════════════ */
+
+/* ── SCREEN WRAPPER ── */
 .wl-screen{
   min-height:100vh;
-  background:linear-gradient(165deg,#0A0628 0%,#130F3A 40%,#0D1F4A 70%,#0A2818 100%);
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(180,80,20,0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 80% 30%, rgba(108,52,200,0.20) 0%, transparent 55%),
+    linear-gradient(175deg,#0A0420 0%,#0D0830 35%,#0A1228 65%,#080520 100%);
   display:flex;flex-direction:column;align-items:center;
-  padding:1rem 1.1rem 2rem;position:relative;overflow:hidden;
+  padding:0 1.1rem 2.5rem;position:relative;overflow:hidden;
 }
-.wl-glow{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;}
-.wl-glow-1{width:280px;height:280px;background:rgba(108,82,227,0.22);top:-60px;right:-60px;}
-.wl-glow-2{width:220px;height:220px;background:rgba(0,192,122,0.12);bottom:80px;left:-60px;}
 
+/* ── AMBIENT GLOWS ── */
+.wl-glow{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;}
+.wl-glow-1{
+  width:340px;height:260px;
+  background:radial-gradient(ellipse,rgba(220,90,20,0.30) 0%,rgba(180,60,10,0.12) 60%,transparent 80%);
+  top:-40px;left:50%;transform:translateX(-50%);
+}
+.wl-glow-2{
+  width:260px;height:220px;
+  background:radial-gradient(ellipse,rgba(108,52,200,0.18) 0%,transparent 70%);
+  bottom:100px;right:-60px;
+}
+
+/* ── CHURCH BADGE ── */
 .wl-badge{
   display:inline-flex;align-items:center;
-  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
-  border-radius:99px;padding:.32rem .9rem;font-size:.72rem;color:rgba(255,255,255,0.7);
-  font-weight:600;letter-spacing:.04em;margin-top:.25rem;margin-bottom:.6rem;
+  background:rgba(245,200,66,0.10);border:1px solid rgba(245,200,66,0.28);
+  border-radius:99px;padding:.34rem 1rem;font-size:.7rem;color:rgba(255,255,255,0.75);
+  font-weight:700;letter-spacing:.06em;margin-top:1rem;margin-bottom:.5rem;
+  text-transform:uppercase;z-index:1;
 }
 .wl-badge-dot{
-  width:7px;height:7px;background:#00C07A;border-radius:50%;
-  margin-right:7px;flex-shrink:0;box-shadow:0 0 6px #00C07A;
+  width:7px;height:7px;background:#f5c842;border-radius:50%;
+  margin-right:8px;flex-shrink:0;box-shadow:0 0 8px rgba(245,200,66,0.8);
+  animation:badge-pulse 2s ease-in-out infinite;
 }
-.wl-wordmark-block{text-align:center;margin-bottom:.3rem;}
+@keyframes badge-pulse{0%,100%{box-shadow:0 0 6px rgba(245,200,66,0.6);}50%{box-shadow:0 0 14px rgba(245,200,66,1);}}
+
+/* ── WORDMARK ── */
+.wl-wordmark-block{text-align:center;margin-bottom:.2rem;z-index:1;line-height:1;}
 .wl-eyebrow-sm{
-  font-size:.72rem;letter-spacing:.35em;color:rgba(255,255,255,0.45);
-  text-transform:uppercase;margin-bottom:2px;
+  font-size:.65rem;letter-spacing:.4em;color:rgba(255,255,255,0.38);
+  text-transform:uppercase;margin-bottom:3px;font-family:Arial,sans-serif;
 }
 .wl-wordmark{
-  font-size:clamp(40px,9vw,56px);font-weight:800;letter-spacing:.02em;
-  line-height:1;font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  font-family:'Bangers',cursive;
+  font-size:clamp(44px,11vw,62px);
+  letter-spacing:.06em;line-height:1;
+  color:#f5c842;
+  text-shadow:0 0 30px rgba(245,200,66,0.5),0 2px 0 rgba(180,100,0,0.6);
 }
 .wl-kids-sup{
-  font-size:clamp(16px,3.5vw,22px);color:#5dade2;font-weight:700;
-  margin-left:3px;vertical-align:super;
+  font-family:'Bangers',cursive;
+  font-size:clamp(18px,4vw,24px);color:rgba(255,255,255,0.55);font-weight:700;
+  margin-left:4px;vertical-align:super;letter-spacing:.04em;
 }
 
-/* Hero warrior */
-.wl-hero-wrap{position:relative;width:100%;max-width:300px;margin:0 auto .1rem;}
+/* ── HERO WARRIOR WRAP ── */
+.wl-hero-wrap{
+  position:relative;width:100%;max-width:310px;
+  margin:0 auto -10px;z-index:1;
+}
 .wl-hero-halo{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:280px;height:280px;border-radius:50%;
-  background:radial-gradient(circle,rgba(201,168,76,0.2) 0%,rgba(108,82,227,0.1) 50%,transparent 70%);
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(245,200,66,0.22) 0%,
+    rgba(220,80,20,0.12) 40%,
+    transparent 70%);
   pointer-events:none;
-  animation:wl-halo-pulse 4s ease-in-out infinite;
+  animation:wl-halo-pulse 3.5s ease-in-out infinite;
 }
-.wl-hero-svg{width:100%;height:auto;filter:drop-shadow(0 8px 30px rgba(108,82,227,0.4));}
+@keyframes wl-halo-pulse{
+  0%,100%{opacity:.7;transform:translate(-50%,-55%) scale(1);}
+  50%{opacity:1;transform:translate(-50%,-55%) scale(1.1);}
+}
+.wl-hero-svg{
+  width:100%;height:auto;
+  filter:
+    drop-shadow(0 0 40px rgba(245,180,30,0.35))
+    drop-shadow(0 12px 30px rgba(100,30,0,0.5));
+  animation:warrior-float 4s ease-in-out infinite, sword-glow-pulse 3s ease-in-out infinite;
+}
+
+/* ── FLOATING SPARKS ── */
 .wl-spark{
-  position:absolute;font-size:1.8rem;animation:wl-spark-float 3s ease-in-out infinite;
-  pointer-events:none;filter:drop-shadow(0 0 10px rgba(245,200,66,0.8));z-index:5;
+  position:absolute;font-size:1.6rem;pointer-events:none;z-index:5;
+  filter:drop-shadow(0 0 8px rgba(245,200,66,0.9));
 }
-.wl-sp1{top:5%;right:0%;animation-delay:0s;}
-.wl-sp2{top:18%;left:-2%;animation-delay:1.1s;}
-.wl-sp3{bottom:5%;right:2%;animation-delay:2s;}
-@keyframes wl-halo-pulse{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08);}}
-@keyframes wl-spark-float{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-10px) rotate(8deg);}}
+.wl-sp1{top:8%;right:1%;animation:spark-drift-1 3.2s ease-in-out infinite;}
+.wl-sp2{top:22%;left:0%;animation:spark-drift-2 3.8s ease-in-out infinite;}
+.wl-sp3{bottom:8%;right:3%;animation:spark-drift-3 2.9s ease-in-out infinite;}
 
-/* Victory tagline */
-.wl-victory-tag{text-align:center;margin-bottom:.8rem;}
+/* ── VICTORY TAGLINE ── */
+.wl-victory-tag{text-align:center;margin-bottom:.75rem;z-index:1;}
 .wl-vt-main{
-  font-family:Bangers,cursive;font-size:1.8rem;color:#f5c842;letter-spacing:.08em;
-  text-shadow:0 0 20px rgba(245,200,66,0.4);line-height:1;
+  font-family:Bangers,cursive;font-size:1.9rem;
+  color:#f5c842;letter-spacing:.08em;
+  text-shadow:0 0 24px rgba(245,200,66,0.6);line-height:1;
 }
-.wl-vt-sub{font-size:.75rem;color:rgba(255,255,255,0.45);margin-top:.2rem;font-weight:600;letter-spacing:.04em;}
+.wl-vt-sub{
+  font-size:.75rem;color:rgba(255,255,255,0.42);margin-top:.25rem;
+  font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+}
 
-/* CTA */
+/* ── MAIN CTA BUTTON ── */
 .wl-cta{
   width:100%;max-width:380px;
-  background:linear-gradient(135deg,#f5c842,#C9A84C);
-  color:#0A0628;border:none;border-radius:99px;
-  padding:1rem;font-size:1.05rem;font-weight:900;cursor:pointer;
-  letter-spacing:.03em;font-family:Bangers,cursive;font-size:1.2rem;letter-spacing:.08em;
-  box-shadow:0 6px 24px rgba(245,200,66,0.35);
-  transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s;
-  margin-bottom:.7rem;display:flex;align-items:center;justify-content:center;gap:.5rem;
+  background:linear-gradient(135deg,#f5c842 0%,#E8A800 50%,#f5c842 100%);
+  background-size:200%;
+  color:#0A0420;border:none;border-radius:14px;
+  padding:1.05rem 1rem;
+  font-family:Bangers,cursive;font-size:1.25rem;letter-spacing:.10em;
+  font-weight:900;cursor:pointer;
+  box-shadow:0 0 0 3px rgba(245,200,66,0.25), 0 8px 28px rgba(245,200,66,0.35);
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .2s,background-position .4s;
+  margin-bottom:.65rem;display:flex;align-items:center;justify-content:center;gap:.55rem;
+  z-index:1;animation:cta-shimmer 4s ease-in-out infinite;
 }
-.wl-cta:active{transform:scale(0.95);}
+@keyframes cta-shimmer{
+  0%,100%{background-position:0%;}
+  50%{background-position:100%;}
+}
+.wl-cta:active{transform:scale(0.95);box-shadow:0 4px 14px rgba(245,200,66,0.2);}
+.wl-cta:hover{box-shadow:0 0 0 3px rgba(245,200,66,0.5),0 12px 32px rgba(245,200,66,0.45);}
 
-/* Secondary row */
-.wl-sec-row{display:flex;gap:.5rem;margin-bottom:.9rem;width:100%;max-width:380px;}
+/* ── SECONDARY BUTTONS ── */
+.wl-sec-row{display:flex;gap:.45rem;margin-bottom:.8rem;width:100%;max-width:380px;z-index:1;}
 .wl-sec{
-  flex:1;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);
-  border-radius:99px;padding:.55rem .5rem;font-size:.78rem;font-weight:700;
-  color:rgba(255,255,255,0.75);cursor:pointer;
-  transition:background .15s;white-space:nowrap;
+  flex:1;
+  background:rgba(255,255,255,0.06);
+  border:1.5px solid rgba(245,200,66,0.18);
+  border-radius:12px;padding:.6rem .4rem;font-size:.74rem;font-weight:800;
+  color:rgba(255,255,255,0.70);cursor:pointer;
+  transition:background .15s,border-color .15s;white-space:nowrap;
+  letter-spacing:.02em;
 }
-.wl-sec:hover{background:rgba(255,255,255,0.15);}
+.wl-sec:hover{background:rgba(245,200,66,0.10);border-color:rgba(245,200,66,0.35);}
+.wl-sec:active{transform:scale(0.95);}
 
-/* Feature grid */
+/* ── FEATURE GRID ── */
 .wl-feats{
-  display:flex;gap:.5rem;margin-bottom:.9rem;width:100%;max-width:380px;justify-content:center;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:.38rem;margin-bottom:.8rem;width:100%;max-width:380px;z-index:1;
 }
 .wl-feat{
-  flex:1;background:linear-gradient(145deg,rgba(255,255,255,0.1),rgba(255,255,255,0.04));
-  border:1.5px solid rgba(255,255,255,0.18);
-  border-radius:20px;padding:.85rem .3rem;text-align:center;cursor:pointer;
-  transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s,background .15s;
-  box-shadow:0 4px 15px rgba(0,0,0,0.3);
+  background:linear-gradient(145deg,rgba(255,255,255,0.09),rgba(255,255,255,0.03));
+  border:1.5px solid rgba(245,200,66,0.14);
+  border-radius:16px;padding:.75rem .2rem;text-align:center;cursor:pointer;
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s,border-color .2s;
+  box-shadow:0 3px 12px rgba(0,0,0,0.35);
 }
-.wl-feat:active{transform:scale(0.88);box-shadow:0 2px 8px rgba(0,0,0,0.2);}
-.wl-feat:hover{background:linear-gradient(145deg,rgba(255,255,255,0.15),rgba(255,255,255,0.07));box-shadow:0 6px 20px rgba(0,0,0,0.4);}
-.wl-feat span{font-size:1.6rem;display:block;margin-bottom:.3rem;}
-.wl-feat div{font-size:.68rem;font-weight:800;color:rgba(255,255,255,0.65);letter-spacing:.04em;}
+.wl-feat:active{transform:scale(0.86);}
+.wl-feat:hover{
+  background:linear-gradient(145deg,rgba(245,200,66,0.15),rgba(245,200,66,0.04));
+  border-color:rgba(245,200,66,0.4);
+  box-shadow:0 6px 20px rgba(245,200,66,0.15);
+  transform:translateY(-2px);
+}
+.wl-feat span{font-size:1.4rem;display:block;margin-bottom:.25rem;}
+.wl-feat div{font-size:.58rem;font-weight:800;color:rgba(255,255,255,0.55);letter-spacing:.05em;text-transform:uppercase;}
 
-/* Verse card */
+/* ── VERSE CARD ── */
 .wl-verse-card{
-  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
-  border-radius:18px;padding:.9rem 1rem;text-align:center;max-width:380px;width:100%;
+  background:linear-gradient(145deg,rgba(245,200,66,0.06),rgba(255,255,255,0.03));
+  border:1px solid rgba(245,200,66,0.20);
+  border-radius:18px;padding:.9rem 1.1rem;text-align:center;
+  max-width:380px;width:100%;z-index:1;
 }
-.wl-verse-q{font-size:.82rem;color:rgba(255,255,255,0.65);line-height:1.6;font-style:italic;}
-.wl-verse-r{font-size:.65rem;font-weight:800;color:#C9A84C;letter-spacing:.12em;margin-top:.4rem;}
+.wl-verse-q{
+  font-size:.82rem;color:rgba(255,255,255,0.70);
+  line-height:1.65;font-style:italic;font-family:Georgia,serif;
+}
+.wl-verse-r{
+  font-size:.65rem;font-weight:900;color:#f5c842;
+  letter-spacing:.14em;margin-top:.5rem;text-transform:uppercase;
+}
+
+/* ── FIRE EMBERS BACKGROUND ── */
+@keyframes ember-rise{
+  0%{transform:translateY(0) translateX(0) scale(.5) rotate(0deg);opacity:0;}
+  10%{opacity:.8;}
+  80%{opacity:.3;}
+  100%{transform:translateY(-70vh) translateX(var(--drift,0px)) scale(1.2) rotate(var(--rot,20deg));opacity:0;}
+}
+.wl-particle{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:0;
+  animation:ember-rise var(--dur,9s) linear infinite var(--delay,0s);
+  bottom:5%;width:var(--sz,4px);height:var(--sz,4px);
+  background:var(--col,#f5c842);
+  box-shadow:0 0 6px var(--col,#f5c842);
+}
+
+/* ── DIVIDER LINE ── */
+.wl-divider{
+  width:100%;max-width:380px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,200,66,0.3),transparent);
+  margin:.5rem 0;z-index:1;
+}
 
 /* ═══════════════════════════════════════════════════════
    HALL OF VICTORY LEADERBOARD
@@ -1729,27 +1823,27 @@ input:focus,select:focus,textarea:focus{
 
 <div class="toast-wrap"><div id="ti"></div></div>
 
-<!-- ═══════════════════ LANDING ═══════════════════ -->
+<!-- ═══════════════════ LANDING PAGE v3 — CINEMATIC WARRIOR ═══════════════════ -->
 <div id="p-land" class="page active">
   <div class="wl-screen">
+
     <!-- atmospheric glows -->
     <div class="wl-glow wl-glow-1"></div>
     <div class="wl-glow wl-glow-2"></div>
 
-    <!-- church pill -->
+    <!-- church badge -->
     <div class="wl-badge">
-      <span class="wl-badge-dot"></span>The Gathering CTX &middot; Cleburne, TX
+      <span class="wl-badge-dot"></span>
+      The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX
     </div>
 
     <!-- wordmark -->
     <div class="wl-wordmark-block">
-      <div class="wl-eyebrow-sm">the</div>
-      <div class="wl-wordmark">
-        <span style="color:#e74c3c">g</span><span style="color:#f39c12">a</span><span style="color:#2ecc71">t</span><span style="color:#9b59b6">h</span><span style="color:#3498db">e</span><span style="color:#f39c12">r</span><span style="color:#e74c3c">i</span><span style="color:#2ecc71">n</span><span style="color:#f1c40f">g</span><sup class="wl-kids-sup">kids</sup>
-      </div>
+      <div class="wl-eyebrow-sm">KIDS</div>
+      <div class="wl-wordmark">Warrior Zone</div>
     </div>
 
-    <!-- warrior hero SVG -->
+    <!-- warrior hero SVG (existing, preserved) -->
     <div class="wl-hero-wrap">
       <div class="wl-hero-halo"></div>
       <svg viewBox="0 0 260 370" xmlns="http://www.w3.org/2000/svg" class="wl-hero-svg">
@@ -1780,8 +1874,8 @@ input:focus,select:focus,textarea:focus{
       <stop offset="100%" stop-color="#BFDBFE"/>
     </linearGradient>
     <radialGradient id="glowRg" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="rgba(201,168,76,0.5)"/>
-      <stop offset="100%" stop-color="rgba(201,168,76,0)"/>
+      <stop offset="0%" stop-color="rgba(245,200,66,0.55)"/>
+      <stop offset="100%" stop-color="rgba(220,80,20,0)"/>
     </radialGradient>
     <filter id="gf1" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="4" result="blur"/>
@@ -1798,221 +1892,130 @@ input:focus,select:focus,textarea:focus{
   <!-- BACKGROUND GLOW HALO -->
   <circle cx="130" cy="185" r="95" fill="url(#glowRg)" opacity=".7"/>
 
-  <!-- ═══ CAPE ═══ -->
-  <path d="M88,148 C62,172 46,228 50,305 L92,290 C86,252 92,210 108,183Z" 
-        fill="#7F1D1D" stroke="#991B1B" stroke-width="1"/>
-  <path d="M172,148 C198,172 214,228 210,305 L168,290 C174,252 168,210 152,183Z" 
-        fill="#7F1D1D" stroke="#991B1B" stroke-width="1"/>
-  <!-- Cape inner highlight -->
+  <!-- CAPE -->
+  <path d="M88,148 C62,172 46,228 50,305 L92,290 C86,252 92,210 108,183Z" fill="#7F1D1D" stroke="#991B1B" stroke-width="1"/>
+  <path d="M172,148 C198,172 214,228 210,305 L168,290 C174,252 168,210 152,183Z" fill="#7F1D1D" stroke="#991B1B" stroke-width="1"/>
   <path d="M88,148 C76,158 68,178 64,200" stroke="rgba(239,68,68,0.25)" stroke-width="2.5" fill="none"/>
   <path d="M172,148 C184,158 192,178 196,200" stroke="rgba(239,68,68,0.25)" stroke-width="2.5" fill="none"/>
 
-  <!-- ═══ LEGS / GREAVES ═══ -->
-  <!-- Left leg -->
-  <rect x="100" y="265" width="26" height="58" rx="10" fill="#2D3160"/>
-  <rect x="100" y="265" width="26" height="58" rx="10" fill="url(#hg1)" opacity=".8"/>
-  <!-- Left leg highlight -->
+  <!-- LEGS / GREAVES -->
+  <rect x="100" y="265" width="26" height="58" rx="10" fill="url(#hg1)"/>
   <rect x="104" y="268" width="7" height="44" rx="4" fill="rgba(255,255,255,0.14)"/>
-  <!-- Left boot gold cuff -->
   <rect x="98" y="305" width="30" height="10" rx="5" fill="url(#hg2)"/>
-  <rect x="100" y="306" width="26" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
-
-  <!-- Right leg -->
-  <rect x="134" y="265" width="26" height="58" rx="10" fill="#2D3160"/>
-  <rect x="134" y="265" width="26" height="58" rx="10" fill="url(#hg1)" opacity=".8"/>
-  <!-- Right leg highlight -->
+  <rect x="134" y="265" width="26" height="58" rx="10" fill="url(#hg1)"/>
   <rect x="138" y="268" width="7" height="44" rx="4" fill="rgba(255,255,255,0.14)"/>
-  <!-- Right boot gold cuff -->
   <rect x="132" y="305" width="30" height="10" rx="5" fill="url(#hg2)"/>
-  <rect x="134" y="306" width="26" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
 
-  <!-- ═══ TORSO ARMOR ═══ -->
+  <!-- TORSO ARMOR -->
   <rect x="90" y="163" width="80" height="110" rx="16" fill="#1E1B4B"/>
-  <!-- Armor side panels -->
   <rect x="90" y="175" width="16" height="90" rx="8" fill="#2D2A6B"/>
   <rect x="154" y="175" width="16" height="90" rx="8" fill="#2D2A6B"/>
-  <!-- Gold chest stripes -->
   <rect x="88" y="215" width="84" height="5" rx="2" fill="rgba(201,168,76,0.35)"/>
-  <rect x="88" y="228" width="84" height="3" rx="1" fill="rgba(201,168,76,0.2)"/>
 
-  <!-- BREASTPLATE CENTER EMBLEM -->
+  <!-- BREASTPLATE CROSS EMBLEM -->
   <ellipse cx="130" cy="198" rx="24" ry="30" fill="#C9A84C"/>
   <ellipse cx="130" cy="196" rx="19" ry="24" fill="#1E1B4B"/>
-  <!-- Cross on breastplate -->
   <rect x="127" y="180" width="6" height="32" rx="2" fill="#F5C842"/>
   <rect x="118" y="191" width="24" height="6" rx="2" fill="#F5C842"/>
-  <!-- Cross inner glow -->
   <rect x="128" y="181" width="4" height="30" rx="1" fill="rgba(255,255,255,0.3)"/>
-  <rect x="119" y="192" width="22" height="4" rx="1" fill="rgba(255,255,255,0.3)"/>
 
-  <!-- ═══ BELT ═══ -->
+  <!-- BELT -->
   <rect x="90" y="257" width="80" height="16" rx="5" fill="url(#hg2)"/>
-  <!-- Belt highlight -->
-  <rect x="92" y="258" width="76" height="5" rx="2" fill="rgba(255,255,255,0.2)"/>
-  <!-- Belt buckle -->
   <rect x="121" y="255" width="18" height="20" rx="4" fill="#F5D76E"/>
   <rect x="123" y="257" width="14" height="16" rx="2" fill="#C9A84C"/>
-  <rect x="128" y="262" width="4" height="6" rx="1" fill="#fff" opacity=".4"/>
 
-  <!-- ═══ SHOULDER PAULDRONS ═══ -->
-  <!-- Left pauldron -->
+  <!-- SHOULDER PAULDRONS -->
   <ellipse cx="88" cy="170" rx="24" ry="15" fill="#2D2A6B"/>
   <ellipse cx="88" cy="166" rx="17" ry="10" fill="url(#hg2)"/>
   <ellipse cx="88" cy="164" rx="12" ry="7" fill="#F5C842" opacity=".9"/>
-  <rect x="76" y="168" width="24" height="5" rx="2" fill="#C9A84C"/>
-
-  <!-- Right pauldron -->
   <ellipse cx="172" cy="170" rx="24" ry="15" fill="#2D2A6B"/>
   <ellipse cx="172" cy="166" rx="17" ry="10" fill="url(#hg2)"/>
   <ellipse cx="172" cy="164" rx="12" ry="7" fill="#F5C842" opacity=".9"/>
-  <rect x="160" y="168" width="24" height="5" rx="2" fill="#C9A84C"/>
 
-  <!-- ═══ SHIELD (left arm, angled outward) ═══ -->
+  <!-- SHIELD -->
   <g transform="translate(-8,12) rotate(-18,62,215)">
-    <!-- Shield base -->
-    <rect x="40" y="185" width="44" height="56" rx="14" fill="#1E3A8A"/>
-    <!-- Shield face -->
+    <rect x="40" y="185" width="44" height="56" rx="14" fill="url(#hg3)"/>
     <rect x="43" y="188" width="38" height="50" rx="12" fill="#2563EB"/>
-    <!-- Shield gradient overlay -->
-    <rect x="43" y="188" width="38" height="50" rx="12" fill="url(#hg3)" opacity=".8"/>
-    <!-- Shield cross -->
     <line x1="62" y1="192" x2="62" y2="234" stroke="#93C5FD" stroke-width="2.5" opacity=".85"/>
     <line x1="47" y1="213" x2="77" y2="213" stroke="#93C5FD" stroke-width="2.5" opacity=".85"/>
-    <!-- Shield center emblem -->
-    <circle cx="62" cy="213" r="8" fill="#1D4ED8"/>
     <circle cx="62" cy="213" r="5" fill="#93C5FD"/>
-    <circle cx="62" cy="213" r="2.5" fill="#DBEAFE"/>
-    <!-- Shield rim gold -->
     <rect x="40" y="185" width="44" height="56" rx="14" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
-    <!-- Shield highlight -->
-    <path d="M44,195 Q62,190 80,195" stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none"/>
   </g>
 
-  <!-- ═══ SWORD (right arm, raised and angled) ═══ -->
+  <!-- SWORD + FLAMES -->
   <g transform="translate(10,-5) rotate(18,195,170)">
-    <!-- Flame glow behind sword -->
     <ellipse cx="195" cy="120" rx="14" ry="26" fill="rgba(245,158,11,0.3)" filter="url(#gf2)"/>
-    <!-- Sword blade -->
     <rect x="191" y="85" width="8" height="105" rx="3" fill="url(#bladeLg)"/>
-    <!-- Blade edge accent -->
     <rect x="191" y="85" width="3" height="105" rx="1" fill="rgba(147,197,253,0.4)"/>
-    <!-- Blade tip -->
     <path d="M191,85 L195,72 L199,85Z" fill="url(#bladeLg)"/>
-    <!-- Crossguard -->
     <rect x="180" y="185" width="30" height="8" rx="4" fill="url(#hg2)"/>
-    <ellipse cx="180" cy="189" rx="5" ry="5" fill="#C9A84C"/>
-    <ellipse cx="210" cy="189" rx="5" ry="5" fill="#C9A84C"/>
-    <!-- Handle -->
     <rect x="192" y="193" width="6" height="30" rx="3" fill="url(#hg4)"/>
-    <!-- Handle wrap lines -->
-    <line x1="191" y1="199" x2="199" y2="199" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-    <line x1="191" y1="207" x2="199" y2="207" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-    <line x1="191" y1="215" x2="199" y2="215" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-    <!-- Pommel -->
     <ellipse cx="195" cy="226" rx="9" ry="7" fill="url(#hg2)"/>
-    <ellipse cx="195" cy="225" rx="5" ry="4" fill="#F5D76E"/>
-    <!-- FLAMES on sword -->
-    <path d="M193,130 C188,115 202,108 197,96 C207,110 205,126 198,130Z" fill="#F59E0B" opacity=".85"/>
-    <path d="M197,120 C193,108 206,103 201,93 C210,107 208,120 202,124Z" fill="#FBBF24" opacity=".7"/>
-    <path d="M190,142 C185,128 200,122 195,110 C204,125 202,140 196,144Z" fill="#F97316" opacity=".65"/>
-    <path d="M194,112 C191,104 202,101 199,93 C207,104 205,114 199,117Z" fill="#FDE68A" opacity=".5"/>
+    <!-- Flames -->
+    <path d="M193,130 C188,115 202,108 197,96 C207,110 205,126 198,130Z" fill="#F59E0B" opacity=".9"/>
+    <path d="M197,120 C193,108 206,103 201,93 C210,107 208,120 202,124Z" fill="#FBBF24" opacity=".75"/>
+    <path d="M190,142 C185,128 200,122 195,110 C204,125 202,140 196,144Z" fill="#F97316" opacity=".7"/>
+    <path d="M194,112 C191,104 202,101 199,93 C207,104 205,114 199,117Z" fill="#FDE68A" opacity=".6"/>
   </g>
 
-  <!-- ═══ NECK ═══ -->
+  <!-- NECK -->
   <rect x="121" y="138" width="18" height="30" rx="7" fill="url(#hg5)"/>
 
-  <!-- ═══ HEAD ═══ -->
-  <!-- Head shape -->
+  <!-- HEAD + FACE -->
   <ellipse cx="130" cy="116" rx="36" ry="38" fill="url(#hg5)"/>
-  <!-- Ear left -->
   <ellipse cx="94" cy="118" rx="7" ry="9" fill="#D4A574"/>
-  <ellipse cx="94" cy="118" rx="4" ry="6" fill="#C4956A"/>
-  <!-- Ear right -->
   <ellipse cx="166" cy="118" rx="7" ry="9" fill="#D4A574"/>
-  <ellipse cx="166" cy="118" rx="4" ry="6" fill="#C4956A"/>
 
-  <!-- ═══ HELMET ═══ -->
-  <!-- Helmet dome -->
+  <!-- HELMET -->
   <path d="M94,104 C94,66 166,66 166,104 L164,96 C164,60 96,60 96,96Z" fill="#1E1B4B"/>
-  <!-- Helmet body down to ears -->
   <path d="M94,104 L94,120 C94,100 166,100 166,120 L166,104 C166,86 94,86 94,104Z" fill="#2D2A6B"/>
-  <!-- Gold helmet rim -->
   <path d="M94,106 Q130,114 166,106" stroke="#C9A84C" stroke-width="3" fill="none"/>
-  <!-- Helmet side guards (cheek pieces) -->
   <path d="M96,108 L90,128 C96,134 99,126 102,122Z" fill="#1E1B4B"/>
   <path d="M164,108 L170,128 C164,134 161,126 158,122Z" fill="#1E1B4B"/>
-  <!-- Gold trim on cheek guards -->
   <path d="M96,108 L90,128" stroke="#C9A84C" stroke-width="1.5" opacity=".6"/>
   <path d="M164,108 L170,128" stroke="#C9A84C" stroke-width="1.5" opacity=".6"/>
-  <!-- Forehead band -->
   <path d="M100,98 Q130,92 160,98" stroke="#C9A84C" stroke-width="2" fill="none" opacity=".7"/>
 
-  <!-- CREST / PLUME (tall dramatic) -->
-  <path d="M130,64 C124,44 118,28 122,12 C126,24 130,36 134,24 C138,12 140,30 132,64Z" 
-        fill="url(#hg2)"/>
-  <path d="M130,64 C127,50 124,36 126,20" stroke="rgba(255,220,100,0.5)" stroke-width="2" fill="none"/>
-  <!-- Plume highlight -->
-  <path d="M132,62 C129,47 127,34 129,18" stroke="#F5D76E" stroke-width="1" fill="none" opacity=".4"/>
+  <!-- CREST PLUME -->
+  <path d="M130,64 C124,44 118,28 122,12 C126,24 130,36 134,24 C138,12 140,30 132,64Z" fill="url(#hg2)"/>
 
-  <!-- ═══ FACE ═══ -->
-  <!-- Face base (framed by helmet) -->
+  <!-- FACE DETAIL -->
   <ellipse cx="130" cy="118" rx="26" ry="24" fill="#E8C99A"/>
   <ellipse cx="130" cy="120" rx="23" ry="21" fill="url(#hg5)"/>
-
-  <!-- Eyebrows (strong, heroic) -->
   <path d="M116,108 Q122,104 128,108" stroke="#7C5230" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   <path d="M132,108 Q138,104 144,108" stroke="#7C5230" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-
-  <!-- Eyes (big, expressive) -->
-  <!-- Left eye white -->
   <ellipse cx="121" cy="116" rx="7" ry="8" fill="#fff"/>
-  <!-- Right eye white -->
   <ellipse cx="139" cy="116" rx="7" ry="8" fill="#fff"/>
-  <!-- Left iris -->
-  <ellipse cx="122" cy="117" rx="4.5" ry="5.5" fill="#3B2000"/>
-  <!-- Right iris -->
-  <ellipse cx="140" cy="117" rx="4.5" ry="5.5" fill="#3B2000"/>
-  <!-- Iris color -->
   <ellipse cx="122" cy="117" rx="3" ry="3.5" fill="#6B3A00"/>
   <ellipse cx="140" cy="117" rx="3" ry="3.5" fill="#6B3A00"/>
-  <!-- Pupils -->
   <ellipse cx="123" cy="117" rx="1.5" ry="2" fill="#111"/>
   <ellipse cx="141" cy="117" rx="1.5" ry="2" fill="#111"/>
-  <!-- Eye highlights (sparkle) -->
   <circle cx="124" cy="115" r="1.5" fill="#fff" opacity=".9"/>
   <circle cx="142" cy="115" r="1.5" fill="#fff" opacity=".9"/>
-  <!-- Eye outline -->
   <ellipse cx="121" cy="116" rx="7" ry="8" fill="none" stroke="#8B5E3C" stroke-width="1"/>
   <ellipse cx="139" cy="116" rx="7" ry="8" fill="none" stroke="#8B5E3C" stroke-width="1"/>
-
-  <!-- Nose (cute) -->
   <path d="M128,125 Q130,128 132,125" stroke="#A06B3C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-  <!-- SMILE (big, heroic grin) -->
   <path d="M118,131 Q130,140 142,131" stroke="#7C4A1A" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Teeth hint -->
   <path d="M121,133 Q130,139 139,133" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".7"/>
-
-  <!-- Rosy cheeks -->
   <ellipse cx="111" cy="126" rx="8" ry="5" fill="#FF9080" opacity=".32"/>
   <ellipse cx="149" cy="126" rx="8" ry="5" fill="#FF9080" opacity=".32"/>
 
-  <!-- ═══ ANIMATED SPARKLE DOTS ═══ -->
+  <!-- ANIMATED SPARKLES -->
   <circle cx="64" cy="244" r="3.5" fill="#C9A84C" opacity=".5">
     <animate attributeName="opacity" values=".3;1;.3" dur="2.3s" repeatCount="indefinite"/>
     <animate attributeName="r" values="3;4.5;3" dur="2.3s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="208" cy="172" r="4" fill="#6C52E3" opacity=".6">
+  <circle cx="208" cy="172" r="4" fill="#F97316" opacity=".6">
     <animate attributeName="opacity" values=".4;1;.4" dur="1.8s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="3;5;3" dur="1.8s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="112" cy="292" r="2.5" fill="#00C07A" opacity=".5">
+  <circle cx="112" cy="292" r="2.5" fill="#F5C842" opacity=".5">
     <animate attributeName="opacity" values=".3;.9;.3" dur="2.6s" repeatCount="indefinite"/>
   </circle>
   <circle cx="200" cy="88" r="3" fill="#F5C842" opacity=".6">
     <animate attributeName="opacity" values=".4;1;.4" dur="1.5s" repeatCount="indefinite"/>
     <animate attributeName="r" values="2;4;2" dur="1.5s" repeatCount="indefinite"/>
   </circle>
-  <!-- Star sparkles near sword -->
   <g opacity=".7" filter="url(#gf1)">
     <path d="M215,95 L217,90 L219,95 L224,97 L219,99 L217,104 L215,99 L210,97Z" fill="#FDE68A" opacity=".8">
       <animate attributeName="opacity" values=".5;1;.5" dur="1.2s" repeatCount="indefinite"/>
@@ -2021,19 +2024,19 @@ input:focus,select:focus,textarea:focus{
 </svg>
 
       <div class="wl-spark wl-sp1">⚡</div>
-      <div class="wl-spark wl-sp2">✨</div>
-      <div class="wl-spark wl-sp3">🔥</div>
+      <div class="wl-spark wl-sp2">🔥</div>
+      <div class="wl-spark wl-sp3">✨</div>
     </div>
 
-    <!-- tagline -->
+    <!-- victory tagline -->
     <div class="wl-victory-tag">
       <div class="wl-vt-main">I walk with victory!</div>
-      <div class="wl-vt-sub">Not to it. In Jesus' name.</div>
+      <div class="wl-vt-sub">Not to it &nbsp;&middot;&nbsp; In Jesus&rsquo; name</div>
     </div>
 
     <!-- primary CTA -->
     <button class="wl-cta" onclick="show('p-kentry')">
-      <span>⚡</span> I'm a Warrior, Let's Go!
+      <span style="font-size:1.4rem">⚔️</span> I&rsquo;m a Warrior &mdash; Let&rsquo;s Go!
     </button>
 
     <!-- secondary row -->
@@ -2043,21 +2046,35 @@ input:focus,select:focus,textarea:focus{
       <button class="wl-sec" onclick="show('p-alogin')">🛡 Admin</button>
     </div>
 
+    <!-- divider -->
+    <div class="wl-divider"></div>
+
     <!-- feature grid -->
     <div class="wl-feats">
-      <div class="wl-feat" onclick="landingRoute('devos')"><span style="font-size:1.6rem">📖</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Devos</div></div>
-      <div class="wl-feat" onclick="landingRoute('games')"><span style="font-size:1.6rem">⚔️</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Battle</div></div>
-      <div class="wl-feat" onclick="landingRoute('warrior')"><span style="font-size:1.6rem">🛡️</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Armor</div></div>
-      <div class="wl-feat" onclick="landingRoute('training')" style="background:linear-gradient(135deg,rgba(245,200,66,.2),rgba(245,200,66,.05));border:2px solid rgba(245,200,66,.4)"><span style="font-size:1.6rem">⚔️</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#f5c842">Warrior<br>Training</div></div>
-      <div class="wl-feat" onclick="landingRoute('lb')"><span style="font-size:1.6rem">🏆</span><div style="font-size:.72rem;font-weight:800;letter-spacing:.5px;margin-top:.3rem;color:#fff">Ranks</div></div>
+      <div class="wl-feat" onclick="landingRoute('devos')">
+        <span>📖</span><div>Daily Devos</div>
+      </div>
+      <div class="wl-feat" onclick="landingRoute('games')">
+        <span>⚔️</span><div>Battle Games</div>
+      </div>
+      <div class="wl-feat" onclick="landingRoute('warrior')">
+        <span>🛡️</span><div>My Armor</div>
+      </div>
+      <div class="wl-feat" onclick="landingRoute('training')" style="border-color:rgba(245,200,66,0.4);background:linear-gradient(145deg,rgba(245,200,66,0.12),rgba(245,200,66,0.04))">
+        <span>🎖️</span><div>Training</div>
+      </div>
+      <div class="wl-feat" onclick="landingRoute('lb')">
+        <span>🏆</span><div>Rankings</div>
+      </div>
     </div>
 
     <!-- verse -->
     <div class="wl-verse-card">
-      <div class="wl-verse-q">"Be strong and courageous. Do not be afraid, for the Lord your God is with you."</div>
-      <div class="wl-verse-r">JOSHUA 1:9</div>
+      <div class="wl-verse-q">&ldquo;Be strong and courageous. Do not be afraid, for the Lord your God is with you wherever you go.&rdquo;</div>
+      <div class="wl-verse-r">Joshua 1:9 &nbsp;&middot;&nbsp; ESV</div>
     </div>
-  </div>
+
+  </div><!-- /wl-screen -->
 
 <!-- ═══════════════════ KID ENTRY ═══════════════════ -->
 <div id="p-kentry" class="page">
@@ -2144,7 +2161,7 @@ input:focus,select:focus,textarea:focus{
     <button class="ktb" id="kt-store" onclick="kidTab('store','act-coral')"><span class="kti"><i class="ti ti-shopping-bag" aria-hidden="true"></i></span><span class="ktl">Store</span></button>
     <button class="ktb" id="kt-devos" onclick="kidTab('devos','act-purple')"><span class="kti"><i class="ti ti-book" aria-hidden="true"></i></span><span class="ktl">Devos</span></button>
     <button class="ktb" id="kt-learn" onclick="kidTab('learn','act-sky')"><span class="kti"><i class="ti ti-bulb" aria-hidden="true"></i></span><span class="ktl">Learn</span></button>
-    <button class="ktb" id="kt-lb" onclick="kidTab('games','act-gold')"><span class="kti"><i class="ti ti-trophy" aria-hidden="true"></i></span><span class="ktl">Games</span></button>
+    <button class="ktb" id="kt-lb" onclick="kidTab('lb','act-gold')"><span class="kti"><i class="ti ti-trophy" aria-hidden="true"></i></span><span class="ktl">Games</span></button>
     <button class="ktb" id="kt-warrior" onclick="kidTab('warrior','act-warrior')"><span class="kti">⚔️</span><span class="ktl">Warrior</span></button>
     <button class="ktb" id="kt-sunday-mode" onclick="kidTab('sunday-mode','act-teal')"><span class="kti">⛪</span><span class="ktl">Sunday</span></button>
     <button class="ktb" id="kt-prayer" onclick="kidTab('prayer','act-green')"><span class="kti">🙏</span><span class="ktl">Prayer</span></button>
@@ -3155,7 +3172,7 @@ function selectGender(g,btn){
   btn.style.border='2px solid #f5c842';btn.style.background='rgba(245,200,66,0.2)';
 }
 function signupStep1(){const first=document.getElementById('su-first').value.trim(),last=document.getElementById('su-last').value.trim(),age=parseInt(document.getElementById('su-age').value);msg('su-err','',false);if(!first||!last){msg('su-err','Please enter your first and last name!');return;}if(!age){msg('su-err','Please pick your age!');return;}S.signupTmp={first,last,age};S.newPin='';updDots('pd','');show('p-klogin');}
-async function signupFinish(){const pName=document.getElementById('pa-name').value.trim();msg('pa-err','',false);if(!pName){msg('pa-err','Please enter the parent or guardian name.');return;}if(S.newPin.length<4){msg('pa-err','Please enter all 4 digits of your family PIN.');return;}const t=S.signupTmp,id=genId();const kid={id,firstName:t.first,lastName:t.last,age:t.age,ageGroup:t.age<=7?'4-7':'8-12',points:0,pin:S.newPin,parentName:pName,joinedAt:Date.now(),gender:window._suGender||null};S.kids.push(kid);await sv('kids',S.kids);S.currentKid=kid;document.getElementById('wlc-n').textContent=t.first;document.getElementById('wlc-id').textContent=id;show('p-kwelcome');}
+async function signupFinish(){const pName=document.getElementById('pa-name').value.trim();msg('pa-err','',false);if(!pName){msg('pa-err','Please enter the parent or guardian name.');return;}if(S.newPin.length<4){msg('pa-err','Please enter all 4 digits of your family PIN.');return;}const t=S.signupTmp,id=genId();const kid={id,firstName:t.first,lastName:t.last,age:t.age,ageGroup:t.age<=7?'4-7':'8-12',points:0,pin:S.newPin,parentName:pName,joinedAt:Date.now(),gender:window._suGender||null};S.kids.push(kid);await sv('kids',S.kids);S.currentKid=kid.id;showKwelcome(kid);}
 function kidLogin(){const raw=document.getElementById('li-id').value.trim().toUpperCase();msg('li-err','',false);const kid=S.kids.find(k=>k.id===raw);if(!kid){msg('li-err',"We couldn't find that ID. Double-check with your parent!");return;}if(S.loginPin!==kid.pin){msg('li-err','Incorrect family PIN. Try again!');return;}S.currentKid=kid;S.loginPin='';updDots('lpd','');goKidDash();}
 function goKidDash(){
   renderKidDash();show('p-kdash');
@@ -6774,6 +6791,10 @@ function landingRoute(dest){
   } else if(dest==='warrior'){
     S.afterLoginTab='warrior';
     show('p-kentry');
+  } else if(dest==='training'){
+    S.afterLoginTab='warrior';
+    window._wtEpisode=0;
+    show('p-kentry');
   }
 }
 function landDevoAge(a){
@@ -6876,7 +6897,11 @@ var AVATARS=[
   {id:'royal',   emoji:'👑', bg:'#7CC800', label:'Royal'},
 ];
 function getAvatarDef(id){return AVATARS.find(a=>a.id===id)||AVATARS_EARLY.find(a=>a.id===id)||AVATARS_EARLY[0];}
-function avatarEl(id,size=36){const a=getAvatarDef(id);return``;}
+function avatarEl(id,size=36){
+  const a=getAvatarDef(id);
+  if(!a) return '';
+  return '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+a.bg+';display:flex;align-items:center;justify-content:center;font-size:'+(size*0.55)+'px;flex-shrink:0;">'+a.emoji+'</div>';
+}
 
 function renderAvatarPicker(){
   const el=document.getElementById('avatar-picker-grid');if(!el)return;
@@ -6942,6 +6967,8 @@ function renderAvatarPicker(){
 .ktb.act-sky{background:linear-gradient(135deg,#29AEFF,#0080d0)!important;border-color:#29AEFF!important;}
 .ktb.act-gold{background:linear-gradient(135deg,#F5C842,#C9A030)!important;border-color:#F5C842!important;}
 .ktb.act-pink{background:linear-gradient(135deg,#FF3E8D,#c4005e)!important;border-color:#FF3E8D!important;}
+.ktb.act-warrior{background:linear-gradient(135deg,#f5c842,#C9A030)!important;border-color:#f5c842!important;}
+.ktb.act-warrior .kti,.ktb.act-warrior .ktl{color:#0A0628!important;opacity:1!important;}
 .ktb.act-teal .kti,.ktb.act-teal .ktl,
 .ktb.act-coral .kti,.ktb.act-coral .ktl,
 .ktb.act-purple .kti,.ktb.act-purple .ktl,
@@ -7225,9 +7252,7 @@ async function signupFinish(){
   const t=S.signupTmp,id=genId();
   const kid={id,firstName:t.first,lastName:t.last,age:t.age,ageGroup:t.age<=7?'4-7':'8-12',points:0,pin:S.newPin,parentName:pName,joinedAt:Date.now(),avatar:selectedAvatar,gender:selectedGender};
   S.kids.push(kid);await sv('kids',S.kids);S.currentKid=kid;
-  document.getElementById('wlc-n').textContent=t.first;
-  document.getElementById('wlc-id').textContent=id;
-  show('p-kwelcome');
+  showKwelcome({id:id,firstName:t.first,pin:S.newPin});
 }
 
 // ── Updated renderKLeaderboard with avatars ──
@@ -7591,6 +7616,30 @@ function toggleFAQ(i){
   ans.style.display=open?"none":"";
   icon.innerHTML=open?"&#43;":"&#8722;";
 }
+
+function initLandingParticles(){
+  var screen=document.querySelector('.wl-screen');
+  if(!screen||screen.querySelector('.wl-particle'))return;
+  var colors=['#f5c842','#F97316','#FBBF24','rgba(245,200,66,0.6)'];
+  var drifts=['20px','-25px','15px','-18px','28px','-12px'];
+  var rots=['15deg','25deg','-20deg','10deg','-30deg','18deg'];
+  for(var i=0;i<12;i++){
+    var p=document.createElement('div');
+    p.className='wl-particle';
+    var sz=(Math.random()*3+2)+'px';
+    p.style.cssText=[
+      '--sz:'+sz,'--dur:'+(Math.random()*5+7)+'s',
+      '--delay:-'+(Math.random()*9)+'s',
+      '--drift:'+drifts[i%drifts.length],
+      '--rot:'+rots[i%rots.length],
+      '--col:'+colors[i%colors.length],
+      'left:'+(Math.random()*90+5)+'%',
+      'bottom:'+(Math.random()*15+2)+'%'
+    ].join(';');
+    screen.appendChild(p);
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){setTimeout(initLandingParticles,300);});
 
 function showHowTo(){
   document.querySelectorAll("[id^=\"p-\"]").forEach(el=>el.style.display="none");
@@ -9122,4 +9171,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781556463-efvmuokihzupazqduxnh -->
+<!-- deploy-1781557186-pnmgwclzjrauktblsbmx -->
