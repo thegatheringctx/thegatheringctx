@@ -25,7 +25,7 @@
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:kd9cihn06rftd0jy -->
+<!-- uid:5s69vvqvtpd4hz1p -->
 <!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
@@ -2978,7 +2978,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-15-v10';
+  const APP_VER = '2026-06-15-v11';
   // Always clear devo cache on load to ensure fresh content
   ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
   localStorage.setItem('kgz_app_ver', APP_VER);
@@ -6742,27 +6742,27 @@ function renderLandDevos(){
     })
     .catch(function(){_doRenderLandDevos(getCurDevos(age),age);});
 }
-function _doRenderLandDevos(list,landDevoAgeVal){
-  const el=document.getElementById('land-devo-list');if(!el)return;
-  // shadowed name -- use argument
-  const ageVal=landDevoAgeVal;
-  const el=document.getElementById('land-devo-list');if(!el)return;
-  if(!list||!list.length){
+function _doRenderLandDevos(rows, ageVal){
+  var el=document.getElementById('land-devo-list');
+  if(!el)return;
+  if(!rows||!rows.length){
     el.innerHTML='<div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5);font-size:14px">No devotionals available yet.</div>';
     return;
   }
-  el.innerHTML=list.map((d,i)=>`
-    <div class="devo-card" onclick="toggleLandDevo('ld${landDevoAgeVal}-${i}')" id="ld${landDevoAgeVal}-${i}" style="background:rgba(255,255,255,0.07);border-radius:16px;padding:16px 18px;margin-bottom:12px;cursor:pointer;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">${d.scripture||''}</div>
-      <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:6px;">${d.title||''}</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.65);font-style:italic;line-height:1.5;">${(d.verse||'').slice(0,120)}${(d.verse||'').length>120?'...':''}</div>
-      <div class="devo-expanded" id="ld${landDevoAgeVal}-${i}-body" style="display:none;margin-top:14px;border-top:1px solid rgba(255,255,255,0.1);padding-top:14px;">
-        <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,0.85);margin-bottom:12px;">${d.content||''}</p>
-        ${d.activity?`<div style="background:rgba(245,200,66,0.1);border:1px dashed rgba(245,200,66,0.4);border-radius:10px;padding:12px;margin-bottom:10px;"><div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#f5c842;margin-bottom:6px;">Family Activity</div><p style="font-size:13px;color:rgba(255,255,255,0.8);">${d.activity}</p></div>`:''}
-        ${d.prayer?`<div style="background:rgba(62,207,207,0.08);border-left:3px solid var(--teal);padding:10px 14px;margin-bottom:10px;"><div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Prayer</div><p style="font-size:13px;color:rgba(255,255,255,0.8);font-style:italic;">${d.prayer}</p></div>`:''}
-      </div>
-    </div>`).join('');
+  el.innerHTML=rows.map(function(d,i){
+    return '<div class="devo-card" onclick="toggleLandDevo(\'ld'+ageVal+'-'+i+'\',\'ld'+ageVal+'-'+i+'-body\')" id="ld'+ageVal+'-'+i+'" style="background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:16px 18px;margin-bottom:12px;cursor:pointer;">'+
+      '<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">'+(d.scripture||'')+'</div>'+
+      '<div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:6px;">'+(d.title||'')+'</div>'+
+      '<div style="font-size:13px;color:rgba(255,255,255,0.65);font-style:italic;line-height:1.5;">'+(d.verse||'').slice(0,120)+((d.verse||'').length>120?'...':'')+'</div>'+
+      '<div class="devo-expanded" id="ld'+ageVal+'-'+i+'-body" style="display:none;margin-top:14px;border-top:1px solid rgba(255,255,255,0.1);padding-top:14px;">'+
+        '<p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,0.85);margin-bottom:12px;">'+(d.content||'')+'</p>'+
+        (d.activity?'<div style="background:rgba(245,200,66,0.1);border:1px dashed rgba(245,200,66,0.4);border-radius:10px;padding:12px;margin-bottom:10px;"><div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#f5c842;margin-bottom:6px;">Family Activity</div><p style="font-size:13px;color:rgba(255,255,255,0.8);">'+d.activity+'</p></div>':'')+
+        (d.prayer?'<div style="background:rgba(62,207,207,0.08);border-left:3px solid var(--teal);padding:10px 14px;margin-bottom:10px;"><div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Prayer</div><p style="font-size:13px;color:rgba(255,255,255,0.8);font-style:italic;">'+d.prayer+'</p></div>':'')+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
+
 function toggleLandDevo(id){
   const body=document.getElementById(id+'-body');
   if(body) body.style.display=body.style.display==='none'?'block':'none';
