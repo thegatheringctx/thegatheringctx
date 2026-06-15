@@ -25,7 +25,7 @@
 ╚══════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
-<!-- uid:64emasxfj5y2m964 -->
+<!-- uid:geatfm0s24ag -->
 <!-- kgz-build-1779591645694 -->
 <html lang="en">
 <head>
@@ -2978,7 +2978,7 @@ const ld = async(k,fb) => {
 
 // Load everything, localStorage first (instant), then Supabase (real)
 async function loadAll() {
-  const APP_VER = '2026-06-15-v13';
+  const APP_VER = '2026-06-15-v14';
   // Always clear devo cache on load to ensure fresh content
   ['kgz_devo-47','kgz_devo-812'].forEach(k=>localStorage.removeItem(k));
   localStorage.setItem('kgz_app_ver', APP_VER);
@@ -6710,7 +6710,7 @@ function landingRoute(dest){
     S.afterLoginTab=dest==='store'?'store':'mz';
     show('p-kentry');
   } else if(dest==='devos'){
-    window._landDevoAge=window._landDevoAge||'47';show('p-land-devos');renderLandDevos();
+    window._landDevoAge=window._landDevoAge||'47';show('p-land-devos');setTimeout(function(){renderLandDevos();},50);
   } else if(dest==='explore'){
     document.getElementById('land-explore-apol').innerHTML=buildApol('le');
     show('p-land-explore');
@@ -6732,33 +6732,41 @@ function landDevoAge(a){
 }
 function renderLandDevos(){
   var el=document.getElementById('land-devo-list');
-  if(!el){return;}
+  if(!el)return;
   var age=window._landDevoAge||'47';
   el.innerHTML='<div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5)">Loading...</div>';
-  var SUPA_URL='https://ktuapfiexhlladgkuauc.supabase.co';
-  var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0dWFwZmlleGhsbGFkZ2t1YXVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MjI0MTgsImV4cCI6MjA5NDA5ODQxOH0.Dp9OIWU_D8ioGaITj9_fVeVfIL9dYaGwRUK4hrJ_YVM';
-  fetch(SUPA_URL+'/rest/v1/devos?active=eq.true&age_group=eq.'+age+'&order=sort_order.asc',{
-    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+  var KEY=+GOOD_KEY+;
+  fetch('https://ktuapfiexhlladgkuauc.supabase.co/rest/v1/devos?active=eq.true&age_group=eq.'+age+'&order=sort_order.asc',{
+    headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}
   })
   .then(function(r){return r.json();})
   .then(function(rows){
     if(!rows||!rows.length){el.innerHTML='<div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5)">No devotionals yet.</div>';return;}
     el.innerHTML=rows.map(function(d,i){
       var uid='ld-'+age+'-'+i;
-      return '<div onclick="(function(el){var b=document.getElementById(\''+uid+'-body\');if(b){b.style.display=b.style.display===\'none\'?\'\':\'none\'}})(this)" style="background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:16px 18px;margin-bottom:12px;cursor:pointer;">'+
+      return '<div onclick="var b=document.getElementById(\''+uid+'-body\');if(b)b.style.display=b.style.display===\'none\'?\'\':\'none\'" style="background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:16px 18px;margin-bottom:12px;cursor:pointer;">'+
         '<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#3ecfcf;margin-bottom:4px;">'+(d.scripture||'')+'</div>'+
         '<div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:6px;">'+(d.title||'')+'</div>'+
         '<div style="font-size:13px;color:rgba(255,255,255,0.65);font-style:italic;line-height:1.5;">'+(d.verse||'').slice(0,120)+((d.verse||'').length>120?'...':'')+'</div>'+
         '<div id="'+uid+'-body" style="display:none;margin-top:14px;border-top:1px solid rgba(255,255,255,0.1);padding-top:14px;">'+
           '<p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,0.85);margin-bottom:12px;">'+(d.content||'')+'</p>'+
           (d.activity?'<div style="background:rgba(245,200,66,0.1);border:1px dashed rgba(245,200,66,0.4);border-radius:10px;padding:12px;margin-bottom:10px;"><div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#f5c842;margin-bottom:6px;">Family Activity</div><p style="font-size:13px;color:rgba(255,255,255,0.8);">'+d.activity+'</p></div>':'')+
-          (d.prayer?'<div style="background:rgba(62,207,207,0.08);border-left:3px solid #3ecfcf;padding:10px 14px;margin-bottom:10px;"><div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#3ecfcf;margin-bottom:4px;">Prayer</div><p style="font-size:13px;color:rgba(255,255,255,0.8);font-style:italic;">'+d.prayer+'</p></div>':'')+
+          (d.prayer?'<div style="border-left:3px solid #3ecfcf;padding:10px 14px;margin-bottom:10px;"><div style="font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#3ecfcf;margin-bottom:4px;">Prayer</div><p style="font-size:13px;color:rgba(255,255,255,0.8);font-style:italic;">'+d.prayer+'</p></div>':'')+
         '</div>'+
       '</div>';
     }).join('');
   })
-  .catch(function(e){el.innerHTML='<div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5)">Could not load devotionals.</div>';});
+  .catch(function(){el.innerHTML='<div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.5)">Could not load devotionals.</div>';});
 }
+function setLandDevoAge(age){
+  window._landDevoAge=age;
+  var b47=document.getElementById('ld-btn-47');
+  var b812=document.getElementById('ld-btn-812');
+  if(b47){b47.style.borderColor=age==='47'?'rgba(62,207,207,.5)':'rgba(255,255,255,.2)';b47.style.background=age==='47'?'rgba(62,207,207,.15)':'rgba(255,255,255,.06)';b47.style.color=age==='47'?'#3ecfcf':'rgba(255,255,255,.7)';}
+  if(b812){b812.style.borderColor=age==='812'?'rgba(62,207,207,.5)':'rgba(255,255,255,.2)';b812.style.background=age==='812'?'rgba(62,207,207,.15)':'rgba(255,255,255,.06)';b812.style.color=age==='812'?'#3ecfcf':'rgba(255,255,255,.7)';}
+  renderLandDevos();
+}
+
 function setLandDevoAge(age){
   window._landDevoAge=age;
   ['47','812'].forEach(function(a){
