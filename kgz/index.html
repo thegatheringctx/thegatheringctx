@@ -2270,6 +2270,24 @@ function doKidLogin(){
     show('p-kdash');
   }
 }
+
+var _appReady = false;
+var _appQueue = [];
+function appReady(fn){
+  if(_appReady){ fn(); }
+  else { _appQueue.push(fn); }
+}
+function _flushAppQueue(){
+  _appReady = true;
+  _appQueue.forEach(function(fn){ try{ fn(); }catch(e){} });
+  _appQueue = [];
+}
+function goToDash(){
+  appReady(function(){
+    if(typeof renderKidDash==='function') renderKidDash();
+    show('p-kdash');
+  });
+}
 function landingRoute(tab){
   if(typeof S!=='undefined'&&S.currentKid){ show('p-kdash'); setTimeout(function(){if(typeof kidTab==='function')kidTab(tab,'act-teal');},150); }
   else show('p-kentry');
@@ -2403,7 +2421,7 @@ function landingRoute(tab){
     <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:.3rem">Your Warrior ID</div>
     <div id="kidwelcome-pin" style="font-family:monospace;font-size:1.8rem;font-weight:700;color:#f5c842;letter-spacing:.3em"></div>
   </div>
-  <button onclick="if(typeof renderKidDash==='function'){renderKidDash();}show('p-kdash')"
+  <button onclick="goToDash()"
     style="width:100%;background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border:none;border-radius:14px;padding:1rem;font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer">
     ⚔️ Enter the Warrior Zone!
   </button>
@@ -7267,6 +7285,8 @@ function printGeneratedID(){
   </div>`);
   w.document.close();
 }
+
+_flushAppQueue();
 </script>
 <!-- LANDING DEVOS PREVIEW -->
 </div>
@@ -10056,4 +10076,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781631179-ovvulfnvxyjvwflimawq -->
+<!-- deploy-1781631427-rtqkjsohxtbnpfulhsgh -->
