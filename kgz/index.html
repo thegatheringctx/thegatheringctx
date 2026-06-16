@@ -9265,7 +9265,7 @@ function gTab(id,btn){
     <p class="sub" style="margin:0">Parents can use the same PIN they created with you. If the PIN is truly lost, a Gathering Kids team leader can reset it from the admin panel using your Warrior PIN.</p>
     <div style="margin-top:1rem;padding:.75rem;background:var(--cream);border-radius:12px;font-size:12px;color:var(--muted)">Your Warrior PIN: <strong style="font-family:monospace;color:var(--text)" id="forgot-id-display">-</strong></div>
   </div>
-  <button class="btn-block btn-block-teal" style="margin-top:1rem" onclick="show('p-klogin')">Back to Sign In</button>
+  <button class="btn-block btn-block-teal" style="margin-top:1rem" onclick="if(typeof buildKlKeypad==='function'){buildKlKeypad();}show('p-klogin')">Back to Sign In</button>
 </div>
 
 
@@ -9924,4 +9924,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781629227-yzuoxhumgyjbnottrdws -->
+<!-- deploy-1781629524-rdzapqpaqawfbiiahkoc -->
