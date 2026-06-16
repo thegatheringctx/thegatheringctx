@@ -596,6 +596,7 @@ function doAdminLogin(){
 }
 
 (function init(){
+  show("p-land");
   sbFetch("kids?select=id").then(function(r){
     var el=document.getElementById("stat-warriors");
     if(el)el.textContent=r.length;
@@ -632,4 +633,4 @@ function doAdminLogin(){
 </script>
 </body>
 </html>
-<!-- deploy-1781645819-qtziptgafsjd -->
+<!-- deploy-1781645940-lyhkgzixiqyc -->
