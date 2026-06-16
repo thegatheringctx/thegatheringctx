@@ -251,11 +251,17 @@ input:focus,select:focus,textarea:focus{
 
 /* ── HOME CHOICES ── */
 .choice-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.25rem 0;}
-.choice-card{background:var(--white);border:1.5px solid var(--border);border-radius:22px;padding:1.25rem .75rem 1rem;cursor:pointer;text-align:center;transition:transform .12s,box-shadow .12s;border-top:4px solid var(--cc);}
-.choice-card:hover{transform:translateY(-2px);}
-.choice-card .cc-icon{font-size:28px;margin-bottom:8px;display:block;}
-.choice-card .cc-label{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
-.choice-card .cc-sub{font-size:11px;color:var(--muted);}
+.choice-card{
+  background:rgba(255,255,255,0.07);
+  border:1.5px solid rgba(255,255,255,0.12);
+  border-radius:22px;padding:1.25rem .75rem 1rem;
+  cursor:pointer;text-align:center;
+  transition:transform .12s,box-shadow .12s,border-color .2s;
+}
+.choice-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3);border-color:var(--cc,rgba(245,200,66,0.4));}
+.choice-card .cc-icon{font-size:2rem;display:block;margin-bottom:.5rem;}
+.choice-card .cc-label{font-size:.9rem;font-weight:800;color:#fff;margin-bottom:3px;}
+.choice-card .cc-sub{font-size:.72rem;color:rgba(255,255,255,0.5);}
 
 /* ── GAMES HUB ── */
 /* ═══════════════════════════════════════════════════════
@@ -2176,41 +2182,6 @@ input:focus,select:focus,textarea:focus{
 </script>
 </head>
 <body>
-<script>
-// Core nav — defined immediately so buttons work before main script loads
-var _navStack = [];
-function show(id, pushToStack){
-  if(pushToStack!==false){
-    var cur=document.querySelector('.page.active');
-    if(cur&&cur.id!==id) _navStack.push(cur.id);
-    if(_navStack.length>20) _navStack.shift();
-  }
-  document.querySelectorAll('.page').forEach(function(p){
-    p.classList.remove('active');
-    p.style.display='none';
-  });
-  var el=document.getElementById(id);
-  if(el){el.classList.add('active');el.style.display='block';}
-  window.scrollTo(0,0);
-}
-function navBack(){
-  if(_navStack.length>0) show(_navStack.pop());
-  else show('p-land');
-}
-function showHowTo(){
-  show('p-howto');
-}
-function landingRoute(tab){
-  // If logged in go to dashboard tab, else go to entry
-  if(typeof S!=='undefined' && S.currentKid){
-    show('p-kdash');
-    if(typeof kidTab==='function') setTimeout(function(){kidTab(tab,'act-teal');},100);
-  } else {
-    show('p-kentry');
-  }
-}
-</script>
-
 
 <!-- ░░ SITE NAV ░░ -->
 <nav style="background:rgba(8,12,20,0.97);border-bottom:1px solid rgba(201,168,76,0.25);padding:.85rem 1.25rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);">
@@ -9902,4 +9873,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781627796-szdioylyambecdqbmafe -->
+<!-- deploy-1781628174-srjikbdkfpcbgslyigam -->
