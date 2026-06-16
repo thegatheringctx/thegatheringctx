@@ -2258,9 +2258,17 @@ function doKidLogin(){
   if(typeof S!=='undefined'){ S.currentKid=kid.id; S.kids=kids; }
   _klPin=[];
   try{ localStorage.setItem('kgz_lastKid', kid.id); }catch(e){}
-  if(typeof showKwelcome==='function') showKwelcome(kid);
-  else if(typeof renderKidDash==='function'){ S.currentKid=kid.id; renderKidDash(); show('p-kdash'); }
-  else show('p-kdash');
+  // Show welcome screen (static page now exists)
+  var kwEl = document.getElementById('p-kidwelcome');
+  if(kwEl){
+    var nameEl = document.getElementById('kidwelcome-name');
+    var pinEl  = document.getElementById('kidwelcome-pin');
+    if(nameEl) nameEl.textContent = kid.firstName || '';
+    if(pinEl)  pinEl.textContent  = kid.pin || '';
+    show('p-kidwelcome');
+  } else {
+    show('p-kdash');
+  }
 }
 function landingRoute(tab){
   if(typeof S!=='undefined'&&S.currentKid){ show('p-kdash'); setTimeout(function(){if(typeof kidTab==='function')kidTab(tab,'act-teal');},150); }
@@ -2425,6 +2433,24 @@ function landingRoute(tab){
     <button onclick="doKidLogin()" style="background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border:none;border-radius:14px;padding:1rem;font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer;width:100%">⚡ Log In</button>
     <button onclick="show('p-ksignup')" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:.82rem;text-align:center;width:100%">New here? Sign up instead</button>
   </div>
+</div>
+
+<!-- ═══════════════════ KID WELCOME ═══════════════════ -->
+<div id="p-kidwelcome" class="page" style="text-align:center;padding-top:2rem">
+  <div id="kw-warrior-wrap" style="display:flex;justify-content:center;margin-bottom:1rem"></div>
+  <div style="font-family:'Bangers',cursive;font-size:2rem;color:#f5c842;letter-spacing:.06em;margin-bottom:.25rem">
+    Welcome back,<br><span id="kidwelcome-name" style="color:#fff"></span>!
+  </div>
+  <div style="font-size:.8rem;color:rgba(255,255,255,0.45);margin-bottom:.5rem">
+    Your PIN: <span id="kidwelcome-pin" style="font-family:monospace;color:#f5c842;letter-spacing:.2em"></span>
+  </div>
+  <p style="font-size:.85rem;color:rgba(255,255,255,0.55);margin-bottom:1.5rem;font-style:italic">
+    Walk in the victory already won for you.
+  </p>
+  <button onclick="if(typeof renderKidDash==='function')renderKidDash();show('p-kdash');"
+    style="background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border:none;border-radius:14px;padding:1rem 2rem;font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer;width:100%;max-width:300px">
+    ⚔️ Enter the Zone!
+  </button>
 </div>
 
 <!-- ═══════════════════ KID ENTRY ═══════════════════ -->
@@ -10013,4 +10039,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781630674-nlfpplirgyazhjobxclw -->
+<!-- deploy-1781630890-rjiokzutvndvcvmxjxlf -->
