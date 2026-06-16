@@ -15,7 +15,7 @@ html,body{height:100%;background:#050318;font-family:Arial,sans-serif;color:#fff
 input,button,select{font-family:inherit;}
 input{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:.75rem 1rem;color:#fff;width:100%;font-size:1rem;outline:none;}
 input:focus{border-color:rgba(245,200,66,.6);}
-.btn{display:block;width:100%;border:none;border-radius:14px;padding:1rem;font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer;text-align:center;transition:transform .15s;}
+.btn{display:block;width:100%;border:none;border-radius:14px;padding:1rem;font-family:Bangers,cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer;text-align:center;transition:transform .15s;}
 .btn:active{transform:scale(.96);}
 .btn-gold{background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;}
 .btn-dark{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;font-family:Arial,sans-serif;font-size:.85rem;font-weight:700;padding:.75rem;}
@@ -30,7 +30,7 @@ input:focus{border-color:rgba(245,200,66,.6);}
 .wl-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to bottom,transparent,#050318);}
 .wl-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:0 1.25rem 2rem;}
 .wl-spacer{height:42vh;}
-.wl-title{font-family:'Bangers',cursive;font-size:clamp(48px,13vw,72px);letter-spacing:.06em;line-height:.95;text-align:center;color:#fff;text-shadow:0 0 40px rgba(245,200,66,.6),0 3px 0 rgba(100,50,0,.8);margin-bottom:.5rem;}
+.wl-title{font-family:Bangers,cursive;font-size:clamp(48px,13vw,72px);letter-spacing:.06em;line-height:.95;text-align:center;color:#fff;text-shadow:0 0 40px rgba(245,200,66,.6),0 3px 0 rgba(100,50,0,.8);margin-bottom:.5rem;}
 .wl-title em{color:#f5c842;font-style:normal;}
 .wl-tag{font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:1.25rem;font-style:italic;}
 .kp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:240px;margin:.75rem auto 0;}
@@ -40,8 +40,8 @@ input:focus{border-color:rgba(245,200,66,.6);}
 .pin-dot{width:48px;height:48px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;transition:border-color .2s;}
 .pin-dot.filled{border-color:#f5c842;box-shadow:0 0 12px rgba(245,200,66,.3);}
 .dash-hero{background:linear-gradient(135deg,rgba(245,200,66,.1),rgba(108,82,227,.08));border:1px solid rgba(245,200,66,.2);border-radius:24px;padding:1.25rem;margin-bottom:1rem;text-align:center;}
-.dash-name{font-family:'Bangers',cursive;font-size:1.8rem;color:#fff;letter-spacing:.05em;}
-.dash-pts{font-family:'Bangers',cursive;font-size:2.5rem;color:#f5c842;line-height:1;}
+.dash-name{font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.05em;}
+.dash-pts{font-family:Bangers,cursive;font-size:2.5rem;color:#f5c842;line-height:1;}
 .pts-lbl{font-size:.65rem;color:rgba(255,255,255,.4);font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
 .armor-bar{background:rgba(255,255,255,.08);border-radius:99px;height:6px;overflow:hidden;margin:.5rem 0;}
 .armor-fill{height:100%;background:linear-gradient(90deg,#f5c842,#FF8C00);border-radius:99px;transition:width .6s;}
@@ -54,7 +54,7 @@ input:focus{border-color:rgba(245,200,66,.6);}
 .store-card:hover{border-color:rgba(245,200,66,.4);transform:translateY(-2px);}
 .store-card img{width:100%;height:100px;object-fit:contain;border-radius:10px;margin-bottom:.5rem;}
 .store-name{font-size:.8rem;font-weight:800;color:#fff;margin-bottom:.25rem;}
-.store-pts{font-family:'Bangers',cursive;font-size:1.1rem;color:#f5c842;}
+.store-pts{font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842;}
 .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:99px;padding:.3rem .85rem;font-size:.65rem;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,.7);text-transform:uppercase;margin-bottom:.75rem;}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:#f5c842;box-shadow:0 0 8px rgba(245,200,66,.9);animation:pulse 2s ease-in-out infinite;flex-shrink:0;}
 @keyframes pulse{0%,100%{box-shadow:0 0 5px rgba(245,200,66,.5);}50%{box-shadow:0 0 14px rgba(245,200,66,1);}}
@@ -311,7 +311,7 @@ function renderRanks(){
       return '<div style="display:flex;align-items:center;gap:.85rem;padding:.75rem 1rem;border-radius:14px;margin-bottom:.4rem;background:'+(isMe?'rgba(245,200,66,.08)':'rgba(255,255,255,.04)')+';border:1px solid '+(isMe?'rgba(245,200,66,.3)':'rgba(255,255,255,.07)')+';">'
         +'<div style="font-size:1.1rem;width:30px;text-align:center">'+medal+'</div>'
         +'<div style="flex:1;font-weight:800">'+k.first_name+'</div>'
-        +'<div style="font-family:'Bangers',cursive;font-size:1.1rem;color:#f5c842">'+k.points+' pts</div>'
+        +'<div style="font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842">'+k.points+' pts</div>'
         +'</div>';
     }).join('');
 }
@@ -321,9 +321,9 @@ var ARMOR=[
   {id:'belt',name:'Belt of Truth',ref:'Ephesians 6:14',desc:'Truth holds everything together.',pts:10,icon:'&#128312;'},
   {id:'breastplate',name:'Breastplate of Righteousness',ref:'Ephesians 6:14',desc:'Protects your heart.',pts:50,icon:'&#129752;'},
   {id:'boots',name:'Shoes of Peace',ref:'Ephesians 6:15',desc:'You carry peace everywhere.',pts:100,icon:'&#128094;'},
-  {id:'shield',name:'Shield of Faith',ref:'Ephesians 6:16',desc:'Blocks the enemy's attacks.',pts:200,icon:'&#128737;&#65039;'},
+  {id:'shield',name:'Shield of Faith',ref:'Ephesians 6:16',desc:'Blocks enemy attacks.',pts:200,icon:'&#128737;&#65039;'},
   {id:'helmet',name:'Helmet of Salvation',ref:'Ephesians 6:17',desc:'Protects your mind.',pts:350,icon:'&#129510;'},
-  {id:'sword',name:'Sword of the Spirit',ref:'Ephesians 6:17',desc:'God's Word is your weapon.',pts:500,icon:'&#9876;&#65039;'},
+  {id:'sword',name:'Sword of the Spirit',ref:'Ephesians 6:17',desc:'God is your weapon.',pts:500,icon:'&#9876;&#65039;'},
   {id:'full',name:'Full Warrior!',ref:'Ephesians 6:13',desc:'You wear the complete armor of God!',pts:750,icon:'&#10024;'}
 ];
 function renderArmor(){
@@ -366,7 +366,7 @@ function renderGames(){
   el.innerHTML='<div class="eyebrow" style="margin-bottom:.75rem">Bible Battle Games</div>'
     +'<div style="background:rgba(245,200,66,.08);border:1.5px solid rgba(245,200,66,.2);border-radius:20px;padding:1.1rem;cursor:pointer;text-align:center" onclick="startQuiz()">'
     +'<div style="font-size:2rem;margin-bottom:.3rem">&#129504;</div>'
-    +'<div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:.05em">Bible Battle Challenge</div>'
+    +'<div style="font-family:Bangers,cursive;font-size:1.2rem;letter-spacing:.05em">Bible Battle Challenge</div>'
     +'<div class="muted" style="margin-top:.3rem">10 questions &middot; Earn up to 50 pts</div>'
     +'</div><div id="quiz-area" style="margin-top:.75rem"></div>';
 }
@@ -396,7 +396,7 @@ function endQuiz(){
   _qa=false;var pts=_qs*5;
   var el=document.getElementById('quiz-area');
   if(el) el.innerHTML='<div style="text-align:center;padding:1.5rem">'
-    +'<div style="font-family:'Bangers',cursive;font-size:2rem;color:#f5c842">'+_qs+'/'+_qpool.length+'</div>'
+    +'<div style="font-family:Bangers,cursive;font-size:2rem;color:#f5c842">'+_qs+'/'+_qpool.length+'</div>'
     +'<div style="font-size:.85rem;color:rgba(255,255,255,.6);margin:.5rem 0">You earned '+pts+' points!</div>'
     +'<button class="btn btn-gold" onclick="startQuiz()" style="max-width:240px;margin:0 auto">Play Again &#9876;&#65039;</button>'
     +'</div>';
@@ -454,7 +454,7 @@ function doParentLogin(){
       if(!rows||!rows.length){err.textContent='No kids found with that PIN.';return;}
       APP.kid=rows[0];
       openDash(rows[0]);
-      toast('Welcome! Showing '+rows[0].first_name+''s dashboard.',3000);
+      toast('Welcome! Showing '+rows[0].first_name+'!',3000);
     }).catch(function(){err.textContent='Error. Try again.';});
 }
 
@@ -528,15 +528,15 @@ function doAdminLogin(){
     </div>
     <div style="display:flex;width:100%;margin-top:.65rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden">
       <div style="flex:1;text-align:center;padding:.7rem .5rem;border-right:1px solid rgba(255,255,255,.08)">
-        <div id="stat-warriors" style="font-family:'Bangers',cursive;font-size:1.5rem;color:#f5c842">&mdash;</div>
+        <div id="stat-warriors" style="font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842">&mdash;</div>
         <div style="font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Warriors</div>
       </div>
       <div style="flex:1;text-align:center;padding:.7rem .5rem;border-right:1px solid rgba(255,255,255,.08)">
-        <div style="font-family:'Bangers',cursive;font-size:1.5rem;color:#f5c842">7</div>
+        <div style="font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842">7</div>
         <div style="font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Armor Pieces</div>
       </div>
       <div style="flex:1;text-align:center;padding:.7rem .5rem">
-        <div style="font-family:'Bangers',cursive;font-size:1.5rem;color:#f5c842">50+</div>
+        <div style="font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842">50+</div>
         <div style="font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Questions</div>
       </div>
     </div>
@@ -548,7 +548,7 @@ function doAdminLogin(){
   <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:2rem">
     <div style="font-size:2rem;margin-bottom:.4rem">&#9876;&#65039;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.8rem;letter-spacing:.05em">Ready to Enter, <span class="gold">Warrior?</span></div>
+    <div style="font-family:Bangers,cursive;font-size:1.8rem;letter-spacing:.05em">Ready to Enter, <span class="gold">Warrior?</span></div>
     <p class="muted" style="margin-top:.35rem">Walk in the victory already won for you.</p>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem">
@@ -575,7 +575,7 @@ function doAdminLogin(){
   <button class="back-btn" onclick="show('p-entry')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:1.5rem">
     <div style="font-size:2rem;margin-bottom:.3rem">&#128274;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:.05em">Welcome Back!</div>
+    <div style="font-family:Bangers,cursive;font-size:1.7rem;letter-spacing:.05em">Welcome Back!</div>
     <p class="muted" style="margin-top:.3rem">Enter your last name and PIN.</p>
   </div>
   <div style="max-width:300px;margin:0 auto">
@@ -611,7 +611,7 @@ function doAdminLogin(){
   <button class="back-btn" onclick="show('p-entry')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:1.5rem">
     <div style="font-size:2rem;margin-bottom:.3rem">&#9876;&#65039;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.7rem;letter-spacing:.05em">Join the <span class="gold">Warriors!</span></div>
+    <div style="font-family:Bangers,cursive;font-size:1.7rem;letter-spacing:.05em">Join the <span class="gold">Warriors!</span></div>
   </div>
   <div style="display:flex;flex-direction:column;gap:.75rem">
     <div><div class="eyebrow" style="margin-bottom:.35rem">First Name</div><input id="su-first" type="text" placeholder="First name" maxlength="20"></div>
@@ -627,9 +627,9 @@ function doAdminLogin(){
 <!-- DASHBOARD -->
 <div id="p-dash" class="page">
   <div style="position:sticky;top:0;background:rgba(5,3,24,.97);border-bottom:1px solid rgba(245,200,66,.15);margin:-1.25rem -1.25rem .75rem;padding:.65rem 1.25rem;display:flex;justify-content:space-between;align-items:center;z-index:10">
-    <div style="font-family:'Bangers',cursive;font-size:1rem;color:#f5c842;letter-spacing:.08em">&#9876;&#65039; WARRIOR ZONE</div>
+    <div style="font-family:Bangers,cursive;font-size:1rem;color:#f5c842;letter-spacing:.08em">&#9876;&#65039; WARRIOR ZONE</div>
     <div style="display:flex;align-items:center;gap:.5rem">
-      <span style="background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.3);color:#f5c842;font-family:'Bangers',cursive;letter-spacing:.06em;font-size:.85rem;padding:3px 10px;border-radius:99px">
+      <span style="background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.3);color:#f5c842;font-family:Bangers,cursive;letter-spacing:.06em;font-size:.85rem;padding:3px 10px;border-radius:99px">
         &#11088; <span id="dash-pts">0</span> pts
       </span>
       <button onclick="doLogout()" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:.75rem">Exit</button>
@@ -666,7 +666,7 @@ function doAdminLogin(){
 <!-- HOW IT WORKS -->
 <div id="p-howto" class="page">
   <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
-  <div style="font-family:'Bangers',cursive;font-size:1.8rem;color:#f5c842;margin-bottom:1rem">How It Works</div>
+  <div style="font-family:Bangers,cursive;font-size:1.8rem;color:#f5c842;margin-bottom:1rem">How It Works</div>
   <div class="card"><div class="eyebrow">Step 1</div><div style="font-weight:800;margin:.3rem 0">Create your Warrior account</div><p class="muted">Sign up with your name and family PIN.</p></div>
   <div class="card"><div class="eyebrow">Step 2</div><div style="font-weight:800;margin:.3rem 0">Earn points every week</div><p class="muted">Read devos, win games, show up Sunday, answer apologetics questions.</p></div>
   <div class="card"><div class="eyebrow">Step 3</div><div style="font-weight:800;margin:.3rem 0">Unlock Armor of God pieces</div><p class="muted">Each piece appears on your warrior as you earn points.</p></div>
@@ -679,7 +679,7 @@ function doAdminLogin(){
   <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:1.5rem">
     <div style="font-size:2rem;margin-bottom:.3rem">&#128106;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.7rem">Parent Portal</div>
+    <div style="font-family:Bangers,cursive;font-size:1.7rem">Parent Portal</div>
     <p class="muted" style="margin-top:.3rem">Enter your family PIN to see your kids.</p>
   </div>
   <div style="max-width:300px;margin:0 auto">
@@ -694,7 +694,7 @@ function doAdminLogin(){
   <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:1.5rem">
     <div style="font-size:2rem;margin-bottom:.3rem">&#128737;&#65039;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.7rem">Admin Access</div>
+    <div style="font-family:Bangers,cursive;font-size:1.7rem">Admin Access</div>
   </div>
   <div style="max-width:300px;margin:0 auto">
     <input id="al-pw" type="password" placeholder="Password" style="margin-bottom:.5rem">
@@ -708,4 +708,4 @@ function doAdminLogin(){
 
 </body>
 </html>
-<!-- deploy-1781644494-mtkrnvsghjya -->
+<!-- deploy-1781645172-vsjnmjgnzdot -->
