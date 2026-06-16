@@ -133,6 +133,8 @@ input:focus,select:focus,textarea:focus{
 .act-chip .ac-label{font-size:11px;font-weight:700;letter-spacing:.3px;}
 .act-chip .ac-pts{font-size:10px;opacity:.8;margin-top:1px;}
 
+.kp-btn{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.15);border-radius:12px;padding:.9rem;font-size:1.25rem;font-weight:700;color:#fff;cursor:pointer;font-family:inherit;transition:background .1s;width:100%;}
+.kp-btn:active{background:rgba(245,200,66,0.3);}
 /* ── SCRIPTURE GAME ── */
 .scripture-game{border-radius:24px;overflow:hidden;margin-bottom:1.25rem;}
 .sg-header{
@@ -2347,7 +2349,20 @@ function landingRoute(tab){
         <div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff"></div>
         <div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff"></div>
       </div>
-      <div id="kl-keypad" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:230px;margin:0 auto"></div>
+      <div id="kl-keypad" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:230px;margin:0 auto">
+        <button type="button" onclick="klPress(1)" class="kp-btn">1</button>
+        <button type="button" onclick="klPress(2)" class="kp-btn">2</button>
+        <button type="button" onclick="klPress(3)" class="kp-btn">3</button>
+        <button type="button" onclick="klPress(4)" class="kp-btn">4</button>
+        <button type="button" onclick="klPress(5)" class="kp-btn">5</button>
+        <button type="button" onclick="klPress(6)" class="kp-btn">6</button>
+        <button type="button" onclick="klPress(7)" class="kp-btn">7</button>
+        <button type="button" onclick="klPress(8)" class="kp-btn">8</button>
+        <button type="button" onclick="klPress(9)" class="kp-btn">9</button>
+        <button type="button" disabled style="visibility:hidden" class="kp-btn"></button>
+        <button type="button" onclick="klPress(0)" class="kp-btn">0</button>
+        <button type="button" onclick="klBackspace()" class="kp-btn">⌫</button>
+      </div>
     </div>
     <div id="kl-err" style="color:#ff8a8a;font-size:.82rem;text-align:center;min-height:1rem;margin-top:.3rem"></div>
     <button onclick="doKidLogin()" style="background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border:none;border-radius:14px;padding:1rem;font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer;width:100%">⚡ Log In</button>
@@ -2366,7 +2381,7 @@ function landingRoute(tab){
     <p style="font-size:.78rem;color:rgba(255,255,255,0.45);margin-top:.4rem">Walk in the victory already won for you.</p>
   </div>
   <div class="choice-row">
-    <div class="choice-card" style="--cc:var(--teal)" onclick="buildKlKeypad();show('p-klogin')">
+    <div class="choice-card" style="--cc:var(--teal)" onclick="show('p-klogin')">
       <span class="cc-icon"><i class="ti ti-login" style="color:var(--teal)" aria-hidden="true"></i></span>
       <div class="cc-label">I have an ID</div>
       <div class="cc-sub">Sign in to my zone</div>
@@ -9941,4 +9956,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781629654-pwbknqpozzmcrkfbuyzl -->
+<!-- deploy-1781630056-jbybppkxutygpmpcdzcq -->
