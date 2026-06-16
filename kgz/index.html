@@ -2205,6 +2205,17 @@ function navBack(){
   else show('p-land');
 }
 function showHowTo(){ show('p-howto'); }
+
+var _klPin = [];
+function klTap(k){
+  if(k==='del'){_klPin.pop();}
+  else if(_klPin.length<4){_klPin.push(k);}
+  var dots=document.querySelectorAll('.kl-dot');
+  dots.forEach(function(dot,i){
+    dot.textContent=_klPin[i]!==undefined?'●':'';
+    dot.style.borderColor=_klPin[i]!==undefined?'#f5c842':'rgba(255,255,255,.18)';
+  });
+}
 function landingRoute(tab){
   if(typeof S!=='undefined'&&S.currentKid){ show('p-kdash'); setTimeout(function(){if(typeof kidTab==='function')kidTab(tab,'act-teal');},150); }
   else show('p-kentry');
@@ -2350,18 +2361,18 @@ function landingRoute(tab){
         <div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff"></div>
       </div>
       <div id="kl-keypad" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:230px;margin:0 auto">
-        <button type="button" onclick="klPress(1)" class="kp-btn">1</button>
-        <button type="button" onclick="klPress(2)" class="kp-btn">2</button>
-        <button type="button" onclick="klPress(3)" class="kp-btn">3</button>
-        <button type="button" onclick="klPress(4)" class="kp-btn">4</button>
-        <button type="button" onclick="klPress(5)" class="kp-btn">5</button>
-        <button type="button" onclick="klPress(6)" class="kp-btn">6</button>
-        <button type="button" onclick="klPress(7)" class="kp-btn">7</button>
-        <button type="button" onclick="klPress(8)" class="kp-btn">8</button>
-        <button type="button" onclick="klPress(9)" class="kp-btn">9</button>
+        <button type="button" onclick="klTap(1)" class="kp-btn">1</button>
+        <button type="button" onclick="klTap(2)" class="kp-btn">2</button>
+        <button type="button" onclick="klTap(3)" class="kp-btn">3</button>
+        <button type="button" onclick="klTap(4)" class="kp-btn">4</button>
+        <button type="button" onclick="klTap(5)" class="kp-btn">5</button>
+        <button type="button" onclick="klTap(6)" class="kp-btn">6</button>
+        <button type="button" onclick="klTap(7)" class="kp-btn">7</button>
+        <button type="button" onclick="klTap(8)" class="kp-btn">8</button>
+        <button type="button" onclick="klTap(9)" class="kp-btn">9</button>
         <button type="button" disabled style="visibility:hidden" class="kp-btn"></button>
-        <button type="button" onclick="klPress(0)" class="kp-btn">0</button>
-        <button type="button" onclick="klBackspace()" class="kp-btn">⌫</button>
+        <button type="button" onclick="klTap(0)" class="kp-btn">0</button>
+        <button type="button" onclick="klTap('del')" class="kp-btn">⌫</button>
       </div>
     </div>
     <div id="kl-err" style="color:#ff8a8a;font-size:.82rem;text-align:center;min-height:1rem;margin-top:.3rem"></div>
@@ -9956,4 +9967,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781630056-jbybppkxutygpmpcdzcq -->
+<!-- deploy-1781630235-yfnmezuhcfgzyosvxrcv -->
