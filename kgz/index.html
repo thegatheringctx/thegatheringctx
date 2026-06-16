@@ -78,634 +78,556 @@ input:focus{border-color:rgba(245,200,66,.6);}
 <script>
 var SUPA_URL="https://ktuapfiexhlladgkuauc.supabase.co";
 var SUPA_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0dWFwZmlleGhsbGFkZ2t1YXVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1OTE2NDUsImV4cCI6MjA5NTE2NzY0NX0.lTLHSuTHCE_jFHFMcQKjGmUKu79i5vjN0PepKhM3akk";
-
-var APP={kid:null,kids:[],storeItems:[],currentTab:'devos'};
+var APP={kid:null,kids:[],storeItems:[],currentTab:"devos"};
 var _pin=[];
 var _stack=[];
 
-function closeOverlay(btn){
-  var el=btn;
-  while(el&&el.style&&el.style.position!=='fixed'){el=el.parentElement;}
-  if(el)el.remove();
-}
 function show(id){
-  var cur=document.querySelector('.page.active');
+  var cur=document.querySelector(".page.active");
   if(cur&&cur.id!==id) _stack.push(cur.id);
-  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');p.style.display='none';});
+  document.querySelectorAll(".page").forEach(function(p){
+    p.classList.remove("active");
+    p.style.display="none";
+  });
   var el=document.getElementById(id);
-  if(el){el.classList.add('active');el.style.display='block';}
+  if(el){el.classList.add("active");el.style.display="block";}
   window.scrollTo(0,0);
 }
-function navBack(){if(_stack.length) show(_stack.pop()); else show('p-land');}
+
+function navBack(){if(_stack.length) show(_stack.pop()); else show("p-land");}
 
 function sbFetch(path,opts){
   opts=opts||{};
-  return fetch(SUPA_URL+'/rest/v1/'+path,{
-    method:opts.method||'GET',
+  return fetch(SUPA_URL+"/rest/v1/"+path,{
+    method:opts.method||"GET",
     headers:{
-      'apikey':SUPA_KEY,
-      'Authorization':'Bearer '+SUPA_KEY,
-      'Content-Type':'application/json',
-      'Prefer':opts.prefer||''
+      "apikey":SUPA_KEY,
+      "Authorization":"Bearer "+SUPA_KEY,
+      "Content-Type":"application/json",
+      "Prefer":opts.prefer||""
     },
     body:opts.body?JSON.stringify(opts.body):undefined
   }).then(function(r){
     if(!r.ok) return r.text().then(function(t){throw new Error(t);});
-    var ct=r.headers.get('content-type')||'';
-    if(ct.indexOf('json')>=0) return r.json();
-    return r.text();
+    var ct=r.headers.get("content-type")||"";
+    if(ct.indexOf("json")>=0) return r.json();
+    return [];
   });
 }
 
 function toast(msg,dur){
-  var el=document.getElementById('toast');
-  el.textContent=msg;el.classList.add('show');
-  setTimeout(function(){el.classList.remove('show');},dur||3000);
+  var el=document.getElementById("toast");
+  if(!el)return;
+  el.textContent=msg;
+  el.classList.add("show");
+  setTimeout(function(){el.classList.remove("show");},dur||3000);
 }
 
-// PIN PAD
 function klTap(k){
-  if(k==='del'){_pin.pop();}
+  if(k==="del"){_pin.pop();}
   else if(_pin.length<4){_pin.push(String(k));}
-  document.querySelectorAll('#kl-dots .pin-dot').forEach(function(d,i){
-    d.textContent=_pin[i]!==undefined?'&#9679;':'';
-    if(_pin[i]!==undefined){d.classList.add('filled');}else{d.classList.remove('filled');}
+  document.querySelectorAll("#kl-dots .pin-dot").forEach(function(d,i){
+    d.textContent=_pin[i]!==undefined?"●":"";
+    if(_pin[i]!==undefined){d.classList.add("filled");}
+    else{d.classList.remove("filled");}
   });
 }
 
-// LOGIN — uses Supabase directly, snake_case columns
 function doLogin(){
-  var last=(document.getElementById('kl-last').value||'').trim();
-  var err=document.getElementById('kl-err');
-  err.textContent='';
-  if(!last){err.textContent='Enter your last name!';return;}
-  if(_pin.length!==4){err.textContent='Enter your 4-digit PIN!';return;}
-  var pin=_pin.join('');
-  err.textContent='Checking...';
-  // Query Supabase — case-insensitive last name match + PIN
-  sbFetch('kids?select=*&last_name=ilike.'+encodeURIComponent(last)+'&pin=eq.'+pin)
+  var last=(document.getElementById("kl-last").value||"").trim();
+  var err=document.getElementById("kl-err");
+  err.textContent="";
+  if(!last){err.textContent="Enter your last name!";return;}
+  if(_pin.length!==4){err.textContent="Enter your 4-digit PIN!";return;}
+  var pin=_pin.join("");
+  err.textContent="Checking...";
+  sbFetch("kids?select=*&last_name=ilike."+encodeURIComponent(last)+"&pin=eq."+pin)
     .then(function(rows){
-      if(!rows||!rows.length) throw new Error('No account found. Check your last name and PIN.');
+      if(!rows||!rows.length) throw new Error("No account found. Check your last name and PIN.");
       return rows[0];
     })
     .then(function(kid){
       APP.kid=kid;
       _pin=[];
-      err.textContent='';
-      document.getElementById('kl-last').value='';
-      document.querySelectorAll('#kl-dots .pin-dot').forEach(function(d){d.textContent='';d.classList.remove('filled');});
+      err.textContent="";
+      document.getElementById("kl-last").value="";
+      document.querySelectorAll("#kl-dots .pin-dot").forEach(function(d){
+        d.textContent="";d.classList.remove("filled");
+      });
       openDash(kid);
     })
     .catch(function(e){
-      err.textContent=(e.message||'Login failed. Try again.');
+      err.textContent=e.message||"Login failed. Try again.";
       _pin=[];
-      document.querySelectorAll('#kl-dots .pin-dot').forEach(function(d){d.textContent='';d.classList.remove('filled');});
+      document.querySelectorAll("#kl-dots .pin-dot").forEach(function(d){
+        d.textContent="";d.classList.remove("filled");
+      });
     });
 }
 
+function getArmor(kid){
+  var pts=kid.points||0;
+  var u=[];
+  if(pts>=10)u.push("belt");
+  if(pts>=50)u.push("breastplate");
+  if(pts>=100)u.push("boots");
+  if(pts>=200)u.push("shield");
+  if(pts>=350)u.push("helmet");
+  if(pts>=500)u.push("sword");
+  if(pts>=750)u.push("full");
+  return u;
+}
+
 function openDash(kid){
-  document.getElementById('dash-name').textContent=kid.first_name||'Warrior';
-  document.getElementById('dash-pts').textContent=kid.points||0;
-  document.getElementById('dash-pts2').textContent=kid.points||0;
+  document.getElementById("dash-name").textContent=kid.first_name||"Warrior";
+  document.getElementById("dash-pts").textContent=kid.points||0;
+  document.getElementById("dash-pts2").textContent=kid.points||0;
   var armor=getArmor(kid);
-  document.getElementById('armor-fill').style.width=Math.round((armor.length/7)*100)+'%';
-  document.getElementById('armor-count').textContent=armor.length+'/7';
-  show('p-dash');
-  dashTab('devos',document.querySelector('.tab-btn'));
+  document.getElementById("armor-fill").style.width=Math.round((armor.length/7)*100)+"%";
+  document.getElementById("armor-count").textContent=armor.length+"/7";
+  show("p-dash");
+  dashTab("devos",document.querySelector(".tab-btn"));
   loadStore();
   loadRanks();
 }
 
-function doLogout(){APP.kid=null;show('p-land');}
+function doLogout(){APP.kid=null;show("p-land");}
 
-function getArmor(kid){
-  var pts=kid.points||0;var u=[];
-  if(pts>=10)u.push('belt');if(pts>=50)u.push('breastplate');
-  if(pts>=100)u.push('boots');if(pts>=200)u.push('shield');
-  if(pts>=350)u.push('helmet');if(pts>=500)u.push('sword');
-  if(pts>=750)u.push('full');
-  return u;
-}
-
-// DASHBOARD TABS
 function dashTab(tab,btn){
   APP.currentTab=tab;
-  ['devos','games','warrior','store','ranks'].forEach(function(t){
-    var el=document.getElementById('tab-'+t);
-    if(el)el.style.display=t===tab?'block':'none';
+  ["devos","games","warrior","store","ranks"].forEach(function(t){
+    var el=document.getElementById("tab-"+t);
+    if(el)el.style.display=t===tab?"block":"none";
   });
-  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
-  if(btn)btn.classList.add('active');
-  if(tab==='devos')renderDevos();
-  if(tab==='games')renderGames();
-  if(tab==='warrior')renderArmor();
-  if(tab==='store'){loadStore();renderStore();}
-  if(tab==='ranks'){loadRanks();renderRanks();}
+  document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active");});
+  if(btn)btn.classList.add("active");
+  if(tab==="devos")renderDevos();
+  if(tab==="games")renderGames();
+  if(tab==="warrior")renderArmor();
+  if(tab==="store"){loadStore();renderStore();}
+  if(tab==="ranks"){loadRanks();}
 }
 
-// DEVOS
 var DEVOS=[
-  {day:1,title:'God Is Working Inside You!',scripture:'Philippians 2:13',body:'Did you know there is a power plant? When you flip a light switch, the power is already there. God is like that for you! He is the power behind everything good you do.',prayer:'God, thank You for working inside me! Help me cooperate with You today. Amen.'},
-  {day:2,title:'No Grumbling!',scripture:'Philippians 2:14',body:'Paul says do ALL things without grumbling. When we grumble we are saying God did not give us enough. When we are thankful we are saying God is good.',prayer:'Jesus, help me do things without complaining. Remind me to be grateful. Amen.'},
-  {day:3,title:'Being Poured Out',scripture:'Philippians 2:17',body:'Paul says he is like a drink poured out for others. He gave everything so others could know Jesus. God wants us to give generously too.',prayer:'God, help me give generously. Help me be glad when I give. Amen.'},
-  {day:4,title:'Timothy Cared for Others',scripture:'Philippians 2:20',body:'Paul had a friend named Timothy who CARED about other people. Paul said there was no one like him. You can be a Timothy for someone today.',prayer:'Jesus, show me one person I can encourage. Help me care about others. Amen.'},
-  {day:5,title:'Go All In!',scripture:'Philippians 2:30',body:'Epaphroditus nearly died for the work of Christ. He went ALL IN for God. Not halfway. Not when it was easy. All the way. God wants us to go all in for Him.',prayer:'God, help me go all in for You. When things get hard, remind me You are worth it. Amen.'}
+  {day:1,title:"God Is Working Inside You!",scripture:"Philippians 2:13",
+   body:"Did you know there is a power plant? When you flip a light switch, the power is already there. God is like that for you! He is the power behind everything good you do.",
+   prayer:"God, thank You for working inside me! Help me cooperate with You today. Amen."},
+  {day:2,title:"No Grumbling!",scripture:"Philippians 2:14",
+   body:"Paul says do ALL things without grumbling. When we grumble we are saying God did not give us enough. When we are thankful we are saying God is good.",
+   prayer:"Jesus, help me do things without complaining. Remind me to be grateful. Amen."},
+  {day:3,title:"Being Poured Out",scripture:"Philippians 2:17",
+   body:"Paul says he is like a drink poured out for others. He gave everything so others could know Jesus. God wants us to give generously too.",
+   prayer:"God, help me give generously. Help me be glad when I give. Amen."},
+  {day:4,title:"Timothy Cared for Others",scripture:"Philippians 2:20",
+   body:"Paul had a friend named Timothy who CARED about other people. Paul said there was no one like him. You can be a Timothy for someone today.",
+   prayer:"Jesus, show me one person I can encourage. Help me care about others. Amen."},
+  {day:5,title:"Go All In!",scripture:"Philippians 2:30",
+   body:"Epaphroditus nearly died for the work of Christ. He went ALL IN for God. Not halfway. Not when it was easy. All the way. God wants us to go all in for Him.",
+   prayer:"God, help me go all in for You. When things get hard, remind me You are worth it. Amen."}
 ];
+
 function renderDevos(){
-  var el=document.getElementById('tab-devos');if(!el)return;
-  el.innerHTML='<div class="eyebrow" style="margin-bottom:.5rem">Daily Devotionals</div>'
-    +DEVOS.map(function(d,i){
-    return '<div onclick="openDevo('+i+')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:.85rem 1rem;display:flex;align-items:center;gap:.85rem;cursor:pointer;margin-bottom:.5rem">'
-      +'<div style="width:38px;height:38px;border-radius:10px;background:rgba(108,82,227,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0">'
-      +'<span style="font-size:.5rem;font-weight:800;color:rgba(255,255,255,.4)">DAY</span>'
-      +'<span style="font-size:1.1rem;font-weight:900">'+d.day+'</span></div>'
-      +'<div style="flex:1"><div style="font-size:.82rem;font-weight:800">'+d.title+'</div>'
-      +'<div style="font-size:.7rem;color:rgba(255,255,255,.45)">'+d.scripture+'</div></div>'
-      +'<div style="color:rgba(255,255,255,.3);font-size:.8rem">&#8250;</div></div>';
-  }).join('');
+  var el=document.getElementById("tab-devos");
+  if(!el)return;
+  var html="<div class=\"eyebrow\" style=\"margin-bottom:.5rem\">Daily Devotionals</div>";
+  DEVOS.forEach(function(d,i){
+    html+="<div class=\"devo-row\" data-i=\""+i+"\" style=\"background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:.85rem 1rem;display:flex;align-items:center;gap:.85rem;cursor:pointer;margin-bottom:.5rem\">";
+    html+="<div style=\"width:38px;height:38px;border-radius:10px;background:rgba(108,82,227,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0\">";
+    html+="<span style=\"font-size:.5rem;font-weight:800;color:rgba(255,255,255,.4)\">DAY</span>";
+    html+="<span style=\"font-size:1.1rem;font-weight:900\">"+d.day+"</span></div>";
+    html+="<div style=\"flex:1\"><div style=\"font-size:.82rem;font-weight:800\">"+d.title+"</div>";
+    html+="<div style=\"font-size:.7rem;color:rgba(255,255,255,.45)\">"+d.scripture+"</div></div>";
+    html+="<div style=\"color:rgba(255,255,255,.3);font-size:.8rem\">&rsaquo;</div></div>";
+  });
+  el.innerHTML=html;
+  el.querySelectorAll(".devo-row").forEach(function(row){
+    row.addEventListener("click",function(){openDevo(parseInt(row.dataset.i));});
+  });
 }
+
 function openDevo(i){
   var d=DEVOS[i];
-  var ov=document.createElement('div');
-  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;display:flex;align-items:flex-end;justify-content:center;padding:0';
-  ov.innerHTML='<div style="background:#0D0830;border-radius:24px 24px 0 0;padding:1.5rem 1.25rem 2.5rem;width:100%;max-width:480px;max-height:80vh;overflow-y:auto">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">'
-    +'<div class="eyebrow">Day '+d.day+' Devotional</div>'
-    +'<button onclick="closeOverlay(this)" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1.2rem">&#10005;</button></div>'
-    +'<div style="font-family:Bangers,cursive;font-size:1.4rem;color:#fff;margin-bottom:.75rem">'+d.title+'</div>'
-    +'<div style="background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.2);border-radius:12px;padding:.75rem;margin-bottom:.85rem;font-size:.72rem;font-weight:800;color:#f5c842">&#128214; '+d.scripture+'</div>'
-    +'<p style="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.8);margin-bottom:.85rem">'+d.body+'</p>'
-    +'<div style="border-left:3px solid #f5c842;padding:.65rem .85rem;background:rgba(245,200,66,.05);border-radius:0 10px 10px 0;margin-bottom:1rem;font-size:.83rem;font-style:italic;color:rgba(255,255,255,.75)">&#128591; '+d.prayer+'</div>'
-    +'<button onclick="markDevo('+i+',this)" class="btn btn-gold">&#9989; Mark Complete &mdash; Earn 10 pts!</button>'
-    +'</div>';
+  var ov=document.createElement("div");
+  ov.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;display:flex;align-items:flex-end;justify-content:center";
+  var inner=document.createElement("div");
+  inner.style.cssText="background:#0D0830;border-radius:24px 24px 0 0;padding:1.5rem 1.25rem 2.5rem;width:100%;max-width:480px;max-height:80vh;overflow-y:auto";
+  
+  var closeBtn=document.createElement("button");
+  closeBtn.textContent="✕";
+  closeBtn.style.cssText="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1.2rem;float:right";
+  closeBtn.addEventListener("click",function(){ov.remove();});
+  
+  var header=document.createElement("div");
+  header.style.cssText="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem";
+  var dayLabel=document.createElement("div");
+  dayLabel.className="eyebrow";
+  dayLabel.textContent="Day "+d.day+" Devotional";
+  header.appendChild(dayLabel);
+  header.appendChild(closeBtn);
+  
+  var title=document.createElement("div");
+  title.style.cssText="font-family:Bangers,cursive;font-size:1.4rem;color:#fff;margin-bottom:.75rem";
+  title.textContent=d.title;
+  
+  var scripture=document.createElement("div");
+  scripture.style.cssText="background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.2);border-radius:12px;padding:.75rem;margin-bottom:.85rem;font-size:.72rem;font-weight:800;color:#f5c842";
+  scripture.textContent="📖 "+d.scripture;
+  
+  var body=document.createElement("p");
+  body.style.cssText="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.8);margin-bottom:.85rem";
+  body.textContent=d.body;
+  
+  var prayer=document.createElement("div");
+  prayer.style.cssText="border-left:3px solid #f5c842;padding:.65rem .85rem;background:rgba(245,200,66,.05);border-radius:0 10px 10px 0;margin-bottom:1rem;font-size:.83rem;font-style:italic;color:rgba(255,255,255,.75)";
+  prayer.textContent="🙏 "+d.prayer;
+  
+  var markBtn=document.createElement("button");
+  markBtn.className="btn btn-gold";
+  markBtn.textContent="✅ Mark Complete — Earn 10 pts!";
+  markBtn.addEventListener("click",function(){markDevo(i,markBtn,ov);});
+  
+  inner.appendChild(header);
+  inner.appendChild(title);
+  inner.appendChild(scripture);
+  inner.appendChild(body);
+  inner.appendChild(prayer);
+  inner.appendChild(markBtn);
+  ov.appendChild(inner);
   document.body.appendChild(ov);
 }
-function markDevo(i,btn){
-  if(!APP.kid){toast('Log in first!');return;}
+
+function markDevo(i,btn,ov){
+  if(!APP.kid){toast("Log in first!");return;}
   var pts=(APP.kid.points||0)+10;
-  sbFetch('kids?id=eq.'+APP.kid.id,{method:'PATCH',body:{points:pts},prefer:'return=representation'})
+  sbFetch("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{points:pts},prefer:"return=representation"})
     .then(function(){
       APP.kid.points=pts;
-      document.getElementById('dash-pts').textContent=pts;
-      document.getElementById('dash-pts2').textContent=pts;
+      document.getElementById("dash-pts").textContent=pts;
+      document.getElementById("dash-pts2").textContent=pts;
       var armor=getArmor(APP.kid);
-      document.getElementById('armor-fill').style.width=Math.round((armor.length/7)*100)+'%';
-      document.getElementById('armor-count').textContent=armor.length+'/7';
-      btn.textContent='Complete! +10 pts';btn.disabled=true;btn.style.background='rgba(0,192,122,.3)';
-      toast('&#128214; Devotional complete! +10 pts');
-    }).catch(function(){toast('Error saving. Check connection.');});
+      document.getElementById("armor-fill").style.width=Math.round((armor.length/7)*100)+"%";
+      document.getElementById("armor-count").textContent=armor.length+"/7";
+      btn.textContent="Complete! +10 pts";
+      btn.disabled=true;
+      btn.style.background="rgba(0,192,122,.3)";
+      toast("📖 Devotional complete! +10 pts");
+      setTimeout(function(){if(ov)ov.remove();},1500);
+    }).catch(function(){toast("Error saving. Check connection.");});
 }
 
-// STORE
 function loadStore(){
-  if(APP.storeItems.length)return;
-  sbFetch('store_items?select=*&active=eq.true&order=pts.asc')
+  if(APP.storeItems.length){renderStore();return;}
+  sbFetch("store_items?select=*&active=eq.true&order=pts.asc")
     .then(function(items){APP.storeItems=items||[];renderStore();})
     .catch(function(){});
 }
+
 function renderStore(){
-  var el=document.getElementById('tab-store');if(!el)return;
-  if(!APP.storeItems.length){el.innerHTML='<div class="eyebrow" style="margin-bottom:.5rem">Warrior Store</div><p class="muted">Loading store...</p>';return;}
+  var el=document.getElementById("tab-store");
+  if(!el)return;
   var myPts=APP.kid?APP.kid.points||0:0;
-  el.innerHTML='<div class="eyebrow" style="margin-bottom:.75rem">Warrior Store</div><div class="store-grid">'
-    +APP.storeItems.map(function(item){
-      var can=myPts>=item.pts;
-      return '<div class="store-card" onclick="redeemItem(''+item.id+'','+item.pts+',''+item.name+'')">'
-        +(item.img?'<img src="'+item.img+'" alt="'+item.name+'" onerror="this.style.display='none'">':'<div style="height:80px;display:flex;align-items:center;justify-content:center;font-size:2.5rem">&#127873;</div>')
-        +'<div class="store-name">'+item.name+'</div>'
-        +'<div class="store-pts">'+item.pts+' pts</div>'
-        +'<div style="font-size:.62rem;color:'+(can?'#00C07A':'rgba(255,255,255,.3)')+';font-weight:700;margin-top:.2rem">'
-        +(can?'&#9989; You can get this!':'Need '+(item.pts-myPts)+' more pts')+'</div>'
-        +'</div>';
-    }).join('')+'</div>';
-}
-function redeemItem(id,pts,name){
-  if(!APP.kid){toast('Log in to redeem!');return;}
-  if((APP.kid.points||0)<pts){toast('Need '+(pts-(APP.kid.points||0))+' more points!');return;}
-  if(!confirm('Redeem "'+name+'" for '+pts+' points?'))return;
-  var newPts=APP.kid.points-pts;
-  sbFetch('kids?id=eq.'+APP.kid.id,{method:'PATCH',body:{points:newPts},prefer:'return=representation'})
-    .then(function(){
-      sbFetch('orders',{method:'POST',body:{kid_id:APP.kid.id,item_id:id,item_name:name,pts_spent:pts,status:'pending'},prefer:'return=representation'});
-      APP.kid.points=newPts;
-      document.getElementById('dash-pts').textContent=newPts;
-      document.getElementById('dash-pts2').textContent=newPts;
-      renderStore();
-      toast('&#127881; Redeemed! A leader will bring you '+name+'!',4000);
-    }).catch(function(){toast('Error. Try again.');});
+  var html="<div class=\"eyebrow\" style=\"margin-bottom:.75rem\">Warrior Store</div>";
+  if(!APP.storeItems.length){
+    html+="<p class=\"muted\">Loading store...</p>";
+    el.innerHTML=html;return;
+  }
+  html+="<div class=\"store-grid\">";
+  APP.storeItems.forEach(function(item){
+    var can=myPts>=item.pts;
+    html+="<div class=\"store-card\" data-id=\""+item.id+"\" data-pts=\""+item.pts+"\" data-name=\""+item.name.replace(/"/g,"&quot;")+"\">";
+    if(item.img){
+      html+="<img src=\""+item.img+"\" alt=\""+item.name.replace(/"/g,"")+"\" style=\"width:100%;height:100px;object-fit:contain;border-radius:10px;margin-bottom:.5rem\" onerror=\"this.style.display='none'\">";
+    } else {
+      html+="<div style=\"height:80px;display:flex;align-items:center;justify-content:center;font-size:2.5rem\">🎁</div>";
+    }
+    html+="<div class=\"store-name\">"+item.name+"</div>";
+    html+="<div class=\"store-pts\">"+item.pts+" pts</div>";
+    html+="<div style=\"font-size:.62rem;color:"+(can?"#00C07A":"rgba(255,255,255,.3)")+";font-weight:700;margin-top:.2rem\">";
+    html+=can?"✅ You can get this!":"Need "+(item.pts-myPts)+" more pts";
+    html+="</div></div>";
+  });
+  html+="</div>";
+  el.innerHTML=html;
+  el.querySelectorAll(".store-card").forEach(function(card){
+    card.addEventListener("click",function(){
+      redeemItem(card.dataset.id,parseInt(card.dataset.pts),card.dataset.name);
+    });
+  });
 }
 
-// LEADERBOARD
+function redeemItem(id,pts,name){
+  if(!APP.kid){toast("Log in to redeem!");return;}
+  if((APP.kid.points||0)<pts){toast("Need "+(pts-(APP.kid.points||0))+" more points!");return;}
+  if(!confirm("Redeem "+name+" for "+pts+" points?"))return;
+  var newPts=APP.kid.points-pts;
+  sbFetch("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{points:newPts},prefer:"return=representation"})
+    .then(function(){
+      sbFetch("orders",{method:"POST",body:{kid_id:APP.kid.id,item_id:id,item_name:name,pts_spent:pts,status:"pending"},prefer:"return=representation"});
+      APP.kid.points=newPts;
+      document.getElementById("dash-pts").textContent=newPts;
+      document.getElementById("dash-pts2").textContent=newPts;
+      renderStore();
+      toast("🎉 Redeemed! A leader will bring you "+name+"!",4000);
+    }).catch(function(){toast("Error. Try again.");});
+}
+
 function loadRanks(){
-  sbFetch('kids?select=first_name,points&order=points.desc&limit=20')
+  sbFetch("kids?select=first_name,points&order=points.desc&limit=20")
     .then(function(rows){APP.kids=rows||[];renderRanks();})
     .catch(function(){});
 }
+
 function renderRanks(){
-  var el=document.getElementById('tab-ranks');if(!el)return;
-  if(!APP.kids.length){el.innerHTML='<div class="eyebrow" style="margin-bottom:.5rem">Hall of Victory</div><p class="muted">Loading...</p>';return;}
-  el.innerHTML='<div class="eyebrow" style="margin-bottom:.75rem">Hall of Victory</div>'
-    +APP.kids.map(function(k,i){
-      var medal=i===0?'&#129351;':i===1?'&#129352;':i===2?'&#129353;':(i+1)+'.';
-      var isMe=APP.kid&&APP.kid.first_name===k.first_name&&APP.kid.points===k.points;
-      return '<div style="display:flex;align-items:center;gap:.85rem;padding:.75rem 1rem;border-radius:14px;margin-bottom:.4rem;background:'+(isMe?'rgba(245,200,66,.08)':'rgba(255,255,255,.04)')+';border:1px solid '+(isMe?'rgba(245,200,66,.3)':'rgba(255,255,255,.07)')+';">'
-        +'<div style="font-size:1.1rem;width:30px;text-align:center">'+medal+'</div>'
-        +'<div style="flex:1;font-weight:800">'+k.first_name+'</div>'
-        +'<div style="font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842">'+k.points+' pts</div>'
-        +'</div>';
-    }).join('');
+  var el=document.getElementById("tab-ranks");
+  if(!el)return;
+  var html="<div class=\"eyebrow\" style=\"margin-bottom:.75rem\">Hall of Victory</div>";
+  if(!APP.kids.length){html+="<p class=\"muted\">Loading...</p>";el.innerHTML=html;return;}
+  APP.kids.forEach(function(k,i){
+    var medals=["🥇","🥈","🥉"];
+    var medal=i<3?medals[i]:(i+1)+".";
+    var isMe=APP.kid&&APP.kid.first_name===k.first_name;
+    html+="<div style=\"display:flex;align-items:center;gap:.85rem;padding:.75rem 1rem;border-radius:14px;margin-bottom:.4rem;";
+    html+="background:"+(isMe?"rgba(245,200,66,.08)":"rgba(255,255,255,.04)")+";";
+    html+="border:1px solid "+(isMe?"rgba(245,200,66,.3)":"rgba(255,255,255,.07)")+";\">";
+    html+="<div style=\"font-size:1.1rem;width:30px;text-align:center\">"+medal+"</div>";
+    html+="<div style=\"flex:1;font-weight:800\">"+k.first_name+"</div>";
+    html+="<div style=\"font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842\">"+k.points+" pts</div>";
+    html+="</div>";
+  });
+  el.innerHTML=html;
 }
 
-// ARMOR SCREEN
-var ARMOR=[
-  {id:'belt',name:'Belt of Truth',ref:'Ephesians 6:14',desc:'Truth holds everything together.',pts:10,icon:'&#128312;'},
-  {id:'breastplate',name:'Breastplate of Righteousness',ref:'Ephesians 6:14',desc:'Protects your heart.',pts:50,icon:'&#129752;'},
-  {id:'boots',name:'Shoes of Peace',ref:'Ephesians 6:15',desc:'You carry peace everywhere.',pts:100,icon:'&#128094;'},
-  {id:'shield',name:'Shield of Faith',ref:'Ephesians 6:16',desc:'Blocks enemy attacks.',pts:200,icon:'&#128737;&#65039;'},
-  {id:'helmet',name:'Helmet of Salvation',ref:'Ephesians 6:17',desc:'Protects your mind.',pts:350,icon:'&#129510;'},
-  {id:'sword',name:'Sword of the Spirit',ref:'Ephesians 6:17',desc:'God is your weapon.',pts:500,icon:'&#9876;&#65039;'},
-  {id:'full',name:'Full Warrior!',ref:'Ephesians 6:13',desc:'You wear the complete armor of God!',pts:750,icon:'&#10024;'}
+var ARMOR_PIECES=[
+  {id:"belt",name:"Belt of Truth",ref:"Ephesians 6:14",desc:"Truth holds everything together.",pts:10,icon:"🟡"},
+  {id:"breastplate",name:"Breastplate of Righteousness",ref:"Ephesians 6:14",desc:"Protects your heart.",pts:50,icon:"🛡"},
+  {id:"boots",name:"Shoes of Peace",ref:"Ephesians 6:15",desc:"You carry peace everywhere.",pts:100,icon:"👟"},
+  {id:"shield",name:"Shield of Faith",ref:"Ephesians 6:16",desc:"Blocks enemy attacks.",pts:200,icon:"🛡️"},
+  {id:"helmet",name:"Helmet of Salvation",ref:"Ephesians 6:17",desc:"Protects your mind.",pts:350,icon:"🪖"},
+  {id:"sword",name:"Sword of the Spirit",ref:"Ephesians 6:17",desc:"The Word of God is your weapon.",pts:500,icon:"⚔️"},
+  {id:"full",name:"Full Warrior!",ref:"Ephesians 6:13",desc:"You wear the complete armor of God!",pts:750,icon:"✨"}
 ];
+
 function renderArmor(){
-  var el=document.getElementById('tab-warrior');if(!el)return;
+  var el=document.getElementById("tab-warrior");
+  if(!el)return;
   var unlocked=APP.kid?getArmor(APP.kid):[];
-  el.innerHTML='<div class="eyebrow" style="margin-bottom:.75rem">Your Armor of God</div>'
-    +ARMOR.map(function(a){
-      var on=unlocked.indexOf(a.id)>=0;
-      return '<div style="display:flex;align-items:center;gap:.85rem;padding:.85rem 1rem;border-radius:16px;margin-bottom:.5rem;background:'+(on?'rgba(245,200,66,.08)':'rgba(255,255,255,.04)')+';border:1.5px solid '+(on?'rgba(245,200,66,.35)':'rgba(255,255,255,.08)')+';">'
-        +'<div style="font-size:1.6rem;filter:'+(on?'none':'grayscale(1) opacity(0.3)')+'">'+a.icon+'</div>'
-        +'<div style="flex:1">'
-        +'<div style="font-size:.85rem;font-weight:800;color:'+(on?'#fff':'rgba(255,255,255,.4)')+'">'+a.name+'</div>'
-        +'<div style="font-size:.68rem;color:rgba(255,255,255,.35)">'+a.ref+'</div>'
-        +'<div style="font-size:.7rem;color:'+(on?'#00C07A':'rgba(255,255,255,.3)')+';font-weight:700;margin-top:2px">'+(on?'&#9989; EQUIPPED':'&#128274; Unlock at '+a.pts+' pts')+'</div>'
-        +'</div></div>';
-    }).join('');
+  var html="<div class=\"eyebrow\" style=\"margin-bottom:.75rem\">Your Armor of God</div>";
+  ARMOR_PIECES.forEach(function(a){
+    var on=unlocked.indexOf(a.id)>=0;
+    html+="<div style=\"display:flex;align-items:center;gap:.85rem;padding:.85rem 1rem;border-radius:16px;margin-bottom:.5rem;";
+    html+="background:"+(on?"rgba(245,200,66,.08)":"rgba(255,255,255,.04)")+";";
+    html+="border:1.5px solid "+(on?"rgba(245,200,66,.35)":"rgba(255,255,255,.08)")+";\">";
+    html+="<div style=\"font-size:1.6rem;filter:"+(on?"none":"grayscale(1) opacity(0.3)")+"\">"+a.icon+"</div>";
+    html+="<div style=\"flex:1\">";
+    html+="<div style=\"font-size:.85rem;font-weight:800;color:"+(on?"#fff":"rgba(255,255,255,.4)")+"\">"+a.name+"</div>";
+    html+="<div style=\"font-size:.68rem;color:rgba(255,255,255,.35)\">"+a.ref+"</div>";
+    html+="<div style=\"font-size:.7rem;color:"+(on?"#00C07A":"rgba(255,255,255,.3)")+";font-weight:700;margin-top:2px\">";
+    html+=on?"✅ EQUIPPED":"🔒 Unlock at "+a.pts+" pts";
+    html+="</div></div></div>";
+  });
+  el.innerHTML=html;
 }
 
-// QUIZ GAME
 var QUIZ=[
   {q:"Paul wrote Philippians from where?",opts:["A palace","Prison","A boat","His home"],ans:1},
-  {q:"The Belt of Truth represents?",opts:["Speed","Truth & honesty","Strength","Courage"],ans:1},
-  {q:"The Sword of the Spirit is?",opts:["A real sword","God's Word","A prayer","A song"],ans:1},
+  {q:"The Belt of Truth represents?",opts:["Speed","Truth and honesty","Strength","Courage"],ans:1},
+  {q:"The Sword of the Spirit is?",opts:["A real sword","The Word of God","A prayer","A song"],ans:1},
   {q:"I can do all things through...?",opts:["My friends","Myself","Christ","Moses"],ans:2},
-  {q:"Jesus was in the tomb for how many days?",opts:["1","2","3","7"],ans:2},
+  {q:"Jesus was in the tomb how many days?",opts:["1","2","3","7"],ans:2},
   {q:"Who was swallowed by a big fish?",opts:["Moses","Jonah","Daniel","Elijah"],ans:1},
   {q:"Jesus turned water into?",opts:["Juice","Wine","Milk","Oil"],ans:1},
-  {q:"Psalm 23 — The Lord is my...?",opts:["King","Shepherd","Father","Rock"],ans:1},
+  {q:"Psalm 23 says the Lord is my?",opts:["King","Shepherd","Father","Rock"],ans:1},
   {q:"How many disciples did Jesus choose?",opts:["7","10","12","15"],ans:2},
   {q:"The Shield of Faith does what?",opts:["Hurts enemies","Blocks attacks","Gives strength","Makes invisible"],ans:1},
   {q:"What armor protects your mind?",opts:["Belt","Breastplate","Helmet","Sword"],ans:2},
-  {q:"What did Paul call his resume compared to knowing Christ?",opts:["Priceless","Rubbish","Important","Average"],ans:1},
-  {q:"Paul says in Philippians 4:4 to rejoice...?",opts:["Sometimes","On Sundays","Always","When happy"],ans:2},
-  {q:"What does 'Emmanuel' mean?",opts:["Son of God","God with us","King of kings","Almighty"],ans:1},
+  {q:"Paul compared his resume to knowing Christ as?",opts:["Priceless","Rubbish","Important","Average"],ans:1},
+  {q:"Philippians 4:4 says to rejoice?",opts:["Sometimes","On Sundays","Always","When happy"],ans:2},
+  {q:"Emmanuel means?",opts:["Son of God","God with us","King of kings","Almighty"],ans:1},
   {q:"Who killed Goliath?",opts:["Samson","Solomon","David","Joshua"],ans:2}
 ];
 var _qi=0,_qs=0,_qa=false,_qpool=[];
+
 function renderGames(){
-  var el=document.getElementById('tab-games');if(!el)return;
-  el.innerHTML='<div class="eyebrow" style="margin-bottom:.75rem">Bible Battle Games</div>'
-    +'<div style="background:rgba(245,200,66,.08);border:1.5px solid rgba(245,200,66,.2);border-radius:20px;padding:1.1rem;cursor:pointer;text-align:center" onclick="startQuiz()">'
-    +'<div style="font-size:2rem;margin-bottom:.3rem">&#129504;</div>'
-    +'<div style="font-family:Bangers,cursive;font-size:1.2rem;letter-spacing:.05em">Bible Battle Challenge</div>'
-    +'<div class="muted" style="margin-top:.3rem">10 questions &middot; Earn up to 50 pts</div>'
-    +'</div><div id="quiz-area" style="margin-top:.75rem"></div>';
+  var el=document.getElementById("tab-games");
+  if(!el)return;
+  var html="<div class=\"eyebrow\" style=\"margin-bottom:.75rem\">Bible Battle Games</div>";
+  html+="<div id=\"quiz-launch\" style=\"background:rgba(245,200,66,.08);border:1.5px solid rgba(245,200,66,.2);border-radius:20px;padding:1.1rem;cursor:pointer;text-align:center\">";
+  html+="<div style=\"font-size:2rem;margin-bottom:.3rem\">🧠</div>";
+  html+="<div style=\"font-family:Bangers,cursive;font-size:1.2rem;letter-spacing:.05em\">Bible Battle Challenge</div>";
+  html+="<div class=\"muted\" style=\"margin-top:.3rem\">10 questions &middot; Earn up to 50 pts</div></div>";
+  html+="<div id=\"quiz-area\" style=\"margin-top:.75rem\"></div>";
+  el.innerHTML=html;
+  document.getElementById("quiz-launch").addEventListener("click",startQuiz);
 }
+
 function startQuiz(){
   _qi=0;_qs=0;_qa=true;
   _qpool=QUIZ.slice().sort(function(){return Math.random()-.5;}).slice(0,10);
   showQ();
 }
+
 function showQ(){
-  var el=document.getElementById('quiz-area');if(!el)return;
+  var el=document.getElementById("quiz-area");
+  if(!el)return;
   if(_qi>=_qpool.length){endQuiz();return;}
   var q=_qpool[_qi];
-  el.innerHTML='<div class="quiz-wrap"><div style="font-size:.7rem;color:rgba(255,255,255,.4);margin-bottom:.5rem">Question '+(_qi+1)+' of '+_qpool.length+'</div>'
-    +'<div class="quiz-q">'+q.q+'</div><div class="quiz-opts">'
-    +q.opts.map(function(o,i){return '<div class="quiz-opt" onclick="ansQ('+i+',this)">'+o+'</div>';}).join('')
-    +'</div></div>';
+  var html="<div style=\"background:rgba(10,6,40,.95);border:1px solid rgba(245,200,66,.2);border-radius:20px;padding:1.25rem\">";
+  html+="<div style=\"font-size:.7rem;color:rgba(255,255,255,.4);margin-bottom:.5rem\">Question "+(_qi+1)+" of "+_qpool.length+"</div>";
+  html+="<div style=\"font-size:.95rem;font-weight:700;color:#E8E4F0;line-height:1.5;margin-bottom:1rem\">"+q.q+"</div>";
+  html+="<div style=\"display:grid;grid-template-columns:1fr 1fr;gap:.5rem\" id=\"quiz-opts\">";
+  q.opts.forEach(function(o,i){
+    html+="<div class=\"quiz-opt\" data-i=\""+i+"\" style=\"background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:12px;padding:.75rem .5rem;font-size:.82rem;font-weight:700;cursor:pointer;color:#E8E4F0;text-align:center\">"+o+"</div>";
+  });
+  html+="</div></div>";
+  el.innerHTML=html;
+  el.querySelectorAll(".quiz-opt").forEach(function(opt){
+    opt.addEventListener("click",function(){ansQ(parseInt(opt.dataset.i),opt);});
+  });
 }
+
 function ansQ(i,el){
   if(!_qa)return;
   var q=_qpool[_qi];
-  document.querySelectorAll('.quiz-opt').forEach(function(o){o.onclick=null;});
-  if(i===q.ans){el.classList.add('correct');_qs++;toast('&#9989; Correct!');}
-  else{el.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');toast('&#10060; Not quite!');}
-  _qi++;setTimeout(showQ,900);
+  document.querySelectorAll(".quiz-opt").forEach(function(o){o.style.pointerEvents="none";});
+  if(i===q.ans){
+    el.style.background="rgba(0,229,160,.15)";
+    el.style.borderColor="#00E5A0";
+    el.style.color="#00E5A0";
+    _qs++;toast("✅ Correct!");
+  } else {
+    el.style.background="rgba(255,90,54,.15)";
+    el.style.borderColor="#FF5A36";
+    var correct=document.querySelector(".quiz-opt[data-i=\""+q.ans+"\"]");
+    if(correct){correct.style.background="rgba(0,229,160,.15)";correct.style.borderColor="#00E5A0";}
+    toast("❌ Not quite!");
+  }
+  _qi++;
+  setTimeout(showQ,900);
 }
+
 function endQuiz(){
-  _qa=false;var pts=_qs*5;
-  var el=document.getElementById('quiz-area');
-  if(el) el.innerHTML='<div style="text-align:center;padding:1.5rem">'
-    +'<div style="font-family:Bangers,cursive;font-size:2rem;color:#f5c842">'+_qs+'/'+_qpool.length+'</div>'
-    +'<div style="font-size:.85rem;color:rgba(255,255,255,.6);margin:.5rem 0">You earned '+pts+' points!</div>'
-    +'<button class="btn btn-gold" onclick="startQuiz()" style="max-width:240px;margin:0 auto">Play Again &#9876;&#65039;</button>'
-    +'</div>';
+  _qa=false;
+  var pts=_qs*5;
+  var el=document.getElementById("quiz-area");
+  if(el){
+    var html="<div style=\"text-align:center;padding:1.5rem\">";
+    html+="<div style=\"font-family:Bangers,cursive;font-size:2rem;color:#f5c842\">"+_qs+"/"+_qpool.length+"</div>";
+    html+="<div style=\"font-size:.85rem;color:rgba(255,255,255,.6);margin:.5rem 0\">You earned "+pts+" points!</div>";
+    html+="<div id=\"play-again\" style=\"display:inline-block;background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border:none;border-radius:14px;padding:.75rem 2rem;font-family:Bangers,cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer\">Play Again ⚔️</div>";
+    html+="</div>";
+    el.innerHTML=html;
+    var pa=document.getElementById("play-again");
+    if(pa)pa.addEventListener("click",startQuiz);
+  }
   if(APP.kid&&pts>0){
     var np=(APP.kid.points||0)+pts;
-    sbFetch('kids?id=eq.'+APP.kid.id,{method:'PATCH',body:{points:np},prefer:'return=representation'})
+    sbFetch("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{points:np},prefer:"return=representation"})
       .then(function(){
         APP.kid.points=np;
-        document.getElementById('dash-pts').textContent=np;
-        document.getElementById('dash-pts2').textContent=np;
+        document.getElementById("dash-pts").textContent=np;
+        document.getElementById("dash-pts2").textContent=np;
         var armor=getArmor(APP.kid);
-        document.getElementById('armor-fill').style.width=Math.round((armor.length/7)*100)+'%';
-        document.getElementById('armor-count').textContent=armor.length+'/7';
-        toast('&#9876;&#65039; +'+pts+' pts earned!',2500);
+        document.getElementById("armor-fill").style.width=Math.round((armor.length/7)*100)+"%";
+        document.getElementById("armor-count").textContent=armor.length+"/7";
+        toast("⚔️ +"+pts+" pts earned!",2500);
       });
   }
 }
 
-// SIGNUP
 function doSignup(){
-  var first=(document.getElementById('su-first').value||'').trim();
-  var last=(document.getElementById('su-last').value||'').trim();
-  var age=parseInt(document.getElementById('su-age').value||'0');
-  var parent=(document.getElementById('su-parent').value||'').trim();
-  var pin=(document.getElementById('su-pin').value||'').trim();
-  var err=document.getElementById('su-err');
-  err.textContent='';
-  if(!first||!last){err.textContent='Enter first and last name.';return;}
-  if(!age||age<4||age>18){err.textContent='Enter a valid age (4-18).';return;}
-  if(pin.length!==4||isNaN(pin)){err.textContent='PIN must be exactly 4 digits.';return;}
-  err.textContent='Creating account...';
-  var id='KGZ-'+Math.floor(1000+Math.random()*9000);
-  sbFetch('kids',{
-    method:'POST',
-    body:{id:id,first_name:first,last_name:last,age:age,age_group:age<=7?'47':'812',pin:pin,parent_name:parent,points:0,joined_at:Date.now(),avatar:'warrior'},
-    prefer:'return=representation'
+  var first=(document.getElementById("su-first").value||"").trim();
+  var last=(document.getElementById("su-last").value||"").trim();
+  var age=parseInt(document.getElementById("su-age").value||"0");
+  var parent=(document.getElementById("su-parent").value||"").trim();
+  var pin=(document.getElementById("su-pin").value||"").trim();
+  var err=document.getElementById("su-err");
+  err.textContent="";
+  if(!first||!last){err.textContent="Enter first and last name.";return;}
+  if(!age||age<4||age>18){err.textContent="Enter a valid age (4-18).";return;}
+  if(pin.length!==4||isNaN(pin)){err.textContent="PIN must be exactly 4 digits.";return;}
+  err.textContent="Creating account...";
+  var id="KGZ-"+Math.floor(1000+Math.random()*9000);
+  sbFetch("kids",{
+    method:"POST",
+    body:{id:id,first_name:first,last_name:last,age:age,age_group:age<=7?"47":"812",
+          pin:pin,parent_name:parent,points:0,joined_at:Date.now(),avatar:"warrior"},
+    prefer:"return=representation"
   }).then(function(rows){
     APP.kid=Array.isArray(rows)?rows[0]:rows;
-    err.textContent='';
-    ['su-first','su-last','su-age','su-parent','su-pin'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+    err.textContent="";
+    ["su-first","su-last","su-age","su-parent","su-pin"].forEach(function(fid){
+      var fel=document.getElementById(fid);if(fel)fel.value="";
+    });
     openDash(APP.kid);
-    toast('&#9876;&#65039; Welcome to the Warrior Zone, '+first+'!',3500);
-  }).catch(function(e){err.textContent='Error: '+(e.message||'try again');});
+    toast("⚔️ Welcome, "+first+"!",3500);
+  }).catch(function(e){err.textContent="Error: "+(e.message||"try again");});
 }
 
-// PARENT LOGIN
 function doParentLogin(){
-  var pin=(document.getElementById('pl-pin').value||'').trim();
-  var err=document.getElementById('pl-err');
-  if(!pin){err.textContent='Enter your PIN.';return;}
-  err.textContent='Checking...';
-  sbFetch('kids?select=*&pin=eq.'+pin)
+  var pin=(document.getElementById("pl-pin").value||"").trim();
+  var err=document.getElementById("pl-err");
+  if(!pin){err.textContent="Enter your PIN.";return;}
+  err.textContent="Checking...";
+  sbFetch("kids?select=*&pin=eq."+pin)
     .then(function(rows){
-      err.textContent='';document.getElementById('pl-pin').value='';
-      if(!rows||!rows.length){err.textContent='No kids found with that PIN.';return;}
+      err.textContent="";
+      document.getElementById("pl-pin").value="";
+      if(!rows||!rows.length){err.textContent="No kids found with that PIN.";return;}
       APP.kid=rows[0];
       openDash(rows[0]);
-      toast('Welcome! Showing '+rows[0].first_name+'!',3000);
-    }).catch(function(){err.textContent='Error. Try again.';});
+      toast("Welcome! Showing "+rows[0].first_name,3000);
+    }).catch(function(){err.textContent="Error. Try again.";});
 }
 
-// ADMIN LOGIN
 function doAdminLogin(){
-  var pw=document.getElementById('al-pw').value;
-  var err=document.getElementById('al-err');
-  if(pw!=='gathering.'){err.textContent='Incorrect password.';return;}
-  err.textContent='';
-  sbFetch('kids?select=first_name,last_name,points,pin&order=points.desc').then(function(rows){
-    APP.kids=rows||[];
-    // Show admin as first kid or just go to blank dash
-    show('p-dash');
-    document.getElementById('dash-name').textContent='Admin View';
-    document.getElementById('dash-pts').textContent='';
-    document.getElementById('dash-pts2').textContent='';
-    dashTab('ranks',document.querySelector('.tab-btn[onclick*=ranks]'));
-    renderRanks();
-    toast('Admin: '+rows.length+' warriors loaded',3000);
-  });
+  var pw=document.getElementById("al-pw").value;
+  var err=document.getElementById("al-err");
+  if(pw!=="gathering."){err.textContent="Incorrect password.";return;}
+  err.textContent="";
+  show("p-dash");
+  document.getElementById("dash-name").textContent="Admin View";
+  document.getElementById("dash-pts").textContent="";
+  document.getElementById("dash-pts2").textContent="";
+  loadRanks();
+  dashTab("ranks",null);
+  toast("Admin loaded",2000);
 }
 
-// INIT
-(function(){
-  // Load warrior count
-  sbFetch('kids?select=id').then(function(r){
-    var el=document.getElementById('stat-warriors');
+(function init(){
+  sbFetch("kids?select=id").then(function(r){
+    var el=document.getElementById("stat-warriors");
     if(el)el.textContent=r.length;
   }).catch(function(){});
-  // Rotating verses
   var VV=[
-    {t:'"Be strong and courageous. Do not be afraid, for the Lord your God is with you wherever you go."',r:'Joshua 1:9 · ESV'},
-    {t:'"I can do all things through him who strengthens me."',r:'Philippians 4:13 · ESV'},
-    {t:'"Put on the whole armor of God, that you may be able to stand."',r:'Ephesians 6:11 · ESV'},
-    {t:'"God gave us a spirit not of fear but of power and love and self-control."',r:'2 Timothy 1:7 · ESV'},
-    {t:'"Rejoice in the Lord always; again I will say, rejoice."',r:'Philippians 4:4 · ESV'}
+    {t:"Be strong and courageous. Do not be afraid, for the Lord your God is with you wherever you go.",r:"Joshua 1:9 \u00b7 ESV"},
+    {t:"I can do all things through him who strengthens me.",r:"Philippians 4:13 \u00b7 ESV"},
+    {t:"Put on the whole armor of God, that you may be able to stand.",r:"Ephesians 6:11 \u00b7 ESV"},
+    {t:"God gave us a spirit not of fear but of power and love and self-control.",r:"2 Timothy 1:7 \u00b7 ESV"},
+    {t:"Rejoice in the Lord always; again I will say, rejoice.",r:"Philippians 4:4 \u00b7 ESV"}
   ];
   var vi=0;
   setInterval(function(){
     vi=(vi+1)%VV.length;
-    var t=document.getElementById('verse-text');
-    var r=document.getElementById('verse-ref');
-    if(t&&r){t.style.opacity=0;setTimeout(function(){t.innerHTML='&ldquo;'+VV[vi].t+'&rdquo;';r.textContent=VV[vi].r;t.style.transition='opacity .5s';t.style.opacity=1;},300);}
+    var t=document.getElementById("verse-text");
+    var r=document.getElementById("verse-ref");
+    if(t&&r){
+      t.style.opacity=0;
+      setTimeout(function(){
+        t.textContent="\u201c"+VV[vi].t+"\u201d";
+        r.textContent=VV[vi].r;
+        t.style.transition="opacity .5s";
+        t.style.opacity=1;
+      },300);
+    }
   },8000);
-  // Ember particles
   for(var i=0;i<10;i++){
-    var e=document.createElement('div');e.className='ember';
-    e.style.cssText='--sz:'+(Math.random()*3+2)+'px;--d:'+(Math.random()*5+7)+'s;--delay:-'+(Math.random()*9)+'s;--c:'+(Math.random()>.5?'#f5c842':'#FF6B1A')+';left:'+(Math.random()*90+5)+'%';
+    var e=document.createElement("div");
+    e.className="ember";
+    e.style.cssText="--sz:"+(Math.random()*3+2)+"px;--d:"+(Math.random()*5+7)+"s;--delay:-"+(Math.random()*9)+"s;--c:"+(Math.random()>.5?"#f5c842":"#FF6B1A")+";left:"+(Math.random()*90+5)+"%";
     document.body.appendChild(e);
   }
 })();
 </script>
-
-<!-- LANDING -->
-<div id="p-land" class="page active">
-  <div class="wl-bg" id="wl-bg"></div>
-  <div class="wl-content">
-    <div class="wl-spacer"></div>
-    <div class="badge"><span class="badge-dot"></span>The Gathering CTX &middot; Cleburne TX</div>
-    <div class="wl-title">Warrior<br><em>Zone</em></div>
-    <p class="wl-tag">Put on the full armor of God &middot; Ephesians 6:11</p>
-    <button class="btn btn-gold" style="margin-bottom:.65rem;font-size:1.3rem" onclick="show('p-entry')">&#9876;&#65039; I'M A WARRIOR &mdash; LET'S GO!</button>
-    <div style="display:flex;gap:.45rem;width:100%;margin-bottom:.85rem">
-      <button class="btn btn-dark" onclick="show('p-plogin')" style="flex:1">Parent</button>
-      <button class="btn btn-dark" onclick="show('p-howto')" style="flex:1">How It Works</button>
-      <button class="btn btn-dark" onclick="show('p-alogin')" style="flex:1">Admin</button>
-    </div>
-    <div class="card" style="width:100%;text-align:center">
-      <div id="verse-text" style="font-size:.84rem;color:rgba(255,255,255,.75);line-height:1.65;font-style:italic;font-family:Georgia,serif">"Be strong and courageous. Do not be afraid, for the Lord your God is with you."</div>
-      <div id="verse-ref" style="font-size:.62rem;font-weight:800;color:#f5c842;letter-spacing:.14em;margin-top:.4rem;text-transform:uppercase">Joshua 1:9 &middot; ESV</div>
-    </div>
-    <div style="display:flex;width:100%;margin-top:.65rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden">
-      <div style="flex:1;text-align:center;padding:.7rem .5rem;border-right:1px solid rgba(255,255,255,.08)">
-        <div id="stat-warriors" style="font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842">&mdash;</div>
-        <div style="font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Warriors</div>
-      </div>
-      <div style="flex:1;text-align:center;padding:.7rem .5rem;border-right:1px solid rgba(255,255,255,.08)">
-        <div style="font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842">7</div>
-        <div style="font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Armor Pieces</div>
-      </div>
-      <div style="flex:1;text-align:center;padding:.7rem .5rem">
-        <div style="font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842">50+</div>
-        <div style="font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Questions</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ENTRY CHOICE -->
-<div id="p-entry" class="page">
-  <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:2rem">
-    <div style="font-size:2rem;margin-bottom:.4rem">&#9876;&#65039;</div>
-    <div style="font-family:Bangers,cursive;font-size:1.8rem;letter-spacing:.05em">Ready to Enter, <span class="gold">Warrior?</span></div>
-    <p class="muted" style="margin-top:.35rem">Walk in the victory already won for you.</p>
-  </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem">
-    <div onclick="show('p-klogin')" style="background:rgba(0,192,122,.1);border:1.5px solid rgba(0,192,122,.3);border-radius:20px;padding:1.1rem .5rem;text-align:center;cursor:pointer">
-      <div style="font-size:1.8rem;margin-bottom:.3rem">&#128272;</div>
-      <div style="font-size:.78rem;font-weight:800;color:#fff">I have an ID</div>
-      <div class="muted" style="font-size:.65rem">Sign in</div>
-    </div>
-    <div onclick="show('p-signup')" style="background:rgba(108,82,227,.1);border:1.5px solid rgba(108,82,227,.3);border-radius:20px;padding:1.1rem .5rem;text-align:center;cursor:pointer">
-      <div style="font-size:1.8rem;margin-bottom:.3rem">&#128100;</div>
-      <div style="font-size:.78rem;font-weight:800;color:#fff">I'm new!</div>
-      <div class="muted" style="font-size:.65rem">Sign up</div>
-    </div>
-    <div onclick="show('p-howto')" style="background:rgba(41,174,255,.1);border:1.5px solid rgba(41,174,255,.3);border-radius:20px;padding:1.1rem .5rem;text-align:center;cursor:pointer">
-      <div style="font-size:1.8rem;margin-bottom:.3rem">&#128065;</div>
-      <div style="font-size:.78rem;font-weight:800;color:#fff">How it works</div>
-      <div class="muted" style="font-size:.65rem">Learn more</div>
-    </div>
-  </div>
-</div>
-
-<!-- KID LOGIN -->
-<div id="p-klogin" class="page">
-  <button class="back-btn" onclick="show('p-entry')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:1.5rem">
-    <div style="font-size:2rem;margin-bottom:.3rem">&#128274;</div>
-    <div style="font-family:Bangers,cursive;font-size:1.7rem;letter-spacing:.05em">Welcome Back!</div>
-    <p class="muted" style="margin-top:.3rem">Enter your last name and PIN.</p>
-  </div>
-  <div style="max-width:300px;margin:0 auto">
-    <div class="eyebrow" style="margin-bottom:.35rem">Last Name</div>
-    <input id="kl-last" type="text" placeholder="e.g. Smith" maxlength="30" autocomplete="off" style="margin-bottom:1rem">
-    <div class="eyebrow" style="margin-bottom:.35rem">Your PIN</div>
-    <div class="pin-dots" id="kl-dots">
-      <div class="pin-dot"></div><div class="pin-dot"></div>
-      <div class="pin-dot"></div><div class="pin-dot"></div>
-    </div>
-    <div class="kp-grid">
-      <button class="kp-btn" onclick="klTap(1)">1</button>
-      <button class="kp-btn" onclick="klTap(2)">2</button>
-      <button class="kp-btn" onclick="klTap(3)">3</button>
-      <button class="kp-btn" onclick="klTap(4)">4</button>
-      <button class="kp-btn" onclick="klTap(5)">5</button>
-      <button class="kp-btn" onclick="klTap(6)">6</button>
-      <button class="kp-btn" onclick="klTap(7)">7</button>
-      <button class="kp-btn" onclick="klTap(8)">8</button>
-      <button class="kp-btn" onclick="klTap(9)">9</button>
-      <button class="kp-btn" disabled style="visibility:hidden"></button>
-      <button class="kp-btn" onclick="klTap(0)">0</button>
-      <button class="kp-btn" onclick="klTap('del')">&#9003;</button>
-    </div>
-    <div id="kl-err" class="error"></div>
-    <button class="btn btn-gold" onclick="doLogin()" style="margin-top:.5rem">&#9889; Log In</button>
-    <button class="btn btn-dark" onclick="show('p-signup')" style="margin-top:.5rem">New here? Sign up</button>
-  </div>
-</div>
-
-<!-- SIGNUP -->
-<div id="p-signup" class="page">
-  <button class="back-btn" onclick="show('p-entry')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:1.5rem">
-    <div style="font-size:2rem;margin-bottom:.3rem">&#9876;&#65039;</div>
-    <div style="font-family:Bangers,cursive;font-size:1.7rem;letter-spacing:.05em">Join the <span class="gold">Warriors!</span></div>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:.75rem">
-    <div><div class="eyebrow" style="margin-bottom:.35rem">First Name</div><input id="su-first" type="text" placeholder="First name" maxlength="20"></div>
-    <div><div class="eyebrow" style="margin-bottom:.35rem">Last Name</div><input id="su-last" type="text" placeholder="Last name" maxlength="30"></div>
-    <div><div class="eyebrow" style="margin-bottom:.35rem">Age</div><input id="su-age" type="number" placeholder="Age" min="4" max="18"></div>
-    <div><div class="eyebrow" style="margin-bottom:.35rem">Parent / Guardian Name</div><input id="su-parent" type="text" placeholder="Parent name" maxlength="40"></div>
-    <div><div class="eyebrow" style="margin-bottom:.35rem">Create a 4-Digit PIN</div><input id="su-pin" type="number" placeholder="e.g. 1234" maxlength="4"></div>
-    <div id="su-err" class="error"></div>
-    <button class="btn btn-gold" onclick="doSignup()">Create My Account &#9876;&#65039;</button>
-  </div>
-</div>
-
-<!-- DASHBOARD -->
-<div id="p-dash" class="page">
-  <div style="position:sticky;top:0;background:rgba(5,3,24,.97);border-bottom:1px solid rgba(245,200,66,.15);margin:-1.25rem -1.25rem .75rem;padding:.65rem 1.25rem;display:flex;justify-content:space-between;align-items:center;z-index:10">
-    <div style="font-family:Bangers,cursive;font-size:1rem;color:#f5c842;letter-spacing:.08em">&#9876;&#65039; WARRIOR ZONE</div>
-    <div style="display:flex;align-items:center;gap:.5rem">
-      <span style="background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.3);color:#f5c842;font-family:Bangers,cursive;letter-spacing:.06em;font-size:.85rem;padding:3px 10px;border-radius:99px">
-        &#11088; <span id="dash-pts">0</span> pts
-      </span>
-      <button onclick="doLogout()" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:.75rem">Exit</button>
-    </div>
-  </div>
-  <div class="dash-hero">
-    <div class="eyebrow">Welcome back</div>
-    <div class="dash-name" id="dash-name">Warrior</div>
-    <div style="margin:.5rem 0">
-      <div class="dash-pts" id="dash-pts2">0</div>
-      <div class="pts-lbl">Warrior Points</div>
-    </div>
-    <div style="margin-top:.5rem">
-      <div style="display:flex;justify-content:space-between;font-size:.65rem;color:rgba(255,255,255,.4);margin-bottom:3px">
-        <span>Armor Progress</span><span id="armor-count">0/7</span>
-      </div>
-      <div class="armor-bar"><div class="armor-fill" id="armor-fill" style="width:0%"></div></div>
-    </div>
-  </div>
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="dashTab('devos',this)">&#128214; Devos</button>
-    <button class="tab-btn" onclick="dashTab('games',this)">&#9876;&#65039; Battle</button>
-    <button class="tab-btn" onclick="dashTab('warrior',this)">&#128737;&#65039; Armor</button>
-    <button class="tab-btn" onclick="dashTab('store',this)">&#127873; Store</button>
-    <button class="tab-btn" onclick="dashTab('ranks',this)">&#127942; Ranks</button>
-  </div>
-  <div id="tab-devos"></div>
-  <div id="tab-games" style="display:none"></div>
-  <div id="tab-warrior" style="display:none"></div>
-  <div id="tab-store" style="display:none"></div>
-  <div id="tab-ranks" style="display:none"></div>
-</div>
-
-<!-- HOW IT WORKS -->
-<div id="p-howto" class="page">
-  <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
-  <div style="font-family:Bangers,cursive;font-size:1.8rem;color:#f5c842;margin-bottom:1rem">How It Works</div>
-  <div class="card"><div class="eyebrow">Step 1</div><div style="font-weight:800;margin:.3rem 0">Create your Warrior account</div><p class="muted">Sign up with your name and family PIN.</p></div>
-  <div class="card"><div class="eyebrow">Step 2</div><div style="font-weight:800;margin:.3rem 0">Earn points every week</div><p class="muted">Read devos, win games, show up Sunday, answer apologetics questions.</p></div>
-  <div class="card"><div class="eyebrow">Step 3</div><div style="font-weight:800;margin:.3rem 0">Unlock Armor of God pieces</div><p class="muted">Each piece appears on your warrior as you earn points.</p></div>
-  <div class="card"><div class="eyebrow">Step 4</div><div style="font-weight:800;margin:.3rem 0">Redeem points for real prizes</div><p class="muted">Browse the Warrior Store and redeem for cool prizes!</p></div>
-  <button class="btn btn-gold" onclick="show('p-entry')" style="margin-top:.5rem">Start Now &#9876;&#65039;</button>
-</div>
-
-<!-- PARENT LOGIN -->
-<div id="p-plogin" class="page">
-  <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:1.5rem">
-    <div style="font-size:2rem;margin-bottom:.3rem">&#128106;</div>
-    <div style="font-family:Bangers,cursive;font-size:1.7rem">Parent Portal</div>
-    <p class="muted" style="margin-top:.3rem">Enter your family PIN to see your kids.</p>
-  </div>
-  <div style="max-width:300px;margin:0 auto">
-    <input id="pl-pin" type="number" placeholder="4-digit PIN" style="margin-bottom:.5rem;text-align:center;font-size:1.5rem;letter-spacing:.3em">
-    <div id="pl-err" class="error"></div>
-    <button class="btn btn-gold" onclick="doParentLogin()">View My Kids</button>
-  </div>
-</div>
-
-<!-- ADMIN LOGIN -->
-<div id="p-alogin" class="page">
-  <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:1.5rem">
-    <div style="font-size:2rem;margin-bottom:.3rem">&#128737;&#65039;</div>
-    <div style="font-family:Bangers,cursive;font-size:1.7rem">Admin Access</div>
-  </div>
-  <div style="max-width:300px;margin:0 auto">
-    <input id="al-pw" type="password" placeholder="Password" style="margin-bottom:.5rem">
-    <div id="al-err" class="error"></div>
-    <button class="btn btn-gold" onclick="doAdminLogin()">Enter</button>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div id="toast"></div>
-
 </body>
 </html>
-<!-- deploy-1781645172-vsjnmjgnzdot -->
+<!-- deploy-1781645519-yxnlfqmpwdce -->
