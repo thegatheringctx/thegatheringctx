@@ -7094,7 +7094,7 @@ async function adminRegisterKid(){
   S.kids.push(kid);await sv('kids',S.kids);
   document.getElementById('rk-generated-id').textContent=id;
   document.getElementById('rk-result').style.display='block';
-  msg('rk-success',`${first} ${last} registered with ID ${id}!`);
+  msg('rk-success',`${first} ${last} registered with ID ${id}!);
   document.getElementById('rk-first').value='';document.getElementById('rk-last').value='';
   document.getElementById('rk-parent').value='';document.getElementById('rk-pin').value='';
   document.getElementById('rk-age').value='';
@@ -8695,7 +8695,6 @@ function renderKtDevos(){
       +"<div style='font-size:.7rem;font-weight:800;color:"+(done?"#00C07A":"rgba(255,255,255,0.3)")+"'>"+(done?"DONE":"→")+"</div>"
     +"</div>";
   }).join('');
-};
 }
 function buildPpKeypad(id){
   var kp=document.getElementById(id);if(!kp)return;
@@ -9880,4 +9879,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781624690-vaxhqmcwebbjuyyaydwd -->
+<!-- deploy-1781625640-xwufwsnvjuzffvvfipvh -->
