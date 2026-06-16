@@ -2766,14 +2766,15 @@ function landingRoute(tab){
 
 <!-- ═══════════════════ PARENT DASHBOARD ═══════════════════ -->
 <div id="p-pdash" class="page">
-  <div class="page-nav"><div class="nav-logo">parent <span>portal</span></div><button class="btn-xs" onclick="parentLogout()">Sign out</button></div>
+  <div class="page-nav">
+    <div class="nav-logo">parent <span>portal</span></div>
+    <button class="btn-xs" onclick="parentLogout()">Sign out</button>
+  </div>
+
   <div class="parent-hero-card" id="parent-hero-card">
     <div style="position:absolute;right:-15px;bottom:-15px;font-size:90px;opacity:.06;pointer-events:none"><i class="ti ti-star" aria-hidden="true"></i></div>
     <div style="font-size:10px;opacity:.6;margin-bottom:4px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">Gathering Kids · Parent View</div>
     <div style="display:flex;align-items:center;gap:10px">
-</div>
-</div>
-</div>
       <div id="p-kid-avatar" style="width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0"></div>
       <div>
         <div style="font-size:22px;font-weight:700;color:#fff" id="p-kid-name"></div>
@@ -2786,8 +2787,12 @@ function landingRoute(tab){
     </div>
     <div style="display:flex;gap:12px;margin-top:10px">
       <div style="flex:1">
-        <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.55);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:.3px"><span>Progress</span><span id="p-prog-lbl"></span></div>
-        <div style="background:rgba(255,255,255,.15);border-radius:100px;height:8px;overflow:hidden"><div style="height:100%;background:#9FE1CB;border-radius:100px;transition:width .6s" id="p-prog-bar"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.55);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:.3px">
+          <span>Progress</span><span id="p-prog-lbl"></span>
+        </div>
+        <div style="background:rgba(255,255,255,.15);border-radius:100px;height:8px;overflow:hidden">
+          <div style="height:100%;background:#9FE1CB;border-radius:100px;transition:width .6s" id="p-prog-bar"></div>
+        </div>
       </div>
       <div style="background:rgba(255,255,255,.15);border-radius:12px;padding:4px 12px;text-align:center;flex-shrink:0">
         <div style="font-size:18px;font-weight:700;color:#fff" id="p-streak">0</div>
@@ -2795,46 +2800,53 @@ function landingRoute(tab){
       </div>
     </div>
   </div>
+
   <div id="p-milestone-alert" style="display:none;background:linear-gradient(135deg,var(--gold),#c47a00);border-radius:16px;padding:1rem;margin-bottom:1rem;color:#fff;text-align:center;font-size:13px;font-weight:700"></div>
+
   <div class="adm-tabs">
     <button class="adm-tab active" id="pt-devos" onclick="parentTab('devos')">📖 Devos</button>
     <button class="adm-tab" id="pt-activity" onclick="parentTab('activity')">⭐ Activity</button>
     <button class="adm-tab" id="pt-orders" onclick="parentTab('orders')">🎁 Orders</button>
     <button class="adm-tab" id="pt-companion" onclick="parentTab('companion')">⚔️ Warrior</button>
   </div>
-<button onclick="toggleClaimSection()" style="margin-top:1rem;background:none;border:2px solid var(--wine,#5C1A1B);color:var(--wine,#5C1A1B);border-radius:10px;padding:.5rem 1rem;font-weight:800;cursor:pointer;font-size:.82rem;width:100%">+ Find Another Child by PIN</button>
-<div id="claim-kids-section" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border,#eee)">
-  <div style="font-size:.8rem;font-weight:700;color:var(--wine,#5C1A1B);margin-bottom:.75rem;letter-spacing:.05em;text-transform:uppercase">Find Your Kids</div>
-  <p style="font-size:.82rem;color:var(--muted,#888);margin-bottom:.75rem">Enter your child's first name and their PIN to add them to your account.</p>
-  <div style="display:flex;flex-direction:column;gap:8px">
-    <input type="text" id="claim-name-input" placeholder="Child's first name" style="border:2px solid var(--border,#eee);border-radius:10px;padding:.6rem .9rem;font-size:.95rem"/>
-    <div style="display:flex;gap:8px">
-      <input type="number" id="claim-pin-input" placeholder="4-digit PIN" maxlength="4" style="flex:1;font-family:monospace;font-size:1.1rem;letter-spacing:.2em;text-align:center;border:2px solid var(--border,#eee);border-radius:10px;padding:.6rem"/>
-      <button onclick="claimKidByPin()" style="background:var(--wine,#5C1A1B);color:#fff;border:none;border-radius:10px;padding:.6rem 1.1rem;font-weight:800;cursor:pointer;font-size:.85rem">Find</button>
+
+  <button onclick="toggleClaimSection()" style="margin-top:1rem;background:rgba(255,255,255,0.08);border:1.5px solid rgba(245,200,66,0.3);color:rgba(255,255,255,0.8);border-radius:12px;padding:.5rem 1rem;font-weight:800;cursor:pointer;font-size:.82rem;width:100%">+ Find Another Child by PIN</button>
+
+  <div id="claim-kids-section" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1)">
+    <div style="font-size:.8rem;font-weight:700;color:#f5c842;margin-bottom:.75rem;letter-spacing:.05em;text-transform:uppercase">Find Your Kids</div>
+    <p style="font-size:.82rem;color:rgba(255,255,255,0.5);margin-bottom:.75rem">Enter your child's first name and their PIN to add them to your account.</p>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <input type="text" id="claim-name-input" placeholder="Child's first name" style="border:2px solid rgba(255,255,255,0.15);border-radius:12px;padding:.6rem .9rem;font-size:.95rem;background:rgba(255,255,255,0.07);color:#fff"/>
+      <div style="display:flex;gap:8px">
+        <input type="number" id="claim-pin-input" placeholder="4-digit PIN" maxlength="4" style="flex:1;font-family:monospace;font-size:1.1rem;letter-spacing:.2em;text-align:center;border:2px solid rgba(255,255,255,0.15);border-radius:12px;padding:.6rem;background:rgba(255,255,255,0.07);color:#fff"/>
+        <button onclick="claimKidByPin()" style="background:var(--teal);color:#fff;border:none;border-radius:12px;padding:.6rem 1.1rem;font-weight:800;cursor:pointer;font-size:.85rem">Find</button>
+      </div>
     </div>
+    <div id="claim-result" style="margin-top:.75rem;font-size:.85rem"></div>
   </div>
-  <div id="claim-result" style="margin-top:.75rem;font-size:.85rem"></div>
-</div>
+
   <div id="pt-tab-devos">
-    <div style="margin-bottom:.75rem">
+    <div style="margin-bottom:.75rem;margin-top:1rem">
       <div class="eyebrow">do this together</div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:3px">Family Devotionals</div>
-      <p class="muted" style="font-size:12px">Read with your child and tap "We did this together!", you both earn bonus points.</p>
+      <div style="font-size:15px;font-weight:700;margin-bottom:3px;color:#fff">Family Devotionals</div>
+      <p class="muted" style="font-size:12px">Read with your child. You both earn bonus points.</p>
     </div>
-</div>
     <div id="p-devo-content"></div>
   </div>
+
   <div id="pt-tab-activity" style="display:none">
     <div class="card"><div class="section-title">Full activity history</div><ul class="tx-list" id="p-tx-list"></ul></div>
   </div>
-  <div id="pt-tab-orders" style="display:none">
-</div>
-    <div class="card"><div class="section-title">Store orders</div><div id="p-orders-list"></div>
-  
-  <div id="pt-tab-companion" style="display:none">
-    <div id="p-companion-content">
-  
 
+  <div id="pt-tab-orders" style="display:none">
+    <div class="card"><div class="section-title">Store orders</div><div id="p-orders-list"></div></div>
+  </div>
+
+  <div id="pt-tab-companion" style="display:none">
+    <div id="p-companion-content"></div>
+  </div>
+
+</div>
 
 <!-- ═══════════════════ ADMIN LOGIN ═══════════════════ -->
 <div id="p-alogin" class="page">
@@ -9912,4 +9924,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781628653-rgtwxslntefkiacvljap -->
+<!-- deploy-1781629028-lifcadkejygiqadqfepo -->
