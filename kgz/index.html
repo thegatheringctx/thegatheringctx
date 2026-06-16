@@ -83,6 +83,11 @@ var APP={kid:null,kids:[],storeItems:[],currentTab:'devos'};
 var _pin=[];
 var _stack=[];
 
+function closeOverlay(btn){
+  var el=btn;
+  while(el&&el.style&&el.style.position!=='fixed'){el=el.parentElement;}
+  if(el)el.remove();
+}
 function show(id){
   var cur=document.querySelector('.page.active');
   if(cur&&cur.id!==id) _stack.push(cur.id);
@@ -226,8 +231,8 @@ function openDevo(i){
   ov.innerHTML='<div style="background:#0D0830;border-radius:24px 24px 0 0;padding:1.5rem 1.25rem 2.5rem;width:100%;max-width:480px;max-height:80vh;overflow-y:auto">'
     +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">'
     +'<div class="eyebrow">Day '+d.day+' Devotional</div>'
-    +'<button onclick="this.closest('[style*=fixed]').remove()" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1.2rem">&#10005;</button></div>'
-    +'<div style="font-family:'Bangers',cursive;font-size:1.4rem;color:#fff;margin-bottom:.75rem">'+d.title+'</div>'
+    +'<button onclick="closeOverlay(this)" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:1.2rem">&#10005;</button></div>'
+    +'<div style="font-family:Bangers,cursive;font-size:1.4rem;color:#fff;margin-bottom:.75rem">'+d.title+'</div>'
     +'<div style="background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.2);border-radius:12px;padding:.75rem;margin-bottom:.85rem;font-size:.72rem;font-weight:800;color:#f5c842">&#128214; '+d.scripture+'</div>'
     +'<p style="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.8);margin-bottom:.85rem">'+d.body+'</p>'
     +'<div style="border-left:3px solid #f5c842;padding:.65rem .85rem;background:rgba(245,200,66,.05);border-radius:0 10px 10px 0;margin-bottom:1rem;font-size:.83rem;font-style:italic;color:rgba(255,255,255,.75)">&#128591; '+d.prayer+'</div>'
@@ -703,4 +708,4 @@ function doAdminLogin(){
 
 </body>
 </html>
-<!-- deploy-1781644257-rylwdljwbnnt -->
+<!-- deploy-1781644494-mtkrnvsghjya -->
