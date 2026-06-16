@@ -2268,10 +2268,10 @@ input:focus,select:focus,textarea:focus{
         <div class="wl-verse-r" id="wl-verse-ref">Joshua 1:9 &nbsp;·&nbsp; ESV</div>
       </div>
 
-      <!-- Stats -->
+      <!-- Stats — live from Supabase -->
       <div class="wl-stats">
         <div class="wl-stat">
-          <span class="wl-stat-num">97</span>
+          <span class="wl-stat-num" id="wl-stat-warriors">—</span>
           <div class="wl-stat-lbl">Warriors</div>
         </div>
         <div class="wl-stat">
@@ -2279,7 +2279,7 @@ input:focus,select:focus,textarea:focus{
           <div class="wl-stat-lbl">Armor Pieces</div>
         </div>
         <div class="wl-stat">
-          <span class="wl-stat-num">50+</span>
+          <span class="wl-stat-num" id="wl-stat-questions">50+</span>
           <div class="wl-stat-lbl">Questions</div>
         </div>
       </div>
@@ -8160,6 +8160,45 @@ function rotateLandingVerse(){
 }
 setInterval(rotateLandingVerse, 8000);
 
+function loadLandingStats(){
+  // Pull real warrior count from Supabase kids table
+  var url = window._SUPA_URL + '/rest/v1/kids?select=id&active=neq.false';
+  fetch(url, {
+    headers: {
+      'apikey': window._SUPA_ANON,
+      'Authorization': 'Bearer ' + window._SUPA_ANON
+    }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(rows){
+    var count = Array.isArray(rows) ? rows.length : 0;
+    var el = document.getElementById('wl-stat-warriors');
+    if(el) el.textContent = count > 0 ? count : '—';
+  })
+  .catch(function(){
+    // Supabase might not have an active column — try without filter
+    fetch(window._SUPA_URL + '/rest/v1/kids?select=id', {
+      headers: {
+        'apikey': window._SUPA_ANON,
+        'Authorization': 'Bearer ' + window._SUPA_ANON
+      }
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(rows){
+      var count = Array.isArray(rows) ? rows.length : 0;
+      var el = document.getElementById('wl-stat-warriors');
+      if(el && count > 0) el.textContent = count;
+    })
+    .catch(function(){});
+  });
+
+  // Quiz count — always accurate from data
+  var qEl = document.getElementById('wl-stat-questions');
+  if(qEl && typeof ALL_QUIZ !== 'undefined') {
+    qEl.textContent = ALL_QUIZ.length + '+';
+  }
+}
+
 function initLandingWarriors(){
   // Full Ephesians 6 armor set for the landing showcase warriors
   var fullArmor = ['belt','breastplate','boots','shield','helmet','sword'];
@@ -8170,6 +8209,7 @@ function initLandingWarriors(){
 }
 document.addEventListener('DOMContentLoaded', function(){
   setTimeout(initLandingWarriors, 100);
+  setTimeout(loadLandingStats, 200);
 });
 
 function initLandingParticles(){
@@ -9824,4 +9864,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781626944-gfugyapqxqdjwfcurfsg -->
+<!-- deploy-1781627283-vbwgdbqvshiwcahqxvva -->
