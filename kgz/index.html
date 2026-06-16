@@ -740,7 +740,7 @@ function renderScramble(el){
       var attempt=_scramSelected.join(" ").toLowerCase();
       if(attempt===correct){
         showToastPts("🏆 Perfect! +30 pts");awardPts(30);
-        el.innerHTML="<div style='text-align:center;padding:2rem'><div style='font-size:3rem'>🏆</div><div style='font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842;margin:.5rem 0'>Perfect!</div><div style='font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:1rem'>+30 points earned!</div><button class='btn btn-gold' style='max-width:200px;margin:0 auto' onclick='initScramble(document.getElementById("game-arena"))'>Next Verse</button></div>";
+        var _sd=document.createElement("div");_sd.style.cssText="text-align:center;padding:2rem";var _si=document.createElement("div");_si.innerHTML="<div style='font-size:3rem'>\uD83C\uDFC6</div><div style='font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842;margin:.5rem 0'>Perfect!</div><div style='font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:1rem'>+30 points earned!</div>";var _snb=document.createElement("button");_snb.className="btn btn-gold";_snb.style.cssText="max-width:200px;margin:.5rem auto 0";_snb.textContent="Next Verse";_snb.addEventListener("click",function(){initScramble(document.getElementById("game-arena"));});_sd.appendChild(_si);_sd.appendChild(_snb);el.innerHTML="";el.appendChild(_sd);
       } else {
         showToastPts("❌ Not quite — try again!");
         _scramSelected=[];_scramOrder=_scramCurrent.words.slice().sort(function(){return Math.random()-.5;});renderScramble(el);
@@ -1153,4 +1153,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781646650-xzmqnieixncf -->
+<!-- deploy-1781646680-tqkrdbmwojog -->
