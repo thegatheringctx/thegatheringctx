@@ -2392,6 +2392,23 @@ function landingRoute(tab){
   </div><!-- /wl-screen -->
 </div><!-- /p-land -->
 
+<!-- ═══════════════════ KID WELCOME ═══════════════════ -->
+<div id="p-kidwelcome" class="page" style="text-align:center;padding:2rem 1.25rem">
+  <div id="kw-warrior-wrap" style="display:flex;justify-content:center;margin-bottom:1rem"></div>
+  <div style="font-family:'Bangers',cursive;font-size:2rem;color:#f5c842;letter-spacing:.06em;line-height:1;margin-bottom:.25rem">
+    Welcome, <span id="kidwelcome-name"></span>!
+  </div>
+  <p style="font-size:.85rem;color:rgba(255,255,255,0.55);margin-bottom:1.5rem">Walk in the victory already won for you.</p>
+  <div style="background:rgba(245,200,66,0.1);border:1.5px solid rgba(245,200,66,0.3);border-radius:16px;padding:1rem;margin-bottom:1.5rem;display:inline-block">
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:.3rem">Your Warrior ID</div>
+    <div id="kidwelcome-pin" style="font-family:monospace;font-size:1.8rem;font-weight:700;color:#f5c842;letter-spacing:.3em"></div>
+  </div>
+  <button onclick="if(typeof renderKidDash==='function'){renderKidDash();}show('p-kdash')"
+    style="width:100%;background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border:none;border-radius:14px;padding:1rem;font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer">
+    ⚔️ Enter the Warrior Zone!
+  </button>
+</div>
+
 <!-- ═══════════════════ KID LOGIN (static) ═══════════════════ -->
 <div id="p-klogin" class="page">
   <button onclick="show('p-kentry')" style="background:none;border:none;color:rgba(255,255,255,.55);cursor:pointer;font-size:.9rem;font-weight:800;margin-bottom:1.5rem;padding:.5rem 0;display:flex;align-items:center;gap:.3rem">&#8592; Back</button>
@@ -10039,4 +10056,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781630890-rjiokzutvndvcvmxjxlf -->
+<!-- deploy-1781631179-ovvulfnvxyjvwflimawq -->
