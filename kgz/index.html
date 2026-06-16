@@ -2176,6 +2176,41 @@ input:focus,select:focus,textarea:focus{
 </script>
 </head>
 <body>
+<script>
+// Core nav — defined immediately so buttons work before main script loads
+var _navStack = [];
+function show(id, pushToStack){
+  if(pushToStack!==false){
+    var cur=document.querySelector('.page.active');
+    if(cur&&cur.id!==id) _navStack.push(cur.id);
+    if(_navStack.length>20) _navStack.shift();
+  }
+  document.querySelectorAll('.page').forEach(function(p){
+    p.classList.remove('active');
+    p.style.display='none';
+  });
+  var el=document.getElementById(id);
+  if(el){el.classList.add('active');el.style.display='block';}
+  window.scrollTo(0,0);
+}
+function navBack(){
+  if(_navStack.length>0) show(_navStack.pop());
+  else show('p-land');
+}
+function showHowTo(){
+  show('p-howto');
+}
+function landingRoute(tab){
+  // If logged in go to dashboard tab, else go to entry
+  if(typeof S!=='undefined' && S.currentKid){
+    show('p-kdash');
+    if(typeof kidTab==='function') setTimeout(function(){kidTab(tab,'act-teal');},100);
+  } else {
+    show('p-kentry');
+  }
+}
+</script>
+
 
 <!-- ░░ SITE NAV ░░ -->
 <nav style="background:rgba(8,12,20,0.97);border-bottom:1px solid rgba(201,168,76,0.25);padding:.85rem 1.25rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);">
@@ -9867,4 +9902,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781627642-dtrqeeprplkjefyhseei -->
+<!-- deploy-1781627796-szdioylyambecdqbmafe -->
