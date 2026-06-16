@@ -2276,20 +2276,31 @@ function doKidLogin(){
 
 // ── Enter dashboard ──────────────────────────────────────
 function enterWarriorZone(){
-  // Make sure S.currentKid is set
-  if(typeof S!=='undefined' && _currentKidCache){ S.currentKid=_currentKidCache.id; }
   show('p-kdash');
   var attempts=0;
   var go=setInterval(function(){
     attempts++;
-    if(typeof renderKidDash==='function'){
+    if(typeof renderKidDash==='function' && typeof S!=='undefined'){
       clearInterval(go);
-      // Set currentKid on S right before render
-      if(typeof S!=='undefined' && _currentKidCache && !S.currentKid){
-        S.currentKid=_currentKidCache.id;
+      // Populate S fully from cache before render
+      if(_currentKidCache){
+        S.currentKid = _currentKidCache.id;
+        if(!S.kids || !S.kids.length){
+          try{
+            var raw=localStorage.getItem('kgz_kids');
+            if(raw) S.kids=JSON.parse(raw);
+          }catch(e){}
+        }
+        // Ensure this kid is in S.kids
+        if(S.kids && S.kids.length){
+          var found=S.kids.find(function(k){return k.id===_currentKidCache.id;});
+          if(!found) S.kids.push(_currentKidCache);
+        } else {
+          S.kids=[_currentKidCache];
+        }
       }
       renderKidDash();
-    } else if(attempts>30){ clearInterval(go); }
+    } else if(attempts>40){ clearInterval(go); }
   },100);
 }
 </script>
@@ -10076,4 +10087,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781638733-mngkgfdbihjevmzxgxoj -->
+<!-- deploy-1781638965-ogewnubyusgebdfzulki -->
