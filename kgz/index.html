@@ -2829,12 +2829,12 @@ function landingRoute(tab){
   </div>
   <div id="pt-tab-orders" style="display:none">
 </div>
-    <div class="card"><div class="section-title">Store orders</div><div id="p-orders-list"></div></div>
-  </div>
+    <div class="card"><div class="section-title">Store orders</div><div id="p-orders-list"></div>
+  
   <div id="pt-tab-companion" style="display:none">
-    <div id="p-companion-content"></div>
-  </div>
-</div>
+    <div id="p-companion-content">
+  
+
 
 <!-- ═══════════════════ ADMIN LOGIN ═══════════════════ -->
 <div id="p-alogin" class="page">
@@ -8593,7 +8593,7 @@ function buildSuKeypad(){
   var kp=document.getElementById("su-keypad");if(!kp)return;
   var keys=["1","2","3","4","5","6","7","8","9","","0","del"];
   kp.innerHTML=keys.map(function(k){
-    if(!k)return "<div></div>";
+    if(!k)return "<div>";
     return "<button onclick='suTap(\""+k+"\")' style='background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:.65rem;font-family:Fredoka One,cursive;font-size:1.1rem;color:#fff;cursor:pointer'>"+(k==="del"?"&#9003;":k)+"</button>";
   }).join("");
 }
@@ -9840,7 +9840,7 @@ function renderWTPanel(panel, idx) {
         '</div>'+
         '<div style="margin-top:14px;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,200,66,.5)">Say it out loud. Speak it like a Warrior.</div>'+
       '</div>'+
-    '</div>';
+    '';
   }
 
   return '';
@@ -9912,4 +9912,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781628609-wihljdjlvfqqwkmlzgjs -->
+<!-- deploy-1781628653-rgtwxslntefkiacvljap -->
