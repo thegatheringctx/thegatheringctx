@@ -2186,6 +2186,16 @@ input:focus,select:focus,textarea:focus{
 <script>
 /* ── CORE NAV — in head so buttons work immediately ── */
 var _navStack = [];
+var _klPin = [];
+function klTap(k){
+  if(k==='del'){ _klPin.pop(); }
+  else if(_klPin.length<4){ _klPin.push(String(k)); }
+  var dots = document.querySelectorAll('.kl-dot');
+  dots.forEach(function(d,i){
+    d.textContent = _klPin[i]!==undefined ? '●' : '';
+    d.style.borderColor = _klPin[i]!==undefined ? '#f5c842' : 'rgba(255,255,255,.18)';
+  });
+}
 function show(id, pushToStack){
   if(pushToStack!==false){
     var cur=document.querySelector('.page.active');
@@ -9992,4 +10002,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781630361-cqmwqlnrdbiemybsfufe -->
+<!-- deploy-1781630494-ocspmbcitkfhwdscfagh -->
