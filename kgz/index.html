@@ -2288,6 +2288,25 @@ function goToDash(){
     show('p-kdash');
   });
 }
+
+function enterWarriorZone(){
+  show('p-kdash');
+  if(typeof renderKidDash==='function'){
+    renderKidDash();
+  } else {
+    // renderKidDash not loaded yet — retry
+    var attempts = 0;
+    var retry = setInterval(function(){
+      attempts++;
+      if(typeof renderKidDash==='function'){
+        clearInterval(retry);
+        renderKidDash();
+      } else if(attempts > 20){
+        clearInterval(retry);
+      }
+    }, 200);
+  }
+}
 function landingRoute(tab){
   if(typeof S!=='undefined'&&S.currentKid){ show('p-kdash'); setTimeout(function(){if(typeof kidTab==='function')kidTab(tab,'act-teal');},150); }
   else show('p-kentry');
@@ -10076,4 +10095,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781631427-rtqkjsohxtbnpfulhsgh -->
+<!-- deploy-1781631534-wcstuqxaizhpheugibid -->
