@@ -2325,6 +2325,36 @@ function landingRoute(tab){
   </div><!-- /wl-screen -->
 </div><!-- /p-land -->
 
+<!-- ═══════════════════ KID LOGIN (static) ═══════════════════ -->
+<div id="p-klogin" class="page">
+  <button onclick="show('p-kentry')" style="background:none;border:none;color:rgba(255,255,255,.55);cursor:pointer;font-size:.9rem;font-weight:800;margin-bottom:1.5rem;padding:.5rem 0;display:flex;align-items:center;gap:.3rem">&#8592; Back</button>
+  <div style="text-align:center;margin-bottom:2rem">
+    <div style="font-size:2.2rem;margin-bottom:.4rem">🔒</div>
+    <div style="font-family:'Bangers',cursive;font-size:1.8rem;color:#fff;letter-spacing:.05em;margin-bottom:.3rem">Welcome Back!</div>
+    <p style="font-size:.82rem;color:rgba(255,255,255,.5)">Enter your last name and PIN.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:.85rem;max-width:300px;margin:0 auto">
+    <div>
+      <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.4rem;font-weight:700">Last Name</div>
+      <input id="kl-last" type="text" placeholder="e.g. Smith" maxlength="30" autocomplete="off"
+        style="width:100%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);border-radius:12px;padding:.75rem 1rem;font-size:1.05rem;color:#fff;outline:none;box-sizing:border-box"/>
+    </div>
+    <div>
+      <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.5rem;font-weight:700">Your PIN</div>
+      <div id="kl-pin-display" style="display:flex;justify-content:center;gap:.55rem;margin-bottom:.65rem">
+        <div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff"></div>
+        <div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff"></div>
+        <div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff"></div>
+        <div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff"></div>
+      </div>
+      <div id="kl-keypad" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:230px;margin:0 auto"></div>
+    </div>
+    <div id="kl-err" style="color:#ff8a8a;font-size:.82rem;text-align:center;min-height:1rem;margin-top:.3rem"></div>
+    <button onclick="doKidLogin()" style="background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border:none;border-radius:14px;padding:1rem;font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:.08em;cursor:pointer;width:100%">⚡ Log In</button>
+    <button onclick="show('p-ksignup')" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:.82rem;text-align:center;width:100%">New here? Sign up instead</button>
+  </div>
+</div>
+
 <!-- ═══════════════════ KID ENTRY ═══════════════════ -->
 <div id="p-kentry" class="page">
   <span class="back" onclick="navBack()" style="color:rgba(255,255,255,0.5);font-size:.85rem"><i class="ti ti-arrow-left" aria-hidden="true"></i> back</span>
@@ -8630,47 +8660,34 @@ function klTap(k){
   dots.forEach(function(dot,i){dot.textContent=_klPin[i]!==undefined?_klPin[i]:"";dot.style.borderColor=_klPin[i]!==undefined?"#F4A820":"rgba(255,255,255,.18)";});
 }
 function buildKlKeypad(){
-  // Create login screen if not a direct body child
-  var kl=document.getElementById("p-klogin");
-  if(!kl||kl.parentElement!==document.body){
-    if(kl)kl.remove();
-    kl=document.createElement("div");
-    kl.id="p-klogin";
-    kl.className="page";
-    kl.innerHTML=
-      '<button onclick="show(\'p-kentry\')" style="background:none;border:none;color:rgba(255,255,255,.55);cursor:pointer;font-size:.9rem;font-weight:800;margin-bottom:1.5rem;padding:.5rem 0;display:flex;align-items:center;gap:.3rem">&#8592; Back</button>'+
-      '<div style="text-align:center;margin-bottom:2rem"><div style="font-size:2.2rem;margin-bottom:.4rem">&#128274;</div>'+
-      '<div style="font-family:Fredoka One,cursive;font-size:1.4rem;color:#fff;margin-bottom:.2rem">Welcome Back!</div>'+
-      '<p style="font-size:.82rem;color:rgba(255,255,255,.5)">Enter your last name and PIN.</p></div>'+
-      '<div style="display:flex;flex-direction:column;gap:.85rem;max-width:300px;margin:0 auto">'+
-      '<div><div style="font-family:Fredoka One,cursive;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.4rem">Last Name</div>'+
-      '<input id="kl-last" type="text" placeholder="e.g. Smith" maxlength="30" autocomplete="off" style="width:100%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);border-radius:12px;padding:.75rem 1rem;font-family:Fredoka One,cursive;font-size:1.05rem;color:#fff;outline:none;box-sizing:border-box"/></div>'+
-      '<div><div style="font-family:Fredoka One,cursive;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.5rem">Your PIN</div>'+
-      '<div id="kl-pin-display" style="display:flex;justify-content:center;gap:.55rem;margin-bottom:.65rem">'+
-      '<div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:Fredoka One,cursive;font-size:1.4rem;color:#fff"></div>'+
-      '<div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:Fredoka One,cursive;font-size:1.4rem;color:#fff"></div>'+
-      '<div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:Fredoka One,cursive;font-size:1.4rem;color:#fff"></div>'+
-      '<div class="kl-dot" style="width:46px;height:46px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:Fredoka One,cursive;font-size:1.4rem;color:#fff"></div></div>'+
-      '<div id="kl-keypad" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:230px;margin:0 auto"></div></div>'+
-      '<div id="kl-err" style="color:#ff8a8a;font-size:.82rem;text-align:center;min-height:1rem;margin-top:.3rem"></div>'+
-      '<button onclick="doKidLogin()" class="kz-btn-main" style="margin:.5rem auto 0">&#9889; Log In</button>'+
-      '<button onclick="show(\'p-ksignup\')" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:.82rem;margin-top:.3rem;text-align:center;width:100%">New here? Sign up instead</button>'+
-      '<div style="text-align:center;margin-top:.5rem"><button onclick="show(\'p-land\')" style="background:none;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-size:.78rem">&#8592; Back to Home</button></div>';
-    document.body.appendChild(kl);
-  }
+  // p-klogin is now static HTML — just reset and build the keypad
+  var kl = document.getElementById('p-klogin');
+  if(!kl) return;
+  // Reset PIN
+  _klPin = [];
+  var lastInput = document.getElementById('kl-last');
+  if(lastInput) lastInput.value = '';
+  var errEl = document.getElementById('kl-err');
+  if(errEl) errEl.textContent = '';
+  // Update PIN dots
+  var dots = document.querySelectorAll('#kl-pin-display .kl-dot');
+  dots.forEach(function(d){ d.textContent = ''; d.style.borderColor = 'rgba(255,255,255,.18)'; });
   // Build keypad
-  _klPin=[];
-  var dots=document.querySelectorAll(".kl-dot");
-  dots.forEach(function(dot){dot.textContent="";dot.style.borderColor="rgba(255,255,255,.18)";});
-  var klLast=document.getElementById("kl-last");if(klLast)klLast.value="";
-  var klErr=document.getElementById("kl-err");if(klErr)klErr.textContent="";
-  var kp=document.getElementById("kl-keypad");if(!kp)return;
-  var keys=["1","2","3","4","5","6","7","8","9","","0","del"];
-  kp.innerHTML=keys.map(function(k){
-    if(!k)return "<div></div>";
-    return "<button onclick='klTap(\""+k+"\")' style='background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:.65rem;font-family:Fredoka One,cursive;font-size:1.1rem;color:#fff;cursor:pointer'>"+(k==="del"?"&#9003;":k)+"</button>";
-  }).join("");
+  var kp = document.getElementById('kl-keypad');
+  if(!kp) return;
+  kp.innerHTML = '';
+  [1,2,3,4,5,6,7,8,9,'',0,'⌫'].forEach(function(k){
+    var btn = document.createElement('button');
+    btn.className = 'kp-btn';
+    btn.textContent = k;
+    btn.style.cssText = 'background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.15);border-radius:12px;padding:.9rem;font-size:1.25rem;font-weight:700;color:#fff;cursor:pointer;font-family:inherit;transition:background .1s';
+    if(k===''){btn.disabled=true;btn.style.visibility='hidden';}
+    else if(k==='⌫'){btn.onclick=function(){klBackspace();};}
+    else{btn.onclick=function(){klPress(k);};}
+    kp.appendChild(btn);
+  });
 }
+
 
 function doKidLogin(){
   var last=((document.getElementById("kl-last")||{}).value||"").trim().toLowerCase();
@@ -9265,7 +9282,7 @@ function gTab(id,btn){
     <p class="sub" style="margin:0">Parents can use the same PIN they created with you. If the PIN is truly lost, a Gathering Kids team leader can reset it from the admin panel using your Warrior PIN.</p>
     <div style="margin-top:1rem;padding:.75rem;background:var(--cream);border-radius:12px;font-size:12px;color:var(--muted)">Your Warrior PIN: <strong style="font-family:monospace;color:var(--text)" id="forgot-id-display">-</strong></div>
   </div>
-  <button class="btn-block btn-block-teal" style="margin-top:1rem" onclick="if(typeof buildKlKeypad==='function'){buildKlKeypad();}show('p-klogin')">Back to Sign In</button>
+  <button class="btn-block btn-block-teal" style="margin-top:1rem" onclick="show('p-klogin');if(typeof buildKlKeypad==='function')buildKlKeypad();">Back to Sign In</button>
 </div>
 
 
@@ -9924,4 +9941,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781629524-rdzapqpaqawfbiiahkoc -->
+<!-- deploy-1781629638-quhmmkeqtbnzdpzwfsen -->
