@@ -2184,18 +2184,12 @@ input:focus,select:focus,textarea:focus{
 </script>
 
 <script>
-/* ── CORE NAV — in head so buttons work immediately ── */
+/* ── CORE NAV + LOGIN — all critical functions in head ── */
 var _navStack = [];
 var _klPin = [];
-function klTap(k){
-  if(k==='del'){ _klPin.pop(); }
-  else if(_klPin.length<4){ _klPin.push(String(k)); }
-  var dots = document.querySelectorAll('.kl-dot');
-  dots.forEach(function(d,i){
-    d.textContent = _klPin[i]!==undefined ? '●' : '';
-    d.style.borderColor = _klPin[i]!==undefined ? '#f5c842' : 'rgba(255,255,255,.18)';
-  });
-}
+var _currentKidCache = null; // cache logged-in kid for renderKidDash
+
+// ── Navigation ──────────────────────────────────────────
 function show(id, pushToStack){
   if(pushToStack!==false){
     var cur=document.querySelector('.page.active');
@@ -2215,37 +2209,46 @@ function navBack(){
   else show('p-land');
 }
 function showHowTo(){ show('p-howto'); }
+function landingRoute(tab){
+  var kidId = (_currentKidCache && _currentKidCache.id) ||
+              (typeof S!=='undefined' && S.currentKid);
+  if(kidId){ enterWarriorZone(); }
+  else show('p-kentry');
+}
 
+// ── PIN pad ─────────────────────────────────────────────
+function klTap(k){
+  if(k==='del'){ _klPin.pop(); }
+  else if(_klPin.length<4){ _klPin.push(String(k)); }
+  document.querySelectorAll('.kl-dot').forEach(function(d,i){
+    d.textContent = _klPin[i]!==undefined ? '●' : '';
+    d.style.borderColor = _klPin[i]!==undefined ? '#f5c842' : 'rgba(255,255,255,.18)';
+  });
+}
+
+// ── Login ────────────────────────────────────────────────
 function doKidLogin(){
   var last = ((document.getElementById('kl-last')||{}).value||'').trim().toLowerCase();
   var err  = document.getElementById('kl-err');
   if(!last){ if(err) err.textContent='Enter your last name!'; return; }
   if(_klPin.length!==4){ if(err) err.textContent='Enter your 4-digit PIN!'; return; }
   var pin = _klPin.join('');
-  // Get kids from S (global) OR localStorage fallback
   var kids = [];
-  if(typeof S!=='undefined' && S.kids && S.kids.length){
-    kids = S.kids;
-  } else {
-    try{
-      var raw = localStorage.getItem('kgz_kids');
-      if(raw) kids = JSON.parse(raw);
-    }catch(e){}
-  }
+  if(typeof S!=='undefined' && S.kids && S.kids.length){ kids=S.kids; }
+  else { try{ var r=localStorage.getItem('kgz_kids'); if(r) kids=JSON.parse(r); }catch(e){} }
   if(!kids.length){
-    if(err) err.textContent='Still loading... please wait a moment and try again.';
-    setTimeout(doKidLogin, 1200);
-    return;
+    if(err) err.textContent='Still loading data... try again in a moment.';
+    setTimeout(doKidLogin,1000); return;
   }
   var kid = kids.find(function(k){
     return (k.lastName||'').toLowerCase()===last && k.pin===pin;
   });
   if(!kid){
-    var nameMatch = kids.find(function(k){return (k.lastName||'').toLowerCase()===last;});
-    var pinMatch  = kids.find(function(k){return k.pin===pin;});
+    var nm=kids.find(function(k){return (k.lastName||'').toLowerCase()===last;});
+    var pm=kids.find(function(k){return k.pin===pin;});
     if(err){
-      if(nameMatch && !pinMatch) err.textContent='PIN does not match. Try again.';
-      else if(pinMatch && !nameMatch) err.textContent='Last name does not match. Try again.';
+      if(nm&&!pm) err.textContent='PIN does not match. Try again.';
+      else if(pm&&!nm) err.textContent='Last name does not match. Try again.';
       else err.textContent='No account found. Check details or sign up!';
     }
     _klPin=[];
@@ -2254,62 +2257,40 @@ function doKidLogin(){
     });
     return;
   }
-  // Found — set current kid on S if available, else store in localStorage
-  if(typeof S!=='undefined'){ S.currentKid=kid.id; S.kids=kids; }
+  // Store kid everywhere so renderKidDash can find it
+  _currentKidCache = kid;
+  try{ localStorage.setItem('kgz_lastKid', kid.id);
+       localStorage.setItem('kgz_currentKid', JSON.stringify(kid)); }catch(e){}
+  if(typeof S!=='undefined'){ S.currentKid=kid.id; if(!S.kids||!S.kids.length) S.kids=kids; }
   _klPin=[];
-  try{ localStorage.setItem('kgz_lastKid', kid.id); }catch(e){}
-  // Show welcome screen (static page now exists)
-  var kwEl = document.getElementById('p-kidwelcome');
+  // Show welcome
+  var kwEl=document.getElementById('p-kidwelcome');
   if(kwEl){
-    var nameEl = document.getElementById('kidwelcome-name');
-    var pinEl  = document.getElementById('kidwelcome-pin');
-    if(nameEl) nameEl.textContent = kid.firstName || '';
-    if(pinEl)  pinEl.textContent  = kid.pin || '';
+    var n=document.getElementById('kidwelcome-name');
+    var p=document.getElementById('kidwelcome-pin');
+    if(n) n.textContent=kid.firstName||'';
+    if(p) p.textContent=kid.pin||'';
     show('p-kidwelcome');
-  } else {
-    show('p-kdash');
-  }
+  } else { enterWarriorZone(); }
 }
 
-var _appReady = false;
-var _appQueue = [];
-function appReady(fn){
-  if(_appReady){ fn(); }
-  else { _appQueue.push(fn); }
-}
-function _flushAppQueue(){
-  _appReady = true;
-  _appQueue.forEach(function(fn){ try{ fn(); }catch(e){} });
-  _appQueue = [];
-}
-function goToDash(){
-  appReady(function(){
-    if(typeof renderKidDash==='function') renderKidDash();
-    show('p-kdash');
-  });
-}
-
+// ── Enter dashboard ──────────────────────────────────────
 function enterWarriorZone(){
+  // Make sure S.currentKid is set
+  if(typeof S!=='undefined' && _currentKidCache){ S.currentKid=_currentKidCache.id; }
   show('p-kdash');
-  if(typeof renderKidDash==='function'){
-    renderKidDash();
-  } else {
-    // renderKidDash not loaded yet — retry
-    var attempts = 0;
-    var retry = setInterval(function(){
-      attempts++;
-      if(typeof renderKidDash==='function'){
-        clearInterval(retry);
-        renderKidDash();
-      } else if(attempts > 20){
-        clearInterval(retry);
+  var attempts=0;
+  var go=setInterval(function(){
+    attempts++;
+    if(typeof renderKidDash==='function'){
+      clearInterval(go);
+      // Set currentKid on S right before render
+      if(typeof S!=='undefined' && _currentKidCache && !S.currentKid){
+        S.currentKid=_currentKidCache.id;
       }
-    }, 200);
-  }
-}
-function landingRoute(tab){
-  if(typeof S!=='undefined'&&S.currentKid){ show('p-kdash'); setTimeout(function(){if(typeof kidTab==='function')kidTab(tab,'act-teal');},150); }
-  else show('p-kentry');
+      renderKidDash();
+    } else if(attempts>30){ clearInterval(go); }
+  },100);
 }
 </script>
 </head>
@@ -10095,4 +10076,4 @@ function drawWarriorSVG(type) {
 </script>
 </body>
 </html>
-<!-- deploy-1781631534-wcstuqxaizhpheugibid -->
+<!-- deploy-1781638733-mngkgfdbihjevmzxgxoj -->
