@@ -27,7 +27,7 @@ html,body{height:100%;background:#07031a;font-family:'Exo 2','Segoe UI',Arial,sa
   #dash-sidebar{padding:1.25rem;border-right:1px solid rgba(255,255,255,.08);min-height:calc(100vh - 54px);}
   #dash-main{padding:1.25rem;overflow-y:auto;}
   .tab-bar{display:none;}
-  .tab-sidebar{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.25rem;}
+  #tab-sidebar-nav{display:flex!important;flex-direction:column;gap:.35rem;margin-bottom:1.25rem;}
   .tab-sidebar-btn{background:none;border:none;border-radius:14px;padding:.75rem 1rem;font-size:.82rem;font-weight:900;color:rgba(255,255,255,.4);cursor:pointer;display:flex;align-items:center;gap:.75rem;text-align:left;transition:all .2s;letter-spacing:.04em;text-transform:uppercase}
   .tab-sidebar-btn .ti{font-size:1.2rem}
   .tab-sidebar-btn.active{background:rgba(245,200,66,.15);color:#f5c842;}
@@ -92,6 +92,8 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 /* TABS */
 .tab-bar{display:flex;gap:.25rem;margin-bottom:1rem;background:rgba(255,255,255,.04);border-radius:16px;padding:.3rem;border:1px solid rgba(255,255,255,.07);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .tab-bar::-webkit-scrollbar{display:none}
+/* Hide sidebar nav on mobile */
+#tab-sidebar-nav{display:none}
 .tab-btn{flex:1;background:none;border:none;border-radius:12px;padding:.45rem .2rem;font-size:.6rem;font-weight:900;color:rgba(255,255,255,.35);cursor:pointer;white-space:nowrap;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:1px;letter-spacing:.04em;text-transform:uppercase}
 .tab-btn .ti{font-size:1.15rem;margin-bottom:1px}
 .tab-btn.active{background:rgba(245,200,66,.15);color:#f5c842;box-shadow:0 2px 10px rgba(0,0,0,.4)}
@@ -309,7 +311,7 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
   </div>
   <div id="dash-sidebar">
   <!-- Sidebar nav for desktop -->
-  <div class="tab-sidebar" id="tab-sidebar-nav" style="display:none">
+  <div class="tab-sidebar" id="tab-sidebar-nav">
     <button class="tab-sidebar-btn active" onclick="dashTab('devos',this)"><span class="ti">📖</span>Devos</button>
     <button class="tab-sidebar-btn" onclick="dashTab('games',this)"><span class="ti">⚔️</span>Battle Arena</button>
     <button class="tab-sidebar-btn" onclick="dashTab('warrior',this)"><span class="ti">🛡️</span>Armor</button>
@@ -419,20 +421,29 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
   <div style="padding:1rem 1.25rem">
 
     <!-- STATS ROW -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:1rem">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.6rem">
       <div class="admin-stat"><div class="stat-num" id="adm-stat-kids">—</div><div class="stat-lbl">Warriors</div></div>
-      <div class="admin-stat"><div class="stat-num" id="adm-stat-pts">—</div><div class="stat-lbl">Total Pts</div></div>
+      <div class="admin-stat"><div class="stat-num" id="adm-stat-pts">—</div><div class="stat-lbl">Pts Awarded</div></div>
       <div class="admin-stat"><div class="stat-num" id="adm-stat-orders">—</div><div class="stat-lbl">Orders</div></div>
-      <div class="admin-stat"><div class="stat-num" id="adm-stat-items">—</div><div class="stat-lbl">Items</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem">
+      <div class="admin-stat" id="adm-checkin-stat" style="cursor:pointer" onclick="toggleCheckin()">
+        <div class="stat-num" id="adm-stat-checkin" style="font-size:1rem">—</div>
+        <div class="stat-lbl">Check-In (tap)</div>
+      </div>
+      <div class="admin-stat">
+        <div class="stat-num" id="adm-stat-items">—</div>
+        <div class="stat-lbl">Store Items</div>
+      </div>
     </div>
 
     <!-- ADMIN TABS -->
     <div style="display:flex;gap:.35rem;margin-bottom:1rem;background:rgba(255,255,255,.04);border-radius:14px;padding:.3rem;border:1px solid rgba(255,255,255,.07)">
       <button class="admin-tab active" onclick="adminTab('kids',this)">👧 Warriors</button>
-      <button class="admin-tab" onclick="adminTab('award',this)">⚡ Award Pts</button>
+      <button class="admin-tab" onclick="adminTab('award',this)">⚡ Points</button>
       <button class="admin-tab" onclick="adminTab('orders',this)">📦 Orders</button>
       <button class="admin-tab" onclick="adminTab('store',this)">🎁 Store</button>
-      <button class="admin-tab" onclick="adminTab('settings',this)">⚙️ Settings</button>
+      <button class="admin-tab" onclick="adminTab('settings',this)">⚙️ Config</button>
     </div>
 
     <!-- WARRIORS LIST -->
@@ -737,10 +748,7 @@ function openDash(kid){
   var dci=document.getElementById("dash-checkin-btn");
   if(dci)dci.style.display=CFG.checkin_enabled==="true"?"block":"none";
   show("p-dash");
-  // Desktop sidebar
-  if(window.innerWidth>=900){
-    var sn=document.getElementById("tab-sidebar-nav");if(sn)sn.style.display="flex";
-  }
+  // Sidebar shown/hidden by CSS @media rule
   dashTab("devos",document.querySelector(".tab-btn"));
   loadStore();loadRanks();
 }
@@ -751,8 +759,15 @@ function dashTab(tab,btn){
   ["devos","games","warrior","store","ranks","prayer","training"].forEach(function(t){
     var el=document.getElementById("tab-"+t);if(el)el.style.display=t===tab?"block":"none";
   });
-  document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active");});
+  // Reset both mobile tab-btns AND desktop sidebar btns
+  document.querySelectorAll(".tab-btn,.tab-sidebar-btn").forEach(function(b){b.classList.remove("active");});
   if(btn)btn.classList.add("active");
+  // Sync the other nav — keep both in sync
+  var allBtns=document.querySelectorAll(".tab-btn,.tab-sidebar-btn");
+  allBtns.forEach(function(b){
+    var match=b.getAttribute("onclick")||"";
+    if(match.indexOf("'"+tab+"'")>=0)b.classList.add("active");
+  });
   if(tab==="devos")renderDevos();
   if(tab==="games")renderGames();
   if(tab==="warrior")renderArmor();
@@ -1883,11 +1898,15 @@ function doAdminLogin(){
   Promise.all([
     sb("kids?select=*&order=points.desc"),
     sb("orders?select=*&order=created_at.desc"),
-    sb("store_items?select=*&order=pts.asc")
+    sb("store_items?select=*&order=pts.asc"),
+    sb("app_config?select=key,value")
   ]).then(function(results){
     ADM.kids=results[0]||[];
     ADM.orders=results[1]||[];
     APP.storeItems=results[2]||[];
+    // Load live config so settings tab shows current values
+    var cfgRows=results[3]||[];
+    cfgRows.forEach(function(r){CFG[r.key]=r.value;});
     err.textContent="";
     show("p-admin");
     admRefreshStats();
@@ -1905,8 +1924,13 @@ function admRefreshStats(){
   var el;
   el=document.getElementById("adm-stat-kids");if(el)el.textContent=ADM.kids.length;
   el=document.getElementById("adm-stat-pts");if(el)el.textContent=totalPts.toLocaleString();
-  el=document.getElementById("adm-stat-orders");if(el)el.textContent=pendOrders;
+  el=document.getElementById("adm-stat-orders");if(el)el.textContent=pendOrders+(pendOrders>0?" ⚠️":"");
   el=document.getElementById("adm-stat-items");if(el)el.textContent=APP.storeItems.length;
+  var ci=document.getElementById("adm-stat-checkin");
+  var ciStat=document.getElementById("adm-checkin-stat");
+  var on=CFG.checkin_enabled==="true";
+  if(ci)ci.textContent=on?"🟢 LIVE":"⚪ OFF";
+  if(ciStat)ciStat.style.borderColor=on?"rgba(0,192,122,.4)":"rgba(255,255,255,.1)";
 }
 
 function admSearchKids(){
@@ -2356,16 +2380,7 @@ window.addEventListener("DOMContentLoaded",function(){
     var t=document.getElementById("verse-text");var r=document.getElementById("verse-ref");
     if(t&&r){t.style.opacity=0;setTimeout(function(){t.textContent="\u201c"+VV[vi].t+"\u201d";r.textContent=VV[vi].r;t.style.transition="opacity .5s";t.style.opacity=1;},300);}
   },8000);
-  // Responsive sidebar on desktop
-  if(window.innerWidth>=900){
-    var sn=document.getElementById("tab-sidebar-nav");
-    if(sn&&APP.kid)sn.style.display="flex";
-  }
-  window.addEventListener("resize",function(){
-    var sn=document.getElementById("tab-sidebar-nav");
-    if(!sn||!APP.kid)return;
-    sn.style.display=window.innerWidth>=900?"flex":"none";
-  });
+  // CSS handles sidebar show/hide via @media — no JS needed
   // Login page particles
   var loginParts=document.getElementById("login-particles");
   if(loginParts){
@@ -2386,4 +2401,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781716934-abjpgydlnone -->
+<!-- deploy-1781717352-kmhpsryumkxh -->
