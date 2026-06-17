@@ -1451,7 +1451,7 @@ function redeemItem(id,pts,name,canAfford){
     +"<div style='font-size:3rem;margin-bottom:.5rem'>🎁</div>"
     +"<div style='font-family:Bangers,cursive;font-size:1.6rem;color:#fff;letter-spacing:.04em;margin-bottom:.25rem'>Redeem This Prize?</div>"
     +"<div style='font-size:.95rem;font-weight:900;color:#f5c842;margin-bottom:.35rem'>"+name+"</div>"
-    +"<div style='font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.55'>This costs <strong style="color:#f5c842">"+pts+" points</strong>.<br>A leader will bring your prize on Sunday!</div></div>"
+    +"<div style='font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.55'>This costs <strong style=\'color:#f5c842\'>"+pts+" points</strong>.<br>A leader will bring your prize on Sunday!</div></div>"
     +"<div style='background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:.85rem 1rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center'>"
     +"<div style='font-size:.78rem;color:rgba(255,255,255,.55)'>Balance after:</div>"
     +"<div style='font-family:Bangers,cursive;font-size:1.4rem;color:#f5c842'>"+((APP.kid.points||0)-pts)+" pts</div></div>"
@@ -1473,7 +1473,7 @@ function redeemItem(id,pts,name,canAfford){
         var cel=document.createElement("div");cel.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;animation:fadeIn .3s";
         cel.innerHTML="<div style='font-size:5rem;margin-bottom:.5rem'>🎉</div>"
           +"<div style='font-family:Bangers,cursive;font-size:2.4rem;color:#f5c842;letter-spacing:.06em;text-shadow:0 0 30px rgba(245,200,66,.5)'>REDEEMED!</div>"
-          +"<div style='font-size:.88rem;color:rgba(255,255,255,.7);margin-top:.5rem;text-align:center;padding:0 2rem;line-height:1.65'>A leader will bring<br><strong style="color:#fff">"+name+"</strong><br>for you on Sunday!</div>";
+          +"<div style='font-size:.88rem;color:rgba(255,255,255,.7);margin-top:.5rem;text-align:center;padding:0 2rem;line-height:1.65'>A leader will bring<br><strong style=\'color:#fff\'>"+name+"</strong><br>for you on Sunday!</div>";
         document.body.appendChild(cel);setTimeout(function(){cel.remove();},2800);
         toast("🎉 "+name+" redeemed!",4000);
       }).catch(function(){toast("Error. Try again.");ov.remove();});
@@ -2761,4 +2761,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781726845-pirsqqdzqbcs -->
+<!-- deploy-1781727147-ejosvypi -->
