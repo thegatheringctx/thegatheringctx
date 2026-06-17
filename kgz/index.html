@@ -13,6 +13,13 @@ html,body{height:100%;background:#07031a;font-family:'Exo 2','Segoe UI',Arial,sa
 .page{display:none!important;min-height:100vh;width:100%;padding:1.25rem}
 .page.active{display:block!important}
 /* Responsive layout */
+
+/* ── LANDING GLOBAL (must be before @media) ── */
+.wl-bg{pointer-events:none!important}
+.wl-content{position:relative!important;z-index:10!important}
+.wl-content *{position:relative;z-index:10}
+#p-land .btn{position:relative;z-index:20!important}
+#p-land .badge,#p-land .wl-title,#p-land .wl-tag,#p-land .stats-row,#p-land .card{position:relative;z-index:10}
 @media(min-width:600px){
   #p-land .wl-content{max-width:700px;margin:0 auto;}
   #p-klogin>*,#p-signup>*,#p-plogin>*,#p-alogin>*{max-width:480px;margin-left:auto;margin-right:auto;}
@@ -2759,4 +2766,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781724089-ozdhxnwxwdzo -->
+<!-- deploy-1781724132-qiglhjfqfztz -->
