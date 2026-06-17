@@ -10,8 +10,27 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;background:#07031a;font-family:'Exo 2','Segoe UI',Arial,sans-serif;color:#fff;overflow-x:hidden}
-.page{display:none;min-height:100vh;width:100%;max-width:480px;margin:0 auto;padding:1.25rem}
+.page{display:none;min-height:100vh;width:100%;padding:1.25rem}
 .page.active{display:block}
+/* Responsive layout */
+@media(min-width:600px){
+  #p-land .wl-content{max-width:700px;margin:0 auto;}
+  #p-klogin>*,#p-signup>*,#p-plogin>*,#p-alogin>*{max-width:480px;margin-left:auto;margin-right:auto;}
+  #p-entry .anim-in{max-width:600px;margin:0 auto;}
+  #p-howto{max-width:600px;margin:0 auto;}
+  #p-dash{padding:0;}
+}
+@media(min-width:900px){
+  #p-dash{display:grid;grid-template-columns:320px 1fr;grid-template-rows:auto;min-height:100vh;padding:0;}
+  .dash-sticky{grid-column:1/-1;margin:0;border-radius:0;}
+  #dash-sidebar{padding:1.25rem;border-right:1px solid rgba(255,255,255,.08);min-height:calc(100vh - 54px);}
+  #dash-main{padding:1.25rem;overflow-y:auto;}
+  .tab-bar{display:none;}
+  .tab-sidebar{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.25rem;}
+  .tab-sidebar-btn{background:none;border:none;border-radius:14px;padding:.75rem 1rem;font-size:.82rem;font-weight:900;color:rgba(255,255,255,.4);cursor:pointer;display:flex;align-items:center;gap:.75rem;text-align:left;transition:all .2s;letter-spacing:.04em;text-transform:uppercase}
+  .tab-sidebar-btn .ti{font-size:1.2rem}
+  .tab-sidebar-btn.active{background:rgba(245,200,66,.15);color:#f5c842;}
+}
 input,button,select{font-family:inherit}
 input{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:.75rem 1rem;color:#fff;width:100%;font-size:1rem;outline:none;transition:border-color .2s}
 input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,66,.1)}
@@ -25,11 +44,13 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 .error{color:#ff8a8a;font-size:.82rem;min-height:1rem;margin:.5rem 0;text-align:center}
 .back-btn{background:none;border:none;color:rgba(255,255,255,.45);cursor:pointer;font-size:.85rem;font-weight:700;padding:.5rem 0;margin-bottom:1rem;display:flex;align-items:center;gap:4px}
 /* LANDING */
-#p-land{padding:0}
+#p-land{padding:0;max-width:100%!important}
 .wl-bg{position:fixed;top:0;left:0;right:0;height:62vh;background-size:cover;background-position:center top;z-index:0}
 .wl-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65%;background:linear-gradient(to bottom,transparent,#07031a)}
 .wl-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:0 1.25rem 2rem}
-.wl-spacer{height:36vh}
+.wl-spacer{height:42vh}
+@media(min-width:600px){.wl-spacer{height:50vh;}.wl-title{font-size:clamp(72px,10vw,120px);}}
+@media(min-width:900px){.wl-bg{height:75vh;}.wl-spacer{height:60vh;}}
 .wl-title{font-family:'Bangers',cursive;font-size:clamp(52px,14vw,82px);letter-spacing:.06em;line-height:.88;text-align:center;text-shadow:0 0 60px rgba(245,200,66,.7),0 4px 0 rgba(80,30,0,.95);margin-bottom:.4rem}
 .wl-title em{color:#f5c842;font-style:normal}
 .wl-tag{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:1rem;font-style:italic;letter-spacing:.05em}
@@ -260,28 +281,52 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 
 <!-- ═══ DASHBOARD ═══ -->
 <div id="p-dash" class="page">
-  <div class="dash-sticky">
+  <div class="dash-sticky" style="grid-column:1/-1">
     <div style="font-family:'Bangers',cursive;font-size:1rem;color:#f5c842;letter-spacing:.08em">&#9876;&#65039; WARRIOR ZONE</div>
     <div style="display:flex;align-items:center;gap:.5rem">
       <div class="pts-pill">&#11088; <span id="dash-pts">0</span> pts</div>
       <button onclick="doLogout()" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:.72rem;font-weight:700">Exit</button>
     </div>
   </div>
-  <div class="hero-card">
-    <div class="eyebrow" style="margin-bottom:.2rem">Welcome back, Warrior</div>
-    <div class="warrior-name" id="dash-name">Warrior</div>
-    <div style="margin:.5rem 0">
-      <div class="warrior-pts" id="dash-pts2">0</div>
-      <div class="pts-lbl">Warrior Points</div>
+  <div id="dash-sidebar">
+  <!-- Sidebar nav for desktop -->
+  <div class="tab-sidebar" id="tab-sidebar-nav" style="display:none">
+    <button class="tab-sidebar-btn active" onclick="dashTab('devos',this)"><span class="ti">📖</span>Devos</button>
+    <button class="tab-sidebar-btn" onclick="dashTab('games',this)"><span class="ti">⚔️</span>Battle Arena</button>
+    <button class="tab-sidebar-btn" onclick="dashTab('warrior',this)"><span class="ti">🛡️</span>Armor</button>
+    <button class="tab-sidebar-btn" onclick="dashTab('store',this)"><span class="ti">🎁</span>Store</button>
+    <button class="tab-sidebar-btn" onclick="dashTab('ranks',this)"><span class="ti">🏆</span>Ranks</button>
+  </div>
+  <div class="hero-card" style="margin-bottom:.85rem;position:relative;overflow:hidden">
+    <div style="position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle at 80% 20%,rgba(245,200,66,.18),transparent 65%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:-20px;right:-15px;font-size:110px;opacity:.04;line-height:1;pointer-events:none">✝</div>
+    <div class="eyebrow" style="margin-bottom:.3rem;font-size:.58rem">⚔️ Welcome back, Warrior</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem">
+      <div>
+        <div class="warrior-name" id="dash-name" style="font-size:2.4rem;line-height:1;text-shadow:0 2px 20px rgba(255,255,255,.15)">Warrior</div>
+        <div style="display:flex;align-items:baseline;gap:.4rem;margin-top:.3rem">
+          <div class="warrior-pts" id="dash-pts2" style="font-size:3.5rem;line-height:1">0</div>
+          <div class="pts-lbl" style="font-size:.6rem">PTS</div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div id="armor-badge" style="background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.3);border-radius:14px;padding:.5rem .75rem;text-align:center">
+          <div style="font-family:'Bangers',cursive;font-size:1.6rem;color:#f5c842;line-height:1" id="armor-count">0/7</div>
+          <div style="font-size:.52rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:2px">Armor</div>
+        </div>
+      </div>
     </div>
     <div>
-      <div style="display:flex;justify-content:space-between;font-size:.6rem;color:rgba(255,255,255,.35);margin-bottom:4px">
-        <span style="font-weight:900;letter-spacing:.08em;text-transform:uppercase">Armor Progress</span>
-        <span id="armor-count" style="font-weight:900">0/7</span>
+      <div style="display:flex;justify-content:space-between;font-size:.58rem;color:rgba(255,255,255,.3);margin-bottom:5px">
+        <span style="font-weight:900;letter-spacing:.1em;text-transform:uppercase">Armor Progress</span>
+        <span id="armor-pct" style="font-weight:900;color:rgba(245,200,66,.7)">0%</span>
       </div>
-      <div class="armor-bar"><div class="armor-fill" id="armor-fill" style="width:0%"></div></div>
+      <div class="armor-bar" style="height:10px"><div class="armor-fill" id="armor-fill" style="width:0%"></div></div>
     </div>
+    <div id="hero-next-armor" style="margin-top:.65rem;font-size:.68rem;color:rgba(255,255,255,.35);font-weight:700"></div>
   </div>
+  </div><!-- end sidebar -->
+  <div id="dash-main">
   <div class="tab-bar">
     <button class="tab-btn active" onclick="dashTab('devos',this)"><span class="ti">&#128214;</span>Devos</button>
     <button class="tab-btn" onclick="dashTab('games',this)"><span class="ti">&#9876;&#65039;</span>Battle</button>
@@ -294,7 +339,8 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
   <div id="tab-warrior" style="display:none"></div>
   <div id="tab-store" style="display:none"></div>
   <div id="tab-ranks" style="display:none"></div>
-</div>
+</div><!-- end dash-main -->
+</div><!-- end p-dash -->
 
 <!-- ═══ HOW IT WORKS ═══ -->
 <div id="p-howto" class="page">
@@ -458,6 +504,7 @@ function awardPts(pts,evt){
       var armor=getArmor(APP.kid);
       var af=document.getElementById("armor-fill");if(af)af.style.width=Math.round((armor.length/7)*100)+"%";
       var ac=document.getElementById("armor-count");if(ac)ac.textContent=armor.length+"/7";
+      var ap=document.getElementById("armor-pct");if(ap)ap.textContent=Math.round((armor.length/7)*100)+"%";
       burst(pts,evt?evt.clientX:null,evt?evt.clientY:null);
     }).catch(function(){});
 }
@@ -468,9 +515,21 @@ function openDash(kid){
   document.getElementById("dash-pts").textContent=kid.points||0;
   document.getElementById("dash-pts2").textContent=kid.points||0;
   var armor=getArmor(kid);
-  document.getElementById("armor-fill").style.width=Math.round((armor.length/7)*100)+"%";
+  var pct=Math.round((armor.length/7)*100);
+  document.getElementById("armor-fill").style.width=pct+"%";
   document.getElementById("armor-count").textContent=armor.length+"/7";
+  var pctEl=document.getElementById("armor-pct");if(pctEl)pctEl.textContent=pct+"%";
+  // Next armor hint
+  var ARMOR_NAMES=[{pts:10,name:"Belt of Truth"},{pts:50,name:"Breastplate"},{pts:100,name:"Boots of Peace"},{pts:200,name:"Shield of Faith"},{pts:350,name:"Helmet"},{pts:500,name:"Sword of the Spirit"},{pts:750,name:"Full Armor!"}];
+  var next=ARMOR_NAMES.find(function(a){return (kid.points||0)<a.pts;});
+  var nextEl=document.getElementById("hero-next-armor");
+  if(nextEl&&next)nextEl.textContent="🎯 Next: "+next.name+" — "+(next.pts-(kid.points||0))+" more pts";
+  else if(nextEl)nextEl.textContent="🏆 Full armor unlocked! You are complete!";
   show("p-dash");
+  // Desktop sidebar
+  if(window.innerWidth>=900){
+    var sn=document.getElementById("tab-sidebar-nav");if(sn)sn.style.display="flex";
+  }
   dashTab("devos",document.querySelector(".tab-btn"));
   loadStore();loadRanks();
 }
@@ -1165,6 +1224,16 @@ window.addEventListener("DOMContentLoaded",function(){
     var t=document.getElementById("verse-text");var r=document.getElementById("verse-ref");
     if(t&&r){t.style.opacity=0;setTimeout(function(){t.textContent="\u201c"+VV[vi].t+"\u201d";r.textContent=VV[vi].r;t.style.transition="opacity .5s";t.style.opacity=1;},300);}
   },8000);
+  // Responsive sidebar on desktop
+  if(window.innerWidth>=900){
+    var sn=document.getElementById("tab-sidebar-nav");
+    if(sn&&APP.kid)sn.style.display="flex";
+  }
+  window.addEventListener("resize",function(){
+    var sn=document.getElementById("tab-sidebar-nav");
+    if(!sn||!APP.kid)return;
+    sn.style.display=window.innerWidth>=900?"flex":"none";
+  });
   for(var i=0;i<12;i++){
     var e=document.createElement("div");e.className="ember";
     e.style.cssText="--sz:"+(Math.random()*3+2)+"px;--d:"+(Math.random()*6+6)+"s;--delay:-"+(Math.random()*10)+"s;--c:"+(Math.random()>.4?"#f5c842":Math.random()>.5?"#FF6B1A":"#ff4500")+";left:"+(Math.random()*90+5)+"%";
@@ -1174,5 +1243,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-
-<!-- deploy-1781710618-zpdlylcpytkr -->
+<!-- deploy-1781713031-oafmkcwyjody -->
