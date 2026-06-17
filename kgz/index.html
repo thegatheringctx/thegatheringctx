@@ -207,6 +207,10 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
       <div id="verse-text" style="font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.65;font-style:italic;font-family:Georgia,serif">&ldquo;Be strong and courageous. Do not be afraid, for the Lord your God is with you.&rdquo;</div>
       <div id="verse-ref" style="font-size:.6rem;font-weight:900;color:#f5c842;letter-spacing:.14em;margin-top:.4rem;text-transform:uppercase">Joshua 1:9 &middot; ESV</div>
     </div>
+    <div id="checkin-banner" style="display:none;width:100%;background:linear-gradient(135deg,#00C07A,#008f52);border-radius:18px;padding:1rem;text-align:center;margin-bottom:.65rem;cursor:pointer" onclick="doCheckin()">
+      <div style="font-family:'Bangers',cursive;font-size:1.5rem;letter-spacing:.06em">⛪ SUNDAY CHECK-IN LIVE!</div>
+      <div style="font-size:.78rem;color:rgba(255,255,255,.8);margin-top:.2rem">Tap to check in and earn <span id="checkin-pts-display">10</span> pts!</div>
+    </div>
     <div class="stats-row" style="width:100%;margin-top:.65rem">
       <div class="stat-cell"><div class="stat-num" id="stat-warriors">&mdash;</div><div class="stat-lbl">Warriors</div></div>
       <div class="stat-cell"><div class="stat-num">7</div><div class="stat-lbl">Armor Pieces</div></div>
@@ -283,6 +287,7 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
     <div><div class="eyebrow" style="margin-bottom:.3rem">Age</div><input id="su-age" type="number" placeholder="Age" min="4" max="18"></div>
     <div><div class="eyebrow" style="margin-bottom:.3rem">Parent Name</div><input id="su-parent" type="text" placeholder="Parent or guardian name" maxlength="40"></div>
     <div><div class="eyebrow" style="margin-bottom:.3rem">Create a 4-Digit PIN</div><input id="su-pin" type="number" placeholder="e.g. 1234"></div>
+    <div><div class="eyebrow" style="margin-bottom:.3rem">Confirm PIN</div><input id="su-pin2" type="number" placeholder="Enter PIN again"></div>
     <div id="su-err" class="error"></div>
     <button class="btn btn-gold" onclick="doSignup()">Create My Account &#9876;&#65039;</button>
   </div>
@@ -333,6 +338,9 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
       <div class="armor-bar" style="height:10px"><div class="armor-fill" id="armor-fill" style="width:0%"></div></div>
     </div>
     <div id="hero-next-armor" style="margin-top:.65rem;font-size:.68rem;color:rgba(255,255,255,.35);font-weight:700"></div>
+    <div id="dash-checkin-btn" style="display:none;margin-top:.75rem">
+      <button onclick="doCheckin()" class="btn btn-teal" style="font-size:.95rem;padding:.7rem">⛪ Sunday Check-In — Earn Points!</button>
+    </div>
   </div>
   </div><!-- end sidebar -->
   <div id="dash-main">
@@ -348,6 +356,7 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
   <div id="tab-warrior" style="display:none"></div>
   <div id="tab-store" style="display:none"></div>
   <div id="tab-ranks" style="display:none"></div>
+  <div id="tab-prayer" style="display:none"></div>
 </div><!-- end dash-main -->
 </div><!-- end p-dash -->
 
@@ -413,6 +422,7 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
       <button class="admin-tab" onclick="adminTab('award',this)">⚡ Award Pts</button>
       <button class="admin-tab" onclick="adminTab('orders',this)">📦 Orders</button>
       <button class="admin-tab" onclick="adminTab('store',this)">🎁 Store</button>
+      <button class="admin-tab" onclick="adminTab('settings',this)">⚙️ Settings</button>
     </div>
 
     <!-- WARRIORS LIST -->
@@ -469,6 +479,54 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
       <div id="adm-orders-list"></div>
     </div>
 
+    <!-- SETTINGS -->
+    <div id="atab-settings" style="display:none">
+      <div class="eyebrow" style="margin-bottom:.75rem">⛪ Sunday Check-In</div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem;margin-bottom:1rem">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+          <div>
+            <div style="font-weight:900;font-size:.88rem">Check-In Mode</div>
+            <div style="font-size:.7rem;color:rgba(255,255,255,.4)">Enable on Sunday mornings</div>
+          </div>
+          <button id="checkin-toggle" onclick="toggleCheckin()" style="border:none;border-radius:10px;padding:.5rem 1.1rem;font-weight:900;font-size:.82rem;cursor:pointer;transition:all .2s">OFF</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <div style="flex:1"><div class="eyebrow" style="margin-bottom:.25rem">Points per Check-In</div>
+          <input id="cfg-checkin-pts" type="number" value="10" min="1" max="100" style="font-size:.9rem;padding:.5rem .75rem"></div>
+          <button onclick="saveCfgCheckin()" style="background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.3);border-radius:10px;padding:.5rem .85rem;color:#f5c842;font-weight:900;font-size:.78rem;cursor:pointer;flex-shrink:0;margin-top:1.2rem">Save</button>
+        </div>
+      </div>
+
+      <div class="eyebrow" style="margin-bottom:.75rem">⚡ Game Points</div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem;margin-bottom:1rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:.65rem">
+          <div><div class="eyebrow" style="margin-bottom:.25rem">Quiz (per Q)</div><input id="cfg-quiz" type="number" value="5" min="1"></div>
+          <div><div class="eyebrow" style="margin-bottom:.25rem">True/False (per Q)</div><input id="cfg-tf" type="number" value="2" min="1"></div>
+          <div><div class="eyebrow" style="margin-bottom:.25rem">Scramble</div><input id="cfg-scramble" type="number" value="30" min="1"></div>
+          <div><div class="eyebrow" style="margin-bottom:.25rem">Match</div><input id="cfg-match" type="number" value="25" min="1"></div>
+          <div><div class="eyebrow" style="margin-bottom:.25rem">Fill Blank (per Q)</div><input id="cfg-fitb" type="number" value="3" min="1"></div>
+          <div><div class="eyebrow" style="margin-bottom:.25rem">Spin Wheel</div><input id="cfg-wheel" type="number" value="10" min="1"></div>
+        </div>
+        <div><div class="eyebrow" style="margin-bottom:.25rem">Devotional Completion</div><input id="cfg-devo" type="number" value="10" min="1" style="max-width:150px"></div>
+        <button onclick="saveCfgGames()" style="margin-top:.65rem;background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.3);border-radius:10px;padding:.5rem 1.25rem;color:#f5c842;font-weight:900;font-size:.82rem;cursor:pointer;width:100%">Save Game Points</button>
+      </div>
+
+      <div class="eyebrow" style="margin-bottom:.75rem">🎁 Store Prizes</div>
+      <div id="adm-prize-list" style="margin-bottom:.75rem"></div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem">
+        <div class="eyebrow" style="margin-bottom:.5rem">Add New Prize</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <input id="new-prize-name" type="text" placeholder="Prize name">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+            <input id="new-prize-pts" type="number" placeholder="Points cost">
+            <input id="new-prize-desc" type="text" placeholder="Description">
+          </div>
+          <input id="new-prize-url" type="text" placeholder="Amazon URL (optional)">
+          <button onclick="addPrize()" class="btn btn-gold" style="font-size:.9rem;padding:.7rem">Add Prize</button>
+        </div>
+      </div>
+    </div>
+
     <!-- STORE MANAGEMENT -->
     <div id="atab-store" style="display:none">
       <div class="eyebrow" style="margin-bottom:.75rem">Store Items</div>
@@ -486,6 +544,16 @@ var SUPA_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZ
 
 var APP={kid:null,kids:[],storeItems:[],tab:"devos"};
 var _pin=[];var _stack=[];
+var CFG={
+  checkin_pts:"10",quiz_pts_per_q:"5",tf_pts_per_q:"2",
+  scramble_pts:"30",match_pts:"25",fitb_pts_per_q:"3",
+  wheel_pts:"10",devo_pts:"10",checkin_enabled:"false"
+};
+function cfgN(k){return parseInt(CFG[k]||"0");}
+function saveConfig(k,v){
+  CFG[k]=String(v);
+  sb("app_config?key=eq."+k,{method:"PATCH",body:{value:String(v)},prefer:"return=representation"}).catch(function(){});
+}
 
 // ── NAV ──────────────────────────────────────────
 function show(id){
@@ -574,6 +642,29 @@ function getArmor(kid){
   return u;
 }
 
+// ── SUNDAY CHECK-IN ─────────────────────────────
+function updateCheckinBtn(){
+  var enabled=CFG.checkin_enabled==="true";
+  var banner=document.getElementById("checkin-banner");
+  if(banner)banner.style.display=enabled?"block":"none";
+  var ptsDsp=document.getElementById("checkin-pts-display");
+  if(ptsDsp)ptsDsp.textContent=CFG.checkin_pts||"10";
+}
+function doCheckin(){
+  if(!APP.kid){show("p-entry");toast("Log in first to check in!");return;}
+  var today=new Date().toISOString().split("T")[0];
+  // Check if already checked in today
+  sb("sunday_checkins?kid_id=eq."+APP.kid.id+"&date=eq."+today)
+    .then(function(rows){
+      if(rows&&rows.length){toast("Already checked in today! ✅");return;}
+      var pts=cfgN("checkin_pts")||10;
+      sb("sunday_checkins",{method:"POST",body:{kid_id:APP.kid.id,date:today,pts_awarded:pts},prefer:"return=representation"})
+        .then(function(){
+          awardPts(pts);toast("⛪ Checked in! +"+pts+" pts! God is good!",4000);
+        }).catch(function(){toast("Error checking in. Try again.");});
+    }).catch(function(){toast("Error. Try again.");});
+}
+
 // ── AWARD POINTS ─────────────────────────────────
 function awardPts(pts,evt){
   if(!APP.kid||pts<=0)return;
@@ -607,6 +698,9 @@ function openDash(kid){
   var nextEl=document.getElementById("hero-next-armor");
   if(nextEl&&next)nextEl.textContent="🎯 Next: "+next.name+" — "+(next.pts-(kid.points||0))+" more pts";
   else if(nextEl)nextEl.textContent="🏆 Full armor unlocked! You are complete!";
+  // Show check-in button if enabled
+  var dci=document.getElementById("dash-checkin-btn");
+  if(dci)dci.style.display=CFG.checkin_enabled==="true"?"block":"none";
   show("p-dash");
   // Desktop sidebar
   if(window.innerWidth>=900){
@@ -619,7 +713,7 @@ function openDash(kid){
 // ── TABS ─────────────────────────────────────────
 function dashTab(tab,btn){
   APP.tab=tab;
-  ["devos","games","warrior","store","ranks"].forEach(function(t){
+  ["devos","games","warrior","store","ranks","prayer"].forEach(function(t){
     var el=document.getElementById("tab-"+t);if(el)el.style.display=t===tab?"block":"none";
   });
   document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active");});
@@ -629,6 +723,7 @@ function dashTab(tab,btn){
   if(tab==="warrior")renderArmor();
   if(tab==="store"){loadStore();renderStore();}
   if(tab==="ranks")loadRanks();
+  if(tab==="prayer")renderPrayer();
 }
 
 // ════════════════════════════════════════════════
@@ -665,6 +760,13 @@ function renderDevos(){
     info.innerHTML="<div style='font-size:.85rem;font-weight:900;color:#fff;margin-bottom:2px'>"+d.title+"</div><div style='font-size:.7rem;color:rgba(255,255,255,.4)'>"+d.scripture+"</div>";
     var arr=document.createElement("div");arr.style.cssText="color:rgba(255,255,255,.25);font-size:1rem";arr.textContent="›";
     row.appendChild(badge);row.appendChild(info);row.appendChild(arr);
+    var completed=APP.kid&&APP.kid.completed_devos&&APP.kid.completed_devos.indexOf(String(i))>=0;
+    if(completed){
+      row.style.borderColor="rgba(0,192,122,.3)";
+      row.style.background="rgba(0,192,122,.05)";
+      var checkMark=document.createElement("div");checkMark.style.cssText="color:#00C07A;font-size:1.1rem;flex-shrink:0";checkMark.textContent="✅";
+      row.appendChild(checkMark);
+    }
     row.addEventListener("click",function(){openDevo(i);});
     el.appendChild(row);
   });
@@ -696,7 +798,17 @@ function openDevo(i){
 
 function markDevo(i,evt){
   if(!APP.kid)return;
-  var pts=10;awardPts(pts,evt);toast("📖 Devotional complete! +10 pts");
+  var completed=APP.kid.completed_devos||[];
+  if(completed.indexOf(String(i))>=0){toast("Already completed this one!");return;}
+  var pts=cfgN("devo_pts")||10;
+  // Update completed_devos array in Supabase
+  completed=completed.concat([String(i)]);
+  sb("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{completed_devos:completed},prefer:"return=representation"})
+    .then(function(){
+      APP.kid.completed_devos=completed;
+      awardPts(pts,evt);
+      toast("📖 Devotional complete! +"+pts+" pts");
+    }).catch(function(){awardPts(pts,evt);toast("📖 +"+pts+" pts!");});
 }
 
 // ════════════════════════════════════════════════
@@ -797,7 +909,7 @@ function showQ(){
 }
 
 function endQuiz(){
-  _qa=false;var pts=_qs*5;
+  _qa=false;var pts=_qs*cfgN("quiz_pts_per_q");
   var el=document.getElementById("quiz-area");if(!el)return;
   el.innerHTML="";el.className="anim-in";
   var wrap=document.createElement("div");
@@ -868,7 +980,7 @@ function showTF(el){
 }
 
 function endTF(el){
-  var pts=_ts*2;el.innerHTML="";el.className="anim-in";
+  var pts=_ts*cfgN("tf_pts_per_q");el.innerHTML="";el.className="anim-in";
   var wrap=document.createElement("div");wrap.style.cssText="text-align:center;padding:1.5rem;background:rgba(8,4,30,.95);border:2px solid rgba(41,174,255,.2);border-radius:24px";
   var icon=document.createElement("div");icon.style.cssText="font-size:3.5rem;margin-bottom:.5rem";icon.textContent=_ts>=8?"🏆":_ts>=5?"⚡":"🛡️";
   var score=document.createElement("div");score.style.cssText="font-family:Bangers,cursive;font-size:3rem;color:#f5c842;letter-spacing:.05em";score.textContent=_ts+"/"+_tfPool.length;
@@ -923,7 +1035,7 @@ function renderScramble(el){
       var correct=_sc.words.join(" ").toLowerCase();
       var attempt=_scSel.join(" ").toLowerCase();
       if(attempt===correct){
-        toast("🏆 Perfect! +30 pts");awardPts(30);
+        var sPts=cfgN("scramble_pts");toast("🏆 Perfect! +"+sPts+" pts");awardPts(sPts);
         el.innerHTML="";
         var done=document.createElement("div");done.style.cssText="text-align:center;padding:2rem;background:rgba(0,192,122,.08);border:2px solid rgba(0,192,122,.3);border-radius:24px";
         done.innerHTML="<div style='font-size:3rem;margin-bottom:.5rem'>🏆</div><div style='font-family:Bangers,cursive;font-size:2rem;color:#f5c842'>Perfect!</div><div style='color:rgba(255,255,255,.6);font-size:.85rem;margin:.5rem 0 1rem'>+30 points earned!</div>";
@@ -980,7 +1092,7 @@ function renderMatch(el){
   el.appendChild(grid);
   if(_mmatched.length===5){
     var done=document.createElement("div");done.style.cssText="text-align:center;margin-top:1rem;padding:1.1rem;background:rgba(0,192,122,.08);border:1.5px solid rgba(0,192,122,.3);border-radius:18px";
-    done.innerHTML="<div style='font-size:2.5rem;margin-bottom:.4rem'>🏆</div><div style='font-family:Bangers,cursive;font-size:1.4rem;color:#f5c842'>All Matched! +25 pts!</div>";
+    var mPts=cfgN("match_pts");done.innerHTML="<div style='font-size:2.5rem;margin-bottom:.4rem'>🏆</div><div style='font-family:Bangers,cursive;font-size:1.4rem;color:#f5c842'>All Matched! +"+mPts+" pts!</div>";
     var ag=document.createElement("button");ag.className="btn btn-gold";ag.style.cssText="max-width:180px;margin:.75rem auto 0";ag.textContent="Play Again";ag.addEventListener("click",function(){initMatch(el);});
     done.appendChild(ag);el.appendChild(done);awardPts(25);
   }
@@ -1020,7 +1132,7 @@ function initFITB(el){
 
 function showFITB(el,pool){
   if(_fi>=pool.length){
-    var pts=_fs*3;el.innerHTML="";el.className="anim-in";
+    var pts=_fs*cfgN("fitb_pts_per_q");el.innerHTML="";el.className="anim-in";
     var wrap=document.createElement("div");wrap.style.cssText="text-align:center;padding:1.5rem;background:rgba(8,4,30,.95);border:2px solid rgba(245,200,66,.15);border-radius:24px";
     var icon=document.createElement("div");icon.style.cssText="font-size:3rem;margin-bottom:.5rem";icon.textContent=_fs>=5?"🏆":_fs>=3?"✍️":"📖";
     var score=document.createElement("div");score.style.cssText="font-family:Bangers,cursive;font-size:3rem;color:#f5c842;letter-spacing:.05em";score.textContent=_fs+"/"+pool.length;
@@ -1208,6 +1320,47 @@ function renderRanks(){
 }
 
 // ════════════════════════════════════════════════
+//  PRAYER WALL
+// ════════════════════════════════════════════════
+function renderPrayer(){
+  var el=document.getElementById("tab-prayer");if(!el)return;
+  el.innerHTML="";
+  var hdr=document.createElement("div");hdr.style.cssText="font-family:'Bangers',cursive;font-size:1.5rem;letter-spacing:.04em;margin-bottom:.85rem";hdr.textContent="Prayer Wall";el.appendChild(hdr);
+  // Submit form
+  var form=document.createElement("div");form.style.cssText="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:1rem;margin-bottom:1rem";
+  var inp=document.createElement("input");inp.type="text";inp.placeholder="Share a prayer request...";inp.id="prayer-inp";inp.style.marginBottom=".5rem";
+  var submitBtn=document.createElement("button");submitBtn.className="btn btn-gold";submitBtn.style.cssText="font-size:.9rem;padding:.7rem";submitBtn.textContent="🙏 Submit Prayer";
+  submitBtn.addEventListener("click",function(){
+    var txt=(inp.value||"").trim();if(!txt){toast("Type your prayer request first!");return;}
+    if(!APP.kid){toast("Log in to submit a prayer!");return;}
+    sb("prayer_wall",{method:"POST",body:{text:txt,name:APP.kid.first_name,kid_id:APP.kid.id,approved:true,prayers:0},prefer:"return=representation"})
+      .then(function(){inp.value="";toast("🙏 Prayer submitted!");renderPrayer();})
+      .catch(function(){toast("Error. Try again.");});
+  });
+  form.appendChild(inp);form.appendChild(submitBtn);el.appendChild(form);
+  // Load prayers
+  var listEl=document.createElement("div");listEl.id="prayer-list";listEl.innerHTML="<p class='muted'>Loading prayers...</p>";el.appendChild(listEl);
+  sb("prayer_wall?select=*&approved=eq.true&order=created_at.desc&limit=30")
+    .then(function(rows){
+      listEl.innerHTML="";
+      if(!rows.length){listEl.innerHTML="<p class='muted'>No prayers yet. Be the first!</p>";return;}
+      rows.forEach(function(p){
+        var card=document.createElement("div");card.style.cssText="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:.85rem 1rem;margin-bottom:.5rem";
+        var txt=document.createElement("div");txt.style.cssText="font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.55;margin-bottom:.4rem";txt.textContent=p.text;
+        var meta=document.createElement("div");meta.style.cssText="font-size:.65rem;color:rgba(255,255,255,.3);display:flex;justify-content:space-between;align-items:center";
+        var nameEl=document.createElement("span");nameEl.textContent="🙏 "+p.name;
+        var prayBtn=document.createElement("button");prayBtn.style.cssText="background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.25);border-radius:8px;padding:2px 10px;color:#f5c842;font-size:.65rem;font-weight:900;cursor:pointer";prayBtn.textContent="Prayed ("+p.prayers+")";
+        prayBtn.addEventListener("click",function(){
+          sb("prayer_wall?id=eq."+p.id,{method:"PATCH",body:{prayers:(p.prayers||0)+1},prefer:"return=representation"})
+            .then(function(){p.prayers=(p.prayers||0)+1;prayBtn.textContent="Prayed ("+p.prayers+")";toast("🙏 Praying with you!");}).catch(function(){});
+        });
+        meta.appendChild(nameEl);meta.appendChild(prayBtn);
+        card.appendChild(txt);card.appendChild(meta);listEl.appendChild(card);
+      });
+    }).catch(function(){listEl.innerHTML="<p class='muted'>Could not load prayers.</p>";});
+}
+
+// ════════════════════════════════════════════════
 //  SIGNUP
 // ════════════════════════════════════════════════
 function doSignup(){
@@ -1219,7 +1372,9 @@ function doSignup(){
   var err=document.getElementById("su-err");err.textContent="";
   if(!first||!last){err.textContent="Enter first and last name.";return;}
   if(!age||age<4||age>18){err.textContent="Enter a valid age (4-18).";return;}
+  var pin2=(document.getElementById("su-pin2").value||"").trim();
   if(pin.length!==4||isNaN(pin)){err.textContent="PIN must be exactly 4 digits.";return;}
+  if(pin!==pin2){err.textContent="PINs do not match! Try again.";return;}
   err.textContent="Creating account...";
   var id="KGZ-"+Math.floor(1000+Math.random()*9000);
   sb("kids",{method:"POST",body:{id:id,first_name:first,last_name:last,age:age,age_group:age<=7?"47":"812",pin:pin,parent_name:parent,points:0,joined_at:Date.now(),avatar:"warrior"},prefer:"return=representation"})
@@ -1275,13 +1430,7 @@ function doAdminLogin(){
   }).catch(function(e){err.textContent="Error: "+(e.message||"try again");});
 }
 
-function adminTab(tab,btn){
-  ["kids","award","orders","store"].forEach(function(t){
-    var el=document.getElementById("atab-"+t);if(el)el.style.display=t===tab?"block":"none";
-  });
-  document.querySelectorAll(".admin-tab").forEach(function(b){b.classList.remove("active");});
-  if(btn)btn.classList.add("active");
-}
+
 
 function admRefreshStats(){
   var totalPts=ADM.kids.reduce(function(s,k){return s+(k.points||0);},0);
@@ -1332,7 +1481,11 @@ function admRenderKidsList(kids){
       document.getElementById("award-selected").style.display="block";
       adminTab("award",document.querySelectorAll(".admin-tab")[1]);
     });
-    row.appendChild(aBtn);
+    var delBtn2=document.createElement("button");
+    delBtn2.style.cssText="background:rgba(255,90,54,.12);border:1px solid rgba(255,90,54,.25);border-radius:8px;padding:.3rem .55rem;color:#FF5A36;font-size:.6rem;font-weight:900;cursor:pointer;flex-shrink:0;margin-left:.25rem";
+    delBtn2.textContent="✕";
+    delBtn2.addEventListener("click",function(e){e.stopPropagation();deleteKid(k);});
+    row.appendChild(aBtn);row.appendChild(delBtn2);
     el.appendChild(row);
   });
 }
@@ -1429,6 +1582,111 @@ function admRenderOrders(){
   });
 }
 
+function adminTab(tab,btn){
+  ["kids","award","orders","store","settings"].forEach(function(t){
+    var el=document.getElementById("atab-"+t);if(el)el.style.display=t===tab?"block":"none";
+  });
+  document.querySelectorAll(".admin-tab").forEach(function(b){b.classList.remove("active");});
+  if(btn)btn.classList.add("active");
+  if(tab==="settings")admLoadSettings();
+}
+
+function toggleCheckin(){
+  var enabled=CFG.checkin_enabled==="true";
+  CFG.checkin_enabled=enabled?"false":"true";
+  saveConfig("checkin_enabled",CFG.checkin_enabled);
+  updateCheckinBtn();
+  admLoadSettings();
+  toast(CFG.checkin_enabled==="true"?"⛪ Check-In is LIVE!":"Check-In turned off",3000);
+}
+
+function saveCfgCheckin(){
+  var pts=document.getElementById("cfg-checkin-pts").value||"10";
+  saveConfig("checkin_pts",pts);CFG.checkin_pts=pts;
+  toast("✅ Check-in points saved: "+pts+" pts");
+}
+
+function saveCfgGames(){
+  var map={quiz:"cfg-quiz",tf:"cfg-tf",scramble:"cfg-scramble",match:"cfg-match",fitb:"cfg-fitb",wheel:"cfg-wheel",devo:"cfg-devo"};
+  var keys={quiz:"quiz_pts_per_q",tf:"tf_pts_per_q",scramble:"scramble_pts",match:"match_pts",fitb:"fitb_pts_per_q",wheel:"wheel_pts",devo:"devo_pts"};
+  Object.keys(map).forEach(function(k){
+    var el=document.getElementById(map[k]);if(!el)return;
+    var v=el.value||"5";saveConfig(keys[k],v);CFG[keys[k]]=v;
+  });
+  toast("✅ Game points saved!");
+}
+
+function admLoadSettings(){
+  // Update toggle button
+  var tog=document.getElementById("checkin-toggle");
+  if(tog){
+    var on=CFG.checkin_enabled==="true";
+    tog.textContent=on?"ON — Tap to Disable":"OFF — Tap to Enable";
+    tog.style.background=on?"rgba(0,192,122,.3)":"rgba(255,90,54,.2)";
+    tog.style.border=on?"1.5px solid rgba(0,192,122,.5)":"1.5px solid rgba(255,90,54,.4)";
+    tog.style.color=on?"#00C07A":"#ff8a8a";
+  }
+  // Fill config values
+  var fields={quiz_pts_per_q:"cfg-quiz",tf_pts_per_q:"cfg-tf",scramble_pts:"cfg-scramble",match_pts:"cfg-match",fitb_pts_per_q:"cfg-fitb",wheel_pts:"cfg-wheel",devo_pts:"cfg-devo",checkin_pts:"cfg-checkin-pts"};
+  Object.keys(fields).forEach(function(k){
+    var el=document.getElementById(fields[k]);if(el)el.value=CFG[k]||"5";
+  });
+  // Render prize list
+  admRenderPrizes();
+}
+
+function admRenderPrizes(){
+  var el=document.getElementById("adm-prize-list");if(!el)return;
+  el.innerHTML="";
+  APP.storeItems.forEach(function(item){
+    var row=document.createElement("div");row.style.cssText="display:flex;align-items:center;gap:.65rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.65rem .85rem;margin-bottom:.4rem";
+    var info=document.createElement("div");info.style.flex="1";
+    info.innerHTML="<div style='font-weight:900;font-size:.82rem'>"+item.name+"</div><div style='font-size:.65rem;color:rgba(255,255,255,.4)'>"+item.pts+" pts</div>";
+    var editPts=document.createElement("input");editPts.type="number";editPts.value=item.pts;editPts.style.cssText="width:70px;padding:.35rem .5rem;font-size:.82rem;text-align:center";
+    var saveBtn=document.createElement("button");saveBtn.style.cssText="background:rgba(245,200,66,.15);border:1px solid rgba(245,200,66,.3);border-radius:8px;padding:.3rem .6rem;color:#f5c842;font-size:.62rem;font-weight:900;cursor:pointer";saveBtn.textContent="Save";
+    saveBtn.addEventListener("click",function(){
+      var np=parseInt(editPts.value||"0");if(!np||np<1)return;
+      sb("store_items?id=eq."+item.id,{method:"PATCH",body:{pts:np},prefer:"return=representation"})
+        .then(function(){item.pts=np;toast("✅ "+item.name+" now costs "+np+" pts");}).catch(function(){toast("Error saving.");});
+    });
+    var delBtn=document.createElement("button");delBtn.style.cssText="background:rgba(255,90,54,.15);border:1px solid rgba(255,90,54,.3);border-radius:8px;padding:.3rem .6rem;color:#FF5A36;font-size:.62rem;font-weight:900;cursor:pointer";delBtn.textContent="Del";
+    delBtn.addEventListener("click",function(){
+      if(!confirm("Delete "+item.name+"?"))return;
+      sb("store_items?id=eq."+item.id,{method:"DELETE"})
+        .then(function(){APP.storeItems=APP.storeItems.filter(function(s){return s.id!==item.id;});admRenderPrizes();admRenderStore();toast("Deleted.");}).catch(function(){toast("Error.");});
+    });
+    row.appendChild(info);row.appendChild(editPts);row.appendChild(saveBtn);row.appendChild(delBtn);el.appendChild(row);
+  });
+}
+
+function addPrize(){
+  var name=(document.getElementById("new-prize-name").value||"").trim();
+  var pts=parseInt(document.getElementById("new-prize-pts").value||"0");
+  var desc=(document.getElementById("new-prize-desc").value||"").trim();
+  var url=(document.getElementById("new-prize-url").value||"").trim();
+  if(!name||!pts){toast("Enter name and point cost!");return;}
+  sb("store_items",{method:"POST",body:{name:name,pts:pts,description:desc,amazon_url:url||null,active:true},prefer:"return=representation"})
+    .then(function(rows){
+      var newItem=Array.isArray(rows)?rows[0]:rows;if(newItem)APP.storeItems.push(newItem);
+      document.getElementById("new-prize-name").value="";
+      document.getElementById("new-prize-pts").value="";
+      document.getElementById("new-prize-desc").value="";
+      document.getElementById("new-prize-url").value="";
+      admRenderPrizes();admRenderStore();toast("✅ Prize added!");
+    }).catch(function(e){toast("Error: "+(e.message||"try again"));});
+}
+
+// ── DELETE KID ────────────────────────────────────
+function deleteKid(kid){
+  if(!confirm("Delete "+kid.first_name+" "+kid.last_name+"? This cannot be undone."))return;
+  sb("kids?id=eq."+kid.id,{method:"DELETE"})
+    .then(function(){
+      ADM.kids=ADM.kids.filter(function(k){return k.id!==kid.id;});
+      admRefreshStats();admRenderKids();
+      toast("Deleted "+kid.first_name,2500);
+    }).catch(function(){toast("Error deleting.");});
+}
+
 function admRenderStore(){
   var el=document.getElementById("adm-store-list");if(!el)return;
   if(!APP.storeItems.length){el.innerHTML="<p class='muted'>No store items.</p>";return;}
@@ -1456,6 +1714,12 @@ function admRenderStore(){
 // ════════════════════════════════════════════════
 window.addEventListener("DOMContentLoaded",function(){
   show("p-land");
+  // Load app config
+  sb("app_config?select=key,value").then(function(rows){
+    rows.forEach(function(r){ CFG[r.key]=r.value; });
+    // Update checkin button if enabled
+    updateCheckinBtn();
+  }).catch(function(){});
   sb("kids?select=id").then(function(r){
     var el=document.getElementById("stat-warriors");if(el)el.textContent=r.length;
   }).catch(function(){});
@@ -1492,4 +1756,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781714023-kkwrlipwwblm -->
+<!-- deploy-1781715068-xmzsyqbnusuf -->
