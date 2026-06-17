@@ -314,6 +314,8 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
     <button class="tab-sidebar-btn" onclick="dashTab('warrior',this)"><span class="ti">🛡️</span>Armor</button>
     <button class="tab-sidebar-btn" onclick="dashTab('store',this)"><span class="ti">🎁</span>Store</button>
     <button class="tab-sidebar-btn" onclick="dashTab('ranks',this)"><span class="ti">🏆</span>Ranks</button>
+    <button class="tab-sidebar-btn" onclick="dashTab('prayer',this)"><span class="ti">🙏</span>Prayer</button>
+    <button class="tab-sidebar-btn" onclick="dashTab('training',this)"><span class="ti">⚔️</span>Warrior Training</button>
   </div>
   <div class="hero-card" style="margin-bottom:.85rem;position:relative;overflow:hidden">
     <div style="position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle at 80% 20%,rgba(245,200,66,.18),transparent 65%);pointer-events:none"></div>
@@ -361,6 +363,7 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
   <div id="tab-store" style="display:none"></div>
   <div id="tab-ranks" style="display:none"></div>
   <div id="tab-prayer" style="display:none"></div>
+  <div id="tab-training" style="display:none"></div>
 </div><!-- end dash-main -->
 </div><!-- end p-dash -->
 
@@ -742,7 +745,7 @@ function openDash(kid){
 // ── TABS ─────────────────────────────────────────
 function dashTab(tab,btn){
   APP.tab=tab;
-  ["devos","games","warrior","store","ranks","prayer"].forEach(function(t){
+  ["devos","games","warrior","store","ranks","prayer","training"].forEach(function(t){
     var el=document.getElementById("tab-"+t);if(el)el.style.display=t===tab?"block":"none";
   });
   document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active");});
@@ -753,6 +756,7 @@ function dashTab(tab,btn){
   if(tab==="store"){loadStore();renderStore();}
   if(tab==="ranks")loadRanks();
   if(tab==="prayer")renderPrayer();
+  if(tab==="training")renderTraining();
 }
 
 // ════════════════════════════════════════════════
@@ -1346,6 +1350,297 @@ function renderRanks(){
     var pts=document.createElement("div");pts.style.cssText="font-family:'Bangers',cursive;font-size:1.25rem;color:#f5c842";pts.textContent=k.points+" pts";
     row.appendChild(medal);row.appendChild(name);row.appendChild(pts);el.appendChild(row);
   });
+}
+
+
+var MISSIONS=[
+  {
+    id:"m1",
+    title:"Did Jesus Actually Rise From the Dead?",
+    emoji:"✝️",
+    bg:"linear-gradient(135deg,#1a0540,#3d1080)",
+    worldSays:"Dead people stay dead. It was probably made up by his followers.",
+    warriorSays:"The resurrection is the most documented event in the ancient world. Over 500 eyewitnesses saw Jesus alive after he died — and none of them ever changed their story, even when threatened with death. People don't die for things they know are lies.",
+    scriptures:[
+      {ref:"1 Corinthians 15:3-6 ESV",text:"Christ died for our sins in accordance with the Scriptures, that he was buried, that he was raised on the third day, and that he appeared to Cephas, then to the twelve. Then he appeared to more than five hundred brothers at one time."},
+      {ref:"John 20:27 ESV",text:"Then he said to Thomas, Put your finger here, and see my hands; and put out your hand, and place it in my side. Do not disbelieve, but believe."},
+      {ref:"Acts 2:32 ESV",text:"This Jesus God raised up, and of that we all are witnesses."}
+    ],
+    fact:"The tomb was guarded by Roman soldiers — the most disciplined military force in the world. They couldn't explain where the body went.",
+    challenge:"Tell one person this week: the resurrection is real, and here is why.",
+    memory:"I am the resurrection and the life. — John 11:25"
+  },
+  {
+    id:"m2",
+    title:"Is the Bible Actually True?",
+    emoji:"📖",
+    bg:"linear-gradient(135deg,#051a40,#103070)",
+    worldSays:"The Bible is just an old book full of myths. Men wrote it and made it all up.",
+    warriorSays:"The Bible was written by 40 different authors across 1,500 years on three continents — and it tells one unified story without contradiction. Archaeological discoveries have confirmed hundreds of specific details in Scripture. No other ancient document comes close to the number of manuscripts we have.",
+    scriptures:[
+      {ref:"2 Timothy 3:16 ESV",text:"All Scripture is breathed out by God and profitable for teaching, for reproof, for correction, and for training in righteousness."},
+      {ref:"2 Peter 1:21 ESV",text:"No prophecy was ever produced by the will of man, but men spoke from God as they were carried along by the Holy Spirit."},
+      {ref:"Psalm 119:160 ESV",text:"The sum of your word is truth, and every one of your righteous rules endures forever."}
+    ],
+    fact:"The Dead Sea Scrolls discovered in 1947 confirmed that the book of Isaiah — written 700 years before Jesus — matches what we have today almost perfectly.",
+    challenge:"Read one chapter of the Bible this week and write down one thing you notice.",
+    memory:"Your word is a lamp to my feet and a light to my path. — Psalm 119:105"
+  },
+  {
+    id:"m3",
+    title:"Why Does God Let Bad Things Happen?",
+    emoji:"❓",
+    bg:"linear-gradient(135deg,#1a2a05,#3a5510)",
+    worldSays:"If God was real and good he would stop suffering. Since there is suffering, God either doesn't exist or doesn't care.",
+    warriorSays:"God is not the author of evil — sin is. God entered the suffering himself in Jesus. He knows what it costs. And he promises that nothing is wasted — every hard thing has a purpose in his hands. Suffering is not proof that God is absent. Sometimes it is proof that he is at work.",
+    scriptures:[
+      {ref:"Romans 8:28 ESV",text:"And we know that for those who love God all things work together for good, for those who are called according to his purpose."},
+      {ref:"John 16:33 ESV",text:"In the world you will have tribulation. But take heart; I have overcome the world."},
+      {ref:"2 Corinthians 1:3-4 ESV",text:"Blessed be the God and Father of our Lord Jesus Christ, the Father of mercies and God of all comfort, who comforts us in all our affliction."}
+    ],
+    fact:"C.S. Lewis — who started as an atheist — said suffering was his biggest argument against God. After becoming a Christian, he called it the megaphone God uses to wake us up.",
+    challenge:"Think of one hard thing in your life. Write down how God might be using it.",
+    memory:"I have said these things to you, that in me you may have peace. — John 16:33"
+  },
+  {
+    id:"m4",
+    title:"Isn't Christianity Just a Religion?",
+    emoji:"🌍",
+    bg:"linear-gradient(135deg,#1a0a05,#503010)",
+    worldSays:"Christianity is just one religion among many. They all basically say the same thing.",
+    warriorSays:"Every religion in the world says: do good things to reach God. Christianity alone says: God came down to reach you. That is not a small difference — it is the opposite direction. Jesus did not come to give us a new religion. He came to give us himself.",
+    scriptures:[
+      {ref:"John 14:6 ESV",text:"Jesus said to him, I am the way, and the truth, and the life. No one comes to the Father except through me."},
+      {ref:"Ephesians 2:8-9 ESV",text:"For by grace you have been saved through faith. And this is not your own doing; it is the gift of God, not a result of works, so that no one may boast."},
+      {ref:"Acts 4:12 ESV",text:"And there is salvation in no one else, for there is no other name under heaven given among men by which we must be saved."}
+    ],
+    fact:"Every major world religion requires human effort to reach God or escape the world. Christianity is the only one where God does the reaching — and pays the price himself.",
+    challenge:"Explain to someone this week what makes Christianity different. Use the phrase: God came down.",
+    memory:"I am the way, and the truth, and the life. — John 14:6"
+  },
+  {
+    id:"m5",
+    title:"Does God Actually Care About Me?",
+    emoji:"❤️",
+    bg:"linear-gradient(135deg,#1a0530,#400a60)",
+    worldSays:"You are too small. The universe is too big. God, if he exists, does not notice you.",
+    warriorSays:"God knows how many hairs are on your head right now. He knew you before you were born and called you by name. The creator of every galaxy chose to enter human history — not as a king — but as a baby in a barn. He did not do that for no one. He did it for you.",
+    scriptures:[
+      {ref:"Jeremiah 1:5 ESV",text:"Before I formed you in the womb I knew you, and before you were born I consecrated you."},
+      {ref:"Matthew 10:30 ESV",text:"Even the hairs of your head are all numbered."},
+      {ref:"Romans 5:8 ESV",text:"God shows his love for us in that while we were still sinners, Christ died for us."}
+    ],
+    fact:"The universe has 200 billion trillion stars. The God who made all of them also made you — and considers you worth dying for.",
+    challenge:"Every morning this week say out loud: God knows my name and he is for me.",
+    memory:"I have called you by name, you are mine. — Isaiah 43:1"
+  },
+  {
+    id:"m6",
+    title:"What Makes Jesus Different From Everyone Else?",
+    emoji:"👑",
+    bg:"linear-gradient(135deg,#0a1a05,#2a5510)",
+    worldSays:"Jesus was a great teacher, but so were Buddha, Muhammad, and others. Pick the one you like.",
+    warriorSays:"Jesus said things no teacher ever said. He said I am the way — not I know the way. He said I am the truth — not I speak the truth. He said I am life — not I teach about life. Every other religious leader pointed to their teaching. Jesus pointed to himself. That is either the most arrogant claim in history or the most important truth ever spoken.",
+    scriptures:[
+      {ref:"Colossians 1:15-16 ESV",text:"He is the image of the invisible God, the firstborn of all creation. For by him all things were created, in heaven and on earth."},
+      {ref:"Hebrews 1:3 ESV",text:"He is the radiance of the glory of God and the exact imprint of his nature, and he upholds the universe by the word of his power."},
+      {ref:"Philippians 2:9-11 ESV",text:"God has highly exalted him and bestowed on him the name that is above every name, so that at the name of Jesus every knee should bow."}
+    ],
+    fact:"No other founder of any religion claimed to be God himself. Jesus did — and then backed it up by rising from the dead.",
+    challenge:"Look up one miracle of Jesus this week. Read the story and ask: who else could do this?",
+    memory:"He is before all things, and in him all things hold together. — Colossians 1:17"
+  },
+  {
+    id:"m7",
+    title:"How Do I Know God Is Real?",
+    emoji:"🌌",
+    bg:"linear-gradient(135deg,#1a1505,#504010)",
+    worldSays:"There is no proof God exists. Science explains everything. God is just something people invented because they were afraid.",
+    warriorSays:"Everything that exists came from somewhere. Science can tell us how things work — it cannot tell us why there is something rather than nothing. The universe had a beginning. That means something outside the universe started it. The fine-tuning of the laws of physics is so precise that the odds of it happening by chance are beyond calculation. And beyond the evidence — God is knowable. You can talk to him and he answers.",
+    scriptures:[
+      {ref:"Romans 1:20 ESV",text:"His invisible attributes, namely, his eternal power and divine nature, have been clearly perceived, ever since the creation of the world, in the things that have been made."},
+      {ref:"Psalm 19:1 ESV",text:"The heavens declare the glory of God, and the sky above proclaims his handiwork."},
+      {ref:"Hebrews 11:6 ESV",text:"Whoever would draw near to God must believe that he exists and that he rewards those who seek him."}
+    ],
+    fact:"The Big Bang — the scientific name for the beginning of the universe — means that time, space, and matter all had a starting point. Whatever caused the Big Bang must be outside of time and space. That sounds a lot like God.",
+    challenge:"Go outside tonight and look at the sky. Ask God to make himself real to you. Then be quiet and listen.",
+    memory:"The heavens declare the glory of God. — Psalm 19:1"
+  },
+  {
+    id:"m8",
+    title:"Why Do Christians Believe in the Trinity?",
+    emoji:"🔱",
+    bg:"linear-gradient(135deg,#180444,#051a40)",
+    worldSays:"The Trinity makes no sense. Three gods? Or one god pretending to be three? Christians just made it up.",
+    warriorSays:"The Trinity is not three gods. It is one God who eternally exists as Father, Son, and Holy Spirit — three persons, one being. We do not fully understand it because God is bigger than our categories. But it is everywhere in Scripture — at the baptism of Jesus, the Father speaks, the Son is baptized, and the Spirit descends. God is not a lonely singular force. He is a community of love. And he made you for that community.",
+    scriptures:[
+      {ref:"Matthew 3:16-17 ESV",text:"And when Jesus was baptized, immediately he went up from the water, and behold, the heavens were opened to him, and he saw the Spirit of God descending like a dove and coming to rest on him; and behold, a voice from heaven said, This is my beloved Son, with whom I am well pleased."},
+      {ref:"John 1:1 ESV",text:"In the beginning was the Word, and the Word was with God, and the Word was God."},
+      {ref:"2 Corinthians 13:14 ESV",text:"The grace of the Lord Jesus Christ and the love of God and the fellowship of the Holy Spirit be with you all."}
+    ],
+    fact:"The word Trinity is not in the Bible but the truth of it is on almost every page. Every time Scripture mentions all three persons together — Father, Son, Spirit — you see the Trinity in action.",
+    challenge:"Memorize this: One God. Three Persons. Father. Son. Holy Spirit. All fully God. All one.",
+    memory:"Go and make disciples, baptizing them in the name of the Father and of the Son and of the Holy Spirit. — Matthew 28:19"
+  }
+];
+
+// ════════════════════════════════════════════════
+//  WARRIOR TRAINING (APOLOGETICS)
+// ════════════════════════════════════════════════
+function renderTraining(){
+  var el=document.getElementById("tab-training");if(!el)return;
+  el.innerHTML="";
+
+  // Header
+  var hdr=document.createElement("div");
+  hdr.style.cssText="background:linear-gradient(135deg,#180444,#051a40);border-radius:24px;padding:1.25rem;margin-bottom:1rem;text-align:center;border:1.5px solid rgba(108,82,227,.3);position:relative;overflow:hidden";
+  hdr.innerHTML="<div style='position:absolute;font-size:90px;opacity:.04;right:-10px;top:-10px'>⚔️</div>"
+    +"<div style='position:relative;z-index:1'>"
+    +"<div style='font-size:.6rem;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.3rem'>Ephesians 6:11</div>"
+    +"<div style='font-family:Bangers,cursive;font-size:2rem;color:#fff;letter-spacing:.05em;line-height:.95;text-shadow:0 0 30px rgba(108,82,227,.5)'>WARRIOR<br><span style=\"color:#f5c842\">TRAINING</span></div>"
+    +"<div style='font-size:.75rem;color:rgba(255,255,255,.45);margin-top:.4rem;line-height:1.5'>Know what you believe.<br>Know why it is true.<br>Be ready to answer anyone.</div>"
+    +"</div>";
+  el.appendChild(hdr);
+
+  // Progress bar
+  var completed=APP.kid?APP.kid.completed_missions||[]:[];
+  var pct=Math.round((completed.length/MISSIONS.length)*100);
+  var prog=document.createElement("div");
+  prog.style.cssText="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:.85rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.85rem";
+  prog.innerHTML="<div style='font-size:1.6rem'>🏆</div>"
+    +"<div style='flex:1'>"
+    +"<div style='display:flex;justify-content:space-between;font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px'>"
+    +"<span>Training Progress</span><span style='color:#f5c842'>"+completed.length+"/"+MISSIONS.length+"</span></div>"
+    +"<div style='background:rgba(255,255,255,.07);border-radius:99px;height:7px;overflow:hidden'>"
+    +"<div style='height:100%;background:linear-gradient(90deg,#6C52E3,#f5c842);border-radius:99px;width:"+pct+"%;transition:width .8s cubic-bezier(.34,1.56,.64,1)'></div></div>"
+    +"<div style='font-size:.62rem;color:rgba(255,255,255,.3);margin-top:3px'>"+(pct===100?"🏆 Complete warrior!":"Complete all 8 missions to become a full Warrior Apologist")+"</div>"
+    +"</div>";
+  el.appendChild(prog);
+
+  // Mission cards
+  MISSIONS.forEach(function(m){
+    var done=completed.indexOf(m.id)>=0;
+    var card=document.createElement("div");
+    card.style.cssText="border-radius:20px;padding:1rem;margin-bottom:.7rem;cursor:pointer;position:relative;overflow:hidden;border:1.5px solid rgba(255,255,255,.1);transition:all .22s;background:"+m.bg;
+    if(done)card.style.borderColor="rgba(0,192,122,.4)";
+    card.innerHTML="<div style='position:absolute;top:10px;right:12px;font-size:2.2rem;opacity:.18'>"+m.emoji+"</div>"
+      +(done?"<div style='position:absolute;top:10px;left:10px;background:rgba(0,192,122,.9);border-radius:99px;font-size:.55rem;font-weight:900;padding:2px 8px;color:#fff;letter-spacing:.08em'>COMPLETE ✅</div>"
+             :"<div style='position:absolute;top:10px;left:10px;background:rgba(108,82,227,.9);border-radius:99px;font-size:.55rem;font-weight:900;padding:2px 8px;color:#fff;letter-spacing:.08em'>MISSION</div>")
+      +"<div style='margin-top:1.4rem'>"
+      +"<div style='font-family:Bangers,cursive;font-size:1.05rem;color:#fff;letter-spacing:.03em;line-height:1.2;margin-bottom:.25rem'>"+m.title+"</div>"
+      +"<div style='font-size:.68rem;color:rgba(255,255,255,.45)'>"+m.scriptures.length+" scriptures &middot; "+(done?"Already completed":"Tap to train")+"</div>"
+      +"<div style='font-size:.65rem;font-weight:900;color:#f5c842;margin-top:.3rem'>⚡ "+( done?"Completed":"Earn 25 pts + complete challenge for 15 more")+"</div>"
+      +"</div>";
+    card.addEventListener("click",function(){openMission(m);});
+    card.addEventListener("mouseenter",function(){card.style.transform="scale(1.01)";});
+    card.addEventListener("mouseleave",function(){card.style.transform="";});
+    el.appendChild(card);
+  });
+}
+
+function openMission(m){
+  var completed=APP.kid?APP.kid.completed_missions||[]:[];
+  var done=completed.indexOf(m.id)>=0;
+  var ov=document.createElement("div");
+  ov.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:flex-end;justify-content:center;overflow:hidden";
+  var box=document.createElement("div");
+  box.style.cssText="background:linear-gradient(180deg,#0f0635 0%,#07031a 100%);border-radius:28px 28px 0 0;padding:1.5rem 1.25rem 3rem;width:100%;max-width:540px;max-height:92vh;overflow-y:auto;border-top:2px solid rgba(108,82,227,.3);animation:slideUp .35s";
+
+  // Close
+  var closeWrap=document.createElement("div");closeWrap.style.cssText="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem";
+  var closeBtn=document.createElement("button");closeBtn.textContent="✕ Close";closeBtn.style.cssText="background:rgba(255,255,255,.08);border:none;border-radius:10px;padding:.4rem .85rem;color:rgba(255,255,255,.5);cursor:pointer;font-size:.78rem;font-weight:700";closeBtn.addEventListener("click",function(){ov.remove();});
+  var mLabel=document.createElement("div");mLabel.style.cssText="font-size:.58rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3)";mLabel.textContent="Warrior Training";
+  closeWrap.appendChild(mLabel);closeWrap.appendChild(closeBtn);box.appendChild(closeWrap);
+
+  // Title block
+  var titleBlock=document.createElement("div");
+  titleBlock.style.cssText="background:"+m.bg+";border-radius:20px;padding:1.25rem;margin-bottom:1.1rem;position:relative;overflow:hidden;border:1.5px solid rgba(255,255,255,.1)";
+  titleBlock.innerHTML="<div style='position:absolute;right:12px;top:12px;font-size:3rem;opacity:.15'>"+m.emoji+"</div>"
+    +"<div style='font-family:Bangers,cursive;font-size:1.6rem;color:#fff;letter-spacing:.04em;line-height:1.1;position:relative;z-index:1'>"+m.title+"</div>"
+    +(done?"<div style='margin-top:.5rem;font-size:.75rem;font-weight:900;color:#00C07A'>✅ Mission Complete!</div>":"");
+  box.appendChild(titleBlock);
+
+  // World says / Warrior says
+  var debate=document.createElement("div");debate.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.1rem";
+  var ws=document.createElement("div");ws.style.cssText="background:rgba(255,90,54,.08);border:1.5px solid rgba(255,90,54,.2);border-radius:16px;padding:.85rem";
+  ws.innerHTML="<div style='font-size:.58rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,90,54,.7);margin-bottom:.4rem'>The World Says</div>"
+    +"<div style='font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.5;font-style:italic'>\""+m.worldSays+"\"</div>";
+  var ww=document.createElement("div");ww.style.cssText="background:rgba(0,192,122,.08);border:1.5px solid rgba(0,192,122,.2);border-radius:16px;padding:.85rem";
+  ww.innerHTML="<div style='font-size:.58rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,192,122,.7);margin-bottom:.4rem'>Warriors Know</div>"
+    +"<div style='font-size:.78rem;color:rgba(255,255,255,.8);line-height:1.5'>"+m.warriorSays+"</div>";
+  debate.appendChild(ws);debate.appendChild(ww);box.appendChild(debate);
+
+  // Fact box
+  var fact=document.createElement("div");fact.style.cssText="background:rgba(245,200,66,.06);border:1.5px solid rgba(245,200,66,.2);border-radius:16px;padding:.85rem 1rem;margin-bottom:1.1rem;display:flex;gap:.75rem;align-items:flex-start";
+  fact.innerHTML="<div style='font-size:1.4rem;flex-shrink:0'>💡</div><div><div style='font-size:.6rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,200,66,.6);margin-bottom:.3rem'>Warrior Fact</div><div style='font-size:.82rem;color:rgba(255,255,255,.8);line-height:1.55'>"+m.fact+"</div></div>";
+  box.appendChild(fact);
+
+  // Scriptures
+  var scrHdr=document.createElement("div");scrHdr.style.cssText="font-size:.6rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.6rem";scrHdr.textContent="Key Scriptures";box.appendChild(scrHdr);
+  m.scriptures.forEach(function(s){
+    var sc=document.createElement("div");sc.style.cssText="background:rgba(255,255,255,.04);border-left:3px solid #f5c842;border-radius:0 12px 12px 0;padding:.75rem 1rem;margin-bottom:.5rem";
+    sc.innerHTML="<div style='font-size:.6rem;font-weight:900;color:#f5c842;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem'>"+s.ref+"</div>"
+      +"<div style='font-size:.83rem;color:rgba(255,255,255,.8);line-height:1.6;font-style:italic'>\""+s.text+"\"</div>";
+    box.appendChild(sc);
+  });
+
+  // Memory verse
+  var mem=document.createElement("div");mem.style.cssText="background:rgba(108,82,227,.1);border:1.5px solid rgba(108,82,227,.25);border-radius:16px;padding:.85rem 1rem;margin:.75rem 0;text-align:center";
+  mem.innerHTML="<div style='font-size:.58rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:rgba(108,82,227,.7);margin-bottom:.3rem'>⚡ Memory Verse</div>"
+    +"<div style='font-size:.88rem;color:#fff;font-style:italic;line-height:1.55'>\""+m.memory+"\"</div>";
+  box.appendChild(mem);
+
+  // Challenge
+  var chal=document.createElement("div");chal.style.cssText="background:rgba(255,107,26,.08);border:1.5px solid rgba(255,107,26,.25);border-radius:16px;padding:.85rem 1rem;margin-bottom:1rem;display:flex;gap:.75rem;align-items:flex-start";
+  chal.innerHTML="<div style='font-size:1.4rem;flex-shrink:0'>🎯</div><div><div style='font-size:.6rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,107,26,.7);margin-bottom:.3rem'>Your Challenge (+15 pts)</div><div style='font-size:.85rem;color:rgba(255,255,255,.85);line-height:1.55;font-weight:700'>"+m.challenge+"</div></div>";
+  box.appendChild(chal);
+
+  // Action buttons
+  var btnRow=document.createElement("div");btnRow.style.cssText="display:grid;gap:.55rem";
+  if(!done){
+    var readBtn=document.createElement("button");readBtn.className="btn btn-gold";readBtn.style.fontSize=".95rem";readBtn.textContent="✅ I Read This Mission — Earn 25 pts";
+    readBtn.addEventListener("click",function(){
+      readBtn.disabled=true;readBtn.style.opacity=".5";
+      completeMission(m.id,25,function(){
+        done=true;readBtn.style.display="none";
+        var chalDone=document.createElement("button");chalDone.className="btn";chalDone.style.cssText="background:rgba(255,107,26,.2);border:1.5px solid rgba(255,107,26,.4);color:#FF6B1A;font-size:.95rem;padding:1rem";chalDone.textContent="🎯 I Did the Challenge — Earn 15 More pts";
+        chalDone.addEventListener("click",function(){
+          chalDone.disabled=true;chalDone.style.opacity=".5";
+          completeMission(m.id+"-challenge",15,function(){toast("🔥 Warrior! +15 pts for the challenge!");});
+        });
+        btnRow.appendChild(chalDone);
+        toast("⚔️ Mission logged! +25 pts!",3000);
+      });
+    });
+    btnRow.appendChild(readBtn);
+  } else {
+    var chalDone2=document.createElement("button");chalDone2.className="btn";chalDone2.style.cssText="background:rgba(255,107,26,.2);border:1.5px solid rgba(255,107,26,.4);color:#FF6B1A;font-size:.95rem;padding:1rem";chalDone2.textContent="🎯 Complete the Challenge — Earn 15 pts";
+    chalDone2.addEventListener("click",function(){
+      chalDone2.disabled=true;chalDone2.style.opacity=".5";
+      completeMission(m.id+"-challenge",15,function(){toast("🔥 +15 pts for the challenge!");});
+    });
+    btnRow.appendChild(chalDone2);
+    var alreadyDone=document.createElement("div");alreadyDone.style.cssText="text-align:center;font-size:.75rem;color:rgba(0,192,122,.7);font-weight:900;padding:.5rem";alreadyDone.textContent="✅ Mission complete! Keep training.";
+    btnRow.appendChild(alreadyDone);
+  }
+  box.appendChild(btnRow);
+  ov.appendChild(box);
+  ov.addEventListener("click",function(e){if(e.target===ov)ov.remove();});
+  document.body.appendChild(ov);
+}
+
+function completeMission(key,pts,cb){
+  if(!APP.kid){toast("Log in to save progress!");return;}
+  var missions=APP.kid.completed_missions||[];
+  if(missions.indexOf(key)>=0){toast("Already completed!");return;}
+  missions=missions.concat([key]);
+  sb("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{completed_missions:missions},prefer:"return=representation"})
+    .then(function(){
+      APP.kid.completed_missions=missions;
+      awardPts(pts);
+      if(cb)cb();
+      renderTraining();
+    }).catch(function(){awardPts(pts);if(cb)cb();});
 }
 
 // ════════════════════════════════════════════════
@@ -1948,4 +2243,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781715506-wniormrrwpln -->
+<!-- deploy-1781715956-xjukdxtajbke -->
