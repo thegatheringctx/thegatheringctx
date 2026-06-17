@@ -176,6 +176,9 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 @keyframes ember{0%{transform:translateY(0) scale(.5);opacity:0}15%{opacity:.9}85%{opacity:.4}100%{transform:translateY(-80vh) scale(1.2);opacity:0}}
 .ember{position:fixed;border-radius:50%;pointer-events:none;z-index:0;bottom:0;animation:ember var(--d,9s) linear infinite var(--delay,0s);width:var(--sz,4px);height:var(--sz,4px);background:var(--c,#f5c842);box-shadow:0 0 8px var(--c,#f5c842)}
 .anim-in{animation:slideUp .35s cubic-bezier(.34,1.56,.64,1)}
+.login-particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.lp-emoji{position:absolute;font-size:1.6rem;animation:lpFloat var(--d,8s) ease-in-out infinite var(--delay,0s);opacity:.12;user-select:none}
+@keyframes lpFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:.15}90%{opacity:.1}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
 .admin-tab{flex:1;background:none;border:none;border-radius:10px;padding:.45rem .3rem;font-size:.72rem;font-weight:900;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;white-space:nowrap}
 .admin-tab.active{background:rgba(245,200,66,.15);color:#f5c842}
 .admin-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:.85rem .5rem;text-align:center}
@@ -272,6 +275,7 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
     <button class="btn btn-gold" onclick="doLogin()" style="margin-top:.5rem">&#9889; Log In</button>
     <button class="btn btn-dark" onclick="show('p-signup')" style="margin-top:.5rem">New here? Sign up</button>
   </div>
+  </div><!-- end z-index wrapper -->
 </div>
 
 <!-- ═══ SIGNUP ═══ -->
@@ -475,8 +479,10 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 
     <!-- ORDERS -->
     <div id="atab-orders" style="display:none">
-      <div class="eyebrow" style="margin-bottom:.75rem">Pending Orders</div>
+      <div class="eyebrow" style="margin-bottom:.5rem">Pending Orders</div>
       <div id="adm-orders-list"></div>
+      <div class="eyebrow" style="margin-bottom:.5rem;margin-top:1.25rem">Prayer Wall</div>
+      <div id="adm-prayers-list"><p class="muted">Loading prayers...</p></div>
     </div>
 
     <!-- SETTINGS -->
@@ -497,6 +503,11 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
         </div>
       </div>
 
+      <div class="eyebrow" style="margin-bottom:.75rem">⛪ Today's Check-Ins</div>
+      <div id="checkin-roster" style="margin-bottom:1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:.85rem;max-height:200px;overflow-y:auto">
+        <p class="muted">Click "Load Roster" to see who checked in today.</p>
+      </div>
+      <button onclick="loadCheckinRoster()" style="background:rgba(0,192,122,.15);border:1.5px solid rgba(0,192,122,.3);border-radius:12px;padding:.55rem 1.25rem;color:#00C07A;font-weight:900;font-size:.82rem;cursor:pointer;margin-bottom:1rem;width:100%">Load Today's Roster</button>
       <div class="eyebrow" style="margin-bottom:.75rem">⚡ Game Points</div>
       <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem;margin-bottom:1rem">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:.65rem">
@@ -643,6 +654,24 @@ function getArmor(kid){
 }
 
 // ── SUNDAY CHECK-IN ─────────────────────────────
+function loadCheckinRoster(){
+  var el=document.getElementById("checkin-roster");if(!el)return;
+  el.innerHTML="<p class='muted'>Loading...</p>";
+  var today=new Date().toISOString().split("T")[0];
+  sb("sunday_checkins?select=*&date=eq."+today)
+    .then(function(rows){
+      if(!rows.length){el.innerHTML="<p class='muted'>No check-ins yet today ("+today+").</p>";return;}
+      el.innerHTML="<div style='font-size:.72rem;font-weight:900;color:#f5c842;margin-bottom:.5rem'>"+rows.length+" warrior"+(rows.length!==1?"s":"")+" checked in today</div>";
+      rows.forEach(function(r){
+        var kid=ADM.kids.find(function(k){return k.id===r.kid_id;});
+        var name=kid?kid.first_name+" "+kid.last_name:"Unknown ("+r.kid_id.slice(0,8)+")";
+        var row=document.createElement("div");row.style.cssText="display:flex;justify-content:space-between;font-size:.78rem;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.06)";
+        row.innerHTML="<span>⛪ "+name+"</span><span style='color:#f5c842;font-weight:900'>+"+r.pts_awarded+" pts</span>";
+        el.appendChild(row);
+      });
+    }).catch(function(){el.innerHTML="<p class='muted'>Error loading roster.</p>";});
+}
+
 function updateCheckinBtn(){
   var enabled=CFG.checkin_enabled==="true";
   var banner=document.getElementById("checkin-banner");
@@ -1467,9 +1496,10 @@ function admRenderKidsList(kids){
         +"<div style='font-size:.62rem;color:rgba(255,255,255,.35);margin-top:1px'>PIN: "+k.pin+" &middot; Age: "+(k.age||"?")+" &middot; "+armor.length+"/7 armor</div>"
       +"</div>"
       +"<div style='text-align:right;flex-shrink:0'>"
-        +"<div style='font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842' data-pts-"+k.id+">"+k.points+" pts</div>"
-        +"<div style='font-size:.6rem;color:rgba(255,255,255,.3)'>"+k.age_group==="47"?"Ages 4-7":"Ages 8-12"+"</div>"
+        +"<div style='font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842'>"+k.points+" pts</div>"
+        +"<div style='font-size:.6rem;color:rgba(255,255,255,.3)'>"+(k.age_group==="47"?"Ages 4-7":"Ages 8-12")+"</div>"
       +"</div>";
+    row.addEventListener("click",function(){showKidDetail(k);});
     var aBtn=document.createElement("button");
     aBtn.style.cssText="background:rgba(245,200,66,.15);border:1px solid rgba(245,200,66,.3);border-radius:8px;padding:.3rem .6rem;color:#f5c842;font-size:.62rem;font-weight:900;cursor:pointer;flex-shrink:0;margin-left:.4rem";
     aBtn.textContent="+pts";
@@ -1481,11 +1511,15 @@ function admRenderKidsList(kids){
       document.getElementById("award-selected").style.display="block";
       adminTab("award",document.querySelectorAll(".admin-tab")[1]);
     });
+    var editBtn=document.createElement("button");
+    editBtn.style.cssText="background:rgba(108,82,227,.15);border:1px solid rgba(108,82,227,.3);border-radius:8px;padding:.3rem .55rem;color:#9B7EE8;font-size:.6rem;font-weight:900;cursor:pointer;flex-shrink:0;margin-left:.25rem";
+    editBtn.textContent="✎";
+    editBtn.addEventListener("click",function(e){e.stopPropagation();editKid(k);});
     var delBtn2=document.createElement("button");
     delBtn2.style.cssText="background:rgba(255,90,54,.12);border:1px solid rgba(255,90,54,.25);border-radius:8px;padding:.3rem .55rem;color:#FF5A36;font-size:.6rem;font-weight:900;cursor:pointer;flex-shrink:0;margin-left:.25rem";
     delBtn2.textContent="✕";
     delBtn2.addEventListener("click",function(e){e.stopPropagation();deleteKid(k);});
-    row.appendChild(aBtn);row.appendChild(delBtn2);
+    row.appendChild(aBtn);row.appendChild(editBtn);row.appendChild(delBtn2);
     el.appendChild(row);
   });
 }
@@ -1589,6 +1623,7 @@ function adminTab(tab,btn){
   document.querySelectorAll(".admin-tab").forEach(function(b){b.classList.remove("active");});
   if(btn)btn.classList.add("active");
   if(tab==="settings")admLoadSettings();
+  if(tab==="orders"){admRenderOrders();admRenderPrayers();}
 }
 
 function toggleCheckin(){
@@ -1676,6 +1711,120 @@ function addPrize(){
     }).catch(function(e){toast("Error: "+(e.message||"try again"));});
 }
 
+// ── KID DETAIL PANEL ─────────────────────────────
+function showKidDetail(kid){
+  var ov=document.createElement("div");
+  ov.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:0";
+  var box=document.createElement("div");
+  box.style.cssText="background:linear-gradient(180deg,#0f0635,#07031a);border-radius:24px 24px 0 0;border-top:2px solid rgba(245,200,66,.2);padding:1.35rem 1.25rem 2rem;width:100%;max-width:480px;max-height:80vh;overflow-y:auto;animation:slideUp .3s";
+  var closeBtn=document.createElement("button");closeBtn.textContent="✕";closeBtn.style.cssText="float:right;background:rgba(255,255,255,.1);border:none;border-radius:50%;width:32px;height:32px;color:rgba(255,255,255,.6);cursor:pointer;font-size:1rem";closeBtn.addEventListener("click",function(){ov.remove();});
+  var armor=getArmor(kid);
+  var headerHTML="<div style='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem'>"
+    +"<div><div style='font-family:Bangers,cursive;font-size:1.6rem;color:#fff;letter-spacing:.04em'>"+kid.first_name+" "+kid.last_name+"</div>"
+    +"<div style='font-size:.7rem;color:rgba(255,255,255,.4)'>PIN: "+kid.pin+" &middot; Age: "+(kid.age||"?")+" &middot; "+armor.length+"/7 armor</div></div>"
+    +"</div>"
+    +"<div style='background:rgba(245,200,66,.1);border:1.5px solid rgba(245,200,66,.25);border-radius:16px;padding:.85rem 1.25rem;text-align:center;margin-bottom:1rem'>"
+    +"<div style='font-family:Bangers,cursive;font-size:2.5rem;color:#f5c842;line-height:1'>"+kid.points+"</div>"
+    +"<div style='font-size:.6rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35)'>Warrior Points</div></div>"
+    +"<div style='display:flex;gap:.5rem;margin-bottom:1rem'>"
+    +"<div id='kd-award-btn' style='flex:1;background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.3);border-radius:12px;padding:.65rem;text-align:center;cursor:pointer;font-weight:900;font-size:.82rem;color:#f5c842'>⚡ Award Pts</div>"
+    +"<div id='kd-edit-btn' style='flex:1;background:rgba(108,82,227,.15);border:1.5px solid rgba(108,82,227,.3);border-radius:12px;padding:.65rem;text-align:center;cursor:pointer;font-weight:900;font-size:.82rem;color:#9B7EE8'>✎ Edit</div>"
+    +"</div>"
+    +"<div id='kd-award-form' style='display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:.85rem;margin-bottom:.75rem'>"
+    +"<div style='display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem'>"
+    +"<input id='kd-pts' type='number' placeholder='Points' min='1'>"
+    +"<select id='kd-cat' style='background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:.7rem .75rem;color:#fff;font-size:.85rem'>"
+    +"<option value='attendance'>Attendance</option><option value='memorization'>Memory</option>"
+    +"<option value='devo'>Devotional</option><option value='game'>Game</option><option value='bonus'>Bonus</option>"
+    +"</select></div>"
+    +"<button onclick='doKdAward()' class='btn btn-gold' style='font-size:.85rem;padding:.65rem'>Award</button></div>"
+    +"<div class='eyebrow' style='margin-bottom:.5rem'>Point History</div>"
+    +"<div id='kd-txns'><p class='muted'>Loading...</p></div>";
+  box.innerHTML=headerHTML;
+  box.prepend(closeBtn);
+  ov.appendChild(box);document.body.appendChild(ov);
+  // Wire buttons
+  document.getElementById("kd-award-btn").addEventListener("click",function(){
+    var f=document.getElementById("kd-award-form");f.style.display=f.style.display==="none"?"block":"none";
+  });
+  document.getElementById("kd-edit-btn").addEventListener("click",function(){ov.remove();editKid(kid);});
+  // Award from detail
+  window.doKdAward=function(){
+    var pts=parseInt((document.getElementById("kd-pts").value||"0"));
+    var cat=document.getElementById("kd-cat").value;
+    if(!pts||pts<1){toast("Enter a valid amount!");return;}
+    var np=(kid.points||0)+pts;
+    sb("kids?id=eq."+kid.id,{method:"PATCH",body:{points:np},prefer:"return=representation"})
+      .then(function(){
+        sb("transactions",{method:"POST",body:{kid_id:kid.id,points:pts,category:cat,assigned_by:"admin",created_at:Date.now()},prefer:"return=representation"}).catch(function(){});
+        kid.points=np;
+        var idx2=ADM.kids.findIndex(function(k2){return k2.id===kid.id;});if(idx2>=0)ADM.kids[idx2].points=np;
+        box.querySelector("[style*='font-size:2.5rem']").textContent=np;
+        document.getElementById("kd-award-form").style.display="none";
+        document.getElementById("kd-pts").value="";
+        admRefreshStats();toast("✅ +"+pts+" pts to "+kid.first_name+"!");
+        loadKdTxns(kid.id);
+      }).catch(function(){toast("Error.");});
+  };
+  loadKdTxns(kid.id);
+}
+
+function loadKdTxns(kidId){
+  var el=document.getElementById("kd-txns");if(!el)return;
+  sb("transactions?select=*&kid_id=eq."+kidId+"&order=created_at.desc&limit=15")
+    .then(function(rows){
+      if(!rows.length){el.innerHTML="<p class='muted'>No transactions yet.</p>";return;}
+      el.innerHTML="";
+      rows.forEach(function(t){
+        var row=document.createElement("div");row.style.cssText="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.78rem";
+        var catIcons={attendance:"⛪",memorization:"📖",devo:"🙏",game:"⚔️",bonus:"⭐",witness:"✝️"};
+        var icon=catIcons[t.category]||"⚡";
+        var lbl=document.createElement("div");lbl.style.cssText="color:rgba(255,255,255,.7)";lbl.textContent=icon+" "+t.category+(t.note?" — "+t.note:"");
+        var pts=document.createElement("div");pts.style.cssText="font-family:Bangers,cursive;font-size:.95rem;color:#f5c842;font-weight:900";pts.textContent="+"+t.points+" pts";
+        var date=document.createElement("div");date.style.cssText="font-size:.6rem;color:rgba(255,255,255,.25);margin-top:1px";date.textContent=new Date(t.created_at||Date.now()).toLocaleDateString();
+        var left=document.createElement("div");left.appendChild(lbl);left.appendChild(date);
+        row.appendChild(left);row.appendChild(pts);el.appendChild(row);
+      });
+    }).catch(function(){el.innerHTML="<p class='muted'>Error loading history.</p>";});
+}
+
+// ── EDIT KID ─────────────────────────────────────
+function editKid(kid){
+  var ov=document.createElement("div");
+  ov.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.25rem";
+  var box=document.createElement("div");
+  box.style.cssText="background:#0f0635;border:2px solid rgba(245,200,66,.25);border-radius:24px;padding:1.5rem;width:100%;max-width:380px;animation:slideUp .3s";
+  box.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.4rem;color:#f5c842;margin-bottom:1rem'>Edit Warrior</div>"
+    +"<div class='eyebrow' style='margin-bottom:.3rem'>First Name</div><input id='ek-first' type='text' value='"+kid.first_name+"' style='margin-bottom:.65rem'>"
+    +"<div class='eyebrow' style='margin-bottom:.3rem'>Last Name</div><input id='ek-last' type='text' value='"+kid.last_name+"' style='margin-bottom:.65rem'>"
+    +"<div style='display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.65rem'>"
+      +"<div><div class='eyebrow' style='margin-bottom:.3rem'>Age</div><input id='ek-age' type='number' value='"+(kid.age||"")+"'></div>"
+      +"<div><div class='eyebrow' style='margin-bottom:.3rem'>PIN</div><input id='ek-pin' type='text' value='"+kid.pin+"' maxlength='4'></div>"
+    +"</div>"
+    +"<div style='display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.35rem'>"
+      +"<div id='ek-cancel' style='background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:12px;padding:.75rem;text-align:center;cursor:pointer;font-weight:700;font-size:.85rem'>Cancel</div>"
+      +"<div id='ek-save' style='background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border-radius:12px;padding:.75rem;text-align:center;cursor:pointer;font-family:Bangers,cursive;font-size:1rem;letter-spacing:.06em'>Save</div>"
+    +"</div>"
+    +"<div id='ek-err' class='error'></div>";
+  ov.appendChild(box);document.body.appendChild(ov);
+  document.getElementById("ek-cancel").addEventListener("click",function(){ov.remove();});
+  document.getElementById("ek-save").addEventListener("click",function(){
+    var first=(document.getElementById("ek-first").value||"").trim();
+    var last=(document.getElementById("ek-last").value||"").trim();
+    var age=parseInt(document.getElementById("ek-age").value||"0");
+    var pin=(document.getElementById("ek-pin").value||"").trim();
+    var err=document.getElementById("ek-err");err.textContent="";
+    if(!first||!last){err.textContent="Name required.";return;}
+    if(pin.length!==4||isNaN(pin)){err.textContent="PIN must be 4 digits.";return;}
+    var ageGroup=age<=7?"47":"812";
+    sb("kids?id=eq."+kid.id,{method:"PATCH",body:{first_name:first,last_name:last,age:age,age_group:ageGroup,pin:pin},prefer:"return=representation"})
+      .then(function(){
+        kid.first_name=first;kid.last_name=last;kid.age=age;kid.age_group=ageGroup;kid.pin=pin;
+        admRenderKids();ov.remove();toast("✅ "+first+" updated!");
+      }).catch(function(){err.textContent="Error saving. Try again.";});
+  });
+}
+
 // ── DELETE KID ────────────────────────────────────
 function deleteKid(kid){
   if(!confirm("Delete "+kid.first_name+" "+kid.last_name+"? This cannot be undone."))return;
@@ -1685,6 +1834,38 @@ function deleteKid(kid){
       admRefreshStats();admRenderKids();
       toast("Deleted "+kid.first_name,2500);
     }).catch(function(){toast("Error deleting.");});
+}
+
+function admRenderPrayers(){
+  var el=document.getElementById("adm-prayers-list");if(!el)return;
+  el.innerHTML="<p class='muted'>Loading prayers...</p>";
+  sb("prayer_wall?select=*&order=created_at.desc")
+    .then(function(rows){
+      el.innerHTML="";
+      if(!rows.length){el.innerHTML="<p class='muted'>No prayers submitted yet.</p>";return;}
+      rows.forEach(function(p){
+        var row=document.createElement("div");row.style.cssText="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:.75rem 1rem;margin-bottom:.4rem";
+        var top=document.createElement("div");top.style.cssText="display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;margin-bottom:.35rem";
+        var txt=document.createElement("div");txt.style.cssText="font-size:.85rem;color:rgba(255,255,255,.85);line-height:1.5;flex:1";txt.textContent=p.text;
+        var btns=document.createElement("div");btns.style.cssText="display:flex;gap:.35rem;flex-shrink:0";
+        var approveBtn=document.createElement("button");approveBtn.style.cssText="background:rgba(0,192,122,.15);border:1px solid rgba(0,192,122,.3);border-radius:8px;padding:.25rem .55rem;color:#00C07A;font-size:.62rem;font-weight:900;cursor:pointer";
+        approveBtn.textContent=p.approved?"✅ Live":"Approve";
+        if(!p.approved){approveBtn.addEventListener("click",function(){
+          sb("prayer_wall?id=eq."+p.id,{method:"PATCH",body:{approved:true},prefer:"return=representation"})
+            .then(function(){p.approved=true;approveBtn.textContent="✅ Live";toast("Prayer approved!");}).catch(function(){});
+        });}
+        var delPBtn=document.createElement("button");delPBtn.style.cssText="background:rgba(255,90,54,.12);border:1px solid rgba(255,90,54,.25);border-radius:8px;padding:.25rem .55rem;color:#FF5A36;font-size:.62rem;font-weight:900;cursor:pointer";
+        delPBtn.textContent="✕";
+        delPBtn.addEventListener("click",function(){
+          sb("prayer_wall?id=eq."+p.id,{method:"DELETE"})
+            .then(function(){row.remove();toast("Prayer removed.");}).catch(function(){});
+        });
+        btns.appendChild(approveBtn);btns.appendChild(delPBtn);top.appendChild(txt);top.appendChild(btns);
+        var meta=document.createElement("div");meta.style.cssText="font-size:.62rem;color:rgba(255,255,255,.3)";
+        meta.textContent="🙏 "+p.name+" · "+p.prayers+" prayed";
+        row.appendChild(top);row.appendChild(meta);el.appendChild(row);
+      });
+    }).catch(function(){el.innerHTML="<p class='muted'>Error loading prayers.</p>";});
 }
 
 function admRenderStore(){
@@ -1747,6 +1928,17 @@ window.addEventListener("DOMContentLoaded",function(){
     if(!sn||!APP.kid)return;
     sn.style.display=window.innerWidth>=900?"flex":"none";
   });
+  // Login page particles
+  var loginParts=document.getElementById("login-particles");
+  if(loginParts){
+    var lpEmojis=["⚔️","🛡️","🪖","📖","✝️","🏆","⚡","🙏","🌟","🔥"];
+    for(var li=0;li<20;li++){
+      var lpe=document.createElement("div");lpe.className="lp-emoji";
+      lpe.textContent=lpEmojis[li%lpEmojis.length];
+      lpe.style.cssText="left:"+(Math.random()*100)+"%;--d:"+(Math.random()*10+6)+"s;--delay:-"+(Math.random()*10)+"s";
+      loginParts.appendChild(lpe);
+    }
+  }
   for(var i=0;i<12;i++){
     var e=document.createElement("div");e.className="ember";
     e.style.cssText="--sz:"+(Math.random()*3+2)+"px;--d:"+(Math.random()*6+6)+"s;--delay:-"+(Math.random()*10)+"s;--c:"+(Math.random()>.4?"#f5c842":Math.random()>.5?"#FF6B1A":"#ff4500")+";left:"+(Math.random()*90+5)+"%";
@@ -1756,4 +1948,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781715068-xmzsyqbnusuf -->
+<!-- deploy-1781715506-wniormrrwpln -->
