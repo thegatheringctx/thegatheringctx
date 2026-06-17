@@ -46,8 +46,9 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 .back-btn{background:none;border:none;color:rgba(255,255,255,.45);cursor:pointer;font-size:.85rem;font-weight:700;padding:.5rem 0;margin-bottom:1rem;display:flex;align-items:center;gap:4px}
 /* LANDING */
 #p-land{padding:0;max-width:100%!important}
-.wl-bg{position:fixed;top:0;left:0;right:0;height:62vh;background-size:cover;background-position:center top;z-index:0}
-.wl-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65%;background:linear-gradient(to bottom,transparent,#07031a)}
+.wl-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:0 1.25rem 2rem}
+.wl-bg{position:fixed;top:0;left:0;right:0;height:62vh;background-size:cover;background-position:center top;z-index:0;pointer-events:none}
+.wl-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65%;background:linear-gradient(to bottom,transparent,#07031a);pointer-events:none}
 .wl-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:0 1.25rem 2rem}
 .wl-spacer{height:42vh}
 @media(min-width:600px){.wl-spacer{height:50vh;}.wl-title{font-size:clamp(72px,10vw,120px);}}
@@ -2758,4 +2759,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781723485-gylyfwoomlvy -->
+<!-- deploy-1781724089-ozdhxnwxwdzo -->
