@@ -21,6 +21,7 @@ html,body{height:100%;background:#07031a;font-family:'Exo 2','Segoe UI',Arial,sa
   #p-dash{padding:0;}
 }
 @media(min-width:900px){
+  #p-admin{display:block!important;max-width:900px;margin:0 auto;}
   #p-dash{display:grid;grid-template-columns:320px 1fr;grid-template-rows:auto;min-height:100vh;padding:0;}
   .dash-sticky{grid-column:1/-1;margin:0;border-radius:0;}
   #dash-sidebar{padding:1.25rem;border-right:1px solid rgba(255,255,255,.08);min-height:calc(100vh - 54px);}
@@ -383,7 +384,7 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 </div>
 
 <!-- ═══ ADMIN DASHBOARD ═══ -->
-<div id="p-admin" class="page">
+<div id="p-admin" class="page" style="display:none;padding:1.25rem">
   <div class="dash-sticky">
     <div style="font-family:'Bangers',cursive;font-size:1rem;color:#f5c842;letter-spacing:.08em">&#128737; ADMIN PANEL</div>
     <button onclick="show('p-land')" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:.72rem;font-weight:700">Exit</button>
@@ -1185,16 +1186,17 @@ function doAdminLogin(){
       rows.forEach(function(k,i){
         var row=document.createElement("div");row.className="kid-admin-row";
         var medal=["🥇","🥈","🥉"][i]||"";
+        var ptsSpan=document.createElement("span");ptsSpan.style.cssText="font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842;flex-shrink:0";ptsSpan.textContent=k.points+" pts";
         row.innerHTML="<div style='font-size:1.1rem;width:28px'>"+medal+"</div>"
-          +"<div style='flex:1'><div style='font-weight:900;font-size:.85rem'>"+k.first_name+" "+k.last_name+"</div><div style='font-size:.65rem;color:rgba(255,255,255,.35)'>PIN: "+k.pin+" &middot; Age: "+(k.age||"?")+"</div></div>"
-          +"<div style='font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842;flex-shrink:0'>"+k.points+" pts</div>";
+          +"<div style='flex:1'><div style='font-weight:900;font-size:.85rem'>"+k.first_name+" "+k.last_name+"</div><div style='font-size:.65rem;color:rgba(255,255,255,.35)'>PIN: "+k.pin+" &middot; Age: "+(k.age||"?")+"</div></div>";
+        row.appendChild(ptsSpan);
         var awardBtn=document.createElement("button");awardBtn.style.cssText="background:rgba(245,200,66,.15);border:1px solid rgba(245,200,66,.3);border-radius:8px;padding:.25rem .55rem;color:#f5c842;font-size:.65rem;font-weight:900;cursor:pointer;flex-shrink:0";awardBtn.textContent="+pts";
         awardBtn.addEventListener("click",function(){
           var amt=parseInt(prompt("Award points to "+k.first_name+"? Enter amount:"));
           if(!amt||isNaN(amt)||amt<=0)return;
           var np=(k.points||0)+amt;
           sb("kids?id=eq."+k.id,{method:"PATCH",body:{points:np},prefer:"return=representation"})
-            .then(function(){k.points=np;row.querySelector("[style*=Bangers]").textContent=np+" pts";toast("✅ Awarded "+amt+" pts to "+k.first_name);})
+            .then(function(){k.points=np;ptsSpan.textContent=np+" pts";toast("✅ Awarded "+amt+" pts to "+k.first_name);})
             .catch(function(){toast("Error awarding points.");});
         });
         row.appendChild(awardBtn);list.appendChild(row);
@@ -1243,4 +1245,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781713031-oafmkcwyjody -->
+<!-- deploy-1781713493-tamfosuoyakr -->
