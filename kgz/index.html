@@ -179,6 +179,8 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 @keyframes ember{0%{transform:translateY(0) scale(.5);opacity:0}15%{opacity:.9}85%{opacity:.4}100%{transform:translateY(-80vh) scale(1.2);opacity:0}}
 .ember{position:fixed;border-radius:50%;pointer-events:none;z-index:0;bottom:0;animation:ember var(--d,9s) linear infinite var(--delay,0s);width:var(--sz,4px);height:var(--sz,4px);background:var(--c,#f5c842);box-shadow:0 0 8px var(--c,#f5c842)}
 .anim-in{animation:slideUp .35s cubic-bezier(.34,1.56,.64,1)}
+textarea{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:.75rem 1rem;color:#fff;width:100%;font-size:.9rem;outline:none;transition:border-color .2s;resize:vertical}
+textarea:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,66,.1)}
 .login-particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .lp-emoji{position:absolute;font-size:1.6rem;animation:lpFloat var(--d,8s) ease-in-out infinite var(--delay,0s);opacity:.12;user-select:none}
 @keyframes lpFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:.15}90%{opacity:.1}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
@@ -439,11 +441,49 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 
     <!-- ADMIN TABS -->
     <div style="display:flex;gap:.35rem;margin-bottom:1rem;background:rgba(255,255,255,.04);border-radius:14px;padding:.3rem;border:1px solid rgba(255,255,255,.07)">
-      <button class="admin-tab active" onclick="adminTab('kids',this)">👧 Warriors</button>
+      <button class="admin-tab active" onclick="adminTab('overview',this)">📊 Today</button>
+      <button class="admin-tab" onclick="adminTab('kids',this)">👧 Warriors</button>
       <button class="admin-tab" onclick="adminTab('award',this)">⚡ Points</button>
       <button class="admin-tab" onclick="adminTab('orders',this)">📦 Orders</button>
       <button class="admin-tab" onclick="adminTab('store',this)">🎁 Store</button>
+      <button class="admin-tab" onclick="adminTab('announce',this)">📣 Announce</button>
       <button class="admin-tab" onclick="adminTab('settings',this)">⚙️ Config</button>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div id="atab-overview">
+      <div class="eyebrow" style="margin-bottom:.6rem">⛪ Sunday Check-In</div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:1rem;margin-bottom:.85rem">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem">
+          <div>
+            <div id="ov-checkin-status" style="font-family:Bangers,cursive;font-size:1.4rem;letter-spacing:.05em">⚪ Check-In Off</div>
+            <div style="font-size:.68rem;color:rgba(255,255,255,.4);margin-top:2px">Tap to toggle on Sundays</div>
+          </div>
+          <button id="ov-toggle-btn" onclick="toggleCheckin()" style="border:none;border-radius:12px;padding:.6rem 1.25rem;font-family:Bangers,cursive;font-size:1.1rem;letter-spacing:.06em;cursor:pointer;transition:all .2s">Toggle</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+          <div style="font-size:.75rem;font-weight:900;color:rgba(255,255,255,.55)">Today's check-ins</div>
+          <button onclick="loadCheckinRoster();document.getElementById('ov-roster').style.display='block'" style="background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.25);border-radius:8px;padding:.3rem .75rem;color:#f5c842;font-size:.65rem;font-weight:900;cursor:pointer">Load Roster</button>
+        </div>
+        <div id="ov-roster" style="display:none;max-height:180px;overflow-y:auto"></div>
+      </div>
+
+      <div class="eyebrow" style="margin-bottom:.6rem">📊 Quick Stats</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+        <div class="admin-stat"><div class="stat-num" id="ov-stat-top">—</div><div class="stat-lbl">Top Warrior</div></div>
+        <div class="admin-stat"><div class="stat-num" id="ov-stat-avg">—</div><div class="stat-lbl">Avg Points</div></div>
+        <div class="admin-stat"><div class="stat-num" id="ov-stat-zero">—</div><div class="stat-lbl">At 0 Points</div></div>
+        <div class="admin-stat"><div class="stat-num" id="ov-stat-armor">—</div><div class="stat-lbl">Full Armor</div></div>
+      </div>
+
+      <div class="eyebrow" style="margin-bottom:.6rem">📋 Export Roster</div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:1rem;margin-bottom:.85rem">
+        <p style="font-size:.78rem;color:rgba(255,255,255,.55);margin-bottom:.65rem;line-height:1.5">Download a CSV of all warriors — name, points, armor count, age group — for board reports.</p>
+        <button onclick="exportCSV()" style="background:rgba(0,192,122,.15);border:1.5px solid rgba(0,192,122,.3);border-radius:12px;padding:.65rem 1.25rem;color:#00C07A;font-weight:900;font-size:.82rem;cursor:pointer;width:100%">⬇️ Download CSV Report</button>
+      </div>
+
+      <div class="eyebrow" style="margin-bottom:.6rem">⚠️ Pending Orders</div>
+      <div id="ov-pending-orders" style="margin-bottom:.85rem"></div>
     </div>
 
     <!-- WARRIORS LIST -->
@@ -496,7 +536,10 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 
     <!-- ORDERS -->
     <div id="atab-orders" style="display:none">
-      <div class="eyebrow" style="margin-bottom:.5rem">Pending Orders</div>
+      <div style="display:flex;gap:.5rem;margin-bottom:.65rem">
+        <input id="order-search" type="text" placeholder="Search orders by name or item..." style="flex:1;font-size:.82rem;padding:.6rem .85rem" oninput="admSearchOrders()">
+      </div>
+      <div class="eyebrow" style="margin-bottom:.5rem">Orders</div>
       <div id="adm-orders-list"></div>
       <div class="eyebrow" style="margin-bottom:.5rem;margin-top:1.25rem">Prayer Wall</div>
       <div id="adm-prayers-list"><p class="muted">Loading prayers...</p></div>
@@ -553,6 +596,27 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
           <button onclick="addPrize()" class="btn btn-gold" style="font-size:.9rem;padding:.7rem">Add Prize</button>
         </div>
       </div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <div id="atab-announce" style="display:none">
+      <div class="eyebrow" style="margin-bottom:.6rem">📣 Send Announcement to All Warriors</div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:1rem;margin-bottom:.85rem">
+        <p style="font-size:.78rem;color:rgba(255,255,255,.5);margin-bottom:.75rem;line-height:1.5">All warriors will see this the next time they open the app. Keep it short and exciting.</p>
+        <input id="ann-title" type="text" placeholder="Title (e.g. Big Announcement!)" style="margin-bottom:.6rem">
+        <textarea id="ann-body" placeholder="Your message..." style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:.75rem 1rem;color:#fff;width:100%;font-size:.9rem;outline:none;resize:vertical;min-height:90px;font-family:inherit;margin-bottom:.6rem"></textarea>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+          <select id="ann-type" style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:.7rem .75rem;color:#fff;font-size:.85rem">
+            <option value="info">📢 Info</option>
+            <option value="event">📅 Event</option>
+            <option value="challenge">⚔️ Challenge</option>
+            <option value="praise">🏆 Praise Report</option>
+          </select>
+          <button onclick="sendAnnouncement()" class="btn btn-gold" style="font-size:.9rem;padding:.7rem">Send to All</button>
+        </div>
+      </div>
+      <div class="eyebrow" style="margin-bottom:.5rem">Recent Announcements</div>
+      <div id="ann-list"><p class="muted">Loading...</p></div>
     </div>
 
     <!-- STORE MANAGEMENT -->
@@ -748,6 +812,8 @@ function openDash(kid){
   var dci=document.getElementById("dash-checkin-btn");
   if(dci)dci.style.display=CFG.checkin_enabled==="true"?"block":"none";
   show("p-dash");
+  // Check for active announcements
+  loadKidAnnouncements();
   // Sidebar shown/hidden by CSS @media rule
   dashTab("devos",document.querySelector(".tab-btn"));
   loadStore();loadRanks();
@@ -1790,6 +1856,35 @@ function completeMission(key,pts,cb){
 }
 
 // ════════════════════════════════════════════════
+//  KID ANNOUNCEMENTS
+// ════════════════════════════════════════════════
+function loadKidAnnouncements(){
+  sb("announcements?select=*&active=eq.true&order=created_at.desc&limit=3")
+    .then(function(rows){
+      if(!rows||!rows.length)return;
+      var typeIcons={info:"📢",event:"📅",challenge:"⚔️",praise:"🏆"};
+      // Show each as a dismissable banner on the hero area
+      var container=document.getElementById("dash-announcements");
+      if(!container){
+        container=document.createElement("div");container.id="dash-announcements";container.style.cssText="margin-bottom:.75rem";
+        var heroCard=document.querySelector(".hero-card");
+        if(heroCard&&heroCard.parentNode)heroCard.parentNode.insertBefore(container,heroCard);
+      }
+      container.innerHTML="";
+      rows.forEach(function(ann){
+        var icon=typeIcons[ann.type]||"📢";
+        var card=document.createElement("div");
+        card.style.cssText="background:linear-gradient(135deg,rgba(108,82,227,.15),rgba(64,10,96,.1));border:1.5px solid rgba(108,82,227,.3);border-radius:18px;padding:.85rem 1rem;margin-bottom:.5rem;position:relative;animation:slideUp .35s";
+        card.innerHTML="<button onclick='this.parentElement.remove()' style='position:absolute;top:8px;right:8px;background:rgba(255,255,255,.1);border:none;border-radius:50%;width:22px;height:22px;color:rgba(255,255,255,.5);cursor:pointer;font-size:.75rem;display:flex;align-items:center;justify-content:center'>✕</button>"
+          +"<div style='font-size:.6rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(108,82,227,.7);margin-bottom:.2rem'>"+icon+" Announcement</div>"
+          +"<div style='font-weight:900;font-size:.88rem;color:#fff;margin-bottom:.2rem'>"+ann.title+"</div>"
+          +"<div style='font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.5'>"+ann.body+"</div>";
+        container.appendChild(card);
+      });
+    }).catch(function(){});
+}
+
+// ════════════════════════════════════════════════
 //  PRAYER WALL
 // ════════════════════════════════════════════════
 function renderPrayer(){
@@ -1913,6 +2008,8 @@ function doAdminLogin(){
     admRenderKids();
     admRenderOrders();
     admRenderStore();
+    // Start on overview tab
+    adminTab("overview", document.querySelector(".admin-tab"));
   }).catch(function(e){err.textContent="Error: "+(e.message||"try again");});
 }
 
@@ -1977,11 +2074,16 @@ function admRenderKidsList(kids){
     editBtn.style.cssText="background:rgba(108,82,227,.15);border:1px solid rgba(108,82,227,.3);border-radius:8px;padding:.3rem .55rem;color:#9B7EE8;font-size:.6rem;font-weight:900;cursor:pointer;flex-shrink:0;margin-left:.25rem";
     editBtn.textContent="✎";
     editBtn.addEventListener("click",function(e){e.stopPropagation();editKid(k);});
+    var resetBtn=document.createElement("button");
+    resetBtn.style.cssText="background:rgba(255,200,0,.1);border:1px solid rgba(255,200,0,.25);border-radius:8px;padding:.3rem .55rem;color:#ffc800;font-size:.6rem;font-weight:900;cursor:pointer;flex-shrink:0;margin-left:.25rem";
+    resetBtn.textContent="0";
+    resetBtn.title="Reset points to 0";
+    resetBtn.addEventListener("click",function(e){e.stopPropagation();resetKidPoints(k);});
     var delBtn2=document.createElement("button");
     delBtn2.style.cssText="background:rgba(255,90,54,.12);border:1px solid rgba(255,90,54,.25);border-radius:8px;padding:.3rem .55rem;color:#FF5A36;font-size:.6rem;font-weight:900;cursor:pointer;flex-shrink:0;margin-left:.25rem";
     delBtn2.textContent="✕";
     delBtn2.addEventListener("click",function(e){e.stopPropagation();deleteKid(k);});
-    row.appendChild(aBtn);row.appendChild(editBtn);row.appendChild(delBtn2);
+    row.appendChild(aBtn);row.appendChild(editBtn);row.appendChild(resetBtn);row.appendChild(delBtn2);
     el.appendChild(row);
   });
 }
@@ -2079,13 +2181,15 @@ function admRenderOrders(){
 }
 
 function adminTab(tab,btn){
-  ["kids","award","orders","store","settings"].forEach(function(t){
+  ["overview","kids","award","orders","store","announce","settings"].forEach(function(t){
     var el=document.getElementById("atab-"+t);if(el)el.style.display=t===tab?"block":"none";
   });
   document.querySelectorAll(".admin-tab").forEach(function(b){b.classList.remove("active");});
   if(btn)btn.classList.add("active");
+  if(tab==="overview")admLoadOverview();
   if(tab==="settings")admLoadSettings();
   if(tab==="orders"){admRenderOrders();admRenderPrayers();}
+  if(tab==="announce")loadAnnouncements();
 }
 
 function toggleCheckin(){
@@ -2330,6 +2434,164 @@ function admRenderPrayers(){
     }).catch(function(){el.innerHTML="<p class='muted'>Error loading prayers.</p>";});
 }
 
+
+// ── OVERVIEW TAB ─────────────────────────────────
+function admLoadOverview(){
+  // Check-in toggle display
+  var on=CFG.checkin_enabled==="true";
+  var statusEl=document.getElementById("ov-checkin-status");
+  var togBtn=document.getElementById("ov-toggle-btn");
+  if(statusEl)statusEl.textContent=on?"🟢 Check-In LIVE":"⚪ Check-In Off";
+  if(togBtn){togBtn.textContent=on?"Turn OFF":"Turn ON";togBtn.style.background=on?"rgba(255,90,54,.3)":"rgba(0,192,122,.3)";togBtn.style.color=on?"#ff8a8a":"#00C07A";}
+
+  // Quick stats
+  var kids=ADM.kids;
+  if(kids.length){
+    var top=kids[0];
+    var avg=Math.round(kids.reduce(function(s,k){return s+(k.points||0);},0)/kids.length);
+    var zeros=kids.filter(function(k){return !k.points||k.points===0;}).length;
+    var fullArmor=kids.filter(function(k){return getArmor(k).length===7;}).length;
+    var el;
+    el=document.getElementById("ov-stat-top");if(el)el.textContent=top.first_name;
+    el=document.getElementById("ov-stat-avg");if(el)el.textContent=avg+" pts";
+    el=document.getElementById("ov-stat-zero");if(el)el.textContent=zeros;
+    el=document.getElementById("ov-stat-armor");if(el)el.textContent=fullArmor;
+  }
+
+  // Wire roster div to ov-roster
+  var ovRoster=document.getElementById("ov-roster");
+  if(ovRoster){
+    var today=new Date().toISOString().split("T")[0];
+    sb("sunday_checkins?select=*&date=eq."+today)
+      .then(function(rows){
+        if(!rows.length){ovRoster.innerHTML="<p class='muted'>No check-ins yet today.</p>";return;}
+        ovRoster.innerHTML="<div style='font-size:.72rem;font-weight:900;color:#f5c842;margin-bottom:.4rem'>"+rows.length+" warrior"+(rows.length!==1?"s":"")+" checked in</div>";
+        rows.forEach(function(r){
+          var kid=ADM.kids.find(function(k){return k.id===r.kid_id;});
+          var name=kid?kid.first_name+" "+kid.last_name:"Unknown";
+          var row=document.createElement("div");row.style.cssText="display:flex;justify-content:space-between;font-size:.78rem;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.05)";
+          row.innerHTML="<span>⛪ "+name+"</span><span style='color:#f5c842;font-weight:900'>+"+r.pts_awarded+" pts</span>";
+          ovRoster.appendChild(row);
+        });
+      }).catch(function(){});
+  }
+
+  // Pending orders quick view
+  var ovOrders=document.getElementById("ov-pending-orders");
+  if(ovOrders){
+    var pending=ADM.orders.filter(function(o){return o.status==="pending";});
+    if(!pending.length){ovOrders.innerHTML="<p class='muted'>No pending orders ✅</p>";return;}
+    ovOrders.innerHTML="";
+    pending.slice(0,5).forEach(function(o){
+      var kid=ADM.kids.find(function(k){return k.id===o.kid_id;});
+      var row=document.createElement("div");row.style.cssText="display:flex;align-items:center;justify-content:space-between;background:rgba(255,200,0,.07);border:1px solid rgba(255,200,0,.2);border-radius:12px;padding:.65rem 1rem;margin-bottom:.4rem";
+      row.innerHTML="<div><div style='font-weight:900;font-size:.82rem'>"+o.item_name+"</div><div style='font-size:.65rem;color:rgba(255,255,255,.4)'>"+(kid?kid.first_name+" "+kid.last_name:"Unknown")+"</div></div>";
+      var fulfBtn=document.createElement("button");fulfBtn.style.cssText="background:rgba(0,192,122,.2);border:1px solid rgba(0,192,122,.35);border-radius:8px;padding:.3rem .7rem;color:#00C07A;font-size:.65rem;font-weight:900;cursor:pointer;flex-shrink:0";fulfBtn.textContent="Fulfill ✅";
+      fulfBtn.addEventListener("click",function(){
+        sb("orders?id=eq."+o.id,{method:"PATCH",body:{status:"fulfilled"},prefer:"return=representation"})
+          .then(function(){o.status="fulfilled";row.remove();admRefreshStats();toast("✅ Fulfilled!");}).catch(function(){});
+      });
+      row.appendChild(fulfBtn);ovOrders.appendChild(row);
+    });
+    if(pending.length>5){var more=document.createElement("p");more.className="muted";more.textContent="+"+(pending.length-5)+" more — see Orders tab";ovOrders.appendChild(more);}
+  }
+}
+
+// ── EXPORT CSV ────────────────────────────────────
+function exportCSV(){
+  if(!ADM.kids.length){toast("No warriors to export.");return;}
+  var rows=["Name,Points,Age Group,Age,Armor Pieces,PIN,Joined"];
+  ADM.kids.forEach(function(k){
+    var armor=getArmor(k).length;
+    var joined=k.joined_at?new Date(k.joined_at).toLocaleDateString():"Unknown";
+    rows.push([
+      (k.first_name||"")+" "+(k.last_name||""),
+      k.points||0,
+      k.age_group==="47"?"Ages 4-7":"Ages 8-12",
+      k.age||"",
+      armor+"/7",
+      k.pin||"",
+      joined
+    ].join(","));
+  });
+  var csv=rows.join("
+");
+  var blob=new Blob([csv],{type:"text/csv"});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement("a");a.href=url;a.download="warrior-zone-report-"+new Date().toISOString().split("T")[0]+".csv";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  toast("📊 CSV downloaded!",2500);
+}
+
+// ── RESET KID POINTS ─────────────────────────────
+function resetKidPoints(kid){
+  if(!confirm("Reset "+kid.first_name+"'s points to 0? This cannot be undone."))return;
+  sb("kids?id=eq."+kid.id,{method:"PATCH",body:{points:0},prefer:"return=representation"})
+    .then(function(){
+      kid.points=0;admRenderKids();admRefreshStats();
+      toast("Points reset for "+kid.first_name,2500);
+    }).catch(function(){toast("Error resetting points.");});
+}
+
+// ── ANNOUNCEMENTS ────────────────────────────────
+function sendAnnouncement(){
+  var title=(document.getElementById("ann-title").value||"").trim();
+  var body=(document.getElementById("ann-body").value||"").trim();
+  var type=document.getElementById("ann-type").value;
+  if(!title||!body){toast("Enter a title and message!");return;}
+  sb("announcements",{method:"POST",body:{title:title,body:body,type:type,active:true,created_at:Date.now()},prefer:"return=representation"})
+    .then(function(){
+      document.getElementById("ann-title").value="";
+      document.getElementById("ann-body").value="";
+      toast("📣 Announcement sent to all warriors!",3000);
+      loadAnnouncements();
+    }).catch(function(e){toast("Error: "+(e.message||"try again"));});
+}
+
+function loadAnnouncements(){
+  var el=document.getElementById("ann-list");if(!el)return;
+  el.innerHTML="<p class='muted'>Loading...</p>";
+  sb("announcements?select=*&order=created_at.desc&limit=10")
+    .then(function(rows){
+      if(!rows.length){el.innerHTML="<p class='muted'>No announcements yet.</p>";return;}
+      el.innerHTML="";
+      rows.forEach(function(a){
+        var row=document.createElement("div");row.style.cssText="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:.85rem 1rem;margin-bottom:.45rem";
+        var typeIcons={info:"📢",event:"📅",challenge:"⚔️",praise:"🏆"};
+        var icon=typeIcons[a.type]||"📢";
+        row.innerHTML="<div style='display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;margin-bottom:.3rem'>"
+          +"<div style='font-weight:900;font-size:.85rem'>"+icon+" "+a.title+"</div>"
+          +"<div style='display:flex;gap:.35rem;flex-shrink:0'>"
+          +"<button onclick='toggleAnn(""+a.id+"","+(!a.active)+",this)' style='background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:.25rem .55rem;color:rgba(255,255,255,.6);font-size:.6rem;font-weight:900;cursor:pointer'>"+(a.active?"Hide":"Show")+"</button>"
+          +"<button onclick='deleteAnn(""+a.id+"",this)' style='background:rgba(255,90,54,.12);border:1px solid rgba(255,90,54,.25);border-radius:8px;padding:.25rem .55rem;color:#FF5A36;font-size:.6rem;font-weight:900;cursor:pointer'>✕</button>"
+          +"</div></div>"
+          +"<div style='font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.45;margin-bottom:.25rem'>"+a.body+"</div>"
+          +"<div style='font-size:.62rem;color:rgba(255,255,255,.3)'>"+new Date(a.created_at||Date.now()).toLocaleDateString()+" &middot; "+(a.active?"🟢 Active":"⚪ Hidden")+"</div>";
+        el.appendChild(row);
+      });
+    }).catch(function(){el.innerHTML="<p class='muted'>Error loading.</p>";});
+}
+
+function toggleAnn(id,active,btn){
+  sb("announcements?id=eq."+id,{method:"PATCH",body:{active:active},prefer:"return=representation"})
+    .then(function(){btn.textContent=active?"Hide":"Show";toast(active?"Announcement shown":"Announcement hidden");loadAnnouncements();})
+    .catch(function(){toast("Error.");});
+}
+function deleteAnn(id,btn){
+  if(!confirm("Delete this announcement?"))return;
+  sb("announcements?id=eq."+id,{method:"DELETE"})
+    .then(function(){btn.closest("[style]").remove();toast("Deleted.");}).catch(function(){toast("Error.");});
+}
+
+// ── ORDER SEARCH ─────────────────────────────────
+function admSearchOrders(){
+  var q=(document.getElementById("order-search").value||"").trim().toUpperCase();
+  var rows=document.querySelectorAll(".order-row");
+  rows.forEach(function(r){
+    r.style.display=!q||r.textContent.toUpperCase().includes(q)?"":"none";
+  });
+}
+
 function admRenderStore(){
   var el=document.getElementById("adm-store-list");if(!el)return;
   if(!APP.storeItems.length){el.innerHTML="<p class='muted'>No store items.</p>";return;}
@@ -2401,4 +2663,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781717352-kmhpsryumkxh -->
+<!-- deploy-1781717681-hcurhvteflju -->
