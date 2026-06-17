@@ -14,9 +14,8 @@ html,body{height:100%;background:#07031a;font-family:'Exo 2','Segoe UI',Arial,sa
 .page.active{display:block}
 /* Responsive layout */
 
-/* landing globals */
 .wl-content{position:relative;z-index:5}
-#p-land .btn,.btn-gold,.btn-dark{position:relative;z-index:6;pointer-events:auto}
+#p-land .btn{position:relative;z-index:6}
 @media(min-width:600px){
   #p-land .wl-content{max-width:700px;margin:0 auto;}
   #p-klogin>*,#p-signup>*,#p-plogin>*,#p-alogin>*{max-width:480px;margin-left:auto;margin-right:auto;}
@@ -26,7 +25,7 @@ html,body{height:100%;background:#07031a;font-family:'Exo 2','Segoe UI',Arial,sa
 }
 @media(min-width:900px){
   #p-admin.active{display:block!important;max-width:900px;margin:0 auto;}
-  #p-dash.active{display:grid!important;grid-template-columns:320px 1fr;grid-template-rows:auto;min-height:100vh;padding:0;}
+  #p-dash.active{display:grid;grid-template-columns:320px 1fr;grid-template-rows:auto;min-height:100vh;padding:0;}
   .dash-sticky{grid-column:1/-1;margin:0;border-radius:0;}
   #dash-sidebar{padding:1.25rem;border-right:1px solid rgba(255,255,255,.08);min-height:calc(100vh - 54px);}
   #dash-main{padding:1.25rem;overflow-y:auto;}
@@ -875,7 +874,7 @@ function renderDevos(){
   var completed=APP.kid?APP.kid.completed_devos||[]:[];
   var doneCount=completed.length,total=DEVOS.length;
   var hdr=document.createElement("div");hdr.style.cssText="margin-bottom:1rem";
-  hdr.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1'>Daily<br><span style='color:#f5c842'>Devotionals</span></div><div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>Read. Reflect. Grow. Earn points every day.</div>";
+  hdr.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1'>Daily<br><span style="color:#f5c842">Devotionals</span></div><div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>Read. Reflect. Grow. Earn points every day.</div>";
   el.appendChild(hdr);
   var progPct=Math.round((doneCount/total)*100);
   var progCard=document.createElement("div");
@@ -964,7 +963,7 @@ function renderGames(gameId){
     var hdr=document.createElement("div");hdr.className="games-header";
     var totalGPts=cfgN("quiz_pts_per_q")*10+cfgN("tf_pts_per_q")*10+cfgN("scramble_pts")+cfgN("match_pts")+cfgN("fitb_pts_per_q")*7+cfgN("wheel_pts");
     hdr.innerHTML="<div style='font-size:.58rem;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.3rem'>Choose Your Weapon</div>"
-      +"<div style='font-family:Bangers,cursive;font-size:2.4rem;color:#fff;letter-spacing:.05em;line-height:.9;text-shadow:0 0 40px rgba(108,82,227,.5)'>BATTLE<br><span style=\'color:#f5c842\'>ARENA</span></div>"
+      +"<div style='font-family:Bangers,cursive;font-size:2.4rem;color:#fff;letter-spacing:.05em;line-height:.9;text-shadow:0 0 40px rgba(108,82,227,.5)'>BATTLE<br><span style="color:#f5c842">ARENA</span></div>"
       +"<div style='display:flex;align-items:center;justify-content:center;gap:.65rem;margin-top:.5rem'>"
       +"<div style='font-size:.68rem;color:rgba(255,255,255,.4)'>6 games</div>"
       +"<div style='width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2)'></div>"
@@ -1409,7 +1408,7 @@ function renderStore(){
   var myPts=APP.kid?APP.kid.points||0:0;
   el.innerHTML="";
   var hdr=document.createElement("div");hdr.style.cssText="margin-bottom:1rem";
-  hdr.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1'>Warrior<br><span style=\'color:#f5c842\'>Store</span></div><div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>Earn points. Trade them for real prizes.</div>";
+  hdr.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1'>Warrior<br><span style="color:#f5c842">Store</span></div><div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>Earn points. Trade them for real prizes.</div>";
   el.appendChild(hdr);
   var ptsBanner=document.createElement("div");
   ptsBanner.style.cssText="background:rgba(245,200,66,.1);border:1.5px solid rgba(245,200,66,.25);border-radius:16px;padding:.75rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.75rem";
@@ -1452,7 +1451,7 @@ function redeemItem(id,pts,name,canAfford){
     +"<div style='font-size:3rem;margin-bottom:.5rem'>🎁</div>"
     +"<div style='font-family:Bangers,cursive;font-size:1.6rem;color:#fff;letter-spacing:.04em;margin-bottom:.25rem'>Redeem This Prize?</div>"
     +"<div style='font-size:.95rem;font-weight:900;color:#f5c842;margin-bottom:.35rem'>"+name+"</div>"
-    +"<div style='font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.55'>This costs <strong style=\'color:#f5c842\'>"+pts+" points</strong>.<br>A leader will bring your prize on Sunday!</div></div>"
+    +"<div style='font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.55'>This costs <strong style="color:#f5c842">"+pts+" points</strong>.<br>A leader will bring your prize on Sunday!</div></div>"
     +"<div style='background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:.85rem 1rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center'>"
     +"<div style='font-size:.78rem;color:rgba(255,255,255,.55)'>Balance after:</div>"
     +"<div style='font-family:Bangers,cursive;font-size:1.4rem;color:#f5c842'>"+((APP.kid.points||0)-pts)+" pts</div></div>"
@@ -1474,7 +1473,7 @@ function redeemItem(id,pts,name,canAfford){
         var cel=document.createElement("div");cel.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;animation:fadeIn .3s";
         cel.innerHTML="<div style='font-size:5rem;margin-bottom:.5rem'>🎉</div>"
           +"<div style='font-family:Bangers,cursive;font-size:2.4rem;color:#f5c842;letter-spacing:.06em;text-shadow:0 0 30px rgba(245,200,66,.5)'>REDEEMED!</div>"
-          +"<div style='font-size:.88rem;color:rgba(255,255,255,.7);margin-top:.5rem;text-align:center;padding:0 2rem;line-height:1.65'>A leader will bring<br><strong style=\'color:#fff\'>"+name+"</strong><br>for you on Sunday!</div>";
+          +"<div style='font-size:.88rem;color:rgba(255,255,255,.7);margin-top:.5rem;text-align:center;padding:0 2rem;line-height:1.65'>A leader will bring<br><strong style="color:#fff">"+name+"</strong><br>for you on Sunday!</div>";
         document.body.appendChild(cel);setTimeout(function(){cel.remove();},2800);
         toast("🎉 "+name+" redeemed!",4000);
       }).catch(function(){toast("Error. Try again.");ov.remove();});
@@ -1493,7 +1492,7 @@ function renderRanks(){
   var el=document.getElementById("tab-ranks");if(!el)return;
   el.innerHTML="";
   var hdr=document.createElement("div");hdr.style.cssText="margin-bottom:1rem";
-  hdr.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1'>Hall of<br><span style=\'color:#f5c842\'>Victory</span></div><div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>Who is walking in the most armor?</div>";
+  hdr.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1'>Hall of<br><span style="color:#f5c842">Victory</span></div><div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>Who is walking in the most armor?</div>";
   el.appendChild(hdr);
   if(!APP.kids.length){var ld=document.createElement("p");ld.className="muted";ld.textContent="Loading warriors...";el.appendChild(ld);loadRanks();return;}
   var myRank=-1;
@@ -2762,4 +2761,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781726302-itowavmiesef -->
+<!-- deploy-1781726724-kiwaperuzonb -->
