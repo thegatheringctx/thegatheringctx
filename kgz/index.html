@@ -90,7 +90,8 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
 .stat-num{font-family:'Bangers',cursive;font-size:1.5rem;color:#f5c842;line-height:1}
 .stat-lbl{font-size:.52rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:2px}
 /* TABS */
-.tab-bar{display:flex;gap:.25rem;margin-bottom:1rem;background:rgba(255,255,255,.04);border-radius:16px;padding:.3rem;border:1px solid rgba(255,255,255,.07)}
+.tab-bar{display:flex;gap:.25rem;margin-bottom:1rem;background:rgba(255,255,255,.04);border-radius:16px;padding:.3rem;border:1px solid rgba(255,255,255,.07);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
 .tab-btn{flex:1;background:none;border:none;border-radius:12px;padding:.45rem .2rem;font-size:.6rem;font-weight:900;color:rgba(255,255,255,.35);cursor:pointer;white-space:nowrap;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:1px;letter-spacing:.04em;text-transform:uppercase}
 .tab-btn .ti{font-size:1.15rem;margin-bottom:1px}
 .tab-btn.active{background:rgba(245,200,66,.15);color:#f5c842;box-shadow:0 2px 10px rgba(0,0,0,.4)}
@@ -350,12 +351,14 @@ input:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,200,6
   </div>
   </div><!-- end sidebar -->
   <div id="dash-main">
-  <div class="tab-bar">
+  <div class="tab-bar" id="mob-tab-bar" style="flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none">
     <button class="tab-btn active" onclick="dashTab('devos',this)"><span class="ti">&#128214;</span>Devos</button>
     <button class="tab-btn" onclick="dashTab('games',this)"><span class="ti">&#9876;&#65039;</span>Battle</button>
     <button class="tab-btn" onclick="dashTab('warrior',this)"><span class="ti">&#128737;&#65039;</span>Armor</button>
     <button class="tab-btn" onclick="dashTab('store',this)"><span class="ti">&#127873;</span>Store</button>
     <button class="tab-btn" onclick="dashTab('ranks',this)"><span class="ti">&#127942;</span>Ranks</button>
+    <button class="tab-btn" onclick="dashTab('prayer',this)"><span class="ti">&#128591;</span>Prayer</button>
+    <button class="tab-btn" onclick="dashTab('training',this)"><span class="ti">&#9876;&#65039;</span>Training</button>
   </div>
   <div id="tab-devos"></div>
   <div id="tab-games" style="display:none"></div>
@@ -683,7 +686,7 @@ function updateCheckinBtn(){
   if(ptsDsp)ptsDsp.textContent=CFG.checkin_pts||"10";
 }
 function doCheckin(){
-  if(!APP.kid){show("p-entry");toast("Log in first to check in!");return;}
+  if(!APP.kid){toast("Log in first to check in! Tap ⚔️ I'M A WARRIOR");show("p-klogin");return;}
   var today=new Date().toISOString().split("T")[0];
   // Check if already checked in today
   sb("sunday_checkins?kid_id=eq."+APP.kid.id+"&date=eq."+today)
@@ -1849,8 +1852,20 @@ function doParentLogin(){
     .then(function(rows){
       err.textContent="";document.getElementById("pl-pin").value="";
       if(!rows||!rows.length){err.textContent="No kids found with that PIN.";return;}
-      APP.kid=rows[0];openDash(rows[0]);
-      toast("Welcome! Showing "+rows[0].first_name,3000);
+      if(rows.length===1){APP.kid=rows[0];openDash(rows[0]);toast("Welcome! Showing "+rows[0].first_name,3000);return;}
+      // Multiple kids — show picker
+      err.style.color="#f5c842";err.textContent="Pick your warrior:";
+      var picker=document.getElementById("pl-picker");
+      if(!picker){picker=document.createElement("div");picker.id="pl-picker";picker.style.cssText="margin-top:.65rem;display:flex;flex-direction:column;gap:.5rem";
+      document.getElementById("pl-pin").parentNode.appendChild(picker);}
+      picker.innerHTML="";
+      rows.forEach(function(k){
+        var btn=document.createElement("div");
+        btn.style.cssText="background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:14px;padding:.85rem 1rem;cursor:pointer;font-weight:900;font-size:.9rem;transition:all .2s;text-align:center";
+        btn.textContent="⚔️ "+k.first_name+" "+k.last_name+" ("+k.points+" pts)";
+        btn.addEventListener("click",function(){APP.kid=k;openDash(k);toast("Welcome, "+k.first_name+"!",3000);});
+        picker.appendChild(btn);
+      });
     }).catch(function(){err.textContent="Error. Try again.";});
 }
 
@@ -2371,4 +2386,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781716363-vcrrrhlcxskf -->
+<!-- deploy-1781716934-abjpgydlnone -->
