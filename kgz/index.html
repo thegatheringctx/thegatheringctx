@@ -10,8 +10,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;background:#07031a;font-family:'Exo 2','Segoe UI',Arial,sans-serif;color:#fff;overflow-x:hidden}
-.page{display:none!important;min-height:100vh;width:100%;padding:1.25rem}
-.page.active{display:block!important}
+.page{display:none;min-height:100vh;width:100%;padding:1.25rem}
+.page.active{display:block}
 /* Responsive layout */
 
 /* landing globals */
@@ -26,7 +26,7 @@ html,body{height:100%;background:#07031a;font-family:'Exo 2','Segoe UI',Arial,sa
 }
 @media(min-width:900px){
   #p-admin.active{display:block!important;max-width:900px;margin:0 auto;}
-  #p-dash.active{display:grid;grid-template-columns:320px 1fr;grid-template-rows:auto;min-height:100vh;padding:0;}
+  #p-dash.active{display:grid!important;grid-template-columns:320px 1fr;grid-template-rows:auto;min-height:100vh;padding:0;}
   .dash-sticky{grid-column:1/-1;margin:0;border-radius:0;}
   #dash-sidebar{padding:1.25rem;border-right:1px solid rgba(255,255,255,.08);min-height:calc(100vh - 54px);}
   #dash-main{padding:1.25rem;overflow-y:auto;}
@@ -232,7 +232,7 @@ textarea:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,20
 </div>
 
 <!-- ═══ ENTRY ═══ -->
-<div id="p-entry" class="page">
+<div id="p-entry" class="page" style="display:none">
   <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:2rem">
     <div style="font-size:2.2rem;margin-bottom:.5rem">&#9876;&#65039;</div>
@@ -259,7 +259,7 @@ textarea:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,20
 </div>
 
 <!-- ═══ KID LOGIN ═══ -->
-<div id="p-klogin" class="page">
+<div id="p-klogin" class="page" style="display:none">
   <button class="back-btn" onclick="show('p-entry')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:1.5rem">
     <div style="font-size:2.2rem;margin-bottom:.35rem">&#128274;</div>
@@ -288,7 +288,7 @@ textarea:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,20
 </div>
 
 <!-- ═══ SIGNUP ═══ -->
-<div id="p-signup" class="page">
+<div id="p-signup" class="page" style="display:none">
   <button class="back-btn" onclick="show('p-entry')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:1.5rem">
     <div style="font-size:2.2rem;margin-bottom:.35rem">&#9876;&#65039;</div>
@@ -307,7 +307,7 @@ textarea:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,20
 </div>
 
 <!-- ═══ DASHBOARD ═══ -->
-<div id="p-dash" class="page">
+<div id="p-dash" class="page" style="display:none">
   <div class="dash-sticky" style="grid-column:1/-1">
     <div style="font-family:'Bangers',cursive;font-size:1rem;color:#f5c842;letter-spacing:.08em">&#9876;&#65039; WARRIOR ZONE</div>
     <div style="display:flex;align-items:center;gap:.5rem">
@@ -380,7 +380,7 @@ textarea:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,20
 </div><!-- end p-dash -->
 
 <!-- ═══ HOW IT WORKS ═══ -->
-<div id="p-howto" class="page">
+<div id="p-howto" class="page" style="display:none">
   <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
   <div style="font-family:'Bangers',cursive;font-size:1.9rem;color:#f5c842;margin-bottom:1.25rem;letter-spacing:.04em">How It Works</div>
   <div class="how-step"><div class="how-num">1</div><div><div style="font-weight:900;margin-bottom:.25rem">Create your Warrior account</div><p class="muted">Sign up with your name and a 4-digit family PIN. Takes 30 seconds.</p></div></div>
@@ -391,7 +391,7 @@ textarea:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,20
 </div>
 
 <!-- ═══ PARENT LOGIN ═══ -->
-<div id="p-plogin" class="page">
+<div id="p-plogin" class="page" style="display:none">
   <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:1.5rem">
     <div style="font-size:2.2rem;margin-bottom:.35rem">&#128106;</div>
@@ -406,7 +406,7 @@ textarea:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,20
 </div>
 
 <!-- ═══ ADMIN LOGIN ═══ -->
-<div id="p-alogin" class="page">
+<div id="p-alogin" class="page" style="display:none">
   <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
   <div style="text-align:center;margin-bottom:1.5rem">
     <div style="font-size:2.2rem;margin-bottom:.35rem">&#128737;&#65039;</div>
@@ -2762,4 +2762,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781725437-lbfiictzaxte -->
+<!-- deploy-1781725636-hqcpukeucgql -->
