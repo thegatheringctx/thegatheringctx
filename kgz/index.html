@@ -27,6 +27,7 @@ html,body{height:100%;background:#07031a;font-family:'Exo 2','Segoe UI',Arial,sa
   #p-admin.active{display:block!important;max-width:900px;margin:0 auto;}
   #p-dash.active{display:grid;grid-template-columns:320px 1fr;grid-template-rows:auto;min-height:100vh;padding:0;}
   .dash-sticky{grid-column:1/-1;margin:0;border-radius:0;}
+  #dash-main{padding:1.25rem;overflow-y:auto}
   #dash-sidebar{padding:1.25rem;border-right:1px solid rgba(255,255,255,.08);min-height:calc(100vh - 54px);}
   #dash-main{padding:1.25rem;overflow-y:auto;}
   .tab-bar{display:none;}
@@ -368,6 +369,8 @@ textarea:focus{border-color:rgba(245,200,66,.7);box-shadow:0 0 0 3px rgba(245,20
     <button class="tab-btn" onclick="dashTab('prayer',this)"><span class="ti">&#128591;</span>Prayer</button>
     <button class="tab-btn" onclick="dashTab('training',this)"><span class="ti">&#9876;&#65039;</span>Training</button>
   </div>
+</div><!-- end dash-sidebar -->
+  <div id="dash-main" style="min-width:0;overflow-y:auto">
   <div id="tab-devos"></div>
   <div id="tab-games" style="display:none"></div>
   <div id="tab-warrior" style="display:none"></div>
@@ -2760,4 +2763,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781727851-qptrtwiw -->
+<!-- deploy-1781728164-kmlskvul -->
