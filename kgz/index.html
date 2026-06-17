@@ -2612,8 +2612,7 @@ function exportCSV(){
       joined
     ].join(","));
   });
-  var csv=rows.join("
-");
+  var csv=rows.join("\n");
   var blob=new Blob([csv],{type:"text/csv"});
   var url=URL.createObjectURL(blob);
   var a=document.createElement("a");a.href=url;a.download="warrior-zone-report-"+new Date().toISOString().split("T")[0]+".csv";
@@ -2761,4 +2760,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781727147-ejosvypi -->
+<!-- deploy-1781727244-ipwhedrs -->
