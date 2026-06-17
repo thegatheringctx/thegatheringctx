@@ -741,7 +741,8 @@ async function handleConnect(e){
   const btn=e.target.querySelector('button');
   btn.textContent='Sending...';
   try{
-    await fetch('/api/subscribe',{--method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,type:'new-here'})});
+    await fetch('/api/subscribe',{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,type:'new-here'})});
     btn.textContent='You are in.';
     e.target.querySelector('input').value='';
   }catch(err){btn.textContent='Try again';}
