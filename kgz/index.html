@@ -875,7 +875,7 @@ function renderDevos(){
   var completed=APP.kid?APP.kid.completed_devos||[]:[];
   var doneCount=completed.length,total=DEVOS.length;
   var hdr=document.createElement("div");hdr.style.cssText="margin-bottom:1rem";
-  hdr.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1'>Daily<br><span style="color:#f5c842">Devotionals</span></div><div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>Read. Reflect. Grow. Earn points every day.</div>";
+  hdr.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1'>Daily<br><span style='color:#f5c842'>Devotionals</span></div><div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>Read. Reflect. Grow. Earn points every day.</div>";
   el.appendChild(hdr);
   var progPct=Math.round((doneCount/total)*100);
   var progCard=document.createElement("div");
@@ -2762,4 +2762,4 @@ window.addEventListener("DOMContentLoaded",function(){
 </script>
 </body>
 </html>
-<!-- deploy-1781726148-jdeffcbyppxq -->
+<!-- deploy-1781726175-vdvpevsskviq -->
