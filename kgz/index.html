@@ -891,7 +891,7 @@ function renderDevos(){
     +"<div style='height:100%;background:linear-gradient(90deg,#6C52E3,#f5c842);border-radius:99px;width:"+progPct+"%'></div></div></div>";
   el.appendChild(progCard);
   DEVOS.forEach(function(d,i){
-    var done=completed.indexOf(String(i))>=0;
+    var done=completed.indexOf(String(d&&d.id?d.id:i))>=0;
     var card=document.createElement("div");
     card.style.cssText="border-radius:20px;margin-bottom:.65rem;overflow:hidden;cursor:pointer;transition:border-color .2s;border:1.5px solid "+(done?"rgba(0,192,122,.3)":"rgba(255,255,255,.08)");
     var topBar=document.createElement("div");topBar.style.cssText="height:4px;background:"+(done?"linear-gradient(90deg,#00C07A,#00E5A0)":"linear-gradient(90deg,rgba(108,82,227,.6),rgba(245,200,66,.4))");
@@ -936,10 +936,10 @@ function openDevo(i){
 function markDevo(i,evt){
   if(!APP.kid)return;
   var completed=APP.kid.completed_devos||[];
-  if(completed.indexOf(String(i))>=0){toast("Already completed this one!");return;}
+  var _mk=String(DEVOS[i]&&DEVOS[i].id?DEVOS[i].id:i);if(completed.indexOf(_mk)>=0){toast("Already completed this one!");return;}
   var pts=cfgN("devo_pts")||10;
   // Update completed_devos array in Supabase
-  completed=completed.concat([String(i)]);
+  completed=completed.concat([_mk]);
   sb("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{completed_devos:completed},prefer:"return=representation"})
     .then(function(){
       APP.kid.completed_devos=completed;
