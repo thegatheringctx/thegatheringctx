@@ -26,7 +26,7 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
 .tab.active{background:var(--gold);color:var(--dark)}
 .tab:not(.active){background:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
 
-/* ── Trivia ─────────────────────────────────────── */
+/* Trivia */
 .trivia-header{text-align:center;margin-bottom:1.25rem}
 .trivia-score{font-family:'Fredoka One',cursive;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.3rem}
 .trivia-score span{color:var(--gold)}
@@ -52,7 +52,7 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
 .done-msg{font-size:.95rem;font-weight:700;margin-bottom:1.25rem}
 .replay-btn{padding:.65rem 1.4rem;border:none;border-radius:99px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;font-family:'Fredoka One',cursive;font-size:.9rem;cursor:pointer}
 
-/* ── Scramble ────────────────────────────────────── */
+/* Scramble */
 .scramble-word{text-align:center;margin:1rem 0}
 .scrambled{font-family:'Fredoka One',cursive;font-size:2.2rem;color:var(--purple);letter-spacing:.25em;margin-bottom:.5rem}
 .scramble-hint{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:1rem}
@@ -77,7 +77,7 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
 </style>
 </head>
 <body>
-<div class="demo-note">&#128269; Preview — this is exactly how it will look in the Kids Zone app</div>
+<div class="demo-note">&#128269; Preview, this is exactly how it will look in the Kids Zone app</div>
 
 <div class="tab-row">
   <button class="tab active" onclick="showTab('trivia')">&#9889; Bible Quiz</button>
@@ -121,12 +121,12 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
 const QUESTIONS = [
   {q:"What sound came from heaven on the day of Pentecost?",ref:"Acts 2:2",choices:["Mighty rushing wind","Thunder and lightning","A trumpet blast","A choir of angels"],correct:0,explain:"A sound like a mighty rushing wind filled the entire house where they were sitting."},
   {q:"What appeared and rested on each person on Pentecost?",ref:"Acts 2:3",choices:["Doves","Tongues of fire","White robes","Bright clouds"],correct:1,explain:"Divided tongues of fire appeared and rested on each one of them."},
-  {q:"The prophet Joel predicted the Holy Spirit being poured out. About how many years before Pentecost did he write it?",ref:"Joel 2:28",choices:["100 years","500 years","800 years","2,000 years"],correct:2,explain:"Joel wrote around 830 BC — about 800 years before Pentecost happened!"},
-  {q:"How many people were saved on the day of Pentecost?",ref:"Acts 2:41",choices:["120","500","1,000","3,000"],correct:3,explain:"About 3,000 people were added that day — the same number that died at Sinai when the Law came. The Spirit gives life!"},
-  {q:"What title did Jesus give the Holy Spirit in John 14:16?",ref:"John 14:16",choices:["The Comforter","The Helper / Paraclete","The Fire","The Witness"],correct:1,explain:"Jesus called Him the Parakletos — the One called alongside you. Not from a distance. Right beside you."},
-  {q:"Paul says in 1 Corinthians 3:16 that you are God's what?",ref:"1 Cor 3:16",choices:["Servant","Student","Temple","Friend"],correct:2,explain:"You are God's temple — the Spirit of God lives in you. The address changed at Pentecost!"},
-  {q:"What did Jesus tell the disciples to do before the Holy Spirit came?",ref:"Acts 1:4",choices:["Pray and fast for 40 days","Wait in Jerusalem","Go to every nation","Baptize everyone"],correct:1,explain:"He told them to wait in Jerusalem for the promise of the Father — the Holy Spirit."},
-  {q:"What does the Greek word 'dunamis' (Acts 1:8) mean?",ref:"Acts 1:8",choices:["Wisdom","Love","Power","Peace"],correct:2,explain:"Dunamis means power — the root of our word 'dynamite.' The Spirit brings explosive kingdom power!"}
+  {q:"The prophet Joel predicted the Holy Spirit being poured out. About how many years before Pentecost did he write it?",ref:"Joel 2:28",choices:["100 years","500 years","800 years","2,000 years"],correct:2,explain:"Joel wrote around 830 BC, about 800 years before Pentecost happened!"},
+  {q:"How many people were saved on the day of Pentecost?",ref:"Acts 2:41",choices:["120","500","1,000","3,000"],correct:3,explain:"About 3,000 people were added that day, the same number that died at Sinai when the Law came. The Spirit gives life!"},
+  {q:"What title did Jesus give the Holy Spirit in John 14:16?",ref:"John 14:16",choices:["The Comforter","The Helper / Paraclete","The Fire","The Witness"],correct:1,explain:"Jesus called Him the Parakletos, the One called alongside you. Not from a distance. Right beside you."},
+  {q:"Paul says in 1 Corinthians 3:16 that you are God's what?",ref:"1 Cor 3:16",choices:["Servant","Student","Temple","Friend"],correct:2,explain:"You are God's temple, the Spirit of God lives in you. The address changed at Pentecost!"},
+  {q:"What did Jesus tell the disciples to do before the Holy Spirit came?",ref:"Acts 1:4",choices:["Pray and fast for 40 days","Wait in Jerusalem","Go to every nation","Baptize everyone"],correct:1,explain:"He told them to wait in Jerusalem for the promise of the Father, the Holy Spirit."},
+  {q:"What does the Greek word 'dunamis' (Acts 1:8) mean?",ref:"Acts 1:8",choices:["Wisdom","Love","Power","Peace"],correct:2,explain:"Dunamis means power, the root of our word 'dynamite.' The Spirit brings explosive kingdom power!"}
 ];
 
 const WORDS = [
@@ -140,7 +140,7 @@ const WORDS = [
   {word:"FIRE",scrambled:"RIFE",hint:"Appeared as tongues of ___"}
 ];
 
-// ── TRIVIA ─────────────────────────────────────────
+// TRIVIA
 let qIdx=0, score=0, answered=false;
 
 function startTrivia(){
@@ -193,13 +193,13 @@ function nextQuestion(){
     document.getElementById('done-msg').textContent=
       pct===100?'🏆 Perfect score! You are a Pentecost pro!':
       pct>=80?'🔥 On fire! You know your stuff!':
-      pct>=60?'⚡ Good work — keep reading your devos!':
-      '📖 Keep digging — God\'s Word has treasure!';
+      pct>=60?'⚡ Good work, keep reading your devos!':
+      '📖 Keep digging, God\'s Word has treasure!';
     document.getElementById('trivia-done').classList.add('show');
   } else { renderQuestion(); }
 }
 
-// ── SCRAMBLE ───────────────────────────────────────
+// SCRAMBLE
 let scIdx=0,guessLetters=[],sourceTiles=[],scDone=[];
 
 function startScramble(){
@@ -278,7 +278,7 @@ function checkScramble(){
     scDone.push(scIdx);
     setTimeout(advanceScramble,1200);
   } else {
-    fb.innerHTML='<span style="color:#ff8a8a">Not quite — try again!</span>';
+    fb.innerHTML='<span style="color:#ff8a8a">Not quite, try again!</span>';
   }
 }
 
@@ -294,7 +294,7 @@ function advanceScramble(){
   } else { renderScramble(); }
 }
 
-// ── TABS ───────────────────────────────────────────
+// TABS
 function showTab(id){
   document.getElementById('tab-trivia').style.display=id==='trivia'?'':'none';
   document.getElementById('tab-scramble').style.display=id==='scramble'?'':'none';
