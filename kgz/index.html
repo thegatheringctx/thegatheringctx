@@ -737,11 +737,11 @@ function doLogout(){APP.kid=null;show("p-land");}
 
 // ── ARMOR HELPER ─────────────────────────────────
 function getArmor(kid){
-  var pts=kid.points||0,u=[];
-  if(pts>=10)u.push("belt");if(pts>=50)u.push("breastplate");
-  if(pts>=100)u.push("boots");if(pts>=200)u.push("shield");
-  if(pts>=350)u.push("helmet");if(pts>=500)u.push("sword");
-  if(pts>=750)u.push("full");
+  var pts=(kid.lifetime_points!=null?kid.lifetime_points:(kid.points||0)),u=[];
+  if(pts>=25)u.push("belt");if(pts>=100)u.push("breastplate");
+  if(pts>=250)u.push("boots");if(pts>=500)u.push("shield");
+  if(pts>=800)u.push("helmet");if(pts>=1200)u.push("sword");
+  if(pts>=1800)u.push("full");
   return u;
 }
 
@@ -791,9 +791,10 @@ function awardPts(pts,evt,cat){
   if(!APP.kid||pts<=0)return;
   var np=(APP.kid.points||0)+pts;
   if(cat){sb("transactions",{method:"POST",body:{id:"t"+Date.now()+"_"+Math.floor(Math.random()*100000),kid_id:APP.kid.id,points:pts,category:cat,note:"auto",created_at:Date.now()}});}
-  sb("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{points:np},prefer:"return=representation"})
+  var nl=(APP.kid.lifetime_points!=null?APP.kid.lifetime_points:(APP.kid.points||0))+pts;
+  sb("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{points:np,lifetime_points:nl},prefer:"return=representation"})
     .then(function(){
-      APP.kid.points=np;
+      APP.kid.points=np;APP.kid.lifetime_points=nl;
       var dp=document.getElementById("dash-pts");if(dp)dp.textContent=np;
       var dp2=document.getElementById("dash-pts2");if(dp2)dp2.textContent=np;
       var armor=getArmor(APP.kid);
