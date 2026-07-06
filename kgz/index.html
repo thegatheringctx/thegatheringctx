@@ -650,6 +650,9 @@ var CFG={
   wheel_pts:"10",devo_pts:"10",checkin_enabled:"false"
 };
 function cfgN(k){return parseInt(CFG[k]||"0");}
+function gameToday(){var d=new Date();d.setHours(0,0,0,0);return d.getTime();}
+function gamePtsToday(cb){sb("transactions?kid_id=eq."+APP.kid.id+"&category=like.game_*&created_at=gte."+gameToday()+"&select=points").then(function(rows){var t=0;(rows||[]).forEach(function(x){t+=(x.points||0);});cb(t);}).catch(function(){cb(0);});}
+function gameAward(pts,key){if(!APP.kid)return;var cap=cfgN("game_daily_max")||50;gamePtsToday(function(used){var room=cap-used;if(room<=0){toast("🎮 Daily game max reached ("+cap+" pts). Keep playing for fun, points reset tomorrow!",4500);return;}var grant=Math.min(pts,room);awardPts(grant,null,"game_"+key);toast("⚡ +"+grant+" pts!  ("+(used+grant)+"/"+cap+" today)",3500);});}
 function saveConfig(k,v){
   CFG[k]=String(v);
   sb("app_config?key=eq."+k,{method:"PATCH",body:{value:String(v)},prefer:"return=representation"}).catch(function(){});
@@ -784,9 +787,10 @@ function doCheckin(){
 }
 
 // ── AWARD POINTS ─────────────────────────────────
-function awardPts(pts,evt){
+function awardPts(pts,evt,cat){
   if(!APP.kid||pts<=0)return;
   var np=(APP.kid.points||0)+pts;
+  if(cat){sb("transactions",{method:"POST",body:{id:"t"+Date.now()+"_"+Math.floor(Math.random()*100000),kid_id:APP.kid.id,points:pts,category:cat,note:"auto",created_at:Date.now()}});}
   sb("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{points:np},prefer:"return=representation"})
     .then(function(){
       APP.kid.points=np;
@@ -1050,7 +1054,7 @@ function endQuiz(){
   var again=document.createElement("button");again.className="btn btn-gold";again.style.maxWidth="220px";again.style.margin="0 auto";again.textContent="Play Again ⚔️";
   again.addEventListener("click",function(){_qi=0;_qs=0;_qa=true;_qpool=QPOOL.slice().sort(function(){return Math.random()-.5;}).slice(0,10);showQ();});
   wrap.appendChild(icon);wrap.appendChild(score);wrap.appendChild(msg);wrap.appendChild(ptsEl);wrap.appendChild(again);el.appendChild(wrap);
-  awardPts(pts);
+  gameAward(pts,"quiz");
 }
 
 // ── GAME 2: TRUE OR FALSE ────────────────────────
@@ -1117,7 +1121,7 @@ function endTF(el){
   var again=document.createElement("button");again.className="btn btn-gold";again.style.maxWidth="220px";again.style.margin="0 auto";again.textContent="Play Again ⚡";
   again.addEventListener("click",function(){initTF(el);});
   wrap.appendChild(icon);wrap.appendChild(score);wrap.appendChild(ptsEl);wrap.appendChild(again);el.appendChild(wrap);
-  awardPts(pts);
+  gameAward(pts,"tf");
 }
 
 // ── GAME 3: SCRIPTURE SCRAMBLE ───────────────────
@@ -1164,7 +1168,7 @@ function renderScramble(el){
       var correct=_sc.words.join(" ").toLowerCase();
       var attempt=_scSel.join(" ").toLowerCase();
       if(attempt===correct){
-        var sPts=cfgN("scramble_pts");toast("🏆 Perfect! +"+sPts+" pts");awardPts(sPts);
+        var sPts=cfgN("scramble_pts");gameAward(sPts,"scramble");
         el.innerHTML="";
         var done=document.createElement("div");done.style.cssText="text-align:center;padding:2rem;background:rgba(0,192,122,.08);border:2px solid rgba(0,192,122,.3);border-radius:24px";
         done.innerHTML="<div style='font-size:3rem;margin-bottom:.5rem'>🏆</div><div style='font-family:Bangers,cursive;font-size:2rem;color:#f5c842'>Perfect!</div><div style='color:rgba(255,255,255,.6);font-size:.85rem;margin:.5rem 0 1rem'>+30 points earned!</div>";
@@ -1223,7 +1227,7 @@ function renderMatch(el){
     var done=document.createElement("div");done.style.cssText="text-align:center;margin-top:1rem;padding:1.1rem;background:rgba(0,192,122,.08);border:1.5px solid rgba(0,192,122,.3);border-radius:18px";
     var mPts=cfgN("match_pts");done.innerHTML="<div style='font-size:2.5rem;margin-bottom:.4rem'>🏆</div><div style='font-family:Bangers,cursive;font-size:1.4rem;color:#f5c842'>All Matched! +"+mPts+" pts!</div>";
     var ag=document.createElement("button");ag.className="btn btn-gold";ag.style.cssText="max-width:180px;margin:.75rem auto 0";ag.textContent="Play Again";ag.addEventListener("click",function(){initMatch(el);});
-    done.appendChild(ag);el.appendChild(done);awardPts(25);
+    done.appendChild(ag);el.appendChild(done);gameAward(cfgN("match_pts")||25,"match");
   }
 }
 
@@ -1268,7 +1272,7 @@ function showFITB(el,pool){
     var ptsEl=document.createElement("div");ptsEl.style.cssText="font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842;margin:.5rem 0 1rem";ptsEl.textContent="+"+pts+" pts!";
     var ag=document.createElement("button");ag.className="btn btn-gold";ag.style.cssText="max-width:220px;margin:0 auto";ag.textContent="Play Again ✍️";ag.addEventListener("click",function(){initFITB(el);});
     wrap.appendChild(icon);wrap.appendChild(score);wrap.appendChild(ptsEl);wrap.appendChild(ag);el.appendChild(wrap);
-    awardPts(pts);return;
+    gameAward(pts,"fitb");return;
   }
   var q=pool[_fi];el.innerHTML="";el.className="anim-in";
   var prog=document.createElement("div");prog.className="prog-bar";
@@ -1328,7 +1332,7 @@ function renderWheel(el){
       var cEl=document.createElement("div");cEl.style.cssText="font-size:.9rem;font-weight:700;color:#E8E4F0;line-height:1.55;margin-bottom:.85rem";cEl.textContent=pick.c;
       var doneBtn=document.createElement("button");doneBtn.className="btn btn-gold";doneBtn.style.maxWidth="220px";doneBtn.style.margin="0 auto";doneBtn.textContent="I Did It! +"+pick.pts+" pts ✅";
       doneBtn.addEventListener("click",function(){
-        awardPts(pick.pts);toast("⚡ +"+pick.pts+" pts earned!");
+        gameAward(pick.pts,"wheel");
         _wSpun=false;renderWheel(el);
       });
       res.appendChild(eEl);res.appendChild(cEl);res.appendChild(doneBtn);resultDiv.appendChild(res);
