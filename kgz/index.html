@@ -907,6 +907,33 @@ function initWatchTab(){
 if(document.readyState!=="loading")initWatchTab();else document.addEventListener("DOMContentLoaded",initWatchTab);
 setTimeout(initWatchTab,1800);
 
+function wzAdminAuth(body){return fetch("https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/wz-admin-auth",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();});}
+function initAdminSecurity(){
+  var host=document.getElementById("atab-settings");if(!host)return;
+  if(document.getElementById("wz-adminsec"))return;
+  var card=document.createElement("div");card.id="wz-adminsec";
+  card.style.cssText="background:rgba(255,255,255,.06);border:1px solid rgba(245,200,66,.3);border-radius:16px;padding:1rem;margin-bottom:1rem";
+  card.innerHTML="<div style='font-weight:900;margin-bottom:.35rem'>🔐 Admin Passphrase</div><div class='muted' id='wz-sec-status' style='margin-bottom:.6rem'>Checking...</div>";
+  var btn=document.createElement("button");btn.className="btn btn-gold";btn.style.cssText="font-size:.9rem;padding:.7rem";btn.textContent="Set / Change Passphrase";
+  function refreshSec(){wzAdminAuth({action:"status"}).then(function(st){var el=document.getElementById("wz-sec-status");if(el)el.textContent=(st&&st.set)?"A secure passphrase is set. It will replace the old admin PIN once lockdown is enabled.":"No secure passphrase set yet. Tap below to create one.";});}
+  btn.addEventListener("click",function(){
+    wzAdminAuth({action:"status"}).then(function(st){
+      var cur=null;
+      if(st&&st.set){cur=window.prompt("Enter CURRENT admin passphrase:");if(cur===null)return;}
+      var np=window.prompt("Enter NEW admin passphrase (at least 6 characters):");if(np===null)return;
+      wzAdminAuth({action:"set",passphrase:np,current:cur||undefined}).then(function(r){
+        if(r&&r.ok){toast("🔐 Admin passphrase saved!");refreshSec();}
+        else if(r&&r.error==="current_wrong"){toast("Current passphrase was wrong.");}
+        else if(r&&r.error==="too_short"){toast("Passphrase must be at least 6 characters.");}
+        else{toast("Could not save. Try again.");}
+      });
+    });
+  });
+  card.appendChild(btn);host.insertBefore(card,host.firstChild);
+  refreshSec();
+}
+if(document.readyState!=="loading")initAdminSecurity();else document.addEventListener("DOMContentLoaded",initAdminSecurity);
+setTimeout(initAdminSecurity,2000);
 function dashTab(tab,btn){
   APP.tab=tab;
   ["devos","games","warrior","store","ranks","prayer","training","watch"].forEach(function(t){
