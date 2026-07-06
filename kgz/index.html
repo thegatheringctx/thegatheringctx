@@ -1009,7 +1009,7 @@ function markDevo(i,evt){
       APP.kid.completed_devos=completed;
       awardPts(pts,evt);
       toast("📖 Devotional complete! +"+pts+" pts");
-    }).catch(function(){awardPts(pts,evt);toast("📖 +"+pts+" pts!");});
+    }).catch(function(){toast("📖 Could not save your progress. Try again in a moment.");});
 }
 
 // ════════════════════════════════════════════════
