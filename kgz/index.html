@@ -1802,6 +1802,7 @@ var MISSIONS=[
 // ════════════════════════════════════════════════
 function renderTraining(){
   var el=document.getElementById("tab-training");if(!el)return;
+  if(!APP._missionsLoaded){el.innerHTML="<p class='muted' style='text-align:center;padding:2rem'>Loading...</p>";APP._missionsLoaded=true;sb("training_missions?active=eq.true&order=sort_order.asc").then(function(rows){if(rows&&rows.length){MISSIONS=rows.map(function(r){return {id:r.id,title:r.title,emoji:r.emoji||"⚔️",bg:r.bg||"linear-gradient(135deg,#180444,#051a40)",worldSays:r.world_says,warriorSays:r.warrior_says,scriptures:r.scriptures||[]};});}renderTraining();}).catch(function(){renderTraining();});return;}
   el.innerHTML="";
 
   // Header
@@ -2006,18 +2007,24 @@ function openMission(m){
   document.body.appendChild(ov);
 }
 
+function trainingPtsThisWeek(cb){sb("transactions?kid_id=eq."+APP.kid.id+"&category=eq.training&created_at=gte."+videoWeekStart()+"&select=points").then(function(rows){var t=0;(rows||[]).forEach(function(x){t+=(x.points||0);});cb(t);}).catch(function(){cb(0);});}
 function completeMission(key,pts,cb){
   if(!APP.kid){toast("Log in to save progress!");return;}
   var missions=APP.kid.completed_missions||[];
   if(missions.indexOf(key)>=0){toast("Already completed!");return;}
-  missions=missions.concat([key]);
-  sb("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{completed_missions:missions},prefer:"return=representation"})
-    .then(function(){
-      APP.kid.completed_missions=missions;
-      awardPts(pts);
-      if(cb)cb();
-      renderTraining();
-    }).catch(function(){awardPts(pts);if(cb)cb();});
+  var cap=(typeof cfgN==="function"?cfgN("training_weekly_max"):0)||50;
+  trainingPtsThisWeek(function(used){
+    if(used>=cap){toast("⚔️ Training points max for this week ("+cap+")! New missions and points next week.",4500);return;}
+    var grant=Math.min(pts,cap-used);
+    var nm=missions.concat([key]);
+    sb("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{completed_missions:nm},prefer:"return=representation"})
+      .then(function(){
+        APP.kid.completed_missions=nm;
+        awardPts(grant,null,"training");
+        if(cb)cb();
+        renderTraining();
+      }).catch(function(){toast("Could not save. Try again.");});
+  });
 }
 
 // ════════════════════════════════════════════════
