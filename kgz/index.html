@@ -832,9 +832,83 @@ function openDash(kid){
 }
 
 // ── TABS ─────────────────────────────────────────
+function renderVideos(){
+  var el=document.getElementById("tab-watch");if(!el)return;
+  el.innerHTML="<p class='muted' style='text-align:center;padding:2rem'>Loading...</p>";
+  var grp=APP.kid?APP.kid.age_group:"812";
+  sb("videos?active=eq.true&age_group=eq."+grp+"&order=sort_order.asc").then(function(rows){
+    var done=(APP.kid&&APP.kid.completed_videos)?APP.kid.completed_videos:[];
+    el.innerHTML="";
+    var hdr=document.createElement("div");hdr.style.cssText="margin-bottom:1rem";
+    hdr.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.7rem;letter-spacing:.04em'>🎬 Watch &amp; Learn</div><div class='muted'>New videos every week. Watch, answer one question, earn points. One time each.</div>";
+    el.appendChild(hdr);
+    if(!rows||!rows.length){var e=document.createElement("div");e.className="muted";e.style.cssText="text-align:center;padding:2rem";e.textContent="New videos coming soon, warrior!";el.appendChild(e);return;}
+    rows.forEach(function(v){
+      var isDone=done.indexOf(v.id)>=0;
+      var row=document.createElement("div");row.className="devo-row";
+      row.innerHTML="<div style='font-size:1.7rem'>"+(isDone?"✅":"🎬")+"</div><div style='flex:1'><div style='font-weight:900'>"+v.title+"</div><div class='muted' style='font-size:.72rem'>"+(v.topic||"")+"</div></div><div class='gold' style='font-weight:900;font-size:.8rem'>"+(isDone?"DONE":"+"+(v.points||25))+"</div>";
+      row.addEventListener("click",function(){openVideo(v,isDone);});
+      el.appendChild(row);
+    });
+  }).catch(function(){el.innerHTML="<p class='muted' style='text-align:center;padding:2rem'>Could not load videos.</p>";});
+}
+function openVideo(v,isDone){
+  var el=document.getElementById("tab-watch");if(!el)return;
+  el.innerHTML="";
+  var back=document.createElement("button");back.className="back-btn";back.textContent="← back";back.addEventListener("click",renderVideos);el.appendChild(back);
+  var t=document.createElement("div");t.style.cssText="font-family:Bangers,cursive;font-size:1.5rem;margin-bottom:.5rem";t.textContent=v.title;el.appendChild(t);
+  var frame=document.createElement("div");frame.style.cssText="position:relative;width:100%;padding-bottom:56.25%;border-radius:16px;overflow:hidden;margin-bottom:1rem;background:#000";
+  frame.innerHTML="<iframe src='https://www.youtube.com/embed/"+(v.youtube_id||"")+"' style='position:absolute;inset:0;width:100%;height:100%;border:0' allow='accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture' allowfullscreen></iframe>";
+  el.appendChild(frame);
+  if(isDone){var d=document.createElement("div");d.className="muted";d.style.cssText="text-align:center;padding:1rem";d.textContent="✅ Points already earned for this one. Watch again anytime!";el.appendChild(d);return;}
+  var qwrap=document.createElement("div");qwrap.className="q-wrap";
+  var qh=document.createElement("div");qh.className="q-text";qh.textContent=v.quiz_q||"Ready?";qwrap.appendChild(qh);
+  var opts=document.createElement("div");opts.className="q-opts";
+  (v.quiz_choices||[]).forEach(function(choice,idx){
+    var o=document.createElement("button");o.className="q-opt";o.textContent=choice;
+    o.addEventListener("click",function(){
+      if(o.classList.contains("done"))return;
+      if(idx===v.quiz_answer){o.classList.add("correct");o.classList.add("done");awardVideo(v);}
+      else{o.classList.add("wrong");toast("Not quite! Watch again and try once more. 🎬",3500);}
+    });
+    opts.appendChild(o);
+  });
+  qwrap.appendChild(opts);el.appendChild(qwrap);
+}
+function videoWeekStart(){var d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-d.getDay());return d.getTime();}
+function videoPtsThisWeek(cb){sb("transactions?kid_id=eq."+APP.kid.id+"&category=eq.video&created_at=gte."+videoWeekStart()+"&select=points").then(function(rows){var t=0;(rows||[]).forEach(function(x){t+=(x.points||0);});cb(t);}).catch(function(){cb(0);});}
+function awardVideo(v){
+  if(!APP.kid)return;
+  var done=APP.kid.completed_videos||[];
+  if(done.indexOf(v.id)>=0){toast("Already earned! ✅");return;}
+  var cap=(typeof cfgN==="function"?cfgN("video_weekly_max"):0)||50;
+  videoPtsThisWeek(function(used){
+    if(used>=cap){toast("🎬 You hit this week's video points max ("+cap+")! New videos and points next week.",4500);return;}
+    var grant=Math.min(v.points||25,cap-used);
+    var nd=done.concat([v.id]);
+    sb("kids?id=eq."+APP.kid.id,{method:"PATCH",body:{completed_videos:nd},prefer:"return=representation"}).then(function(){
+      APP.kid.completed_videos=nd;
+      awardPts(grant,null,"video");
+      toast("🎬 Correct! +"+grant+" points, warrior!",4000);
+      setTimeout(renderVideos,1400);
+    }).catch(function(){toast("Hmm, could not save. Try again in a moment.");});
+  });
+}
+function initWatchTab(){
+  if(document.getElementById("tab-watch"))return;
+  var host=document.getElementById("tab-devos");if(!host||!host.parentElement)return;
+  var c=document.createElement("div");c.id="tab-watch";c.style.display="none";host.parentElement.appendChild(c);
+  var mb=document.querySelector(".tab-bar");
+  if(mb&&!mb.querySelector("[data-watch]")){var b=document.createElement("button");b.className="tab-btn";b.setAttribute("data-watch","1");b.setAttribute("onclick","dashTab('watch',this)");b.innerHTML="<span class='ti'>🎬</span>Watch";mb.appendChild(b);}
+  var sbn=document.getElementById("tab-sidebar-nav");
+  if(sbn&&!sbn.querySelector("[data-watch]")){var b2=document.createElement("button");b2.className="tab-sidebar-btn";b2.setAttribute("data-watch","1");b2.setAttribute("onclick","dashTab('watch',this)");b2.innerHTML="<span class='ti'>🎬</span>Watch";sbn.appendChild(b2);}
+}
+if(document.readyState!=="loading")initWatchTab();else document.addEventListener("DOMContentLoaded",initWatchTab);
+setTimeout(initWatchTab,1800);
+
 function dashTab(tab,btn){
   APP.tab=tab;
-  ["devos","games","warrior","store","ranks","prayer","training"].forEach(function(t){
+  ["devos","games","warrior","store","ranks","prayer","training","watch"].forEach(function(t){
     var el=document.getElementById("tab-"+t);if(el)el.style.display=t===tab?"block":"none";
   });
   // Reset both mobile tab-btns AND desktop sidebar btns
@@ -853,6 +927,7 @@ function dashTab(tab,btn){
   if(tab==="ranks")loadRanks();
   if(tab==="prayer")renderPrayer();
   if(tab==="training")renderTraining();
+  if(tab==="watch")renderVideos();
 }
 
 // ════════════════════════════════════════════════
