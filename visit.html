@@ -263,7 +263,7 @@ document.getElementById('visit-form')?.addEventListener('submit', async function
   const mobile = document.getElementById('visit-mobile').value.trim();
   btn.textContent = 'Sending...'; btn.style.opacity = '.6';
   try {
-    const res = await fetch('/api/clearstream-subscribe', {--method: 'POST', headers: {'Content-Type':'application/json'},
+    const res = await fetch('/api/clearstream-subscribe', {method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({name, mobile, list:'visit'})
     });
     const data = await res.json();
