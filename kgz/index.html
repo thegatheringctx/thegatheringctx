@@ -1122,6 +1122,7 @@ var QPOOL=[
 var _qi=0,_qs=0,_qa=false,_qpool=[];
 
 function initQuiz(el){
+  if(!APP._quizLoaded){APP._quizLoaded=true;el.innerHTML="<p class='muted' style='text-align:center;padding:2rem'>Loading...</p>";var _g=APP.kid?APP.kid.age_group:"812";sb("quiz_questions?active=eq.true&or=(age_group.eq."+_g+",age_group.is.null)&order=sort_order.asc").then(function(rows){if(rows&&rows.length){QPOOL=rows.map(function(r){return {q:r.q,o:r.o,a:r.a};});}initQuiz(el);}).catch(function(){initQuiz(el);});return;}
   _qi=0;_qs=0;_qa=true;
   _qpool=QPOOL.slice().sort(function(){return Math.random()-.5;}).slice(0,10);
   el.innerHTML="<div style='text-align:center;margin-bottom:1rem'><div style='font-family:Bangers,cursive;font-size:1.6rem;color:#f5c842;letter-spacing:.05em'>Bible Battle Quiz</div><div class='muted' style='margin:.2rem 0'>10 questions · 5 pts each · 50 pts max</div></div><div id='quiz-area'></div>";
