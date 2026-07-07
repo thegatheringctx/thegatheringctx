@@ -961,6 +961,9 @@ function wzActiveText(){var ov=[].slice.call(document.querySelectorAll('div')).f
 function wzListenInit(){if(document.getElementById("wz-listen"))return;var b=document.createElement("button");b.id="wz-listen";b.style.cssText="position:fixed;bottom:82px;right:14px;z-index:9000;background:linear-gradient(135deg,#6C52E3,#3d1080);color:#fff;border:1.5px solid rgba(255,255,255,.25);border-radius:99px;padding:.55rem .85rem;font-weight:900;font-size:.78rem;box-shadow:0 6px 20px rgba(0,0,0,.5);cursor:pointer;display:none";b.innerHTML="🔊 Listen";b.addEventListener("click",function(){if(window.speechSynthesis&&speechSynthesis.speaking){speechSynthesis.cancel();b.innerHTML="🔊 Listen";return;}var t=wzActiveText();if(!t||t.length<12){toast("Open a devo, verse, or lesson to listen.");return;}if(wzSpeak(t))b.innerHTML="⏹ Stop";});document.body.appendChild(b);setInterval(function(){b.style.display=(window.APP&&APP.kid)?"block":"none";if(window.speechSynthesis&&!speechSynthesis.speaking&&b.innerHTML.indexOf("Stop")>=0)b.innerHTML="🔊 Listen";},1000);}
 if(document.readyState!=="loading")wzListenInit();else document.addEventListener("DOMContentLoaded",wzListenInit);
 setTimeout(wzListenInit,2200);
+;/* --- WZ DAILY NUDGE --- */
+function wzNudge(){if(!(window.APP&&APP.kid)||APP._nudged)return;var today=new Date().toISOString().slice(0,10);if(APP.kid.last_active!==today){APP._nudged=true;setTimeout(function(){if(typeof toast==="function")toast("🔥 Keep your streak alive, warrior! Do today's verse or a devo.",6000);},3500);}}
+setInterval(wzNudge,3000);
 function dashTab(tab,btn){
   APP.tab=tab;
   ["devos","games","warrior","store","ranks","prayer","training","watch","verse","jesus"].forEach(function(t){
