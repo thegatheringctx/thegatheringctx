@@ -327,8 +327,8 @@ async function newHereSubmit() {
   if (!name) { msg.textContent = 'Please enter your name.'; msg.style.display='block'; return; }
   if (!email && !phone) { msg.textContent = 'Add an email or phone so we can reach you.'; msg.style.display='block'; return; }
   const promises = [];
-  if (email) promises.push(fetch('/api/subscribe',{--method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,group:'New Here'})}).catch(()=>{}));
-  if (phone) promises.push(fetch('/api/clearstream-subscribe',{--method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,mobile:phone,list:'new'})}).catch(()=>{}));
+  if (email) promises.push(fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,group:'New Here'})}).catch(()=>{}));
+  if (phone) promises.push(fetch('/api/clearstream-subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,mobile:phone,list:'new'})}).catch(()=>{}));
   await Promise.all(promises);
   msg.textContent = 'Got it. Watch for a text or email from us before Sunday.';
   msg.style.display = 'block';
