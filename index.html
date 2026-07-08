@@ -361,12 +361,8 @@
   <div>
     <p class="cs-label">Stay Connected</p>
     <h2 class="cs-title">We will reach out.</h2>
-    <p class="cs-sub">Or <a href="sms:+18175184773&body=VISIT" style="color:inherit">text <strong>VISIT</strong> to (817) 518-4773</a></p>
+    <p class="cs-sub"><a href="sms:+18175184773&body=VISIT" style="color:inherit">Text <strong>VISIT</strong> to (817) 518-4773</a></p>
   </div>
-  <form class="connect-form" onsubmit="handleConnect(event)">
-    <input class="connect-input" type="email" placeholder="Your email address" required>
-    <button class="connect-btn" type="submit">I'm In &rarr;</button>
-  </form>
 </div>
 
 <section class="sermon" id="sermon-section">
@@ -734,18 +730,6 @@
 </footer>
 
 <script>
-async function handleConnect(e){
-  e.preventDefault();
-  const email=e.target.querySelector('input').value;
-  const btn=e.target.querySelector('button');
-  btn.textContent='Sending...';
-  try{
-    await fetch('/api/subscribe',{
-      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,type:'new-here'})});
-    btn.textContent='You are in.';
-    e.target.querySelector('input').value='';
-  }catch(err){btn.textContent='Try again';}
-}
 function handlePrayer(e){
   e.preventDefault();
   const form = e.target;
