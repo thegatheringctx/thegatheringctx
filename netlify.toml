@@ -114,6 +114,11 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/api/subscribe"
+  to = "/.netlify/functions/subscribe"
+  status = 200
+
 # Custom 404
 [[redirects]]
   from = "/*"
