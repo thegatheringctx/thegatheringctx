@@ -422,7 +422,7 @@ async function handleSub(e,list){
   var f=e.target,em=f.email.value.trim(),btn=f.querySelector('.sub-btn'),msg=document.getElementById('sub-msg-'+list);
   btn.disabled=true;btn.textContent='Sending…';msg.className='sub-msg';msg.textContent='';
   try{
-    var r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,list:list})});
+    var r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,type:'sermon'})});
     var data=await r.json();
     if(r.ok&&data.success){msg.className='sub-msg ok';msg.textContent='Subscribed! Check your inbox.';f.reset();}
     else throw new Error(data.error||'Something went wrong.');
