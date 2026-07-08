@@ -41,7 +41,11 @@ export const handler = async (event) => {
       body: JSON.stringify(subData),
     });
 
-    const sub = await subRes.json();
+    const sub = await subRes.json().catch(() => ({}));
+    if (!subRes.ok) {
+      console.error("MailerLite error:", subRes.status, JSON.stringify(sub));
+      return { statusCode: 502, headers, body: JSON.stringify({ error: sub?.message || "Subscription service error" }) };
+    }
     const subId = sub?.data?.id;
 
     if (subId) {
