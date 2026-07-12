@@ -1048,6 +1048,12 @@ setTimeout(function(){var oc=window.wzArmorCelebrate;if(typeof oc==='function'){
  function init(){style();hookRender();hookTab();try{enhanceArmor();}catch(e){}}
  setTimeout(init,200);setTimeout(init,900);setTimeout(init,2000);
 })();
+/*WZANIM2_INJECT*/
+(function(){
+ if(window.__wzAnim2)return; window.__wzAnim2=1;
+ function css(){ if(document.getElementById('wz-anim2-css'))return; var s=document.createElement('style'); s.id='wz-anim2-css'; s.textContent=".wz-armor-stage::before{content:'';position:absolute;top:46%;left:50%;width:520px;height:520px;transform:translate(-50%,-50%);z-index:0;pointer-events:none;background:repeating-conic-gradient(from 0deg, rgba(245,200,66,.18) 0deg 7deg, rgba(245,200,66,0) 7deg 22deg);border-radius:50%;-webkit-mask:radial-gradient(circle,#000 28%,rgba(0,0,0,0) 70%);mask:radial-gradient(circle,#000 28%,rgba(0,0,0,0) 70%);animation:wzrays 24s linear infinite} @keyframes wzrays{to{transform:translate(-50%,-50%) rotate(360deg)}} .wz-armor-stage::after{content:'';position:absolute;top:46%;left:50%;width:300px;height:300px;transform:translate(-50%,-50%);z-index:1;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(255,240,190,.55),rgba(255,240,190,0) 60%);opacity:0;animation:wzpowerup 4.8s ease-in-out infinite} @keyframes wzpowerup{0%,70%,100%{opacity:0;transform:translate(-50%,-50%) scale(.6)}82%{opacity:.6;transform:translate(-50%,-50%) scale(1.08)}} .wz-armor-hero{animation:wzfloat2 4s ease-in-out infinite !important} @keyframes wzfloat2{0%,100%{transform:translateY(0) rotate(-1.4deg) scale(1)}50%{transform:translateY(-15px) rotate(1.4deg) scale(1.035)}} #wz-hero-banner>div:nth-child(3){animation:wzfloatB2 4.4s ease-in-out infinite !important} @keyframes wzfloatB2{0%,100%{transform:translateY(0);filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}50%{transform:translateY(-7px);filter:drop-shadow(0 10px 20px rgba(245,200,66,.4))}}"; document.head.appendChild(s); }
+ setTimeout(css,150);setTimeout(css,900);setTimeout(css,2200);
+})();
 function dashTab(tab,btn){
   APP.tab=tab;
   ["devos","games","warrior","store","ranks","prayer","training","watch","verse","jesus"].forEach(function(t){
