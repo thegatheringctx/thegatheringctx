@@ -1,4 +1,4 @@
-// Daily streak nudge opt-in. Deliberately gentle: never auto-prompts.
+// Daily streak nudge opt-in. Deliberately gentle: never auto-prompts, never nags.
 (function(){
  if(window.__wzPush)return; window.__wzPush=1;
  var VAPID='BEZ3txP6vF8LWe3FWehAA1VkSCP8kWNEZuKH1ro03IHhkYlsQR8A0YnnuAyFDjq0hp5xcc6BJUU5XfbcrEDFs5o';
@@ -10,35 +10,48 @@
   var reg=await navigator.serviceWorker.ready;
   var sub=await reg.pushManager.getSubscription();
   if(!sub){ sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:u8(VAPID)}); }
-  var j=sub.toJSON();
-  var r=await fetch('https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/wz-push-subscribe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({kid_id:k.id,pin:k.pin,subscription:j})});
-  var res=await r.json();
+  var r=await fetch('https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/wz-push-subscribe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({kid_id:k.id,pin:k.pin,subscription:sub.toJSON()})});
+  var res=await r.json().catch(function(){return null;});
   return !!(res&&res.ok);
  }
  function css(){ if(document.getElementById('wz-push-css'))return; var s=document.createElement('style'); s.id='wz-push-css';
-  s.textContent="#wz-push-btn{position:fixed;left:12px;bottom:12px;z-index:2147483000;background:#f5c842;color:#1a1a2e;border:none;border-radius:22px;padding:10px 16px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.45);display:flex;align-items:center;gap:6px}#wz-push-btn:hover{filter:brightness(1.05)}";
+  s.textContent="#wz-push-btn{position:fixed;left:12px;bottom:12px;z-index:2147483000;background:#f5c842;color:#1a1a2e;border:none;border-radius:22px;padding:10px 16px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.45);font-family:inherit}#wz-push-btn:hover{filter:brightness(1.05)}#wz-push-btn:disabled{opacity:.7;cursor:default}";
   document.head.appendChild(s); }
  function hide(){ var b=document.getElementById('wz-push-btn'); if(b)b.remove(); }
  function show(){
   if(document.getElementById('wz-push-btn'))return; css();
-  var b=document.createElement('button'); b.id='wz-push-btn'; b.innerHTML='\uD83D\uDD14 Remind me daily';
+  var b=document.createElement('button'); b.id='wz-push-btn'; b.textContent='\uD83D\uDD14 Remind me daily';
   b.onclick=async function(){
     b.disabled=true; b.textContent='...';
     try{
       var perm=await Notification.requestPermission();
-      if(perm==='granted'){ var ok=await subscribe(); b.textContent = ok?'\u2713 Reminders on':'Try again'; if(ok) setTimeout(hide,1800); else b.disabled=false; }
-      else { hide(); try{localStorage.setItem('wz_push_dismissed','1');}catch(e){} }
+      if(perm==='granted'){
+        var ok=await subscribe();
+        b.textContent = ok ? '\u2713 Reminders on' : 'Try again';
+        if(ok){ setTimeout(hide,1800); } else { b.disabled=false; }
+      } else {
+        hide(); try{localStorage.setItem('wz_push_dismissed','1');}catch(e){}
+      }
     }catch(e){ hide(); }
   };
   document.body.appendChild(b);
  }
- async function init(){
+ function init(){
   if(!supported())return;
-  if(!kid())return;                       // only ever ask a logged-in kid
+  if(!kid())return;
   if(Notification.permission==='denied')return;
   try{ if(localStorage.getItem('wz_push_dismissed')==='1')return; }catch(e){}
-  if(Notification.permission==='granted'){ hide(); subscribe(); return; }   // already allowed: just (re)subscribe silently
-  show();                                  // otherwise offer the button; permission needs a real tap
+  if(Notification.permission==='granted'){ hide(); subscribe(); return; }
+  show();
  }
- setTimeout(init,4000); setTimeout(init,9000);
+ // Wait for an actual login. Fixed timers used to fire while the child was still
+ // typing their PIN, so init() found no kid and never ran again.
+ var tries=0;
+ var iv=setInterval(function(){
+  tries++;
+  if(tries>400){ clearInterval(iv); return; }   // give up after ~10 min
+  if(!kid())return;
+  clearInterval(iv);
+  init();
+ },1500);
 })();
