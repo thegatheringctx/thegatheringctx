@@ -8,10 +8,10 @@
  if(window.__wzBelong)return; window.__wzBelong=1;
  if(typeof renderRanks!=='function'||typeof sb!=='function')return;
 
- var TIERS=[{k:'belt',n:'Belt of Truth',p:25},{k:'breastplate',n:'Breastplate',p:100},
-  {k:'boots',n:'Boots of Peace',p:250},{k:'shield',n:'Shield of Faith',p:500},
-  {k:'helmet',n:'Helmet',p:800},{k:'sword',n:'Sword of the Spirit',p:1200},
-  {k:'full',n:'FULL ARMOR',p:1800}];
+ var TIERS=[{k:'belt',n:'Belt of Truth',p:50},{k:'breastplate',n:'Breastplate',p:150},
+  {k:'boots',n:'Boots of Peace',p:400},{k:'shield',n:'Shield of Faith',p:900},
+  {k:'helmet',n:'Helmet',p:2000},{k:'sword',n:'Sword of the Spirit',p:4000},
+  {k:'full',n:'FULL ARMOR',p:8000}];
 
  function css(){ if(document.getElementById('wz-bl-css'))return;
   var s=document.createElement('style'); s.id='wz-bl-css';
