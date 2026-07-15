@@ -49,6 +49,9 @@ button:disabled{opacity:.6;cursor:default}
   <div class="cs">Kids who asked you to pray. Tap when you actually have. They will see it.</div>
   <button id="loadPray" class="ghost">Load the prayer queue</button>
   <div id="prayList" style="margin-top:.9rem"></div>
+  <button id="alertBtn" class="ghost" style="margin-top:.5rem">🔔 Alert me when a kid asks for prayer</button>
+  <div id="alertOut" class="hint"></div>
+
 </div>
 
 <div class="card">
@@ -164,5 +167,36 @@ document.getElementById('goTalk').onclick=function(){
     else show(out,'err',err(r));
   }).catch(function(){b.disabled=false;b.textContent='Post the family talk';show(out,'err','Network error. Try again.');});
 };
+
+var ALERTS='https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/wz-pastor-alerts';
+var VAPID_PUB='BEZ3txP6vF8LWe3FWehAA1VkSCP8kWNEZuKH1ro03IHhkYlsQR8A0YnnuAyFDjq0hp5xcc6BJUU5XfbcrEDFs5o';
+function u8(b64){var pad='='.repeat((4-b64.length%4)%4);var s=(b64+pad).replace(/-/g,'+').replace(/_/g,'/');var raw=atob(s);var o=new Uint8Array(raw.length);for(var i=0;i<raw.length;i++)o[i]=raw.charCodeAt(i);return o;}
+function aPost(body){return fetch(ALERTS,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json();});}
+var ab=document.getElementById('alertBtn'), ao=document.getElementById('alertOut');
+if(ab){
+ ab.onclick=async function(){
+  if(!v('pass')){ao.textContent='Enter your admin passphrase first.';return;}
+  if(!('serviceWorker' in navigator)||!('PushManager' in window)){ao.textContent='This browser cannot do notifications. Try Chrome or Safari on your phone.';return;}
+  ab.disabled=true; ao.textContent='Setting up...';
+  try{
+   var reg=await navigator.serviceWorker.register('/sw.js');
+   await navigator.serviceWorker.ready;
+   var perm=await Notification.requestPermission();
+   if(perm!=='granted'){ ao.textContent='You said no to notifications. Turn them on in browser settings if you change your mind.'; ab.disabled=false; return; }
+   var sub=await reg.pushManager.getSubscription();
+   if(!sub) sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:u8(VAPID_PUB)});
+   var res=await aPost({action:'subscribe',passphrase:v('pass'),subscription:sub.toJSON()});
+   if(res&&res.ok){
+    ao.textContent='\u2713 This device will be alerted. Sending you a test...';
+    await aPost({action:'test',passphrase:v('pass')});
+    ab.textContent='\u2713 Alerts on for this device';
+   } else {
+    ao.textContent = (res&&res.error==='bad_passphrase') ? 'Passphrase not recognized.' : 'Could not turn on alerts.';
+    ab.disabled=false;
+   }
+  }catch(e){ ao.textContent='Could not turn on alerts: '+e.message; ab.disabled=false; }
+ };
+}
+
 </script>
 </body></html>
