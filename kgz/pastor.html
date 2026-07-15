@@ -5,7 +5,7 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#12121f;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:1.25rem;line-height:1.5}
-.wrap{max-width:560px;margin:0 auto}
+.wrap{max-width:600px;margin:0 auto}
 h1{color:#f5c842;font-size:1.4rem;margin:0 0 .2rem}
 .sub{color:rgba(255,255,255,.55);font-size:.84rem;margin-bottom:1rem}
 .card{background:#1a1a2e;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1rem;margin-bottom:1.25rem}
@@ -15,22 +15,41 @@ label{display:block;font-size:.7rem;font-weight:800;text-transform:uppercase;let
 input,textarea{width:100%;background:#25253f;border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:.65rem;color:#fff;font-size:1rem;font-family:inherit}
 textarea{min-height:64px;resize:vertical}
 input:focus,textarea:focus{outline:none;border-color:#f5c842}
-button{width:100%;margin-top:.9rem;background:#f5c842;color:#1a1a2e;border:none;border-radius:10px;padding:.8rem;font-size:.95rem;font-weight:900;cursor:pointer}
+button{width:100%;margin-top:.9rem;background:#f5c842;color:#1a1a2e;border:none;border-radius:10px;padding:.8rem;font-size:.95rem;font-weight:900;cursor:pointer;font-family:inherit}
 button:disabled{opacity:.6;cursor:default}
 .out{margin-top:.8rem;padding:.7rem;border-radius:9px;font-size:.85rem;display:none}
 .ok{background:rgba(126,224,138,.14);border:1px solid rgba(126,224,138,.5);color:#7ee08a}
 .err{background:rgba(255,107,107,.14);border:1px solid rgba(255,107,107,.5);color:#ff9b9b}
 .hint{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem}
 #pass{border-color:rgba(245,200,66,.4)}
+.pray{background:#20203a;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.8rem;margin-bottom:.65rem}
+.pray.waiting{border-color:rgba(245,200,66,.5)}
+.pray.done{opacity:.5}
+.who{font-weight:900;font-size:.9rem;color:#f5c842}
+.when{font-size:.7rem;color:rgba(255,255,255,.4);font-weight:700}
+.ptext{margin:.45rem 0 .6rem;font-size:.92rem;line-height:1.45;color:#fff}
+.prow{display:flex;gap:.5rem}
+.prow button{margin-top:0;flex:1;padding:.55rem;font-size:.8rem}
+.ghost{background:none;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.75)}
+.badge{display:inline-block;font-size:.62rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:.15rem .45rem;border-radius:10px;background:rgba(126,224,138,.18);color:#7ee08a;margin-left:.35rem}
+.badge.wait{background:rgba(245,200,66,.18);color:#f5c842}
+.badge.flag{background:rgba(255,107,107,.2);color:#ff9b9b}
 </style></head>
 <body><div class="wrap">
 <h1>Warrior Zone · This Week</h1>
-<div class="sub">Thursday, about five minutes. Both parts are optional — post either one.</div>
+<div class="sub">Thursday, about five minutes. Every part is optional.</div>
 
 <label for="pass">Admin passphrase</label>
 <input id="pass" type="password" autocomplete="current-password" placeholder="your Warrior Zone admin passphrase">
-<div class="hint">Used for both forms below.</div>
+<div class="hint">Used for all three sections.</div>
 <br>
+
+<div class="card">
+  <h2>🙏 Prayer Queue</h2>
+  <div class="cs">Kids who asked you to pray. Tap when you actually have. They will see it.</div>
+  <button id="loadPray" class="ghost">Load the prayer queue</button>
+  <div id="prayList" style="margin-top:.9rem"></div>
+</div>
 
 <div class="card">
   <h2>🎥 This Week's Word</h2>
@@ -78,6 +97,48 @@ function err(r){
   if(r.error==='missing_title')return 'Add what they learned.';
   return 'Could not post: '+(r.error||'unknown');
 }
+function days(iso){var d=Math.floor((Date.now()-new Date(iso).getTime())/86400000);return d===0?'today':(d===1?'yesterday':d+' days ago');}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+document.getElementById('loadPray').onclick=function(){ loadPrayers(); };
+function loadPrayers(){
+  var box=document.getElementById('prayList');
+  if(!v('pass')){box.innerHTML='<div class="out err" style="display:block">Enter your admin passphrase.</div>';return;}
+  box.innerHTML='<div class="hint">Loading...</div>';
+  post({action:'prayers-list',passphrase:v('pass')}).then(function(r){
+    if(!r.ok){box.innerHTML='<div class="out err" style="display:block">'+err(r)+'</div>';return;}
+    if(!r.rows.length){box.innerHTML='<div class="hint">No prayer requests yet.</div>';return;}
+    box.innerHTML='<div class="hint" style="margin-bottom:.6rem">'+r.waiting+' waiting for you</div>';
+    r.rows.forEach(function(p){
+      var d=document.createElement('div');
+      d.className='pray '+(p.prayed_by_pastor?'done':'waiting');
+      var badge=p.prayed_by_pastor?'<span class="badge">prayed</span>':'<span class="badge wait">waiting</span>';
+      var flag=p.needs_followup?'<span class="badge flag">needs a call</span>':'';
+      d.innerHTML='<div><span class="who">'+esc(p.kid_first_name)+(p.kid_age?', '+p.kid_age:'')+'</span>'+badge+flag+
+        '</div><div class="when">'+days(p.created_at)+' · '+p.prayers+' kids prayed</div>'+
+        '<div class="ptext">'+esc(p.text)+'</div>';
+      var row=document.createElement('div'); row.className='prow';
+      if(!p.prayed_by_pastor){
+        var b1=document.createElement('button'); b1.textContent='🙏 I prayed for this';
+        b1.onclick=function(){
+          b1.disabled=true;b1.textContent='...';
+          post({action:'prayed',passphrase:v('pass'),id:p.id}).then(function(){ loadPrayers(); });
+        };
+        row.appendChild(b1);
+      }
+      var b2=document.createElement('button'); b2.className='ghost';
+      b2.textContent=p.needs_followup?'✓ Flagged to call':'Flag: needs a call';
+      b2.onclick=function(){
+        b2.disabled=true;
+        post({action:'flag',passphrase:v('pass'),id:p.id,needs_followup:!p.needs_followup}).then(function(){ loadPrayers(); });
+      };
+      row.appendChild(b2);
+      d.appendChild(row);
+      box.appendChild(d);
+    });
+  }).catch(function(){box.innerHTML='<div class="out err" style="display:block">Network error.</div>';});
+}
+
 document.getElementById('goVid').onclick=function(){
   var b=this,out=document.getElementById('outVid');
   if(!v('pass')){show(out,'err','Enter your admin passphrase.');return;}
