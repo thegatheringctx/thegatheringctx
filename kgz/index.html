@@ -9,6 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Exo+2:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="app/base.css?v=bf0488cd">
   <link rel="stylesheet" href="app/landing.css?v=c5d8dcf5">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1a1a2e">
+  <link rel="apple-touch-icon" href="img/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Warrior Zone">
 </head>
 <body>
 
@@ -463,5 +469,17 @@
   <script src="app/features/arena-header.js?v=4e6df2dc"></script>
   <script src="app/features/warrior-video.js?v=5c055076"></script>
   <script src="app/core-b.js?v=f374cb8f"></script>
+  <script>
+  if('serviceWorker' in navigator){
+    window.addEventListener('load',function(){
+      navigator.serviceWorker.register('sw.js').catch(function(){});
+    });
+    // escape hatch: gathering-kids-zone.netlify.app/?nosw=1 nukes the SW + caches
+    if(location.search.indexOf('nosw=1')>=0){
+      navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});
+      if(window.caches) caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});
+    }
+  }
+  </script>
 </body>
 </html>
