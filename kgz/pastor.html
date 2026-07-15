@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Post This Week's Word · Warrior Zone</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#12121f;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:1.25rem;line-height:1.5}
+.wrap{max-width:560px;margin:0 auto}
+h1{color:#f5c842;font-size:1.5rem;margin:0 0 .25rem}
+.sub{color:rgba(255,255,255,.55);font-size:.85rem;margin-bottom:1.25rem}
+label{display:block;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.6);margin:.9rem 0 .3rem}
+input,textarea{width:100%;background:#1e1e33;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:.7rem;color:#fff;font-size:1rem;font-family:inherit}
+textarea{min-height:80px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:#f5c842}
+button{width:100%;margin-top:1.1rem;background:#f5c842;color:#1a1a2e;border:none;border-radius:11px;padding:.85rem;font-size:1rem;font-weight:900;cursor:pointer}
+button:disabled{opacity:.6;cursor:default}
+#out{margin-top:1rem;padding:.8rem;border-radius:10px;font-size:.88rem;display:none}
+.ok{background:rgba(126,224,138,.14);border:1px solid rgba(126,224,138,.5);color:#7ee08a}
+.err{background:rgba(255,107,107,.14);border:1px solid rgba(255,107,107,.5);color:#ff9b9b}
+.hint{font-size:.75rem;color:rgba(255,255,255,.4);margin-top:.3rem}
+.recent{margin-top:2rem;border-top:1px solid rgba(255,255,255,.1);padding-top:1rem}
+.recent h2{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.5);margin:0 0 .5rem}
+.vid{font-size:.8rem;color:rgba(255,255,255,.7);padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+</style></head>
+<body><div class="wrap">
+<h1>🎥 This Week's Word</h1>
+<div class="sub">Record on your phone → upload to YouTube as <b>Unlisted</b> → paste the link here. Kids see it at the top of Warrior Zone.</div>
+
+<label for="pass">Admin passphrase</label>
+<input id="pass" type="password" autocomplete="current-password" placeholder="your Warrior Zone admin passphrase">
+
+<label for="url">YouTube link</label>
+<input id="url" type="url" inputmode="url" placeholder="https://youtu.be/...">
+<div class="hint">Unlisted is fine. Shorts, watch links and youtu.be all work.</div>
+
+<label for="title">Title</label>
+<input id="title" type="text" placeholder="A Word From Pastor Billy">
+
+<label for="msg">Note for the kids (optional)</label>
+<textarea id="msg" placeholder="One or two sentences."></textarea>
+
+<button id="go">Post it to Warrior Zone</button>
+<div id="out"></div>
+
+<div class="recent"><h2>Recently posted</h2><div id="list" class="vid">Enter your passphrase to see.</div></div>
+</div>
+<script>
+var EP='https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/wz-pastor';
+var out=document.getElementById('out');
+function show(cls,msg){out.className=cls;out.textContent=msg;out.style.display='block';}
+function post(body){return fetch(EP,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json();});}
+function refresh(){
+  var p=document.getElementById('pass').value;
+  if(!p)return;
+  post({action:'list',passphrase:p}).then(function(r){
+    var el=document.getElementById('list');
+    if(!r.ok){el.textContent='Passphrase not recognized.';return;}
+    if(!r.rows.length){el.textContent='Nothing posted yet.';return;}
+    el.innerHTML='';
+    r.rows.forEach(function(v){
+      var d=document.createElement('div'); d.className='vid';
+      d.textContent=(v.active?'● ':'○ ')+v.title+'  —  '+new Date(v.created_at).toLocaleDateString();
+      el.appendChild(d);
+    });
+  });
+}
+document.getElementById('pass').addEventListener('change',refresh);
+document.getElementById('go').onclick=function(){
+  var b=this;
+  var pass=document.getElementById('pass').value.trim();
+  var url=document.getElementById('url').value.trim();
+  if(!pass){show('err','Enter your admin passphrase.');return;}
+  if(!url){show('err','Paste the YouTube link.');return;}
+  b.disabled=true;b.textContent='Posting...';
+  post({action:'post',passphrase:pass,url:url,
+        title:document.getElementById('title').value.trim(),
+        message:document.getElementById('msg').value.trim()}).then(function(r){
+    b.disabled=false;b.textContent='Post it to Warrior Zone';
+    if(r.ok){show('ok','✓ Posted. The kids will see it next time they open Warrior Zone.');document.getElementById('url').value='';refresh();}
+    else if(r.error==='bad_passphrase')show('err','Passphrase not recognized.');
+    else if(r.error==='bad_youtube_url')show('err','That does not look like a YouTube link.');
+    else show('err','Could not post: '+(r.error||'unknown'));
+  }).catch(function(){b.disabled=false;b.textContent='Post it to Warrior Zone';show('err','Network error. Try again.');});
+};
+</script>
+</body></html>
