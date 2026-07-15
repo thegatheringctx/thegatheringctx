@@ -72,7 +72,7 @@
 
   // six pieces evenly around the ring — honest layout for portrait art
   TIERS.forEach(function(t,i){
-   var ang=(-90 + i*(360/TIERS.length)) * Math.PI/180;
+   var ang=(-60 + i*(360/TIERS.length)) * Math.PI/180;
    var r=41;
    var p=document.createElement('div');
    p.className='wz-pin '+(mine.indexOf(t.k)>=0?'on':'off');
