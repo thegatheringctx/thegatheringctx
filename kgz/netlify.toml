@@ -2,15 +2,21 @@
   publish = "."
   command = ""
 
-# HTML stays uncached so app updates land instantly
+# HTML stays uncached so app updates land instantly.
 [[headers]]
   for = "/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
 
-# Static art + warrior clips are immutable and MUST cache,
-# otherwise every image and video re-downloads on every open.
+# Art + warrior clips: immutable, cache hard.
 [[headers]]
   for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# App code: cached hard, busted by the ?v=<git blob sha> in index.html.
+# When a file changes its blob sha changes, the URL changes, the cache misses.
+[[headers]]
+  for = "/app/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
