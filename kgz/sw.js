@@ -34,3 +34,21 @@ self.addEventListener('fetch',e=>{
     return;
   }
 });
+
+/* --- push --- */
+self.addEventListener('push',function(e){
+  var d={title:'Warrior Zone',body:'Your warrior is waiting.',url:'/'};
+  try{ if(e.data) d=Object.assign(d, e.data.json()); }catch(_){ try{ d.body=e.data.text(); }catch(__){} }
+  e.waitUntil(self.registration.showNotification(d.title,{
+    body:d.body, icon:'img/icon-192.png', badge:'img/icon-192.png',
+    data:{url:d.url||'/'}, tag:'wz-nudge', renotify:false
+  }));
+});
+self.addEventListener('notificationclick',function(e){
+  e.notification.close();
+  var url=(e.notification.data&&e.notification.data.url)||'/';
+  e.waitUntil(self.clients.matchAll({type:'window',includeUncontrolled:true}).then(function(cs){
+    for(var i=0;i<cs.length;i++){ if(cs[i].url.indexOf(self.location.origin)===0){ cs[i].focus(); return; } }
+    return self.clients.openWindow(url);
+  }));
+});
