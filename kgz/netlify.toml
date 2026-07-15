@@ -2,7 +2,15 @@
   publish = "."
   command = ""
 
+# HTML stays uncached so app updates land instantly
 [[headers]]
   for = "/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Static art + warrior clips are immutable and MUST cache,
+# otherwise every image and video re-downloads on every open.
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
