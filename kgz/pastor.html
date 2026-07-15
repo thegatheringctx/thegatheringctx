@@ -1,86 +1,107 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Post This Week's Word · Warrior Zone</title>
+<title>This Week · Warrior Zone</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#12121f;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:1.25rem;line-height:1.5}
 .wrap{max-width:560px;margin:0 auto}
-h1{color:#f5c842;font-size:1.5rem;margin:0 0 .25rem}
-.sub{color:rgba(255,255,255,.55);font-size:.85rem;margin-bottom:1.25rem}
-label{display:block;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.6);margin:.9rem 0 .3rem}
-input,textarea{width:100%;background:#1e1e33;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:.7rem;color:#fff;font-size:1rem;font-family:inherit}
-textarea{min-height:80px;resize:vertical}
+h1{color:#f5c842;font-size:1.4rem;margin:0 0 .2rem}
+.sub{color:rgba(255,255,255,.55);font-size:.84rem;margin-bottom:1rem}
+.card{background:#1a1a2e;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1rem;margin-bottom:1.25rem}
+.card h2{font-size:1rem;color:#f5c842;margin:0 0 .15rem}
+.card .cs{font-size:.76rem;color:rgba(255,255,255,.45);margin-bottom:.5rem}
+label{display:block;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.55);margin:.8rem 0 .25rem}
+input,textarea{width:100%;background:#25253f;border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:.65rem;color:#fff;font-size:1rem;font-family:inherit}
+textarea{min-height:64px;resize:vertical}
 input:focus,textarea:focus{outline:none;border-color:#f5c842}
-button{width:100%;margin-top:1.1rem;background:#f5c842;color:#1a1a2e;border:none;border-radius:11px;padding:.85rem;font-size:1rem;font-weight:900;cursor:pointer}
+button{width:100%;margin-top:.9rem;background:#f5c842;color:#1a1a2e;border:none;border-radius:10px;padding:.8rem;font-size:.95rem;font-weight:900;cursor:pointer}
 button:disabled{opacity:.6;cursor:default}
-#out{margin-top:1rem;padding:.8rem;border-radius:10px;font-size:.88rem;display:none}
+.out{margin-top:.8rem;padding:.7rem;border-radius:9px;font-size:.85rem;display:none}
 .ok{background:rgba(126,224,138,.14);border:1px solid rgba(126,224,138,.5);color:#7ee08a}
 .err{background:rgba(255,107,107,.14);border:1px solid rgba(255,107,107,.5);color:#ff9b9b}
-.hint{font-size:.75rem;color:rgba(255,255,255,.4);margin-top:.3rem}
-.recent{margin-top:2rem;border-top:1px solid rgba(255,255,255,.1);padding-top:1rem}
-.recent h2{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.5);margin:0 0 .5rem}
-.vid{font-size:.8rem;color:rgba(255,255,255,.7);padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.hint{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem}
+#pass{border-color:rgba(245,200,66,.4)}
 </style></head>
 <body><div class="wrap">
-<h1>🎥 This Week's Word</h1>
-<div class="sub">Record on your phone → upload to YouTube as <b>Unlisted</b> → paste the link here. Kids see it at the top of Warrior Zone.</div>
+<h1>Warrior Zone · This Week</h1>
+<div class="sub">Thursday, about five minutes. Both parts are optional — post either one.</div>
 
 <label for="pass">Admin passphrase</label>
 <input id="pass" type="password" autocomplete="current-password" placeholder="your Warrior Zone admin passphrase">
+<div class="hint">Used for both forms below.</div>
+<br>
 
-<label for="url">YouTube link</label>
-<input id="url" type="url" inputmode="url" placeholder="https://youtu.be/...">
-<div class="hint">Unlisted is fine. Shorts, watch links and youtu.be all work.</div>
+<div class="card">
+  <h2>🎥 This Week's Word</h2>
+  <div class="cs">Record on your phone → upload to YouTube as <b>Unlisted</b> → paste the link.</div>
+  <label for="url">YouTube link</label>
+  <input id="url" type="url" inputmode="url" placeholder="https://youtu.be/...">
+  <label for="vtitle">Title</label>
+  <input id="vtitle" type="text" placeholder="A Word From Pastor Billy">
+  <label for="vmsg">Note for the kids (optional)</label>
+  <textarea id="vmsg" placeholder="One or two sentences."></textarea>
+  <button id="goVid">Post the video</button>
+  <div id="outVid" class="out"></div>
+</div>
 
-<label for="title">Title</label>
-<input id="title" type="text" placeholder="A Word From Pastor Billy">
-
-<label for="msg">Note for the kids (optional)</label>
-<textarea id="msg" placeholder="One or two sentences."></textarea>
-
-<button id="go">Post it to Warrior Zone</button>
-<div id="out"></div>
-
-<div class="recent"><h2>Recently posted</h2><div id="list" class="vid">Enter your passphrase to see.</div></div>
+<div class="card">
+  <h2>📣 Talk About It At Home</h2>
+  <div class="cs">Goes home with the kid. Ties your sermon to their dinner table.</div>
+  <label for="ttitle">What they learned</label>
+  <input id="ttitle" type="text" placeholder="Rooted in Jesus">
+  <label for="tsum">One line for the kid (optional)</label>
+  <input id="tsum" type="text" placeholder="Jesus holds us steady when things get hard.">
+  <label for="tverse">Verse (optional)</label>
+  <textarea id="tverse" placeholder="Therefore, as you received Christ Jesus the Lord, so walk in him..."></textarea>
+  <label for="tref">Reference</label>
+  <input id="tref" type="text" placeholder="Colossians 2:6">
+  <label for="q1">Question 1</label>
+  <input id="q1" type="text" placeholder="What does it mean to be rooted in something?">
+  <label for="q2">Question 2</label>
+  <input id="q2" type="text" placeholder="Where do you feel strongest?">
+  <label for="q3">Question 3</label>
+  <input id="q3" type="text" placeholder="How can our family stay rooted this week?">
+  <button id="goTalk">Post the family talk</button>
+  <div id="outTalk" class="out"></div>
+</div>
 </div>
 <script>
 var EP='https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/wz-pastor';
-var out=document.getElementById('out');
-function show(cls,msg){out.className=cls;out.textContent=msg;out.style.display='block';}
+function v(id){return document.getElementById(id).value.trim();}
+function show(el,cls,msg){el.className='out '+cls;el.textContent=msg;el.style.display='block';}
 function post(body){return fetch(EP,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json();});}
-function refresh(){
-  var p=document.getElementById('pass').value;
-  if(!p)return;
-  post({action:'list',passphrase:p}).then(function(r){
-    var el=document.getElementById('list');
-    if(!r.ok){el.textContent='Passphrase not recognized.';return;}
-    if(!r.rows.length){el.textContent='Nothing posted yet.';return;}
-    el.innerHTML='';
-    r.rows.forEach(function(v){
-      var d=document.createElement('div'); d.className='vid';
-      d.textContent=(v.active?'● ':'○ ')+v.title+'  —  '+new Date(v.created_at).toLocaleDateString();
-      el.appendChild(d);
-    });
-  });
+function err(r){
+  if(r.error==='bad_passphrase')return 'Passphrase not recognized.';
+  if(r.error==='bad_youtube_url')return 'That does not look like a YouTube link.';
+  if(r.error==='need_a_question')return 'Add at least one question.';
+  if(r.error==='missing_title')return 'Add what they learned.';
+  return 'Could not post: '+(r.error||'unknown');
 }
-document.getElementById('pass').addEventListener('change',refresh);
-document.getElementById('go').onclick=function(){
-  var b=this;
-  var pass=document.getElementById('pass').value.trim();
-  var url=document.getElementById('url').value.trim();
-  if(!pass){show('err','Enter your admin passphrase.');return;}
-  if(!url){show('err','Paste the YouTube link.');return;}
+document.getElementById('goVid').onclick=function(){
+  var b=this,out=document.getElementById('outVid');
+  if(!v('pass')){show(out,'err','Enter your admin passphrase.');return;}
+  if(!v('url')){show(out,'err','Paste the YouTube link.');return;}
   b.disabled=true;b.textContent='Posting...';
-  post({action:'post',passphrase:pass,url:url,
-        title:document.getElementById('title').value.trim(),
-        message:document.getElementById('msg').value.trim()}).then(function(r){
-    b.disabled=false;b.textContent='Post it to Warrior Zone';
-    if(r.ok){show('ok','✓ Posted. The kids will see it next time they open Warrior Zone.');document.getElementById('url').value='';refresh();}
-    else if(r.error==='bad_passphrase')show('err','Passphrase not recognized.');
-    else if(r.error==='bad_youtube_url')show('err','That does not look like a YouTube link.');
-    else show('err','Could not post: '+(r.error||'unknown'));
-  }).catch(function(){b.disabled=false;b.textContent='Post it to Warrior Zone';show('err','Network error. Try again.');});
+  post({action:'post',passphrase:v('pass'),url:v('url'),title:v('vtitle'),message:v('vmsg')}).then(function(r){
+    b.disabled=false;b.textContent='Post the video';
+    if(r.ok){show(out,'ok','✓ Posted. Kids see it at the top of Warrior Zone.');document.getElementById('url').value='';}
+    else show(out,'err',err(r));
+  }).catch(function(){b.disabled=false;b.textContent='Post the video';show(out,'err','Network error. Try again.');});
+};
+document.getElementById('goTalk').onclick=function(){
+  var b=this,out=document.getElementById('outTalk');
+  if(!v('pass')){show(out,'err','Enter your admin passphrase.');return;}
+  if(!v('ttitle')){show(out,'err','Add what they learned.');return;}
+  var qs=[v('q1'),v('q2'),v('q3')].filter(function(x){return x;});
+  if(!qs.length){show(out,'err','Add at least one question.');return;}
+  b.disabled=true;b.textContent='Posting...';
+  post({action:'talk-post',passphrase:v('pass'),title:v('ttitle'),summary:v('tsum'),
+        verse:v('tverse'),verse_ref:v('tref'),questions:qs}).then(function(r){
+    b.disabled=false;b.textContent='Post the family talk';
+    if(r.ok)show(out,'ok','✓ Posted. Kids can send it home from the dashboard.');
+    else show(out,'err',err(r));
+  }).catch(function(){b.disabled=false;b.textContent='Post the family talk';show(out,'err','Network error. Try again.');});
 };
 </script>
 </body></html>
