@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Content · Warrior Zone</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#12121f;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:1.25rem;line-height:1.5}
+.wrap{max-width:620px;margin:0 auto}
+h1{color:#f5c842;font-size:1.4rem;margin:0 0 .2rem}
+.sub{color:rgba(255,255,255,.55);font-size:.84rem;margin-bottom:1rem}
+.card{background:#1a1a2e;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1rem;margin-bottom:1.25rem}
+.card h2{font-size:1rem;color:#f5c842;margin:0 0 .15rem}
+.cs{font-size:.76rem;color:rgba(255,255,255,.45);margin-bottom:.6rem}
+label{display:block;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.55);margin:.7rem 0 .25rem}
+input,textarea,select{width:100%;background:#25253f;border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:.65rem;color:#fff;font-size:1rem;font-family:inherit}
+textarea{min-height:62px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#f5c842}
+button{width:100%;margin-top:.8rem;background:#f5c842;color:#1a1a2e;border:none;border-radius:10px;padding:.75rem;font-size:.92rem;font-weight:900;cursor:pointer;font-family:inherit}
+button:disabled{opacity:.6;cursor:default}
+.ghost{background:none;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.75)}
+.out{margin-top:.7rem;padding:.65rem;border-radius:9px;font-size:.84rem;display:none}
+.ok{background:rgba(126,224,138,.14);border:1px solid rgba(126,224,138,.5);color:#7ee08a}
+.err{background:rgba(255,107,107,.14);border:1px solid rgba(255,107,107,.5);color:#ff9b9b}
+.hint{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem}
+#pass{border-color:rgba(245,200,66,.4)}
+.v{background:#20203a;border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:.65rem;margin-bottom:.5rem}
+.v.live{border-color:#7ee08a;background:rgba(126,224,138,.08)}
+.vr{font-weight:900;color:#f5c842;font-size:.82rem}
+.vt{font-size:.8rem;color:rgba(255,255,255,.75);margin:.2rem 0 .5rem;font-style:italic}
+.badge{display:inline-block;font-size:.6rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:.12rem .4rem;border-radius:9px;background:rgba(126,224,138,.2);color:#7ee08a;margin-left:.35rem}
+.tabs{display:flex;gap:.4rem;margin-bottom:.8rem}
+.tabs button{margin:0;flex:1;padding:.5rem;font-size:.78rem;background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
+.tabs button.on{background:#f5c842;color:#1a1a2e;border-color:#f5c842}
+.stat{font-size:.74rem;color:rgba(255,255,255,.5);margin-bottom:.5rem}
+a.back{color:#f5c842;font-size:.8rem;text-decoration:none;font-weight:800}
+</style></head>
+<body><div class="wrap">
+<a class="back" href="/pastor.html">← This Week</a>
+<h1 style="margin-top:.5rem">Warrior Zone · Content</h1>
+<div class="sub">Change what the kids see. No developer needed.</div>
+
+<label for="pass">Admin passphrase</label>
+<input id="pass" type="password" autocomplete="current-password" placeholder="your Warrior Zone admin passphrase">
+<div class="hint">Used for everything on this page.</div>
+<br>
+
+<div class="card">
+  <h2>📜 This Week's Memory Verse</h2>
+  <div class="cs">One verse is live per age group. Tap <b>Use this week</b> to switch it.</div>
+  <button id="loadV" class="ghost">Load the verses</button>
+  <div class="tabs" id="vtabs" style="display:none;margin-top:.8rem">
+    <button data-g="47" class="on">Ages 4 to 7</button>
+    <button data-g="812">Ages 8 to 12</button>
+  </div>
+  <div id="vlist"></div>
+</div>
+
+<div class="card">
+  <h2>➕ Add a Memory Verse</h2>
+  <div class="cs">Goes into the library. It won't go live until you pick it above.</div>
+  <label for="vref">Reference</label>
+  <input id="vref" type="text" placeholder="Colossians 2:6 ESV">
+  <label for="vtext">Verse text</label>
+  <textarea id="vtext" placeholder="Therefore, as you received Christ Jesus the Lord, so walk in him."></textarea>
+  <label for="vage">Age group</label>
+  <select id="vage"><option value="47">Ages 4 to 7 (keep it short)</option><option value="812">Ages 8 to 12</option></select>
+  <button id="goV">Add to the library</button>
+  <div id="outV" class="out"></div>
+</div>
+
+<div class="card">
+  <h2>🧠 Add a Quiz Question</h2>
+  <div id="qstat" class="stat"></div>
+  <label for="qq">Question</label>
+  <input id="qq" type="text" placeholder="Who was swallowed by a great fish?">
+  <label>Answers (tick the correct one)</label>
+  <div id="qopts"></div>
+  <label for="qage">Age group</label>
+  <select id="qage"><option value="all">Everyone</option><option value="47">Ages 4 to 7</option><option value="812">Ages 8 to 12</option></select>
+  <button id="goQ">Add the question</button>
+  <div id="outQ" class="out"></div>
+</div>
+
+<div class="card">
+  <h2>🎮 Add Game Content</h2>
+  <div id="gstat" class="stat"></div>
+  <label for="gtype">Which game</label>
+  <select id="gtype">
+    <option value="tf">True or False</option>
+    <option value="fitb">Fill the Blank</option>
+    <option value="scramble">Scripture Scramble</option>
+  </select>
+  <label for="gage">Age group</label>
+  <select id="gage"><option value="47">Ages 4 to 7</option><option value="812">Ages 8 to 12</option></select>
+  <div id="gfields"></div>
+  <button id="goG">Add it</button>
+  <div id="outG" class="out"></div>
+</div>
+</div>
+<script>
+var EP='https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/wz-content';
+function v(id){return (document.getElementById(id).value||'').trim();}
+function show(el,cls,msg){el.className='out '+cls;el.textContent=msg;el.style.display='block';}
+function post(b){return fetch(EP,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function err(r){
+  var m={bad_passphrase:'Passphrase not recognized.',missing_reference:'Add the reference.',
+    missing_text:'Add the verse text.',missing_question:'Add the question.',
+    need_two_options:'Add at least two answers.',bad_answer_index:'Tick which answer is correct.',
+    need_blank:'Use _____ to mark the blank.',too_long_for_47:'Too long for ages 4 to 7 (max 7 words).',
+    too_short:'Needs at least 3 words.',missing_statement:'Add the statement.',
+    missing_true_false:'Pick True or False.',missing_answer:'Add the answer word.',
+    missing_sentence:'Add the sentence.'};
+  return m[r.error]||('Could not save: '+(r.error||'unknown'));
+}
+
+// ---- verses ----
+var VROWS=[], VG='47';
+function drawV(){
+  var box=document.getElementById('vlist');
+  var rows=VROWS.filter(function(r){return r.age_group===VG;});
+  box.innerHTML='';
+  rows.forEach(function(r){
+    var d=document.createElement('div'); d.className='v'+(r.active?' live':'');
+    d.innerHTML='<div class="vr">'+esc(r.reference)+(r.active?'<span class="badge">live now</span>':'')+'</div>'+
+                '<div class="vt">\u201C'+esc(r.text)+'\u201D</div>';
+    if(!r.active){
+      var b=document.createElement('button'); b.className='ghost'; b.style.marginTop='0'; b.textContent='Use this week';
+      b.onclick=function(){ b.disabled=true; b.textContent='...';
+        post({action:'verse-activate',passphrase:v('pass'),id:r.id}).then(function(res){
+          if(res.ok) loadV(); else { b.disabled=false; b.textContent='Use this week'; }
+        }); };
+      d.appendChild(b);
+    }
+    box.appendChild(d);
+  });
+}
+function loadV(){
+  if(!v('pass')){document.getElementById('vlist').innerHTML='<div class="hint">Enter your passphrase first.</div>';return;}
+  document.getElementById('vlist').innerHTML='<div class="hint">Loading...</div>';
+  post({action:'verses',passphrase:v('pass')}).then(function(r){
+    if(!r.ok){document.getElementById('vlist').innerHTML='<div class="out err" style="display:block">'+err(r)+'</div>';return;}
+    VROWS=r.rows; document.getElementById('vtabs').style.display='flex'; drawV();
+  });
+}
+document.getElementById('loadV').onclick=loadV;
+document.querySelectorAll('#vtabs button').forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll('#vtabs button').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on'); VG=b.dataset.g; drawV();
+  };
+});
+document.getElementById('goV').onclick=function(){
+  var b=this,out=document.getElementById('outV');
+  if(!v('pass')){show(out,'err','Enter your admin passphrase.');return;}
+  b.disabled=true;b.textContent='Adding...';
+  post({action:'verse-add',passphrase:v('pass'),reference:v('vref'),text:v('vtext'),
+        age_group:document.getElementById('vage').value}).then(function(r){
+    b.disabled=false;b.textContent='Add to the library';
+    if(r.ok){show(out,'ok','\u2713 Added to the library. Tap "Use this week" above to make it live.');
+      document.getElementById('vref').value='';document.getElementById('vtext').value='';loadV();}
+    else show(out,'err',err(r));
+  }).catch(function(){b.disabled=false;b.textContent='Add to the library';show(out,'err','Network error.');});
+};
+
+// ---- quiz ----
+var qbox=document.getElementById('qopts');
+for(var i=0;i<4;i++){
+  var row=document.createElement('div'); row.style.cssText='display:flex;gap:.5rem;align-items:center;margin-bottom:.35rem';
+  var rad=document.createElement('input'); rad.type='radio'; rad.name='qa'; rad.value=String(i); rad.style.width='auto';
+  if(i===0)rad.checked=true;
+  var inp=document.createElement('input'); inp.type='text'; inp.id='qo'+i; inp.placeholder='Answer '+(i+1)+(i>1?' (optional)':'');
+  row.appendChild(rad); row.appendChild(inp); qbox.appendChild(row);
+}
+function qstat(){
+  if(!v('pass'))return;
+  post({action:'quiz-count',passphrase:v('pass')}).then(function(r){
+    if(r.ok)document.getElementById('qstat').textContent=
+      r.total+' live questions \u00b7 '+r.age47+' for 4-7, '+r.age812+' for 8-12, '+r.everyone+' for everyone';
+  });
+}
+document.getElementById('goQ').onclick=function(){
+  var b=this,out=document.getElementById('outQ');
+  if(!v('pass')){show(out,'err','Enter your admin passphrase.');return;}
+  var opts=[]; for(var i=0;i<4;i++){ var x=v('qo'+i); if(x)opts.push(x); }
+  var ans=Number((document.querySelector('input[name=qa]:checked')||{}).value||0);
+  if(ans>=opts.length){show(out,'err','The correct answer must be one you filled in.');return;}
+  b.disabled=true;b.textContent='Adding...';
+  post({action:'quiz-add',passphrase:v('pass'),q:v('qq'),o:opts,a:ans,
+        age_group:document.getElementById('qage').value}).then(function(r){
+    b.disabled=false;b.textContent='Add the question';
+    if(r.ok){show(out,'ok','\u2713 Added. It is live in the Bible Battle Quiz.');
+      document.getElementById('qq').value=''; for(var i=0;i<4;i++)document.getElementById('qo'+i).value=''; qstat();}
+    else show(out,'err',err(r));
+  }).catch(function(){b.disabled=false;b.textContent='Add the question';show(out,'err','Network error.');});
+};
+
+// ---- game content ----
+function gfields(){
+  var t=document.getElementById('gtype').value, box=document.getElementById('gfields');
+  if(t==='tf'){
+    box.innerHTML='<label for="gs">Statement</label><input id="gs" type="text" placeholder="Jesus is God\u2019s Son.">'+
+      '<label>Is it true?</label><select id="gtf"><option value="true">True</option><option value="false">False</option></select>';
+  } else if(t==='fitb'){
+    box.innerHTML='<label for="gs">Sentence (use _____ for the blank)</label><input id="gs" type="text" placeholder="God is _____.">'+
+      '<label for="ga">The missing word</label><input id="ga" type="text" placeholder="love">'+
+      '<label for="gref">Reference</label><input id="gref" type="text" placeholder="1 John 4:8">';
+  } else {
+    box.innerHTML='<label for="gtext">Verse to scramble</label><input id="gtext" type="text" placeholder="God is love">'+
+      '<div class="hint">Ages 4 to 7: 7 words max.</div>'+
+      '<label for="gref">Reference</label><input id="gref" type="text" placeholder="1 John 4:8">';
+  }
+}
+document.getElementById('gtype').onchange=gfields; gfields();
+function gstat(){
+  if(!v('pass'))return;
+  post({action:'game-count',passphrase:v('pass')}).then(function(r){
+    if(!r.ok)return;
+    var c=r.counts, parts=[];
+    ['tf','fitb','scramble'].forEach(function(g){
+      parts.push(g+': '+(c[g+'_47']||0)+' / '+(c[g+'_812']||0));
+    });
+    document.getElementById('gstat').textContent='items (4-7 / 8-12) \u2192 '+parts.join(' \u00b7 ');
+  });
+}
+document.getElementById('goG').onclick=function(){
+  var b=this,out=document.getElementById('outG');
+  if(!v('pass')){show(out,'err','Enter your admin passphrase.');return;}
+  var t=document.getElementById('gtype').value;
+  var body={action:'game-add',passphrase:v('pass'),game:t,age_group:document.getElementById('gage').value};
+  if(t==='tf'){ body.s=v('gs'); body.a=document.getElementById('gtf').value==='true'; }
+  else if(t==='fitb'){ body.s=v('gs'); body.a=v('ga'); body.ref=v('gref'); }
+  else { body.text=v('gtext'); body.ref=v('gref'); }
+  b.disabled=true;b.textContent='Adding...';
+  post(body).then(function(r){
+    b.disabled=false;b.textContent='Add it';
+    if(r.ok){show(out,'ok','\u2713 Added. Kids will see it next time they play.'); gfields(); gstat();}
+    else show(out,'err',err(r));
+  }).catch(function(){b.disabled=false;b.textContent='Add it';show(out,'err','Network error.');});
+};
+
+document.getElementById('pass').addEventListener('change',function(){ qstat(); gstat(); });
+</script>
+</body></html>
