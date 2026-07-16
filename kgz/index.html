@@ -137,6 +137,7 @@
   <!-- Sidebar nav for desktop -->
   <div class="tab-sidebar" id="tab-sidebar-nav">
     <button class="tab-sidebar-btn active" onclick="dashTab('devos',this)"><span class="ti">📖</span>Devos</button>
+    <button class="tab-sidebar-btn" onclick="dashTab('worship',this)"><span class="ti">🎵</span>Worship</button>
     <button class="tab-sidebar-btn" onclick="dashTab('games',this)"><span class="ti">⚔️</span>Battle Arena</button>
     <button class="tab-sidebar-btn" onclick="dashTab('warrior',this)"><span class="ti">🛡️</span>Armor</button>
     <button class="tab-sidebar-btn" onclick="dashTab('store',this)"><span class="ti">🎁</span>Store</button>
@@ -190,6 +191,7 @@
 </div><!-- end dash-sidebar -->
   <div id="dash-main" style="min-width:0;overflow-y:auto">
   <div id="tab-devos"></div>
+  <div id="tab-worship" style="display:none"></div>
   <div id="tab-games" style="display:none"></div>
   <div id="tab-warrior" style="display:none"></div>
   <div id="tab-store" style="display:none"></div>
@@ -480,6 +482,7 @@
   <script src="app/darts.js?v=c9cbefb0"></script>
   <script src="app/armor-scale.js?v=50e55473"></script>
   <script src="app/games2.js?v=df108281"></script>
+  <script src="app/worship.js"></script>
   <script>
   if('serviceWorker' in navigator){
     window.addEventListener('load',function(){

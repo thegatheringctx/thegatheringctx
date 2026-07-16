@@ -87,6 +87,28 @@ button:disabled{opacity:.6;cursor:default}
   <button id="goTalk">Post the family talk</button>
   <div id="outTalk" class="out"></div>
 </div>
+
+<div class="card">
+  <h2>🎵 Warrior Worship</h2>
+  <div class="cs">YouTube links only. Paste a song and it appears in the kids' Worship tab.</div>
+  <label for="wsurl">YouTube link</label>
+  <input id="wsurl" type="url" inputmode="url" placeholder="https://youtu.be/...">
+  <label for="wstitle">Song title</label>
+  <input id="wstitle" type="text" placeholder="The Lord Is My Shepherd">
+  <label for="wsartist">Artist (optional)</label>
+  <input id="wsartist" type="text" placeholder="Seeds Family Worship">
+  <label for="wsref">Verse it sings (optional)</label>
+  <input id="wsref" type="text" placeholder="Psalm 23:1">
+  <label for="wsage">Who is it for?</label>
+  <select id="wsage" style="width:100%;background:#25253f;border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:.65rem;color:#fff;font-size:1rem;font-family:inherit">
+    <option value="all">Everyone</option>
+    <option value="47">Ages 4 to 7</option>
+    <option value="812">Ages 8 to 12</option>
+  </select>
+  <button id="goWs">Add the song</button>
+  <div id="outWs" class="out"></div>
+  <div id="wsList" style="margin-top:.9rem"></div>
+</div>
 </div>
 <script>
 var EP='https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/wz-pastor';
@@ -196,6 +218,48 @@ if(ab){
    }
   }catch(e){ ao.textContent='Could not turn on alerts: '+e.message; ab.disabled=false; }
  };
+}
+
+
+var WSEP='https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/wz-worship';
+function wsPost(b){return fetch(WSEP,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
+function wsList(){
+  var box=document.getElementById('wsList');
+  if(!v('pass')){box.innerHTML='';return;}
+  wsPost({action:'list',passphrase:v('pass')}).then(function(r){
+    if(!r.ok){box.innerHTML='';return;}
+    if(!r.rows.length){box.innerHTML='<div class="hint">No songs added yet.</div>';return;}
+    box.innerHTML='<div class="hint" style="margin-bottom:.4rem">'+r.rows.length+' song(s)</div>';
+    r.rows.forEach(function(s){
+      var d=document.createElement('div'); d.className='pray '+(s.active?'waiting':'done');
+      d.innerHTML='<div><span class="who">'+esc(s.title)+'</span>'+(s.active?'<span class="badge">live</span>':'<span class="badge flag">hidden</span>')+'</div>'+
+        '<div class="when">'+esc(s.artist||'')+' \u00b7 '+(s.age_group==='all'?'everyone':'ages '+s.age_group)+'</div>';
+      var row=document.createElement('div'); row.className='prow';
+      var b=document.createElement('button'); b.className='ghost'; b.textContent=s.active?'Hide it':'Show it';
+      b.onclick=function(){ b.disabled=true; wsPost({action:s.active?'retire':'restore',passphrase:v('pass'),id:s.id}).then(wsList); };
+      row.appendChild(b); d.appendChild(row); box.appendChild(d);
+    });
+  });
+}
+var goWs=document.getElementById('goWs');
+if(goWs){
+  goWs.onclick=function(){
+    var b=this,out=document.getElementById('outWs');
+    if(!v('pass')){show(out,'err','Enter your admin passphrase.');return;}
+    if(!v('wsurl')){show(out,'err','Paste the YouTube link.');return;}
+    if(!v('wstitle')){show(out,'err','Add the song title.');return;}
+    b.disabled=true;b.textContent='Adding...';
+    wsPost({action:'add',passphrase:v('pass'),url:v('wsurl'),title:v('wstitle'),
+            artist:v('wsartist'),verse_ref:v('wsref'),age_group:document.getElementById('wsage').value}).then(function(r){
+      b.disabled=false;b.textContent='Add the song';
+      if(r.ok){show(out,'ok','\u2713 Added. It is live in the Worship tab.');
+        document.getElementById('wsurl').value='';document.getElementById('wstitle').value='';wsList();}
+      else if(r.error==='bad_passphrase')show(out,'err','Passphrase not recognized.');
+      else if(r.error==='bad_youtube_url')show(out,'err','That does not look like a YouTube link.');
+      else show(out,'err','Could not add: '+(r.error||'unknown'));
+    }).catch(function(){b.disabled=false;b.textContent='Add the song';show(out,'err','Network error.');});
+  };
+  document.getElementById('pass').addEventListener('change',wsList);
 }
 
 </script>
