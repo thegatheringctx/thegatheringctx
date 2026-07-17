@@ -86,3 +86,40 @@
   return _sb(path,opts);
  };
 })();
+
+// ---- signup routing (appended) ----------------------------------------
+// The client POSTed straight to `kids` with a client-generated random id and no
+// collision check. Now: wz-signup validates, allocates a unique id, rate limits.
+(function(){
+ if(window.__wzSignup)return; window.__wzSignup=1;
+ if(typeof sb!=='function'||typeof wzPost!=='function')return;
+ var _sb2=sb;
+ window.sb=function(path,opts){
+  try{
+   if(path==='kids' && opts && String(opts.method).toUpperCase()==='POST' && opts.body){
+    var k=opts.body;
+    var typedPin=k.pin;
+    return wzPost('wz-signup',{
+      first_name:k.first_name, last_name:k.last_name, age:k.age,
+      parent_name:k.parent_name, pin:typedPin,
+      code:(window.__wzSignupCode||'')
+    }).then(function(r){
+      if(!r||!r.ok){
+       var msg={bad_code:'That signup code is not right.',
+                too_many_signups:'Too many new warriors from here right now. Try again shortly.',
+                bad_pin:'PIN must be exactly 4 digits.',
+                bad_age:'Enter a valid age (4-18).',
+                missing_name:'Enter first and last name.',
+                name_too_long:'That name is too long.'}[r&&r.error]||'Could not create the account. Try again.';
+       throw new Error(msg);
+      }
+      // reattach the PIN the child just typed — the server never returns it,
+      // and wz-award needs it for the rest of the session.
+      var kid=r.kid; kid.pin=typedPin;
+      return [kid];
+    });
+   }
+  }catch(e){ if(e && e.message) throw e; }
+  return _sb2(path,opts);
+ };
+})();
