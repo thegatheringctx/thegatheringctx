@@ -1,0 +1,42 @@
+/* Touch targets + nav discoverability — measured at 390px, 2026-07-16.
+   BEFORE: 7 of 11 nav buttons under 44px wide (Jesus 36x52, Devos 40x52);
+   529px of buttons in a 334px scroller, so only 7 of 11 tabs were reachable
+   without sideways scrolling. Exit was 21x14.
+
+   Apple minimum is 44x44, Google 48x48 — and these are CHILDREN, whose aim is
+   worse than an adult's. Treat 48 as a floor.
+
+   KEY DECISION: simply enlarging the buttons would push MORE tabs off-screen
+   (bigger targets, worse discovery). So the bar WRAPS to two rows instead of
+   scrolling: every tab visible, no hidden content, bigger targets. Costs ~50px
+   of vertical space; buys a 5-year-old the ability to find Verse and Worship. */
+
+@media (max-width: 899px) {
+  #mob-tab-bar {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    justify-content: center;
+    gap: .3rem !important;
+    padding: .4rem !important;
+  }
+  #mob-tab-bar .tab-btn {
+    flex: 0 0 auto !important;
+    min-width: 60px;
+    min-height: 52px;
+    padding: .5rem .35rem !important;
+    font-size: .62rem !important;
+    justify-content: center;
+  }
+  #mob-tab-bar .tab-btn .ti { font-size: 1.3rem !important; }
+
+  /* Exit was 21x14 — unhittable. Give it a real target without making it
+     inviting enough to tap by accident. */
+  .dash-sticky button {
+    min-width: 48px;
+    min-height: 44px;
+    padding: .4rem .6rem !important;
+  }
+
+  /* Any remaining small controls get a floor. */
+  .btn, .btn-gold, .btn-dark { min-height: 44px; }
+}
