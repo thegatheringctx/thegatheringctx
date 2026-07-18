@@ -137,7 +137,8 @@
   <div id="dash-sidebar">
   <!-- Sidebar nav for desktop -->
   <div class="tab-sidebar" id="tab-sidebar-nav">
-    <button class="tab-sidebar-btn active" onclick="dashTab('devos',this)"><span class="ti">📖</span>Devos</button>
+    <button class="tab-sidebar-btn active" onclick="dashTab('today',this)"><span class="ti">⭐</span>Today</button>
+    <button class="tab-sidebar-btn" onclick="dashTab('devos',this)"><span class="ti">📖</span>Devos</button>
     <button class="tab-sidebar-btn" onclick="dashTab('worship',this)"><span class="ti">🎵</span>Worship</button>
     <button class="tab-sidebar-btn" onclick="dashTab('games',this)"><span class="ti">⚔️</span>Battle Arena</button>
     <button class="tab-sidebar-btn" onclick="dashTab('warrior',this)"><span class="ti">🛡️</span>Armor</button>
@@ -181,7 +182,8 @@
     </div>
   </div>
   <div class="tab-bar" id="mob-tab-bar" style="flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none">
-    <button class="tab-btn active" onclick="dashTab('devos',this)"><span class="ti">&#128214;</span>Devos</button>
+    <button class="tab-btn active" onclick="dashTab('today',this)"><span class="ti">⭐</span>Today</button>
+    <button class="tab-btn" onclick="dashTab('devos',this)"><span class="ti">&#128214;</span>Devos</button>
     <button class="tab-btn" onclick="dashTab('worship',this)"><span class="ti">&#127925;</span>Worship</button>
     <button class="tab-btn" onclick="dashTab('games',this)"><span class="ti">&#9876;&#65039;</span>Battle</button>
     <button class="tab-btn" onclick="dashTab('warrior',this)"><span class="ti">&#128737;&#65039;</span>Armor</button>
@@ -192,6 +194,7 @@
   </div>
 </div><!-- end dash-sidebar -->
   <div id="dash-main" style="min-width:0;overflow-y:auto">
+  <div id="tab-today" style="display:none"></div>
   <div id="tab-devos"></div>
   <div id="tab-worship" style="display:none"></div>
   <div id="tab-games" style="display:none"></div>
@@ -485,6 +488,7 @@
   <script src="app/armor-scale.js?v=50e55473"></script>
   <script src="app/games2.js?v=df108281"></script>
   <script src="app/worship.js?v=b12e9a80"></script>
+  <script src="app/today.js"></script>
   <script>
   if('serviceWorker' in navigator){
     window.addEventListener('load',function(){
