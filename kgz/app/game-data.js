@@ -38,3 +38,33 @@
   };
  }
 })();
+
+// ---- match + wheel (appended) -----------------------------------------
+// Last two hardcoded games moved to game_content, age-filtered.
+(function(){
+ if(window.__wzGameData2)return; window.__wzGameData2=1;
+ if(typeof sb!=='function')return;
+ function grp(){ try{ return (window.APP&&APP.kid&&APP.kid.age_group)||'812'; }catch(e){ return '812'; } }
+ function load(game){
+  return sb('game_content?active=eq.true&game=eq.'+game+'&age_group=eq.'+grp()+'&order=sort_order.asc')
+   .then(function(rows){ return (rows||[]).map(function(r){ return r.payload; }); })
+   .catch(function(){ return []; });
+ }
+ function refresh(){
+  load('match').then(function(p){ if(p.length>=5 && typeof MPAIRS!=='undefined') MPAIRS=p; });
+  load('wheel').then(function(p){ if(p.length>=4 && typeof WCHALLENGES!=='undefined') WCHALLENGES=p; });
+ }
+ var tries=0;
+ var iv=setInterval(function(){
+  tries++; if(tries>400){clearInterval(iv);return;}
+  if(!(window.APP&&APP.kid))return;
+  clearInterval(iv); refresh();
+ },1500);
+ if(typeof renderGames==='function'){
+  var _rg=renderGames;
+  renderGames=function(gameId){
+   if(!gameId && window.APP && APP.kid) refresh();
+   return _rg.apply(this,arguments);
+  };
+ }
+})();
