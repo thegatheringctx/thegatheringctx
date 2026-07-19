@@ -1,5 +1,5 @@
 /* Warrior Zone service worker */
-const V='wz-v1';
+const V='wz-v2';
 const SHELL=['./'];
 self.addEventListener('install',e=>{
   self.skipWaiting();
