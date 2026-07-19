@@ -645,52 +645,8 @@ function redeemItem(id,pts,name,canAfford){
 // ════════════════════════════════════════════════
 //  LEADERBOARD
 // ════════════════════════════════════════════════
-function loadRanks(){
-  sb("kids?select=first_name,last_name,points&order=points.desc&limit=20")
-    .then(function(rows){APP.kids=rows||[];renderRanks();}).catch(function(){});
-}
-
-function renderRanks(){
-  var el=document.getElementById("tab-ranks");if(!el)return;
-  el.innerHTML="";
-  var hdr=document.createElement("div");hdr.style.cssText="margin-bottom:1rem";
-  hdr.innerHTML="<div style=\'font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1\'>Hall of<br><span style=\'color:#f5c842\'>Victory</span></div><div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>Who is walking in the most armor?</div>";
-  el.appendChild(hdr);
-  if(!APP.kids.length){var ld=document.createElement("p");ld.className="muted";ld.textContent="Loading warriors...";el.appendChild(ld);loadRanks();return;}
-  var myRank=-1;
-  APP.kids.forEach(function(k,i){if(APP.kid&&k.first_name===APP.kid.first_name&&k.last_name===APP.kid.last_name)myRank=i+1;});
-  if(APP.kid&&myRank>0){
-    var medals3=["🥇","🥈","🥉"];
-    var myArmor2=getArmor(APP.kid);
-    var myCard=document.createElement("div");
-    myCard.style.cssText="background:linear-gradient(135deg,rgba(245,200,66,.12),rgba(245,200,66,.05));border:2px solid rgba(245,200,66,.35);border-radius:20px;padding:.9rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.85rem";
-    myCard.innerHTML="<div style='font-size:1.6rem;flex-shrink:0'>"+(myRank<=3?medals3[myRank-1]:"#"+myRank)+"</div>"
-      +"<div style='flex:1'><div style='font-size:.56rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,200,66,.6);margin-bottom:1px'>Your Rank</div>"
-      +"<div style='font-weight:900;color:#fff;font-size:.95rem'>"+APP.kid.first_name+"</div>"
-      +"<div style='font-size:.65rem;color:rgba(255,255,255,.4);margin-top:1px'>"+myArmor2.length+"/7 armor pieces</div></div>"
-      +"<div style='text-align:right;flex-shrink:0'><div style='font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842;text-shadow:0 0 10px rgba(245,200,66,.4)'>"+APP.kid.points+"</div><div style='font-size:.55rem;font-weight:900;color:rgba(245,200,66,.5);text-transform:uppercase;letter-spacing:.1em'>pts</div></div>";
-    el.appendChild(myCard);
-  }
-  var medals4=["🥇","🥈","🥉"];
-  APP.kids.forEach(function(k,i){
-    var isMe=APP.kid&&k.first_name===APP.kid.first_name&&k.last_name===APP.kid.last_name;
-    var armor2=getArmor(k);
-    var armorEmojis=["🟡","🛡","👟","🛡️","🪖","⚔️","✨"].slice(0,armor2.length).join("");
-    var row=document.createElement("div");
-    row.style.cssText="display:flex;align-items:center;gap:.75rem;padding:.75rem .9rem;border-radius:16px;margin-bottom:.4rem;border:1.5px solid "
-      +(isMe?"rgba(245,200,66,.3)":"rgba(255,255,255,.07)")+";"
-      +"background:"+(i===0?"linear-gradient(90deg,rgba(245,200,66,.1),transparent)":i===1?"linear-gradient(90deg,rgba(200,200,200,.06),transparent)":i===2?"linear-gradient(90deg,rgba(180,120,40,.07),transparent)":isMe?"linear-gradient(90deg,rgba(245,200,66,.05),transparent)":"rgba(255,255,255,.03)");
-    var rankEl=document.createElement("div");rankEl.style.cssText="font-size:"+(i<3?"1.4rem":".85rem")+";width:30px;text-align:center;flex-shrink:0;font-weight:900;color:"+(i<3?"inherit":"rgba(255,255,255,.35)");rankEl.textContent=i<3?medals4[i]:(i+1);
-    var av=document.createElement("div");av.style.cssText="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,rgba(108,82,227,.5),rgba(64,10,96,.5));border:1.5px solid rgba(108,82,227,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem;font-weight:900;color:#fff;flex-shrink:0";av.textContent=(k.first_name||"?").charAt(0).toUpperCase();
-    var infoEl=document.createElement("div");infoEl.style.cssText="flex:1;min-width:0";
-    infoEl.innerHTML="<div style='font-weight:900;font-size:.85rem;color:"+(isMe?"#f5c842":"#fff")+"'>"+(k.first_name||"")+(isMe?" (you)":"")+"</div><div style='font-size:.58rem;margin-top:1px;color:rgba(255,255,255,.3);letter-spacing:.03em'>"+(armorEmojis||"No armor yet")+"</div>";
-    var ptsEl=document.createElement("div");ptsEl.style.cssText="text-align:right;flex-shrink:0";
-    ptsEl.innerHTML="<div style='font-family:Bangers,cursive;font-size:1.2rem;color:"+(isMe?"#f5c842":"rgba(255,255,255,.85)")+"'>"+k.points+"</div><div style='font-size:.52rem;font-weight:900;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.08em'>pts</div>";
-    row.appendChild(rankEl);row.appendChild(av);row.appendChild(infoEl);row.appendChild(ptsEl);
-    el.appendChild(row);
-  });
-}
-
+/* loadRanks: folded into the ranks (belonging) module at end of file */
+/* renderRanks: folded into the ranks (belonging) module at end of file */
 
 
 
@@ -1950,3 +1906,321 @@ function saveCustom(k,v){var cur={};try{var a=APP.kid.avatar;if(a&&a.charAt(0)==
 function openCustomize(){var host=document.getElementById("tab-warrior");if(!host)return;var ex=document.getElementById("wz-custom");if(ex){ex.remove();return;}var skins=["#ffe0bd","#f1c27d","#c68642","#8d5524"];var accents=["#6C52E3","#2f6fed","#00b070","#e04a3f","#f5c842","#e85aa0"];var cur={};try{var a=APP.kid.avatar;if(a&&a.charAt(0)==="{")cur=JSON.parse(a);}catch(e){}var p=document.createElement("div");p.id="wz-custom";p.style.cssText="background:rgba(255,255,255,.05);border:1px solid rgba(245,200,66,.3);border-radius:16px;padding:1rem;margin-bottom:1rem";var h="<div style='font-weight:900;margin-bottom:.5rem'>🎨 Customize Your Warrior</div><div class='muted' style='font-size:.72rem;margin-bottom:.3rem'>Skin</div><div style='display:flex;gap:.5rem;margin-bottom:.7rem'>";skins.forEach(function(c){h+="<button data-skin='"+c+"' style='width:38px;height:38px;border-radius:50%;border:3px solid "+((cur.skin||'#f1c27d')===c?'#f5c842':'rgba(255,255,255,.2)')+";background:"+c+";cursor:pointer'></button>";});h+="</div><div class='muted' style='font-size:.72rem;margin-bottom:.3rem'>Warrior Color</div><div style='display:flex;gap:.5rem;flex-wrap:wrap'>";accents.forEach(function(c){h+="<button data-accent='"+c+"' style='width:38px;height:38px;border-radius:50%;border:3px solid "+((cur.accent||'#6C52E3')===c?'#f5c842':'rgba(255,255,255,.2)')+";background:"+c+";cursor:pointer'></button>";});h+="</div>";p.innerHTML=h;host.insertBefore(p,host.children[3]||null);p.querySelectorAll("[data-skin]").forEach(function(b){b.addEventListener("click",function(){saveCustom("skin",b.getAttribute("data-skin"));});});p.querySelectorAll("[data-accent]").forEach(function(b){b.addEventListener("click",function(){saveCustom("accent",b.getAttribute("data-accent"));});});}
 window.renderArmor=function(){var el=document.getElementById("tab-warrior");if(!el)return;var unlocked=APP.kid?getArmor(APP.kid):[];el.innerHTML="";var pts=APP.kid?(APP.kid.lifetime_points!=null?APP.kid.lifetime_points:(APP.kid.points||0)):0;var PIECES=[{id:"belt",label:"Belt of Truth",e:"🎗️",t:25},{id:"breastplate",label:"Breastplate of Righteousness",e:"🛡️",t:100},{id:"boots",label:"Gospel Boots",e:"🥾",t:250},{id:"shield",label:"Shield of Faith",e:"🛡️",t:500},{id:"helmet",label:"Helmet of Salvation",e:"⛑️",t:800},{id:"sword",label:"Sword of the Spirit",e:"⚔️",t:1200},{id:"full",label:"Full Armor of God",e:"✨",t:1800}];var has=function(id){return unlocked.indexOf(id)>=0;};var count=unlocked.filter(function(x){return x!=="full";}).length;var hdr=document.createElement("div");hdr.style.cssText="font-family:'Bangers',cursive;font-size:1.6rem;letter-spacing:.04em";hdr.textContent="Your Armor of God";var sub=document.createElement("div");sub.className="muted";sub.style.cssText="margin-bottom:.6rem;font-size:.78rem";sub.textContent=count+" of 6 pieces earned"+(has("full")?" — FULL ARMOR, warrior!":"");el.appendChild(hdr);el.appendChild(sub);var cbtn=document.createElement("button");cbtn.className="btn btn-dark";cbtn.style.cssText="font-size:.8rem;padding:.5rem .9rem;margin-bottom:.85rem;width:auto;display:inline-block";cbtn.textContent="🎨 Customize My Warrior";cbtn.addEventListener("click",openCustomize);el.appendChild(cbtn);var box=document.createElement("div");box.style.cssText="background:linear-gradient(160deg,#150a3a,#08132e);border:1.5px solid rgba(245,200,66,.2);border-radius:24px;padding:1rem;margin-bottom:1rem;text-align:center";box.innerHTML=armorSVG(has);el.appendChild(box);var next=null;for(var i=0;i<PIECES.length;i++){if(!has(PIECES[i].id)){next=PIECES[i];break;}}if(next){var prevT=0;for(var j=0;j<PIECES.length;j++){if(PIECES[j].id===next.id)break;prevT=PIECES[j].t;}var pctn=Math.max(0,Math.min(100,Math.round((pts-prevT)/(next.t-prevT)*100)));var prog=document.createElement("div");prog.style.cssText="margin-bottom:1rem";prog.innerHTML="<div class='muted' style='font-size:.72rem;margin-bottom:.3rem'>Next: "+next.e+" "+next.label+" ("+pts+" / "+next.t+")</div><div style='background:rgba(255,255,255,.08);border-radius:99px;height:9px;overflow:hidden'><div style='height:100%;width:"+pctn+"%;background:linear-gradient(90deg,#f5c842,#ff8c00);border-radius:99px'></div></div>";el.appendChild(prog);}var grid=document.createElement("div");grid.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.25rem";PIECES.forEach(function(a){if(a.id==="full")return;var on=has(a.id);var card=document.createElement("div");card.style.cssText="border-radius:18px;padding:.85rem .6rem;text-align:center;border:1.5px solid "+(on?"rgba(245,200,66,.4)":"rgba(255,255,255,.08)")+";background:"+(on?"rgba(245,200,66,.08)":"rgba(255,255,255,.03)");card.innerHTML="<div style='font-size:2rem;margin-bottom:.3rem"+(on?"":";filter:grayscale(1) opacity(.3)")+"'>"+a.e+"</div><div style='font-size:.66rem;font-weight:800;color:"+(on?"#fff":"rgba(255,255,255,.4)")+";line-height:1.2'>"+a.label+"</div><div style='font-size:.6rem;color:"+(on?"#f5c842":"rgba(255,255,255,.3)")+";margin-top:.2rem'>"+(on?"UNLOCKED":a.t+" pts")+"</div>";grid.appendChild(card);});el.appendChild(grid);el.appendChild(renderBadgesSection());};
 
+
+
+/* ===== ranks (belonging) folded from patch layer (2026-07-19) ===== */
+// Hall of Victory — belonging, not ranking.
+// REPLACES a public 1..21 leaderboard titled "Who is walking in the most armor?".
+// Live data showed top=9037, median=70, 12 of 21 kids under 100: the board told
+// most children they were last, with a gap no effort could close, and framed it
+// as spiritual attainment. Now: one shared church goal, progress against
+// YOURSELF, and every kid who showed up this week named. No child is ranked.
+(function(){
+ if(window.__wzBelong)return; window.__wzBelong=1;
+ if(typeof sb!=='function')return;
+
+ var TIERS=[{k:'belt',n:'Belt of Truth',p:50},{k:'breastplate',n:'Breastplate',p:150},
+  {k:'boots',n:'Boots of Peace',p:400},{k:'shield',n:'Shield of Faith',p:900},
+  {k:'helmet',n:'Helmet',p:2000},{k:'sword',n:'Sword of the Spirit',p:4000},
+  {k:'full',n:'FULL ARMOR',p:8000}];
+
+ function css(){ if(document.getElementById('wz-bl-css'))return;
+  var s=document.createElement('style'); s.id='wz-bl-css';
+  s.textContent=
+   ".bl-card{background:linear-gradient(135deg,#1e1e38,#171730);border:1px solid rgba(245,200,66,.3);border-radius:16px;padding:1.1rem;margin-bottom:1rem}"+
+   ".bl-hero{background:linear-gradient(135deg,rgba(245,200,66,.16),rgba(245,200,66,.04));border:2px solid rgba(245,200,66,.45)}"+
+   ".bl-t{font-family:Bangers,cursive;font-size:1.25rem;letter-spacing:.04em;color:#f5c842;line-height:1.1;margin-bottom:.15rem}"+
+   ".bl-sub{font-size:.72rem;color:rgba(255,255,255,.45);font-weight:700;margin-bottom:.8rem}"+
+   ".bl-nums{display:flex;gap:.6rem;flex-wrap:wrap}"+
+   ".bl-num{flex:1;min-width:88px;text-align:center;background:rgba(0,0,0,.25);border-radius:12px;padding:.7rem .4rem}"+
+   ".bl-n{font-family:Bangers,cursive;font-size:1.9rem;color:#f5c842;line-height:1}"+
+   ".bl-l{font-size:.6rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:.2rem}"+
+   ".bl-bar{height:10px;background:rgba(0,0,0,.35);border-radius:6px;overflow:hidden;margin:.5rem 0 .3rem}"+
+   ".bl-fill{height:100%;background:linear-gradient(90deg,#f5c842,#ffe08a);border-radius:6px;transition:width .6s}"+
+   ".bl-next{font-size:.74rem;color:rgba(255,255,255,.65)}"+
+   ".bl-pieces{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.55rem}"+
+   ".bl-p{font-size:.66rem;font-weight:800;padding:.28rem .5rem;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.35)}"+
+   ".bl-p.on{background:rgba(245,200,66,.2);color:#f5c842}"+
+   ".bl-wall{display:flex;flex-wrap:wrap;gap:.4rem}"+
+   ".bl-name{background:rgba(245,200,66,.13);color:#f5c842;border-radius:20px;padding:.32rem .68rem;font-size:.76rem;font-weight:800}"+
+   ".bl-name.me{background:#f5c842;color:#1a1a2e}";
+  document.head.appendChild(s); }
+
+ function daysAgo(ymd){
+  if(!ymd)return 999;
+  var p=String(ymd).split('-'); if(p.length!==3)return 999;
+  var d=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]));
+  return Math.floor((Date.now()-d.getTime())/86400000);
+ }
+
+ loadRanks=function(){
+  sb('kids?select=first_name,lifetime_points,points,completed_verses,last_active&limit=500')
+   .then(function(rows){ APP.kids=rows||[]; renderRanks(); })
+   .catch(function(){ APP.kids=[]; renderRanks(); });
+ };
+
+ renderRanks=function(){
+  var el=document.getElementById('tab-ranks'); if(!el)return;
+  css(); el.innerHTML='';
+
+  var hdr=document.createElement('div'); hdr.style.cssText='margin-bottom:1rem';
+  hdr.innerHTML="<div style=\"font-family:Bangers,cursive;font-size:1.8rem;color:#fff;letter-spacing:.04em;line-height:1\">Hall of<br><span style=\"color:#f5c842\">Victory</span></div>"+
+   "<div style='font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.25rem'>One body. One mission. Every warrior counts.</div>";
+  el.appendChild(hdr);
+
+  if(!APP.kids||!APP.kids.length){
+   var ld=document.createElement('p'); ld.className='muted'; ld.textContent='Loading warriors...';
+   el.appendChild(ld); loadRanks(); return;
+  }
+
+  // ---- 1. what the church has done TOGETHER ----
+  var verses=0, pieces=0, active=0;
+  APP.kids.forEach(function(k){
+   verses += (k.completed_verses||[]).length;
+   try{ pieces += getArmor(k).length; }catch(e){}
+   if(daysAgo(k.last_active)<=7) active++;
+  });
+  var c1=document.createElement('div'); c1.className='bl-card bl-hero';
+  c1.innerHTML="<div class='bl-t'>\uD83C\uDFF0 The Gathering Warriors</div>"+
+   "<div class='bl-sub'>What God is doing through all of us together</div>"+
+   "<div class='bl-nums'>"+
+    "<div class='bl-num'><div class='bl-n'>"+verses+"</div><div class='bl-l'>Verses<br>Memorized</div></div>"+
+    "<div class='bl-num'><div class='bl-n'>"+pieces+"</div><div class='bl-l'>Armor<br>Earned</div></div>"+
+    "<div class='bl-num'><div class='bl-n'>"+APP.kids.length+"</div><div class='bl-l'>Warriors<br>Strong</div></div>"+
+   "</div>";
+  el.appendChild(c1);
+
+  // ---- 2. YOUR journey, measured against yourself ----
+  if(APP.kid){
+   var lp=(APP.kid.lifetime_points!=null?APP.kid.lifetime_points:(APP.kid.points||0));
+   var mine=[]; try{ mine=getArmor(APP.kid); }catch(e){}
+   var next=null;
+   for(var i=0;i<TIERS.length;i++){ if(lp<TIERS[i].p){ next=TIERS[i]; break; } }
+   var prevP=0;
+   for(var j=0;j<TIERS.length;j++){ if(lp>=TIERS[j].p)prevP=TIERS[j].p; }
+   var pct = next ? Math.max(2,Math.round(((lp-prevP)/(next.p-prevP))*100)) : 100;
+
+   var c2=document.createElement('div'); c2.className='bl-card';
+   var pieceHtml=TIERS.map(function(t){
+    return "<span class='bl-p"+(mine.indexOf(t.k)>=0?' on':'')+"'>"+(mine.indexOf(t.k)>=0?'\u2713 ':'')+t.n+"</span>";
+   }).join('');
+   c2.innerHTML="<div class='bl-t'>\u2694\uFE0F Your Journey</div>"+
+    "<div class='bl-sub'>You against yesterday's you. Nobody else.</div>"+
+    "<div class='bl-nums' style='margin-bottom:.7rem'>"+
+     "<div class='bl-num'><div class='bl-n'>"+(APP.kid.streak_count||0)+"</div><div class='bl-l'>Day<br>Streak</div></div>"+
+     "<div class='bl-num'><div class='bl-n'>"+(APP.kid.best_streak||0)+"</div><div class='bl-l'>Your<br>Best</div></div>"+
+     "<div class='bl-num'><div class='bl-n'>"+((APP.kid.completed_verses||[]).length)+"</div><div class='bl-l'>Verses<br>You Know</div></div>"+
+    "</div>"+
+    (next
+      ? "<div class='bl-bar'><div class='bl-fill' style='width:"+pct+"%'></div></div>"+
+        "<div class='bl-next'>"+(next.p-lp)+" more points to earn your <b style='color:#f5c842'>"+next.n+"</b></div>"
+      : "<div class='bl-next'>\uD83C\uDFC6 You are wearing the <b style='color:#f5c842'>FULL ARMOR OF GOD</b>. Keep walking.</div>")+
+    "<div class='bl-pieces'>"+pieceHtml+"</div>";
+   el.appendChild(c2);
+  }
+
+  // ---- 3. everyone who showed up this week, unranked ----
+  var week=APP.kids.filter(function(k){ return daysAgo(k.last_active)<=7; });
+  var c3=document.createElement('div'); c3.className='bl-card';
+  var t3=document.createElement('div'); t3.className='bl-t'; t3.textContent='\uD83D\uDEE1\uFE0F Wall of Warriors';
+  var s3=document.createElement('div'); s3.className='bl-sub';
+  s3.textContent = week.length ? 'Everyone who showed up this week. No order. No score.' : 'Be the first warrior on the wall this week.';
+  c3.appendChild(t3); c3.appendChild(s3);
+  var wall=document.createElement('div'); wall.className='bl-wall';
+  week.map(function(k){ return k.first_name||'Warrior'; })
+      .sort(function(a,b){ return a.localeCompare(b); })
+      .forEach(function(n){
+       var sp=document.createElement('span'); sp.className='bl-name';
+       if(APP.kid&&n===APP.kid.first_name)sp.className+=' me';
+       sp.textContent=n; wall.appendChild(sp);
+      });
+  c3.appendChild(wall); el.appendChild(c3);
+ };
+})();
+
+
+/* ===== prayer (prayer loop) folded from patch layer (2026-07-19) ===== */
+// The answer coming back — a child who knows her pastor prayed for her BY NAME
+// is being shepherded. Wraps renderPrayer rather than reimplementing it.
+(function(){
+ if(window.__wzPrayLoop)return; window.__wzPrayLoop=1;
+ if(typeof renderPrayer!=='function'||typeof sb!=='function')return;
+
+ function css(){ if(document.getElementById('wz-pl-css'))return;
+  var s=document.createElement('style'); s.id='wz-pl-css';
+  s.textContent=
+   "#wz-prayed{background:linear-gradient(135deg,rgba(245,200,66,.2),rgba(245,200,66,.05));border:2px solid #f5c842;border-radius:16px;padding:.95rem;margin-bottom:1rem}"+
+   "#wz-prayed .pl-t{font-family:Bangers,cursive;font-size:1.15rem;color:#f5c842;letter-spacing:.03em;line-height:1.15}"+
+   "#wz-prayed .pl-s{font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;margin:.15rem 0 .6rem}"+
+   "#wz-prayed .pl-q{background:rgba(0,0,0,.28);border-left:3px solid #f5c842;border-radius:6px;padding:.5rem .65rem;margin-bottom:.4rem}"+
+   "#wz-prayed .pl-x{font-size:.82rem;color:#fff;line-height:1.4;font-style:italic}"+
+   "#wz-prayed .pl-w{font-size:.68rem;color:rgba(245,200,66,.85);font-weight:800;margin-top:.25rem}";
+  document.head.appendChild(s); }
+
+ function decorate(){
+  var el=document.getElementById('tab-prayer');
+  if(!el||!window.APP||!APP.kid)return;
+  if(document.getElementById('wz-prayed'))return;
+  sb('prayer_wall?select=id,text,prayed_at&kid_id=eq.'+encodeURIComponent(APP.kid.id)+'&prayed_by_pastor=is.true&order=prayed_at.desc&limit=3')
+   .then(function(rows){
+    if(!rows||!rows.length)return;
+    if(document.getElementById('wz-prayed'))return;
+    css();
+    var box=document.createElement('div'); box.id='wz-prayed';
+    var t=document.createElement('div'); t.className='pl-t';
+    t.textContent='\uD83D\uDE4F Pastor Billy prayed for you, '+(APP.kid.first_name||'warrior')+'.';
+    var s=document.createElement('div'); s.className='pl-s';
+    s.textContent='You are not praying alone. Your pastor prayed for this by name.';
+    box.appendChild(t); box.appendChild(s);
+    rows.forEach(function(p){
+     var q=document.createElement('div'); q.className='pl-q';
+     var x=document.createElement('div'); x.className='pl-x'; x.textContent='\u201C'+p.text+'\u201D';
+     q.appendChild(x);
+     if(p.prayed_at){
+      var w=document.createElement('div'); w.className='pl-w';
+      var d=new Date(p.prayed_at);
+      w.textContent='\u2713 Prayed for on '+d.toLocaleDateString();
+      q.appendChild(w);
+     }
+     box.appendChild(q);
+    });
+    el.insertBefore(box, el.firstChild);
+   }).catch(function(){});
+ }
+
+ var _rp=renderPrayer;
+ renderPrayer=function(){
+  var r=_rp.apply(this,arguments);
+  setTimeout(decorate,350);
+  return r;
+ };
+})();
+
+
+/* ===== auth (sb routing) folded from patch layer (2026-07-19) ===== */
+/* sb + wzPost are both defined above; these wraps capture the originals and fall through. */
+// Keep sensitive child data away from the browser's anon key.
+// Queries needing privileged data are rerouted to service-role edge functions.
+// We wrap sb() rather than reimplement the UI, so the PIN pad, the multi-kid
+// picker, the prayer wall and the admin panel keep their exact behaviour.
+(function(){
+ if(window.__wzAuth)return; window.__wzAuth=1;
+ if(typeof sb!=='function'||typeof wzPost!=='function')return;
+ var _sb=sb;
+ function admPass(){ return (typeof ADM!=='undefined'&&ADM&&ADM.pass)?ADM.pass:''; }
+ function kid(){ try{ return (window.APP&&APP.kid)||null; }catch(e){ return null; } }
+ function isGet(opts){ return !opts || !opts.method || String(opts.method).toUpperCase()==='GET'; }
+
+ window.sb=function(path,opts){
+  try{
+   if(typeof path==='string'){
+
+    if(path.indexOf('kids?select=*')===0){
+     // 1. kid login: last name + PIN
+     var m=path.match(/last_name=ilike\.([^&]*)&pin=eq\.(\d{4})/);
+     if(m){
+      var typed=m[2];
+      return wzPost('wz-login',{mode:'kid',last_name:decodeURIComponent(m[1]),pin:typed})
+       .then(function(r){
+        if(!r||!r.ok||!r.kids)return [];
+        // reattach the PIN the child just typed: wz-award needs it and the
+        // server deliberately never sends it back.
+        return r.kids.map(function(k){ k.pin=typed; return k; });
+       });
+     }
+     // 2. admin kid list
+     if(path.indexOf('order=points.desc')>=0){
+      return wzPost('wz-admin',{action:'kids',pass:admPass()})
+       .then(function(r){ return (r&&r.ok&&r.kids)?r.kids:[]; });
+     }
+     // 3. parent login: PIN only
+     var p=path.match(/pin=eq\.(\d{4})/);
+     if(p){
+      var ptyped=p[1];
+      return wzPost('wz-login',{mode:'parent',pin:ptyped})
+       .then(function(r){
+        if(!r||!r.ok||!r.kids)return [];
+        return r.kids.map(function(k){ k.pin=ptyped; return k; });
+       });
+     }
+    }
+
+    // 4. admin decisions list (anon SELECT revoked)
+    if(path.indexOf('decisions?')===0 && isGet(opts)){
+     return wzPost('wz-admin',{action:'rest',table:'decisions',method:'GET',query:'?'+path.split('?')[1],pass:admPass()})
+      .then(function(r){ return (r&&r.ok&&Array.isArray(r.data))?r.data:[]; });
+    }
+
+    // 5. PRAYER WALL reads (anon SELECT revoked — a stranger could scrape
+    //    children's grief). Kids read it via wz-read with id+pin; the admin
+    //    (which needs unapproved rows too) goes through wz-admin.
+    if(path.indexOf('prayer_wall?')===0 && isGet(opts)){
+     var k=kid();
+     var mine=path.match(/kid_id=eq\.([^&]+)/);
+     if(k && mine && path.indexOf('prayed_by_pastor=is.true')>=0){
+      return wzPost('wz-read',{kid_id:k.id,pin:k.pin,what:'my-answered'})
+       .then(function(r){ return (r&&r.ok&&r.rows)?r.rows:[]; });
+     }
+     if(k && path.indexOf('approved=eq.true')>=0){
+      return wzPost('wz-read',{kid_id:k.id,pin:k.pin,what:'prayers'})
+       .then(function(r){ return (r&&r.ok&&r.rows)?r.rows:[]; });
+     }
+     // admin view (all rows, incl. unapproved)
+     if(admPass()){
+      return wzPost('wz-admin',{action:'rest',table:'prayer_wall',method:'GET',query:'?'+path.split('?')[1],pass:admPass()})
+       .then(function(r){ return (r&&r.ok&&Array.isArray(r.data))?r.data:[]; });
+     }
+     return Promise.resolve([]);
+    }
+
+    // 6. TRANSACTIONS reads — a child's own ledger only.
+    if(path.indexOf('transactions?')===0 && isGet(opts)){
+     var k2=kid();
+     if(k2){
+      return wzPost('wz-read',{kid_id:k2.id,pin:k2.pin,what:'my-transactions'})
+       .then(function(r){ return (r&&r.ok&&r.rows)?r.rows:[]; });
+     }
+     return Promise.resolve([]);
+    }
+   }
+  }catch(e){}
+  return _sb(path,opts);
+ };
+})();
+
+// ---- signup routing (appended) ----------------------------------------
+// The client POSTed straight to `kids` with a client-generated random id and no
+// collision check. Now: wz-signup validates, allocates a unique id, rate limits.
+(function(){
+ if(window.__wzSignup)return; window.__wzSignup=1;
+ if(typeof sb!=='function'||typeof wzPost!=='function')return;
+ var _sb2=sb;
+ window.sb=function(path,opts){
+  try{
+   if(path==='kids' && opts && String(opts.method).toUpperCase()==='POST' && opts.body){
+    var k=opts.body;
+    var typedPin=k.pin;
+    return wzPost('wz-signup',{
+      first_name:k.first_name, last_name:k.last_name, age:k.age,
+      parent_name:k.parent_name, pin:typedPin,
+      code:(window.__wzSignupCode||'')
+    }).then(function(r){
+      if(!r||!r.ok){
+       var msg={bad_code:'That signup code is not right.',
+                too_many_signups:'Too many new warriors from here right now. Try again shortly.',
+                bad_pin:'PIN must be exactly 4 digits.',
+                bad_age:'Enter a valid age (4-18).',
+                missing_name:'Enter first and last name.',
+                name_too_long:'That name is too long.'}[r&&r.error]||'Could not create the account. Try again.';
+       throw new Error(msg);
+      }
+      // reattach the PIN the child just typed — the server never returns it,
+      // and wz-award needs it for the rest of the session.
+      var kid=r.kid; kid.pin=typedPin;
+      return [kid];
+    });
+   }
+  }catch(e){ if(e && e.message) throw e; }
+  return _sb2(path,opts);
+ };
+})();
