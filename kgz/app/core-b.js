@@ -1917,7 +1917,7 @@ window.renderArmor=function(){var el=document.getElementById("tab-warrior");if(!
 // YOURSELF, and every kid who showed up this week named. No child is ranked.
 (function(){
  if(window.__wzBelong)return; window.__wzBelong=1;
- if(typeof renderRanks!=='function'||typeof sb!=='function')return;
+ if(typeof sb!=='function')return;
 
  var TIERS=[{k:'belt',n:'Belt of Truth',p:50},{k:'breastplate',n:'Breastplate',p:150},
   {k:'boots',n:'Boots of Peace',p:400},{k:'shield',n:'Shield of Faith',p:900},
