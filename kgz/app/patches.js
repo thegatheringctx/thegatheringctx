@@ -766,14 +766,7 @@ try {
   el.insertBefore(box, el.firstChild);
  }
 
- if(typeof dashTab==='function'){
-  var _dt=dashTab;
-  dashTab=function(tab,btn){
-   var r=_dt.apply(this,arguments);
-   if(tab==='warrior')setTimeout(paintWarrior,420);
-   return r;
-  };
- }
+ window.__wzPaintWarrior=paintWarrior;
 })();
 
 } catch(__wzPatchErr){ try{console.error("[wz patch] armor-scale",__wzPatchErr);}catch(_){} }
@@ -1035,14 +1028,7 @@ try {
 
  // dashTab's tab list is hardcoded and does not know about worship, so it will
  // hide every known tab but never show/hide ours. Handle it here.
- var _dt=dashTab;
- dashTab=function(tab,btn){
-  var r=_dt.apply(this,arguments);
-  var w=document.getElementById('tab-worship');
-  if(w)w.style.display=(tab==='worship')?'block':'none';
-  if(tab==='worship')renderWorship();
-  return r;
- };
+
 })();
 
 } catch(__wzPatchErr){ try{console.error("[wz patch] worship",__wzPatchErr);}catch(_){} }
@@ -1143,14 +1129,7 @@ try {
  }
 
  // route dashTab through 'today' and render it
- var _dt=dashTab;
- dashTab=function(tab,btn){
-  var r=_dt.apply(this,arguments);
-  var t=document.getElementById('tab-today');
-  if(t)t.style.display=(tab==='today')?'block':'none';
-  if(tab==='today')renderToday();
-  return r;
- };
+
 
  // make Today the landing view: openDash defaults to devos, so override after it
  if(typeof openDash==='function'){
@@ -1184,3 +1163,20 @@ try {
  };
 })();
 } catch(__wzPatchErr){ try{console.error("[wz patch] renderGames-consolidated",__wzPatchErr);}catch(_){} }
+
+/* =================== consolidated dashTab wrapper =================== */
+try {
+(function(){
+ if(typeof dashTab!=='function')return;
+ var _dt=dashTab;
+ dashTab=function(tab,btn){
+  var r=_dt.apply(this,arguments);
+  var w=document.getElementById('tab-worship'); if(w)w.style.display=(tab==='worship')?'block':'none';
+  var t=document.getElementById('tab-today'); if(t)t.style.display=(tab==='today')?'block':'none';
+  if(tab==='worship' && typeof renderWorship==='function') renderWorship();
+  if(tab==='today' && typeof renderToday==='function') renderToday();
+  if(tab==='warrior' && typeof window.__wzPaintWarrior==='function') setTimeout(window.__wzPaintWarrior,420);
+  return r;
+ };
+})();
+} catch(__wzPatchErr){ try{console.error("[wz patch] dashTab-consolidated",__wzPatchErr);}catch(_){} }
