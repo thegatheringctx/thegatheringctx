@@ -509,13 +509,7 @@ try {
   if(!(window.APP&&APP.kid))return;
   clearInterval(iv); refresh();
  },1500);
- if(typeof renderGames==='function'){
-  var _rg=renderGames;
-  renderGames=function(gameId){
-   if(!gameId && window.APP && APP.kid) refresh();
-   return _rg.apply(this,arguments);
-  };
- }
+ window.__wzPoolRefresh=refresh;
 })();
 } catch(__wzPatchErr){ try{console.error("[wz patch] game-data",__wzPatchErr);}catch(_){} }
 
@@ -665,15 +659,7 @@ try {
   stage.addEventListener('click',function(){ if(running)flash(); });
  };
 
- var _rg=renderGames;
- renderGames=function(gameId){
-  var r=_rg.apply(this,arguments);
-  if(gameId==='darts'){
-   var a=document.getElementById('game-arena');
-   if(a)initDarts(a);
-  }
-  return r;
- };
+
 })();
 
 } catch(__wzPatchErr){ try{console.error("[wz patch] darts",__wzPatchErr);}catch(_){} }
@@ -984,14 +970,7 @@ try {
  if(!GAMES.some(function(g){return g.id==='storyorder';}))
   GAMES.push({id:'storyorder',title:'Story Order',emoji:'\uD83D\uDDBC\uFE0F',bg:bg(ART.storyorder),pts:15,sub:'Put the story in order · pictures'});
 
- var _rg=renderGames;
- renderGames=function(gameId){
-  var r=_rg.apply(this,arguments);
-  var a=document.getElementById('game-arena');
-  if(gameId==='armorup'&&a)initArmorUp(a);
-  if(gameId==='storyorder'&&a)initStoryOrder(a);
-  return r;
- };
+
 })();
 
 } catch(__wzPatchErr){ try{console.error("[wz patch] games2",__wzPatchErr);}catch(_){} }
@@ -1186,3 +1165,22 @@ try {
 
 } catch(__wzPatchErr){ try{console.error("[wz patch] today",__wzPatchErr);}catch(_){} }
 
+
+/* =================== consolidated renderGames wrapper =================== */
+try {
+(function(){
+ if(typeof renderGames!=='function')return;
+ var _rg=renderGames;
+ renderGames=function(gameId){
+  if(!gameId && window.APP && window.APP.kid && typeof window.__wzPoolRefresh==='function'){ try{ window.__wzPoolRefresh(); }catch(e){} }
+  var r=_rg.apply(this,arguments);
+  var a=document.getElementById('game-arena');
+  if(a){
+   if(gameId==='darts' && typeof initDarts==='function') initDarts(a);
+   if(gameId==='armorup' && typeof initArmorUp==='function') initArmorUp(a);
+   if(gameId==='storyorder' && typeof initStoryOrder==='function') initStoryOrder(a);
+  }
+  return r;
+ };
+})();
+} catch(__wzPatchErr){ try{console.error("[wz patch] renderGames-consolidated",__wzPatchErr);}catch(_){} }
