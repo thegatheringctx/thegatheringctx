@@ -244,3 +244,18 @@
   for = "/partners-ephesians-book-9d4cc31bd9.pdf"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/partners-ephesians-c7e0ca758b.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/partners-ephesians-kids47-d683586507.pdf"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/partners-ephesians-kids812-1f684ef49d.pdf"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
