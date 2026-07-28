@@ -67,6 +67,19 @@
   to = "/devotional-template.html"
   status = 200
 
+# SEO: consolidate old devotional slugs to canonical URLs (301)
+[[redirects]]
+  from = "/phil1-adult-devo"
+  to = "/devotional-philippians-1"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/philippians-2"
+  to = "/devotional-philippians-2"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/announcements"
   to = "/announcements.html"
