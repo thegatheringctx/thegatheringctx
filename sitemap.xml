@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://gatheringctx.org/</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://gatheringctx.org/</loc><lastmod>2026-07-28</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://gatheringctx.org/visit</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://gatheringctx.org/new-here</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://gatheringctx.org/sermons</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://gatheringctx.org/devotionals</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://gatheringctx.org/sermons</loc><lastmod>2026-07-28</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://gatheringctx.org/devotionals</loc><lastmod>2026-07-28</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://gatheringctx.org/kids</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gatheringctx.org/generosity</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gatheringctx.org/events</loc><lastmod>2026-05-28</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -18,13 +18,14 @@
   <url><loc>https://gatheringctx.org/formed</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/small-gatherings</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/small-groups</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/resources</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gatheringctx.org/testimonies</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/resources</loc><lastmod>2026-07-28</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/testimonies</loc><lastmod>2026-07-28</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/decrees</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/prayer-guide</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/reading-plan</loc><lastmod>2026-07-09</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/ephesians</loc><lastmod>2026-05-28</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gatheringctx.org/philippians</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/colossians</loc><lastmod>2026-07-28</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gatheringctx.org/devotional-pentecost</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/devotional-easter-sunday</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/devotional-palm-sunday</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -35,10 +36,14 @@
   <url><loc>https://gatheringctx.org/devotional-ephesians-5</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/devotional-ephesians-6</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/devotional-philippians-1</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-philippians-2</loc><lastmod>2026-07-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/devotional-philippians-3</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/devotional-philippians-4</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/devotional-philippians-5</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/devotional-philippians-6</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-colossians-1</loc><lastmod>2026-07-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-colossians-2</loc><lastmod>2026-07-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gatheringctx.org/devotional-worship-why-what-how</loc><lastmod>2026-07-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gatheringctx.org/family-devotional-ephesians</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://gatheringctx.org/church-cleburne-tx</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gatheringctx.org/spirit-filled-church-cleburne</loc><lastmod>2026-05-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
