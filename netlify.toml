@@ -238,3 +238,9 @@
   from = "/church-near-godley-tx"
   to = "/church-near-godley-tx.html"
   status = 200
+
+# Unlisted partner downloads: keep out of search engines (added 2026-07-28)
+[[headers]]
+  for = "/partners-ephesians-book-9d4cc31bd9.pdf"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
