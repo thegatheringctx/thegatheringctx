@@ -1,1542 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Warrior Zone — The Gathering CTX</title>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Exo+2:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="app/base.css?v=bf0488cd">
-  <link rel="stylesheet" href="app/touch.css?v=c63cc791">
-  <link rel="stylesheet" href="app/landing.css?v=c5d8dcf5">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#1a1a2e">
-  <link rel="apple-touch-icon" href="img/icon-180.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Warrior Zone">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3L9RY5RS73');
+    gtag('config', 'AW-18072555268');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Gathering CTX | Church in Cleburne, TX | Sundays at 5 PM</title>
+  <meta name="description" content="The Gathering CTX is a Spirit-led church in Cleburne, TX. Sundays at 5 PM at the Cleburne Conference Center. Come as you are. Walk with victory.">
+  <link rel="canonical" href="https://gatheringctx.org">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":["Church","LocalBusiness"],"@id":"https://gatheringctx.org/#church","name":"The Gathering CTX","url":"https://gatheringctx.org","image":"https://gatheringctx.org/hero-worship.jpg","description":"A Spirit-led church in Cleburne, TX making disciples who are confident and empowered to make disciples.","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"},"telephone":"+16822865640","email":"info@gatheringctx.org","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"16:30","closes":"19:00"},"hasMap":"https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX+76033","sameAs":["https://www.facebook.com/thegatheringctx","https://www.instagram.com/thegatheringctx","https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293"]},
+    {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What denomination is The Gathering CTX?","acceptedAnswer":{"@type":"Answer","text":"Independent, non-denominational. Evangelical, continuationist, and elder-led."}},{"@type":"Question","name":"How long is the service?","acceptedAnswer":{"@type":"Answer","text":"About 90 minutes. 5:00 PM to around 6:30 PM."}},{"@type":"Question","name":"Do you have kids ministry?","acceptedAnswer":{"@type":"Answer","text":"Yes. Babies through Pre-K have a dedicated room. Kids 5-12 stay for worship then go to the Kids Zone table during the message."}},{"@type":"Question","name":"What should I wear?","acceptedAnswer":{"@type":"Answer","text":"Whatever you are comfortable in. Come as you are."}},{"@type":"Question","name":"Where is The Gathering CTX?","acceptedAnswer":{"@type":"Answer","text":"Cleburne Conference Center, 1501 W Henderson St, Cleburne, TX 76033."}}]}
+  ]}
+  </script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:#0a0a0a;color:#fff;font-family:'Georgia',serif;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+    img{display:block;max-width:100%;}
+    :root{--gold:#b8935a;--dark:#0a0a0a;--dark2:#0f0f0f;--dark3:#111;--border:#1a1a1a;--muted:rgba(255,255,255,0.45);--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(10,10,10,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04);}
+    .nav-logo{font-family:var(--sans);line-height:1;}
+    .nav-the{display:block;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.38;}
+    .nav-name{font-size:0.9rem;letter-spacing:0.22em;text-transform:uppercase;}
+    .nav-links{display:flex;align-items:center;gap:32px;}
+    .nav-links a{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.62);transition:color 0.2s;}
+    .nav-links a:hover{color:#fff;}
+    /* nav-new pill removed - I'm New now matches standard nav link style */
+    .nav-give{background:#fff;color:#0a0a0a !important;padding:9px 22px;font-weight:600 !important;}
+
+    /* HERO */
+    .hero{position:relative;height:100vh;min-height:620px;display:flex;align-items:flex-end;overflow:hidden;}
+    .hero-bg{position:absolute;--inset:0;background:url('/hero-worship.jpg') center 25%/cover no-repeat;}
+    .hero-overlay{position:absolute;--inset:0;background:linear-gradient(170deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0.58) 70%,rgba(0,0,0,0.9) 100%);}
+    .hero-body{position:relative;z-index:2;padding:0 56px 80px;}
+    .hero-eyebrow{font-family:var(--sans);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+    .hero-title{font-size:clamp(3rem,7.5vw,6rem);font-weight:300;line-height:1.0;letter-spacing:-0.01em;margin-bottom:36px;}
+    .hero-title em{font-style:italic;color:rgba(255,255,255,0.36);display:block;}
+    .hero-actions{display:flex;align-items:center;gap:24px;}
+    .btn-white{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;background:#fff;color:#0a0a0a;padding:14px 32px;font-weight:600;}
+    .btn-outline{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.65);}
+    .btn-outline:hover{color:#fff;}
+
+    /* CONNECT */
+    .connect-strip{background:var(--dark2);border-bottom:1px solid var(--border);padding:40px 56px;display:flex;align-items:center;justify-content:space-between;gap:40px;}
+    .cs-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+    .cs-title{font-size:1.5rem;font-weight:300;}
+    .cs-sub{font-family:var(--sans);font-size:0.8rem;color:var(--muted);margin-top:6px;}
+    .connect-form{display:flex;flex-shrink:0;}
+    .connect-input{font-family:var(--sans);font-size:0.8rem;background:#0a0a0a;--border:1px solid #2a2a2a;border-right:none;color:#fff;padding:13px 20px;width:260px;outline:none;}
+    .connect-input::placeholder{color:rgba(255,255,255,0.25);}
+    .connect-btn{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--gold);color:#fff;--border:none;padding:13px 24px;cursor:pointer;}
+
+    /* SERMON */
+    .sermon{background:var(--dark);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;}
+    .sermon-left{padding:72px 56px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;}
+    .s-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+    .s-title{font-size:2rem;font-weight:300;line-height:1.2;margin-bottom:8px;}
+    .s-ref{font-family:var(--sans);font-size:0.82rem;color:var(--muted);font-style:italic;margin-bottom:32px;}
+    .s-btns{display:flex;align-items:center;gap:20px;}
+    .btn-gold{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--gold);color:#fff;padding:12px 28px;--border:none;cursor:pointer;display:inline-block;}
+    .btn-subtle{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+    .btn-subtle:hover{color:#fff;}
+    .sermon-right{padding:72px 56px;display:flex;align-items:center;}
+    .sermon-player{width:100%;}
+
+    /* WELCOME */
+    .welcome{display:grid;grid-template-columns:1fr 1fr;min-height:580px;}
+    .welcome-left{background:#f5f2ed;color:#1a1a1a;padding:80px 64px;display:flex;flex-direction:column;justify-content:center;}
+    .w-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:#999;margin-bottom:20px;}
+    .w-title{font-size:clamp(2.4rem,4vw,3.6rem);font-weight:300;line-height:1.05;margin-bottom:28px;}
+    .w-title em{font-style:italic;color:#bbb;}
+    .w-body{font-family:var(--sans);font-size:0.95rem;line-height:1.85;color:#666;max-width:400px;margin-bottom:36px;}
+    .w-body p{margin-bottom:14px;}
+    .btn-dark{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;background:#1a1a1a;color:#fff;padding:14px 30px;display:inline-block;}
+    .welcome-photo{background:url('/Alexus-120.jpg') center/cover no-repeat;min-height:500px;}
+
+    /* SCRIPTURE */
+    .scripture{background:#111;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 56px;text-align:center;}
+    .scripture-q{font-size:clamp(1.3rem,2.8vw,2rem);font-weight:300;font-style:italic;line-height:1.6;max-width:760px;margin:0 auto 20px;color:rgba(255,255,255,0.82);}
+    .scripture-ref{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);}
+
+    /* CONVICTIONS */
+    .convictions{padding:96px 56px;background:#0d0d0d;border-top:1px solid #2a2a2a;}
+    .sec-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+    .sec-title{font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.1;margin-bottom:56px;max-width:600px;}
+    .conv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#2a2a2a;--border:2px solid #2a2a2a;}
+    .conv-item{background:#111;padding:48px;border-bottom:3px solid transparent;transition:border-color 0.3s;}
+    .conv-item:hover{border-left-color:var(--gold);} .conv-item-x{border-bottom-color:var(--gold);}.conv-num{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:block;}
+    .conv-title{font-size:1.3rem;font-weight:400;margin-bottom:14px;line-height:1.3;}
+    .conv-body{font-family:var(--sans);font-size:0.88rem;line-height:1.8;color:var(--muted);margin-bottom:16px;}
+    .conv-scripture{font-family:var(--sans);font-size:0.72rem;color:var(--gold);}
+
+    /* STEPS */
+    .steps{padding:96px 56px;background:var(--dark2);border-top:1px solid var(--border);}
+    .steps-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:56px;}
+    .step{border-top:1px solid #2a2a2a;padding-top:32px;transition:border-color 0.3s;}
+    .step:hover{border-color:var(--gold);}
+    .step-tag{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+    .step-title{font-size:1.4rem;font-weight:300;margin-bottom:14px;line-height:1.2;}
+    .step-body{font-family:var(--sans);font-size:0.88rem;line-height:1.8;color:var(--muted);margin-bottom:24px;}
+    .step-link{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);border-bottom:1px solid rgba(255,255,255,0.12);padding-bottom:2px;}
+    .step-link:hover{color:var(--gold);border-color:var(--gold);}
+
+    /* PHOTOS */
+    .photos{display:grid;grid-template-columns:2fr 1fr 1fr;height:400px;gap:2px;}
+    .photos img{width:100%;height:100%;object-fit:cover;}
+
+    /* KIDS */
+    .kids{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);}
+    .kids-photo{background:url('/gather-09.jpg') center/cover no-repeat;min-height:440px;position:relative;}
+    .kids-photo-overlay{position:absolute;--inset:0;background:rgba(0,0,0,0.4);}
+    .kids-content{background:var(--dark3);padding:80px 64px;display:flex;flex-direction:column;justify-content:center;}
+    .k-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+    .k-title{font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.1;margin-bottom:24px;}
+    .k-body{font-family:var(--sans);font-size:0.9rem;line-height:1.8;color:var(--muted);margin-bottom:10px;}
+    .k-cta{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;}
+    .btn-border{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;--border:1px solid rgba(255,255,255,0.22);padding:12px 24px;color:rgba(255,255,255,0.65);transition:all 0.2s;}
+    .btn-border:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* PRAYER */
+    .prayer{padding:96px 56px;background:var(--dark);border-top:1px solid var(--border);text-align:center;}
+    .p-title{font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:16px;}
+    .p-sub{font-family:var(--sans);font-size:0.9rem;color:var(--muted);margin-bottom:48px;}
+    .prayer-form{display:flex;flex-direction:column;gap:16px;max-width:560px;margin:0 auto;}
+    .p-input,.p-textarea{font-family:var(--sans);font-size:0.88rem;background:#111;--border:1px solid #222;color:#fff;padding:14px 20px;outline:none;width:100%;}
+    .p-input::placeholder,.p-textarea::placeholder{color:rgba(255,255,255,0.25);}
+    .p-textarea{min-height:120px;resize:vertical;}
+    .p-btn{font-family:var(--sans);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;background:var(--gold);color:#fff;--border:none;padding:15px;cursor:pointer;}
+    .p-msg{font-family:var(--sans);font-size:0.8rem;color:var(--gold);margin-top:8px;display:none;}
+
+    /* FOOTER */
+    .site-footer{background:#060606;border-top:1px solid var(--border);padding:72px 56px 32px;}
+    .footer-inner{display:grid;grid-template-columns:1.8fr 1.2fr 1.2fr 1fr;gap:48px;max-width:1200px;margin:0 auto 56px;}
+    .f-logo-the{display:block;font-family:var(--sans);font-size:0.52rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:2px;}
+    .f-logo-name{font-family:var(--sans);font-size:1rem;letter-spacing:0.2em;text-transform:uppercase;}
+    .f-tagline{font-family:var(--sans);font-size:0.82rem;color:var(--muted);margin-top:14px;margin-bottom:20px;font-style:italic;line-height:1.5;}
+    .f-social{display:flex;gap:16px;}
+    .f-social a{color:rgba(255,255,255,0.3);transition:color 0.2s;}
+    .f-social a:hover{color:var(--gold);}
+    .f-col-label{font-family:var(--sans);font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block;}
+    .f-col-line{font-family:var(--sans);font-size:0.8rem;color:var(--muted);line-height:1.9;display:block;}
+    .f-col-link{font-family:var(--sans);font-size:0.8rem;color:var(--muted);line-height:1.9;display:block;transition:color 0.2s;}
+    .f-col-link:hover{color:#fff;}
+    .f-map{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);display:inline-block;margin-top:12px;}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding-top:28px;border-top:1px solid #111;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+    .footer-bottom p{font-family:var(--sans);font-size:0.65rem;color:rgba(255,255,255,0.18);}
+    .footer-bottom a{color:rgba(255,255,255,0.28);}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .nav{padding:0 24px;} .nav-hamburger{display:flex;} .nav-links a:not(.nav-give){display:none;}
+      
+      .hero-body{padding:0 28px 60px;}
+      .hero-title{font-size:clamp(2.6rem,10vw,3.8rem);}
+      .connect-strip{flex-direction:column;align-items:flex-start;padding:40px 28px;}
+      .connect-form{width:100%;}
+      .connect-input{flex:1;width:auto;}
+      .sermon{grid-template-columns:1fr;}
+      .sermon-left{padding:48px 28px;border-right:none;border-bottom:1px solid var(--border);}
+      .sermon-right{padding:40px 28px;}
+      .welcome{grid-template-columns:1fr;}
+      .welcome-photo{min-height:300px;}
+      .welcome-left{padding:60px 28px;}
+      .scripture{padding:56px 28px;}
+      .convictions{padding:64px 28px;}
+      .conv-grid{grid-template-columns:1fr;}
+      .steps{padding:64px 28px;}
+      .steps-grid{grid-template-columns:1fr;gap:32px;}
+      .photos{grid-template-columns:1fr;height:300px;}
+      .photos div:nth-child(2),.photos div:nth-child(3){display:none;}
+      .kids{grid-template-columns:1fr;}
+      .kids-photo{min-height:280px;}
+      .kids-content{padding:56px 28px;}
+      .prayer{padding:64px 28px;}
+      .footer-inner{grid-template-columns:1fr 1fr;gap:40px;}
+      .site-footer{padding:56px 28px 28px;}
+    }
+    @media(max-width:580px){
+      .footer-inner{grid-template-columns:1fr;}
+      .footer-bottom{flex-direction:column;text-align:center;}
+    }
+  
+    .foundations{padding:0 56px 96px;background:#0d0d0d;padding-top:48px;}
+    .foundations-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+    .foundations-title{font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.1;margin-bottom:56px;max-width:600px;}
+    .found-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#2a2a2a;--border:2px solid #2a2a2a;}
+    .found-item{background:#161616;padding:48px;}
+    .found-num{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+    .found-title{font-size:1.3rem;font-weight:400;margin-bottom:14px;line-height:1.3;}
+    .found-body{font-family:var(--sans);font-size:0.88rem;line-height:1.8;color:var(--muted);}
+    @media(max-width:1100px){.steps-grid{grid-template-columns:1fr 1fr;}}@media(max-width:900px){.foundations{padding:0 28px 72px;}.found-grid{grid-template-columns:1fr;}}
+  
+    .testimonies{padding:80px 56px;background:#0d0d0d;border-top:1px solid #1a1a1a;}
+    .testimonies-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+    .testimonies-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;line-height:1.1;margin-bottom:48px;max-width:560px;}
+    .testimonies-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:#2a2a2a;}
+    .testimony{background:#161616;padding:40px;}
+    .testimony-quote{font-family:'Georgia',serif;font-size:1rem;line-height:1.85;color:rgba(255,255,255,0.78);margin-bottom:24px;font-style:italic;}
+    .testimony-quote::before{content:'"';font-size:1.8rem;color:var(--gold);line-height:0;vertical-align:-0.4rem;margin-right:4px;}
+    .testimony-name{font-family:var(--sans);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);}
+    @media(max-width:900px){.testimonies{padding:64px 28px;}.testimonies-grid{grid-template-columns:1fr;}}
+  
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;margin-left:12px;}
+  .nav-hamburger span{display:block;width:24px;height:2px;background:#fff;transition:all 0.25s;}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-hamburger.open span:nth-child(2){opacity:0;}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .nav-mobile-menu{display:none;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(16px);border-bottom:1px solid #1a1a1a;z-index:99;padding:20px 24px 32px;flex-direction:column;}
+  .nav-mobile-menu.open{display:flex;}
+  .nav-mobile-menu a{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;}
+  .nav-mobile-menu a:last-child{border-bottom:none;}
+  .nav-mobile-menu .mob-give{color:#b8935a;font-weight:600;border-bottom:none;margin-top:4px;}
+  @media(max-width:1100px){
+    .steps-grid{grid-template-columns:repeat(3,1fr)!important;gap:24px!important;}
+  }
+  @media(max-width:900px){
+    .nav{padding:0 20px;height:64px;}
+    .nav-links{display:none!important;}
+    .nav-hamburger{display:flex;}
+    .hero{min-height:500px;}
+    .hero-body{padding:0 24px 52px;}
+    .hero-title{font-size:clamp(2.4rem,9vw,3.6rem);}
+    .hero-actions{gap:16px;flex-wrap:wrap;}
+    .connect-strip{flex-direction:column;padding:36px 24px;gap:24px;}
+    .connect-form{width:100%;}
+    .connect-input{flex:1;min-width:0;width:auto;}
+    .sermon{grid-template-columns:1fr;}
+    .sermon-left{padding:44px 24px 28px;border-right:none;border-bottom:1px solid #1a1a1a;}
+    .sermon-right{padding:28px 24px 44px;}
+    .welcome{grid-template-columns:1fr;}
+    .welcome-left{padding:52px 24px;order:2;}
+    .welcome-photo{min-height:280px;order:1;}
+    .scripture{padding:52px 24px;}
+    .scripture-q{font-size:1.1rem;}
+    .convictions{padding:60px 24px;}
+    .conv-grid{grid-template-columns:1fr;}
+    .conv-item{padding:32px 24px;}
+    .foundations{padding:0 24px 60px;padding-top:40px;}
+    .found-grid{grid-template-columns:1fr;}
+    .found-item{padding:32px 24px;}
+    .testimonies{padding:52px 24px;}
+    .testimonies-grid{grid-template-columns:1fr;}
+    .testimony{padding:28px 20px;}
+    .steps{padding:60px 24px;}
+    .steps-grid{grid-template-columns:1fr 1fr!important;gap:20px!important;}
+    .photos{grid-template-columns:1fr!important;height:auto;}
+    .photos img{height:260px!important;}
+    .photos img:nth-child(2),.photos img:nth-child(3){display:none;}
+    .kids{grid-template-columns:1fr;}
+    .kids-photo{min-height:260px;}
+    .kids-content{padding:48px 24px;}
+    .prayer{padding:60px 24px;}
+    .site-footer{padding:48px 24px 24px;}
+    .footer-inner{grid-template-columns:1fr 1fr;gap:32px;}
+    .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+    .testimonies-title{font-size:1.8rem;}
+    .sec-title{font-size:clamp(1.6rem,5vw,2.4rem);}
+  }
+  @media(max-width:700px){
+    .hero-title{font-size:clamp(1.9rem,9vw,2.6rem);}
+    .btn-white,.btn-dark{padding:12px 22px;font-size:0.62rem;}
+    .steps-grid{grid-template-columns:1fr!important;}
+    .footer-inner{grid-template-columns:1fr;gap:24px;}
+    .conv-item{padding:28px 20px;}
+    .found-item{padding:28px 20px;}
+    .kids-content{padding:40px 20px;}
+    .k-cta{flex-direction:column;}
+    .cta-btns{flex-direction:column;align-items:center;}
+    .belief-body{grid-template-columns:1fr;}
+    .belief-scripture-block{border-left:none;border-top:1px solid #1a1a1a;padding-left:0;padding-top:20px;margin-top:8px;}
+    .page-hero{padding:100px 24px 52px;}
+  }
+  @media(max-width:480px){
+    .hero-title{font-size:1.8rem;}
+    .hero-eyebrow{font-size:0.52rem;}
+    .connect-strip{padding:28px 20px;}
+    .connect-btn{padding:13px 14px;font-size:0.6rem;}
+    .testimony-quote{font-size:0.88rem;}
+    .testimony{padding:22px 18px;}
+    .conv-num,.found-num{font-size:0.52rem;}
+    .footer-inner{gap:20px;}
+  }
+
+  /* Social feed responsive */
+  @media(max-width:700px){
+    #social-grid{grid-template-columns:1fr !important;}
+  }
+</style>
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gatheringctx.org">
+  <meta property="og:title" content="The Gathering CTX | Church in Cleburne, TX">
+  <meta property="og:description" content="A Spirit-led church in Cleburne, TX walking in the victory Christ has already won. Sundays at 5 PM. Come as you are.">
+  <meta property="og:image" content="https://gatheringctx.org/Alexus-120.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="The Gathering CTX">
+  <meta property="og:locale" content="en_US">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Gathering CTX | Church in Cleburne, TX">
+  <meta name="twitter:description" content="Walk with victory. Not to it. Sundays at 5 PM in Cleburne, TX.">
+  <meta name="twitter:image" content="https://gatheringctx.org/Alexus-120.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Event","name":"Sunday Worship Service - The Gathering CTX","description":"Join us for Spirit-led worship, expository preaching, and real community. Come as you are.","startDate":"2026-05-25T17:00:00-05:00","endDate":"2026-05-25T18:30:00-05:00","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","location":{"@type":"Place","name":"Cleburne Conference Center","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"}},"organizer":{"@type":"Organization","name":"The Gathering CTX","url":"https://gatheringctx.org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://gatheringctx.org/visit"},"image":"https://gatheringctx.org/Alexus-120.jpg","url":"https://gatheringctx.org/visit"}
+</script>
+<!-- build: 2026-06-09 09:00:00 -->
 </head>
 <body>
 
+<nav class="nav">
+  <a href="/" class="nav-brand"><span class="nav-the">The</span><span class="nav-name">Gathering</span></a>
+  <div class="nav-links">
+    <a href="/new-here">I'm New</a>
+    <a href="/belong">Connect</a>
+    <a href="/kids">Kids</a>
+    <a href="/sermons">Sermons</a>
+    <a href="/devotionals">Devotionals</a>
+    <a href="/resources">Resources</a>
+    <a href="/generosity" class="nav-give-btn">Give</a>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" onclick="this.classList.toggle('open');var m=document.getElementById('nav-mobile-menu');m.classList.toggle('open');"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/new-here">I'm New</a>
+  <a href="/belong">Connect</a>
+  <a href="/kids">Kids Zone</a>
+  <a href="/sermons">Sermons</a>
+  <a href="/devotionals">Devotionals</a>
+  <a href="https://gatheringctx.churchcenter.com/giving" class="mob-give" target="_blank">Give</a>
+</div>
 
-<!-- ═══ LANDING ═══ -->
-<div id="p-land" class="page active">
-  <div class="wl-bg" id="wl-bg"></div>
-  <div class="wl-content">
-    <div class="wl-spacer"></div>
-    <div class="badge"><span class="badge-dot"></span>The Gathering CTX &middot; Cleburne TX</div>
-    <div class="wl-title">Warrior<br><em>Zone</em></div>
-    <p class="wl-tag">Put on the full armor of God &middot; Ephesians 6:11</p>
-    <button class="btn btn-gold" style="margin-bottom:.55rem;font-size:1.35rem;letter-spacing:.1em" onclick="show('p-entry')">&#9876;&#65039; I'M A WARRIOR!</button>
-    <div style="display:flex;gap:.45rem;width:100%;margin-bottom:.8rem">
-      <button class="btn btn-dark" onclick="show('p-plogin')" style="flex:1">&#128106; Parent</button>
-      <button class="btn btn-dark" onclick="show('p-howto')" style="flex:1">&#10067; How It Works</button>
-      <button class="btn btn-dark" onclick="show('p-alogin')" style="flex:1">&#128737; Admin</button>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <p class="hero-eyebrow">Cleburne, Texas &nbsp;&middot;&nbsp; Sundays at 5 PM</p>
+    <h1 class="hero-title">Walk with victory.<em>Not to it.</em></h1>
+    <div class="hero-actions">
+      <a href="/visit" class="btn-white">Plan a Visit</a>
+      <a href="/our-story" class="btn-outline">Our Story &rarr;</a>
     </div>
-    <div class="card" style="width:100%;text-align:center;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08)">
-      <div id="verse-text" style="font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.65;font-style:italic;font-family:Georgia,serif">&ldquo;Be strong and courageous. Do not be afraid, for the Lord your God is with you.&rdquo;</div>
-      <div id="verse-ref" style="font-size:.6rem;font-weight:900;color:#f5c842;letter-spacing:.14em;margin-top:.4rem;text-transform:uppercase">Joshua 1:9 &middot; ESV</div>
-    </div>
-    <div id="checkin-banner" style="display:none;width:100%;background:linear-gradient(135deg,#00C07A,#008f52);border-radius:18px;padding:1rem;text-align:center;margin-bottom:.65rem;cursor:pointer" onclick="doCheckin()">
-      <div style="font-family:'Bangers',cursive;font-size:1.5rem;letter-spacing:.06em">⛪ SUNDAY CHECK-IN LIVE!</div>
-      <div style="font-size:.78rem;color:rgba(255,255,255,.8);margin-top:.2rem">Tap to check in and earn <span id="checkin-pts-display">10</span> pts!</div>
-    </div>
-    <div class="stats-row" style="width:100%;margin-top:.65rem">
-      <div class="stat-cell"><div class="stat-num" id="stat-warriors">&mdash;</div><div class="stat-lbl">Warriors</div></div>
-      <div class="stat-cell"><div class="stat-num">7</div><div class="stat-lbl">Armor Pieces</div></div>
-      <div class="stat-cell"><div class="stat-num">6</div><div class="stat-lbl">Games</div></div>
-    </div>
+  </div>
+</section>
+
+<div class="connect-strip">
+  <div>
+    <p class="cs-label">Stay Connected</p>
+    <h2 class="cs-title">We will reach out.</h2>
+    <p class="cs-sub"><a href="sms:+18175184773&body=VISIT" style="color:inherit">Text <strong>VISIT</strong> to (817) 518-4773</a></p>
   </div>
 </div>
 
-<!-- ═══ ENTRY ═══ -->
-<div id="p-entry" class="page" style="display:none">
-  <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:2rem">
-    <div style="font-size:2.2rem;margin-bottom:.5rem">&#9876;&#65039;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.9rem;letter-spacing:.05em">Ready, <span class="gold">Warrior?</span></div>
-    <p class="muted" style="margin-top:.35rem">Walk in the victory already won for you.</p>
-  </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem">
-    <div onclick="show('p-klogin')" style="background:linear-gradient(135deg,rgba(0,192,122,.15),rgba(0,143,82,.08));border:1.5px solid rgba(0,192,122,.35);border-radius:20px;padding:1.1rem .5rem;text-align:center;cursor:pointer;transition:all .2s" class="anim-in">
-      <div style="font-size:1.9rem;margin-bottom:.35rem">&#128272;</div>
-      <div style="font-size:.78rem;font-weight:900;color:#fff">I have an ID</div>
-      <div class="muted" style="font-size:.62rem">Sign in</div>
-    </div>
-    <div onclick="show('p-signup')" style="background:linear-gradient(135deg,rgba(108,82,227,.15),rgba(64,10,96,.08));border:1.5px solid rgba(108,82,227,.35);border-radius:20px;padding:1.1rem .5rem;text-align:center;cursor:pointer;transition:all .2s" class="anim-in">
-      <div style="font-size:1.9rem;margin-bottom:.35rem">&#128100;</div>
-      <div style="font-size:.78rem;font-weight:900;color:#fff">I'm new!</div>
-      <div class="muted" style="font-size:.62rem">Sign up</div>
-    </div>
-    <div onclick="show('p-howto')" style="background:linear-gradient(135deg,rgba(41,174,255,.15),rgba(0,80,180,.08));border:1.5px solid rgba(41,174,255,.35);border-radius:20px;padding:1.1rem .5rem;text-align:center;cursor:pointer;transition:all .2s" class="anim-in">
-      <div style="font-size:1.9rem;margin-bottom:.35rem">&#128065;</div>
-      <div style="font-size:.78rem;font-weight:900;color:#fff">How it works</div>
-      <div class="muted" style="font-size:.62rem">Learn more</div>
+<section class="sermon" id="sermon-section">
+  <div class="sermon-left" id="sermon-left">
+    <p class="s-label">This Week's Message</p>
+    <h2 class="s-title" id="s-title">Loading...</h2>
+    <p class="s-ref" id="s-ref"></p>
+    <div class="s-btns">
+      <a href="/sermons" class="btn-gold">All Sermons</a>
     </div>
   </div>
-</div>
-
-<!-- ═══ KID LOGIN ═══ -->
-<div id="p-klogin" class="page" style="display:none">
-  <button class="back-btn" onclick="show('p-entry')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:1.5rem">
-    <div style="font-size:2.2rem;margin-bottom:.35rem">&#128274;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.8rem;letter-spacing:.05em">Welcome Back!</div>
-    <p class="muted" style="margin-top:.3rem">Enter your last name and PIN.</p>
-  </div>
-  <div style="max-width:300px;margin:0 auto">
-    <div class="eyebrow" style="margin-bottom:.35rem">Last Name</div>
-    <input id="kl-last" type="text" placeholder="e.g. Smith" maxlength="30" autocomplete="off" style="margin-bottom:1rem">
-    <div class="eyebrow" style="margin-bottom:.35rem">Your PIN</div>
-    <div class="pin-dots" id="kl-dots">
-      <div class="pin-dot"></div><div class="pin-dot"></div>
-      <div class="pin-dot"></div><div class="pin-dot"></div>
-    </div>
-    <div class="kp-grid">
-      <button class="kp-btn" onclick="klTap(1)">1</button><button class="kp-btn" onclick="klTap(2)">2</button><button class="kp-btn" onclick="klTap(3)">3</button>
-      <button class="kp-btn" onclick="klTap(4)">4</button><button class="kp-btn" onclick="klTap(5)">5</button><button class="kp-btn" onclick="klTap(6)">6</button>
-      <button class="kp-btn" onclick="klTap(7)">7</button><button class="kp-btn" onclick="klTap(8)">8</button><button class="kp-btn" onclick="klTap(9)">9</button>
-      <button class="kp-btn" disabled style="visibility:hidden"></button><button class="kp-btn" onclick="klTap(0)">0</button><button class="kp-btn" onclick="klTap('del')">&#9003;</button>
-    </div>
-    <div id="kl-err" class="error"></div>
-    <button class="btn btn-gold" onclick="doLogin()" style="margin-top:.5rem">&#9889; Log In</button>
-    <button class="btn btn-dark" onclick="show('p-signup')" style="margin-top:.5rem">New here? Sign up</button>
-  </div>
-  </div><!-- end z-index wrapper -->
-</div>
-
-<!-- ═══ SIGNUP ═══ -->
-<div id="p-signup" class="page" style="display:none">
-  <button class="back-btn" onclick="show('p-entry')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:1.5rem">
-    <div style="font-size:2.2rem;margin-bottom:.35rem">&#9876;&#65039;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.8rem;letter-spacing:.05em">Join the <span class="gold">Warriors!</span></div>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:.75rem">
-    <div><div class="eyebrow" style="margin-bottom:.3rem">First Name</div><input id="su-first" type="text" placeholder="First name" maxlength="20"></div>
-    <div><div class="eyebrow" style="margin-bottom:.3rem">Last Name</div><input id="su-last" type="text" placeholder="Last name" maxlength="30"></div>
-    <div><div class="eyebrow" style="margin-bottom:.3rem">Age</div><input id="su-age" type="number" placeholder="Age" min="4" max="18"></div>
-    <div><div class="eyebrow" style="margin-bottom:.3rem">Parent Name</div><input id="su-parent" type="text" placeholder="Parent or guardian name" maxlength="40"></div>
-    <div><div class="eyebrow" style="margin-bottom:.3rem">Create a 4-Digit PIN</div><input id="su-pin" type="number" placeholder="e.g. 1234"></div>
-    <div><div class="eyebrow" style="margin-bottom:.3rem">Confirm PIN</div><input id="su-pin2" type="number" placeholder="Enter PIN again"></div>
-    <div id="su-err" class="error"></div>
-    <button class="btn btn-gold" onclick="doSignup()">Create My Account &#9876;&#65039;</button>
-  </div>
-</div>
-
-<!-- ═══ DASHBOARD ═══ -->
-<div id="p-dash" class="page" style="display:none">
-  <div class="dash-sticky" style="grid-column:1/-1">
-    <div style="font-family:'Bangers',cursive;font-size:1rem;color:#f5c842;letter-spacing:.08em">&#9876;&#65039; WARRIOR ZONE</div>
-    <div style="display:flex;align-items:center;gap:.5rem">
-      <div class="pts-pill">&#11088; <span id="dash-pts">0</span> pts</div>
-      <button onclick="doLogout()" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:.72rem;font-weight:700">Exit</button>
+  <div class="sermon-right" id="sermon-right">
+    <div class="sermon-player" id="sermon-player">
+      <p style="color:rgba(255,255,255,0.3);font-size:.85rem">Loading sermon player...</p>
     </div>
   </div>
-  <div id="dash-sidebar">
-  <!-- Sidebar nav for desktop -->
-  <div class="tab-sidebar" id="tab-sidebar-nav">
-    <button class="tab-sidebar-btn active" onclick="dashTab('today',this)"><span class="ti">⭐</span>Today</button>
-    <button class="tab-sidebar-btn" onclick="dashTab('devos',this)"><span class="ti">📖</span>Devos</button>
-    <button class="tab-sidebar-btn" onclick="dashTab('worship',this)"><span class="ti">🎵</span>Worship</button>
-    <button class="tab-sidebar-btn" onclick="dashTab('games',this)"><span class="ti">⚔️</span>Battle Arena</button>
-    <button class="tab-sidebar-btn" onclick="dashTab('warrior',this)"><span class="ti">🛡️</span>Armor</button>
-    <button class="tab-sidebar-btn" onclick="dashTab('store',this)"><span class="ti">🎁</span>Store</button>
-    <button class="tab-sidebar-btn" onclick="dashTab('ranks',this)"><span class="ti">🏆</span>Ranks</button>
-    <button class="tab-sidebar-btn" onclick="dashTab('prayer',this)"><span class="ti">🙏</span>Prayer</button>
-    <button class="tab-sidebar-btn" onclick="dashTab('training',this)"><span class="ti">⚔️</span>Warrior Training</button>
-  </div>
-  <div class="hero-card" id="dash-hero">
-    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0445 0%,#0b1f4a 50%,#081a0b 100%);border-radius:inherit"></div>
-    <div style="position:absolute;top:-30px;right:-30px;width:180px;height:180px;background:radial-gradient(circle,rgba(245,200,66,.12),transparent 65%);pointer-events:none"></div>
-    <div style="position:absolute;bottom:-10px;left:-10px;width:140px;height:140px;background:radial-gradient(circle,rgba(108,82,227,.1),transparent 65%);pointer-events:none"></div>
-    <div style="position:absolute;bottom:-25px;right:-10px;font-size:100px;opacity:.035;line-height:1;pointer-events:none;font-family:serif">✝</div>
-    <div style="position:relative;z-index:1">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.5rem">
-        <div>
-          <div style="font-size:.56rem;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.2rem">⚔️ Warrior Identity</div>
-          <div id="dash-name" style="font-family:'Bangers',cursive;font-size:2.6rem;color:#fff;line-height:.92;letter-spacing:.04em;text-shadow:0 2px 20px rgba(255,255,255,.12)">Warrior</div>
-        </div>
-        <div style="text-align:center;background:rgba(245,200,66,.12);border:1.5px solid rgba(245,200,66,.25);border-radius:16px;padding:.5rem .85rem;flex-shrink:0">
-          <div id="dash-pts2" style="font-family:'Bangers',cursive;font-size:2.2rem;color:#f5c842;line-height:1;text-shadow:0 0 20px rgba(245,200,66,.5)">0</div>
-          <div style="font-size:.5rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3)">points</div>
-        </div>
-      </div>
-      <div style="margin-bottom:.5rem">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
-          <div style="font-size:.58rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Armor of God</div>
-          <div id="armor-count" style="font-size:.68rem;font-weight:900;color:rgba(245,200,66,.8)">0/7</div>
-        </div>
-        <div style="background:rgba(255,255,255,.07);border-radius:99px;height:10px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.3)">
-          <div id="armor-fill" style="height:100%;background:linear-gradient(90deg,#f5c842,#ff8c00,#ff4500);border-radius:99px;width:0%;transition:width 1s cubic-bezier(.34,1.56,.64,1);box-shadow:0 0 12px rgba(245,200,66,.6)"></div>
-        </div>
-      </div>
-      <div id="armor-emoji-row" style="display:flex;gap:.3rem;margin-bottom:.55rem;flex-wrap:wrap"></div>
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
-        <div id="hero-next-armor" style="font-size:.65rem;color:rgba(255,255,255,.3);font-weight:700;flex:1"></div>
-        <div id="dash-checkin-btn" style="display:none">
-          <button onclick="doCheckin()" style="background:linear-gradient(135deg,#00C07A,#008f52);border:none;border-radius:12px;padding:.45rem .9rem;font-family:'Bangers',cursive;font-size:.9rem;letter-spacing:.06em;color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(0,192,122,.35)">⛪ Check In!</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="tab-bar" id="mob-tab-bar" style="flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none">
-    <button class="tab-btn active" onclick="dashTab('today',this)"><span class="ti">⭐</span>Today</button>
-    <button class="tab-btn" onclick="dashTab('devos',this)"><span class="ti">&#128214;</span>Devos</button>
-    <button class="tab-btn" onclick="dashTab('worship',this)"><span class="ti">&#127925;</span>Worship</button>
-    <button class="tab-btn" onclick="dashTab('games',this)"><span class="ti">&#9876;&#65039;</span>Battle</button>
-    <button class="tab-btn" onclick="dashTab('warrior',this)"><span class="ti">&#128737;&#65039;</span>Armor</button>
-    <button class="tab-btn" onclick="dashTab('store',this)"><span class="ti">&#127873;</span>Store</button>
-    <button class="tab-btn" onclick="dashTab('ranks',this)"><span class="ti">&#127942;</span>Ranks</button>
-    <button class="tab-btn" onclick="dashTab('prayer',this)"><span class="ti">&#128591;</span>Prayer</button>
-    <button class="tab-btn" onclick="dashTab('training',this)"><span class="ti">&#9876;&#65039;</span>Training</button>
-  </div>
-</div><!-- end dash-sidebar -->
-  <div id="dash-main" style="min-width:0;overflow-y:auto">
-  <div id="tab-today" style="display:none"></div>
-  <div id="tab-devos"></div>
-  <div id="tab-worship" style="display:none"></div>
-  <div id="tab-games" style="display:none"></div>
-  <div id="tab-warrior" style="display:none"></div>
-  <div id="tab-store" style="display:none"></div>
-  <div id="tab-ranks" style="display:none"></div>
-  <div id="tab-prayer" style="display:none"></div>
-  <div id="tab-training" style="display:none"></div>
-</div><!-- end dash-main -->
-</div><!-- end p-dash -->
+</section>
 
-<!-- ═══ HOW IT WORKS ═══ -->
-<div id="p-howto" class="page" style="display:none">
-  <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
-  <div style="font-family:'Bangers',cursive;font-size:1.9rem;color:#f5c842;margin-bottom:1.25rem;letter-spacing:.04em">How It Works</div>
-  <div class="how-step"><div class="how-num">1</div><div><div style="font-weight:900;margin-bottom:.25rem">Create your Warrior account</div><p class="muted">Sign up with your name and a 4-digit family PIN. Takes 30 seconds.</p></div></div>
-  <div class="how-step"><div class="how-num">2</div><div><div style="font-weight:900;margin-bottom:.25rem">Earn points every week</div><p class="muted">Read devos, win games, show up Sunday, memorize scripture. Every action earns points.</p></div></div>
-  <div class="how-step"><div class="how-num">3</div><div><div style="font-weight:900;margin-bottom:.25rem">Unlock Armor of God pieces</div><p class="muted">Points unlock each piece of the armor from Ephesians 6. Work toward the full set.</p></div></div>
-  <div class="how-step"><div class="how-num">4</div><div><div style="font-weight:900;margin-bottom:.25rem">Redeem points for real prizes</div><p class="muted">Browse the Warrior Store and trade your points for cool prizes delivered by a leader.</p></div></div>
-  <button class="btn btn-gold" onclick="show('p-entry')" style="margin-top:.75rem">Start Now &#9876;&#65039;</button>
-</div>
-
-<!-- ═══ PARENT LOGIN ═══ -->
-<div id="p-plogin" class="page" style="display:none">
-  <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:1.5rem">
-    <div style="font-size:2.2rem;margin-bottom:.35rem">&#128106;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.8rem">Parent Portal</div>
-    <p class="muted" style="margin-top:.3rem">Enter your family PIN to view your kids.</p>
-  </div>
-  <div style="max-width:300px;margin:0 auto">
-    <input id="pl-pin" type="number" placeholder="4-digit family PIN" style="margin-bottom:.5rem;text-align:center;font-size:1.5rem;letter-spacing:.3em">
-    <div id="pl-err" class="error"></div>
-    <button class="btn btn-gold" onclick="doParentLogin()">View My Kids</button>
-  </div>
-</div>
-
-<!-- ═══ ADMIN LOGIN ═══ -->
-<div id="p-alogin" class="page" style="display:none">
-  <button class="back-btn" onclick="show('p-land')">&#8592; back</button>
-  <div style="text-align:center;margin-bottom:1.5rem">
-    <div style="font-size:2.2rem;margin-bottom:.35rem">&#128737;&#65039;</div>
-    <div style="font-family:'Bangers',cursive;font-size:1.8rem">Admin Access</div>
-  </div>
-  <div style="max-width:300px;margin:0 auto">
-    <input id="al-pw" type="password" placeholder="Password" style="margin-bottom:.5rem">
-    <div id="al-err" class="error"></div>
-    <button class="btn btn-gold" onclick="doAdminLogin()">Enter</button>
-  </div>
-</div>
-
-<!-- ═══ ADMIN DASHBOARD ═══ -->
-<div id="p-admin" class="page" style="display:none;padding:0">
-  <div class="dash-sticky" style="position:sticky;top:0;z-index:100">
-    <div style="font-family:'Bangers',cursive;font-size:1rem;color:#f5c842;letter-spacing:.08em">🛡️ ADMIN PANEL</div>
-    <button onclick="show('p-land')" style="background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:.72rem;font-weight:700">Exit</button>
-  </div>
-  <div style="padding:1rem 1.25rem">
-
-    <!-- STATS ROW -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.6rem">
-      <div class="admin-stat"><div class="stat-num" id="adm-stat-kids">—</div><div class="stat-lbl">Warriors</div></div>
-      <div class="admin-stat"><div class="stat-num" id="adm-stat-pts">—</div><div class="stat-lbl">Pts Awarded</div></div>
-      <div class="admin-stat"><div class="stat-num" id="adm-stat-orders">—</div><div class="stat-lbl">Orders</div></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem">
-      <div class="admin-stat" id="adm-checkin-stat" style="cursor:pointer" onclick="toggleCheckin()">
-        <div class="stat-num" id="adm-stat-checkin" style="font-size:1rem">—</div>
-        <div class="stat-lbl">Check-In (tap)</div>
-      </div>
-      <div class="admin-stat">
-        <div class="stat-num" id="adm-stat-items">—</div>
-        <div class="stat-lbl">Store Items</div>
-      </div>
-    </div>
-
-    <!-- ADMIN TABS -->
-    <div style="display:flex;gap:.35rem;margin-bottom:1rem;background:rgba(255,255,255,.04);border-radius:14px;padding:.3rem;border:1px solid rgba(255,255,255,.07)">
-      <button class="admin-tab active" onclick="adminTab('overview',this)">📊 Today</button>
-      <button class="admin-tab" onclick="adminTab('kids',this)">👧 Warriors</button>
-      <button class="admin-tab" onclick="adminTab('award',this)">⚡ Points</button>
-      <button class="admin-tab" onclick="adminTab('orders',this)">📦 Orders</button>
-      <button class="admin-tab" onclick="adminTab('store',this)">🎁 Store</button>
-      <button class="admin-tab" onclick="adminTab('announce',this)">📣 Announce</button>
-      <button class="admin-tab" onclick="adminTab('settings',this)">⚙️ Config</button>
-    </div>
-
-    <!-- OVERVIEW TAB -->
-    <div id="atab-overview">
-      <div class="eyebrow" style="margin-bottom:.6rem">⛪ Sunday Check-In</div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:1rem;margin-bottom:.85rem">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem">
-          <div>
-            <div id="ov-checkin-status" style="font-family:Bangers,cursive;font-size:1.4rem;letter-spacing:.05em">⚪ Check-In Off</div>
-            <div style="font-size:.68rem;color:rgba(255,255,255,.4);margin-top:2px">Tap to toggle on Sundays</div>
-          </div>
-          <button id="ov-toggle-btn" onclick="toggleCheckin()" style="border:none;border-radius:12px;padding:.6rem 1.25rem;font-family:Bangers,cursive;font-size:1.1rem;letter-spacing:.06em;cursor:pointer;transition:all .2s">Toggle</button>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
-          <div style="font-size:.75rem;font-weight:900;color:rgba(255,255,255,.55)">Today's check-ins</div>
-          <button onclick="loadCheckinRoster();document.getElementById('ov-roster').style.display='block'" style="background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.25);border-radius:8px;padding:.3rem .75rem;color:#f5c842;font-size:.65rem;font-weight:900;cursor:pointer">Load Roster</button>
-        </div>
-        <div id="ov-roster" style="display:none;max-height:180px;overflow-y:auto"></div>
-      </div>
-
-      <div class="eyebrow" style="margin-bottom:.6rem">📊 Quick Stats</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-        <div class="admin-stat"><div class="stat-num" id="ov-stat-top">—</div><div class="stat-lbl">Top Warrior</div></div>
-        <div class="admin-stat"><div class="stat-num" id="ov-stat-avg">—</div><div class="stat-lbl">Avg Points</div></div>
-        <div class="admin-stat"><div class="stat-num" id="ov-stat-zero">—</div><div class="stat-lbl">At 0 Points</div></div>
-        <div class="admin-stat"><div class="stat-num" id="ov-stat-armor">—</div><div class="stat-lbl">Full Armor</div></div>
-      </div>
-
-      <div class="eyebrow" style="margin-bottom:.6rem">📋 Export Roster</div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:1rem;margin-bottom:.85rem">
-        <p style="font-size:.78rem;color:rgba(255,255,255,.55);margin-bottom:.65rem;line-height:1.5">Download a CSV of all warriors — name, points, armor count, age group — for board reports.</p>
-        <button onclick="exportCSV()" style="background:rgba(0,192,122,.15);border:1.5px solid rgba(0,192,122,.3);border-radius:12px;padding:.65rem 1.25rem;color:#00C07A;font-weight:900;font-size:.82rem;cursor:pointer;width:100%">⬇️ Download CSV Report</button>
-      </div>
-
-      <div class="eyebrow" style="margin-bottom:.6rem">⚠️ Pending Orders</div>
-      <div id="ov-pending-orders" style="margin-bottom:.85rem"></div>
-    </div>
-
-    <!-- WARRIORS LIST -->
-    <div id="atab-kids">
-      <div style="display:flex;gap:.5rem;margin-bottom:.75rem">
-        <input id="adm-search" type="text" placeholder="Search by name..." style="flex:1" oninput="admSearchKids()">
-      </div>
-      <div id="adm-kids-list"></div>
-    </div>
-
-    <!-- AWARD POINTS -->
-    <div id="atab-award" style="display:none">
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem;margin-bottom:.75rem">
-        <div class="eyebrow" style="margin-bottom:.5rem">Search for a Warrior</div>
-        <input id="award-search" type="text" placeholder="Type name..." oninput="admAwardSearch()" style="margin-bottom:.5rem">
-        <div id="award-results"></div>
-        <div id="award-selected" style="display:none;background:rgba(245,200,66,.1);border:1.5px solid rgba(245,200,66,.3);border-radius:12px;padding:.65rem 1rem;margin-top:.5rem;display:none">
-          <div style="font-weight:900" id="award-sel-name">—</div>
-          <div style="font-size:.72rem;color:rgba(255,255,255,.4)" id="award-sel-pts">—</div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem;margin-bottom:.75rem">
-        <div class="eyebrow" style="margin-bottom:.5rem">Award Points</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.65rem">
-          <input id="award-pts" type="number" placeholder="Points" min="1">
-          <select id="award-cat" style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:.75rem 1rem;color:#fff;font-size:.9rem">
-            <option value="attendance">Sunday Attendance</option>
-            <option value="memorization">Scripture Memory</option>
-            <option value="devo">Devotional</option>
-            <option value="game">Game Win</option>
-            <option value="bonus">Bonus / Special</option>
-            <option value="witness">Shared Their Faith</option>
-          </select>
-        </div>
-        <input id="award-note" type="text" placeholder="Note (optional)" style="margin-bottom:.65rem">
-        <div id="award-err" class="error"></div>
-        <button class="btn btn-gold" onclick="doAwardPts()">⚡ Award Points</button>
-      </div>
-      <!-- Quick award buttons -->
-      <div class="eyebrow" style="margin-bottom:.5rem">Quick Award</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem">
-        <button onclick="quickAward(10,'attendance')" style="background:rgba(0,192,122,.12);border:1.5px solid rgba(0,192,122,.3);border-radius:12px;padding:.65rem;color:#00C07A;font-weight:900;font-size:.78rem;cursor:pointer">+10 Attendance</button>
-        <button onclick="quickAward(15,'memorization')" style="background:rgba(245,200,66,.12);border:1.5px solid rgba(245,200,66,.3);border-radius:12px;padding:.65rem;color:#f5c842;font-weight:900;font-size:.78rem;cursor:pointer">+15 Memory</button>
-        <button onclick="quickAward(5,'devo')" style="background:rgba(108,82,227,.12);border:1.5px solid rgba(108,82,227,.3);border-radius:12px;padding:.65rem;color:#9B7EE8;font-weight:900;font-size:.78rem;cursor:pointer">+5 Devo</button>
-        <button onclick="quickAward(20,'witness')" style="background:rgba(255,107,26,.12);border:1.5px solid rgba(255,107,26,.3);border-radius:12px;padding:.65rem;color:#FF6B1A;font-weight:900;font-size:.78rem;cursor:pointer">+20 Witness</button>
-        <button onclick="quickAward(25,'bonus')" style="background:rgba(255,200,0,.12);border:1.5px solid rgba(255,200,0,.3);border-radius:12px;padding:.65rem;color:#ffc800;font-weight:900;font-size:.78rem;cursor:pointer">+25 Bonus</button>
-        <button onclick="quickAward(50,'memorization')" style="background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.4);border-radius:12px;padding:.65rem;color:#f5c842;font-weight:900;font-size:.78rem;cursor:pointer">+50 Special</button>
-      </div>
-    </div>
-
-    <!-- ORDERS -->
-    <div id="atab-orders" style="display:none">
-      <div style="display:flex;gap:.5rem;margin-bottom:.65rem">
-        <input id="order-search" type="text" placeholder="Search orders by name or item..." style="flex:1;font-size:.82rem;padding:.6rem .85rem" oninput="admSearchOrders()">
-      </div>
-      <div class="eyebrow" style="margin-bottom:.5rem">Orders</div>
-      <div id="adm-orders-list"></div>
-      <div class="eyebrow" style="margin-bottom:.5rem;margin-top:1.25rem">Prayer Wall</div>
-      <div id="adm-prayers-list"><p class="muted">Loading prayers...</p></div>
-    </div>
-
-    <!-- SETTINGS -->
-    <div id="atab-settings" style="display:none">
-      <div class="eyebrow" style="margin-bottom:.75rem">⛪ Sunday Check-In</div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem;margin-bottom:1rem">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
-          <div>
-            <div style="font-weight:900;font-size:.88rem">Check-In Mode</div>
-            <div style="font-size:.7rem;color:rgba(255,255,255,.4)">Enable on Sunday mornings</div>
-          </div>
-          <button id="checkin-toggle" onclick="toggleCheckin()" style="border:none;border-radius:10px;padding:.5rem 1.1rem;font-weight:900;font-size:.82rem;cursor:pointer;transition:all .2s">OFF</button>
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem">
-          <div style="flex:1"><div class="eyebrow" style="margin-bottom:.25rem">Points per Check-In</div>
-          <input id="cfg-checkin-pts" type="number" value="10" min="1" max="100" style="font-size:.9rem;padding:.5rem .75rem"></div>
-          <button onclick="saveCfgCheckin()" style="background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.3);border-radius:10px;padding:.5rem .85rem;color:#f5c842;font-weight:900;font-size:.78rem;cursor:pointer;flex-shrink:0;margin-top:1.2rem">Save</button>
-        </div>
-      </div>
-
-      <div class="eyebrow" style="margin-bottom:.75rem">⛪ Today's Check-Ins</div>
-      <div id="checkin-roster" style="margin-bottom:1rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:.85rem;max-height:200px;overflow-y:auto">
-        <p class="muted">Click "Load Roster" to see who checked in today.</p>
-      </div>
-      <button onclick="loadCheckinRoster()" style="background:rgba(0,192,122,.15);border:1.5px solid rgba(0,192,122,.3);border-radius:12px;padding:.55rem 1.25rem;color:#00C07A;font-weight:900;font-size:.82rem;cursor:pointer;margin-bottom:1rem;width:100%">Load Today's Roster</button>
-      <div class="eyebrow" style="margin-bottom:.75rem">⚡ Game Points</div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem;margin-bottom:1rem">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:.65rem">
-          <div><div class="eyebrow" style="margin-bottom:.25rem">Quiz (per Q)</div><input id="cfg-quiz" type="number" value="5" min="1"></div>
-          <div><div class="eyebrow" style="margin-bottom:.25rem">True/False (per Q)</div><input id="cfg-tf" type="number" value="2" min="1"></div>
-          <div><div class="eyebrow" style="margin-bottom:.25rem">Scramble</div><input id="cfg-scramble" type="number" value="30" min="1"></div>
-          <div><div class="eyebrow" style="margin-bottom:.25rem">Match</div><input id="cfg-match" type="number" value="25" min="1"></div>
-          <div><div class="eyebrow" style="margin-bottom:.25rem">Fill Blank (per Q)</div><input id="cfg-fitb" type="number" value="3" min="1"></div>
-          <div><div class="eyebrow" style="margin-bottom:.25rem">Spin Wheel</div><input id="cfg-wheel" type="number" value="10" min="1"></div>
-        </div>
-        <div><div class="eyebrow" style="margin-bottom:.25rem">Devotional Completion</div><input id="cfg-devo" type="number" value="10" min="1" style="max-width:150px"></div>
-        <button onclick="saveCfgGames()" style="margin-top:.65rem;background:rgba(245,200,66,.15);border:1.5px solid rgba(245,200,66,.3);border-radius:10px;padding:.5rem 1.25rem;color:#f5c842;font-weight:900;font-size:.82rem;cursor:pointer;width:100%">Save Game Points</button>
-      </div>
-
-      <div class="eyebrow" style="margin-bottom:.75rem">🎁 Store Prizes</div>
-      <div id="adm-prize-list" style="margin-bottom:.75rem"></div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1rem">
-        <div class="eyebrow" style="margin-bottom:.5rem">Add New Prize</div>
-        <div style="display:flex;flex-direction:column;gap:.5rem">
-          <input id="new-prize-name" type="text" placeholder="Prize name">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
-            <input id="new-prize-pts" type="number" placeholder="Points cost">
-            <input id="new-prize-desc" type="text" placeholder="Description">
-          </div>
-          <input id="new-prize-url" type="text" placeholder="Amazon URL (optional)">
-          <button onclick="addPrize()" class="btn btn-gold" style="font-size:.9rem;padding:.7rem">Add Prize</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ANNOUNCEMENTS -->
-    <div id="atab-announce" style="display:none">
-      <div class="eyebrow" style="margin-bottom:.6rem">📣 Send Announcement to All Warriors</div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:1rem;margin-bottom:.85rem">
-        <p style="font-size:.78rem;color:rgba(255,255,255,.5);margin-bottom:.75rem;line-height:1.5">All warriors will see this the next time they open the app. Keep it short and exciting.</p>
-        <input id="ann-title" type="text" placeholder="Title (e.g. Big Announcement!)" style="margin-bottom:.6rem">
-        <textarea id="ann-body" placeholder="Your message..." style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:.75rem 1rem;color:#fff;width:100%;font-size:.9rem;outline:none;resize:vertical;min-height:90px;font-family:inherit;margin-bottom:.6rem"></textarea>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
-          <select id="ann-type" style="background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:.7rem .75rem;color:#fff;font-size:.85rem">
-            <option value="info">📢 Info</option>
-            <option value="event">📅 Event</option>
-            <option value="challenge">⚔️ Challenge</option>
-            <option value="praise">🏆 Praise Report</option>
-          </select>
-          <button onclick="sendAnnouncement()" class="btn btn-gold" style="font-size:.9rem;padding:.7rem">Send to All</button>
-        </div>
-      </div>
-      <div class="eyebrow" style="margin-bottom:.5rem">Recent Announcements</div>
-      <div id="ann-list"><p class="muted">Loading...</p></div>
-    </div>
-
-    <!-- STORE MANAGEMENT -->
-    <div id="atab-store" style="display:none">
-      <div class="eyebrow" style="margin-bottom:.75rem">Store Items</div>
-      <div id="adm-store-list"></div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ═══ TOAST ═══ -->
-<div id="toast"></div>
-
-  <!-- Phase 1: app split out of the 877KB monolith. Load order is load-bearing. -->
-  <script src="app/core-a.js?v=ba8eee49"></script>
-  <script src="app/features/scene.js?v=70e2b884"></script>
-  <script src="app/features/layout.js?v=c0c3817f"></script>
-  <script src="app/features/hero-banner.js?v=310c4e97"></script>
-  <script src="app/features/armor-stage.js?v=b488979a"></script>
-  <script src="app/features/armor-motion.js?v=4d7f5bcd"></script>
-  <script src="app/features/celebration.js?v=f79ad993"></script>
-  <script src="app/features/story-player.js?v=745963d9"></script>
-  <script src="app/features/academy.js?v=00d8f5ca"></script>
-  <script src="app/features/arena-header.js?v=4e6df2dc"></script>
-  <script src="app/features/warrior-video.js?v=5c055076"></script>
-  <script src="app/features/push.js?v=99ec665a"></script>
-  <script src="app/features/pastor-video.js?v=4c14fcaa"></script>
-  <script src="app/features/family-talk.js?v=9aa378ef"></script>
-  <script src="app/core-b.js?v=9f2a039a"></script>
-  <script src="app/patches.js?v=915508b4"></script>
-  <!-- Enhancement sweep (load last; each self-installs and fails safe) -->
-  <script>
-// wz-icons — a small, cohesive custom SVG icon set to replace the emoji.
-// Modern line-style icons (Lucide/Linear feel): 24x24, single stroke, rounded
-// joins, drawn in the app's gold via currentColor. One source of truth so every
-// surface (Locker, armor tab, welcome) reads as one designed system, not clip-art.
-// window.wzIcon(name, size) -> SVG string. Unknown name falls back to a shield.
-(function(){
- if(window.wzIcon)return;
-
- var P={
-  // Armor of God (Ephesians 6)
-  belt:        "<rect x='3' y='9.5' width='18' height='5' rx='1.6'/><rect x='9.5' y='8' width='5' height='8' rx='1.2'/><path d='M12 10.4v3.2'/>",
-  breastplate: "<path d='M7 4.5h10v6.5a5 5 0 0 1-10 0z'/><path d='M12 4.5v12'/><path d='M7 8h10'/>",
-  boots:       "<path d='M9 3h4v10h3a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H8a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h1z'/>",
-  shield:      "<path d='M12 3 4 6v5.2c0 4.5 3.4 7.6 8 9 4.6-1.4 8-4.5 8-9V6z'/><path d='M12 8.4v6.2M9 11.5h6'/>",
-  helmet:      "<path d='M5 12a7 7 0 0 1 14 0v2.6A2.4 2.4 0 0 1 16.6 17H7.4A2.4 2.4 0 0 1 5 14.6z'/><path d='M9 12h6M12 4.6V3'/>",
-  sword:       "<path d='M14.5 17.5 4 7V4h3l10.5 10.5'/><path d='M13 19l6-6'/><path d='M16 16l4 4'/><path d='M19 21l2-2'/>",
-  full:        "<path d='M3.5 8l3.6 3.4L12 5l4.9 6.4L20.5 8 19 18H5z'/><path d='M5 20.5h14'/>",
-  // supporting UI icons
-  target:      "<circle cx='12' cy='12' r='8'/><circle cx='12' cy='12' r='4'/><circle cx='12' cy='12' r='.6' fill='currentColor'/>",
-  gift:        "<rect x='4' y='9' width='16' height='11' rx='1.6'/><path d='M4 12.5h16M12 9v11'/><path d='M12 9S10.5 4.5 8.2 5.2 9 9 12 9zM12 9s1.5-4.5 3.8-3.8S15 9 12 9z'/>",
-  star:        "<path d='M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z'/>",
-  flame:       "<path d='M12 3s5 4 5 9a5 5 0 0 1-10 0c0-2 1-3 1-3s0 2 1.5 2.5C10 12 9 9 12 3z'/>",
-  book:        "<path d='M5 4.5h11a2 2 0 0 1 2 2V20a1.5 1.5 0 0 0-1.5-1.5H5z'/><path d='M5 4.5A1.5 1.5 0 0 0 3.5 6v13A1.5 1.5 0 0 1 5 20.5'/>",
-  trophy:      "<path d='M8 4h8v4a4 4 0 0 1-8 0z'/><path d='M8 5H5v1a3 3 0 0 0 3 3M16 5h3v1a3 3 0 0 1-3 3'/><path d='M12 12v4M9 20h6M10 20l.5-4M14 20l-.5-4'/>",
-  heart:       "<path d='M12 20s-6.8-4.4-6.8-9.4A3.6 3.6 0 0 1 12 8a3.6 3.6 0 0 1 6.8 2.6C18.8 15.6 12 20 12 20z'/>",
-  play:        "<circle cx='12' cy='12' r='8.5'/><path d='M10.2 8.6l5 3.4-5 3.4z'/>",
-  bolt:        "<path d='M13 3 5.5 13H10l-1 8 8.5-11H13z'/>"
- };
-
- window.wzIcon=function(name, size){
-  var d=P[name]||P.shield; size=size||28;
-  return "<svg class='wz-ic' width='"+size+"' height='"+size+"' viewBox='0 0 24 24' fill='none' stroke='currentColor' "+
-   "stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>"+d+"</svg>";
- };
-
- // one-time style: gold color + a hairline glow for depth; inline in text nicely.
- if(!document.getElementById('wz-ic-css')){
-  var s=document.createElement('style'); s.id='wz-ic-css';
-  s.textContent=".wz-ic{color:#f5c842;vertical-align:middle;filter:drop-shadow(0 1px 3px rgba(245,200,66,.25))}";
-  document.head.appendChild(s);
- }
-})();
-
-  </script>
-  <script src="app/features/juice.js?v=072a2c69"></script>
-  <script>
-// Streaks & Stickers — the daily-return hook, built to fit the app's soul.
-// The Hall of Victory deliberately REFUSES to rank children against each other
-// (see ranks.js). This module keeps that promise: every reward here is you vs
-// yesterday's you. Nothing compares one kid to another.
-//
-// Two pieces, appended to the Hall of Victory tab (which renders synchronously,
-// so a plain wrapper is safe):
-//   1. A "don't break the chain" streak strip — visual fire for showing up.
-//   2. A Sticker Shelf — collectible milestones a kid earns from their OWN
-//      journey (verses learned, devos read, armor earned, streak kept).
-//
-// All of it is DERIVED from data the kid record already carries — no backend
-// change, no new writes. The only thing we persist is a tiny per-kid list in
-// localStorage so a newly-earned sticker celebrates exactly once.
-(function(){
- if(window.__wzStreaks)return; window.__wzStreaks=1;
-
- function arr(v){ return Array.isArray(v)?v:[]; }
- function vlen(k){ return arr(k.completed_verses).length; }
- function dlen(k){ return arr(k.completed_devos).length; }
- function mlen(k){ return arr(k.completed_missions).length; }
- function wlen(k){ return arr(k.completed_videos).length; }
- function best(k){ return Math.max(k.best_streak||0, k.streak_count||0); }
- function pieces(k){ try{ return getArmor(k).filter(function(x){return x!=='full';}).length; }catch(e){ return 0; } }
- function hasFull(k){ try{ return getArmor(k).indexOf('full')>=0; }catch(e){ return false; } }
-
- // Milestones. Order = the shelf order. Each `on(kid)` is a pure predicate.
- var STICKERS=[
-  {id:'first',    ic:'star',   n:'First Steps',    hint:'Join the warriors',        on:function(){return true;}},
-  {id:'verse1',   ic:'book',   n:'Verse Keeper',   hint:'Learn your first verse',    on:function(k){return vlen(k)>=1;}},
-  {id:'devo1',    ic:'heart',  n:'Quiet Time',     hint:'Finish your first devo',    on:function(k){return dlen(k)>=1;}},
-  {id:'streak3',  ic:'flame',  n:'On Fire',        hint:'Keep a 3-day streak',       on:function(k){return best(k)>=3;}},
-  {id:'armor3',   ic:'shield', n:'Armored Up',     hint:'Earn 3 armor pieces',       on:function(k){return pieces(k)>=3;}},
-  {id:'verse5',   ic:'sword',  n:'Word Warrior',   hint:'Learn 5 verses',            on:function(k){return vlen(k)>=5;}},
-  {id:'devo5',    ic:'book',   n:'Faithful Reader',hint:'Finish 5 devos',            on:function(k){return dlen(k)>=5;}},
-  {id:'mission1', ic:'target', n:'Truth Scout',    hint:'Finish a training mission', on:function(k){return mlen(k)>=1;}},
-  {id:'watch1',   ic:'play',   n:'All Ears',       hint:'Watch a warrior video',     on:function(k){return wlen(k)>=1;}},
-  {id:'streak7',  ic:'bolt',   n:'Unstoppable',    hint:'Keep a 7-day streak',       on:function(k){return best(k)>=7;}},
-  {id:'streak14', ic:'trophy', n:'Legendary',      hint:'Keep a 14-day streak',      on:function(k){return best(k)>=14;}},
-  {id:'armorfull',ic:'full',   n:'Fully Armored',  hint:'Wear the full armor of God',on:function(k){return hasFull(k);}}
- ];
-
- function css(){ if(document.getElementById('wz-stk-css'))return;
-  var s=document.createElement('style'); s.id='wz-stk-css';
-  s.textContent=
-   ".stk-card{background:linear-gradient(135deg,#1e1e38,#171730);border:1px solid rgba(245,200,66,.3);border-radius:16px;padding:1.1rem;margin-bottom:1rem}"+
-   ".stk-t{font-family:Bangers,cursive;font-size:1.25rem;letter-spacing:.04em;color:#f5c842;line-height:1.1;margin-bottom:.15rem}"+
-   ".stk-sub{font-size:.72rem;color:rgba(255,255,255,.45);font-weight:700;margin-bottom:.85rem}"+
-   ".stk-chain{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.5rem}"+
-   ".stk-day{width:30px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}"+
-   ".stk-day.on{background:linear-gradient(180deg,rgba(255,140,40,.35),rgba(255,80,20,.15));border-color:rgba(255,150,60,.6);box-shadow:0 0 10px rgba(255,120,40,.3)}"+
-   ".stk-day.next{border:1.5px dashed rgba(245,200,66,.5)}"+
-   ".stk-meta{display:flex;gap:1.2rem;font-size:.74rem;color:rgba(255,255,255,.6);font-weight:700;margin-top:.35rem}"+
-   ".stk-meta b{color:#f5c842;font-family:Bangers,cursive;font-size:1.15rem;letter-spacing:.03em}"+
-   ".stk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin-top:.35rem}"+
-   ".stk-badge{position:relative;text-align:center;border-radius:14px;padding:.6rem .25rem;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)}"+
-   ".stk-badge.got{border-color:rgba(245,200,66,.4);background:linear-gradient(160deg,rgba(245,200,66,.12),rgba(245,200,66,.03))}"+
-   ".stk-badge .em{font-size:1.7rem;line-height:1;display:block;margin-bottom:.25rem}"+
-   ".stk-badge.locked .em{filter:grayscale(1);opacity:.3}"+
-   ".stk-badge .nm{font-size:.58rem;font-weight:800;line-height:1.15;color:#fff}"+
-   ".stk-badge.locked .nm{color:rgba(255,255,255,.4)}"+
-   ".stk-badge .hint{font-size:.52rem;color:rgba(255,255,255,.3);margin-top:.15rem;line-height:1.1}"+
-   ".stk-badge.got .hint{color:#f5c842}"+
-   ".stk-badge.pop{animation:stkpop .6s cubic-bezier(.34,1.56,.64,1)}"+
-   "@keyframes stkpop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}"+
-   ".stk-count{font-size:.68rem;color:rgba(255,255,255,.45);font-weight:800;margin:.15rem 0 .55rem}";
-  document.head.appendChild(s); }
-
- function lsKey(k){ return 'wz_stickers_'+(k.id||'anon'); }
- function loadSeen(k){ try{ return JSON.parse(localStorage.getItem(lsKey(k))||'null'); }catch(e){ return null; } }
- function saveSeen(k,ids){ try{ localStorage.setItem(lsKey(k),JSON.stringify(ids)); }catch(e){} }
-
- function build(k){
-  var card=document.createElement('div'); card.className='stk-card';
-
-  // ---- streak strip ----
-  var cur=k.streak_count||0, bst=best(k);
-  var SLOTS=Math.max(7,Math.min(10,cur+1));   // always show at least a week
-  var chain='';
-  for(var i=0;i<SLOTS;i++){
-   var on=i<cur, isNext=(i===cur);
-   chain+="<div class='stk-day"+(on?' on':'')+(isNext?' next':'')+"'>"+(on?'🔥':(isNext?'⭐':''))+"</div>";
-  }
-  var strip=cur>0
-    ? "<div class='stk-sub'>Don’t break the chain — come back tomorrow to keep it going.</div>"
-    : "<div class='stk-sub'>Show up today to light your first flame.</div>";
-
-  // ---- sticker shelf ----
-  var earned=STICKERS.filter(function(s){return s.on(k);}).map(function(s){return s.id;});
-  var seen=loadSeen(k);
-  var fresh = seen ? earned.filter(function(id){return seen.indexOf(id)<0;}) : [];
-  saveSeen(k,earned);   // first-ever open saves silently (seen===null -> no fresh)
-
-  var badges='';
-  STICKERS.forEach(function(s){
-   var got=s.on(k), isFresh=fresh.indexOf(s.id)>=0;
-   badges+="<div class='stk-badge "+(got?'got':'locked')+(isFresh?' pop':'')+"'>"+
-     "<span class='em'>"+(window.wzIcon?wzIcon(s.ic,30):'')+"</span>"+
-     "<div class='nm'>"+s.n+"</div>"+
-     "<div class='hint'>"+(got?'Earned!':s.hint)+"</div></div>";
-  });
-
-  card.innerHTML=
-   "<div class='stk-t'>Your Streak</div>"+strip+
-   "<div class='stk-chain'>"+chain+"</div>"+
-   "<div class='stk-meta'><span>Now <b>"+cur+"</b></span><span>Best <b>"+bst+"</b></span></div>"+
-   "<div class='stk-t' style='margin-top:1.1rem'>Sticker Shelf</div>"+
-   "<div class='stk-count'>"+earned.length+" of "+STICKERS.length+" collected</div>"+
-   "<div class='stk-grid'>"+badges+"</div>";
-
-  // celebrate newly-earned stickers (once), respecting mute
-  if(fresh.length){
-   setTimeout(function(){
-    try{ if(typeof wzConfetti==='function')wzConfetti(40); }catch(e){}
-    try{ if(typeof wzSfxFanfare==='function')wzSfxFanfare(); }catch(e){}
-    try{ if(navigator.vibrate)navigator.vibrate([40,30,60]); }catch(e){}
-    var s0=STICKERS.filter(function(s){return s.id===fresh[0];})[0];
-    if(s0&&typeof toast==='function')toast('New sticker: '+s0.n+(fresh.length>1?' (+'+(fresh.length-1)+' more)':'')+'!',4500);
-   },600);
-  }
-  return card;
- }
-
- // Swap the Hall of Victory's emoji headers for the custom icon set.
- function swapHallHeaders(el){
-  if(!window.wzIcon)return;
-  var map={'The Gathering Warriors':'trophy','Your Journey':'sword','Wall of Warriors':'shield'};
-  [].forEach.call(el.querySelectorAll('.bl-t'),function(t){
-   if(t.__wzIc)return;
-   var txt=t.textContent||'';
-   for(var name in map){ if(txt.indexOf(name)>=0){ t.innerHTML=wzIcon(map[name],18)+' '+name; t.__wzIc=1; break; } }
-  });
- }
-
- function inject(){
-  var el=document.getElementById('tab-ranks'); if(!el)return;
-  if(!window.APP||!APP.kid)return;
-  // Only after the Hall's own cards have rendered (avoids the pre-data pass).
-  if(!el.querySelector('.bl-card'))return;
-  css();
-  swapHallHeaders(el);
-  if(el.querySelector('.stk-card'))return;   // idempotent per render
-  el.appendChild(build(APP.kid));
- }
-
- function hook(){
-  if(typeof renderRanks!=='function')return false;
-  var _rr=renderRanks;
-  window.renderRanks=renderRanks=function(){
-   var r=_rr.apply(this,arguments);
-   try{ inject(); }catch(e){}
-   return r;
-  };
-  return true;
- }
-
- // renderRanks is folded into core-b (loads before this file), so hook now;
- // fall back to a short retry if load order ever shifts.
- if(!hook()){
-  var n=0, iv=setInterval(function(){ if(hook()||++n>40)clearInterval(iv); },300);
- }
-})();
-
-  </script>
-  <script src="app/features/books-game.js?v=2f942555"></script>
-  <script>
-// Armor thresholds: show the kid the SAME numbers the unlock logic uses.
-// getArmor (WZ_TIERS) is the single source of truth: armor is earned on LIFETIME
-// points at 50 / 150 / 400 / 900 / 2000 / 4000 / 8000. But the warrior tab and
-// the dashboard hero hint were rendered from older, smaller, hardcoded scales
-// (and the hero hint read current points, not lifetime), so "N more points"
-// never matched when a piece actually unlocked — confusing and discouraging.
-//
-// Rather than edit the 175KB bundle, this module corrects the DISPLAY after the
-// existing renderers run. It never changes what is unlocked (getArmor already
-// gets that right) — only the numbers the child reads. Fails safe: if a node
-// isn't found, the worst case is the old text remains; nothing breaks.
-(function(){
- if(window.__wzArmorFix)return; window.__wzArmorFix=1;
-
- // Canonical tiers — prefer the live source of truth, fall back to the known set.
- function tiers(){
-  if(window.WZ_TIERS&&WZ_TIERS.length)return WZ_TIERS;
-  return [{k:'belt',n:'Belt of Truth',p:50,icon:'🎗️'},{k:'breastplate',n:'Breastplate',p:150,icon:'🛡️'},
-   {k:'boots',n:'Boots of Peace',p:400,icon:'🥾'},{k:'shield',n:'Shield of Faith',p:900,icon:'✨'},
-   {k:'helmet',n:'Helmet of Salvation',p:2000,icon:'⛑️'},{k:'sword',n:'Sword of the Spirit',p:4000,icon:'⚔️'},
-   {k:'full',n:'FULL ARMOR',p:8000,icon:'🏆'}];
- }
- // Label text as rendered in the warrior tab -> canonical threshold.
- var LABEL_PTS={
-  'Belt of Truth':50,'Breastplate of Righteousness':150,'Gospel Boots':400,
-  'Shield of Faith':900,'Helmet of Salvation':2000,'Sword of the Spirit':4000,'Full Armor of God':8000
- };
- // Label -> custom icon key, so the armor tab grid uses the icon set too.
- var LABEL_KEY={
-  'Belt of Truth':'belt','Breastplate of Righteousness':'breastplate','Gospel Boots':'boots',
-  'Shield of Faith':'shield','Helmet of Salvation':'helmet','Sword of the Spirit':'sword','Full Armor of God':'full'
- };
- function life(){ try{ var k=APP.kid; return k?(k.lifetime_points!=null?k.lifetime_points:(k.points||0)):0; }catch(e){ return 0; } }
-
- // ---- 1. dashboard hero hint (#hero-next-armor, set by openDash) ----
- function fixHero(){
-  var el=document.getElementById('hero-next-armor'); if(!el||!window.APP||!APP.kid)return;
-  var lp=life(), T=tiers(), next=null;
-  for(var i=0;i<T.length;i++){ if(lp<T[i].p){ next=T[i]; break; } }
-  el.textContent = next
-   ? '🎯 Next: '+next.n+' — '+(next.p-lp)+' more pts'
-   : '🏆 Full armor unlocked! You are complete!';
- }
-
- // ---- 2. warrior tab: grid card labels + the "Next:" progress line ----
- function fixArmorTab(){
-  var tw=document.getElementById('tab-warrior'); if(!tw)return;
-  var lp=life(), T=tiers();
-
-  // (a) per-piece cards: the status div reads "<t> pts" when locked. Rewrite the
-  //     number by matching the card's exact label text (stable), leave "UNLOCKED".
-  var labels=Object.keys(LABEL_PTS);
-  var divs=tw.getElementsByTagName('div');
-  for(var i=0;i<divs.length;i++){
-   var d=divs[i], txt=(d.textContent||'').trim();
-   if(labels.indexOf(txt)<0)continue;                 // this is a label div
-   var card=d.parentElement; if(!card)continue;
-   var status=card.children[card.children.length-1];   // last cell = status
-   if(!status||status===d)continue;
-   if(/^\d[\d,]*\s*pts$/i.test((status.textContent||'').trim())){
-    status.textContent=LABEL_PTS[txt]+' pts';
-   }
-   // swap the emoji icon (first cell) for the custom icon
-   if(window.wzIcon && LABEL_KEY[txt]){
-    var iconDiv=card.children[0];
-    if(iconDiv && iconDiv!==d && iconDiv!==status && !iconDiv.querySelector('svg')){
-     iconDiv.innerHTML=wzIcon(LABEL_KEY[txt],32);
-    }
-   }
-  }
-
-  // (b) the "Next: … (pts / t)" progress line + its bar.
-  var nextLine=null;
-  for(var j=0;j<divs.length;j++){
-   var t=(divs[j].textContent||'').trim();
-   if(t.indexOf('Next:')===0 && t.indexOf('/')>0){ nextLine=divs[j]; break; }
-  }
-  if(nextLine){
-   var next=null, prevP=0;
-   for(var m=0;m<T.length;m++){ if(lp<T[m].p){ next=T[m]; break; } prevP=T[m].p; }
-   if(next){
-    var nkey=next.k||'';
-    nextLine.innerHTML='Next: '+(window.wzIcon&&nkey?wzIcon(nkey,15):(next.icon||''))+' '+next.n+' ('+lp+' / '+next.p+')';
-    // sibling bar's fill width, recomputed against the real tier span
-    var bar=nextLine.nextElementSibling;
-    var fill=bar&&bar.firstElementChild;
-    if(fill){ var pct=Math.max(0,Math.min(100,Math.round((lp-prevP)/(next.p-prevP)*100))); fill.style.width=pct+'%'; }
-   }
-  }
- }
-
- // ---- install: wrap the renderers, and re-apply on warrior-tab opens ----
- function hookArmor(){
-  if(typeof window.renderArmor==='function' && !window.renderArmor.__wzFix){
-   var _ra=window.renderArmor;
-   window.renderArmor=function(){ var r=_ra.apply(this,arguments); try{ fixArmorTab(); }catch(e){} return r; };
-   window.renderArmor.__wzFix=1;
-  }
- }
- function hookOpen(){
-  if(typeof window.openDash==='function' && !window.openDash.__wzFix){
-   var _od=window.openDash;
-   window.openDash=function(){ var r=_od.apply(this,arguments); setTimeout(fixHero,80); return r; };
-   window.openDash.__wzFix=1;
-  }
- }
- function hookTab(){
-  if(typeof window.dashTab==='function' && !window.dashTab.__wzFixTab){
-   var _dt=window.dashTab;
-   window.dashTab=function(tab,btn){ var r=_dt.apply(this,arguments); if(tab==='warrior')setTimeout(fixArmorTab,60); return r; };
-   window.dashTab.__wzFixTab=1;
-  }
- }
- function init(){ hookArmor(); hookOpen(); hookTab(); try{ fixHero(); fixArmorTab(); }catch(e){} }
- // renderArmor/openDash/dashTab are re-wrapped by other modules on timers; match
- // that cadence so we always end up on top of the final versions.
- setTimeout(init,350); setTimeout(init,1300); setTimeout(init,2700);
-})();
-
-  </script>
-  <script>
-// Today+ — make the daily hub feel like a mission you can finish.
-// The Today tab lists up to four actions but only the pastor card ever showed a
-// done state, and finishing everything felt like nothing. This adds:
-//   - a "Today's Mission" progress bar over the cards,
-//   - a green check on each card the kid has actually completed TODAY,
-//   - a once-a-day celebration when the whole mission is done.
-//
-// "Done today" is read from one transactions-today query (same shape core-a uses
-// for gamePtsToday) plus the pastor card's own state — so it resets each day and
-// needs no backend change. Purely additive: it observes the Today tab and
-// enhances whatever renderToday produced. If a signal is missing, a card simply
-// shows no check; nothing breaks.
-(function(){
- if(window.__wzTodayPlus)return; window.__wzTodayPlus=1;
- if(typeof sb!=='function')return;
-
- function css(){ if(document.getElementById('wz-tp-css'))return;
-  var s=document.createElement('style'); s.id='wz-tp-css';
-  s.textContent=
-   "#wz-tp-bar{background:linear-gradient(135deg,#1e1e38,#171730);border:1px solid rgba(245,200,66,.3);border-radius:14px;padding:.8rem .95rem;margin-bottom:.8rem}"+
-   "#wz-tp-bar .tp-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}"+
-   "#wz-tp-bar .tp-t{font-family:Bangers,cursive;font-size:1.05rem;letter-spacing:.04em;color:#f5c842}"+
-   "#wz-tp-bar .tp-n{font-size:.74rem;font-weight:800;color:rgba(255,255,255,.6)}"+
-   "#wz-tp-bar .tp-track{height:9px;background:rgba(0,0,0,.35);border-radius:6px;overflow:hidden}"+
-   "#wz-tp-bar .tp-fill{height:100%;background:linear-gradient(90deg,#f5c842,#ffe08a);border-radius:6px;transition:width .7s cubic-bezier(.34,1.56,.64,1)}"+
-   "#wz-tp-bar.tp-alldone{border-color:rgba(126,224,138,.6)}"+
-   "#wz-tp-bar.tp-alldone .tp-fill{background:linear-gradient(90deg,#7ee08a,#c7f7cf)}"+
-   ".td-card .td-go.tp-check{color:#7ee08a}";
-  document.head.appendChild(s); }
-
- function today(){ return new Date().toISOString().slice(0,10); }
- function dayStart(){ var d=new Date(); d.setHours(0,0,0,0); return d.getTime(); }
-
- // Which mission each Today card is, keyed by the icon renderToday uses.
- function typeOf(card){
-  var ic=card.querySelector('.td-ic'); var e=ic?(ic.textContent||'').trim():'';
-  if(e.indexOf('🎥')>=0)return 'pastor';   // 🎥
-  if(e.indexOf('📜')>=0)return 'verse';     // 📜
-  if(e.indexOf('📖')>=0)return 'devo';      // 📖
-  if(e.indexOf('⚔')>=0)return 'battle';          // ⚔️
-  return '';
- }
-
- function markDone(card){
-  card.classList.add('done');
-  var go=card.querySelector('.td-go'); if(go){ go.textContent='✓'; go.classList.add('tp-check'); }
- }
-
- function celebrate(){
-  try{ if(typeof wzConfetti==='function')wzConfetti(60); }catch(e){}
-  try{ if(typeof wzSfxFanfare==='function')wzSfxFanfare(); }catch(e){}
-  try{ if(navigator.vibrate)navigator.vibrate([50,40,80]); }catch(e){}
-  try{ if(typeof toast==='function')toast('🌟 Mission complete! Way to go, warrior!',4500); }catch(e){}
- }
-
- function apply(host, doneSet){
-  var cards=host.querySelectorAll('.td-card'); if(!cards.length)return;
-  var total=0, done=0;
-  cards.forEach(function(card){
-   var t=typeOf(card); if(!t)return;
-   total++;
-   var isDone = card.classList.contains('done') || doneSet[t]===true;
-   if(isDone){ markDone(card); done++; }
-  });
-  if(!total)return;
-
-  // progress bar just above the first card
-  var bar=host.querySelector('#wz-tp-bar');
-  if(!bar){
-   bar=document.createElement('div'); bar.id='wz-tp-bar';
-   var first=host.querySelector('.td-card');
-   if(first&&first.parentNode)first.parentNode.insertBefore(bar,first);
-   else host.appendChild(bar);
-  }
-  var pct=Math.round((done/total)*100);
-  var allDone=done>=total;
-  bar.className=allDone?'tp-alldone':'';
-  var micon=window.wzIcon?wzIcon(allDone?'trophy':'star',16)+' ':'';
-  bar.innerHTML="<div class='tp-top'><div class='tp-t'>"+micon+(allDone?'Mission Complete!':'Today’s Mission')+"</div>"+
-    "<div class='tp-n'>"+done+" of "+total+" done</div></div>"+
-    "<div class='tp-track'><div class='tp-fill' style='width:"+pct+"%'></div></div>";
-
-  // celebrate once per kid per day
-  if(allDone && window.APP && APP.kid){
-   var key='wz_tp_done_'+APP.kid.id+'_'+today();
-   var seen=false; try{ seen=localStorage.getItem(key)==='1'; }catch(e){}
-   if(!seen){ try{ localStorage.setItem(key,'1'); }catch(e){} setTimeout(celebrate,500); }
-  }
- }
-
- // one transactions-today read -> which categories the kid earned in today
- function fetchDone(cb){
-  var out={pastor:false,verse:false,devo:false,battle:false};
-  if(!window.APP||!APP.kid){ cb(out); return; }
-  sb("transactions?kid_id=eq."+APP.kid.id+"&created_at=gte."+dayStart()+"&select=category")
-   .then(function(rows){
-    (rows||[]).forEach(function(r){
-     var c=String(r.category||'').toLowerCase();
-     if(c.indexOf('game')>=0)out.battle=true;
-     if(c.indexOf('devo')>=0)out.devo=true;
-     if(c.indexOf('verse')>=0||c.indexOf('memor')>=0)out.verse=true;
-     if(c.indexOf('video')>=0)out.pastor=true;
+<script>
+(async () => {
+  try {
+    const res = await fetch('https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/weekly-content-deploy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'get_latest_sermon', data: {} })
     });
-    cb(out);
-   }).catch(function(){ cb(out); });
- }
+    const data = await res.json();
+    const s = data.data;
+    if (!s) return;
 
- var busy=false;
- function enhance(){
-  var host=document.getElementById('tab-today'); if(!host)return;
-  if(!host.querySelector('.td-card'))return;       // renderToday not done yet
-  if(host.querySelector('#wz-tp-bar'))return;      // already enhanced this render
-  if(busy)return; busy=true;
-  fetchDone(function(doneSet){
-   try{ apply(host,doneSet); }catch(e){}
-   busy=false;
-  });
- }
+    const date = s.preached_on ? new Date(s.preached_on + 'T12:00:00') : null;
+    const dateStr = date ? date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
 
- // Observe the Today tab; renderToday rebuilds it, we re-enhance the new cards.
- function watch(){
-  var host=document.getElementById('tab-today'); if(!host)return false;
-  if(host.__wzTpWatched)return true; host.__wzTpWatched=1;
-  css();
-  var deb=null;
-  var mo=new MutationObserver(function(){ if(deb)clearTimeout(deb); deb=setTimeout(enhance,150); });
-  try{ mo.observe(host,{childList:true}); }catch(e){}
-  setTimeout(enhance,200);
-  return true;
- }
- var n=0, iv=setInterval(function(){ if(watch()||++n>60)clearInterval(iv); },350);
-})();
+    document.getElementById('s-title').textContent = s.title || '';
+    document.getElementById('s-ref').innerHTML = (s.passage || '') + (dateStr ? ' &nbsp;&middot;&nbsp; ' + dateStr : '');
 
-  </script>
-  <script src="app/features/fruit-game.js?v=48df4eb3"></script>
-  <script src="app/features/heroes-game.js?v=bce55d81"></script>
-  <script src="app/features/polish.js?v=074886c9"></script>
-  <script>
-// Warrior Locker — the emotional heart of the app: YOUR warrior, suiting up.
-// The whole zone is themed "put on the full armor of God" (Ephesians 6), but the
-// armor was only ever a progress bar + an emoji grid. Kids bond with a character,
-// not a bar. This is a full-screen hero moment: the child's own warrior (their
-// colors, their look) stands tall and the armor pieces they've EARNED snap on one
-// by one with light and sound. Tapping a piece teaches its verse from Ephesians 6.
-//
-// It reuses what already exists — armorSVG (which already draws each earned
-// piece), getArmor / WZ_TIERS (the real thresholds), and the celebration SFX —
-// so it's purely additive and cannot change points or unlocks. A gold "Enter my
-// Locker" button is added to the Armor tab; the Locker itself is a separate
-// full-screen overlay, so it never fights the existing armor rendering.
-(function(){
- if(window.__wzLocker)return; window.__wzLocker=1;
-
- // Ephesians 6 — each piece's verse + a kid-friendly meaning. Order matches
- // WZ_TIERS. Kept short, accurate, and orthodox.
- var PIECES=[
-  {k:'belt',        e:'🎗️', name:'Belt of Truth',            ref:'Ephesians 6:14',
-   verse:'“Stand therefore, having fastened on the belt of truth.”',
-   mean:'Truth holds everything together. When you live in God’s truth, you stand strong.'},
-  {k:'breastplate', e:'🛡️', name:'Breastplate of Righteousness', ref:'Ephesians 6:14',
-   verse:'“…and having put on the breastplate of righteousness.”',
-   mean:'It guards your heart. You are made right with God through Jesus, not by being perfect.'},
-  {k:'boots',       e:'🥾', name:'Gospel Boots of Peace',     ref:'Ephesians 6:15',
-   verse:'“…as shoes for your feet, having put on the readiness given by the gospel of peace.”',
-   mean:'You’re ready to go and carry God’s peace wherever you walk.'},
-  {k:'shield',      e:'🛡️', name:'Shield of Faith',           ref:'Ephesians 6:16',
-   verse:'“In all circumstances take up the shield of faith, with which you can extinguish all the flaming darts of the evil one.”',
-   mean:'Faith in God stops the enemy’s lies. Trust God and you are protected.'},
-  {k:'helmet',      e:'⛑️', name:'Helmet of Salvation',       ref:'Ephesians 6:17',
-   verse:'“…take the helmet of salvation.”',
-   mean:'It guards your mind. You know you belong to God and are safe in Jesus.'},
-  {k:'sword',       e:'⚔️', name:'Sword of the Spirit',       ref:'Ephesians 6:17',
-   verse:'“…and the sword of the Spirit, which is the word of God.”',
-   mean:'God’s Word is your weapon. Know it, speak it, and stand strong.'},
-  {k:'full',        e:'🏆', name:'The Full Armor of God',     ref:'Ephesians 6:11',
-   verse:'“Put on the whole armor of God, that you may be able to stand against the schemes of the devil.”',
-   mean:'Wearing it all, you are ready for anything, because your strength is in the Lord.'}
- ];
- // Titles a kid grows into, by how many pieces they wear (not counting FULL).
- var TITLES=['Recruit','Squire','Shield-Bearer','Guardian','Defender','Champion','Full Warrior of God'];
-
- function has(kid){ try{ var a=getArmor(kid)||[]; return function(id){ return a.indexOf(id)>=0; }; }catch(e){ return function(){return false;}; } }
- function earnedList(kid){ try{ return getArmor(kid)||[]; }catch(e){ return []; } }
- function tiers(){ if(window.WZ_TIERS&&WZ_TIERS.length)return WZ_TIERS; return PIECES.map(function(p,i){return {k:p.k,n:p.name,p:[50,150,400,900,2000,4000,8000][i]};}); }
- function life(kid){ return kid?(kid.lifetime_points!=null?kid.lifetime_points:(kid.points||0)):0; }
- // Real illustrated warrior art (and animated clips) already shipped with the app.
- var HERO_IMG={w1:'warrior-boy.png',w2:'warrior-2.png',w3:'warrior-3.png',w4:'warrior-girl.png',w5:'warrior-5.png',w6:'warrior-6.png'};
- var HERO_VID={w1:'warrior-1.mp4',w2:'warrior-2.mp4',w3:'warrior-3.mp4',w4:'warrior-4.mp4',w5:'warrior-5.mp4',w6:'warrior-6.mp4'};
- function heroKey(kid){ var a=(kid&&kid.avatar)||''; return HERO_IMG[a]?a:'w1'; }
-
- function css(){ if(document.getElementById('wz-lk-css'))return;
-  var s=document.createElement('style'); s.id='wz-lk-css';
-  s.textContent=
-   "#wz-lk{position:fixed;inset:0;z-index:100050;background:radial-gradient(circle at 50% 30%,#221056,#07031a 70%);overflow-y:auto;display:none}"+
-   "#wz-lk.show{display:block;animation:wzlkin .35s ease}"+
-   "@keyframes wzlkin{from{opacity:0}to{opacity:1}}"+
-   "#wz-lk .lk-in{max-width:460px;margin:0 auto;padding:1.1rem 1.1rem 2.2rem;position:relative}"+
-   "#wz-lk .lk-x{position:absolute;top:.7rem;right:.9rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;z-index:3}"+
-   "#wz-lk .lk-name{font-family:Bangers,cursive;font-size:2.3rem;color:#fff;text-align:center;letter-spacing:.03em;line-height:1;margin:.4rem 0 .1rem;text-shadow:0 0 30px rgba(245,200,66,.5)}"+
-   "#wz-lk .lk-title{text-align:center;color:#f5c842;font-weight:900;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem}"+
-   "#wz-lk .lk-stage{position:relative;height:300px;display:flex;align-items:center;justify-content:center;margin-bottom:.3rem}"+
-   "#wz-lk .lk-aura{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,.45),rgba(245,200,66,0) 68%);animation:wzlkpulse 3.6s ease-in-out infinite}"+
-   "@keyframes wzlkpulse{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.65;transform:scale(1.08)}}"+
-   "#wz-lk .lk-hero{position:relative;z-index:2;width:216px;height:216px;border-radius:28px;overflow:hidden;border:3px solid rgba(245,200,66,.6);box-shadow:0 12px 34px rgba(0,0,0,.55),0 0 46px rgba(245,200,66,.28);animation:wzlkfloat 4.4s ease-in-out infinite;background:#140a2e}"+
-   "#wz-lk .lk-hero video,#wz-lk .lk-hero img{width:100%;height:100%;object-fit:cover;display:block}"+
-   "@keyframes wzlkfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}"+
-   "#wz-lk .lk-piece.reveal{animation:wzlkrev .55s cubic-bezier(.34,1.56,.64,1)}"+
-   "@keyframes wzlkrev{0%{transform:scale(.55);opacity:.3}60%{transform:scale(1.14)}100%{transform:scale(1)}}"+
-   "#wz-lk .lk-quest{background:rgba(255,255,255,.05);border:1px solid rgba(245,200,66,.3);border-radius:14px;padding:.7rem .9rem;margin-bottom:.9rem;text-align:center}"+
-   "#wz-lk .lk-quest .qn{font-size:.8rem;color:#fff;font-weight:800}"+
-   "#wz-lk .lk-quest .qb{height:9px;background:rgba(0,0,0,.35);border-radius:6px;overflow:hidden;margin:.45rem 0 .2rem}"+
-   "#wz-lk .lk-quest .qf{height:100%;background:linear-gradient(90deg,#f5c842,#ffe08a);border-radius:6px;transition:width .8s}"+
-   "#wz-lk .lk-quest .qs{font-size:.68rem;color:rgba(255,255,255,.5)}"+
-   "#wz-lk .lk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.9rem}"+
-   "#wz-lk .lk-piece{text-align:center;border-radius:14px;padding:.6rem .2rem;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);cursor:pointer;transition:transform .12s}"+
-   "#wz-lk .lk-piece:active{transform:scale(.94)}"+
-   "#wz-lk .lk-piece.on{border-color:rgba(245,200,66,.5);background:linear-gradient(160deg,rgba(245,200,66,.15),rgba(245,200,66,.03));box-shadow:0 0 14px rgba(245,200,66,.15)}"+
-   "#wz-lk .lk-piece .pe{font-size:1.7rem;display:block}"+
-   "#wz-lk .lk-piece.off .pe{filter:grayscale(1);opacity:.3}"+
-   "#wz-lk .lk-piece .pn{font-size:.55rem;font-weight:800;color:#fff;line-height:1.15;margin-top:.2rem}"+
-   "#wz-lk .lk-piece.off .pn{color:rgba(255,255,255,.4)}"+
-   "#wz-lk .lk-verse{background:linear-gradient(135deg,#1e1e38,#171730);border:1px solid rgba(245,200,66,.35);border-radius:16px;padding:1rem;margin-bottom:.9rem;min-height:110px}"+
-   "#wz-lk .lk-verse .vr{color:#f5c842;font-weight:900;font-size:.72rem;letter-spacing:.05em;margin-bottom:.35rem}"+
-   "#wz-lk .lk-verse .vt{color:#fff;font-style:italic;font-size:.9rem;line-height:1.5;margin-bottom:.45rem}"+
-   "#wz-lk .lk-verse .vm{color:rgba(255,255,255,.7);font-size:.8rem;line-height:1.5}"+
-   "#wz-lk .lk-verse.locked .vt{color:rgba(255,255,255,.5)}"+
-   "#wz-lk .lk-btns{display:flex;gap:.55rem}"+
-   "#wz-lk .lk-btn{flex:1;border:none;border-radius:12px;padding:.8rem;font-family:Bangers,cursive;font-size:1.05rem;letter-spacing:.05em;cursor:pointer}"+
-   "#wz-lk .lk-gold{background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318}"+
-   "#wz-lk .lk-dark{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff}"+
-   ".lk-launch{width:100%;border:none;border-radius:16px;padding:.95rem;margin-bottom:1rem;font-family:Bangers,cursive;font-size:1.25rem;letter-spacing:.06em;color:#0A0318;background:linear-gradient(135deg,#f5c842,#E09000);box-shadow:0 6px 20px rgba(245,200,66,.35);cursor:pointer}"+
-   ".lk-launch:active{transform:scale(.97)}";
-  document.head.appendChild(s); }
-
- function selectPiece(root, kid, i){
-  var has_=has(kid), p=PIECES[i], on=has_(p.k);
-  var box=root.querySelector('.lk-verse');
-  box.className='lk-verse'+(on?'':' locked');
-  box.innerHTML="<div class='vr'>"+(window.wzIcon?wzIcon(p.k,17):'')+" "+p.name+" · "+p.ref+"</div>"+
-    "<div class='vt'>"+p.verse+"</div>"+
-    "<div class='vm'>"+(on?p.mean:'🔒 Earn this piece to unlock it. '+p.mean)+"</div>";
-  [].forEach.call(root.querySelectorAll('.lk-piece'),function(el,idx){ el.style.outline=(idx===i)?'2px solid rgba(245,200,66,.6)':'none'; });
- }
-
- function buildQuest(root, kid){
-  var lp=life(kid), T=tiers(), next=null, prevP=0;
-  for(var i=0;i<T.length;i++){ if(lp<T[i].p){ next=T[i]; break; } prevP=T[i].p; }
-  var q=root.querySelector('.lk-quest');
-  var ic=function(k,sz){ return window.wzIcon?wzIcon(k,sz):''; };
-  if(next){
-   var nm=(PIECES[T.indexOf(next)]||{}).name||next.n||'the next piece';
-   var pct=Math.max(3,Math.min(100,Math.round((lp-prevP)/(next.p-prevP)*100)));
-   q.innerHTML="<div class='qn'>"+ic('target',16)+" Next: "+nm+"</div><div class='qb'><div class='qf' style='width:"+pct+"%'></div></div>"+
-     "<div class='qs'>"+(next.p-lp)+" more points to earn it</div>";
-  } else {
-   q.innerHTML="<div class='qn'>"+ic('full',16)+" You wear the FULL armor of God!</div><div class='qs'>Keep standing strong, warrior.</div>";
-  }
- }
-
- function renderHero(root, kid){
-  var el=root.querySelector('#lk-hero'); if(!el)return;
-  var k=heroKey(kid);
-  // <video> with a poster: if the mp4 plays we get an animated warrior; if it
-  // fails to load, the poster image (the illustrated art) stays. Clean fallback.
-  el.innerHTML="<video autoplay muted loop playsinline preload='metadata' poster='img/"+HERO_IMG[k]+"'><source src='img/"+HERO_VID[k]+"' type='video/mp4'></video>";
- }
- function revealPieces(root, kid){
-  var has_=has(kid);
-  var earnedCards=[];
-  [].forEach.call(root.querySelectorAll('.lk-piece'),function(c){
-   var i=parseInt(c.getAttribute('data-i'),10);
-   if(PIECES[i] && has_(PIECES[i].k)) earnedCards.push(c);
-  });
-  earnedCards.forEach(function(c,idx){
-   setTimeout(function(){
-    c.classList.remove('reveal'); void c.offsetWidth; c.classList.add('reveal');
-    try{ if(typeof wzSfxEarn==='function')wzSfxEarn(); }catch(e){}
-    try{ if(navigator.vibrate)navigator.vibrate(16); }catch(e){}
-   }, 350+idx*360);
-  });
- }
-
- window.wzOpenLocker=function(){
-  var kid=(window.APP&&APP.kid); if(!kid){ if(typeof toast==='function')toast('Log in to see your Locker!'); return; }
-  css();
-  var root=document.getElementById('wz-lk');
-  if(!root){ root=document.createElement('div'); root.id='wz-lk'; document.body.appendChild(root); }
-  var has_=has(kid);
-  var pieceCount=earnedList(kid).filter(function(x){return x!=='full';}).length;
-  var title=TITLES[Math.min(pieceCount,TITLES.length-1)];
-
-  var ic=function(k,sz){ return window.wzIcon?wzIcon(k,sz):''; };
-  var grid='';
-  PIECES.forEach(function(p,i){ var on=has_(p.k);
-   grid+="<div class='lk-piece "+(on?'on':'off')+"' data-i='"+i+"'><span class='pe'>"+ic(p.k,30)+"</span><div class='pn'>"+p.name+"</div></div>";
-  });
-
-  root.innerHTML=
-   "<div class='lk-in'>"+
-   "<button class='lk-x' aria-label='Close'>✕</button>"+
-   "<div class='lk-name'>"+((kid.first_name||'Warrior'))+"</div>"+
-   "<div class='lk-title'>"+(window.wzIcon?wzIcon('sword',14):'')+" "+title+"</div>"+
-   "<div class='lk-stage'><div class='lk-aura'></div><div class='lk-hero' id='lk-hero'></div></div>"+
-   "<div class='lk-quest'></div>"+
-   "<div class='lk-grid'>"+grid+"</div>"+
-   "<div class='lk-verse locked'><div class='vr'>Tap a piece of armor</div><div class='vt'>Each piece is a promise from God in Ephesians 6.</div><div class='vm'>Tap any armor above to read its verse and what it means for you.</div></div>"+
-   "<div class='lk-btns'>"+
-     "<button class='lk-btn lk-gold' id='lk-custom'>🎨 Customize</button>"+
-     "<button class='lk-btn lk-dark' id='lk-close'>Done</button>"+
-   "</div></div>";
-
-  root.classList.add('show');
-  buildQuest(root, kid);
-  renderHero(root, kid);
-  revealPieces(root, kid);
-
-  function close(){ root.classList.remove('show'); }
-  root.querySelector('.lk-x').onclick=close;
-  root.querySelector('#lk-close').onclick=close;
-  root.querySelector('#lk-custom').onclick=function(){
-   close();
-   try{ if(typeof dashTab==='function'){ var b=document.querySelector(".tab-btn[onclick*=\"'warrior'\"]")||document.querySelector(".tab-sidebar-btn[onclick*=\"'warrior'\"]"); dashTab('warrior',b); } if(typeof openCustomize==='function')setTimeout(openCustomize,200); }catch(e){}
-  };
-  [].forEach.call(root.querySelectorAll('.lk-piece'),function(el){
-   el.onclick=function(){ selectPiece(root, kid, parseInt(el.getAttribute('data-i'),10)); };
-  });
-
-  // celebrate a full set on open
-  if(has_('full')){ try{ if(typeof wzConfetti==='function')setTimeout(function(){wzConfetti(50);},earnedList(kid).length*480+300); }catch(e){} }
- };
-
- // Add a prominent launch button to the top of the Armor tab (after it renders).
- function addLaunch(){
-  var tw=document.getElementById('tab-warrior'); if(!tw)return;
-  if(tw.querySelector('.lk-launch'))return;
-  if(!tw.firstChild)return;                 // wait until the tab has rendered
-  var b=document.createElement('button'); b.className='lk-launch';
-  b.textContent='Enter My Warrior Locker';
-  b.onclick=function(){ wzOpenLocker(); };
-  tw.insertBefore(b, tw.firstChild);
- }
- function hookArmor(){
-  if(typeof window.renderArmor==='function' && !window.renderArmor.__wzLk){
-   var _ra=window.renderArmor;
-   window.renderArmor=function(){ var r=_ra.apply(this,arguments); setTimeout(addLaunch,20); return r; };
-   window.renderArmor.__wzLk=1;
-  }
- }
- function hookTab(){
-  if(typeof window.dashTab==='function' && !window.dashTab.__wzLkTab){
-   var _dt=window.dashTab;
-   window.dashTab=function(tab,btn){ var r=_dt.apply(this,arguments); if(tab==='warrior')setTimeout(addLaunch,80); return r; };
-   window.dashTab.__wzLkTab=1;
-  }
- }
- function init(){ hookArmor(); hookTab(); try{ addLaunch(); }catch(e){} }
- setTimeout(init,400); setTimeout(init,1300); setTimeout(init,2700);
-})();
-
-  </script>
-  <script>
-// Daily Gift — "Today's Blessing."
-// A once-a-day chest the kid opens for a Scripture blessing. It builds the daily
-// habit the streak system rewards, and sends every child off with God's Word.
-// The verse is chosen by the calendar day, so the whole church gets the same
-// "verse of the day" — a shared blessing, not a random one.
-//
-// Additive and backend-free: no points are awarded (so nothing to abuse), the
-// only thing stored is a per-kid "opened today" flag in localStorage. It adds a
-// button to the top of the Today hub; opening it plays the existing celebration
-// SFX. All verses are ESV and passed the biblical-soundness review.
-(function(){
- if(window.__wzGift)return; window.__wzGift=1;
-
- // Shared verse-of-the-day pool (ESV). Rotated by day-of-year so everyone gets
- // the same blessing each day. Kept short and kid-appropriate.
- var VERSES=[
-  {t:'Be strong and courageous. Do not be frightened… for the Lord your God is with you wherever you go.', r:'Joshua 1:9'},
-  {t:'I can do all things through him who strengthens me.', r:'Philippians 4:13'},
-  {t:'The Lord is my shepherd; I shall not want.', r:'Psalm 23:1'},
-  {t:'God is our refuge and strength, a very present help in trouble.', r:'Psalm 46:1'},
-  {t:'Trust in the Lord with all your heart, and do not lean on your own understanding.', r:'Proverbs 3:5'},
-  {t:'For God so loved the world, that he gave his only Son…', r:'John 3:16'},
-  {t:'We love because he first loved us.', r:'1 John 4:19'},
-  {t:'Let the little children come to me… for to such belongs the kingdom of heaven.', r:'Matthew 19:14'},
-  {t:'I have called you by name, you are mine.', r:'Isaiah 43:1'},
-  {t:'Fear not, for I am with you; be not dismayed, for I am your God.', r:'Isaiah 41:10'},
-  {t:'Oh give thanks to the Lord, for he is good, for his steadfast love endures forever!', r:'Psalm 107:1'},
-  {t:'But you are a chosen race, a royal priesthood, a holy nation, a people for his own possession.', r:'1 Peter 2:9'},
-  {t:'The Lord is my light and my salvation; whom shall I fear?', r:'Psalm 27:1'},
-  {t:'Rejoice in the Lord always; again I will say, rejoice.', r:'Philippians 4:4'}
- ];
-
- function dayOfYear(){
-  var d=new Date(), start=new Date(d.getFullYear(),0,0);
-  return Math.floor((d-start)/86400000);
- }
- function today(){ return new Date().toISOString().slice(0,10); }
- function verseOfDay(){ return VERSES[dayOfYear()%VERSES.length]; }
- function kidId(){ try{ return (window.APP&&APP.kid&&APP.kid.id)||'anon'; }catch(e){ return 'anon'; } }
- function openedToday(){ try{ return localStorage.getItem('wz_gift_'+kidId())===today(); }catch(e){ return false; } }
- function markOpened(){ try{ localStorage.setItem('wz_gift_'+kidId(), today()); }catch(e){} }
-
- function css(){ if(document.getElementById('wz-gift-css'))return;
-  var s=document.createElement('style'); s.id='wz-gift-css';
-  s.textContent=
-   ".gift-launch{display:flex;align-items:center;gap:.7rem;width:100%;border:none;border-radius:16px;padding:.85rem 1rem;margin-bottom:.8rem;cursor:pointer;background:linear-gradient(135deg,#3a2270,#1a0f45);border:1px solid rgba(245,200,66,.4);text-align:left}"+
-   ".gift-launch .ge{font-size:1.9rem;animation:giftwob 2.2s ease-in-out infinite}"+
-   "@keyframes giftwob{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}"+
-   ".gift-launch .gt{flex:1}"+
-   ".gift-launch .g1{font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842;letter-spacing:.03em}"+
-   ".gift-launch .g2{font-size:.72rem;color:rgba(255,255,255,.6)}"+
-   ".gift-launch.done{opacity:.7;background:rgba(255,255,255,.04);border-color:rgba(126,224,138,.4)}"+
-   ".gift-launch.done .ge{animation:none}"+
-   "#wz-gift{position:fixed;inset:0;z-index:100060;background:radial-gradient(circle at 50% 40%,rgba(58,34,112,.97),rgba(7,3,26,.99));display:none;align-items:center;justify-content:center;text-align:center;padding:1.4rem}"+
-   "#wz-gift.show{display:flex;animation:giftin .3s ease}"+
-   "@keyframes giftin{from{opacity:0}to{opacity:1}}"+
-   "#wz-gift .gc{max-width:420px}"+
-   "#wz-gift .chest{font-size:5.5rem;cursor:pointer;animation:giftpop .5s cubic-bezier(.34,1.56,.64,1)}"+
-   "@keyframes giftpop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1)}}"+
-   "#wz-gift .chest.shake{animation:giftshake .5s}"+
-   "@keyframes giftshake{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(8deg)}}"+
-   "#wz-gift .hint{color:rgba(255,255,255,.6);font-size:.85rem;margin-top:.6rem}"+
-   "#wz-gift .reveal{display:none;animation:giftin .5s ease}"+
-   "#wz-gift .reveal.show{display:block}"+
-   "#wz-gift .rt{font-family:Bangers,cursive;font-size:1.7rem;color:#f5c842;letter-spacing:.03em;margin-bottom:.8rem}"+
-   "#wz-gift .verse{background:rgba(255,255,255,.06);border:1px solid rgba(245,200,66,.35);border-radius:18px;padding:1.2rem;margin-bottom:1rem}"+
-   "#wz-gift .vt{font-style:italic;color:#fff;font-size:1.1rem;line-height:1.6;margin-bottom:.6rem}"+
-   "#wz-gift .vr{color:#f5c842;font-weight:900;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase}"+
-   "#wz-gift .sub{color:rgba(255,255,255,.65);font-size:.85rem;margin-bottom:1.2rem;line-height:1.5}"+
-   "#wz-gift .gbtn{background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border:none;border-radius:13px;padding:.8rem 2rem;font-family:Bangers,cursive;font-size:1.15rem;letter-spacing:.05em;cursor:pointer}";
-  document.head.appendChild(s); }
-
- window.wzOpenGift=function(){
-  css();
-  var v=verseOfDay();
-  var root=document.getElementById('wz-gift');
-  if(!root){ root=document.createElement('div'); root.id='wz-gift'; document.body.appendChild(root); }
-  var already=openedToday();
-  root.innerHTML=
-   "<div class='gc'>"+
-   "<div id='gift-chest' class='chest'>"+(window.wzIcon?wzIcon('gift',88):'🎁')+"</div>"+
-   "<div class='hint' id='gift-hint'>"+(already?'Here is today’s blessing.':'Tap the gift to open today’s blessing!')+"</div>"+
-   "<div class='reveal' id='gift-reveal'>"+
-     "<div class='rt'>Today’s Blessing</div>"+
-     "<div class='verse'><div class='vt'>“"+v.t+"”</div><div class='vr'>"+v.r+" · ESV</div></div>"+
-     "<div class='sub'>God’s Word is for you today, warrior. Come back tomorrow for a new blessing.</div>"+
-     "<button class='gbtn' id='gift-done'>Amen ✓</button>"+
-   "</div></div>";
-  root.classList.add('show');
-
-  var chest=root.querySelector('#gift-chest');
-  var reveal=root.querySelector('#gift-reveal');
-  var hint=root.querySelector('#gift-hint');
-  function open(){
-   chest.classList.add('shake');
-   setTimeout(function(){
-    hint.style.display='none'; reveal.classList.add('show');
-    markOpened(); refreshBtn();
-    try{ if(typeof wzConfetti==='function')wzConfetti(50); }catch(e){}
-    try{ if(typeof wzSfxFanfare==='function')wzSfxFanfare(); }catch(e){}
-    try{ if(navigator.vibrate)navigator.vibrate([40,30,60]); }catch(e){}
-   },500);
-  }
-  if(already){ reveal.classList.add('show'); hint.style.display='none'; }
-  else chest.onclick=open;
-  root.querySelector('#gift-done').onclick=function(){ root.classList.remove('show'); };
-  // tap backdrop to close
-  root.onclick=function(e){ if(e.target===root)root.classList.remove('show'); };
- };
-
- function refreshBtn(){
-  var b=document.querySelector('.gift-launch'); if(!b)return;
-  var done=openedToday();
-  b.className='gift-launch'+(done?' done':'');
-  b.innerHTML="<div class='ge'>"+(window.wzIcon?wzIcon('gift',30):(done?'🎉':'🎁'))+"</div><div class='gt'>"+
-    "<div class='g1'>"+(done?'Blessing opened':'Today’s Blessing')+"</div>"+
-    "<div class='g2'>"+(done?'Come back tomorrow for a new one!':'Tap to open your daily gift')+"</div></div>";
- }
- function addButton(){
-  var host=document.getElementById('tab-today'); if(!host)return;
-  if(!host.firstChild)return;
-  if(host.querySelector('.gift-launch'))return;
-  css();
-  var b=document.createElement('button'); b.className='gift-launch';
-  b.onclick=function(){ wzOpenGift(); };
-  host.insertBefore(b, host.firstChild);
-  refreshBtn();
- }
-
- function watch(){
-  var host=document.getElementById('tab-today'); if(!host)return false;
-  if(host.__wzGiftWatched)return true; host.__wzGiftWatched=1;
-  var deb=null;
-  var mo=new MutationObserver(function(){ if(deb)clearTimeout(deb); deb=setTimeout(addButton,160); });
-  try{ mo.observe(host,{childList:true}); }catch(e){}
-  setTimeout(addButton,220);
-  return true;
- }
- var n=0, iv=setInterval(function(){ if(watch()||++n>60)clearInterval(iv); },350);
-})();
-
-  </script>
-  <script>
-// Warrior Buddy — a little animated mascot that gives the app "cartoon" life.
-// A friendly SVG warrior sits in the corner, bobs and blinks, WAVES when you
-// change tabs, CHEERS (jumps + speech bubble) when you earn points, and gives a
-// word of encouragement when tapped. It borrows the kid's own skin/accent colors
-// so it feels like their warrior cheering them on.
-//
-// Pure decoration, backend-free: it only reads the on-screen points readout and
-// wraps dashTab. Shows only when a kid is logged in; if a hook is missing it just
-// sits still. Encouragements are short, kid-friendly, and doctrinally safe.
-(function(){
- if(window.__wzMascot)return; window.__wzMascot=1;
-
- var CHEERS=['🎉 Yes!','Nice one!','Way to go!','⚡ Boom!','Keep it up!','Awesome!'];
- var WORDS=[
-  'You’re a mighty warrior! ⚔️',
-  'God is with you today!',
-  'Put on the full armor of God!',
-  'You can do all things through Christ! 💪',
-  'Be strong and courageous!',
-  'Jesus loves you so much!',
-  'Keep going, warrior. I believe in you!',
-  'Hide God’s Word in your heart!'
- ];
-
- // The kid's real illustrated warrior, cropped into a circular buddy.
- var HERO_IMG={w1:'warrior-boy.png',w2:'warrior-2.png',w3:'warrior-3.png',w4:'warrior-girl.png',w5:'warrior-5.png',w6:'warrior-6.png'};
-
- function css(){ if(document.getElementById('wz-mas-css'))return;
-  var s=document.createElement('style'); s.id='wz-mas-css';
-  s.textContent=
-   "#wz-buddy{position:fixed;right:14px;bottom:20px;z-index:9500;width:66px;height:66px;cursor:pointer;display:none;border-radius:50%;overflow:hidden;border:2.5px solid rgba(245,200,66,.75);box-shadow:0 6px 16px rgba(0,0,0,.5),0 0 16px rgba(245,200,66,.25);background:#140a2e}"+
-   "#wz-buddy .bwrap{width:100%;height:100%;animation:wzbob 3.4s ease-in-out infinite;transform-origin:50% 90%}"+
-   "#wz-buddy .bwrap img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}"+
-   "@keyframes wzbob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(-2deg)}}"+
-   "#wz-buddy.cheer .bwrap{animation:wzcheer .6s cubic-bezier(.34,1.56,.64,1)}"+
-   "@keyframes wzcheer{0%{transform:translateY(0) scale(1)}40%{transform:translateY(-16px) scale(1.12)}100%{transform:translateY(0) scale(1)}}"+
-   "#wz-buddy.wave .bwrap{animation:wzwave .6s ease}"+
-   "@keyframes wzwave{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}"+
-   "#wz-buddy .eye{transform-origin:center;animation:wzblink 4.2s infinite}"+
-   "@keyframes wzblink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}"+
-   "#wz-bubble{position:fixed;right:16px;bottom:88px;z-index:9501;max-width:180px;background:#fff;color:#1a1a2e;border-radius:14px;padding:.55rem .8rem;font-size:.8rem;font-weight:800;box-shadow:0 6px 18px rgba(0,0,0,.4);opacity:0;transform:translateY(8px) scale(.9);transition:all .2s;pointer-events:none;display:none}"+
-   "#wz-bubble.show{opacity:1;transform:translateY(0) scale(1)}"+
-   "#wz-bubble::after{content:'';position:absolute;right:22px;bottom:-7px;width:0;height:0;border:7px solid transparent;border-top-color:#fff;border-bottom:0}";
-  document.head.appendChild(s); }
-
- function svg(){
-  var a=(window.APP&&APP.kid&&APP.kid.avatar)||''; if(!HERO_IMG[a])a='w1';
-  return "<div class='bwrap'><img src='img/"+HERO_IMG[a]+"' alt=''></div>";
- }
-
- function bubble(txt){
-  var el=document.getElementById('wz-bubble'); if(!el)return;
-  el.textContent=txt; el.style.display='block';
-  requestAnimationFrame(function(){ el.classList.add('show'); });
-  clearTimeout(el.__t);
-  el.__t=setTimeout(function(){ el.classList.remove('show'); setTimeout(function(){ el.style.display='none'; },220); }, 2600);
- }
- function react(cls){
-  var b=document.getElementById('wz-buddy'); if(!b)return;
-  b.classList.remove(cls); void b.offsetWidth; b.classList.add(cls);
-  setTimeout(function(){ b.classList.remove(cls); }, 700);
- }
-
- function build(){
-  if(document.getElementById('wz-buddy'))return;
-  css();
-  var b=document.createElement('div'); b.id='wz-buddy'; b.innerHTML=svg();
-  b.setAttribute('aria-label','Warrior buddy');
-  b.onclick=function(){ react('cheer'); bubble(WORDS[Math.floor(Math.random()*WORDS.length)]); };
-  document.body.appendChild(b);
-  var bub=document.createElement('div'); bub.id='wz-bubble'; document.body.appendChild(bub);
-  // show only when a kid is logged in
-  setInterval(function(){ b.style.display=(window.APP&&APP.kid)?'block':'none'; }, 1000);
-  // refresh colors to match the kid once known
-  setTimeout(function(){ b.innerHTML=svg(); }, 2500);
- }
-
- function hookTab(){
-  if(typeof window.dashTab!=='function' || window.dashTab.__wzMascot)return;
-  var _dt=window.dashTab;
-  window.dashTab=function(tab,btn){ var r=_dt.apply(this,arguments); try{ react('wave'); }catch(e){} return r; };
-  window.dashTab.__wzMascot=1;
- }
- function watchPoints(){
-  var el=document.getElementById('dash-pts'); if(!el)return false;
-  if(el.__wzMascot)return true; el.__wzMascot=1;
-  var last=el.textContent;
-  var mo=new MutationObserver(function(){
-   var now=el.textContent; if(now===last)return;
-   var up=(parseInt(now,10)||0)>(parseInt(last,10)||0); last=now;
-   if(up){ react('cheer'); bubble(CHEERS[Math.floor(Math.random()*CHEERS.length)]); }
-  });
-  try{ mo.observe(el,{childList:true,characterData:true,subtree:true}); }catch(e){}
-  return true;
- }
-
- function init(){ build(); hookTab(); watchPoints(); }
- if(document.readyState!=='loading')init(); else document.addEventListener('DOMContentLoaded',init);
- setTimeout(init,600); setTimeout(init,1600); setTimeout(init,2800);
- var n=0, iv=setInterval(function(){ if((watchPoints()&&window.dashTab&&window.dashTab.__wzMascot)||++n>60)clearInterval(iv); },500);
-})();
-
-  </script>
-  <script>
-// Welcome, Warrior — a first-login moment that hooks a new kid.
-// The very first time a child reaches their dashboard, this plays a short,
-// celebratory welcome: confetti + fanfare, their warrior on screen, one anchor
-// verse (Ephesians 6:10, ESV), three quick "here's how it works" beats, and a
-// nudge to make their warrior their own. It fires ONCE per kid (a per-kid flag in
-// localStorage), then never again.
-//
-// Additive and backend-free: it wraps openDash to detect the first arrival and
-// reuses armorSVG for the warrior. If anything is missing it simply doesn't show.
-(function(){
- if(window.__wzWelcome)return; window.__wzWelcome=1;
-
- function seen(id){ try{ return localStorage.getItem('wz_welcomed_'+id)==='1'; }catch(e){ return true; } }
- function mark(id){ try{ localStorage.setItem('wz_welcomed_'+id,'1'); }catch(e){} }
-
- function css(){ if(document.getElementById('wz-wel-css'))return;
-  var s=document.createElement('style'); s.id='wz-wel-css';
-  s.textContent=
-   "#wz-wel{position:fixed;inset:0;z-index:100070;background:radial-gradient(circle at 50% 30%,#2a1466,#07031a 72%);display:none;overflow-y:auto}"+
-   "#wz-wel.show{display:block;animation:wzwelin .4s ease}"+
-   "@keyframes wzwelin{from{opacity:0}to{opacity:1}}"+
-   "#wz-wel .win{max-width:440px;margin:0 auto;padding:1.6rem 1.3rem 2.2rem;text-align:center}"+
-   "#wz-wel .badge{display:inline-block;background:rgba(245,200,66,.15);border:1px solid rgba(245,200,66,.35);color:#f5c842;border-radius:99px;padding:.25rem .8rem;font-size:.6rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.6rem}"+
-   "#wz-wel .h{font-family:Bangers,cursive;font-size:2.5rem;color:#fff;line-height:1;letter-spacing:.03em;text-shadow:0 0 30px rgba(245,200,66,.5);margin-bottom:.15rem}"+
-   "#wz-wel .h em{color:#f5c842;font-style:normal}"+
-   "#wz-wel .warr{height:210px;display:flex;align-items:center;justify-content:center;margin:.4rem 0}"+
-   "#wz-wel .welhero{width:200px;height:200px;border-radius:26px;overflow:hidden;border:3px solid rgba(245,200,66,.6);box-shadow:0 12px 30px rgba(0,0,0,.5),0 0 42px rgba(245,200,66,.25);animation:wzwelfloat 4.2s ease-in-out infinite;background:#140a2e}"+
-   "#wz-wel .welhero video,#wz-wel .welhero img{width:100%;height:100%;object-fit:cover;display:block}"+
-   "@keyframes wzwelfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}"+
-   "#wz-wel .verse{color:#fff;font-style:italic;font-size:.95rem;line-height:1.5;margin:.2rem auto 1rem;max-width:340px}"+
-   "#wz-wel .verse .vr{display:block;color:#f5c842;font-style:normal;font-weight:900;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-top:.35rem}"+
-   "#wz-wel .steps{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.2rem;text-align:left}"+
-   "#wz-wel .step{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:.7rem .85rem}"+
-   "#wz-wel .step .se{font-size:1.6rem;flex-shrink:0}"+
-   "#wz-wel .step .st{font-weight:800;font-size:.9rem;color:#fff}"+
-   "#wz-wel .step .sd{font-size:.74rem;color:rgba(255,255,255,.55)}"+
-   "#wz-wel .btns{display:flex;gap:.55rem}"+
-   "#wz-wel .wbtn{flex:1;border:none;border-radius:13px;padding:.85rem;font-family:Bangers,cursive;font-size:1.15rem;letter-spacing:.05em;cursor:pointer}"+
-   "#wz-wel .gold{background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318}"+
-   "#wz-wel .dark{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff}";
-  document.head.appendChild(s); }
-
- // Use the real illustrated (and animated) warrior art the app already ships.
- var HERO_IMG={w1:'warrior-boy.png',w2:'warrior-2.png',w3:'warrior-3.png',w4:'warrior-girl.png',w5:'warrior-5.png',w6:'warrior-6.png'};
- var HERO_VID={w1:'warrior-1.mp4',w2:'warrior-2.mp4',w3:'warrior-3.mp4',w4:'warrior-4.mp4',w5:'warrior-5.mp4',w6:'warrior-6.mp4'};
- function warriorSVG(kid){
-  var a=(kid&&kid.avatar)||''; if(!HERO_IMG[a])a='w1';
-  return "<div class='welhero'><video autoplay muted loop playsinline preload='metadata' poster='img/"+HERO_IMG[a]+"'><source src='img/"+HERO_VID[a]+"' type='video/mp4'></video></div>";
- }
-
- window.wzWelcome=function(kid){
-  kid=kid||(window.APP&&APP.kid); if(!kid)return;
-  css();
-  var root=document.getElementById('wz-wel');
-  if(!root){ root=document.createElement('div'); root.id='wz-wel'; document.body.appendChild(root); }
-  root.innerHTML=
-   "<div class='win'>"+
-   "<div class='badge'>⚔️ The Gathering CTX</div>"+
-   "<div class='h'>Welcome,<br><em>"+(kid.first_name||'Warrior')+"!</em></div>"+
-   "<div class='warr'>"+warriorSVG(kid)+"</div>"+
-   "<div class='verse'>“Be strong in the Lord and in the strength of his might.”<span class='vr'>Ephesians 6:10 · ESV</span></div>"+
-   "<div class='steps'>"+
-     "<div class='step'><div class='se'>"+(window.wzIcon?wzIcon('star',26):'⭐')+"</div><div><div class='st'>Earn points</div><div class='sd'>Read, play, memorize, show up on Sunday.</div></div></div>"+
-     "<div class='step'><div class='se'>"+(window.wzIcon?wzIcon('shield',26):'🛡️')+"</div><div><div class='st'>Put on the armor of God</div><div class='sd'>Your points unlock each piece from Ephesians 6.</div></div></div>"+
-     "<div class='step'><div class='se'>"+(window.wzIcon?wzIcon('gift',26):'🎁')+"</div><div><div class='st'>Open your daily blessing</div><div class='sd'>A new verse waits for you every day.</div></div></div>"+
-   "</div>"+
-   "<div class='btns'>"+
-     "<button class='wbtn dark' id='wel-custom'>🎨 Make it mine</button>"+
-     "<button class='wbtn gold' id='wel-go'>Let’s go! ⚔️</button>"+
-   "</div></div>";
-  root.classList.add('show');
-  try{ if(typeof wzConfetti==='function')wzConfetti(64); }catch(e){}
-  try{ if(typeof wzSfxFanfare==='function')wzSfxFanfare(); }catch(e){}
-  try{ if(navigator.vibrate)navigator.vibrate([40,30,60,30,80]); }catch(e){}
-
-  function close(){ root.classList.remove('show'); }
-  root.querySelector('#wel-go').onclick=close;
-  root.querySelector('#wel-custom').onclick=function(){
-   close();
-   try{
-    if(typeof wzOpenLocker==='function'){ wzOpenLocker(); return; }
-    if(typeof dashTab==='function'){ var b=document.querySelector(".tab-btn[onclick*=\"'warrior'\"]"); dashTab('warrior',b); }
-    if(typeof openCustomize==='function')setTimeout(openCustomize,250);
-   }catch(e){}
-  };
- };
-
- function maybeWelcome(){
-  var kid=(window.APP&&APP.kid); if(!kid||!kid.id)return;
-  if(seen(kid.id))return;
-  mark(kid.id);
-  setTimeout(function(){ try{ wzWelcome(kid); }catch(e){} }, 650);
- }
- function hook(){
-  if(typeof window.openDash!=='function' || window.openDash.__wzWel)return;
-  var _od=window.openDash;
-  window.openDash=function(kid){ var r=_od.apply(this,arguments); try{ maybeWelcome(); }catch(e){} return r; };
-  window.openDash.__wzWel=1;
- }
- setTimeout(hook,400); setTimeout(hook,1300); setTimeout(hook,2700);
-})();
-
-  </script>
-  <script>
-  if('serviceWorker' in navigator){
-    window.addEventListener('load',function(){
-      navigator.serviceWorker.register('sw.js').catch(function(){});
-    });
-    // escape hatch: gathering-kids-zone.netlify.app/?nosw=1 nukes the SW + caches
-    if(location.search.indexOf('nosw=1')>=0){
-      navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});
-      if(window.caches) caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});
+    if (s.podcast_url) {
+      // Extract Buzzsprout episode ID from URL for proper embed
+      const match = s.podcast_url.match(/episodes\/(\d+)/);
+      if (match) {
+        const epId = match[1];
+        const player = document.getElementById('sermon-player');
+        const div = document.createElement('div');
+        div.id = 'buzzsprout-player-' + epId;
+        player.innerHTML = '';
+        player.appendChild(div);
+        const script = document.createElement('script');
+        script.src = `https://www.buzzsprout.com/2608288/${epId}.js?container_id=buzzsprout-player-${epId}&player=small`;
+        script.charset = 'utf-8';
+        document.body.appendChild(script);
+      } else {
+        document.getElementById('sermon-player').innerHTML =
+          '<audio controls preload="none" style="width:100%;max-width:500px"><source src="' + s.podcast_url + '" type="audio/mpeg"></audio>';
+      }
+    } else {
+      document.getElementById('sermon-player').innerHTML =
+        '<p style="color:rgba(255,255,255,0.35);font-size:.85rem">Podcast coming soon.</p>';
     }
+  } catch(e) {
+    console.error('Sermon load error:', e);
   }
-  </script>
+})();
+</script>
+
+<section class="welcome">
+  <div class="welcome-left">
+    <p class="w-label">Who We Are</p>
+    <h2 class="w-title">Welcome<br><em>home.</em></h2>
+    <div class="w-body">
+      <p>The Gathering exists to be a community formed by the Word, led by the Spirit, and walking in the victory Christ has already won.</p>
+      <p>We are not building a program. We are making disciples.</p>
+      <p>Whether you are exploring faith for the first time or looking for a church home in Cleburne, there is a seat at the table for you.</p>
+    </div>
+    <a href="/visit" class="btn-dark">Find Your Seat &rarr;</a>
+  </div>
+  <div class="welcome-photo"></div>
+</section>
+
+<div class="scripture">
+  <p class="scripture-q">"They devoted themselves to the apostles' teaching, to fellowship, to the breaking of bread, and to prayer."</p>
+  <p class="scripture-ref">Acts 2:42</p>
+</div>
+
+<section class="convictions">
+  <p class="sec-label">What We Believe</p>
+  <h2 class="sec-title">Four Convictions that shape everything we do.</h2>
+  <div class="conv-grid">
+    <div class="conv-item">
+      <p class="conv-num">01</p>
+      <h3 class="conv-title">We will proclaim Christ. Fearlessly.</h3>
+      <p class="conv-body">Not a watered-down Jesus designed to make everyone comfortable. The full Christ crucified for sin, buried in a tomb, risen on the third day, seated at the right hand of the Father, and coming back in glory. In a world that wants to reduce Jesus to a life coach, we declare Him as Lord.</p>
+    </div>
+    <div class="conv-item">
+      <p class="conv-num">02</p>
+      <h3 class="conv-title">We will make disciples. Not just converts.</h3>
+      <p class="conv-body">Jesus never said go make church members. He said go make disciples. Men and women who learn His ways, carry His authority, and reflect His character in every room they walk into. Formation over information. Transformation over attendance.</p>
+    </div>
+    <div class="conv-item">
+      <p class="conv-num">03</p>
+      <h3 class="conv-title">We will build real community. Not a crowd.</h3>
+      <p class="conv-body">A crowd sits in the same room once a week. A community knows each other, carries each other, and sharpens each other. We are building the kind of church where people are genuinely known and genuinely loved.</p>
+    </div>
+    <div class="conv-item">
+      <p class="conv-num">04</p>
+      <h3 class="conv-title">We will be a fully activated Church.</h3>
+      <p class="conv-body">A victorious Church is not built on one gifted leader. It is built on activated sons and daughters. Every believer carries presence and proclamation. Ministry is not reserved for the platform. It belongs to every person in the room.</p>
+    </div>
+  </div>
+</section>
+<section class="foundations">
+  <p class="foundations-label">How We Live</p>
+  <h2 class="foundations-title">Four Foundations that shape our life together.</h2>
+  <div class="found-grid">
+    <div class="found-item">
+      <p class="found-num">01</p>
+      <h3 class="found-title">Word-Driven</h3>
+      <p class="found-body">The Word defines truth and anchors the Church against drift. Everything we do flows from what Scripture actually says, not what we wish it said, not what culture demands. The Word has the final word.</p>
+    </div>
+    <div class="found-item">
+      <p class="found-num">02</p>
+      <h3 class="found-title">Spirit-Led</h3>
+      <p class="found-body">All gifts of the Holy Spirit are active and available today. The Spirit empowers obedience and alignment. We do not operate in our own strength. We move when He moves and trust what He does.</p>
+    </div>
+    <div class="found-item">
+      <p class="found-num">03</p>
+      <h3 class="found-title">Prayer-Fueled</h3>
+      <p class="found-body">Prayer is relational dependence that sustains everything we do. We pray first, not last. Not as a formality. As a lifeline. A church that stops praying stops moving with God.</p>
+    </div>
+    <div class="found-item">
+      <p class="found-num">04</p>
+      <h3 class="found-title">Fully Activated</h3>
+      <p class="found-body">A victorious Church is built on activated sons and daughters. Every believer carries presence and proclamation. Ministry is not reserved for the platform. It belongs to every person in the room.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="testimonies">
+  <p class="testimonies-label">From Our Family</p>
+  <h2 class="testimonies-title">What people are saying.</h2>
+  <div class="testimonies-grid">
+    <div class="testimony">
+      <p class="testimony-quote">I shared a prayer request for my brand new grandson with a few ladies at church the other night, and not only did they pray (and we received the answer to the prayer that night, praise God!), but they also gave me info and resources to help. Real community! So thankful!</p>
+      <p class="testimony-name">Partner</p>
+    </div>
+    <div class="testimony">
+      <p class="testimony-quote">I'm so very thankful for The Gathering and the direction we are heading!</p>
+      <p class="testimony-name">Partner</p>
+    </div>
+    <div class="testimony">
+      <p class="testimony-quote">The Gathering has given me a place I feel like I belong. After moving to Cleburne 10 years ago, leaving our home church, and after visiting several local churches, The Gathering has been what I have yearned for and needed so much. Pastor Billy's messages have brought fresh meaning of the scriptures to me. His love for the Word is so evident. I pray everyone who walks into The Gathering feels like they belong and that Jesus and His Word comes alive to them.</p>
+      <p class="testimony-name">Partner</p>
+    </div>
+    <div class="testimony">
+      <p class="testimony-quote">In all my 75 years, I have never heard a Pentecost sermon like I did last Sunday. Since sitting under the teaching here, my spirit is finding rest. The Word that is brought stays with me and I meditate on it throughout the week. Not only me but my family, those I do life with. We truly are able to Sabbath with services at 5 PM and look so forward to the decrees and declarations of who we are in Christ.</p>
+      <p class="testimony-name">Partner, 75 years in the faith</p>
+    </div>
+  </div>
+</section>
+
+<section class="steps">
+  <p class="sec-label">Get Connected</p>
+  <h2 class="sec-title">Your next step<br><em style="font-style:italic;color:rgba(255,255,255,0.38)">starts here.</em></h2>
+  <div class="steps-grid">
+    <div class="step">
+      <p class="step-tag">Plan a Visit</p>
+      <h3 class="step-title">Come as you are.</h3>
+      <p class="step-body">No dress code, no pressure, no surprises. Just come. Join us Sunday at 5 PM at the Cleburne Conference Center and find out what The Gathering is all about.</p>
+      <a href="/visit" class="step-link">Plan Your Visit &rarr;</a>
+    </div>
+    <div class="step">
+      <p class="step-tag">Belong &amp; Become</p>
+      <h3 class="step-title">Partnership Class.</h3>
+      <p class="step-body">Belong and Become is our partnership class where you learn who we are, what we believe, and how to become a committed Partner in The Gathering family. It is how you move from visitor to family.</p>
+      <a href="/belong" class="step-link">Learn More &rarr;</a>
+    </div>
+    <div class="step">
+      <p class="step-tag">Formed &amp; Sent</p>
+      <h3 class="step-title">Discipleship Track.</h3>
+      <p class="step-body">Formed and Sent is where identity becomes calling. Walk through who you are in Christ and get equipped to live it out in your neighborhood, your workplace, and your home.</p>
+      <a href="/formed" class="step-link">Learn More &rarr;</a>
+    </div>
+    <div class="step">
+      <p class="step-tag">Serve with Us</p>
+      <h3 class="step-title">Use your gifts.</h3>
+      <p class="step-body">Every believer is called and equipped. Use your gifts to build something meaningful. Join a serving team and make an impact in the room on Sundays and in the city throughout the week.</p>
+      <a href="https://gatheringctx.churchcenter.com/volunteering" target="_blank" rel="noopener" class="step-link">Find a Team &rarr;</a>
+    </div>
+    <div class="step">
+      <p class="step-tag">Small Gatherings</p>
+      <h3 class="step-title">Midweek Connection.</h3>
+      <p class="step-body">Smaller, deeper, more personal. Small Gatherings are midweek spaces for prayer, Scripture, and the kind of community that cannot happen in a Sunday service alone.</p>
+      <a href="/small-gatherings" class="step-link">Learn More &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<div class="photos">
+  <img src="/hero-room.jpg" alt="Worship at The Gathering CTX" loading="lazy">
+  <img src="/gather-03.jpg" alt="Community at The Gathering CTX" loading="lazy">
+  <img src="/gather-07.jpg" alt="The Gathering CTX" loading="lazy">
+</div>
+
+<section class="kids">
+  <div class="kids-photo"><div class="kids-photo-overlay"></div></div>
+  <div class="kids-content">
+    <p class="k-label">Kids Gathering Zone</p>
+    <h2 class="k-title">Your kids belong here too.</h2>
+    <p class="k-body"><strong style="color:#fff">Babies through Pre-K</strong> have a dedicated, safe room with caring volunteers from the moment you arrive.</p>
+    <p class="k-body"><strong style="color:#fff">Ages 5&ndash;12</strong> stay in the main service for worship, then go to the Kids Zone table during the message for an age-appropriate experience.</p>
+    <p class="k-body" style="margin-top:8px">Background-checked volunteers. Secure check-in tags. Two-adult rule. You can worship knowing your kids are safe and engaged.</p>
+    <div class="k-cta">
+      <a href="/kids" class="btn-border">Kids Ministry &rarr;</a>
+      <a href="https://kids.gatheringctx.org" class="btn-border">Kids Zone App &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="prayer">
+  <p class="sec-label">Prayer</p>
+  <h2 class="p-title">We believe in it. Let us pray for you.</h2>
+  <p class="p-sub">Send us your prayer request and our team will pray over it this week.</p>
+  <form class="prayer-form" name="prayer-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handlePrayer(event)">
+    <input type="hidden" name="form-name" value="prayer-request">
+    <p style="display:none"><input name="bot-field"></p>
+    <input class="p-input" type="text" name="name" placeholder="Your name" required>
+    <input class="p-input" type="email" name="email" placeholder="Your email (optional)">
+    <textarea class="p-textarea" name="request" placeholder="Share your prayer request..." required></textarea>
+    <button class="p-btn" type="submit">Send My Request</button>
+    <p class="p-msg" id="prayer-success">We received your request. Our team will be praying.</p>
+  </form>
+</section>
+
+
+<!-- SOCIAL FEED SECTION -->
+<section style="background:#0a0a0a;padding:5rem 1.5rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:3rem">
+      <h2 style="font-family:'Georgia',serif;font-size:2rem;font-weight:400;color:#fff;margin:0 0 .75rem">Follow Along</h2>
+      <p style="color:rgba(255,255,255,.55);font-size:1rem;font-family:system-ui,sans-serif;margin:0">See what is happening at The Gathering throughout the week.</p>
+    </div>
+    <div id="social-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start">
+
+      <!-- Facebook feed -->
+      <div>
+        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1.25rem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,.6)"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <span style="font-family:system-ui,sans-serif;font-size:.85rem;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase">Facebook</span>
+        </div>
+        <div id="fb-root"></div>
+        <div style="border-radius:6px;overflow:hidden">
+          <div class="fb-page"
+            data-href="https://www.facebook.com/thegatheringctx"
+            data-tabs="timeline"
+            data-width="500"
+            data-height="500"
+            data-small-header="true"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="false">
+          </div>
+        </div>
+        <a href="https://www.facebook.com/thegatheringctx" target="_blank" rel="noopener"
+          style="display:inline-block;margin-top:1rem;font-family:system-ui,sans-serif;font-size:.85rem;color:rgba(255,255,255,.45);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:2px">
+          See all posts on Facebook &rarr;
+        </a>
+      </div>
+
+      <!-- Instagram CTA -->
+      <div>
+        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1.25rem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="rgba(255,255,255,.6)" stroke="none"/></svg>
+          <span style="font-family:system-ui,sans-serif;font-size:.85rem;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase">Instagram</span>
+        </div>
+        <a href="https://www.instagram.com/thegatheringctx" target="_blank" rel="noopener"
+          style="display:block;text-decoration:none;border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:2.5rem 2rem;text-align:center;transition:border-color .2s">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.4" style="margin-bottom:1.25rem"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="rgba(255,255,255,.4)" stroke="none"/></svg>
+          <div style="font-family:system-ui,sans-serif;font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:.5rem">@thegatheringctx</div>
+          <div style="font-family:system-ui,sans-serif;font-size:.875rem;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:1.5rem">Photos, moments, and glimpses of what God is doing in our community. Follow along on Instagram.</div>
+          <span style="display:inline-block;font-family:system-ui,sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.3);border-radius:3px;padding:.5rem 1.25rem">Follow on Instagram</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
+</script>
+
+
+<!-- EVENTS SECTION -->
+<section style="background:#0f0f0f;border-top:1px solid #1a1a1a;padding:5rem 3rem;">
+  <div style="max-width:900px;margin:0 auto;">
+    <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:#b8935a;margin-bottom:16px;">What's Coming</p>
+    <h2 style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:300;color:#fff;margin-bottom:8px;">Upcoming at The Gathering</h2>
+    <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.9rem;color:rgba(255,255,255,0.45);margin-bottom:3rem;">Stay connected with everything happening in the life of The Gathering CTX.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:#1a1a1a;">
+      <div style="background:#0f0f0f;padding:2rem;">
+        <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:8px;">Every Sunday</p>
+        <h3 style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:8px;">The Gathering</h3>
+        <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.7;">5:00 PM &nbsp;&bull;&nbsp; Cleburne Conference Center<br>1501 W. Henderson St., Cleburne TX</p>
+      </div>
+      <div style="background:#0f0f0f;padding:2rem;">
+        <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:8px;">Coming Up</p>
+        <h3 style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:8px;">Belong &amp; Become</h3>
+        <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.7;">Partnership class for anyone ready to go deeper. Date TBA. <a href="/belong" style="color:#b8935a;text-decoration:none;">reserve your seat</a>.</p>
+      </div>
+      <div style="background:#0f0f0f;padding:2rem;">
+        <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:8px;">Current Series</p>
+        <h3 style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:8px;">Rooted / All of Him</h3>
+        <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.7;">Colossians. Our new series begins Sunday, July 19. This Sunday, July 12, is a Night of Worship. <a href="/sermons" style="color:#b8935a;text-decoration:none;">Catch up on past weeks</a>.</p>
+      </div>
+    </div>
+    <div style="margin-top:2rem;text-align:center;">
+      <a href="https://gatheringctx.churchcenter.com/calendar" target="_blank" rel="noopener" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:2px;">View Full Calendar &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="/"><span class="f-logo-the">The</span><span class="f-logo-name">Gathering</span></a>
+      <p class="f-tagline">Walk with victory. Not to it.</p>
+      <div class="f-social">
+        <a href="https://www.facebook.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293" target="_blank" rel="noopener" aria-label="Apple Podcasts"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 4c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3zm0 14.2c-2.5 0-4.7-1.2-6.1-3.2.6-1.2 2-2 3.6-2h5c1.6 0 3 .8 3.6 2-1.4 2-3.6 3.2-6.1 3.2z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <span class="f-col-label">Join Us</span>
+      <span class="f-col-line">Sundays at 5:00 PM</span>
+      <span class="f-col-line">Cleburne Conference Center</span>
+      <span class="f-col-line">1501 W Henderson St</span>
+      <span class="f-col-line">Cleburne, TX 76033</span>
+      <a href="https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX+76033" target="_blank" rel="noopener" class="f-map">Get Directions &rarr;</a>
+    </div>
+    <div>
+      <span class="f-col-label">Connect</span>
+      <a href="tel:+16822865640" class="f-col-link">(682) 286-5640</a>
+      <a href="mailto:info@gatheringctx.org" class="f-col-link">info@gatheringctx.org</a>
+      <a href="sms:+18175184773&body=VISIT" class="f-col-link" style="margin-top:14px">Text VISIT to (817) 518-4773</a>
+    </div>
+    <div>
+      <span class="f-col-label">Site</span>
+      <a href="/new-here" class="f-col-link">I'm New</a>
+      <a href="/belong" class="f-col-link">Belong &amp; Become</a>
+      <a href="/formed" class="f-col-link">Formed &amp; Sent</a>
+      <a href="/sermons" class="f-col-link">Sermons</a>
+      <a href="/devotionals" class="f-col-link">Devotionals</a>
+      <a href="/kids" class="f-col-link">Kids</a>
+      <a href="/our-story" class="f-col-link">Our Story</a>
+      <a href="/beliefs" class="f-col-link">What We Believe</a>
+      <a href="/generosity" class="f-col-link">Give</a>
+      <a href="/privacy" class="f-col-link">Privacy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX &nbsp;&middot;&nbsp; <a href="/privacy">Privacy Policy</a></p>
+    <p style="font-style:italic">Photography by <a href="https://www.instagram.com/captured.by.kendra_" target="_blank" rel="noopener">@captured.by.kendra_</a></p>
+  </div>
+</footer>
+
+<script>
+function handlePrayer(e){
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  const body = new URLSearchParams(new FormData(form)).toString();
+  fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body})
+    .then(() => {
+      document.getElementById('prayer-success').style.display = 'block';
+      form.reset();
+      btn.textContent = 'Send My Request';
+      btn.disabled = false;
+    })
+    .catch(() => { btn.textContent = 'Try again'; btn.disabled = false; });
+}
+</script>
+
+<script>
+// Close mobile menu on link click
+document.addEventListener("DOMContentLoaded",function(){
+  var menu=document.getElementById("nav-mobile-menu");
+  var btn=document.getElementById("nav-hamburger");
+  if(menu){menu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click",function(){
+      menu.classList.remove("open");
+      if(btn)btn.classList.remove("open");
+    });
+  });}
+  // Close on outside click
+  document.addEventListener("click",function(e){
+    if(menu&&btn&&!menu.contains(e.target)&&!btn.contains(e.target)){
+      menu.classList.remove("open");
+      btn.classList.remove("open");
+    }
+  });
+});
+</script>
 </body>
 </html>
