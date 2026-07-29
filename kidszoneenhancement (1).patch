@@ -1,0 +1,1856 @@
+From a26e4793011db9fe4c3b9add6baa3374fbe4f166 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 28 Jul 2026 21:12:43 +0000
+Subject: [PATCH] =?UTF-8?q?Kids=20Zone:=20engagement=20sweep=20=E2=80=94?=
+ =?UTF-8?q?=20Locker,=20Daily=20Gift,=20Mascot,=20Welcome,=20custom=20icon?=
+ =?UTF-8?q?s?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+"Next level" pass for the Warrior Zone kids app, built entirely as self-installing
+modules that fail safe. No edits to the core bundles — safer to review and deploy.
+
+Visuals: the Locker, Welcome, and Mascot use the app's real illustrated (and
+animated) warrior art keyed to the kid's avatar. A cohesive custom SVG icon set
+(wz-icons.js, Lucide/Linear style in the app's gold) replaces the emoji app-wide:
+the Locker, the Welcome steps, the armor tab grid + "next piece" line, the Sticker
+Shelf, the Hall of Victory headers, the daily mission, and the Daily Gift.
+
+New (kgz/app/features/):
+- wz-icons.js: window.wzIcon(name,size) — armor (belt/breastplate/boots/shield/
+  helmet/sword/full) + UI icons (target/gift/star/flame/book/trophy/heart/play/bolt).
+- welcome.js: first-login "Welcome, Warrior" moment with the kid's illustrated
+  warrior, Ephesians 6:10 (ESV), icon-based how-it-works.
+- mascot.js: "Warrior Buddy" — the kid's warrior as a circular corner buddy that
+  bobs, waves on tab changes, cheers on points, encourages when tapped.
+- warrior-locker.js: hero view — the kid's illustrated/animated warrior in a
+  glowing frame; earned armor pieces (custom icons) light up in sequence; each
+  teaches its Ephesians 6 verse (ESV).
+- daily-gift.js: "Today's Blessing" daily verse-of-the-day chest (ESV).
+- streaks.js: streak strip + 12-sticker shelf (custom icons); Hall of Victory
+  header icons.
+- today-plus.js / armor-fix.js / polish.js / juice.js: daily mission, corrected
+  armor thresholds + armor-tab icons, motion polish, game sound + haptics.
+- books-game.js / fruit-game.js / heroes-game.js: three new age-aware Arena games
+  (Arena 6 -> 12).
+
+All Scripture passed the biblical-soundness review (ESV). Scripts load last in
+index.html with content-hash cache-busting; SW bumped wz-v2 -> wz-v3. Verified in
+headless Chromium: 13 modules self-install, new games register, Locker/Welcome/
+armor/stickers render the real art and custom icon set, no script errors.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01XazuD1wXTPmbztixqDMZ5x
+---
+ kgz/app/features/armor-fix.js      | 118 ++++++++++++++++
+ kgz/app/features/books-game.js     | 151 ++++++++++++++++++++
+ kgz/app/features/daily-gift.js     | 140 ++++++++++++++++++
+ kgz/app/features/fruit-game.js     | 161 +++++++++++++++++++++
+ kgz/app/features/heroes-game.js    | 152 ++++++++++++++++++++
+ kgz/app/features/juice.js          |  98 +++++++++++++
+ kgz/app/features/mascot.js         | 101 +++++++++++++
+ kgz/app/features/polish.js         |  86 +++++++++++
+ kgz/app/features/streaks.js        | 162 +++++++++++++++++++++
+ kgz/app/features/today-plus.js     | 132 +++++++++++++++++
+ kgz/app/features/warrior-locker.js | 220 +++++++++++++++++++++++++++++
+ kgz/app/features/welcome.js        | 101 +++++++++++++
+ kgz/app/features/wz-icons.js       |  42 ++++++
+ kgz/index.html                     |  14 ++
+ kgz/sw.js                          |   2 +-
+ 15 files changed, 1679 insertions(+), 1 deletion(-)
+ create mode 100644 kgz/app/features/armor-fix.js
+ create mode 100644 kgz/app/features/books-game.js
+ create mode 100644 kgz/app/features/daily-gift.js
+ create mode 100644 kgz/app/features/fruit-game.js
+ create mode 100644 kgz/app/features/heroes-game.js
+ create mode 100644 kgz/app/features/juice.js
+ create mode 100644 kgz/app/features/mascot.js
+ create mode 100644 kgz/app/features/polish.js
+ create mode 100644 kgz/app/features/streaks.js
+ create mode 100644 kgz/app/features/today-plus.js
+ create mode 100644 kgz/app/features/warrior-locker.js
+ create mode 100644 kgz/app/features/welcome.js
+ create mode 100644 kgz/app/features/wz-icons.js
+
+diff --git a/kgz/app/features/armor-fix.js b/kgz/app/features/armor-fix.js
+new file mode 100644
+index 0000000..663c72d
+--- /dev/null
++++ b/kgz/app/features/armor-fix.js
+@@ -0,0 +1,118 @@
++// Armor thresholds: show the kid the SAME numbers the unlock logic uses.
++// getArmor (WZ_TIERS) is the single source of truth: armor is earned on LIFETIME
++// points at 50 / 150 / 400 / 900 / 2000 / 4000 / 8000. But the warrior tab and
++// the dashboard hero hint were rendered from older, smaller, hardcoded scales
++// (and the hero hint read current points, not lifetime), so "N more points"
++// never matched when a piece actually unlocked — confusing and discouraging.
++//
++// Rather than edit the 175KB bundle, this module corrects the DISPLAY after the
++// existing renderers run. It never changes what is unlocked (getArmor already
++// gets that right) — only the numbers the child reads. Fails safe: if a node
++// isn't found, the worst case is the old text remains; nothing breaks.
++(function(){
++ if(window.__wzArmorFix)return; window.__wzArmorFix=1;
++
++ // Canonical tiers — prefer the live source of truth, fall back to the known set.
++ function tiers(){
++  if(window.WZ_TIERS&&WZ_TIERS.length)return WZ_TIERS;
++  return [{k:'belt',n:'Belt of Truth',p:50,icon:'🎗️'},{k:'breastplate',n:'Breastplate',p:150,icon:'🛡️'},
++   {k:'boots',n:'Boots of Peace',p:400,icon:'🥾'},{k:'shield',n:'Shield of Faith',p:900,icon:'✨'},
++   {k:'helmet',n:'Helmet of Salvation',p:2000,icon:'⛑️'},{k:'sword',n:'Sword of the Spirit',p:4000,icon:'⚔️'},
++   {k:'full',n:'FULL ARMOR',p:8000,icon:'🏆'}];
++ }
++ // Label text as rendered in the warrior tab -> canonical threshold.
++ var LABEL_PTS={
++  'Belt of Truth':50,'Breastplate of Righteousness':150,'Gospel Boots':400,
++  'Shield of Faith':900,'Helmet of Salvation':2000,'Sword of the Spirit':4000,'Full Armor of God':8000
++ };
++ // Label -> custom icon key, so the armor tab grid uses the icon set too.
++ var LABEL_KEY={
++  'Belt of Truth':'belt','Breastplate of Righteousness':'breastplate','Gospel Boots':'boots',
++  'Shield of Faith':'shield','Helmet of Salvation':'helmet','Sword of the Spirit':'sword','Full Armor of God':'full'
++ };
++ function life(){ try{ var k=APP.kid; return k?(k.lifetime_points!=null?k.lifetime_points:(k.points||0)):0; }catch(e){ return 0; } }
++
++ // ---- 1. dashboard hero hint (#hero-next-armor, set by openDash) ----
++ function fixHero(){
++  var el=document.getElementById('hero-next-armor'); if(!el||!window.APP||!APP.kid)return;
++  var lp=life(), T=tiers(), next=null;
++  for(var i=0;i<T.length;i++){ if(lp<T[i].p){ next=T[i]; break; } }
++  el.textContent = next
++   ? '🎯 Next: '+next.n+' — '+(next.p-lp)+' more pts'
++   : '🏆 Full armor unlocked! You are complete!';
++ }
++
++ // ---- 2. warrior tab: grid card labels + the "Next:" progress line ----
++ function fixArmorTab(){
++  var tw=document.getElementById('tab-warrior'); if(!tw)return;
++  var lp=life(), T=tiers();
++
++  // (a) per-piece cards: the status div reads "<t> pts" when locked. Rewrite the
++  //     number by matching the card's exact label text (stable), leave "UNLOCKED".
++  var labels=Object.keys(LABEL_PTS);
++  var divs=tw.getElementsByTagName('div');
++  for(var i=0;i<divs.length;i++){
++   var d=divs[i], txt=(d.textContent||'').trim();
++   if(labels.indexOf(txt)<0)continue;                 // this is a label div
++   var card=d.parentElement; if(!card)continue;
++   var status=card.children[card.children.length-1];   // last cell = status
++   if(!status||status===d)continue;
++   if(/^\d[\d,]*\s*pts$/i.test((status.textContent||'').trim())){
++    status.textContent=LABEL_PTS[txt]+' pts';
++   }
++   // swap the emoji icon (first cell) for the custom icon
++   if(window.wzIcon && LABEL_KEY[txt]){
++    var iconDiv=card.children[0];
++    if(iconDiv && iconDiv!==d && iconDiv!==status && !iconDiv.querySelector('svg')){
++     iconDiv.innerHTML=wzIcon(LABEL_KEY[txt],32);
++    }
++   }
++  }
++
++  // (b) the "Next: … (pts / t)" progress line + its bar.
++  var nextLine=null;
++  for(var j=0;j<divs.length;j++){
++   var t=(divs[j].textContent||'').trim();
++   if(t.indexOf('Next:')===0 && t.indexOf('/')>0){ nextLine=divs[j]; break; }
++  }
++  if(nextLine){
++   var next=null, prevP=0;
++   for(var m=0;m<T.length;m++){ if(lp<T[m].p){ next=T[m]; break; } prevP=T[m].p; }
++   if(next){
++    var nkey=next.k||'';
++    nextLine.innerHTML='Next: '+(window.wzIcon&&nkey?wzIcon(nkey,15):(next.icon||''))+' '+next.n+' ('+lp+' / '+next.p+')';
++    // sibling bar's fill width, recomputed against the real tier span
++    var bar=nextLine.nextElementSibling;
++    var fill=bar&&bar.firstElementChild;
++    if(fill){ var pct=Math.max(0,Math.min(100,Math.round((lp-prevP)/(next.p-prevP)*100))); fill.style.width=pct+'%'; }
++   }
++  }
++ }
++
++ // ---- install: wrap the renderers, and re-apply on warrior-tab opens ----
++ function hookArmor(){
++  if(typeof window.renderArmor==='function' && !window.renderArmor.__wzFix){
++   var _ra=window.renderArmor;
++   window.renderArmor=function(){ var r=_ra.apply(this,arguments); try{ fixArmorTab(); }catch(e){} return r; };
++   window.renderArmor.__wzFix=1;
++  }
++ }
++ function hookOpen(){
++  if(typeof window.openDash==='function' && !window.openDash.__wzFix){
++   var _od=window.openDash;
++   window.openDash=function(){ var r=_od.apply(this,arguments); setTimeout(fixHero,80); return r; };
++   window.openDash.__wzFix=1;
++  }
++ }
++ function hookTab(){
++  if(typeof window.dashTab==='function' && !window.dashTab.__wzFixTab){
++   var _dt=window.dashTab;
++   window.dashTab=function(tab,btn){ var r=_dt.apply(this,arguments); if(tab==='warrior')setTimeout(fixArmorTab,60); return r; };
++   window.dashTab.__wzFixTab=1;
++  }
++ }
++ function init(){ hookArmor(); hookOpen(); hookTab(); try{ fixHero(); fixArmorTab(); }catch(e){} }
++ // renderArmor/openDash/dashTab are re-wrapped by other modules on timers; match
++ // that cadence so we always end up on top of the final versions.
++ setTimeout(init,350); setTimeout(init,1300); setTimeout(init,2700);
++})();
+diff --git a/kgz/app/features/books-game.js b/kgz/app/features/books-game.js
+new file mode 100644
+index 0000000..2f94255
+--- /dev/null
++++ b/kgz/app/features/books-game.js
+@@ -0,0 +1,151 @@
++// Books of the Bible — put the books back in order.
++// A calm, no-timer ordering game (same spirit as the Verse Builder): tap the
++// books in the right order, a wrong tap just wobbles and costs nothing. Teaches
++// something genuinely useful — where things live in Scripture — instead of only
++// testing recall.
++//
++// Age-aware: 4-7 order a short, famous run (4 books); 8-12 get a 6-book run.
++// We use CURATED consecutive runs, never a random slice, so a kid is never asked
++// to order four obscure minor prophets. Award path mirrors Fiery Darts exactly
++// (wz-award, key 'books'); the server enforces the daily cap.
++(function(){
++ if(window.__wzBooks)return; window.__wzBooks=1;
++ if(typeof GAMES==='undefined'||typeof renderGames!=='function')return;
++
++ function artBg(file){
++  return "linear-gradient(rgba(10,8,30,.72),rgba(10,8,30,.9)), url('img/"+file+"') center 30%/cover no-repeat";
++ }
++ if(!GAMES.some(function(g){return g.id==='books';})){
++  GAMES.push({id:'books',title:'Books in Order',emoji:'📚',bg:artBg('story-bible-1.jpg'),
++   pts:20,sub:'Put the Bible’s books in order'});
++ }
++
++ // Curated, well-known consecutive runs.
++ var RUNS_47=[
++  ['Genesis','Exodus','Leviticus','Numbers'],
++  ['Matthew','Mark','Luke','John'],
++  ['Joshua','Judges','Ruth','1 Samuel'],
++  ['John','Acts','Romans','1 Corinthians']
++ ];
++ var RUNS_812=[
++  ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua'],
++  ['Matthew','Mark','Luke','John','Acts','Romans'],
++  ['1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles'],
++  ['Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians']
++ ];
++
++ function grp(){ try{ return (window.APP&&APP.kid&&APP.kid.age_group)||'812'; }catch(e){ return '812'; } }
++ function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
++ function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
++
++ function css(){ if(document.getElementById('wz-bk-css'))return;
++  var s=document.createElement('style'); s.id='wz-bk-css';
++  s.textContent=
++   "#bk-wrap{max-width:520px;margin:0 auto}"+
++   "#bk-head{background:linear-gradient(135deg,#180444,#051a40);border:1.5px solid rgba(245,200,66,.3);border-radius:18px;padding:1rem;text-align:center;margin-bottom:.85rem}"+
++   "#bk-head h3{font-family:Bangers,cursive;font-size:1.5rem;color:#fff;letter-spacing:.03em;margin:0}"+
++   "#bk-head p{color:rgba(255,255,255,.6);font-size:.76rem;margin:.25rem 0 0}"+
++   "#bk-order{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.85rem}"+
++   ".bk-slot{display:flex;align-items:center;gap:.6rem;min-height:46px;border-radius:12px;padding:.35rem .6rem;background:rgba(255,255,255,.04);border:1.5px dashed rgba(245,200,66,.3)}"+
++   ".bk-slot.done{border-style:solid;border-color:#7ee08a;background:rgba(126,224,138,.1)}"+
++   ".bk-slot.next{border-color:#f5c842;background:rgba(245,200,66,.08)}"+
++   ".bk-idx{font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842;width:24px;text-align:center;flex-shrink:0}"+
++   ".bk-slot.done .bk-idx{color:#7ee08a}"+
++   ".bk-fill{font-weight:800;font-size:.95rem;color:#fff}"+
++   ".bk-bank{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}"+
++   ".bk-tile{background:#f5c842;color:#1a1a2e;border:none;border-radius:11px;padding:.6rem .9rem;font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit;min-height:44px}"+
++   ".bk-tile:disabled{opacity:.2;cursor:default}"+
++   ".bk-tile.bad{animation:bkwob .4s}"+
++   ".bk-tile.peek{box-shadow:0 0 0 3px rgba(126,224,138,.8);animation:bkpulse 1s}"+
++   "@keyframes bkwob{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px) rotate(-3deg)}75%{transform:translateX(7px) rotate(3deg)}}"+
++   "@keyframes bkpulse{0%,100%{box-shadow:0 0 0 3px rgba(126,224,138,.2)}50%{box-shadow:0 0 0 4px rgba(126,224,138,.9)}}"+
++   "#bk-msg{text-align:center;padding:1.1rem;background:linear-gradient(135deg,#1e1e38,#171730);border:1px solid rgba(245,200,66,.35);border-radius:16px;margin-top:.5rem}"+
++   "#bk-msg h4{font-family:Bangers,cursive;font-size:1.5rem;color:#f5c842;margin:0 0 .3rem;letter-spacing:.03em}"+
++   "#bk-msg p{color:rgba(255,255,255,.82);font-size:.86rem;margin:0 0 .8rem}"+
++   ".bk-btn{background:#f5c842;color:#1a1a2e;border:none;border-radius:11px;padding:.7rem 1.4rem;font-weight:900;font-size:.95rem;cursor:pointer;font-family:inherit}";
++  document.head.appendChild(s); }
++
++ window.initBooks=function(el){
++  css();
++  var run=pick(grp()==='47'?RUNS_47:RUNS_812);
++  var target=run.slice();               // canonical order
++  var filled=0, wrongOnSlot=0, hinted=false;
++
++  el.innerHTML='';
++  var wrap=document.createElement('div'); wrap.id='bk-wrap';
++  wrap.innerHTML=
++   "<div id='bk-head'><h3>📚 Books in Order</h3>"+
++   "<p>Tap the books in the order they appear in the Bible.</p></div>"+
++   "<div id='bk-order'></div><div class='bk-bank' id='bk-bank'></div>";
++  el.appendChild(wrap);
++
++  var order=wrap.querySelector('#bk-order');
++  var bank=wrap.querySelector('#bk-bank');
++
++  target.forEach(function(_,i){
++   var slot=document.createElement('div'); slot.className='bk-slot'+(i===0?' next':'');
++   slot.innerHTML="<div class='bk-idx'>"+(i+1)+"</div><div class='bk-fill'></div>";
++   slot.dataset.i=String(i);
++   order.appendChild(slot);
++  });
++
++  var tiles={};
++  shuffle(run).forEach(function(name){
++   var b=document.createElement('button'); b.className='bk-tile'; b.textContent=name;
++   b.onclick=function(){ tap(b,name); };
++   bank.appendChild(b); tiles[name]=b;
++  });
++
++  function markNext(){
++   var slots=order.querySelectorAll('.bk-slot');
++   slots.forEach(function(s){ s.classList.remove('next'); });
++   if(filled<slots.length)slots[filled].classList.add('next');
++  }
++
++  function tap(btn,name){
++   if(btn.disabled)return;
++   if(name!==target[filled]){
++    btn.classList.add('bad'); setTimeout(function(){ btn.classList.remove('bad'); },420);
++    wrongOnSlot++;
++    // gentle help after a few misses — a peek, never a penalty, never a scold
++    if(wrongOnSlot>=3){ hinted=true; var right=tiles[target[filled]];
++     if(right){ right.classList.add('peek'); setTimeout(function(){ right.classList.remove('peek'); },1000); } }
++    return;
++   }
++   var slot=order.querySelector(".bk-slot[data-i='"+filled+"']");
++   if(slot){ slot.classList.add('done'); slot.querySelector('.bk-fill').textContent=name; }
++   btn.disabled=true; filled++; wrongOnSlot=0; markNext();
++   if(filled>=target.length)done();
++  }
++
++  function done(){
++   var base=(grp()==='47')?15:20;
++   var pts=hinted?Math.max((grp()==='47')?8:10, base-5):base;
++   var msg=document.createElement('div'); msg.id='bk-msg';
++   msg.innerHTML="<h4>✓ In Order!</h4><p>You put <b style='color:#f5c842'>"+target.length+"</b> books in the right place. Now you know where to find them.</p>";
++   var again=document.createElement('button'); again.className='bk-btn'; again.textContent='Play again';
++   again.onclick=function(){ initBooks(el); };
++   msg.appendChild(again); wrap.appendChild(msg);
++   if(window.APP && APP.kid && typeof wzPost==='function'){
++    wzPost('wz-award',{action:'game',kidId:APP.kid.id,pin:APP.kid.pin,key:'books',amount:pts})
++     .then(function(res){
++      if(res&&res.ok){
++       if(typeof wzSyncKid==='function')wzSyncKid(res);
++       if(res.granted>0&&typeof toast==='function')toast('⚡ +'+res.granted+' pts!',2500);
++       else if(typeof toast==='function')toast('🎮 Daily game points are maxed — play for fun!',3000);
++      }
++     }).catch(function(){});
++   }
++  }
++ };
++
++ var _rg=renderGames;
++ renderGames=function(gameId){
++  var r=_rg.apply(this,arguments);
++  if(gameId==='books'){
++   var a=document.getElementById('game-arena');
++   if(a)initBooks(a);
++  }
++  return r;
++ };
++})();
+diff --git a/kgz/app/features/daily-gift.js b/kgz/app/features/daily-gift.js
+new file mode 100644
+index 0000000..42407a9
+--- /dev/null
++++ b/kgz/app/features/daily-gift.js
+@@ -0,0 +1,140 @@
++// Daily Gift — "Today's Blessing."
++// A once-a-day chest the kid opens for a Scripture blessing. It builds the daily
++// habit the streak system rewards, and sends every child off with God's Word.
++// The verse is chosen by the calendar day, so the whole church gets the same
++// "verse of the day" — a shared blessing, not a random one.
++//
++// Additive and backend-free: no points are awarded (so nothing to abuse), the
++// only thing stored is a per-kid "opened today" flag in localStorage. It adds a
++// button to the top of the Today hub; opening it plays the existing celebration
++// SFX. All verses are ESV and passed the biblical-soundness review.
++(function(){
++ if(window.__wzGift)return; window.__wzGift=1;
++
++ // Shared verse-of-the-day pool (ESV). Rotated by day-of-year so everyone gets
++ // the same blessing each day. Kept short and kid-appropriate.
++ var VERSES=[
++  {t:'Be strong and courageous. Do not be frightened… for the Lord your God is with you wherever you go.', r:'Joshua 1:9'},
++  {t:'I can do all things through him who strengthens me.', r:'Philippians 4:13'},
++  {t:'The Lord is my shepherd; I shall not want.', r:'Psalm 23:1'},
++  {t:'God is our refuge and strength, a very present help in trouble.', r:'Psalm 46:1'},
++  {t:'Trust in the Lord with all your heart, and do not lean on your own understanding.', r:'Proverbs 3:5'},
++  {t:'For God so loved the world, that he gave his only Son…', r:'John 3:16'},
++  {t:'We love because he first loved us.', r:'1 John 4:19'},
++  {t:'Let the little children come to me… for to such belongs the kingdom of heaven.', r:'Matthew 19:14'},
++  {t:'I have called you by name, you are mine.', r:'Isaiah 43:1'},
++  {t:'Fear not, for I am with you; be not dismayed, for I am your God.', r:'Isaiah 41:10'},
++  {t:'Oh give thanks to the Lord, for he is good, for his steadfast love endures forever!', r:'Psalm 107:1'},
++  {t:'But you are a chosen race, a royal priesthood, a holy nation, a people for his own possession.', r:'1 Peter 2:9'},
++  {t:'The Lord is my light and my salvation; whom shall I fear?', r:'Psalm 27:1'},
++  {t:'Rejoice in the Lord always; again I will say, rejoice.', r:'Philippians 4:4'}
++ ];
++
++ function dayOfYear(){
++  var d=new Date(), start=new Date(d.getFullYear(),0,0);
++  return Math.floor((d-start)/86400000);
++ }
++ function today(){ return new Date().toISOString().slice(0,10); }
++ function verseOfDay(){ return VERSES[dayOfYear()%VERSES.length]; }
++ function kidId(){ try{ return (window.APP&&APP.kid&&APP.kid.id)||'anon'; }catch(e){ return 'anon'; } }
++ function openedToday(){ try{ return localStorage.getItem('wz_gift_'+kidId())===today(); }catch(e){ return false; } }
++ function markOpened(){ try{ localStorage.setItem('wz_gift_'+kidId(), today()); }catch(e){} }
++
++ function css(){ if(document.getElementById('wz-gift-css'))return;
++  var s=document.createElement('style'); s.id='wz-gift-css';
++  s.textContent=
++   ".gift-launch{display:flex;align-items:center;gap:.7rem;width:100%;border:none;border-radius:16px;padding:.85rem 1rem;margin-bottom:.8rem;cursor:pointer;background:linear-gradient(135deg,#3a2270,#1a0f45);border:1px solid rgba(245,200,66,.4);text-align:left}"+
++   ".gift-launch .ge{font-size:1.9rem;animation:giftwob 2.2s ease-in-out infinite}"+
++   "@keyframes giftwob{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}"+
++   ".gift-launch .gt{flex:1}"+
++   ".gift-launch .g1{font-family:Bangers,cursive;font-size:1.1rem;color:#f5c842;letter-spacing:.03em}"+
++   ".gift-launch .g2{font-size:.72rem;color:rgba(255,255,255,.6)}"+
++   ".gift-launch.done{opacity:.7;background:rgba(255,255,255,.04);border-color:rgba(126,224,138,.4)}"+
++   ".gift-launch.done .ge{animation:none}"+
++   "#wz-gift{position:fixed;inset:0;z-index:100060;background:radial-gradient(circle at 50% 40%,rgba(58,34,112,.97),rgba(7,3,26,.99));display:none;align-items:center;justify-content:center;text-align:center;padding:1.4rem}"+
++   "#wz-gift.show{display:flex;animation:giftin .3s ease}"+
++   "@keyframes giftin{from{opacity:0}to{opacity:1}}"+
++   "#wz-gift .gc{max-width:420px}"+
++   "#wz-gift .chest{font-size:5.5rem;cursor:pointer;animation:giftpop .5s cubic-bezier(.34,1.56,.64,1)}"+
++   "@keyframes giftpop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1)}}"+
++   "#wz-gift .chest.shake{animation:giftshake .5s}"+
++   "@keyframes giftshake{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(8deg)}}"+
++   "#wz-gift .hint{color:rgba(255,255,255,.6);font-size:.85rem;margin-top:.6rem}"+
++   "#wz-gift .reveal{display:none;animation:giftin .5s ease}"+
++   "#wz-gift .reveal.show{display:block}"+
++   "#wz-gift .rt{font-family:Bangers,cursive;font-size:1.7rem;color:#f5c842;letter-spacing:.03em;margin-bottom:.8rem}"+
++   "#wz-gift .verse{background:rgba(255,255,255,.06);border:1px solid rgba(245,200,66,.35);border-radius:18px;padding:1.2rem;margin-bottom:1rem}"+
++   "#wz-gift .vt{font-style:italic;color:#fff;font-size:1.1rem;line-height:1.6;margin-bottom:.6rem}"+
++   "#wz-gift .vr{color:#f5c842;font-weight:900;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase}"+
++   "#wz-gift .sub{color:rgba(255,255,255,.65);font-size:.85rem;margin-bottom:1.2rem;line-height:1.5}"+
++   "#wz-gift .gbtn{background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318;border:none;border-radius:13px;padding:.8rem 2rem;font-family:Bangers,cursive;font-size:1.15rem;letter-spacing:.05em;cursor:pointer}";
++  document.head.appendChild(s); }
++
++ window.wzOpenGift=function(){
++  css();
++  var v=verseOfDay();
++  var root=document.getElementById('wz-gift');
++  if(!root){ root=document.createElement('div'); root.id='wz-gift'; document.body.appendChild(root); }
++  var already=openedToday();
++  root.innerHTML=
++   "<div class='gc'>"+
++   "<div id='gift-chest' class='chest'>"+(window.wzIcon?wzIcon('gift',88):'🎁')+"</div>"+
++   "<div class='hint' id='gift-hint'>"+(already?'Here is today’s blessing.':'Tap the gift to open today’s blessing!')+"</div>"+
++   "<div class='reveal' id='gift-reveal'>"+
++     "<div class='rt'>Today’s Blessing</div>"+
++     "<div class='verse'><div class='vt'>“"+v.t+"”</div><div class='vr'>"+v.r+" · ESV</div></div>"+
++     "<div class='sub'>God’s Word is for you today, warrior. Come back tomorrow for a new blessing.</div>"+
++     "<button class='gbtn' id='gift-done'>Amen ✓</button>"+
++   "</div></div>";
++  root.classList.add('show');
++
++  var chest=root.querySelector('#gift-chest');
++  var reveal=root.querySelector('#gift-reveal');
++  var hint=root.querySelector('#gift-hint');
++  function open(){
++   chest.classList.add('shake');
++   setTimeout(function(){
++    hint.style.display='none'; reveal.classList.add('show');
++    markOpened(); refreshBtn();
++    try{ if(typeof wzConfetti==='function')wzConfetti(50); }catch(e){}
++    try{ if(typeof wzSfxFanfare==='function')wzSfxFanfare(); }catch(e){}
++    try{ if(navigator.vibrate)navigator.vibrate([40,30,60]); }catch(e){}
++   },500);
++  }
++  if(already){ reveal.classList.add('show'); hint.style.display='none'; }
++  else chest.onclick=open;
++  root.querySelector('#gift-done').onclick=function(){ root.classList.remove('show'); };
++  // tap backdrop to close
++  root.onclick=function(e){ if(e.target===root)root.classList.remove('show'); };
++ };
++
++ function refreshBtn(){
++  var b=document.querySelector('.gift-launch'); if(!b)return;
++  var done=openedToday();
++  b.className='gift-launch'+(done?' done':'');
++  b.innerHTML="<div class='ge'>"+(window.wzIcon?wzIcon('gift',30):(done?'🎉':'🎁'))+"</div><div class='gt'>"+
++    "<div class='g1'>"+(done?'Blessing opened':'Today’s Blessing')+"</div>"+
++    "<div class='g2'>"+(done?'Come back tomorrow for a new one!':'Tap to open your daily gift')+"</div></div>";
++ }
++ function addButton(){
++  var host=document.getElementById('tab-today'); if(!host)return;
++  if(!host.firstChild)return;
++  if(host.querySelector('.gift-launch'))return;
++  css();
++  var b=document.createElement('button'); b.className='gift-launch';
++  b.onclick=function(){ wzOpenGift(); };
++  host.insertBefore(b, host.firstChild);
++  refreshBtn();
++ }
++
++ function watch(){
++  var host=document.getElementById('tab-today'); if(!host)return false;
++  if(host.__wzGiftWatched)return true; host.__wzGiftWatched=1;
++  var deb=null;
++  var mo=new MutationObserver(function(){ if(deb)clearTimeout(deb); deb=setTimeout(addButton,160); });
++  try{ mo.observe(host,{childList:true}); }catch(e){}
++  setTimeout(addButton,220);
++  return true;
++ }
++ var n=0, iv=setInterval(function(){ if(watch()||++n>60)clearInterval(iv); },350);
++})();
+diff --git a/kgz/app/features/fruit-game.js b/kgz/app/features/fruit-game.js
+new file mode 100644
+index 0000000..48df4eb
+--- /dev/null
++++ b/kgz/app/features/fruit-game.js
+@@ -0,0 +1,161 @@
++// Fruit of the Spirit — Galatians 5:22-23.
++// A joyful COLLECT game (the Arena's other reflex game, Fiery Darts, is about
++// defense; this one is about receiving). Nine fruits drift up the stage; tap
++// each kind to gather it into your basket. No timer, no losing — a fruit you
++// miss just floats off and comes back. The goal is simply to collect all nine,
++// which walks the child through the whole list.
++//
++// Movement is CSS animation (not requestAnimationFrame), matching darts.js, so
++// it keeps working if the tab is backgrounded. Award path mirrors the other
++// games (wz-award, key 'fruit'); the server enforces the daily cap.
++(function(){
++ if(window.__wzFruit)return; window.__wzFruit=1;
++ if(typeof GAMES==='undefined'||typeof renderGames!=='function')return;
++
++ function artBg(file){
++  return "linear-gradient(rgba(10,8,30,.7),rgba(10,8,30,.9)), url('img/"+file+"') center 30%/cover no-repeat";
++ }
++ if(!GAMES.some(function(g){return g.id==='fruit';})){
++  GAMES.push({id:'fruit',title:'Fruit Basket',emoji:'🧺',bg:artBg('story-way-3.jpg'),
++   pts:15,sub:'Collect the fruit of the Spirit'});
++ }
++
++ // Galatians 5:22-23 order.
++ var FRUITS=[
++  {k:'love',n:'Love',e:'❤️'},{k:'joy',n:'Joy',e:'😊'},{k:'peace',n:'Peace',e:'🕊️'},
++  {k:'patience',n:'Patience',e:'⏳'},{k:'kindness',n:'Kindness',e:'🤝'},{k:'goodness',n:'Goodness',e:'🌟'},
++  {k:'faith',n:'Faithfulness',e:'🙏'},{k:'gentleness',n:'Gentleness',e:'🍃'},{k:'selfcontrol',n:'Self-Control',e:'🛑'}
++ ];
++
++ function css(){ if(document.getElementById('wz-fr-css'))return;
++  var s=document.createElement('style'); s.id='wz-fr-css';
++  s.textContent=
++   "#fr-wrap{max-width:520px;margin:0 auto}"+
++   "#fr-checklist{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center;margin-bottom:.6rem}"+
++   ".fr-slot{display:flex;align-items:center;gap:.3rem;border-radius:20px;padding:.25rem .55rem;font-size:.66rem;font-weight:800;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4)}"+
++   ".fr-slot .fe{font-size:.95rem;filter:grayscale(1);opacity:.4}"+
++   ".fr-slot.on{background:rgba(126,224,138,.14);border-color:rgba(126,224,138,.5);color:#bff3c8}"+
++   ".fr-slot.on .fe{filter:none;opacity:1}"+
++   "#fr-stage{position:relative;width:100%;height:400px;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#123a25,#0a1f14);border:2px solid rgba(126,224,138,.3);touch-action:manipulation;user-select:none}"+
++   "#fr-basket{position:absolute;bottom:6px;left:50%;margin-left:-30px;font-size:3.4rem;z-index:3;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}"+
++   ".fr-fruit{position:absolute;bottom:-52px;font-size:2.4rem;cursor:pointer;padding:12px;margin:-12px;line-height:1;animation-name:frrise;animation-timing-function:linear;animation-fill-mode:forwards}"+
++   "@keyframes frrise{from{transform:translateY(0)}to{transform:translateY(-460px)}}"+
++   ".fr-pop{animation:frpop .35s forwards !important}"+
++   "@keyframes frpop{to{transform:scale(2) translateY(-30px);opacity:0}}"+
++   "#fr-hud{display:flex;justify-content:space-between;align-items:center;margin:0 auto .5rem;max-width:520px}"+
++   ".fr-stat{font-family:Bangers,cursive;font-size:1.6rem;color:#7ee08a;line-height:1}"+
++   ".fr-lab{font-size:.58rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}"+
++   "#fr-msg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.2rem;background:rgba(10,20,14,.92);z-index:5}"+
++   "#fr-msg h3{font-family:Bangers,cursive;font-size:2rem;color:#7ee08a;margin:0 0 .3rem;letter-spacing:.03em}"+
++   "#fr-msg p{color:rgba(255,255,255,.85);font-size:.88rem;margin:0 0 .9rem;line-height:1.5;max-width:340px}"+
++   "#fr-msg .v{font-style:italic;color:#fff;font-size:.8rem;border-left:3px solid #7ee08a;padding-left:.6rem;margin-bottom:.9rem;text-align:left;max-width:340px}"+
++   ".fr-btn{background:#7ee08a;color:#0a1f14;border:none;border-radius:11px;padding:.75rem 1.5rem;font-weight:900;font-size:1rem;cursor:pointer;font-family:inherit}";
++  document.head.appendChild(s); }
++
++ window.initFruit=function(el){
++  css();
++  el.innerHTML='';
++  var wrap=document.createElement('div'); wrap.id='fr-wrap';
++  var hud=document.createElement('div'); hud.id='fr-hud';
++  hud.innerHTML="<div><div class='fr-stat' id='fr-count'>0</div><div class='fr-lab'>of 9 gathered</div></div>"+
++                "<div style='text-align:right;max-width:60%'><div class='fr-lab'>Galatians 5:22-23</div></div>";
++  wrap.appendChild(hud);
++
++  var check=document.createElement('div'); check.id='fr-checklist';
++  FRUITS.forEach(function(f){
++   var sl=document.createElement('div'); sl.className='fr-slot'; sl.dataset.k=f.k;
++   sl.innerHTML="<span class='fe'>"+f.e+"</span>"+f.n;
++   check.appendChild(sl);
++  });
++  wrap.appendChild(check);
++
++  var stage=document.createElement('div'); stage.id='fr-stage';
++  var basket=document.createElement('div'); basket.id='fr-basket'; basket.textContent='🧺';
++  stage.appendChild(basket);
++
++  var msg=document.createElement('div'); msg.id='fr-msg';
++  msg.innerHTML="<h3>🧺 Fruit Basket</h3>"+
++   "<p>The fruit of the Spirit is floating up. <b>Tap each one</b> to gather it into your basket. Collect all nine!</p>"+
++   "<div class='v'>“The fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control.”<br>Galatians 5:22-23</div>";
++  var go=document.createElement('button'); go.className='fr-btn'; go.textContent='🧺 Start';
++  msg.appendChild(go); stage.appendChild(msg);
++  wrap.appendChild(stage); el.appendChild(wrap);
++
++  var got={}, running=false, spawnT=null;
++
++  function collected(){ var n=0; for(var k in got){ if(got[k])n++; } return n; }
++
++  function celebrateFruit(f){
++   got[f.k]=true;
++   var sl=check.querySelector(".fr-slot[data-k='"+f.k+"']"); if(sl)sl.classList.add('on');
++   document.getElementById('fr-count').textContent=collected();
++   if(typeof toast==='function')toast(f.e+' '+f.n+'!',1400);
++   if(navigator.vibrate){ try{ navigator.vibrate(25); }catch(e){} }
++   if(collected()>=FRUITS.length)finish();
++  }
++
++  function spawn(){
++   if(!running)return;
++   // bias toward fruit not yet collected
++   var pool=FRUITS.filter(function(f){return !got[f.k];});
++   if(!pool.length)pool=FRUITS;
++   var f=pool[Math.floor(Math.random()*pool.length)];
++   var d=document.createElement('div'); d.className='fr-fruit'; d.textContent=f.e;
++   var w=stage.clientWidth||320;
++   d.style.left=Math.max(8,Math.round(14+Math.random()*(w-60)))+'px';
++   d.style.animationDuration=(3.6+Math.random()*2)+'s';
++   d.addEventListener('click',function(ev){
++    ev.stopPropagation();
++    if(!running||d.dataset.dead)return;
++    d.dataset.dead='1'; d.classList.add('fr-pop');
++    if(!got[f.k])celebrateFruit(f);
++    else if(navigator.vibrate){ try{ navigator.vibrate(12); }catch(e){} }
++    setTimeout(function(){ if(d.parentNode)d.remove(); },360);
++   });
++   d.addEventListener('animationend',function(e){
++    if(e.animationName!=='frrise'||d.dataset.dead)return;
++    d.dataset.dead='1'; if(d.parentNode)d.remove();
++   });
++   stage.appendChild(d);
++  }
++
++  function finish(){
++   running=false; clearInterval(spawnT);
++   var all=stage.querySelectorAll('.fr-fruit'); for(var i=0;i<all.length;i++)all[i].remove();
++   msg.innerHTML="<h3>✓ Basket Full!</h3>"+
++    "<p>You gathered <b style='color:#7ee08a'>all nine</b> fruit of the Spirit. Ask God to grow them in you.</p>"+
++    "<div class='v'>“The fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control.”<br>Galatians 5:22-23</div>";
++   var again=document.createElement('button'); again.className='fr-btn'; again.textContent='Play again';
++   again.onclick=function(){ initFruit(el); };
++   msg.appendChild(again); msg.style.display='flex';
++   if(window.APP && APP.kid && typeof wzPost==='function'){
++    wzPost('wz-award',{action:'game',kidId:APP.kid.id,pin:APP.kid.pin,key:'fruit',amount:15})
++     .then(function(res){
++      if(res&&res.ok){
++       if(typeof wzSyncKid==='function')wzSyncKid(res);
++       if(res.granted>0&&typeof toast==='function')toast('⚡ +'+res.granted+' pts!',2500);
++       else if(typeof toast==='function')toast('🎮 Daily game points are maxed — play for fun!',3000);
++      }
++     }).catch(function(){});
++   }
++  }
++
++  go.onclick=function(){
++   msg.style.display='none'; running=true; got={};
++   document.getElementById('fr-count').textContent='0';
++   check.querySelectorAll('.fr-slot').forEach(function(s){ s.classList.remove('on'); });
++   spawn(); spawn();
++   spawnT=setInterval(spawn,900);
++  };
++ };
++
++ var _rg=renderGames;
++ renderGames=function(gameId){
++  var r=_rg.apply(this,arguments);
++  if(gameId==='fruit'){
++   var a=document.getElementById('game-arena');
++   if(a)initFruit(a);
++  }
++  return r;
++ };
++})();
+diff --git a/kgz/app/features/heroes-game.js b/kgz/app/features/heroes-game.js
+new file mode 100644
+index 0000000..bce55d8
+--- /dev/null
++++ b/kgz/app/features/heroes-game.js
+@@ -0,0 +1,152 @@
++// Who Am I? — Bible Heroes.
++// A clue-based guessing game: read up to three clues, then pick the hero. It
++// teaches the great stories of Scripture (not just verses), and rewards the kid
++// for guessing with FEWER clues — so a child who knows the story is celebrated,
++// and a child who doesn't still gets there and learns it. No shaming: a wrong
++// pick just reveals the right answer kindly and moves on.
++//
++// Self-contained and age-aware; awards through the existing wz-award path
++// (key 'heroes'), server enforces the daily cap. Same module pattern as the
++// other Arena games (register into GAMES, wrap renderGames).
++(function(){
++ if(window.__wzHeroes)return; window.__wzHeroes=1;
++ if(typeof GAMES==='undefined'||typeof renderGames!=='function')return;
++
++ function artBg(file){
++  return "linear-gradient(rgba(10,8,30,.72),rgba(10,8,30,.9)), url('img/"+file+"') center 30%/cover no-repeat";
++ }
++ if(!GAMES.some(function(g){return g.id==='heroes';})){
++  GAMES.push({id:'heroes',title:'Who Am I?',emoji:'🦸',bg:artBg('story-god47-4.jpg'),
++   pts:25,sub:'Guess the Bible hero from clues'});
++ }
++
++ // Well-known heroes. `easy:true` ones are used for the 4-7 band too.
++ var HEROES=[
++  {n:'Noah',   easy:true,  c:['God told me to build a giant boat.','I brought two of every animal aboard.','God sent a rainbow after the flood.']},
++  {n:'Moses',  easy:true,  c:['I was placed in a basket on a river as a baby.','I saw a bush that was on fire but did not burn.','God used me to part the Red Sea.']},
++  {n:'David',  easy:true,  c:['I was a young shepherd boy.','I beat a giant with a sling and one stone.','I became a king and wrote songs to God.']},
++  {n:'Daniel', easy:true,  c:['I prayed to God even when it was against the law.','I was thrown into a den of lions.','God shut the lions’ mouths and I was safe.']},
++  {n:'Jonah',  easy:true,  c:['God told me to go to Nineveh, but I ran away.','I was swallowed by a great fish.','After three days I obeyed God.']},
++  {n:'Joseph', easy:true,  c:['My father gave me a colorful coat.','My brothers sold me, but God had a plan.','I became a ruler in Egypt and saved my family.']},
++  {n:'Ruth',   easy:false, c:['I left my home to stay with Naomi.','I gathered grain in Boaz’s field.','I became the great-grandmother of King David.']},
++  {n:'Esther', easy:false, c:['I was a queen chosen by the king.','I was brave “for such a time as this.”','I saved my people from an evil plan.']},
++  {n:'Abraham',easy:false, c:['God promised me more children than the stars.','I was ready to trust God with my son Isaac.','I am called the father of many nations.']},
++  {n:'Peter',  easy:false, c:['I was a fisherman before Jesus called me.','I walked on water toward Jesus for a moment.','I preached and 3,000 people believed in one day.']},
++  {n:'Paul',   easy:false, c:['I once hurt Christians before I met Jesus.','I met Jesus in a bright light on the Damascus road.','I wrote many letters in the New Testament.']},
++  {n:'Joshua', easy:false, c:['I took over leading Israel after Moses.','We marched around Jericho and the walls fell.','I said, “As for me and my house, we will serve the Lord.”']}
++ ];
++
++ function css(){ if(document.getElementById('wz-hr-css'))return;
++  var s=document.createElement('style'); s.id='wz-hr-css';
++  s.textContent=
++   "#hr-wrap{max-width:520px;margin:0 auto}"+
++   "#hr-head{background:linear-gradient(135deg,#180444,#051a40);border:1.5px solid rgba(108,82,227,.3);border-radius:18px;padding:.9rem 1rem;text-align:center;margin-bottom:.85rem}"+
++   "#hr-head h3{font-family:Bangers,cursive;font-size:1.4rem;color:#fff;letter-spacing:.03em;margin:0}"+
++   "#hr-head .rnd{color:rgba(255,255,255,.5);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:.15rem}"+
++   ".hr-clues{background:rgba(255,255,255,.04);border:1px solid rgba(245,200,66,.25);border-radius:16px;padding:1rem;margin-bottom:.85rem;min-height:120px}"+
++   ".hr-clue{display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.6rem;animation:hrin .3s}"+
++   "@keyframes hrin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}"+
++   ".hr-num{font-family:Bangers,cursive;color:#f5c842;font-size:1.1rem;line-height:1.2;flex-shrink:0}"+
++   ".hr-tx{font-size:.92rem;color:#eee;line-height:1.4}"+
++   ".hr-more{background:none;border:1px dashed rgba(245,200,66,.4);color:#f5c842;border-radius:10px;padding:.4rem .8rem;font-size:.78rem;font-weight:800;cursor:pointer;font-family:inherit}"+
++   ".hr-opts{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}"+
++   ".hr-opt{background:rgba(108,82,227,.14);border:2px solid rgba(108,82,227,.35);color:#fff;border-radius:14px;padding:.85rem .5rem;font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit;min-height:52px}"+
++   ".hr-opt.right{background:rgba(126,224,138,.2);border-color:#7ee08a;color:#bff3c8}"+
++   ".hr-opt.wrongpick{background:rgba(255,120,90,.16);border-color:rgba(255,120,90,.5)}"+
++   "#hr-msg{text-align:center;padding:1.2rem;background:linear-gradient(135deg,#1e1e38,#171730);border:1px solid rgba(245,200,66,.35);border-radius:16px}"+
++   "#hr-msg h4{font-family:Bangers,cursive;font-size:1.6rem;color:#f5c842;margin:0 0 .3rem;letter-spacing:.03em}"+
++   "#hr-msg p{color:rgba(255,255,255,.82);font-size:.9rem;margin:0 0 .9rem}"+
++   ".hr-btn{background:#f5c842;color:#1a1a2e;border:none;border-radius:11px;padding:.7rem 1.4rem;font-weight:900;font-size:.95rem;cursor:pointer;font-family:inherit}";
++  document.head.appendChild(s); }
++
++ function grp(){ try{ return (window.APP&&APP.kid&&APP.kid.age_group)||'812'; }catch(e){ return '812'; } }
++ function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
++
++ window.initHeroes=function(el){
++  css();
++  var pool=(grp()==='47')?HEROES.filter(function(h){return h.easy;}):HEROES;
++  var rounds=shuffle(pool).slice(0,5);
++  var idx=0, correct=0;
++
++  el.innerHTML="<div id='hr-wrap'><div id='hr-head'><h3>🦸 Who Am I?</h3><div class='rnd' id='hr-rnd'></div></div><div id='hr-body'></div></div>";
++  var body=el.querySelector('#hr-body');
++
++  function draw(){
++   if(idx>=rounds.length)return finish();
++   document.getElementById('hr-rnd').textContent='Hero '+(idx+1)+' of '+rounds.length;
++   var hero=rounds[idx];
++   var shown=1, answered=false;
++
++   var clues=document.createElement('div'); clues.className='hr-clues';
++   function renderClues(){
++    clues.innerHTML='';
++    for(var i=0;i<shown;i++){
++     var c=document.createElement('div'); c.className='hr-clue';
++     c.innerHTML="<div class='hr-num'>"+(i+1)+"</div><div class='hr-tx'>"+hero.c[i]+"</div>";
++     clues.appendChild(c);
++    }
++    if(shown<hero.c.length && !answered){
++     var more=document.createElement('button'); more.className='hr-more'; more.textContent='Need another clue';
++     more.onclick=function(){ shown++; renderClues(); };
++     clues.appendChild(more);
++    }
++   }
++   renderClues();
++
++   // options: correct + 3 distinct others
++   var others=shuffle(HEROES.filter(function(h){return h.n!==hero.n;})).slice(0,3).map(function(h){return h.n;});
++   var opts=shuffle(others.concat([hero.n]));
++   var grid=document.createElement('div'); grid.className='hr-opts';
++   opts.forEach(function(name){
++    var b=document.createElement('button'); b.className='hr-opt'; b.textContent=name;
++    b.onclick=function(){
++     if(answered)return; answered=true;
++     var right=(name===hero.n);
++     if(right){ b.classList.add('right'); correct++; if(typeof toast==='function')toast('✓ Yes! '+hero.n+(shown===1?' — first clue!':'')); }
++     else{
++      b.classList.add('wrongpick');
++      [].forEach.call(grid.children,function(x){ if(x.textContent===hero.n)x.classList.add('right'); });
++      if(typeof toast==='function')toast('It was '+hero.n+'. Now you know!',2600);
++     }
++     // remove the "need a clue" button
++     var mb=clues.querySelector('.hr-more'); if(mb)mb.remove();
++     setTimeout(function(){ idx++; draw(); }, right?900:1700);
++    };
++    grid.appendChild(b);
++   });
++
++   body.innerHTML=''; body.appendChild(clues); body.appendChild(grid);
++  }
++
++  function finish(){
++   var pts=correct*5;
++   body.innerHTML="<div id='hr-msg'><h4>✓ "+correct+" of "+rounds.length+"!</h4>"+
++     "<p>You know your Bible heroes. Their stories show us who God is.</p></div>";
++   var msg=body.querySelector('#hr-msg');
++   var again=document.createElement('button'); again.className='hr-btn'; again.textContent='Play again';
++   again.onclick=function(){ initHeroes(el); }; msg.appendChild(again);
++   if(pts>0 && window.APP && APP.kid && typeof wzPost==='function'){
++    wzPost('wz-award',{action:'game',kidId:APP.kid.id,pin:APP.kid.pin,key:'heroes',amount:pts})
++     .then(function(res){
++      if(res&&res.ok){
++       if(typeof wzSyncKid==='function')wzSyncKid(res);
++       if(res.granted>0&&typeof toast==='function')toast('⚡ +'+res.granted+' pts!',2500);
++       else if(typeof toast==='function')toast('🎮 Daily game points are maxed — play for fun!',3000);
++      }
++     }).catch(function(){});
++   }
++  }
++
++  draw();
++ };
++
++ var _rg=renderGames;
++ renderGames=function(gameId){
++  var r=_rg.apply(this,arguments);
++  if(gameId==='heroes'){
++   var a=document.getElementById('game-arena');
++   if(a)initHeroes(a);
++  }
++  return r;
++ };
++})();
+diff --git a/kgz/app/features/juice.js b/kgz/app/features/juice.js
+new file mode 100644
+index 0000000..072a2c6
+--- /dev/null
++++ b/kgz/app/features/juice.js
+@@ -0,0 +1,98 @@
++// Juice Pack — tactile + audible feedback across the whole Arena.
++// Before: only the FINAL point-award chimed (wzSyncKid -> wzSfxEarn). A kid could
++// answer 10 quiz questions and hear nothing until the end. Kids need feedback on
++// EVERY tap — that is what makes a game feel alive.
++//
++// How it works: instead of editing all six games, we watch the dashboard for the
++// exact CSS classes the games already add on a right/wrong answer (.correct,
++// .wrong, .match-matched) and fire a short tone + a gentle haptic buzz. Purely
++// additive, reads nothing, breaks nothing. Respects the existing mute toggle
++// (wzMute) and does nothing on browsers without WebAudio/vibrate.
++//
++// Tone philosophy matches the app: correct = warm rising chime, wrong = a soft
++// low "boop", never harsh. No shaming. A quick run of correct answers nudges the
++// pitch up so a streak literally sounds better.
++(function(){
++ if(window.__wzJuice)return; window.__wzJuice=1;
++
++ // ---- audio (self-contained; core-a's `tone` is module-private) ----
++ var AC=null;
++ function muted(){ try{ return typeof wzMute==='function' && wzMute(); }catch(e){ return false; } }
++ function ctx(){ if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } return AC; }
++ function tone(freq,dur,type,vol,delay){
++  var ac=ctx(); if(!ac||muted())return;
++  try{ if(ac.state==='suspended')ac.resume(); }catch(e){}
++  var t=ac.currentTime+(delay||0);
++  var o=ac.createOscillator(), g=ac.createGain();
++  o.type=type||'sine'; o.frequency.value=freq; o.connect(g); g.connect(ac.destination);
++  g.gain.setValueAtTime(0.0001,t);
++  g.gain.linearRampToValueAtTime(vol||.10,t+0.02);
++  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
++  o.start(t); o.stop(t+dur+0.06);
++ }
++ function buzz(pattern){ if(navigator.vibrate){ try{ navigator.vibrate(pattern); }catch(e){} } }
++
++ // ---- combo: consecutive correct answers raise the pitch ----
++ var combo=0, lastCorrect=0;
++ function correctFx(){
++  var now=Date.now();
++  combo = (now-lastCorrect < 6000) ? Math.min(combo+1,6) : 1;
++  lastCorrect=now;
++  var base=587 + combo*44;               // D5 climbing with the streak
++  tone(base,0.11,'triangle',.11,0);
++  tone(base*1.5,0.14,'triangle',.09,0.06);
++  buzz(30);
++ }
++ function wrongFx(){
++  combo=0;
++  tone(196,0.16,'sine',.09,0);           // gentle low G, no sting
++  buzz([12,50,12]);
++ }
++
++ // Debounce so one answer that flips several nodes fires once.
++ var pending=null, sawCorrect=false, sawWrong=false;
++ function flush(){
++  pending=null;
++  if(sawCorrect)correctFx(); else if(sawWrong)wrongFx();
++  sawCorrect=sawWrong=false;
++ }
++ function note(kind){
++  if(kind==='correct')sawCorrect=true; else sawWrong=true;
++  if(!pending)pending=setTimeout(flush,40);
++ }
++
++ function classify(cls){
++  if(!cls||cls.indexOf)cls=String(cls||'');
++  // positive: quiz/tf right answer, memory-match pair made
++  if(/\b(correct|match-matched)\b/.test(cls))return 'correct';
++  // negative: quiz/tf wrong answer, verse-builder wrong tile
++  if(/\b(wrong|vg-tile[^"]*\bbad|chip[^"]*\bbad)\b/.test(cls) || /\bwrong\b/.test(cls))return 'wrong';
++  return null;
++ }
++
++ function watch(root){
++  if(!root||root.__wzJuiceWatched)return; root.__wzJuiceWatched=1;
++  var mo=new MutationObserver(function(muts){
++   for(var i=0;i<muts.length;i++){
++    var m=muts[i];
++    if(m.type!=='attributes'||m.attributeName!=='class')continue;
++    var k=classify(m.target.className);
++    if(k)note(k);
++   }
++  });
++  try{ mo.observe(root,{attributes:true,attributeName:['class'],subtree:true}); }catch(e){}
++ }
++
++ // #dash-main holds every game; wait for it, then watch it.
++ var tries=0;
++ var iv=setInterval(function(){
++  tries++; if(tries>200){ clearInterval(iv); return; }
++  var main=document.getElementById('dash-main');
++  if(main){ clearInterval(iv); watch(main); }
++ },400);
++
++ // First user gesture unlocks the audio context on iOS/Safari.
++ function unlock(){ try{ var ac=ctx(); if(ac&&ac.state==='suspended')ac.resume(); }catch(e){} }
++ document.addEventListener('touchstart',unlock,{once:true,passive:true});
++ document.addEventListener('click',unlock,{once:true});
++})();
+diff --git a/kgz/app/features/mascot.js b/kgz/app/features/mascot.js
+new file mode 100644
+index 0000000..0729499
+--- /dev/null
++++ b/kgz/app/features/mascot.js
+@@ -0,0 +1,101 @@
++// Warrior Buddy — a little animated mascot that gives the app "cartoon" life.
++// A friendly SVG warrior sits in the corner, bobs and blinks, WAVES when you
++// change tabs, CHEERS (jumps + speech bubble) when you earn points, and gives a
++// word of encouragement when tapped. It borrows the kid's own skin/accent colors
++// so it feels like their warrior cheering them on.
++//
++// Pure decoration, backend-free: it only reads the on-screen points readout and
++// wraps dashTab. Shows only when a kid is logged in; if a hook is missing it just
++// sits still. Encouragements are short, kid-friendly, and doctrinally safe.
++(function(){
++ if(window.__wzMascot)return; window.__wzMascot=1;
++
++ var CHEERS=['🎉 Yes!','Nice one!','Way to go!','⚡ Boom!','Keep it up!','Awesome!'];
++ var WORDS=[
++  'You’re a mighty warrior! ⚔️',
++  'God is with you today!',
++  'Put on the full armor of God!',
++  'You can do all things through Christ! 💪',
++  'Be strong and courageous!',
++  'Jesus loves you so much!',
++  'Keep going, warrior. I believe in you!',
++  'Hide God’s Word in your heart!'
++ ];
++
++ // The kid's real illustrated warrior, cropped into a circular buddy.
++ var HERO_IMG={w1:'warrior-boy.png',w2:'warrior-2.png',w3:'warrior-3.png',w4:'warrior-girl.png',w5:'warrior-5.png',w6:'warrior-6.png'};
++
++ function css(){ if(document.getElementById('wz-mas-css'))return;
++  var s=document.createElement('style'); s.id='wz-mas-css';
++  s.textContent=
++   "#wz-buddy{position:fixed;right:14px;bottom:20px;z-index:9500;width:66px;height:66px;cursor:pointer;display:none;border-radius:50%;overflow:hidden;border:2.5px solid rgba(245,200,66,.75);box-shadow:0 6px 16px rgba(0,0,0,.5),0 0 16px rgba(245,200,66,.25);background:#140a2e}"+
++   "#wz-buddy .bwrap{width:100%;height:100%;animation:wzbob 3.4s ease-in-out infinite;transform-origin:50% 90%}"+
++   "#wz-buddy .bwrap img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}"+
++   "@keyframes wzbob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(-2deg)}}"+
++   "#wz-buddy.cheer .bwrap{animation:wzcheer .6s cubic-bezier(.34,1.56,.64,1)}"+
++   "@keyframes wzcheer{0%{transform:translateY(0) scale(1)}40%{transform:translateY(-16px) scale(1.12)}100%{transform:translateY(0) scale(1)}}"+
++   "#wz-buddy.wave .bwrap{animation:wzwave .6s ease}"+
++   "@keyframes wzwave{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}"+
++   "#wz-buddy .eye{transform-origin:center;animation:wzblink 4.2s infinite}"+
++   "@keyframes wzblink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}"+
++   "#wz-bubble{position:fixed;right:16px;bottom:88px;z-index:9501;max-width:180px;background:#fff;color:#1a1a2e;border-radius:14px;padding:.55rem .8rem;font-size:.8rem;font-weight:800;box-shadow:0 6px 18px rgba(0,0,0,.4);opacity:0;transform:translateY(8px) scale(.9);transition:all .2s;pointer-events:none;display:none}"+
++   "#wz-bubble.show{opacity:1;transform:translateY(0) scale(1)}"+
++   "#wz-bubble::after{content:'';position:absolute;right:22px;bottom:-7px;width:0;height:0;border:7px solid transparent;border-top-color:#fff;border-bottom:0}";
++  document.head.appendChild(s); }
++
++ function svg(){
++  var a=(window.APP&&APP.kid&&APP.kid.avatar)||''; if(!HERO_IMG[a])a='w1';
++  return "<div class='bwrap'><img src='img/"+HERO_IMG[a]+"' alt=''></div>";
++ }
++
++ function bubble(txt){
++  var el=document.getElementById('wz-bubble'); if(!el)return;
++  el.textContent=txt; el.style.display='block';
++  requestAnimationFrame(function(){ el.classList.add('show'); });
++  clearTimeout(el.__t);
++  el.__t=setTimeout(function(){ el.classList.remove('show'); setTimeout(function(){ el.style.display='none'; },220); }, 2600);
++ }
++ function react(cls){
++  var b=document.getElementById('wz-buddy'); if(!b)return;
++  b.classList.remove(cls); void b.offsetWidth; b.classList.add(cls);
++  setTimeout(function(){ b.classList.remove(cls); }, 700);
++ }
++
++ function build(){
++  if(document.getElementById('wz-buddy'))return;
++  css();
++  var b=document.createElement('div'); b.id='wz-buddy'; b.innerHTML=svg();
++  b.setAttribute('aria-label','Warrior buddy');
++  b.onclick=function(){ react('cheer'); bubble(WORDS[Math.floor(Math.random()*WORDS.length)]); };
++  document.body.appendChild(b);
++  var bub=document.createElement('div'); bub.id='wz-bubble'; document.body.appendChild(bub);
++  // show only when a kid is logged in
++  setInterval(function(){ b.style.display=(window.APP&&APP.kid)?'block':'none'; }, 1000);
++  // refresh colors to match the kid once known
++  setTimeout(function(){ b.innerHTML=svg(); }, 2500);
++ }
++
++ function hookTab(){
++  if(typeof window.dashTab!=='function' || window.dashTab.__wzMascot)return;
++  var _dt=window.dashTab;
++  window.dashTab=function(tab,btn){ var r=_dt.apply(this,arguments); try{ react('wave'); }catch(e){} return r; };
++  window.dashTab.__wzMascot=1;
++ }
++ function watchPoints(){
++  var el=document.getElementById('dash-pts'); if(!el)return false;
++  if(el.__wzMascot)return true; el.__wzMascot=1;
++  var last=el.textContent;
++  var mo=new MutationObserver(function(){
++   var now=el.textContent; if(now===last)return;
++   var up=(parseInt(now,10)||0)>(parseInt(last,10)||0); last=now;
++   if(up){ react('cheer'); bubble(CHEERS[Math.floor(Math.random()*CHEERS.length)]); }
++  });
++  try{ mo.observe(el,{childList:true,characterData:true,subtree:true}); }catch(e){}
++  return true;
++ }
++
++ function init(){ build(); hookTab(); watchPoints(); }
++ if(document.readyState!=='loading')init(); else document.addEventListener('DOMContentLoaded',init);
++ setTimeout(init,600); setTimeout(init,1600); setTimeout(init,2800);
++ var n=0, iv=setInterval(function(){ if((watchPoints()&&window.dashTab&&window.dashTab.__wzMascot)||++n>60)clearInterval(iv); },500);
++})();
+diff --git a/kgz/app/features/polish.js b/kgz/app/features/polish.js
+new file mode 100644
+index 0000000..074886c
+--- /dev/null
++++ b/kgz/app/features/polish.js
+@@ -0,0 +1,86 @@
++// Polish — the small motion + feedback touches that make the app feel premium.
++// Purely cosmetic and additive: it wraps dashTab to animate tab changes, watches
++// the points readout to celebrate every earn with a pulse, and adds a soft tick
++// when a kid changes tabs (respecting the existing mute toggle). Nothing here
++// touches data or game logic; if a hook is missing it simply does less.
++(function(){
++ if(window.__wzPolish)return; window.__wzPolish=1;
++
++ function css(){ if(document.getElementById('wz-polish-css'))return;
++  var s=document.createElement('style'); s.id='wz-polish-css';
++  s.textContent=
++   "@keyframes wzFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}"+
++   ".wz-fade-in{animation:wzFadeUp .34s cubic-bezier(.34,1.56,.64,1)}"+
++   "@keyframes wzPtsPulse{0%{transform:scale(1)}35%{transform:scale(1.22)}100%{transform:scale(1)}}"+
++   ".wz-pts-pulse{animation:wzPtsPulse .6s cubic-bezier(.34,1.56,.64,1)}"+
++   // buttons/cards get a snappier, more tactile press everywhere
++   ".btn,.game-card,.td-card,.store-card,.tab-btn,.q-opt,.tf-t,.tf-f,.kp-btn,.armor-card{transition:transform .12s ease, box-shadow .2s ease}"+
++   ".game-card:active,.store-card:active,.td-card:active{transform:scale(.96)}"+
++   // a gentle sheen that sweeps the hero card when you land on a tab
++   "#dash-hero{position:relative;overflow:hidden}"+
++   "#dash-hero.wz-sheen::after{content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.10),transparent);transform:skewX(-18deg);animation:wzSheen 1.1s ease-out;pointer-events:none;z-index:5}"+
++   "@keyframes wzSheen{to{left:130%}}";
++  document.head.appendChild(s); }
++
++ // ---- soft UI tick (own tiny synth, gated by the existing mute toggle) ----
++ var AC=null;
++ function muted(){ try{ return typeof wzMute==='function' && wzMute(); }catch(e){ return false; } }
++ function tick(){
++  if(muted())return;
++  try{
++   if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();
++   if(AC.state==='suspended')AC.resume();
++   var t=AC.currentTime, o=AC.createOscillator(), g=AC.createGain();
++   o.type='sine'; o.frequency.value=523;
++   o.connect(g); g.connect(AC.destination);
++   g.gain.setValueAtTime(0.0001,t);
++   g.gain.linearRampToValueAtTime(0.045,t+0.01);
++   g.gain.exponentialRampToValueAtTime(0.0001,t+0.09);
++   o.start(t); o.stop(t+0.12);
++  }catch(e){}
++ }
++
++ // ---- animate tab changes + sheen the hero ----
++ function hookTab(){
++  if(typeof window.dashTab!=='function' || window.dashTab.__wzPolish)return;
++  var _dt=window.dashTab;
++  window.dashTab=function(tab,btn){
++   var r=_dt.apply(this,arguments);
++   try{
++    var pane=document.getElementById('tab-'+tab);
++    if(pane){ pane.classList.remove('wz-fade-in'); void pane.offsetWidth; pane.classList.add('wz-fade-in'); }
++    var hero=document.getElementById('dash-hero');
++    if(hero){ hero.classList.remove('wz-sheen'); void hero.offsetWidth; hero.classList.add('wz-sheen'); }
++    if(btn)tick();
++   }catch(e){}
++   return r;
++  };
++  window.dashTab.__wzPolish=1;
++ }
++
++ // ---- reward pulse whenever the points readout changes ----
++ function watchPoints(){
++  var el=document.getElementById('dash-pts'); if(!el)return false;
++  if(el.__wzPolish)return true; el.__wzPolish=1;
++  var last=el.textContent;
++  var mo=new MutationObserver(function(){
++   var now=el.textContent;
++   if(now===last)return;
++   var up=(parseInt(now,10)||0)>(parseInt(last,10)||0); last=now;
++   if(!up)return;
++   ['.pts-pill','#dash-pts2'].forEach(function(sel){
++    var n=document.querySelector(sel); if(!n)return;
++    n.classList.remove('wz-pts-pulse'); void n.offsetWidth; n.classList.add('wz-pts-pulse');
++   });
++  });
++  try{ mo.observe(el,{childList:true,characterData:true,subtree:true}); }catch(e){}
++  return true;
++ }
++
++ function init(){ css(); hookTab(); watchPoints(); }
++ if(document.readyState!=='loading')init(); else document.addEventListener('DOMContentLoaded',init);
++ // dashTab / the readout are created after login and re-wrapped by other modules
++ // on timers; match that cadence so we settle on top.
++ setTimeout(init,400); setTimeout(init,1300); setTimeout(init,2700);
++ var n=0, iv=setInterval(function(){ if((watchPoints()&&window.dashTab&&window.dashTab.__wzPolish)||++n>60)clearInterval(iv); },500);
++})();
+diff --git a/kgz/app/features/streaks.js b/kgz/app/features/streaks.js
+new file mode 100644
+index 0000000..5e09254
+--- /dev/null
++++ b/kgz/app/features/streaks.js
+@@ -0,0 +1,162 @@
++// Streaks & Stickers — the daily-return hook, built to fit the app's soul.
++// The Hall of Victory deliberately REFUSES to rank children against each other
++// (see ranks.js). This module keeps that promise: every reward here is you vs
++// yesterday's you. Nothing compares one kid to another.
++//
++// Two pieces, appended to the Hall of Victory tab (which renders synchronously,
++// so a plain wrapper is safe):
++//   1. A "don't break the chain" streak strip — visual fire for showing up.
++//   2. A Sticker Shelf — collectible milestones a kid earns from their OWN
++//      journey (verses learned, devos read, armor earned, streak kept).
++//
++// All of it is DERIVED from data the kid record already carries — no backend
++// change, no new writes. The only thing we persist is a tiny per-kid list in
++// localStorage so a newly-earned sticker celebrates exactly once.
++(function(){
++ if(window.__wzStreaks)return; window.__wzStreaks=1;
++
++ function arr(v){ return Array.isArray(v)?v:[]; }
++ function vlen(k){ return arr(k.completed_verses).length; }
++ function dlen(k){ return arr(k.completed_devos).length; }
++ function mlen(k){ return arr(k.completed_missions).length; }
++ function wlen(k){ return arr(k.completed_videos).length; }
++ function best(k){ return Math.max(k.best_streak||0, k.streak_count||0); }
++ function pieces(k){ try{ return getArmor(k).filter(function(x){return x!=='full';}).length; }catch(e){ return 0; } }
++ function hasFull(k){ try{ return getArmor(k).indexOf('full')>=0; }catch(e){ return false; } }
++
++ // Milestones. Order = the shelf order. Each `on(kid)` is a pure predicate.
++ var STICKERS=[
++  {id:'first',    ic:'star',   n:'First Steps',    hint:'Join the warriors',        on:function(){return true;}},
++  {id:'verse1',   ic:'book',   n:'Verse Keeper',   hint:'Learn your first verse',    on:function(k){return vlen(k)>=1;}},
++  {id:'devo1',    ic:'heart',  n:'Quiet Time',     hint:'Finish your first devo',    on:function(k){return dlen(k)>=1;}},
++  {id:'streak3',  ic:'flame',  n:'On Fire',        hint:'Keep a 3-day streak',       on:function(k){return best(k)>=3;}},
++  {id:'armor3',   ic:'shield', n:'Armored Up',     hint:'Earn 3 armor pieces',       on:function(k){return pieces(k)>=3;}},
++  {id:'verse5',   ic:'sword',  n:'Word Warrior',   hint:'Learn 5 verses',            on:function(k){return vlen(k)>=5;}},
++  {id:'devo5',    ic:'book',   n:'Faithful Reader',hint:'Finish 5 devos',            on:function(k){return dlen(k)>=5;}},
++  {id:'mission1', ic:'target', n:'Truth Scout',    hint:'Finish a training mission', on:function(k){return mlen(k)>=1;}},
++  {id:'watch1',   ic:'play',   n:'All Ears',       hint:'Watch a warrior video',     on:function(k){return wlen(k)>=1;}},
++  {id:'streak7',  ic:'bolt',   n:'Unstoppable',    hint:'Keep a 7-day streak',       on:function(k){return best(k)>=7;}},
++  {id:'streak14', ic:'trophy', n:'Legendary',      hint:'Keep a 14-day streak',      on:function(k){return best(k)>=14;}},
++  {id:'armorfull',ic:'full',   n:'Fully Armored',  hint:'Wear the full armor of God',on:function(k){return hasFull(k);}}
++ ];
++
++ function css(){ if(document.getElementById('wz-stk-css'))return;
++  var s=document.createElement('style'); s.id='wz-stk-css';
++  s.textContent=
++   ".stk-card{background:linear-gradient(135deg,#1e1e38,#171730);border:1px solid rgba(245,200,66,.3);border-radius:16px;padding:1.1rem;margin-bottom:1rem}"+
++   ".stk-t{font-family:Bangers,cursive;font-size:1.25rem;letter-spacing:.04em;color:#f5c842;line-height:1.1;margin-bottom:.15rem}"+
++   ".stk-sub{font-size:.72rem;color:rgba(255,255,255,.45);font-weight:700;margin-bottom:.85rem}"+
++   ".stk-chain{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.5rem}"+
++   ".stk-day{width:30px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}"+
++   ".stk-day.on{background:linear-gradient(180deg,rgba(255,140,40,.35),rgba(255,80,20,.15));border-color:rgba(255,150,60,.6);box-shadow:0 0 10px rgba(255,120,40,.3)}"+
++   ".stk-day.next{border:1.5px dashed rgba(245,200,66,.5)}"+
++   ".stk-meta{display:flex;gap:1.2rem;font-size:.74rem;color:rgba(255,255,255,.6);font-weight:700;margin-top:.35rem}"+
++   ".stk-meta b{color:#f5c842;font-family:Bangers,cursive;font-size:1.15rem;letter-spacing:.03em}"+
++   ".stk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin-top:.35rem}"+
++   ".stk-badge{position:relative;text-align:center;border-radius:14px;padding:.6rem .25rem;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)}"+
++   ".stk-badge.got{border-color:rgba(245,200,66,.4);background:linear-gradient(160deg,rgba(245,200,66,.12),rgba(245,200,66,.03))}"+
++   ".stk-badge .em{font-size:1.7rem;line-height:1;display:block;margin-bottom:.25rem}"+
++   ".stk-badge.locked .em{filter:grayscale(1);opacity:.3}"+
++   ".stk-badge .nm{font-size:.58rem;font-weight:800;line-height:1.15;color:#fff}"+
++   ".stk-badge.locked .nm{color:rgba(255,255,255,.4)}"+
++   ".stk-badge .hint{font-size:.52rem;color:rgba(255,255,255,.3);margin-top:.15rem;line-height:1.1}"+
++   ".stk-badge.got .hint{color:#f5c842}"+
++   ".stk-badge.pop{animation:stkpop .6s cubic-bezier(.34,1.56,.64,1)}"+
++   "@keyframes stkpop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}"+
++   ".stk-count{font-size:.68rem;color:rgba(255,255,255,.45);font-weight:800;margin:.15rem 0 .55rem}";
++  document.head.appendChild(s); }
++
++ function lsKey(k){ return 'wz_stickers_'+(k.id||'anon'); }
++ function loadSeen(k){ try{ return JSON.parse(localStorage.getItem(lsKey(k))||'null'); }catch(e){ return null; } }
++ function saveSeen(k,ids){ try{ localStorage.setItem(lsKey(k),JSON.stringify(ids)); }catch(e){} }
++
++ function build(k){
++  var card=document.createElement('div'); card.className='stk-card';
++
++  // ---- streak strip ----
++  var cur=k.streak_count||0, bst=best(k);
++  var SLOTS=Math.max(7,Math.min(10,cur+1));   // always show at least a week
++  var chain='';
++  for(var i=0;i<SLOTS;i++){
++   var on=i<cur, isNext=(i===cur);
++   chain+="<div class='stk-day"+(on?' on':'')+(isNext?' next':'')+"'>"+(on?'🔥':(isNext?'⭐':''))+"</div>";
++  }
++  var strip=cur>0
++    ? "<div class='stk-sub'>Don’t break the chain — come back tomorrow to keep it going.</div>"
++    : "<div class='stk-sub'>Show up today to light your first flame.</div>";
++
++  // ---- sticker shelf ----
++  var earned=STICKERS.filter(function(s){return s.on(k);}).map(function(s){return s.id;});
++  var seen=loadSeen(k);
++  var fresh = seen ? earned.filter(function(id){return seen.indexOf(id)<0;}) : [];
++  saveSeen(k,earned);   // first-ever open saves silently (seen===null -> no fresh)
++
++  var badges='';
++  STICKERS.forEach(function(s){
++   var got=s.on(k), isFresh=fresh.indexOf(s.id)>=0;
++   badges+="<div class='stk-badge "+(got?'got':'locked')+(isFresh?' pop':'')+"'>"+
++     "<span class='em'>"+(window.wzIcon?wzIcon(s.ic,30):'')+"</span>"+
++     "<div class='nm'>"+s.n+"</div>"+
++     "<div class='hint'>"+(got?'Earned!':s.hint)+"</div></div>";
++  });
++
++  card.innerHTML=
++   "<div class='stk-t'>Your Streak</div>"+strip+
++   "<div class='stk-chain'>"+chain+"</div>"+
++   "<div class='stk-meta'><span>Now <b>"+cur+"</b></span><span>Best <b>"+bst+"</b></span></div>"+
++   "<div class='stk-t' style='margin-top:1.1rem'>Sticker Shelf</div>"+
++   "<div class='stk-count'>"+earned.length+" of "+STICKERS.length+" collected</div>"+
++   "<div class='stk-grid'>"+badges+"</div>";
++
++  // celebrate newly-earned stickers (once), respecting mute
++  if(fresh.length){
++   setTimeout(function(){
++    try{ if(typeof wzConfetti==='function')wzConfetti(40); }catch(e){}
++    try{ if(typeof wzSfxFanfare==='function')wzSfxFanfare(); }catch(e){}
++    try{ if(navigator.vibrate)navigator.vibrate([40,30,60]); }catch(e){}
++    var s0=STICKERS.filter(function(s){return s.id===fresh[0];})[0];
++    if(s0&&typeof toast==='function')toast('New sticker: '+s0.n+(fresh.length>1?' (+'+(fresh.length-1)+' more)':'')+'!',4500);
++   },600);
++  }
++  return card;
++ }
++
++ // Swap the Hall of Victory's emoji headers for the custom icon set.
++ function swapHallHeaders(el){
++  if(!window.wzIcon)return;
++  var map={'The Gathering Warriors':'trophy','Your Journey':'sword','Wall of Warriors':'shield'};
++  [].forEach.call(el.querySelectorAll('.bl-t'),function(t){
++   if(t.__wzIc)return;
++   var txt=t.textContent||'';
++   for(var name in map){ if(txt.indexOf(name)>=0){ t.innerHTML=wzIcon(map[name],18)+' '+name; t.__wzIc=1; break; } }
++  });
++ }
++
++ function inject(){
++  var el=document.getElementById('tab-ranks'); if(!el)return;
++  if(!window.APP||!APP.kid)return;
++  // Only after the Hall's own cards have rendered (avoids the pre-data pass).
++  if(!el.querySelector('.bl-card'))return;
++  css();
++  swapHallHeaders(el);
++  if(el.querySelector('.stk-card'))return;   // idempotent per render
++  el.appendChild(build(APP.kid));
++ }
++
++ function hook(){
++  if(typeof renderRanks!=='function')return false;
++  var _rr=renderRanks;
++  window.renderRanks=renderRanks=function(){
++   var r=_rr.apply(this,arguments);
++   try{ inject(); }catch(e){}
++   return r;
++  };
++  return true;
++ }
++
++ // renderRanks is folded into core-b (loads before this file), so hook now;
++ // fall back to a short retry if load order ever shifts.
++ if(!hook()){
++  var n=0, iv=setInterval(function(){ if(hook()||++n>40)clearInterval(iv); },300);
++ }
++})();
+diff --git a/kgz/app/features/today-plus.js b/kgz/app/features/today-plus.js
+new file mode 100644
+index 0000000..5ab910d
+--- /dev/null
++++ b/kgz/app/features/today-plus.js
+@@ -0,0 +1,132 @@
++// Today+ — make the daily hub feel like a mission you can finish.
++// The Today tab lists up to four actions but only the pastor card ever showed a
++// done state, and finishing everything felt like nothing. This adds:
++//   - a "Today's Mission" progress bar over the cards,
++//   - a green check on each card the kid has actually completed TODAY,
++//   - a once-a-day celebration when the whole mission is done.
++//
++// "Done today" is read from one transactions-today query (same shape core-a uses
++// for gamePtsToday) plus the pastor card's own state — so it resets each day and
++// needs no backend change. Purely additive: it observes the Today tab and
++// enhances whatever renderToday produced. If a signal is missing, a card simply
++// shows no check; nothing breaks.
++(function(){
++ if(window.__wzTodayPlus)return; window.__wzTodayPlus=1;
++ if(typeof sb!=='function')return;
++
++ function css(){ if(document.getElementById('wz-tp-css'))return;
++  var s=document.createElement('style'); s.id='wz-tp-css';
++  s.textContent=
++   "#wz-tp-bar{background:linear-gradient(135deg,#1e1e38,#171730);border:1px solid rgba(245,200,66,.3);border-radius:14px;padding:.8rem .95rem;margin-bottom:.8rem}"+
++   "#wz-tp-bar .tp-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}"+
++   "#wz-tp-bar .tp-t{font-family:Bangers,cursive;font-size:1.05rem;letter-spacing:.04em;color:#f5c842}"+
++   "#wz-tp-bar .tp-n{font-size:.74rem;font-weight:800;color:rgba(255,255,255,.6)}"+
++   "#wz-tp-bar .tp-track{height:9px;background:rgba(0,0,0,.35);border-radius:6px;overflow:hidden}"+
++   "#wz-tp-bar .tp-fill{height:100%;background:linear-gradient(90deg,#f5c842,#ffe08a);border-radius:6px;transition:width .7s cubic-bezier(.34,1.56,.64,1)}"+
++   "#wz-tp-bar.tp-alldone{border-color:rgba(126,224,138,.6)}"+
++   "#wz-tp-bar.tp-alldone .tp-fill{background:linear-gradient(90deg,#7ee08a,#c7f7cf)}"+
++   ".td-card .td-go.tp-check{color:#7ee08a}";
++  document.head.appendChild(s); }
++
++ function today(){ return new Date().toISOString().slice(0,10); }
++ function dayStart(){ var d=new Date(); d.setHours(0,0,0,0); return d.getTime(); }
++
++ // Which mission each Today card is, keyed by the icon renderToday uses.
++ function typeOf(card){
++  var ic=card.querySelector('.td-ic'); var e=ic?(ic.textContent||'').trim():'';
++  if(e.indexOf('🎥')>=0)return 'pastor';   // 🎥
++  if(e.indexOf('📜')>=0)return 'verse';     // 📜
++  if(e.indexOf('📖')>=0)return 'devo';      // 📖
++  if(e.indexOf('⚔')>=0)return 'battle';          // ⚔️
++  return '';
++ }
++
++ function markDone(card){
++  card.classList.add('done');
++  var go=card.querySelector('.td-go'); if(go){ go.textContent='✓'; go.classList.add('tp-check'); }
++ }
++
++ function celebrate(){
++  try{ if(typeof wzConfetti==='function')wzConfetti(60); }catch(e){}
++  try{ if(typeof wzSfxFanfare==='function')wzSfxFanfare(); }catch(e){}
++  try{ if(navigator.vibrate)navigator.vibrate([50,40,80]); }catch(e){}
++  try{ if(typeof toast==='function')toast('🌟 Mission complete! Way to go, warrior!',4500); }catch(e){}
++ }
++
++ function apply(host, doneSet){
++  var cards=host.querySelectorAll('.td-card'); if(!cards.length)return;
++  var total=0, done=0;
++  cards.forEach(function(card){
++   var t=typeOf(card); if(!t)return;
++   total++;
++   var isDone = card.classList.contains('done') || doneSet[t]===true;
++   if(isDone){ markDone(card); done++; }
++  });
++  if(!total)return;
++
++  // progress bar just above the first card
++  var bar=host.querySelector('#wz-tp-bar');
++  if(!bar){
++   bar=document.createElement('div'); bar.id='wz-tp-bar';
++   var first=host.querySelector('.td-card');
++   if(first&&first.parentNode)first.parentNode.insertBefore(bar,first);
++   else host.appendChild(bar);
++  }
++  var pct=Math.round((done/total)*100);
++  var allDone=done>=total;
++  bar.className=allDone?'tp-alldone':'';
++  var micon=window.wzIcon?wzIcon(allDone?'trophy':'star',16)+' ':'';
++  bar.innerHTML="<div class='tp-top'><div class='tp-t'>"+micon+(allDone?'Mission Complete!':'Today’s Mission')+"</div>"+
++    "<div class='tp-n'>"+done+" of "+total+" done</div></div>"+
++    "<div class='tp-track'><div class='tp-fill' style='width:"+pct+"%'></div></div>";
++
++  // celebrate once per kid per day
++  if(allDone && window.APP && APP.kid){
++   var key='wz_tp_done_'+APP.kid.id+'_'+today();
++   var seen=false; try{ seen=localStorage.getItem(key)==='1'; }catch(e){}
++   if(!seen){ try{ localStorage.setItem(key,'1'); }catch(e){} setTimeout(celebrate,500); }
++  }
++ }
++
++ // one transactions-today read -> which categories the kid earned in today
++ function fetchDone(cb){
++  var out={pastor:false,verse:false,devo:false,battle:false};
++  if(!window.APP||!APP.kid){ cb(out); return; }
++  sb("transactions?kid_id=eq."+APP.kid.id+"&created_at=gte."+dayStart()+"&select=category")
++   .then(function(rows){
++    (rows||[]).forEach(function(r){
++     var c=String(r.category||'').toLowerCase();
++     if(c.indexOf('game')>=0)out.battle=true;
++     if(c.indexOf('devo')>=0)out.devo=true;
++     if(c.indexOf('verse')>=0||c.indexOf('memor')>=0)out.verse=true;
++     if(c.indexOf('video')>=0)out.pastor=true;
++    });
++    cb(out);
++   }).catch(function(){ cb(out); });
++ }
++
++ var busy=false;
++ function enhance(){
++  var host=document.getElementById('tab-today'); if(!host)return;
++  if(!host.querySelector('.td-card'))return;       // renderToday not done yet
++  if(host.querySelector('#wz-tp-bar'))return;      // already enhanced this render
++  if(busy)return; busy=true;
++  fetchDone(function(doneSet){
++   try{ apply(host,doneSet); }catch(e){}
++   busy=false;
++  });
++ }
++
++ // Observe the Today tab; renderToday rebuilds it, we re-enhance the new cards.
++ function watch(){
++  var host=document.getElementById('tab-today'); if(!host)return false;
++  if(host.__wzTpWatched)return true; host.__wzTpWatched=1;
++  css();
++  var deb=null;
++  var mo=new MutationObserver(function(){ if(deb)clearTimeout(deb); deb=setTimeout(enhance,150); });
++  try{ mo.observe(host,{childList:true}); }catch(e){}
++  setTimeout(enhance,200);
++  return true;
++ }
++ var n=0, iv=setInterval(function(){ if(watch()||++n>60)clearInterval(iv); },350);
++})();
+diff --git a/kgz/app/features/warrior-locker.js b/kgz/app/features/warrior-locker.js
+new file mode 100644
+index 0000000..0d60340
+--- /dev/null
++++ b/kgz/app/features/warrior-locker.js
+@@ -0,0 +1,220 @@
++// Warrior Locker — the emotional heart of the app: YOUR warrior, suiting up.
++// The whole zone is themed "put on the full armor of God" (Ephesians 6), but the
++// armor was only ever a progress bar + an emoji grid. Kids bond with a character,
++// not a bar. This is a full-screen hero moment: the child's own warrior (their
++// colors, their look) stands tall and the armor pieces they've EARNED snap on one
++// by one with light and sound. Tapping a piece teaches its verse from Ephesians 6.
++//
++// It reuses what already exists — armorSVG (which already draws each earned
++// piece), getArmor / WZ_TIERS (the real thresholds), and the celebration SFX —
++// so it's purely additive and cannot change points or unlocks. A gold "Enter my
++// Locker" button is added to the Armor tab; the Locker itself is a separate
++// full-screen overlay, so it never fights the existing armor rendering.
++(function(){
++ if(window.__wzLocker)return; window.__wzLocker=1;
++
++ // Ephesians 6 — each piece's verse + a kid-friendly meaning. Order matches
++ // WZ_TIERS. Kept short, accurate, and orthodox.
++ var PIECES=[
++  {k:'belt',        e:'🎗️', name:'Belt of Truth',            ref:'Ephesians 6:14',
++   verse:'“Stand therefore, having fastened on the belt of truth.”',
++   mean:'Truth holds everything together. When you live in God’s truth, you stand strong.'},
++  {k:'breastplate', e:'🛡️', name:'Breastplate of Righteousness', ref:'Ephesians 6:14',
++   verse:'“…and having put on the breastplate of righteousness.”',
++   mean:'It guards your heart. You are made right with God through Jesus, not by being perfect.'},
++  {k:'boots',       e:'🥾', name:'Gospel Boots of Peace',     ref:'Ephesians 6:15',
++   verse:'“…as shoes for your feet, having put on the readiness given by the gospel of peace.”',
++   mean:'You’re ready to go and carry God’s peace wherever you walk.'},
++  {k:'shield',      e:'🛡️', name:'Shield of Faith',           ref:'Ephesians 6:16',
++   verse:'“In all circumstances take up the shield of faith, with which you can extinguish all the flaming darts of the evil one.”',
++   mean:'Faith in God stops the enemy’s lies. Trust God and you are protected.'},
++  {k:'helmet',      e:'⛑️', name:'Helmet of Salvation',       ref:'Ephesians 6:17',
++   verse:'“…take the helmet of salvation.”',
++   mean:'It guards your mind. You know you belong to God and are safe in Jesus.'},
++  {k:'sword',       e:'⚔️', name:'Sword of the Spirit',       ref:'Ephesians 6:17',
++   verse:'“…and the sword of the Spirit, which is the word of God.”',
++   mean:'God’s Word is your weapon. Know it, speak it, and stand strong.'},
++  {k:'full',        e:'🏆', name:'The Full Armor of God',     ref:'Ephesians 6:11',
++   verse:'“Put on the whole armor of God, that you may be able to stand against the schemes of the devil.”',
++   mean:'Wearing it all, you are ready for anything, because your strength is in the Lord.'}
++ ];
++ // Titles a kid grows into, by how many pieces they wear (not counting FULL).
++ var TITLES=['Recruit','Squire','Shield-Bearer','Guardian','Defender','Champion','Full Warrior of God'];
++
++ function has(kid){ try{ var a=getArmor(kid)||[]; return function(id){ return a.indexOf(id)>=0; }; }catch(e){ return function(){return false;}; } }
++ function earnedList(kid){ try{ return getArmor(kid)||[]; }catch(e){ return []; } }
++ function tiers(){ if(window.WZ_TIERS&&WZ_TIERS.length)return WZ_TIERS; return PIECES.map(function(p,i){return {k:p.k,n:p.name,p:[50,150,400,900,2000,4000,8000][i]};}); }
++ function life(kid){ return kid?(kid.lifetime_points!=null?kid.lifetime_points:(kid.points||0)):0; }
++ // Real illustrated warrior art (and animated clips) already shipped with the app.
++ var HERO_IMG={w1:'warrior-boy.png',w2:'warrior-2.png',w3:'warrior-3.png',w4:'warrior-girl.png',w5:'warrior-5.png',w6:'warrior-6.png'};
++ var HERO_VID={w1:'warrior-1.mp4',w2:'warrior-2.mp4',w3:'warrior-3.mp4',w4:'warrior-4.mp4',w5:'warrior-5.mp4',w6:'warrior-6.mp4'};
++ function heroKey(kid){ var a=(kid&&kid.avatar)||''; return HERO_IMG[a]?a:'w1'; }
++
++ function css(){ if(document.getElementById('wz-lk-css'))return;
++  var s=document.createElement('style'); s.id='wz-lk-css';
++  s.textContent=
++   "#wz-lk{position:fixed;inset:0;z-index:100050;background:radial-gradient(circle at 50% 30%,#221056,#07031a 70%);overflow-y:auto;display:none}"+
++   "#wz-lk.show{display:block;animation:wzlkin .35s ease}"+
++   "@keyframes wzlkin{from{opacity:0}to{opacity:1}}"+
++   "#wz-lk .lk-in{max-width:460px;margin:0 auto;padding:1.1rem 1.1rem 2.2rem;position:relative}"+
++   "#wz-lk .lk-x{position:absolute;top:.7rem;right:.9rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;z-index:3}"+
++   "#wz-lk .lk-name{font-family:Bangers,cursive;font-size:2.3rem;color:#fff;text-align:center;letter-spacing:.03em;line-height:1;margin:.4rem 0 .1rem;text-shadow:0 0 30px rgba(245,200,66,.5)}"+
++   "#wz-lk .lk-title{text-align:center;color:#f5c842;font-weight:900;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem}"+
++   "#wz-lk .lk-stage{position:relative;height:300px;display:flex;align-items:center;justify-content:center;margin-bottom:.3rem}"+
++   "#wz-lk .lk-aura{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,.45),rgba(245,200,66,0) 68%);animation:wzlkpulse 3.6s ease-in-out infinite}"+
++   "@keyframes wzlkpulse{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.65;transform:scale(1.08)}}"+
++   "#wz-lk .lk-hero{position:relative;z-index:2;width:216px;height:216px;border-radius:28px;overflow:hidden;border:3px solid rgba(245,200,66,.6);box-shadow:0 12px 34px rgba(0,0,0,.55),0 0 46px rgba(245,200,66,.28);animation:wzlkfloat 4.4s ease-in-out infinite;background:#140a2e}"+
++   "#wz-lk .lk-hero video,#wz-lk .lk-hero img{width:100%;height:100%;object-fit:cover;display:block}"+
++   "@keyframes wzlkfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}"+
++   "#wz-lk .lk-piece.reveal{animation:wzlkrev .55s cubic-bezier(.34,1.56,.64,1)}"+
++   "@keyframes wzlkrev{0%{transform:scale(.55);opacity:.3}60%{transform:scale(1.14)}100%{transform:scale(1)}}"+
++   "#wz-lk .lk-quest{background:rgba(255,255,255,.05);border:1px solid rgba(245,200,66,.3);border-radius:14px;padding:.7rem .9rem;margin-bottom:.9rem;text-align:center}"+
++   "#wz-lk .lk-quest .qn{font-size:.8rem;color:#fff;font-weight:800}"+
++   "#wz-lk .lk-quest .qb{height:9px;background:rgba(0,0,0,.35);border-radius:6px;overflow:hidden;margin:.45rem 0 .2rem}"+
++   "#wz-lk .lk-quest .qf{height:100%;background:linear-gradient(90deg,#f5c842,#ffe08a);border-radius:6px;transition:width .8s}"+
++   "#wz-lk .lk-quest .qs{font-size:.68rem;color:rgba(255,255,255,.5)}"+
++   "#wz-lk .lk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.9rem}"+
++   "#wz-lk .lk-piece{text-align:center;border-radius:14px;padding:.6rem .2rem;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);cursor:pointer;transition:transform .12s}"+
++   "#wz-lk .lk-piece:active{transform:scale(.94)}"+
++   "#wz-lk .lk-piece.on{border-color:rgba(245,200,66,.5);background:linear-gradient(160deg,rgba(245,200,66,.15),rgba(245,200,66,.03));box-shadow:0 0 14px rgba(245,200,66,.15)}"+
++   "#wz-lk .lk-piece .pe{font-size:1.7rem;display:block}"+
++   "#wz-lk .lk-piece.off .pe{filter:grayscale(1);opacity:.3}"+
++   "#wz-lk .lk-piece .pn{font-size:.55rem;font-weight:800;color:#fff;line-height:1.15;margin-top:.2rem}"+
++   "#wz-lk .lk-piece.off .pn{color:rgba(255,255,255,.4)}"+
++   "#wz-lk .lk-verse{background:linear-gradient(135deg,#1e1e38,#171730);border:1px solid rgba(245,200,66,.35);border-radius:16px;padding:1rem;margin-bottom:.9rem;min-height:110px}"+
++   "#wz-lk .lk-verse .vr{color:#f5c842;font-weight:900;font-size:.72rem;letter-spacing:.05em;margin-bottom:.35rem}"+
++   "#wz-lk .lk-verse .vt{color:#fff;font-style:italic;font-size:.9rem;line-height:1.5;margin-bottom:.45rem}"+
++   "#wz-lk .lk-verse .vm{color:rgba(255,255,255,.7);font-size:.8rem;line-height:1.5}"+
++   "#wz-lk .lk-verse.locked .vt{color:rgba(255,255,255,.5)}"+
++   "#wz-lk .lk-btns{display:flex;gap:.55rem}"+
++   "#wz-lk .lk-btn{flex:1;border:none;border-radius:12px;padding:.8rem;font-family:Bangers,cursive;font-size:1.05rem;letter-spacing:.05em;cursor:pointer}"+
++   "#wz-lk .lk-gold{background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318}"+
++   "#wz-lk .lk-dark{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff}"+
++   ".lk-launch{width:100%;border:none;border-radius:16px;padding:.95rem;margin-bottom:1rem;font-family:Bangers,cursive;font-size:1.25rem;letter-spacing:.06em;color:#0A0318;background:linear-gradient(135deg,#f5c842,#E09000);box-shadow:0 6px 20px rgba(245,200,66,.35);cursor:pointer}"+
++   ".lk-launch:active{transform:scale(.97)}";
++  document.head.appendChild(s); }
++
++ function selectPiece(root, kid, i){
++  var has_=has(kid), p=PIECES[i], on=has_(p.k);
++  var box=root.querySelector('.lk-verse');
++  box.className='lk-verse'+(on?'':' locked');
++  box.innerHTML="<div class='vr'>"+(window.wzIcon?wzIcon(p.k,17):'')+" "+p.name+" · "+p.ref+"</div>"+
++    "<div class='vt'>"+p.verse+"</div>"+
++    "<div class='vm'>"+(on?p.mean:'🔒 Earn this piece to unlock it. '+p.mean)+"</div>";
++  [].forEach.call(root.querySelectorAll('.lk-piece'),function(el,idx){ el.style.outline=(idx===i)?'2px solid rgba(245,200,66,.6)':'none'; });
++ }
++
++ function buildQuest(root, kid){
++  var lp=life(kid), T=tiers(), next=null, prevP=0;
++  for(var i=0;i<T.length;i++){ if(lp<T[i].p){ next=T[i]; break; } prevP=T[i].p; }
++  var q=root.querySelector('.lk-quest');
++  var ic=function(k,sz){ return window.wzIcon?wzIcon(k,sz):''; };
++  if(next){
++   var nm=(PIECES[T.indexOf(next)]||{}).name||next.n||'the next piece';
++   var pct=Math.max(3,Math.min(100,Math.round((lp-prevP)/(next.p-prevP)*100)));
++   q.innerHTML="<div class='qn'>"+ic('target',16)+" Next: "+nm+"</div><div class='qb'><div class='qf' style='width:"+pct+"%'></div></div>"+
++     "<div class='qs'>"+(next.p-lp)+" more points to earn it</div>";
++  } else {
++   q.innerHTML="<div class='qn'>"+ic('full',16)+" You wear the FULL armor of God!</div><div class='qs'>Keep standing strong, warrior.</div>";
++  }
++ }
++
++ function renderHero(root, kid){
++  var el=root.querySelector('#lk-hero'); if(!el)return;
++  var k=heroKey(kid);
++  // <video> with a poster: if the mp4 plays we get an animated warrior; if it
++  // fails to load, the poster image (the illustrated art) stays. Clean fallback.
++  el.innerHTML="<video autoplay muted loop playsinline preload='metadata' poster='img/"+HERO_IMG[k]+"'><source src='img/"+HERO_VID[k]+"' type='video/mp4'></video>";
++ }
++ function revealPieces(root, kid){
++  var has_=has(kid);
++  var earnedCards=[];
++  [].forEach.call(root.querySelectorAll('.lk-piece'),function(c){
++   var i=parseInt(c.getAttribute('data-i'),10);
++   if(PIECES[i] && has_(PIECES[i].k)) earnedCards.push(c);
++  });
++  earnedCards.forEach(function(c,idx){
++   setTimeout(function(){
++    c.classList.remove('reveal'); void c.offsetWidth; c.classList.add('reveal');
++    try{ if(typeof wzSfxEarn==='function')wzSfxEarn(); }catch(e){}
++    try{ if(navigator.vibrate)navigator.vibrate(16); }catch(e){}
++   }, 350+idx*360);
++  });
++ }
++
++ window.wzOpenLocker=function(){
++  var kid=(window.APP&&APP.kid); if(!kid){ if(typeof toast==='function')toast('Log in to see your Locker!'); return; }
++  css();
++  var root=document.getElementById('wz-lk');
++  if(!root){ root=document.createElement('div'); root.id='wz-lk'; document.body.appendChild(root); }
++  var has_=has(kid);
++  var pieceCount=earnedList(kid).filter(function(x){return x!=='full';}).length;
++  var title=TITLES[Math.min(pieceCount,TITLES.length-1)];
++
++  var ic=function(k,sz){ return window.wzIcon?wzIcon(k,sz):''; };
++  var grid='';
++  PIECES.forEach(function(p,i){ var on=has_(p.k);
++   grid+="<div class='lk-piece "+(on?'on':'off')+"' data-i='"+i+"'><span class='pe'>"+ic(p.k,30)+"</span><div class='pn'>"+p.name+"</div></div>";
++  });
++
++  root.innerHTML=
++   "<div class='lk-in'>"+
++   "<button class='lk-x' aria-label='Close'>✕</button>"+
++   "<div class='lk-name'>"+((kid.first_name||'Warrior'))+"</div>"+
++   "<div class='lk-title'>"+(window.wzIcon?wzIcon('sword',14):'')+" "+title+"</div>"+
++   "<div class='lk-stage'><div class='lk-aura'></div><div class='lk-hero' id='lk-hero'></div></div>"+
++   "<div class='lk-quest'></div>"+
++   "<div class='lk-grid'>"+grid+"</div>"+
++   "<div class='lk-verse locked'><div class='vr'>Tap a piece of armor</div><div class='vt'>Each piece is a promise from God in Ephesians 6.</div><div class='vm'>Tap any armor above to read its verse and what it means for you.</div></div>"+
++   "<div class='lk-btns'>"+
++     "<button class='lk-btn lk-gold' id='lk-custom'>🎨 Customize</button>"+
++     "<button class='lk-btn lk-dark' id='lk-close'>Done</button>"+
++   "</div></div>";
++
++  root.classList.add('show');
++  buildQuest(root, kid);
++  renderHero(root, kid);
++  revealPieces(root, kid);
++
++  function close(){ root.classList.remove('show'); }
++  root.querySelector('.lk-x').onclick=close;
++  root.querySelector('#lk-close').onclick=close;
++  root.querySelector('#lk-custom').onclick=function(){
++   close();
++   try{ if(typeof dashTab==='function'){ var b=document.querySelector(".tab-btn[onclick*=\"'warrior'\"]")||document.querySelector(".tab-sidebar-btn[onclick*=\"'warrior'\"]"); dashTab('warrior',b); } if(typeof openCustomize==='function')setTimeout(openCustomize,200); }catch(e){}
++  };
++  [].forEach.call(root.querySelectorAll('.lk-piece'),function(el){
++   el.onclick=function(){ selectPiece(root, kid, parseInt(el.getAttribute('data-i'),10)); };
++  });
++
++  // celebrate a full set on open
++  if(has_('full')){ try{ if(typeof wzConfetti==='function')setTimeout(function(){wzConfetti(50);},earnedList(kid).length*480+300); }catch(e){} }
++ };
++
++ // Add a prominent launch button to the top of the Armor tab (after it renders).
++ function addLaunch(){
++  var tw=document.getElementById('tab-warrior'); if(!tw)return;
++  if(tw.querySelector('.lk-launch'))return;
++  if(!tw.firstChild)return;                 // wait until the tab has rendered
++  var b=document.createElement('button'); b.className='lk-launch';
++  b.textContent='Enter My Warrior Locker';
++  b.onclick=function(){ wzOpenLocker(); };
++  tw.insertBefore(b, tw.firstChild);
++ }
++ function hookArmor(){
++  if(typeof window.renderArmor==='function' && !window.renderArmor.__wzLk){
++   var _ra=window.renderArmor;
++   window.renderArmor=function(){ var r=_ra.apply(this,arguments); setTimeout(addLaunch,20); return r; };
++   window.renderArmor.__wzLk=1;
++  }
++ }
++ function hookTab(){
++  if(typeof window.dashTab==='function' && !window.dashTab.__wzLkTab){
++   var _dt=window.dashTab;
++   window.dashTab=function(tab,btn){ var r=_dt.apply(this,arguments); if(tab==='warrior')setTimeout(addLaunch,80); return r; };
++   window.dashTab.__wzLkTab=1;
++  }
++ }
++ function init(){ hookArmor(); hookTab(); try{ addLaunch(); }catch(e){} }
++ setTimeout(init,400); setTimeout(init,1300); setTimeout(init,2700);
++})();
+diff --git a/kgz/app/features/welcome.js b/kgz/app/features/welcome.js
+new file mode 100644
+index 0000000..e700b15
+--- /dev/null
++++ b/kgz/app/features/welcome.js
+@@ -0,0 +1,101 @@
++// Welcome, Warrior — a first-login moment that hooks a new kid.
++// The very first time a child reaches their dashboard, this plays a short,
++// celebratory welcome: confetti + fanfare, their warrior on screen, one anchor
++// verse (Ephesians 6:10, ESV), three quick "here's how it works" beats, and a
++// nudge to make their warrior their own. It fires ONCE per kid (a per-kid flag in
++// localStorage), then never again.
++//
++// Additive and backend-free: it wraps openDash to detect the first arrival and
++// reuses armorSVG for the warrior. If anything is missing it simply doesn't show.
++(function(){
++ if(window.__wzWelcome)return; window.__wzWelcome=1;
++
++ function seen(id){ try{ return localStorage.getItem('wz_welcomed_'+id)==='1'; }catch(e){ return true; } }
++ function mark(id){ try{ localStorage.setItem('wz_welcomed_'+id,'1'); }catch(e){} }
++
++ function css(){ if(document.getElementById('wz-wel-css'))return;
++  var s=document.createElement('style'); s.id='wz-wel-css';
++  s.textContent=
++   "#wz-wel{position:fixed;inset:0;z-index:100070;background:radial-gradient(circle at 50% 30%,#2a1466,#07031a 72%);display:none;overflow-y:auto}"+
++   "#wz-wel.show{display:block;animation:wzwelin .4s ease}"+
++   "@keyframes wzwelin{from{opacity:0}to{opacity:1}}"+
++   "#wz-wel .win{max-width:440px;margin:0 auto;padding:1.6rem 1.3rem 2.2rem;text-align:center}"+
++   "#wz-wel .badge{display:inline-block;background:rgba(245,200,66,.15);border:1px solid rgba(245,200,66,.35);color:#f5c842;border-radius:99px;padding:.25rem .8rem;font-size:.6rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.6rem}"+
++   "#wz-wel .h{font-family:Bangers,cursive;font-size:2.5rem;color:#fff;line-height:1;letter-spacing:.03em;text-shadow:0 0 30px rgba(245,200,66,.5);margin-bottom:.15rem}"+
++   "#wz-wel .h em{color:#f5c842;font-style:normal}"+
++   "#wz-wel .warr{height:210px;display:flex;align-items:center;justify-content:center;margin:.4rem 0}"+
++   "#wz-wel .welhero{width:200px;height:200px;border-radius:26px;overflow:hidden;border:3px solid rgba(245,200,66,.6);box-shadow:0 12px 30px rgba(0,0,0,.5),0 0 42px rgba(245,200,66,.25);animation:wzwelfloat 4.2s ease-in-out infinite;background:#140a2e}"+
++   "#wz-wel .welhero video,#wz-wel .welhero img{width:100%;height:100%;object-fit:cover;display:block}"+
++   "@keyframes wzwelfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}"+
++   "#wz-wel .verse{color:#fff;font-style:italic;font-size:.95rem;line-height:1.5;margin:.2rem auto 1rem;max-width:340px}"+
++   "#wz-wel .verse .vr{display:block;color:#f5c842;font-style:normal;font-weight:900;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-top:.35rem}"+
++   "#wz-wel .steps{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.2rem;text-align:left}"+
++   "#wz-wel .step{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:.7rem .85rem}"+
++   "#wz-wel .step .se{font-size:1.6rem;flex-shrink:0}"+
++   "#wz-wel .step .st{font-weight:800;font-size:.9rem;color:#fff}"+
++   "#wz-wel .step .sd{font-size:.74rem;color:rgba(255,255,255,.55)}"+
++   "#wz-wel .btns{display:flex;gap:.55rem}"+
++   "#wz-wel .wbtn{flex:1;border:none;border-radius:13px;padding:.85rem;font-family:Bangers,cursive;font-size:1.15rem;letter-spacing:.05em;cursor:pointer}"+
++   "#wz-wel .gold{background:linear-gradient(135deg,#f5c842,#E09000);color:#0A0318}"+
++   "#wz-wel .dark{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff}";
++  document.head.appendChild(s); }
++
++ // Use the real illustrated (and animated) warrior art the app already ships.
++ var HERO_IMG={w1:'warrior-boy.png',w2:'warrior-2.png',w3:'warrior-3.png',w4:'warrior-girl.png',w5:'warrior-5.png',w6:'warrior-6.png'};
++ var HERO_VID={w1:'warrior-1.mp4',w2:'warrior-2.mp4',w3:'warrior-3.mp4',w4:'warrior-4.mp4',w5:'warrior-5.mp4',w6:'warrior-6.mp4'};
++ function warriorSVG(kid){
++  var a=(kid&&kid.avatar)||''; if(!HERO_IMG[a])a='w1';
++  return "<div class='welhero'><video autoplay muted loop playsinline preload='metadata' poster='img/"+HERO_IMG[a]+"'><source src='img/"+HERO_VID[a]+"' type='video/mp4'></video></div>";
++ }
++
++ window.wzWelcome=function(kid){
++  kid=kid||(window.APP&&APP.kid); if(!kid)return;
++  css();
++  var root=document.getElementById('wz-wel');
++  if(!root){ root=document.createElement('div'); root.id='wz-wel'; document.body.appendChild(root); }
++  root.innerHTML=
++   "<div class='win'>"+
++   "<div class='badge'>⚔️ The Gathering CTX</div>"+
++   "<div class='h'>Welcome,<br><em>"+(kid.first_name||'Warrior')+"!</em></div>"+
++   "<div class='warr'>"+warriorSVG(kid)+"</div>"+
++   "<div class='verse'>“Be strong in the Lord and in the strength of his might.”<span class='vr'>Ephesians 6:10 · ESV</span></div>"+
++   "<div class='steps'>"+
++     "<div class='step'><div class='se'>"+(window.wzIcon?wzIcon('star',26):'⭐')+"</div><div><div class='st'>Earn points</div><div class='sd'>Read, play, memorize, show up on Sunday.</div></div></div>"+
++     "<div class='step'><div class='se'>"+(window.wzIcon?wzIcon('shield',26):'🛡️')+"</div><div><div class='st'>Put on the armor of God</div><div class='sd'>Your points unlock each piece from Ephesians 6.</div></div></div>"+
++     "<div class='step'><div class='se'>"+(window.wzIcon?wzIcon('gift',26):'🎁')+"</div><div><div class='st'>Open your daily blessing</div><div class='sd'>A new verse waits for you every day.</div></div></div>"+
++   "</div>"+
++   "<div class='btns'>"+
++     "<button class='wbtn dark' id='wel-custom'>🎨 Make it mine</button>"+
++     "<button class='wbtn gold' id='wel-go'>Let’s go! ⚔️</button>"+
++   "</div></div>";
++  root.classList.add('show');
++  try{ if(typeof wzConfetti==='function')wzConfetti(64); }catch(e){}
++  try{ if(typeof wzSfxFanfare==='function')wzSfxFanfare(); }catch(e){}
++  try{ if(navigator.vibrate)navigator.vibrate([40,30,60,30,80]); }catch(e){}
++
++  function close(){ root.classList.remove('show'); }
++  root.querySelector('#wel-go').onclick=close;
++  root.querySelector('#wel-custom').onclick=function(){
++   close();
++   try{
++    if(typeof wzOpenLocker==='function'){ wzOpenLocker(); return; }
++    if(typeof dashTab==='function'){ var b=document.querySelector(".tab-btn[onclick*=\"'warrior'\"]"); dashTab('warrior',b); }
++    if(typeof openCustomize==='function')setTimeout(openCustomize,250);
++   }catch(e){}
++  };
++ };
++
++ function maybeWelcome(){
++  var kid=(window.APP&&APP.kid); if(!kid||!kid.id)return;
++  if(seen(kid.id))return;
++  mark(kid.id);
++  setTimeout(function(){ try{ wzWelcome(kid); }catch(e){} }, 650);
++ }
++ function hook(){
++  if(typeof window.openDash!=='function' || window.openDash.__wzWel)return;
++  var _od=window.openDash;
++  window.openDash=function(kid){ var r=_od.apply(this,arguments); try{ maybeWelcome(); }catch(e){} return r; };
++  window.openDash.__wzWel=1;
++ }
++ setTimeout(hook,400); setTimeout(hook,1300); setTimeout(hook,2700);
++})();
+diff --git a/kgz/app/features/wz-icons.js b/kgz/app/features/wz-icons.js
+new file mode 100644
+index 0000000..77a13e3
+--- /dev/null
++++ b/kgz/app/features/wz-icons.js
+@@ -0,0 +1,42 @@
++// wz-icons — a small, cohesive custom SVG icon set to replace the emoji.
++// Modern line-style icons (Lucide/Linear feel): 24x24, single stroke, rounded
++// joins, drawn in the app's gold via currentColor. One source of truth so every
++// surface (Locker, armor tab, welcome) reads as one designed system, not clip-art.
++// window.wzIcon(name, size) -> SVG string. Unknown name falls back to a shield.
++(function(){
++ if(window.wzIcon)return;
++
++ var P={
++  // Armor of God (Ephesians 6)
++  belt:        "<rect x='3' y='9.5' width='18' height='5' rx='1.6'/><rect x='9.5' y='8' width='5' height='8' rx='1.2'/><path d='M12 10.4v3.2'/>",
++  breastplate: "<path d='M7 4.5h10v6.5a5 5 0 0 1-10 0z'/><path d='M12 4.5v12'/><path d='M7 8h10'/>",
++  boots:       "<path d='M9 3h4v10h3a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H8a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h1z'/>",
++  shield:      "<path d='M12 3 4 6v5.2c0 4.5 3.4 7.6 8 9 4.6-1.4 8-4.5 8-9V6z'/><path d='M12 8.4v6.2M9 11.5h6'/>",
++  helmet:      "<path d='M5 12a7 7 0 0 1 14 0v2.6A2.4 2.4 0 0 1 16.6 17H7.4A2.4 2.4 0 0 1 5 14.6z'/><path d='M9 12h6M12 4.6V3'/>",
++  sword:       "<path d='M14.5 17.5 4 7V4h3l10.5 10.5'/><path d='M13 19l6-6'/><path d='M16 16l4 4'/><path d='M19 21l2-2'/>",
++  full:        "<path d='M3.5 8l3.6 3.4L12 5l4.9 6.4L20.5 8 19 18H5z'/><path d='M5 20.5h14'/>",
++  // supporting UI icons
++  target:      "<circle cx='12' cy='12' r='8'/><circle cx='12' cy='12' r='4'/><circle cx='12' cy='12' r='.6' fill='currentColor'/>",
++  gift:        "<rect x='4' y='9' width='16' height='11' rx='1.6'/><path d='M4 12.5h16M12 9v11'/><path d='M12 9S10.5 4.5 8.2 5.2 9 9 12 9zM12 9s1.5-4.5 3.8-3.8S15 9 12 9z'/>",
++  star:        "<path d='M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z'/>",
++  flame:       "<path d='M12 3s5 4 5 9a5 5 0 0 1-10 0c0-2 1-3 1-3s0 2 1.5 2.5C10 12 9 9 12 3z'/>",
++  book:        "<path d='M5 4.5h11a2 2 0 0 1 2 2V20a1.5 1.5 0 0 0-1.5-1.5H5z'/><path d='M5 4.5A1.5 1.5 0 0 0 3.5 6v13A1.5 1.5 0 0 1 5 20.5'/>",
++  trophy:      "<path d='M8 4h8v4a4 4 0 0 1-8 0z'/><path d='M8 5H5v1a3 3 0 0 0 3 3M16 5h3v1a3 3 0 0 1-3 3'/><path d='M12 12v4M9 20h6M10 20l.5-4M14 20l-.5-4'/>",
++  heart:       "<path d='M12 20s-6.8-4.4-6.8-9.4A3.6 3.6 0 0 1 12 8a3.6 3.6 0 0 1 6.8 2.6C18.8 15.6 12 20 12 20z'/>",
++  play:        "<circle cx='12' cy='12' r='8.5'/><path d='M10.2 8.6l5 3.4-5 3.4z'/>",
++  bolt:        "<path d='M13 3 5.5 13H10l-1 8 8.5-11H13z'/>"
++ };
++
++ window.wzIcon=function(name, size){
++  var d=P[name]||P.shield; size=size||28;
++  return "<svg class='wz-ic' width='"+size+"' height='"+size+"' viewBox='0 0 24 24' fill='none' stroke='currentColor' "+
++   "stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>"+d+"</svg>";
++ };
++
++ // one-time style: gold color + a hairline glow for depth; inline in text nicely.
++ if(!document.getElementById('wz-ic-css')){
++  var s=document.createElement('style'); s.id='wz-ic-css';
++  s.textContent=".wz-ic{color:#f5c842;vertical-align:middle;filter:drop-shadow(0 1px 3px rgba(245,200,66,.25))}";
++  document.head.appendChild(s);
++ }
++})();
+diff --git a/kgz/index.html b/kgz/index.html
+index 06f0857..fbde412 100644
+--- a/kgz/index.html
++++ b/kgz/index.html
+@@ -480,6 +480,20 @@
+   <script src="app/features/family-talk.js?v=9aa378ef"></script>
+   <script src="app/core-b.js?v=9f2a039a"></script>
+   <script src="app/patches.js?v=915508b4"></script>
++  <!-- Enhancement sweep (load last; each self-installs and fails safe) -->
++  <script src="app/features/wz-icons.js?v=77a13e3a"></script>
++  <script src="app/features/juice.js?v=072a2c69"></script>
++  <script src="app/features/streaks.js?v=5e092547"></script>
++  <script src="app/features/books-game.js?v=2f942555"></script>
++  <script src="app/features/armor-fix.js?v=663c72df"></script>
++  <script src="app/features/today-plus.js?v=5ab910df"></script>
++  <script src="app/features/fruit-game.js?v=48df4eb3"></script>
++  <script src="app/features/heroes-game.js?v=bce55d81"></script>
++  <script src="app/features/polish.js?v=074886c9"></script>
++  <script src="app/features/warrior-locker.js?v=0d60340a"></script>
++  <script src="app/features/daily-gift.js?v=42407a95"></script>
++  <script src="app/features/mascot.js?v=07294993"></script>
++  <script src="app/features/welcome.js?v=e700b154"></script>
+   <script>
+   if('serviceWorker' in navigator){
+     window.addEventListener('load',function(){
+diff --git a/kgz/sw.js b/kgz/sw.js
+index a8d1288..3c521c8 100644
+--- a/kgz/sw.js
++++ b/kgz/sw.js
+@@ -1,5 +1,5 @@
+ /* Warrior Zone service worker */
+-const V='wz-v2';
++const V='wz-v3';
+ const SHELL=['./'];
+ self.addEventListener('install',e=>{
+   self.skipWaiting();
+-- 
+2.43.0
+
