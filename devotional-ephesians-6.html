@@ -81,12 +81,11 @@
     .site-footer a { color: var(--muted); text-decoration: none; }
     .site-footer a:hover { color: var(--body); }
   </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<nav class="site-nav">
-  <a href="https://gatheringctx.org" class="nav-logo"><span class="the">the</span><span class="gathering">gathering</span></a>
-  <a href="https://gatheringctx.org/devotionals" class="nav-back">&#8592; All Devotionals</a>
-</nav>
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
 <div class="article">
   <header class="hero">
     <p class="series-label">Ephesians &middot; Week 6</p>
@@ -169,10 +168,8 @@
     <p class="amen-line">Amen.</p>
   </div>
 </div>
-<footer class="site-footer">
-  <div class="footer-logo"><span class="the">the</span><span class="gathering">gathering</span></div>
-  <p>Sundays at 5:00 PM &middot; Cleburne Conference Center</p>
-  <p><a href="https://gatheringctx.org">gatheringctx.org</a></p>
-</footer>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

@@ -50,12 +50,11 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem;text-align:c
   .container{padding:8rem 2rem 6rem}
 }
 </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<nav>
-  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
-  <a href="/" class="nav-back">&larr; Home</a>
-</nav>
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
 
 <div class="container">
   <div class="eyebrow">Legal</div>
@@ -107,14 +106,8 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem;text-align:c
   </div>
 </div>
 
-<footer>
-  <div class="footer-brand"><sup>the</sup>gathering &middot; Cleburne, TX</div>
-  <div class="footer-links">
-    <a href="/" class="footer-link">Home</a>
-    <a href="/visit" class="footer-link">Visit</a>
-    <a href="/privacy" class="footer-link">Privacy Policy</a>
-    <a href="/bylaws.pdf" class="footer-link" target="_blank" rel="noopener">Bylaws</a>
-  </div>
-</footer>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

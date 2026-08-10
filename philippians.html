@@ -42,12 +42,11 @@
     .btn{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;background:var(--gold);color:#fff;padding:13px 28px;white-space:nowrap;}
     @media(max-width:900px){.series-hero{height:320px;}.series-hero-content{left:24px;bottom:32px;}.series-body{padding:48px 24px 72px;}.sub-band{padding:40px 24px;}.site-footer{padding:36px 24px 20px;flex-direction:column;}}
   </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<nav class="nav">
-  <a href="/" class="nav-logo"><span class="nav-the">The</span><span class="nav-name">Gathering</span></a>
-  <a href="/sermons" class="nav-back">All Sermons</a>
-</nav>
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
 
 <div class="series-hero">
   <div class="series-hero-overlay"></div>
@@ -110,9 +109,8 @@
   <a href="https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293" target="_blank" rel="noopener" class="btn">Subscribe on Apple Podcasts</a>
 </div>
 
-<footer class="site-footer">
-  <p>&copy; 2026 The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX</p>
-  <p><a href="/sermons" style="color:rgba(255,255,255,0.3)">All Sermons</a> &nbsp;&middot;&nbsp; <a href="/visit" style="color:rgba(255,255,255,0.3)">Plan a Visit</a></p>
-</footer>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
