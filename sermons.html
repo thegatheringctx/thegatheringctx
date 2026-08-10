@@ -176,34 +176,12 @@
   <meta name="twitter:description" content="Verse by verse expository preaching through books of the Bible. Listen on Apple Podcasts and Spotify.">
   <meta name="twitter:image" content="https://gatheringctx.org/Alexus-110.jpg">
 <!-- build: 2026-06-08 15:34:15 -->
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<nav class="nav">
-  <a href="/" class="nav-brand"><span class="nav-the">The</span><span class="nav-name">Gathering</span></a>
-  <div class="nav-links">
-    <a href="/new-here">I'm New</a>
-    <a href="/belong">Connect</a>
-    <a href="/kids">Kids</a>
-    <a href="/sermons">Sermons</a>
-    <a href="/devotionals">Devotionals</a>
-    <a href="/resources">Resources</a>
-    <a href="/generosity" class="nav-give-btn">Give</a>
-  </div>
-  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" onclick="this.classList.toggle('open');var m=document.getElementById('nav-mobile-menu');m.classList.toggle('open');"><span></span><span></span><span></span></button>
-</nav>
-<div id="nav-mobile-menu" class="nav-mobile-menu">
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/new-here">I'm New</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/visit">Plan a Visit</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/our-story">Our Story</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/sermons">Sermons</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/devotionals">Devotionals</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/kids">Kids</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/belong">Belong &amp; Become</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/formed">Formed &amp; Sent</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/events">Events</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.72);padding:14px 0;border-bottom:1px solid #1a1a1a;display:block;text-decoration:none;" href="/resources">Resources</a>
-  <a style="font-family:-apple-system,sans-serif;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:#b8935a;font-weight:600;padding:14px 0;display:block;text-decoration:none;border-bottom:none;" href="/generosity">Give</a>
-</div>
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
+
 <button id="mob-btn" onclick="var m=document.getElementById('mob-menu');m.style.display=m.style.display==='flex'?'none':'flex';this.classList.toggle('open');" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:fixed;top:18px;right:20px;z-index:101;">
   <span style="display:block;width:24px;height:2px;background:#fff;transition:all 0.25s;"></span>
   <span style="display:block;width:24px;height:2px;background:#fff;transition:all 0.25s;"></span>
@@ -357,49 +335,8 @@ function renderSermons(sermons, list) {
 </section>
 
   
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <a href="/" class="footer-logo"><span class="footer-the">THE</span><span class="footer-gathering">gathering</span></a>
-      <p class="footer-tagline">Walk with victory. Not to it.</p>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="https://www.instagram.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293" target="_blank" rel="noopener" aria-label="Apple Podcasts"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></a>
-      </div>
-    </div>
-    <div>
-      <span class="footer-info-label">Join Us</span>
-      <span class="footer-info-line">Sundays at 5:00 PM</span>
-      <span class="footer-info-line">Cleburne Conference Center</span>
-      <span class="footer-info-line">1501 W Henderson St</span>
-      <span class="footer-info-line">Cleburne, TX 76033</span>
-      <a href="https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX+76033" target="_blank" rel="noopener" class="footer-map-link">Get Directions &rarr;</a>
-    </div>
-    <div>
-      <span class="footer-info-label">Connect</span>
-      <a href="tel:+16822865640" class="footer-info-line footer-link">(682) 286-5640</a>
-      <a href="mailto:info@gatheringctx.org" class="footer-info-line footer-link">info@gatheringctx.org</a>
-      <span class="footer-info-line" style="margin-top:12px">Text VISIT to</span>
-      <span class="footer-info-line">(817) 518-4773</span>
-    </div>
-    <div class="footer-nav">
-      <span class="footer-info-label">Site</span>
-      <a href="/visit" class="footer-nav-link">Plan a Visit</a>
-      <a href="/sermons" class="footer-nav-link">Sermons</a>
-      <a href="/devotionals" class="footer-nav-link">Devotionals</a>
-      <a href="/kids" class="footer-nav-link">Kids</a>
-      <a href="/our-story" class="footer-nav-link">Our Story</a>
-      <a href="/gallery" class="footer-nav-link">Gallery</a>
-      <a href="/generosity" class="footer-nav-link">Give</a>
-      <a href="/privacy" class="footer-nav-link">Privacy</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX &nbsp;&middot;&nbsp; <a href="/privacy" class="footer-bottom-link">Privacy Policy</a></p>
-    <p style="font-style:italic">Photography by <a href="https://www.instagram.com/captured.by.kendra_" target="_blank" rel="noopener" class="footer-bottom-link">@captured.by.kendra_</a></p>
-  </div>
-</footer>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
 <section class="subscribe-section">
   <div class="subscribe-inner">
     <div class="subscribe-text">
@@ -430,5 +367,6 @@ async function handleSub(e,list){
   finally{btn.disabled=false;btn.textContent='Subscribe →';}
 }
 </script>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
