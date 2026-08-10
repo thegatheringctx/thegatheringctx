@@ -339,6 +339,77 @@
   </div>
 </section>
 
+<style>
+  .service-strip{background:#0d0d0d;border-bottom:1px solid var(--border);padding:34px 56px;}
+  .ss-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;max-width:1200px;margin:0 auto;flex-wrap:wrap;}
+  .ss-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+  .ss-date{font-size:1.55rem;font-weight:300;line-height:1.15;margin-bottom:7px;}
+  .ss-meta{font-family:var(--sans);font-size:0.82rem;color:var(--muted);line-height:1.5;}
+  .ss-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .ss-btn{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;padding:13px 26px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s;text-decoration:none;border:1px solid transparent;}
+  .ss-btn-gold{background:var(--gold);color:#fff;}
+  .ss-btn-gold:hover{filter:brightness(1.08);}
+  .ss-btn-outline{border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.75);}
+  .ss-btn-outline:hover{border-color:var(--gold);color:#fff;}
+  @media(max-width:640px){.service-strip{padding:26px 24px;}.ss-inner{flex-direction:column;align-items:flex-start;gap:20px;}.ss-actions{width:100%;}.ss-btn{flex:1;justify-content:center;}}
+</style>
+<section class="service-strip" aria-label="Join us this Sunday">
+  <div class="ss-inner">
+    <div class="ss-lead">
+      <p class="ss-label">Join Us This Sunday</p>
+      <h2 class="ss-date" id="ss-date">This Sunday</h2>
+      <p class="ss-meta">5:00 PM &nbsp;&middot;&nbsp; Cleburne Conference Center &nbsp;&middot;&nbsp; 1501 W Henderson St</p>
+    </div>
+    <div class="ss-actions">
+      <a href="#" class="ss-btn ss-btn-gold" id="ss-cal" role="button">Add to Calendar</a>
+      <a href="https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX+76033" target="_blank" rel="noopener" class="ss-btn ss-btn-outline">Get Directions &rarr;</a>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  // Compute the upcoming Sunday service (Sundays 5:00 PM). Before 7pm on a
+  // Sunday still counts as "today"; otherwise roll to next Sunday.
+  function upcomingSunday(){
+    var now=new Date();
+    var d=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    var day=d.getDay();
+    var add = day===0 ? (now.getHours()<19?0:7) : (7-day);
+    d.setDate(d.getDate()+add);
+    return d;
+  }
+  var svc=upcomingSunday();
+  var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var el=document.getElementById('ss-date');
+  if(el) el.textContent='This Sunday, '+months[svc.getMonth()]+' '+svc.getDate();
+
+  function pad(n){return (n<10?'0':'')+n;}
+  function ymd(dt){return dt.getFullYear()+pad(dt.getMonth()+1)+pad(dt.getDate());}
+  function stamp(dt){return dt.getUTCFullYear()+pad(dt.getUTCMonth()+1)+pad(dt.getUTCDate())+'T'+pad(dt.getUTCHours())+pad(dt.getUTCMinutes())+pad(dt.getUTCSeconds())+'Z';}
+  var cal=document.getElementById('ss-cal');
+  if(cal) cal.addEventListener('click',function(e){
+    e.preventDefault();
+    var day=ymd(svc); // floating local time — 5:00 PM local for our Cleburne audience
+    var ics=[
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//The Gathering CTX//Sunday Service//EN',
+      'CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
+      'UID:sunday-'+day+'@gatheringctx.org','DTSTAMP:'+stamp(new Date()),
+      'DTSTART:'+day+'T170000','DTEND:'+day+'T183000',
+      'SUMMARY:The Gathering CTX — Sunday Service',
+      'LOCATION:Cleburne Conference Center\\, 1501 W Henderson St\\, Cleburne\\, TX 76033',
+      'DESCRIPTION:Sundays at 5 PM. Come as you are. Walk with victory.',
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url; a.download='the-gathering-sunday.ics';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},100);
+  });
+})();
+</script>
+
 <div class="connect-strip">
   <div>
     <p class="cs-label">Stay Connected</p>
