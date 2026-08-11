@@ -167,6 +167,25 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Images keep stable filenames and rarely change: cache for a day so repeat
+# visits skip re-downloading them (revalidates after 24h).
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+[[headers]]
+  for = "/*.jpeg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 [[redirects]]
   from = "/spirit-filled-church-cleburne"
   to = "/spirit-filled-church-cleburne.html"
