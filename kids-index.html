@@ -2798,7 +2798,7 @@ function renderAdmItems(){
     const inactive=item.available===false;
     return '<div class="si-card'+(inactive?' si-inactive':'')+'" id="sic-'+item.id+'" draggable="true" ondragstart="siDragStart(event,\''+item.id+'\')" ondragend="siDragEnd(event)" ondragover="siDragOver(event,\''+item.id+'\')" ondrop="siDrop(event,\''+item.id+'\')">'+
       '<div class="si-drag-handle">&#10783; drag</div>'+
-      '<div class="si-card-img">'+(item.img?'<img src="'+item.img+'" alt="'+item.name+'" onerror="this.parentElement.innerHTML='🎁'">':'🎁')+'</div>'+
+      '<div class="si-card-img">'+(item.img?'<img src="'+item.img+'" alt="'+item.name+'" onerror="this.parentElement.innerHTML=\'🎁\'">':'🎁')+'</div>'+
       '<div class="si-card-body">'+
         '<div class="si-card-name">'+item.name+'</div>'+
         '<div class="si-card-meta">'+(item.desc||'')+'</div>'+
