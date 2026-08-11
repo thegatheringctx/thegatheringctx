@@ -75,8 +75,12 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
 .sc-dot.done{background:var(--green)}
 .sc-dot.current{background:var(--purple)}
 </style>
+  <link rel="stylesheet" href="/assets/kids-shell.css">
 </head>
 <body>
+<!-- Kids Zone header injected by /assets/kids-shell.js -->
+<div id="kids-header"></div>
+
 <div class="demo-note">&#128269; Preview, this is exactly how it will look in the Kids Zone app</div>
 
 <div class="tab-row">
@@ -304,5 +308,8 @@ function showTab(id){
 startTrivia();
 startScramble();
 </script>
+<!-- Kids Zone footer injected by /assets/kids-shell.js -->
+<div id="kids-footer"></div>
+<script src="/assets/kids-shell.js" defer></script>
 </body>
 </html>

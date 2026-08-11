@@ -1,0 +1,38 @@
+/* ============================================================
+   The Gathering CTX — Kids Zone shared shell
+   A playful nav + footer for the kids pages, distinct from the
+   adult site. Teal + coral, Fredoka One + Nunito, rounded and fun.
+   Markup injected by /assets/kids-shell.js.
+   ============================================================ */
+
+.kz-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:.7rem 1.25rem;background:#fffdf9;border-bottom:3px solid #085041;font-family:'Nunito',system-ui,sans-serif;}
+.kz-brand{display:flex;align-items:center;gap:.45rem;font-family:'Fredoka One','Nunito',cursive;font-size:1.15rem;color:#085041;text-decoration:none;line-height:1;}
+.kz-brand .kz-emoji{font-size:1.35rem;}
+.kz-links{display:flex;align-items:center;gap:.35rem;}
+.kz-links a{font-family:'Nunito',sans-serif;font-weight:800;font-size:.82rem;color:#0a5f4c;text-decoration:none;padding:.5rem .85rem;border-radius:999px;transition:background .15s,color .15s;}
+.kz-links a:hover,.kz-links a.active{background:#127881;color:#fff;}
+.kz-links a.kz-main{color:#ff6b6b;}
+.kz-links a.kz-main:hover{background:#ff6b6b;color:#fff;}
+
+.kz-burger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:8px;}
+.kz-burger span{display:block;width:24px;height:3px;border-radius:3px;background:#085041;transition:transform .2s,opacity .2s;}
+.kz-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.kz-burger.open span:nth-child(2){opacity:0;}
+.kz-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.kz-burger:focus-visible{outline:3px solid #f5c842;outline-offset:2px;border-radius:6px;}
+
+.kz-mobile{display:none;flex-direction:column;position:sticky;top:55px;z-index:99;background:#fffdf9;border-bottom:3px solid #085041;padding:.4rem 1.25rem 1rem;}
+.kz-mobile.open{display:flex;}
+.kz-mobile a{font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;color:#0a5f4c;text-decoration:none;padding:.75rem 0;border-bottom:1px solid #f0ece2;}
+.kz-mobile a:last-child{border-bottom:none;}
+.kz-mobile a.active{color:#127881;}
+.kz-mobile a.kz-main{color:#ff6b6b;}
+@media(max-width:760px){.kz-links{display:none;}.kz-burger{display:flex;}}
+
+.kz-footer{background:#085041;color:#fff;font-family:'Nunito',sans-serif;padding:2.4rem 1.5rem;text-align:center;}
+.kz-f-logo{font-family:'Fredoka One','Nunito',cursive;font-size:1.2rem;color:#f5c842;margin-bottom:.5rem;}
+.kz-f-line{font-size:.85rem;color:rgba(255,255,255,.82);line-height:1.75;}
+.kz-f-links{margin-top:1.1rem;display:flex;gap:1.1rem;justify-content:center;flex-wrap:wrap;}
+.kz-f-links a{color:#9FE1CB;text-decoration:none;font-weight:800;font-size:.82rem;}
+.kz-f-links a:hover{color:#fff;}
+.kz-f-note{margin-top:1.1rem;font-size:.72rem;color:rgba(255,255,255,.45);}
