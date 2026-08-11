@@ -157,6 +157,24 @@
     document.head.appendChild(l);
   }
 
+  // Ensure the brand favicon, home-screen icons, manifest, and theme color are
+  // present on every page. The root /favicon.ico is auto-requested by browsers,
+  // but this adds the richer PNG/SVG icons and manifest where a page lacks them.
+  function ensureIcons() {
+    var head = document.head;
+    function add(html, testSel) {
+      if (testSel && document.querySelector(testSel)) return;
+      var tmp = document.createElement("div");
+      tmp.innerHTML = html;
+      head.appendChild(tmp.firstChild);
+    }
+    add('<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">', 'link[rel="icon"][sizes="32x32"]');
+    add('<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">', 'link[rel="icon"][sizes="16x16"]');
+    add('<link rel="apple-touch-icon" href="/apple-touch-icon.png">', 'link[rel="apple-touch-icon"]');
+    add('<link rel="manifest" href="/site.webmanifest">', 'link[rel="manifest"]');
+    add('<meta name="theme-color" content="#0a0a0a">', 'meta[name="theme-color"]');
+  }
+
   // Skip-to-content link for keyboard and screen-reader users.
   function addSkipLink() {
     if (document.querySelector(".skip-link")) return;
@@ -207,6 +225,7 @@
     if (header) header.innerHTML = buildHeader();
     if (footer) footer.innerHTML = buildFooter();
     ensureFonts();
+    ensureIcons();
     addSkipLink();
     wire();
     addReveals();
