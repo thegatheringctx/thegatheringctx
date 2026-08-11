@@ -13,6 +13,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Devotional | The Gathering CTX</title>
   <meta name="description" content="A daily devotional from The Gathering CTX in Cleburne, TX.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Gathering CTX">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Devotionals | The Gathering CTX">
+  <meta property="og:description" content="Daily devotionals walking verse by verse through Scripture, from The Gathering CTX in Cleburne, TX.">
+  <meta property="og:image" content="https://gatheringctx.org/Alexus-120.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Devotionals | The Gathering CTX">
+  <meta name="twitter:description" content="Daily devotionals walking verse by verse through Scripture, from The Gathering CTX in Cleburne, TX.">
+  <meta name="twitter:image" content="https://gatheringctx.org/Alexus-120.jpg">
   <link rel="stylesheet" href="/assets/site.css">
   <style>
     .dt-body{background:#f7f4ee;color:#2a2320;font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -83,11 +95,29 @@
     var root = document.getElementById("dt-root");
     // SEO from data
     document.title = (d.title || "Devotional") + " | The Gathering CTX";
+    var desc = d.description || d.subtitle || (d.intro && d.intro[0]) || "";
     var md = document.querySelector('meta[name="description"]');
-    if (md && d.description) md.setAttribute("content", d.description);
+    if (md && desc) md.setAttribute("content", String(desc).slice(0, 300));
+    var url = "https://gatheringctx.org/devotionals/" + (d.slug || "");
     var can = document.createElement("link"); can.rel = "canonical";
-    can.href = "https://gatheringctx.org/devotionals/" + (d.slug || "");
+    can.href = url;
     document.head.appendChild(can);
+
+    // Update social-share tags with the real devotional title/description.
+    // (Static defaults in <head> cover crawlers that do not run JS.)
+    var shareTitle = (d.title || "Devotional") + " | The Gathering CTX";
+    var shareDesc = String(desc || "").slice(0, 300);
+    function setMeta(sel, val) {
+      var m = document.querySelector(sel);
+      if (m && val) m.setAttribute("content", val);
+    }
+    setMeta('meta[property="og:title"]', shareTitle);
+    setMeta('meta[property="og:description"]', shareDesc);
+    setMeta('meta[name="twitter:title"]', shareTitle);
+    setMeta('meta[name="twitter:description"]', shareDesc);
+    var ogu = document.querySelector('meta[property="og:url"]');
+    if (!ogu) { ogu = document.createElement("meta"); ogu.setAttribute("property", "og:url"); document.head.appendChild(ogu); }
+    ogu.setAttribute("content", url);
 
     var label = (d.series ? d.series : "") + (d.week ? " &middot; Week " + d.week : "") + " Devotional";
     var html = '' +
