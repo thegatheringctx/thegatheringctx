@@ -14,7 +14,7 @@
 .tg-field{display:flex;flex-direction:column;gap:.5rem;}
 .tg-field label{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#b8935a;}
 .tg-field label .opt{color:rgba(255,255,255,.3);}
-.tg-input,.tg-textarea,.tg-select{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.95rem;background:#111;border:1px solid #262626;color:#fff;padding:.95rem 1.1rem;outline:none;width:100%;border-radius:2px;transition:border-color .2s;}
+.tg-input,.tg-textarea,.tg-select{box-sizing:border-box;font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.95rem;background:#111;border:1px solid #262626;color:#fff;padding:.95rem 1.1rem;outline:none;width:100%;border-radius:2px;transition:border-color .2s;max-width:100%;}
 .tg-input:focus,.tg-textarea:focus,.tg-select:focus{border-color:#b8935a;}
 .tg-input::placeholder,.tg-textarea::placeholder{color:rgba(255,255,255,.28);}
 .tg-textarea{min-height:150px;resize:vertical;line-height:1.6;}
@@ -30,7 +30,9 @@
 .tg-msg.ok{background:rgba(45,106,79,.16);border:1px solid rgba(45,106,79,.5);color:#a7d7bf;}
 .tg-msg.err{background:rgba(140,60,45,.16);border:1px solid rgba(140,60,45,.5);color:#e0a99a;}
 
-.tg-hp{position:absolute;left:-9999px;opacity:0;height:0;width:0;overflow:hidden;}
+/* Honeypot: hidden from people, still in the DOM for bots to fill. Uses the
+   clip pattern (not left:-9999px) so it never adds off-screen scroll width. */
+.tg-hp{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;opacity:0;}
 
 .fp-alt{margin-top:3rem;padding-top:2rem;border-top:1px solid #1a1a1a;font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.9;}
 .fp-alt a{color:#b8935a;text-decoration:none;border-bottom:1px solid rgba(184,147,90,.35);}
