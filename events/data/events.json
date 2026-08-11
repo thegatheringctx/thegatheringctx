@@ -1,0 +1,63 @@
+{
+  "_howToUpdate": "This file drives the /events page. To update: edit the text below and commit. Cards with an \"expires\" date (YYYY-MM-DD) automatically disappear from the site the day after that date, so old events clean themselves up. Leave \"expires\" out for evergreen items that should always show. Keep the tone plain and warm, and do not use em-dashes.",
+  "recurring": {
+    "title": "Every Sunday at 5:00 PM",
+    "detail": "Cleburne Conference Center · 1501 W Henderson St, Cleburne, TX 76033 · Doors open at 4:30 PM · Kids ministry available · All are welcome"
+  },
+  "sections": [
+    {
+      "label": "Discipleship",
+      "title": "Belong and Become",
+      "cards": [
+        {
+          "date": "Coming Up",
+          "title": "Partnership Class",
+          "body": "One session. 90 minutes. Everything you need to know about who we are, what we believe, and how to move from visitor to family. Contact us for the next date.",
+          "linkHref": "/belong",
+          "linkLabel": "Learn More"
+        },
+        {
+          "date": "Ongoing",
+          "title": "Formed and Sent",
+          "body": "Our discipleship track. Walk through who you are in Christ, what you carry, and how to deploy it in every room you walk into. Ask us about the next cohort start date.",
+          "linkHref": "/formed",
+          "linkLabel": "Learn More"
+        },
+        {
+          "date": "Midweek",
+          "title": "Small Gatherings",
+          "body": "Smaller, deeper, more personal. Midweek spaces in homes and around tables for prayer, Scripture, and real community. Ask us how to find one near you.",
+          "linkHref": "/small-gatherings",
+          "linkLabel": "Learn More"
+        }
+      ]
+    },
+    {
+      "label": "Sermon Series",
+      "title": "Now Preaching",
+      "cards": [
+        {
+          "date": "Now Preaching",
+          "title": "Colossians: Rooted / All of Him",
+          "body": "The supremacy of Christ and what it means to be rooted in Him. We are walking verse by verse through Colossians this season.",
+          "linkHref": "/sermons",
+          "linkLabel": "Listen to Messages"
+        },
+        {
+          "date": "Recent Series",
+          "title": "Philippians",
+          "body": "Joy that does not depend on circumstances. The mind of Christ. Contentment in every season. Paul wrote it from prison. We preached it for people who walk in victory.",
+          "linkHref": "/philippians",
+          "linkLabel": "Series Page"
+        },
+        {
+          "date": "Always",
+          "title": "Have a question?",
+          "body": "Text us at (817) 518-4773 or email info@gatheringctx.org. We will get back to you. Doors are always open.",
+          "linkHref": "/visit",
+          "linkLabel": "Plan Your Visit"
+        }
+      ]
+    }
+  ]
+}
