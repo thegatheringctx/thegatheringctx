@@ -90,6 +90,40 @@ Each **day** object: `n` (number), `title`, `scripture`, `scriptureRef`,
 
 ---
 
+## Events
+
+The `/events` page reads a single file, so keeping it current is one edit.
+
+- **File:** `events/data/events.json`
+- **Lives at:** `/events`
+
+The file has a `recurring` block (the Sunday service banner) and a list of
+`sections`. Each section has a `label`, a `title`, and a list of `cards`.
+Each **card** has `date` (a short free-text tag like `"Coming Up"` or
+`"Now Preaching"`), `title`, `body`, and an optional `linkHref` + `linkLabel`
+button.
+
+**Events clean themselves up.** Add `"expires": "YYYY-MM-DD"` to any dated
+card and it disappears from the site the day after that date, so old events
+never linger. A section with no cards left hides itself too. Leave `expires`
+out for evergreen items (Partnership Class, "Have a question?", etc.) that
+should always show.
+
+Example card for a one-time event:
+
+```json
+{
+  "date": "August 24, 2026",
+  "title": "Night of Worship",
+  "body": "One night. No sermon. Just worship. Bring someone with you.",
+  "linkHref": "/visit",
+  "linkLabel": "Plan Your Visit",
+  "expires": "2026-08-24"
+}
+```
+
+---
+
 ## Per-book header themes
 
 Each book gets its own header look automatically, chosen from the `series`
