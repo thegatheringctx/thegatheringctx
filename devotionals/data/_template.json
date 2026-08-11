@@ -1,0 +1,43 @@
+{
+  "slug": "book-week-1",
+  "series": "Book Name",
+  "week": 1,
+  "title": "Devotional Title",
+  "subtitle": "One-line hook under the title.",
+  "passage": "Book 1:1 to 14",
+  "description": "SEO meta description, a sentence or two.",
+  "intro": [
+    "First intro paragraph.",
+    "Second intro paragraph."
+  ],
+  "days": [
+    {
+      "n": 1,
+      "title": "Day Title",
+      "scripture": "The verse text.",
+      "scriptureRef": "Book 1:1 · ESV",
+      "pull": "Optional one-line highlight.",
+      "body": [
+        "Paragraph one.",
+        "Paragraph two."
+      ],
+      "greekWord": "Optional Greek word note.",
+      "reflect": [
+        "Question one?",
+        "Question two?",
+        "Question three?"
+      ]
+    }
+  ],
+  "prayer": {
+    "title": "A Prayer",
+    "body": "Prayer text."
+  },
+  "declaration": [
+    "Declaration line one.",
+    "Declaration line two."
+  ],
+  "benediction": [
+    "Benediction paragraph."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "sermon-slug",
+  "series": "Book Name",
+  "seriesShort": "Book",
+  "week": 1,
+  "title": "Sermon Title",
+  "subtitle": "One-line hook under the title.",
+  "passage": "Book 1:1 to 14",
+  "preachedOn": "2026-01-01",
+  "speaker": "Pastor Billy Philips",
+  "podcastUrl": "https://www.buzzsprout.com/2608288/episodes/00000000",
+  "summary": [
+    "Overview paragraph one.",
+    "Overview paragraph two."
+  ],
+  "points": [
+    {
+      "title": "Point one",
+      "body": "A sentence about it."
+    }
+  ],
+  "devotionalSlug": ""
+}
