@@ -1,5 +1,5 @@
 /* ============================================================
-   The Gathering CTX — Interactive devotional reader
+   The Gathering CTX - Interactive devotional reader
    A self-contained enhancement layer added to devotional pages:
      • a slim reading-progress bar at the top of the window
      • a reading streak kept in localStorage (🔥 N-day streak)
@@ -86,7 +86,7 @@
         navigator.share(data).catch(function () {});
       } else if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(location.href).then(function () {
-          showToast("Link copied — text it to a friend.");
+          showToast("Link copied. Text it to a friend.");
         }).catch(function () { showToast(location.href); });
       } else {
         showToast(location.href);
@@ -108,13 +108,13 @@
     var LAST = "tg_devo_last", CNT = "tg_devo_streak";
     var today = todayKey(), last, count;
     try { last = localStorage.getItem(LAST); count = parseInt(localStorage.getItem(CNT) || "0", 10) || 0; }
-    catch (e) { return; } // storage blocked — skip streak silently
+    catch (e) { return; } // storage blocked - skip streak silently
 
     if (last !== today) {
       var gap = last ? daysBetween(last, today) : null;
       count = (gap === 1) ? count + 1 : 1; // consecutive day continues; otherwise restart
       try { localStorage.setItem(LAST, today); localStorage.setItem(CNT, String(count)); } catch (e) {}
-      if (count >= 2) setTimeout(function () { showToast("🔥 " + count + "-day reading streak — keep going."); }, 900);
+      if (count >= 2) setTimeout(function () { showToast("🔥 " + count + "-day reading streak. Keep going."); }, 900);
     }
     if (count >= 1) {
       streak.innerHTML = '🔥&nbsp; <b>' + count + '</b>&nbsp; day' + (count === 1 ? '' : 's');

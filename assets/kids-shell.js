@@ -1,5 +1,5 @@
 /* ============================================================
-   The Gathering CTX — Kids Zone shell injector
+   The Gathering CTX - Kids Zone shell injector
    Renders the playful kids nav + footer from one definition into
    <div id="kids-header"></div> and <div id="kids-footer"></div>.
    Styling: /assets/kids-shell.css

@@ -1,5 +1,5 @@
 /* ============================================================
-   The Gathering CTX — shared Netlify Forms submit handler
+   The Gathering CTX - shared Netlify Forms submit handler
    Any <form class="js-netlify-form"> is submitted over AJAX to "/"
    (Netlify captures it, then submission-created.mjs routes pastoral
    forms into the care queue). Shows an inline success/error message
@@ -46,7 +46,7 @@
       }).then(function (res) {
         if (!res.ok) throw new Error("bad status " + res.status);
         var done = form.getAttribute("data-success") ||
-          "Thank you — we received it. Someone from The Gathering will follow up.";
+          "Thank you. We received it. Someone from The Gathering will follow up.";
         form.reset();
         msg.textContent = done;
         msg.className = "tg-msg ok show";
