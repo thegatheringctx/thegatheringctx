@@ -146,6 +146,17 @@
   }
 
   // ---- Mount ----
+  // Ensure the brand typefaces are present on every page (Cormorant Garamond
+  // for display, Nunito Sans for body/labels). Many pages already load them;
+  // this covers the ones that don't so the whole site shares one type system.
+  function ensureFonts() {
+    if (document.querySelector('link[href*="Cormorant"]')) return;
+    var l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600;700&display=swap";
+    document.head.appendChild(l);
+  }
+
   // Skip-to-content link for keyboard and screen-reader users.
   function addSkipLink() {
     if (document.querySelector(".skip-link")) return;
@@ -174,6 +185,7 @@
     var footer = document.getElementById("site-footer");
     if (header) header.innerHTML = buildHeader();
     if (footer) footer.innerHTML = buildFooter();
+    ensureFonts();
     addSkipLink();
     wire();
   }
