@@ -53,7 +53,7 @@
 # Individual sermon pages /sermons/[episode-id]
 [[redirects]]
   from = "/sermons/*"
-  to = "/sermon-template.html"
+  to = "/sermons.html"
   status = 200
 
 [[redirects]]
@@ -64,7 +64,7 @@
 # Individual devotional pages /devotionals/[slug]
 [[redirects]]
   from = "/devotionals/*"
-  to = "/devotional-template.html"
+  to = "/devotionals.html"
   status = 200
 
 # SEO: consolidate old devotional slugs to canonical URLs (301)
@@ -97,17 +97,17 @@
 
 [[redirects]]
   from = "/contact"
-  to = "/contact.html"
+  to = "/new-here.html"
   status = 200
 
 [[redirects]]
   from = "/serve"
-  to = "/serve.html"
+  to = "/belong.html"
   status = 200
 
 [[redirects]]
   from = "/prayer"
-  to = "/prayer.html"
+  to = "/prayer-guide.html"
   status = 200
 
 [[redirects]]

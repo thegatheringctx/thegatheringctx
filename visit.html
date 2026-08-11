@@ -138,12 +138,11 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display
   <meta name="twitter:description" content="Visiting The Gathering CTX? Sundays at 5 PM at the Cleburne Conference Center, Cleburne TX. Come as you are. No dress code, no pressure."/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Plan Your Visit | The Gathering CTX | Church in Cleburne, TX","url":"https://gatheringctx.org/visit","description":"Visiting The Gathering CTX? Sundays at 5 PM at the Cleburne Conference Center, Cleburne TX. Come as you are. No dress code, no pressure.","isPartOf":{"@type":"WebSite","name":"The Gathering CTX","url":"https://gatheringctx.org"},"publisher":{"@type":"Church","name":"The Gathering CTX","url":"https://gatheringctx.org"}}</script>
 <!-- build: 2026-05-27 21:48 -->
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<nav id="nav">
-  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
-  <a href="/" class="nav-back">&larr; Home</a>
-</nav>
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
 <section class="hero">
   <div class="eyebrow">Plan Your Visit</div>
   <h1 class="hero-h1">Come as<br>you <em>are.</em></h1>
@@ -153,6 +152,84 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display
     <div class="vital"><div class="vital-label">Doors Open</div><div class="vital-val">4:30 PM<br>Come early, meet people</div></div>
   </div>
 </section>
+
+<style>
+  .pv-guide{background:#0a0a0a;padding:6rem 6rem;border-top:1px solid var(--w08);border-bottom:1px solid var(--w08)}
+  .pv-eyebrow{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+  .pv-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.1;margin-bottom:1rem}
+  .pv-h2 em{font-style:italic;color:var(--gold)}
+  .pv-intro{font-size:.95rem;color:var(--w55);line-height:1.9;margin-bottom:3rem;max-width:520px}
+  .pv-card{max-width:640px;border:1px solid var(--w08);background:#0d0d0d}
+  .pv-track{display:flex;gap:.5rem;padding:1.5rem 2.5rem 0}
+  .pv-dot{height:3px;flex:1;background:rgba(255,255,255,.12);transition:background .35s}
+  .pv-dot.done{background:var(--gold)}
+  .pv-panel{padding:2.5rem 2.5rem 1rem;min-height:210px}
+  .pv-step-label{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+  .pv-step-h{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:300;margin-bottom:1rem;line-height:1.2}
+  .pv-step-body{font-size:.95rem;color:var(--w80);line-height:1.95}
+  .pv-step-body strong{color:#fff;font-weight:600}
+  .pv-action{margin-top:1.6rem}
+  .pv-mini-btn{display:inline-block;font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,169,110,.4);padding:.75rem 1.5rem;text-decoration:none;transition:all .2s;font-weight:600;cursor:pointer;background:none}
+  .pv-mini-btn:hover{background:var(--gold);color:#0a0a0a}
+  .pv-controls{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 2.5rem 2rem;border-top:1px solid var(--w08);margin-top:1rem}
+  .pv-count{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--w30);font-family:'Nunito Sans',sans-serif}
+  .pv-btns{display:flex;gap:.75rem}
+  .pv-btn{font-family:'Nunito Sans',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:.8rem 1.6rem;cursor:pointer;border:1px solid var(--w08);background:none;color:var(--w55);transition:all .2s}
+  .pv-btn:hover:not(:disabled){color:#fff;border-color:var(--w30)}
+  .pv-btn:disabled{opacity:.3;cursor:default}
+  .pv-btn-next{background:var(--gold);color:#0a0a0a;border-color:var(--gold)}
+  .pv-btn-next:hover:not(:disabled){filter:brightness(1.1);color:#0a0a0a}
+  @media(max-width:900px){.pv-guide{padding:4rem 2rem}.pv-panel{padding:2rem 1.5rem 1rem}.pv-track{padding:1.25rem 1.5rem 0}.pv-controls{padding:1.25rem 1.5rem 1.5rem}}
+</style>
+<section class="pv-guide" aria-label="Plan your visit, step by step">
+  <div class="pv-eyebrow">First Time Here?</div>
+  <h2 class="pv-h2">Let's plan it,<br><em>one step at a time.</em></h2>
+  <p class="pv-intro">Visiting a new church can feel like a lot. Take it a tap at a time — here are the only things you actually need to know before Sunday.</p>
+  <div class="pv-card">
+    <div class="pv-track" id="pv-track" aria-hidden="true"></div>
+    <div class="pv-panel" id="pv-panel" role="group" aria-live="polite"></div>
+    <div class="pv-controls">
+      <span class="pv-count" id="pv-count"></span>
+      <div class="pv-btns">
+        <button class="pv-btn" id="pv-back" type="button">Back</button>
+        <button class="pv-btn pv-btn-next" id="pv-next" type="button">Next &rarr;</button>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var STEPS=[
+    {label:"Step 1 &middot; When &amp; Where", h:"Every Sunday at 5:00 PM.", body:"We gather at the <strong>Cleburne Conference Center</strong>, 1501 W Henderson St. Doors open at <strong>4:30</strong> — come early, grab a seat, meet someone.", action:{text:"Get Directions &rarr;", href:"https://maps.google.com/?q=Cleburne+Conference+Center+Cleburne+TX", ext:true}},
+    {label:"Step 2 &middot; What to Wear", h:"Whatever you woke up in.", body:"Jeans, boots, a hoodie, your Sunday best — all of it fits here. <strong>There is no dress code.</strong> Come as you are. We mean that literally."},
+    {label:"Step 3 &middot; Your Kids", h:"Bring the whole family.", body:"Kids are welcome right beside you, and we have the <strong>Kids Gathering Zone</strong> for a dedicated experience. Tell us at the door and we will get them settled."},
+    {label:"Step 4 &middot; What Happens", h:"Arrive, worship, the Word.", body:"You will be welcomed, we will worship together, then open the Bible — about <strong>75 minutes</strong> in all. No one puts you on the spot, and guests never pass a plate."},
+    {label:"You are all set", h:"That is really it.", body:"No surprises. Just welcome. Want us to text you everything you need for Sunday? It is one text — that is the whole thing.", action:{text:"Save My Seat &rarr;", href:"#visit-form", scroll:true}}
+  ];
+  var i=0;
+  var track=document.getElementById("pv-track"), panel=document.getElementById("pv-panel"),
+      count=document.getElementById("pv-count"), back=document.getElementById("pv-back"), next=document.getElementById("pv-next");
+  if(!track) return;
+  track.innerHTML=STEPS.map(function(_,n){return '<span class="pv-dot" data-n="'+n+'"></span>';}).join("");
+  var dots=track.querySelectorAll(".pv-dot");
+  function render(){
+    var s=STEPS[i];
+    var act=s.action?'<div class="pv-action"><a class="pv-mini-btn" href="'+s.action.href+'"'+(s.action.ext?' target="_blank" rel="noopener"':'')+(s.action.scroll?' data-scroll="1"':'')+'>'+s.action.text+'</a></div>':'';
+    panel.innerHTML='<div class="pv-step-label">'+s.label+'</div><div class="pv-step-h">'+s.h+'</div><div class="pv-step-body">'+s.body+'</div>'+act;
+    dots.forEach(function(d,n){d.classList.toggle("done",n<=i);});
+    count.textContent=(i+1)+" of "+STEPS.length;
+    back.disabled=(i===0);
+    next.disabled=(i===STEPS.length-1);
+    next.innerHTML=(i===STEPS.length-1)?"Done":"Next &rarr;";
+    var sc=panel.querySelector('[data-scroll]');
+    if(sc) sc.addEventListener("click",function(e){e.preventDefault();var f=document.getElementById("visit-form");if(f){f.scrollIntoView({behavior:"smooth",block:"center"});var nm=document.getElementById("visit-name");if(nm)setTimeout(function(){nm.focus();},500);}});
+  }
+  back.addEventListener("click",function(){if(i>0){i--;render();}});
+  next.addEventListener("click",function(){if(i<STEPS.length-1){i++;render();}});
+  render();
+})();
+</script>
+
 <section class="expect">
   <div class="section-label section-label-dark">What to Expect</div>
   <div class="two-col">
@@ -211,49 +288,8 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display
     <a href="mailto:info@gatheringctx.org" class="btn-outline-dark">Email Us &rarr;</a>
   </div>
 </section>
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <a href="/" class="footer-logo"><span class="footer-the">THE</span><span class="footer-gathering">gathering</span></a>
-      <p class="footer-tagline">Walk with victory. Not to it.</p>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="https://www.instagram.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293" target="_blank" rel="noopener" aria-label="Apple Podcasts"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></a>
-      </div>
-    </div>
-    <div>
-      <span class="footer-info-label">Join Us</span>
-      <span class="footer-info-line">Sundays at 5:00 PM</span>
-      <span class="footer-info-line">Cleburne Conference Center</span>
-      <span class="footer-info-line">1501 W Henderson St</span>
-      <span class="footer-info-line">Cleburne, TX 76033</span>
-      <a href="https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX+76033" target="_blank" rel="noopener" class="footer-map-link">Get Directions &rarr;</a>
-    </div>
-    <div>
-      <span class="footer-info-label">Connect</span>
-      <a href="tel:+16822865640" class="footer-info-line footer-link">(682) 286-5640</a>
-      <a href="mailto:info@gatheringctx.org" class="footer-info-line footer-link">info@gatheringctx.org</a>
-      <span class="footer-info-line" style="margin-top:12px">Text VISIT to</span>
-      <span class="footer-info-line">(817) 518-4773</span>
-    </div>
-    <div class="footer-nav">
-      <span class="footer-info-label">Site</span>
-      <a href="/visit" class="footer-nav-link">Plan a Visit</a>
-      <a href="/sermons" class="footer-nav-link">Sermons</a>
-      <a href="/devotionals" class="footer-nav-link">Devotionals</a>
-      <a href="/kids" class="footer-nav-link">Kids</a>
-      <a href="/our-story" class="footer-nav-link">Our Story</a>
-      <a href="/gallery" class="footer-nav-link">Gallery</a>
-      <a href="/generosity" class="footer-nav-link">Give</a>
-      <a href="/privacy" class="footer-nav-link">Privacy</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX &nbsp;&middot;&nbsp; <a href="/privacy" class="footer-bottom-link">Privacy Policy</a></p>
-    <p style="font-style:italic">Photography by <a href="https://www.instagram.com/captured.by.kendra_" target="_blank" rel="noopener" class="footer-bottom-link">@captured.by.kendra_</a></p>
-  </div>
-</footer>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
 <script>
 document.getElementById('visit-form')?.addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -281,47 +317,9 @@ document.getElementById('visit-form')?.addEventListener('submit', async function
   }
   btn.textContent = 'I Am In →'; btn.style.opacity = '1';
 });
-window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)});
 </script>
 
-  <!  WHAT TO EXPECT  >
-  <section style="padding:4rem 2rem;max-width:780px;margin:0 auto">
-    <div style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#c9a84c;margin-bottom:1rem;font-family:system-ui,sans-serif">WHAT TO EXPECT</div>
-    <h2 style="font-size:clamp(1.75rem,4vw,2.75rem);font-weight:400;margin-bottom:1rem">No surprises.<br><em style="color:#c9a84c;font-style:italic">Just welcome.</em></h2>
-    <p style="color:rgba(255,255,255,.6);font-family:system-ui,sans-serif;font-size:1rem;line-height:1.7;margin-bottom:3rem;max-width:560px">We know visiting a new church can feel uncertain. Here is exactly what you will walk into when you show up.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
-      <div style="border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:1.75rem">
-        <div style="margin-bottom:.75rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:.5rem;font-family:system-ui,sans-serif">How long is the service?</h3>
-        <p style="font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;font-family:system-ui,sans-serif">About 75 to 90 minutes. We start at 5:00 PM and doors open at 4:30 PM. Come early and meet people.</p>
-      </div>
-      <div style="border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:1.75rem">
-        <div style="margin-bottom:.75rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div>
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:.5rem;font-family:system-ui,sans-serif">What should I wear?</h3>
-        <p style="font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;font-family:system-ui,sans-serif">Whatever you want. Jeans, boots, a dress, a hoodie. There is no dress code here. Come as you are. That is not a slogan, it is our actual expectation.</p>
-      </div>
-      <div style="border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:1.75rem">
-        <div style="margin-bottom:.75rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:.5rem;font-family:system-ui,sans-serif">What is the worship like?</h3>
-        <p style="font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;font-family:system-ui,sans-serif">Contemporary worship music, led live. It is participatory, not performative. We sing to God, not for an audience. You are free to engage however feels natural.</p>
-      </div>
-      <div style="border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:1.75rem">
-        <div style="margin-bottom:.75rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg></div>
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:.5rem;font-family:system-ui,sans-serif">What about my kids?</h3>
-        <p style="font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;font-family:system-ui,sans-serif">Kids are welcome in the service with you. We also have the Kids Gathering Zone, a dedicated experience for children. Ask at the door and we will get them connected.</p>
-      </div>
-      <div style="border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:1.75rem">
-        <div style="margin-bottom:.75rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:.5rem;font-family:system-ui,sans-serif">Do I have to give?</h3>
-        <p style="font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;font-family:system-ui,sans-serif">Absolutely not. Giving is for those who call The Gathering home. If you are visiting, just show up. You are our guest.</p>
-      </div>
-      <div style="border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:1.75rem">
-        <div style="margin-bottom:.75rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:.5rem;font-family:system-ui,sans-serif">Where do I park?</h3>
-        <p style="font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;font-family:system-ui,sans-serif">The Cleburne Conference Center has ample free parking. Pull into any open spot. You will see the signs directing you inside.</p>
-      </div>
-    </div>
-  </section>
+<script src="/assets/site.js" defer></script>
 </body>
   </html>
 

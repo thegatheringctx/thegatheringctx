@@ -448,14 +448,13 @@
     .prayer-section { padding: 2rem 1.5rem; }
   }
 </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 
 <!-- SITE NAV -->
-<nav class="site-nav">
-  <a href="https://gatheringctx.org" class="site-nav-logo"><sup>the</sup>gathering</a>
-  <a href="https://gatheringctx.org/#devotionals" class="site-nav-back">← All Devotionals</a>
-</nav>
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
 
 <!-- HERO -->
 <header class="hero" style="padding-top:7rem">
@@ -651,11 +650,10 @@
     <a href="mailto:?subject=Devotional from The Gathering CTX&body=Thought you might want to read this: https://gatheringctx.org/devotional-palm-sunday.html" style="display:inline-block;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;text-decoration:none;padding:.6rem 1.4rem;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase">Email a Friend</a>
   </div>
 </div>
-<footer class="footer">
-  <p class="site-name">THE gathering CTX</p>
-  <p>Cleburne, Texas · Sundays at 5:00 PM</p>
-  <p style="margin-top:.5rem"><a href="https://gatheringctx.org" style="color:var(--gold);text-decoration:none">gatheringctx.org</a></p>
-</footer>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
 
+<script src="/assets/site.js" defer></script>
+<script src="/assets/devotional.js" defer></script>
 </body>
 </html>

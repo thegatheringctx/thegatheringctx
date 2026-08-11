@@ -383,8 +383,12 @@
     .prayer-section { padding: 2rem 1.5rem; }
   }
 </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
+<body class="has-shell-nav">
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
+
 
 <header class="hero">
   <div class="hero-content">
@@ -519,10 +523,10 @@
 
 </article>
 
-<footer class="footer">
-  <p class="site-name">The Gathering CTX</p>
-  <p>gatheringctx.org</p>
-</footer>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
 
+<script src="/assets/site.js" defer></script>
+<script src="/assets/devotional.js" defer></script>
 </body>
 </html>

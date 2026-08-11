@@ -122,12 +122,11 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
   <meta name="twitter:title" content="Our Story | The Gathering CTX | Church in Cleburne, TX"/>
   <meta name="twitter:description" content="March 2026. A barn in Blum, Texas. This is how The Gathering CTX began and why we exist to make disciples who make disciples in Cleburne, TX."/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"Our Story | The Gathering CTX | Church in Cleburne, TX","url":"https://gatheringctx.org/our-story","description":"March 2026. A barn in Blum, Texas. This is how The Gathering CTX began and why we exist to make disciples who make disciples in Cleburne, TX.","isPartOf":{"@type":"WebSite","name":"The Gathering CTX","url":"https://gatheringctx.org"}}</script>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<nav id="nav">
-  <a href="/" class="nav-brand"><sup>the</sup>gathering</a>
-  <a href="/" class="nav-back">&larr; Back to Home</a>
-</nav>
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
 <section class="hero">
   <div class="hero-eyebrow">Our Story</div>
   <h1 class="hero-h1">Every church<br>has <em>a moment.</em></h1>
@@ -196,53 +195,13 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
     <div style="font-size:.9rem;color:var(--w55);">Come as you are. There is a seat at the table for you.</div>
   </div>
 </section>
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <a href="/" class="footer-logo"><span class="footer-the">THE</span><span class="footer-gathering">gathering</span></a>
-      <p class="footer-tagline">Walk with victory. Not to it.</p>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="https://www.instagram.com/thegatheringctx" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://podcasts.apple.com/us/podcast/the-gathering-ctx/id1892510293" target="_blank" rel="noopener" aria-label="Apple Podcasts"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></a>
-      </div>
-    </div>
-    <div>
-      <span class="footer-info-label">Join Us</span>
-      <span class="footer-info-line">Sundays at 5:00 PM</span>
-      <span class="footer-info-line">Cleburne Conference Center</span>
-      <span class="footer-info-line">1501 W Henderson St</span>
-      <span class="footer-info-line">Cleburne, TX 76033</span>
-      <a href="https://maps.google.com/?q=1501+W+Henderson+St+Cleburne+TX+76033" target="_blank" rel="noopener" class="footer-map-link">Get Directions &rarr;</a>
-    </div>
-    <div>
-      <span class="footer-info-label">Connect</span>
-      <a href="tel:+16822865640" class="footer-info-line footer-link">(682) 286-5640</a>
-      <a href="mailto:info@gatheringctx.org" class="footer-info-line footer-link">info@gatheringctx.org</a>
-      <span class="footer-info-line" style="margin-top:12px">Text VISIT to</span>
-      <span class="footer-info-line">(817) 518-4773</span>
-    </div>
-    <div class="footer-nav">
-      <span class="footer-info-label">Site</span>
-      <a href="/visit" class="footer-nav-link">Plan a Visit</a>
-      <a href="/sermons" class="footer-nav-link">Sermons</a>
-      <a href="/devotionals" class="footer-nav-link">Devotionals</a>
-      <a href="/kids" class="footer-nav-link">Kids</a>
-      <a href="/our-story" class="footer-nav-link">Our Story</a>
-      <a href="/gallery" class="footer-nav-link">Gallery</a>
-      <a href="/generosity" class="footer-nav-link">Give</a>
-      <a href="/privacy" class="footer-nav-link">Privacy</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX &nbsp;&middot;&nbsp; <a href="/privacy" class="footer-bottom-link">Privacy Policy</a></p>
-    <p style="font-style:italic">Photography by <a href="https://www.instagram.com/captured.by.kendra_" target="_blank" rel="noopener" class="footer-bottom-link">@captured.by.kendra_</a></p>
-  </div>
-</footer>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
 <script>
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
 });
 </script>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

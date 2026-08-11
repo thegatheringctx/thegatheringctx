@@ -43,12 +43,11 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 .msg.ok{display:block;background:rgba(184,147,90,0.1);border:1px solid rgba(184,147,90,0.35);color:#fff;}
 .msg.err{display:block;background:rgba(217,123,108,0.08);border:1px solid rgba(217,123,108,0.35);color:#e8b3a9;}
 </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<nav class="nav">
-<a href="/" class="nav-logo"><span class="nav-the">The</span><span class="nav-name">Gathering</span></a>
-<a href="/resources" class="nav-back">Back to Resources</a>
-</nav>
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
 <div class="page-hero">
 <p class="label">From Our Family</p>
 <h1 class="page-title">Testimonies.<em>What He has done.</em></h1>
@@ -95,10 +94,8 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 </div>
 
 </div>
-<footer class="site-footer">
-<p>&copy; 2026 The Gathering CTX &nbsp;&middot;&nbsp; Cleburne, TX</p>
-<p><a href="/visit" style="color:rgba(255,255,255,0.3)">Plan a Visit</a> &nbsp;&middot;&nbsp; <a href="/sermons" style="color:rgba(255,255,255,0.3)">Sermons</a> &nbsp;&middot;&nbsp; <a href="/beliefs" style="color:rgba(255,255,255,0.3)">What We Believe</a></p>
-</footer>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
 
 <script>
 const SUPA='https://ktuapfiexhlladgkuauc.supabase.co';
@@ -183,5 +180,6 @@ document.getElementById('tform').addEventListener('submit',async(e)=>{
   }
 });
 </script>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

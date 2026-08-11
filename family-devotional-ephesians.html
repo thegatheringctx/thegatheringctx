@@ -101,8 +101,12 @@
     .back-cover a { color: var(--wine); font-weight: 600; }
     .back-cover-tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--wine); margin-top: 2rem; }
   </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
+<body class="has-shell-nav">
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
+
 <div class="print-bar no-print">
   <span><a href="https://gatheringctx.org">&#8592; The Gathering CTX</a></span>
   <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
@@ -296,5 +300,9 @@
   <p><a href="https://gatheringctx.org">gatheringctx.org</a></p>
   <p class="back-cover-tagline">"I walk with victory, not to it."</p>
 </div>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/devotional.js" defer></script>
 </body>
 </html>
