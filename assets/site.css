@@ -61,6 +61,15 @@
    hero (like the homepage) omit it on purpose. */
 body.has-shell-nav{padding-top:72px;}
 
+/* ---- ACCESSIBILITY ---- */
+/* Visible keyboard focus across the site (mouse clicks stay clean). */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid #b8935a;outline-offset:2px;border-radius:2px;
+}
+/* Skip-to-content link (injected by site.js): hidden until focused. */
+.skip-link{position:fixed;top:-100px;left:12px;z-index:300;background:#b8935a;color:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.8rem;font-weight:600;padding:10px 18px;border-radius:0 0 4px 4px;text-decoration:none;transition:top .15s;}
+.skip-link:focus{top:0;}
+
 /* ---- RESPONSIVE ---- */
 @media(max-width:900px){
   .nav{padding:0 24px;}
