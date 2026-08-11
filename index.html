@@ -847,34 +847,5 @@ function handlePrayer(e){
 </script>
 
 <script src="/assets/site.js" defer></script>
-
-<style>
-/* Gentle scroll-reveal for below-the-fold sections. Applied only by JS, so
-   no-JS visitors always see everything, and it is fully off under
-   reduced-motion. */
-@media (prefers-reduced-motion: no-preference){
-  section.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.61,.36,1);}
-  section.reveal.in{opacity:1;transform:none;}
-}
-</style>
-<script>
-(function(){
-  if(!('IntersectionObserver' in window)) return;
-  try{ if(matchMedia('(prefers-reduced-motion: reduce)').matches) return; }catch(e){}
-  var vh = window.innerHeight || document.documentElement.clientHeight;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-  // Only animate sections that start below the fold, so nothing above it flickers.
-  [].forEach.call(document.querySelectorAll('section'), function(s){
-    if(s.classList.contains('hero')) return;
-    if(s.getBoundingClientRect().top < vh * 0.9) return;
-    s.classList.add('reveal');
-    io.observe(s);
-  });
-})();
-</script>
 </body>
 </html>
