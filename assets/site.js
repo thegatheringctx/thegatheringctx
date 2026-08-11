@@ -1,5 +1,5 @@
 /* ============================================================
-   The Gathering CTX — Shared site shell injector
+   The Gathering CTX - Shared site shell injector
    Renders the nav, mobile menu, and footer from ONE definition
    into <div id="site-header"></div> and <div id="site-footer"></div>.
    Change the nav once here and it updates on every page.

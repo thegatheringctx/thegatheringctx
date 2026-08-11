@@ -389,13 +389,13 @@
   var cal=document.getElementById('ss-cal');
   if(cal) cal.addEventListener('click',function(e){
     e.preventDefault();
-    var day=ymd(svc); // floating local time — 5:00 PM local for our Cleburne audience
+    var day=ymd(svc); // floating local time - 5:00 PM local for our Cleburne audience
     var ics=[
       'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//The Gathering CTX//Sunday Service//EN',
       'CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
       'UID:sunday-'+day+'@gatheringctx.org','DTSTAMP:'+stamp(new Date()),
       'DTSTART:'+day+'T170000','DTEND:'+day+'T183000',
-      'SUMMARY:The Gathering CTX — Sunday Service',
+      'SUMMARY:The Gathering CTX Sunday Service',
       'LOCATION:Cleburne Conference Center\\, 1501 W Henderson St\\, Cleburne\\, TX 76033',
       'DESCRIPTION:Sundays at 5 PM. Come as you are. Walk with victory.',
       'END:VEVENT','END:VCALENDAR'
