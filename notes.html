@@ -63,7 +63,11 @@ body.pulpit #sidebar,body.pulpit #meta{display:none!important}
   body.editing #editor{display:flex}
   #backBtn{display:block}
 }
-</style></head><body>
+</style>  <link rel="stylesheet" href="/assets/site.css">
+</head><body class="has-shell-nav">
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
+
 <div id="login">
   <h1>Gathering Notes</h1>
   <p id="loginMsg">Enter your passphrase.</p>
@@ -201,4 +205,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)flush()})
 if(token){$('login').style.display='none';$('app').style.display='flex';$('empty').style.display='flex';$('body').style.display='none';load()}
 else{$('loginMsg').textContent='Enter your passphrase. First visit? The passphrase you enter becomes THE passphrase (8+ characters).'}
 </script>
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
+<script src="/assets/site.js" defer></script>
 </body></html>
