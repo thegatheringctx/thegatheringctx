@@ -15,6 +15,7 @@
   <title>The Gathering CTX | Nondenominational Church in Cleburne, TX</title>
   <meta name="description" content="The Gathering CTX is a Spirit-led church in Cleburne, TX. Sundays at 5 PM at the Cleburne Conference Center. Come as you are. Walk with victory.">
   <link rel="canonical" href="https://gatheringctx.org">
+  <link rel="preload" as="image" href="/hero-worship.webp" type="image/webp" fetchpriority="high">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -49,7 +50,7 @@
 
     /* HERO */
     .hero{position:relative;height:100vh;min-height:620px;display:flex;align-items:flex-end;overflow:hidden;}
-    .hero-bg{position:absolute;inset:0;background:url('/hero-worship.jpg') center 25%/cover no-repeat;}
+    .hero-bg{position:absolute;inset:0;background:url('/hero-worship.jpg') center 25%/cover no-repeat;background-image:image-set(url('/hero-worship.webp') type('image/webp'),url('/hero-worship.jpg') type('image/jpeg'));}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(170deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0.58) 70%,rgba(0,0,0,0.9) 100%);}
     .hero-body{position:relative;z-index:2;padding:0 56px 80px;}
     .hero-eyebrow{font-family:var(--sans);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
@@ -92,7 +93,7 @@
     .w-body{font-family:var(--sans);font-size:0.95rem;line-height:1.85;color:#666;max-width:400px;margin-bottom:36px;}
     .w-body p{margin-bottom:14px;}
     .btn-dark{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;background:#1a1a1a;color:#fff;padding:14px 30px;display:inline-block;}
-    .welcome-photo{background:url('/Alexus-120.jpg') center/cover no-repeat;min-height:500px;}
+    .welcome-photo{background:url('/Alexus-120.jpg') center/cover no-repeat;background-image:image-set(url('/Alexus-120.webp') type('image/webp'),url('/Alexus-120.jpg') type('image/jpeg'));min-height:500px;}
 
     /* SCRIPTURE */
     .scripture{background:#111;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 56px;text-align:center;}
@@ -124,10 +125,11 @@
     /* PHOTOS */
     .photos{display:grid;grid-template-columns:2fr 1fr 1fr;height:400px;gap:2px;}
     .photos img{width:100%;height:100%;object-fit:cover;}
+    .photos picture{display:block;width:100%;height:100%;}
 
     /* KIDS */
     .kids{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);}
-    .kids-photo{background:url('/gather-09.jpg') center/cover no-repeat;min-height:440px;position:relative;}
+    .kids-photo{background:url('/gather-09.jpg') center/cover no-repeat;background-image:image-set(url('/gather-09.webp') type('image/webp'),url('/gather-09.jpg') type('image/jpeg'));min-height:440px;position:relative;}
     .kids-photo-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.4);}
     .kids-content{background:var(--dark3);padding:80px 64px;display:flex;flex-direction:column;justify-content:center;}
     .k-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
@@ -187,7 +189,7 @@
       .steps{padding:64px 28px;}
       .steps-grid{grid-template-columns:1fr;gap:32px;}
       .photos{grid-template-columns:1fr;height:300px;}
-      .photos div:nth-child(2),.photos div:nth-child(3){display:none;}
+      .photos picture:nth-child(2),.photos picture:nth-child(3){display:none;}
       .kids{grid-template-columns:1fr;}
       .kids-photo{min-height:280px;}
       .kids-content{padding:56px 28px;}
@@ -265,7 +267,8 @@
     .steps-grid{grid-template-columns:1fr 1fr!important;gap:20px!important;}
     .photos{grid-template-columns:1fr!important;height:auto;}
     .photos img{height:260px!important;}
-    .photos img:nth-child(2),.photos img:nth-child(3){display:none;}
+    .photos picture{height:260px!important;}
+    .photos picture:nth-child(2),.photos picture:nth-child(3){display:none;}
     .kids{grid-template-columns:1fr;}
     .kids-photo{min-height:260px;}
     .kids-content{padding:48px 24px;}
@@ -656,9 +659,9 @@
 </section>
 
 <div class="photos">
-  <img src="/hero-room.jpg" alt="Worship at The Gathering CTX" loading="lazy">
-  <img src="/gather-03.jpg" alt="Community at The Gathering CTX" loading="lazy">
-  <img src="/gather-07.jpg" alt="The Gathering CTX" loading="lazy">
+  <picture><source srcset="/hero-room.webp" type="image/webp"><img src="/hero-room.jpg" alt="Worship at The Gathering CTX" width="1024" height="683" loading="lazy" decoding="async"></picture>
+  <picture><source srcset="/gather-03.webp" type="image/webp"><img src="/gather-03.jpg" alt="Community at The Gathering CTX" width="1247" height="935" loading="lazy" decoding="async"></picture>
+  <picture><source srcset="/gather-07.webp" type="image/webp"><img src="/gather-07.jpg" alt="The Gathering CTX" width="1247" height="935" loading="lazy" decoding="async"></picture>
 </div>
 
 <section class="kids">
