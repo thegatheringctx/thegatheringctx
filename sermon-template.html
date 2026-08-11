@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3L9RY5RS73');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sermon | The Gathering CTX</title>
+  <meta name="description" content="A sermon from The Gathering CTX in Cleburne, TX.">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .st-body{background:#0a0a0a;color:#fff;font-family:'Georgia','Times New Roman',serif;}
+    .st-hero{background:#100d0c;padding:6.5rem 24px 4.5rem;text-align:center;}
+    .st-hero-inner{max-width:760px;margin:0 auto;}
+    .st-label{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--st-accent,#b8935a);margin-bottom:1.3rem;}
+    .st-title{font-size:clamp(2.3rem,6vw,3.7rem);font-weight:300;line-height:1.06;letter-spacing:-.01em;margin-bottom:1.3rem;}
+    .st-sub{font-size:1.2rem;font-style:italic;color:rgba(255,255,255,.6);margin-bottom:1.5rem;line-height:1.5;}
+    .st-meta{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.42);line-height:1.8;}
+    .st-meta b{color:var(--st-accent,#b8935a);font-weight:600;}
+    .st-wrap{max-width:680px;margin:0 auto;padding:3.5rem 24px 5.5rem;}
+    .st-player{background:#131110;border:1px solid #241f1b;border-radius:4px;padding:1.6rem 1.6rem 1.1rem;margin-bottom:3rem;}
+    .st-player-label{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--st-accent,#b8935a);margin-bottom:1rem;}
+    .st-player .fallback{font-family:-apple-system,sans-serif;font-size:.85rem;color:rgba(255,255,255,.4);}
+    .st-section-label{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--st-accent,#b8935a);margin:0 0 1.1rem;}
+    .st-summary p{font-size:1.05rem;line-height:1.95;color:rgba(255,255,255,.8);margin-bottom:1.3rem;}
+    .st-points{margin-top:2.6rem;display:flex;flex-direction:column;gap:1px;background:#1c1815;border:1px solid #1c1815;}
+    .st-point{background:#0e0c0b;padding:1.6rem 1.7rem;}
+    .st-point h3{font-size:1.25rem;font-weight:400;color:#fff;margin-bottom:.5rem;line-height:1.25;}
+    .st-point p{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.92rem;line-height:1.75;color:rgba(255,255,255,.6);}
+    .st-more{margin-top:3rem;padding-top:2rem;border-top:1px solid #1a1a1a;display:flex;gap:1.5rem;flex-wrap:wrap;}
+    .st-more a{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--st-accent,#b8935a);text-decoration:none;border-bottom:1px solid rgba(184,147,90,.3);padding-bottom:2px;}
+    .st-more a:hover{color:#fff;}
+    .st-loading,.st-error{max-width:680px;margin:0 auto;padding:8rem 24px;text-align:center;color:rgba(255,255,255,.4);font-family:-apple-system,sans-serif;}
+    .st-error a{color:#b8935a;}
+    @media(max-width:600px){.st-hero{padding:5rem 20px 3.5rem;}.st-wrap{padding:2.5rem 20px 4.5rem;}}
+  </style>
+</head>
+<body class="st-body has-shell-nav">
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
+
+<div id="st-root">
+  <div class="st-loading">Loading sermon…</div>
+</div>
+
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/series-themes.js"></script>
+<script>
+(function () {
+  function getSlug() {
+    var q = new URLSearchParams(location.search).get("slug");
+    if (q) return q;
+    var parts = location.pathname.replace(/\/+$/, "").split("/");
+    var last = parts[parts.length - 1];
+    if (last && last !== "sermons" && last !== "sermon-template.html") return last;
+    return "complete-in-him";
+  }
+  function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function paras(a){return (a||[]).map(function(p){return "<p>"+esc(p)+"</p>";}).join("");}
+  function fmtDate(s){
+    if(!s) return "";
+    var d=new Date(s+"T12:00:00");
+    if(isNaN(d)) return s;
+    return d.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  }
+
+  function embedPlayer(url, mount) {
+    var m = url && url.match(/buzzsprout\.com\/(\d+)\/episodes\/(\d+)/);
+    if (m) {
+      var show = m[1], ep = m[2];
+      var div = document.createElement("div");
+      div.id = "buzzsprout-player-" + ep;
+      mount.innerHTML = "";
+      mount.appendChild(div);
+      var s = document.createElement("script");
+      s.src = "https://www.buzzsprout.com/" + show + "/" + ep + ".js?container_id=buzzsprout-player-" + ep + "&player=small";
+      s.charset = "utf-8"; s.async = true;
+      document.body.appendChild(s);
+    } else if (url) {
+      mount.innerHTML = '<audio controls preload="none" style="width:100%"><source src="' + url + '" type="audio/mpeg"></audio>';
+    } else {
+      mount.innerHTML = '<p class="fallback">Audio coming soon.</p>';
+    }
+  }
+
+  function schema(d) {
+    try {
+      var s = document.createElement("script");
+      s.type = "application/ld+json";
+      s.textContent = JSON.stringify({
+        "@context": "https://schema.org", "@type": "Article",
+        "headline": d.title, "description": (d.summary || []).join(" "),
+        "datePublished": d.preachedOn || undefined,
+        "author": d.speaker ? { "@type": "Person", "name": d.speaker } : undefined,
+        "publisher": { "@type": "Organization", "name": "The Gathering CTX", "url": "https://gatheringctx.org" },
+        "isPartOf": d.series || undefined, "about": d.passage || undefined,
+        "url": "https://gatheringctx.org/sermons/" + (d.slug || "")
+      });
+      document.head.appendChild(s);
+    } catch (e) {}
+  }
+
+  function render(d) {
+    var root = document.getElementById("st-root");
+    document.title = (d.title || "Sermon") + " | The Gathering CTX";
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute("content", (d.subtitle || (d.summary && d.summary[0]) || d.title || "").slice(0, 300));
+    var can = document.createElement("link"); can.rel = "canonical";
+    can.href = "https://gatheringctx.org/sermons/" + (d.slug || "");
+    document.head.appendChild(can);
+
+    var label = (d.seriesShort || d.series || "") + (d.week ? " &middot; Week " + d.week : "");
+    var meta = [];
+    if (d.passage) meta.push("<b>" + esc(d.passage) + "</b>");
+    if (d.preachedOn) meta.push(fmtDate(d.preachedOn));
+    if (d.speaker) meta.push(esc(d.speaker));
+
+    var html = '' +
+      '<header class="st-hero"><div class="st-hero-inner">' +
+        '<p class="st-label">' + label + '</p>' +
+        '<h1 class="st-title">' + esc(d.title) + '</h1>' +
+        (d.subtitle ? '<p class="st-sub">' + esc(d.subtitle) + '</p>' : '') +
+        '<p class="st-meta">' + meta.join(" &nbsp;&middot;&nbsp; ") + '</p>' +
+      '</div></header>' +
+      '<div class="st-wrap">' +
+        '<div class="st-player"><p class="st-player-label">Listen</p><div id="st-audio"><p class="fallback">Loading player…</p></div></div>';
+
+    if (d.summary && d.summary.length) html += '<p class="st-section-label">The Message</p><div class="st-summary">' + paras(d.summary) + '</div>';
+    if (d.points && d.points.length) {
+      html += '<div class="st-points">' + d.points.map(function (p) {
+        return '<div class="st-point"><h3>' + esc(p.title) + '</h3>' + (p.body ? '<p>' + esc(p.body) + '</p>' : '') + '</div>';
+      }).join("") + '</div>';
+    }
+    html += '<div class="st-more"><a href="/sermons">All Sermons</a>' +
+      (d.devotionalSlug ? '<a href="/devotionals/' + d.devotionalSlug + '">This Week\'s Devotional</a>' : '') +
+      '<a href="/devotionals">Devotionals</a></div>';
+    html += '</div>';
+    root.innerHTML = html;
+
+    embedPlayer(d.podcastUrl, document.getElementById("st-audio"));
+    schema(d);
+
+    var theme = window.SeriesThemes ? window.SeriesThemes.get(d.series || d.seriesShort, d.theme) : null;
+    if (theme) {
+      document.documentElement.style.setProperty("--st-accent", theme.accent);
+      var hero = root.querySelector(".st-hero");
+      if (hero) hero.style.background = theme.image
+        ? "linear-gradient(rgba(10,8,7,0.5),rgba(10,8,7,0.8)), url('" + theme.image + "') center/cover no-repeat"
+        : theme.bg;
+    }
+  }
+
+  fetch("/sermons/data/" + getSlug() + ".json")
+    .then(function (r) { if (!r.ok) throw new Error("nf"); return r.json(); })
+    .then(render)
+    .catch(function () {
+      document.getElementById("st-root").innerHTML =
+        '<div class="st-error"><p>We couldn\'t load this sermon.</p><p><a href="/sermons">Browse all sermons →</a></p></div>';
+    });
+})();
+</script>
+</body>
+</html>

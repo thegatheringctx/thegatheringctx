@@ -64,7 +64,7 @@
 # Individual sermon pages /sermons/[episode-id]
 [[redirects]]
   from = "/sermons/*"
-  to = "/sermons.html"
+  to = "/sermon-template.html"
   status = 200
 
 [[redirects]]
