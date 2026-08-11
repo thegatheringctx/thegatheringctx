@@ -75,7 +75,7 @@
 # Individual devotional pages /devotionals/[slug]
 [[redirects]]
   from = "/devotionals/*"
-  to = "/devotionals.html"
+  to = "/devotional-template.html"
   status = 200
 
 # SEO: consolidate old devotional slugs to canonical URLs (301)
