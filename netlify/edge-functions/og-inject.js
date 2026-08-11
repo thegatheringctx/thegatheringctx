@@ -35,37 +35,37 @@ function injectMeta(html, data) {
 }
 
 export default async (request, context) => {
-  var url = new URL(request.url);
-  var path = url.pathname;
-
-  var kind, dir;
-  if (path.indexOf("/sermons/") === 0) { kind = "sermon"; dir = "sermons"; }
-  else if (path.indexOf("/devotionals/") === 0) { kind = "devotional"; dir = "devotionals"; }
-  else return; // not ours -> normal handling
-
-  var slug = path.replace(/^\/(sermons|devotionals)\//, "").replace(/\/+$/, "");
-  // Only a bare single-segment slug (skip data files and nested paths).
-  if (!slug || slug.indexOf("/") !== -1) return;
-
-  var res = await context.next();
-  var ct = res.headers.get("content-type") || "";
-  if (ct.indexOf("text/html") === -1) return res; // only transform HTML
-
-  // Rebuild the response with the (possibly) modified body. Content-Length must
-  // be dropped because the body length changes; the runtime recomputes it.
-  function send(body) {
-    var headers = new Headers(res.headers);
-    headers.delete("content-length");
-    return new Response(body, { status: res.status, statusText: res.statusText, headers: headers });
-  }
-
-  var html = await res.text();
-  // Only touch a genuine 200 render of the expected template. If the rewrite
-  // pipeline returned anything else (e.g. a 404), serve it through untouched.
-  var marker = kind === "sermon" ? "st-root" : "dt-root";
-  if (!res.ok || html.indexOf(marker) === -1) return send(html);
-
   try {
+    var url = new URL(request.url);
+    var path = url.pathname;
+
+    var kind, dir;
+    if (path.indexOf("/sermons/") === 0) { kind = "sermon"; dir = "sermons"; }
+    else if (path.indexOf("/devotionals/") === 0) { kind = "devotional"; dir = "devotionals"; }
+    else return; // not ours -> normal handling
+
+    var slug = path.replace(/^\/(sermons|devotionals)\//, "").replace(/\/+$/, "");
+    // Only a bare single-segment slug (skip data files and nested paths).
+    if (!slug || slug.indexOf("/") !== -1) return;
+
+    var res = await context.next();
+    var ct = res.headers.get("content-type") || "";
+    if (ct.indexOf("text/html") === -1) return res; // only transform HTML
+
+    // Rebuild the response with the (possibly) modified body. Content-Length must
+    // be dropped because the body length changes; the runtime recomputes it.
+    function send(body) {
+      var headers = new Headers(res.headers);
+      headers.delete("content-length");
+      return new Response(body, { status: res.status, statusText: res.statusText, headers: headers });
+    }
+
+    var html = await res.text();
+    // Only touch a genuine 200 render of the expected template. If the rewrite
+    // pipeline returned anything else (e.g. a 404), serve it through untouched.
+    var marker = kind === "sermon" ? "st-root" : "dt-root";
+    if (!res.ok || html.indexOf(marker) === -1) return send(html);
+
     var dataRes = await fetch(url.origin + "/" + dir + "/data/" + slug + ".json");
     if (!dataRes.ok) return send(html);
     var d = await dataRes.json();
@@ -81,7 +81,7 @@ export default async (request, context) => {
     });
     return send(out);
   } catch (e) {
-    return send(html); // any failure -> unmodified page
+    return; // any failure -> fall back to normal handling, page never breaks
   }
 };
 
