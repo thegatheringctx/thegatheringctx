@@ -180,6 +180,27 @@
     document.body.insertBefore(a, document.body.firstChild);
   }
 
+  // Gentle scroll-reveal for below-the-fold <section>s. Progressive enhancement:
+  // only sections that start below the fold are animated (nothing above it
+  // flickers), and the whole thing is skipped under reduced-motion or when
+  // IntersectionObserver is unavailable, leaving all content visible.
+  function addReveals() {
+    if (!("IntersectionObserver" in window)) return;
+    try { if (matchMedia("(prefers-reduced-motion: reduce)").matches) return; } catch (e) {}
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    [].forEach.call(document.querySelectorAll("section"), function (s) {
+      if (s.classList.contains("hero") || s.classList.contains("page-hero")) return;
+      if (s.getBoundingClientRect().top < vh * 0.9) return;
+      s.classList.add("reveal");
+      io.observe(s);
+    });
+  }
+
   function mount() {
     var header = document.getElementById("site-header");
     var footer = document.getElementById("site-footer");
@@ -188,6 +209,7 @@
     ensureFonts();
     addSkipLink();
     wire();
+    addReveals();
   }
 
   if (document.readyState === "loading") {
