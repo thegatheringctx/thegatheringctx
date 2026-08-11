@@ -81,11 +81,11 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
 <!-- Kids Zone header injected by /assets/kids-shell.js -->
 <div id="kids-header"></div>
 
-<div class="demo-note">&#128269; Preview, this is exactly how it will look in the Kids Zone app</div>
+<div class="demo-note">Preview, this is exactly how it will look in the Kids Zone app</div>
 
 <div class="tab-row">
-  <button class="tab active" onclick="showTab('trivia')">&#9889; Bible Quiz</button>
-  <button class="tab" onclick="showTab('scramble')">&#128253; Word Scramble</button>
+  <button class="tab active" onclick="showTab('trivia')">Bible Quiz</button>
+  <button class="tab" onclick="showTab('scramble')">Word Scramble</button>
 </div>
 
 <!-- TRIVIA TAB -->
@@ -94,13 +94,13 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
     <div class="trivia-score">Question <span id="q-counter">1</span> of <span id="q-total">8</span> &nbsp;·&nbsp; <span id="q-pts" style="color:var(--gold)">0</span> pts</div>
   </div>
   <div id="q-card" class="q-card"></div>
-  <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question &#8594;</button>
+  <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question</button>
   <div class="trivia-done" id="trivia-done">
-    <div style="font-size:3rem;margin-bottom:.5rem">&#127881;</div>
+    
     <div class="done-score" id="done-score"></div>
     <div class="done-label">out of <span id="done-total"></span> pts possible</div>
     <div class="done-msg" id="done-msg"></div>
-    <button class="replay-btn" onclick="startTrivia()">Play Again &#8635;</button>
+    <button class="replay-btn" onclick="startTrivia()">Play Again</button>
   </div>
 </div>
 
@@ -114,7 +114,7 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
   <div class="letter-row" id="sc-letters"></div>
   <div class="guess-row" id="sc-guess"></div>
   <div class="scramble-actions">
-    <button class="sc-btn check" onclick="checkScramble()">Check &#10003;</button>
+    <button class="sc-btn check" onclick="checkScramble()">Check</button>
     <button class="sc-btn clear" onclick="clearGuess()">Clear</button>
     <button class="sc-btn skip" onclick="skipWord()">Skip</button>
   </div>
@@ -134,11 +134,11 @@ const QUESTIONS = [
 ];
 
 const WORDS = [
-  {word:"PENTECOST",scrambled:"CPNTTSEOOE",hint:"The day the Spirit came 🔥"},
-  {word:"HOLY SPIRIT",scrambled:"IHLSOYRTIP",hint:"The Helper Jesus promised 🕊"},
+  {word:"PENTECOST",scrambled:"CPNTTSEOOE",hint:"The day the Spirit came "},
+  {word:"HOLY SPIRIT",scrambled:"IHLSOYRTIP",hint:"The Helper Jesus promised "},
   {word:"PARACLETE",scrambled:"AALEPCRET",hint:"Greek: called alongside you"},
   {word:"TEMPLE",scrambled:"MELTPE",hint:"What YOU are (1 Cor 3:16)"},
-  {word:"DUNAMIS",scrambled:"SIADUNM",hint:"Greek word for power ⚡"},
+  {word:"DUNAMIS",scrambled:"SIADUNM",hint:"Greek word for power "},
   {word:"JOEL",scrambled:"EJOL",hint:"He prophesied 800 years early"},
   {word:"JERUSALEM",scrambled:"AAJEERLSMU",hint:"Where they waited for the Spirit"},
   {word:"FIRE",scrambled:"RIFE",hint:"Appeared as tongues of ___"}
@@ -183,7 +183,7 @@ function answer(idx){
   document.getElementById('feedback').classList.add('show');
   document.getElementById('q-pts').textContent=score;
   document.getElementById('next-btn').classList.add('show');
-  document.getElementById('next-btn').textContent=qIdx<QUESTIONS.length-1?'Next Question ➔':'See My Score!';
+  document.getElementById('next-btn').textContent=qIdx<QUESTIONS.length-1?'Next Question ':'See My Score!';
 }
 
 function nextQuestion(){
@@ -195,10 +195,10 @@ function nextQuestion(){
     document.getElementById('done-score').textContent=score;
     document.getElementById('done-total').textContent=QUESTIONS.length*10;
     document.getElementById('done-msg').textContent=
-      pct===100?'🏆 Perfect score! You are a Pentecost pro!':
-      pct>=80?'🔥 On fire! You know your stuff!':
-      pct>=60?'⚡ Good work, keep reading your devos!':
-      '📖 Keep digging, God\'s Word has treasure!';
+      pct===100?' Perfect score! You are a Pentecost pro!':
+      pct>=80?' On fire! You know your stuff!':
+      pct>=60?' Good work, keep reading your devos!':
+      ' Keep digging, God\'s Word has treasure!';
     document.getElementById('trivia-done').classList.add('show');
   } else { renderQuestion(); }
 }
@@ -278,7 +278,7 @@ function checkScramble(){
   const fb=document.getElementById('sc-feedback');
   if(guess.length<cleanWord.length){fb.innerHTML='<span style="color:rgba(255,255,255,.4)">Fill in all the letters first!</span>';return;}
   if(guess===cleanWord){
-    fb.innerHTML='<span class="sc-pts">+10 pts!</span> &#127881; That\'s right!';
+    fb.innerHTML='<span class="sc-pts">+10 pts!</span>That\'s right!';
     scDone.push(scIdx);
     setTimeout(advanceScramble,1200);
   } else {
@@ -293,7 +293,7 @@ function advanceScramble(){
   if(scIdx>=WORDS.length){
     const got=scDone.filter(x=>x!==null).length;
     document.getElementById('sc-feedback').innerHTML=
-      '<div style="text-align:center;padding:.5rem 0">&#127881; <strong style="color:var(--gold)">'+got+'/'+WORDS.length+'</strong> words! +'+(got*10)+' pts!</div>';
+      '<div style="text-align:center;padding:.5rem 0"><strong style="color:var(--gold)">'+got+'/'+WORDS.length+'</strong> words! +'+(got*10)+' pts!</div>';
     setTimeout(startScramble,2500);
   } else { renderScramble(); }
 }

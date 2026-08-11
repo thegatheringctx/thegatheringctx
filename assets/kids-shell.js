@@ -45,7 +45,7 @@
   function header() {
     return '' +
       '<nav class="kz-nav">' +
-        '<a href="/kids" class="kz-brand"><span class="kz-emoji">🦁</span>Kids Zone</a>' +
+        '<a href="/kids" class="kz-brand">Kids Zone</a>' +
         '<div class="kz-links">' + NAV.map(function (l) { return link(l); }).join("") + '</div>' +
         '<button class="kz-burger" id="kz-burger" aria-label="Open menu" aria-expanded="false" aria-controls="kz-mobile"><span></span><span></span><span></span></button>' +
       '</nav>' +

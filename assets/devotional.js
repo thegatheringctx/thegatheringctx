@@ -2,7 +2,7 @@
    The Gathering CTX - Interactive devotional reader
    A self-contained enhancement layer added to devotional pages:
      • a slim reading-progress bar at the top of the window
-     • a reading streak kept in localStorage (🔥 N-day streak)
+     • a reading streak kept in localStorage (N-day streak)
      • a share button (native share sheet, or copy-link fallback)
    It does not parse the page's own markup, so it is safe on every
    devotional regardless of how that page is built.
@@ -114,10 +114,10 @@
       var gap = last ? daysBetween(last, today) : null;
       count = (gap === 1) ? count + 1 : 1; // consecutive day continues; otherwise restart
       try { localStorage.setItem(LAST, today); localStorage.setItem(CNT, String(count)); } catch (e) {}
-      if (count >= 2) setTimeout(function () { showToast("🔥 " + count + "-day reading streak. Keep going."); }, 900);
+      if (count >= 2) setTimeout(function () { showToast(count + "-day reading streak. Keep going."); }, 900);
     }
     if (count >= 1) {
-      streak.innerHTML = '🔥&nbsp; <b>' + count + '</b>&nbsp; day' + (count === 1 ? '' : 's');
+      streak.innerHTML = '<b>' + count + '</b>&nbsp; day' + (count === 1 ? '' : 's') + ' in a row';
       streak.title = "Your reading streak";
       streak.classList.add("show");
     }

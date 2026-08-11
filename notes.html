@@ -83,7 +83,7 @@ body.pulpit #sidebar,body.pulpit #meta{display:none!important}
   </div>
   <div id="editor">
     <div id="ebar">
-      <button id="backBtn">&#8249;</button>
+      <button id="backBtn"></button>
       <input id="title" placeholder="Title">
       <button class="act" id="pinBtn">Pin</button>
       <button class="act" id="prevBtn">Read</button>
@@ -147,7 +147,7 @@ function renderFolders(){
   $('folderOpts').innerHTML=folders.map(f=>'<option value="'+esc(f)+'">').join('')
 }
 function renderList(){
-  $('list').innerHTML=notes.map(n=>'<div class="item'+(cur&&cur.id===n.id?' on':'')+'" data-id="'+n.id+'"><div class="t">'+(n.pinned?'<span class="pin">&#9733;</span>':'')+esc(n.title)+'</div><div class="s">'+esc(n.snippet||'')+'</div><div class="m">'+esc(n.folder)+' &middot; '+fmtDate(n.updated_at)+'</div></div>').join('')||'<div style="padding:24px;color:#4a5265;text-align:center;font-size:14px">No notes yet</div>'
+  $('list').innerHTML=notes.map(n=>'<div class="item'+(cur&&cur.id===n.id?' on':'')+'" data-id="'+n.id+'"><div class="t">'+(n.pinned?'':'')+esc(n.title)+'</div><div class="s">'+esc(n.snippet||'')+'</div><div class="m">'+esc(n.folder)+' &middot; '+fmtDate(n.updated_at)+'</div></div>').join('')||'<div style="padding:24px;color:#4a5265;text-align:center;font-size:14px">No notes yet</div>'
   document.querySelectorAll('.item').forEach(el=>el.onclick=()=>openNote(el.dataset.id))
 }
 async function openNote(id){
