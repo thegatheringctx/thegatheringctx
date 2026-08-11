@@ -133,12 +133,17 @@ const photos=[
 ];
 let cur=0;
 const grid=document.getElementById('galleryGrid');
+// Serve WebP (small thumbnail in the grid, full size in the lightbox) with a
+// JPG fallback for browsers that cannot decode WebP.
+function webp(s,suf){return s.replace(/\.(jpe?g|png)$/i,(suf||'')+'.webp');}
 photos.forEach((p,i)=>{
   const item=document.createElement('div');item.className='gallery-item';item.onclick=()=>openLightbox(i);
-  const img=document.createElement('img');img.src=p.src;img.alt=p.alt;img.loading='lazy';
+  const img=document.createElement('img');
+  img.src=webp(p.src,'-thumb');img.alt=p.alt;img.loading='lazy';img.decoding='async';
+  img.onerror=function(){this.onerror=null;this.src=p.src;};
   item.appendChild(img);grid.appendChild(item);
 });
-function openLightbox(i){cur=i;document.getElementById('lightboxImg').src=photos[i].src;document.getElementById('lightboxCounter').textContent=(i+1)+' of '+photos.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function openLightbox(i){cur=i;var lb=document.getElementById('lightboxImg');lb.onerror=function(){this.onerror=null;this.src=photos[i].src;};lb.src=webp(photos[i].src);document.getElementById('lightboxCounter').textContent=(i+1)+' of '+photos.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 function lightboxNav(d){cur=(cur+d+photos.length)%photos.length;openLightbox(cur);}
 document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
