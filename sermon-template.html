@@ -13,6 +13,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sermon | The Gathering CTX</title>
   <meta name="description" content="A sermon from The Gathering CTX in Cleburne, TX.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Gathering CTX">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Sermons | The Gathering CTX">
+  <meta property="og:description" content="Spirit-led, verse-by-verse teaching from The Gathering CTX in Cleburne, TX.">
+  <meta property="og:image" content="https://gatheringctx.org/Alexus-120.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sermons | The Gathering CTX">
+  <meta name="twitter:description" content="Spirit-led, verse-by-verse teaching from The Gathering CTX in Cleburne, TX.">
+  <meta name="twitter:image" content="https://gatheringctx.org/Alexus-120.jpg">
   <link rel="stylesheet" href="/assets/site.css">
   <style>
     .st-body{background:#0a0a0a;color:#fff;font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -111,11 +123,28 @@
   function render(d) {
     var root = document.getElementById("st-root");
     document.title = (d.title || "Sermon") + " | The Gathering CTX";
+    var desc = (d.subtitle || (d.summary && d.summary[0]) || d.title || "").slice(0, 300);
     var md = document.querySelector('meta[name="description"]');
-    if (md) md.setAttribute("content", (d.subtitle || (d.summary && d.summary[0]) || d.title || "").slice(0, 300));
+    if (md) md.setAttribute("content", desc);
+    var url = "https://gatheringctx.org/sermons/" + (d.slug || "");
     var can = document.createElement("link"); can.rel = "canonical";
-    can.href = "https://gatheringctx.org/sermons/" + (d.slug || "");
+    can.href = url;
     document.head.appendChild(can);
+
+    // Update social-share tags so JS-aware crawlers get the real sermon title.
+    // (The static defaults in <head> cover crawlers that do not run JS.)
+    var shareTitle = (d.title || "Sermon") + " | The Gathering CTX";
+    function setMeta(sel, val) {
+      var m = document.querySelector(sel);
+      if (m && val) m.setAttribute("content", val);
+    }
+    setMeta('meta[property="og:title"]', shareTitle);
+    setMeta('meta[property="og:description"]', desc);
+    setMeta('meta[name="twitter:title"]', shareTitle);
+    setMeta('meta[name="twitter:description"]', desc);
+    var ogu = document.querySelector('meta[property="og:url"]');
+    if (!ogu) { ogu = document.createElement("meta"); ogu.setAttribute("property", "og:url"); document.head.appendChild(ogu); }
+    ogu.setAttribute("content", url);
 
     var label = (d.seriesShort || d.series || "") + (d.week ? " &middot; Week " + d.week : "");
     var meta = [];
