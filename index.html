@@ -429,6 +429,19 @@
     out.innerHTML='<span class="ss-series-label">Now preaching</span> &nbsp;'+
       '<a href="/sermons">'+escHtml(name)+'</a>'+tail;
     out.hidden=false;
+
+    // Same source drives the "Current Series" card lower on the page. Title is
+    // the series subtitle (after the colon) when there is one; the blurb stays
+    // series-agnostic so it is always true no matter which book we are in.
+    var title=document.getElementById('hp-series-title');
+    var blurb=document.getElementById('hp-series-blurb');
+    var subtitle=(latest.series&&latest.series.indexOf(':')>-1)
+      ? latest.series.split(':').slice(1).join(':').trim()
+      : (latest.seriesShort||name);
+    if(title&&subtitle) title.textContent=subtitle;
+    if(blurb) blurb.innerHTML=escHtml(name)+'. We are walking verse by verse through '+
+      'Scripture together this season. Join us Sundays at 5:00 PM. '+
+      '<a href="/sermons" style="color:#b8935a;text-decoration:none;">Catch up on past weeks</a>.';
   }).catch(function(){});
 })();
 </script>
@@ -750,8 +763,8 @@
       </div>
       <div style="background:#0f0f0f;padding:2rem;">
         <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:8px;">Current Series</p>
-        <h3 style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:8px;">Rooted / All of Him</h3>
-        <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.7;">Colossians. We are walking verse by verse through Paul's letter, rooted and complete in all of Him. Join us Sundays at 5:00 PM. <a href="/sermons" style="color:#b8935a;text-decoration:none;">Catch up on past weeks</a>.</p>
+        <h3 id="hp-series-title" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:8px;">Rooted / All of Him</h3>
+        <p id="hp-series-blurb" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.7;">Colossians. We are walking verse by verse through Paul's letter, rooted and complete in all of Him. Join us Sundays at 5:00 PM. <a href="/sermons" style="color:#b8935a;text-decoration:none;">Catch up on past weeks</a>.</p>
       </div>
     </div>
     <div style="margin-top:2rem;text-align:center;">
