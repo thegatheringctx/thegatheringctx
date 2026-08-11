@@ -737,6 +737,57 @@
   </div>
 </section>
 
+<style>
+  .news-strip{background:#0d0d0d;border-top:1px solid var(--border);padding:64px 56px;}
+  .news-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap;}
+  .news-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  .news-title{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:300;line-height:1.15;margin-bottom:12px;}
+  .news-sub{font-family:var(--sans);font-size:0.85rem;color:var(--muted);line-height:1.6;max-width:42ch;}
+  .news-form{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+  .news-input{font-family:var(--sans);font-size:0.85rem;background:#111;border:1px solid #262626;color:#fff;padding:13px 18px;outline:none;border-radius:2px;transition:border-color .2s;}
+  .news-input:focus{border-color:var(--gold);}
+  .news-input::placeholder{color:rgba(255,255,255,0.3);}
+  #news-name{width:150px;} #news-email{width:230px;}
+  .news-btn{font-family:var(--sans);font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;background:var(--gold);color:#0a0a0a;border:none;padding:14px 26px;cursor:pointer;border-radius:2px;transition:filter .2s,opacity .2s;}
+  .news-btn:hover{filter:brightness(1.08);} .news-btn:disabled{opacity:.55;cursor:default;}
+  .news-msg{font-family:var(--sans);font-size:0.82rem;width:100%;margin-top:6px;display:none;}
+  .news-msg.show{display:block;} .news-msg.ok{color:#a7d7bf;} .news-msg.err{color:#e0a99a;}
+  @media(max-width:640px){.news-strip{padding:48px 24px;}.news-inner{flex-direction:column;align-items:flex-start;gap:28px;}.news-form{width:100%;}#news-name,#news-email{flex:1;width:auto;min-width:130px;}}
+</style>
+<section class="news-strip" aria-label="Newsletter signup">
+  <div class="news-inner">
+    <div>
+      <p class="news-label">Stay in the Word</p>
+      <h2 class="news-title">The weekly devotional, in your inbox.</h2>
+      <p class="news-sub">Scripture rooted and tied to what we are preaching on Sunday. No spam. Unsubscribe anytime.</p>
+    </div>
+    <form class="news-form" id="news-form">
+      <input class="news-input" id="news-name" type="text" placeholder="First name" aria-label="First name">
+      <input class="news-input" id="news-email" type="email" placeholder="Your email" aria-label="Your email" required>
+      <button class="news-btn" id="news-btn" type="submit">Subscribe</button>
+      <p class="news-msg" id="news-msg" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+<script>
+document.getElementById('news-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var btn=document.getElementById('news-btn'), msg=document.getElementById('news-msg');
+  var email=document.getElementById('news-email').value.trim(), name=document.getElementById('news-name').value.trim();
+  btn.disabled=true; btn.textContent='Sending...'; msg.className='news-msg';
+  fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,name:name,type:'devotional'})})
+    .then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d};});})
+    .then(function(res){
+      if(res.ok && res.d && res.d.success){
+        msg.textContent='You are in. Check your inbox to confirm.'; msg.className='news-msg ok show';
+        document.getElementById('news-form').reset();
+      } else { msg.textContent=(res.d&&res.d.error)||'Something went wrong. Please try again.'; msg.className='news-msg err show'; }
+      btn.disabled=false; btn.textContent='Subscribe';
+    })
+    .catch(function(){ msg.textContent='Could not connect. Please try again.'; msg.className='news-msg err show'; btn.disabled=false; btn.textContent='Subscribe'; });
+});
+</script>
+
 <!-- Shared site footer injected by /assets/site.js -->
 <div id="site-footer"></div>
 
