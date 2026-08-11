@@ -146,11 +146,35 @@
   }
 
   // ---- Mount ----
+  // Skip-to-content link for keyboard and screen-reader users.
+  function addSkipLink() {
+    if (document.querySelector(".skip-link")) return;
+    var a = document.createElement("a");
+    a.className = "skip-link";
+    a.href = "#";
+    a.textContent = "Skip to content";
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      var target = document.querySelector("main, [role=main], article, .fp-wrap, .article-wrapper, .dt-article, .st-wrap");
+      if (!target) {
+        var secs = [].slice.call(document.querySelectorAll("section"));
+        target = secs.filter(function (s) { return !s.closest("#site-header"); })[0];
+      }
+      if (target) {
+        target.setAttribute("tabindex", "-1");
+        target.focus();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+    document.body.insertBefore(a, document.body.firstChild);
+  }
+
   function mount() {
     var header = document.getElementById("site-header");
     var footer = document.getElementById("site-footer");
     if (header) header.innerHTML = buildHeader();
     if (footer) footer.innerHTML = buildFooter();
+    addSkipLink();
     wire();
   }
 
