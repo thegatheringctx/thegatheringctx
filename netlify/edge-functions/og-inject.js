@@ -4,12 +4,15 @@
  * The sermon and devotional pages are rendered client-side from JSON, so
  * crawlers that do not run JS (Facebook, iMessage, etc.) only see the generic
  * default tags baked into the template. This edge function intercepts a single
- * /sermons/<slug> or /devotionals/<slug> request, reads the matching JSON, and
- * rewrites the <title> and Open Graph / Twitter tags in the served HTML so the
- * real title and description are present in the initial markup.
+ * /sermons/<slug> or /devotionals/<slug> request, reads the template and the
+ * matching JSON, and returns the template with the <title> and Open Graph /
+ * Twitter tags rewritten to the real title and description.
  *
- * Safety: every failure path returns the original, unmodified response, so the
- * worst case is exactly the behavior we have today. It never blocks the page.
+ * Safety: it never serves the pipeline's own output. It fetches the static
+ * template itself and only returns a custom response once everything has
+ * succeeded. On ANY doubt it returns undefined, which makes Netlify serve the
+ * request normally (the /sermons/* -> template rewrite), so a working page can
+ * never be turned into a broken one.
  */
 
 function esc(s) {
@@ -39,37 +42,31 @@ export default async (request, context) => {
     var url = new URL(request.url);
     var path = url.pathname;
 
-    var kind, dir;
-    if (path.indexOf("/sermons/") === 0) { kind = "sermon"; dir = "sermons"; }
-    else if (path.indexOf("/devotionals/") === 0) { kind = "devotional"; dir = "devotionals"; }
-    else return; // not ours -> normal handling
+    var kind, dir, tmpl, marker;
+    if (path.indexOf("/sermons/") === 0) {
+      kind = "sermon"; dir = "sermons"; tmpl = "/sermon-template.html"; marker = "st-root";
+    } else if (path.indexOf("/devotionals/") === 0) {
+      kind = "devotional"; dir = "devotionals"; tmpl = "/devotional-template.html"; marker = "dt-root";
+    } else {
+      return; // not ours
+    }
 
     var slug = path.replace(/^\/(sermons|devotionals)\//, "").replace(/\/+$/, "");
     // Only a bare single-segment slug (skip data files and nested paths).
     if (!slug || slug.indexOf("/") !== -1) return;
 
-    var res = await context.next();
-    var ct = res.headers.get("content-type") || "";
-    if (ct.indexOf("text/html") === -1) return res; // only transform HTML
+    // Fetch the static template and the content JSON directly. We never touch
+    // context.next(), so we can only ever ADD a good response, never replace a
+    // working one with a broken one.
+    var tRes = await fetch(url.origin + tmpl);
+    var dRes = await fetch(url.origin + "/" + dir + "/data/" + slug + ".json");
+    if (!tRes.ok || !dRes.ok) return; // opt out -> Netlify serves normally
 
-    // Rebuild the response with the (possibly) modified body. Content-Length must
-    // be dropped because the body length changes; the runtime recomputes it.
-    function send(body) {
-      var headers = new Headers(res.headers);
-      headers.delete("content-length");
-      return new Response(body, { status: res.status, statusText: res.statusText, headers: headers });
-    }
+    var html = await tRes.text();
+    if (html.indexOf(marker) === -1) return; // not the template we expected
 
-    var html = await res.text();
-    // Only touch a genuine 200 render of the expected template. If the rewrite
-    // pipeline returned anything else (e.g. a 404), serve it through untouched.
-    var marker = kind === "sermon" ? "st-root" : "dt-root";
-    if (!res.ok || html.indexOf(marker) === -1) return send(html);
-
-    var dataRes = await fetch(url.origin + "/" + dir + "/data/" + slug + ".json");
-    if (!dataRes.ok) return send(html);
-    var d = await dataRes.json();
-    if (!d || !d.title) return send(html);
+    var d = await dRes.json();
+    if (!d || !d.title) return;
 
     var desc = kind === "sermon"
       ? (d.subtitle || (d.summary && d.summary[0]) || d.title)
@@ -79,9 +76,13 @@ export default async (request, context) => {
       title: d.title + " | The Gathering CTX",
       desc: String(desc || "").slice(0, 300)
     });
-    return send(out);
+
+    var headers = new Headers(tRes.headers);
+    headers.delete("content-length");
+    headers.set("content-type", "text/html; charset=utf-8");
+    return new Response(out, { status: 200, headers: headers });
   } catch (e) {
-    return; // any failure -> fall back to normal handling, page never breaks
+    return; // any failure -> normal handling, page never breaks
   }
 };
 
