@@ -65,6 +65,10 @@ Each **day** object: `n` (number), `title`, `scripture`, `scriptureRef`,
 - **Lives at:** `/sermons/<slug>`
 - **Template:** `sermon-template.html`
 - **Copy the skeleton:** `sermons/data/_template.json`
+- **Also add it to the list:** append one entry to `sermons/data/index.json`
+  (`slug`, `title`, `seriesGroup`, `series`, `seriesShort`, `week`, `passage`,
+  `preachedOn`) so it appears in the `/sermons` archive. The archive reads
+  this file and sorts newest-first automatically.
 
 ### Fields
 
@@ -102,12 +106,15 @@ Pentecost ember, Easter dawn; anything else falls back to the house gold.
 
 ## Good to know
 
-- **The archive pages** (`/devotionals`, `/sermons`) and the homepage's
-  "latest" currently read from the existing Supabase content system. The new
-  per-item pages above read the JSON data files. Both can coexist; over time
-  we can point the archives at the same data files so there is a single
-  source of truth. Until then, keep updating Supabase for the homepage's
-  "latest sermon/devotional" as you do today.
+- **The `/sermons` archive now reads the JSON files** (`sermons/data/index.json`)
+  and no longer depends on Supabase. Publishing a sermon = write its JSON +
+  add one line to `index.json`.
+- **The `/devotionals` archive and the homepage's "latest"** still read the
+  existing Supabase content system, since the older devotional content lives
+  in the static pages, not fully in Supabase. New devotionals published as
+  JSON work at their own URL immediately; to also list one in the archive
+  today, keep updating Supabase as you do now. Converging the devotional
+  archive onto JSON (like sermons) is a planned follow-up.
 - **Nothing is hand-built.** If a page ever looks off, fix the template or the
   theme once and every page updates.
 - **Everything is reversible.** It is all in git history.
