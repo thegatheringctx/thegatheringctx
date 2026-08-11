@@ -124,6 +124,24 @@ Example card for a one-time event:
 
 ---
 
+## Keeping the sitemap current
+
+Search engines find pages through `sitemap.xml`. Instead of editing that file
+by hand, regenerate it after publishing:
+
+```
+node scripts/build-sitemap.mjs
+```
+
+It keeps a curated list of the main pages and automatically adds every sermon
+in `sermons/data/index.json` and every devotional in `devotionals/data/`, so
+newly published content shows up in search on its own. Commit the updated
+`sitemap.xml` alongside the content. When you add a brand new evergreen page
+(not a sermon or devotional), add one line to the `CORE` list at the top of
+`scripts/build-sitemap.mjs`.
+
+---
+
 ## Per-book header themes
 
 Each book gets its own header look automatically, chosen from the `series`
