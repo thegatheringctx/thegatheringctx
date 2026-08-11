@@ -75,7 +75,7 @@ nav.scrolled{background:rgba(0,0,0,.92);border-color:var(--w08);backdrop-filter:
 .cta-body{font-size:.95rem;line-height:2;color:var(--k70);max-width:520px;margin:0 auto 2.5rem}
 .btn-dark{display:inline-block;background:#000;color:#fff;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;padding:1.2rem 3rem;transition:opacity .2s;margin:.5rem}
 .btn-dark:hover{opacity:.8}
-.btn-outline-dark{display:inline-block;--border:1px solid rgba(0,0,0,.3);color:#000;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:1.2rem 3rem;transition:all .2s;margin:.5rem}
+.btn-outline-dark{display:inline-block;border:1px solid rgba(0,0,0,.3);color:#000;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:1.2rem 3rem;transition:all .2s;margin:.5rem}
 .btn-outline-dark:hover{background:#000;color:#fff}
 footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
 .footer-brand{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:400;color:var(--w55)}
@@ -274,10 +274,10 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display
   <h2 class="cta-h2">Ready to<br><em>be in the room?</em></h2>
   <p class="cta-body">Drop your name and number and we will text you everything you need for Sunday. No spam. One text. That is it.</p>
   <form id="visit-form" style="max-width:420px;margin:0 auto 2rem;display:flex;flex-direction:column;gap:1rem;">
-    <input type="text" id="visit-name" placeholder="Your name" style="padding:1rem 1.5rem;font-family:'Nunito Sans',sans-serif;font-size:.9rem;--border:1px solid rgba(0,0,0,.2);background:#fff;color:#000;outline:none;width:100%;" required/>
+    <input type="text" id="visit-name" placeholder="Your name" style="padding:1rem 1.5rem;font-family:'Nunito Sans',sans-serif;font-size:.9rem;border:1px solid rgba(0,0,0,.2);background:#fff;color:#000;outline:none;width:100%;" required/>
     <div style="display:flex;gap:.75rem;">
-      <input type="tel" id="visit-mobile" placeholder="Phone number" style="padding:1rem 1.5rem;font-family:'Nunito Sans',sans-serif;font-size:.9rem;--border:1px solid rgba(0,0,0,.2);background:#fff;color:#000;outline:none;flex:1;" required/>
-      <button type="submit" id="visit-btn" style="background:#000;color:#fff;--border:none;padding:1rem 2rem;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;">I Am In &rarr;</button>
+      <input type="tel" id="visit-mobile" placeholder="Phone number" style="padding:1rem 1.5rem;font-family:'Nunito Sans',sans-serif;font-size:.9rem;border:1px solid rgba(0,0,0,.2);background:#fff;color:#000;outline:none;flex:1;" required/>
+      <button type="submit" id="visit-btn" style="background:#000;color:#fff;border:none;padding:1rem 2rem;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;">I Am In &rarr;</button>
     </div>
     <p style="font-size:.75rem;color:rgba(0,0,0,.45);line-height:1.7;text-align:center;margin-top:-.25rem;padding:0 .5rem;">By providing your phone number, you agree to receive text messages from The Gathering CTX regarding services, events, and updates. Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to opt out at any time.</p>
     <p id="visit-msg" style="font-size:.82rem;color:#5c4b2a;display:none;text-align:center;"></p>
