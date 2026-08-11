@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3L9RY5RS73');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Your Story | The Gathering CTX | Cleburne, TX</title>
+  <meta name="description" content="God is moving at The Gathering CTX in Cleburne, TX. Share what He has done in your life. Your testimony could be the reason someone else believes.">
+  <link rel="canonical" href="https://gatheringctx.org/testimony">
+  <meta property="og:title" content="Share Your Story | The Gathering CTX">
+  <meta property="og:description" content="Tell us what God has done in your life.">
+  <meta property="og:url" content="https://gatheringctx.org/testimony">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/forms.css">
+</head>
+<body class="form-page has-shell-nav">
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
+
+<main class="fp-wrap">
+  <p class="fp-eyebrow">They Overcame By Their Testimony</p>
+  <h1 class="fp-title">Tell us what God <em>has done.</em></h1>
+  <p class="fp-intro">Every story of what God has done is a seed of faith for someone else. Whether it is big or quiet, healing or rescue or a slow steady change, we would love to hear it. Your testimony could be the reason someone else believes.</p>
+
+  <form class="tg-form js-netlify-form" name="testimony" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+        data-success="Thank you for sharing. We read every story, and we are grateful God let us be part of yours.">
+    <input type="hidden" name="form-name" value="testimony">
+    <p class="tg-hp"><label>Do not fill this out <input name="bot-field"></label></p>
+
+    <div class="tg-field">
+      <label for="ty-name">Your name</label>
+      <input class="tg-input" id="ty-name" type="text" name="name" placeholder="First name is fine" required>
+    </div>
+    <div class="tg-field">
+      <label for="ty-email">Email <span class="opt">(optional)</span></label>
+      <input class="tg-input" id="ty-email" type="email" name="email" placeholder="you@example.com">
+    </div>
+    <div class="tg-field">
+      <label for="ty-story">Your story</label>
+      <textarea class="tg-textarea" id="ty-story" name="testimony" placeholder="What has God done? Share it in your own words…" required></textarea>
+    </div>
+    <div class="tg-field">
+      <label for="ty-share">May we share your story?</label>
+      <select class="tg-select" id="ty-share" name="shareable" required>
+        <option value="" disabled selected>Choose one…</option>
+        <option value="Yes, you may share it">Yes, you may share it (we may reach out first)</option>
+        <option value="Share it without my name">Share it, but without my name</option>
+        <option value="Please keep it private">Please keep it private, just for the team</option>
+      </select>
+    </div>
+
+    <button class="tg-submit" type="submit">Share My Story</button>
+    <p class="tg-msg" aria-live="polite"></p>
+  </form>
+
+  <p class="fp-alt">Want to read what God is doing? See our <a href="/testimonies">testimonies</a>.</p>
+</main>
+
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/forms.js" defer></script>
+</body>
+</html>

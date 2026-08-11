@@ -17,7 +17,7 @@ const SB_URL = process.env.SUPABASE_URL || 'https://ktuapfiexhlladgkuauc.supabas
 // never SELECT, on website_submissions.
 const SB_KEY = process.env.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_Z72fHkjKvEG0QnxdIsHBlg_Q4nLAaN6';
 
-const HANDLED = new Set(['prayer-request', 'connect-card', 'serve-interest', 'contact']);
+const HANDLED = new Set(['prayer-request', 'connect-card', 'serve-interest', 'contact', 'testimony']);
 
 export const handler = async (event) => {
   let formName = '(unknown)';
@@ -50,6 +50,9 @@ export const handler = async (event) => {
     } else if (formName === 'contact') {
       row.phone = d.phone || null;
       row.request = d.message || null;   // their message
+    } else if (formName === 'testimony') {
+      row.request = d.testimony || null;     // their story
+      row.heard_from = d.shareable || null;  // may we share it publicly?
     } else { // connect-card
       row.phone = d.phone || null;
       row.heard_from = d.heard_from || null;
