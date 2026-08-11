@@ -148,7 +148,7 @@
     embedPlayer(d.podcastUrl, document.getElementById("st-audio"));
     schema(d);
 
-    var theme = window.SeriesThemes ? window.SeriesThemes.get(d.series || d.seriesShort, d.theme) : null;
+    var theme = window.SeriesThemes ? window.SeriesThemes.get(d.themeKey || d.series || d.seriesShort, d.theme) : null;
     if (theme) {
       document.documentElement.style.setProperty("--st-accent", theme.accent);
       var hero = root.querySelector(".st-hero");

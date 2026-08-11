@@ -237,11 +237,11 @@
 <script>
 let _allSermons = [];
 
-function filterSermons(series, btn) {
+function filterSermons(group, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   const list = document.getElementById('sermon-list');
-  const filtered = series === 'all' ? _allSermons : _allSermons.filter(s => s.series === series);
+  const filtered = group === 'all' ? _allSermons : _allSermons.filter(s => (s.seriesGroup || s.series) === group);
   renderSermons(filtered, list);
 }
 
@@ -251,77 +251,43 @@ function renderSermons(sermons, list) {
     return;
   }
   list.innerHTML = sermons.map(s => {
-    const date = s.preached_on ? new Date(s.preached_on + 'T12:00:00') : null;
+    const date = s.preachedOn ? new Date(s.preachedOn + 'T12:00:00') : null;
     const month = date ? date.toLocaleString('en-US',{month:'short'}).toUpperCase() : '';
     const day = date ? date.getDate() : '';
     const year = date ? date.getFullYear() : '';
-
-    let playerHtml = '';
-    if (s.podcast_url) {
-      const match = s.podcast_url.match(/episodes\/(\d+)/);
-      if (match) {
-        const epId = match[1];
-        playerHtml = `<div class="sermon-player"><div id="bp-${epId}"></div></div>`;
-      } else {
-        playerHtml = `<div class="sermon-player"><audio controls preload="none" style="width:100%;max-width:500px"><source src="${s.podcast_url}" type="audio/mpeg"></audio></div>`;
-      }
-    }
-
-    return `<div class="sermon-card">
+    return `<a class="sermon-card" href="/sermons/${s.slug}" style="text-decoration:none;color:inherit">
       <div class="sermon-date">
         <span class="sermon-month">${month}</span>
         <span class="sermon-day">${day}</span>
         <span class="sermon-year">${year}</span>
       </div>
       <div class="sermon-info">
-        <span class="sermon-series">${s.series || ''}</span>
+        <span class="sermon-series">${s.seriesShort || s.seriesGroup || s.series || ''}</span>
         <h3 class="sermon-title">${s.title || ''}</h3>
-        <p class="sermon-meta">${s.passage || ''} &middot; ${s.speaker || 'Pastor Billy Philips'}</p>
-        ${s.preview_text ? `<p style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.75;margin-top:.4rem">${s.preview_text}</p>` : ''}
-        ${playerHtml}
+        <p class="sermon-meta">${s.passage ? s.passage + ' &middot; ' : ''}Listen &rarr;</p>
       </div>
-    </div>`;
+    </a>`;
   }).join('');
-
-  // Load Buzzsprout embeds after rendering
-  sermons.forEach(s => {
-    if (s.podcast_url) {
-      const match = s.podcast_url.match(/episodes\/(\d+)/);
-      if (match) {
-        const epId = match[1];
-        if (document.getElementById('bp-' + epId)) {
-          const sc = document.createElement('script');
-          sc.src = `https://www.buzzsprout.com/2608288/${epId}.js?container_id=bp-${epId}&player=small`;
-          sc.charset = 'utf-8';
-          document.body.appendChild(sc);
-        }
-      }
-    }
-  });
 }
 
 (async () => {
   try {
-    const res = await fetch('https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/weekly-content-deploy', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'get_sermon_archive', data: {} })
-    });
-    const data = await res.json();
-    _allSermons = data.data || [];
+    const res = await fetch('/sermons/data/index.json', { cache: 'no-cache' });
+    _allSermons = await res.json();
+    _allSermons.sort((a, b) => (b.preachedOn || '').localeCompare(a.preachedOn || ''));
 
-    // Build series filter buttons
-    const seriesSet = [...new Set(_allSermons.map(s => s.series).filter(Boolean))];
+    // Build series filter buttons from the series groups
+    const groups = [...new Set(_allSermons.map(s => s.seriesGroup || s.series).filter(Boolean))];
     const filterDiv = document.getElementById('series-filter');
-    seriesSet.forEach(series => {
+    groups.forEach(g => {
       const btn = document.createElement('button');
       btn.className = 'filter-btn';
-      btn.dataset.series = series;
-      btn.textContent = series;
-      btn.onclick = () => filterSermons(series, btn);
+      btn.dataset.series = g;
+      btn.textContent = g;
+      btn.onclick = () => filterSermons(g, btn);
       filterDiv.appendChild(btn);
     });
-    if (seriesSet.length <= 1) filterDiv.style.display = 'none';
+    if (groups.length <= 1) filterDiv.style.display = 'none';
 
     renderSermons(_allSermons, document.getElementById('sermon-list'));
   } catch(e) {
