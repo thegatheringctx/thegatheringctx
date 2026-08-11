@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9RY5RS73"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3L9RY5RS73');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devotional | The Gathering CTX</title>
+  <meta name="description" content="A daily devotional from The Gathering CTX in Cleburne, TX.">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .dt-body{background:#f7f4ee;color:#2a2320;font-family:'Georgia','Times New Roman',serif;}
+    /* HERO (dark) */
+    .dt-hero{background:#100d0c;color:#fff;padding:6.5rem 24px 4.5rem;text-align:center;}
+    .dt-hero-inner{max-width:760px;margin:0 auto;}
+    .dt-label{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#b8935a;margin-bottom:1.4rem;}
+    .dt-title{font-size:clamp(2.3rem,6vw,3.6rem);font-weight:300;line-height:1.08;letter-spacing:-.01em;margin-bottom:1.6rem;}
+    .dt-rule{width:54px;height:1px;background:#b8935a;margin:0 auto 1.6rem;}
+    .dt-sub{font-size:1.2rem;font-style:italic;color:rgba(255,255,255,.62);margin-bottom:1.1rem;line-height:1.5;}
+    .dt-passage{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+    /* ARTICLE (cream) */
+    .dt-article{max-width:680px;margin:0 auto;padding:4.5rem 24px 6rem;}
+    .dt-article p{font-size:1.06rem;line-height:1.95;margin-bottom:1.4rem;color:#3a322d;}
+    .dt-intro p:first-child{font-size:1.15rem;}
+    .dt-divider{display:flex;align-items:center;justify-content:center;margin:3.5rem 0 2.5rem;}
+    .dt-divider span{width:6px;height:6px;border-radius:50%;background:#b8935a;}
+    .dt-divider::before,.dt-divider::after{content:'';height:1px;flex:1;background:rgba(92,26,27,.18);}
+    .dt-divider::before{margin-right:1rem;}.dt-divider::after{margin-left:1rem;}
+    .dt-daynum{font-size:3rem;font-weight:300;color:rgba(184,147,90,.45);line-height:1;margin-bottom:.4rem;}
+    .dt-daytitle{font-size:1.9rem;font-weight:400;color:#5c1a1b;line-height:1.2;margin-bottom:1.6rem;}
+    .dt-scripture{background:#efe9df;border-left:3px solid #b8935a;padding:1.4rem 1.6rem;margin:0 0 1.8rem;}
+    .dt-scripture p{font-style:italic;font-size:1.05rem;line-height:1.75;color:#4a403a;margin:0 0 .7rem;}
+    .dt-scripture cite{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#b8935a;font-style:normal;font-weight:600;}
+    .dt-pull{font-size:1.3rem !important;font-style:italic;color:#5c1a1b;line-height:1.5;margin:0 0 1.6rem !important;}
+    .dt-greek{background:#f0ece3;padding:1.2rem 1.4rem;border-radius:3px;font-size:.98rem !important;line-height:1.85;color:#4a403a;}
+    .dt-reflect{margin-top:2rem;padding:1.6rem 1.8rem;border:1px solid rgba(92,26,27,.16);border-radius:3px;}
+    .dt-reflect h3{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#b8935a;margin-bottom:1rem;}
+    .dt-reflect ol{margin:0;padding-left:1.2rem;}
+    .dt-reflect li{font-size:1rem;line-height:1.8;color:#3a322d;margin-bottom:.7rem;}
+    .dt-close{margin-top:3.5rem;padding-top:2.5rem;border-top:2px solid rgba(92,26,27,.14);}
+    .dt-close h3{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:#b8935a;margin:2rem 0 1rem;}
+    .dt-decl p{margin-bottom:.9rem;font-style:italic;color:#4a403a;}
+    .dt-bened{margin-top:2rem;font-style:italic;color:#5c4b3f;}
+    .dt-loading,.dt-error{max-width:680px;margin:0 auto;padding:8rem 24px;text-align:center;color:rgba(0,0,0,.4);font-family:-apple-system,sans-serif;}
+    .dt-error a{color:#b8935a;}
+    @media(max-width:600px){.dt-hero{padding:5rem 20px 3.5rem;}.dt-article{padding:3rem 20px 4.5rem;}}
+  </style>
+</head>
+<body class="dt-body has-shell-nav">
+<!-- Shared site header injected by /assets/site.js -->
+<div id="site-header"></div>
+
+<div id="dt-root">
+  <div class="dt-loading">Loading devotional…</div>
+</div>
+
+<!-- Shared site footer injected by /assets/site.js -->
+<div id="site-footer"></div>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/devotional.js" defer></script>
+<script>
+(function () {
+  // slug from /devotionals/<slug> path, or ?slug=, fallback to a sample
+  function getSlug() {
+    var q = new URLSearchParams(location.search).get("slug");
+    if (q) return q;
+    var parts = location.pathname.replace(/\/+$/, "").split("/");
+    var last = parts[parts.length - 1];
+    if (last && last !== "devotionals" && last !== "devotional-template.html") return last;
+    return "colossians-week-1";
+  }
+  function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function paras(arr){return (arr||[]).map(function(p){return "<p>"+esc(p)+"</p>";}).join("");}
+
+  function render(d) {
+    var root = document.getElementById("dt-root");
+    // SEO from data
+    document.title = (d.title || "Devotional") + " | The Gathering CTX";
+    var md = document.querySelector('meta[name="description"]');
+    if (md && d.description) md.setAttribute("content", d.description);
+    var can = document.createElement("link"); can.rel = "canonical";
+    can.href = "https://gatheringctx.org/devotionals/" + (d.slug || "");
+    document.head.appendChild(can);
+
+    var label = (d.series ? d.series : "") + (d.week ? " &middot; Week " + d.week : "") + " Devotional";
+    var html = '' +
+      '<header class="dt-hero"><div class="dt-hero-inner">' +
+        '<p class="dt-label">' + label + '</p>' +
+        '<h1 class="dt-title">' + esc(d.title) + '</h1>' +
+        '<div class="dt-rule"></div>' +
+        (d.subtitle ? '<p class="dt-sub">' + esc(d.subtitle) + '</p>' : '') +
+        (d.passage ? '<p class="dt-passage">' + esc(d.passage) + '</p>' : '') +
+      '</div></header>' +
+      '<article class="dt-article">' +
+        '<div class="dt-intro">' + paras(d.intro) + '</div>';
+
+    (d.days || []).forEach(function (day) {
+      html += '<div class="dt-divider"><span></span></div>' +
+        '<div class="dt-daynum">' + String(day.n).padStart(2, "0") + '</div>' +
+        '<h2 class="dt-daytitle">' + esc(day.title) + '</h2>' +
+        (day.scripture ? '<blockquote class="dt-scripture"><p>' + esc(day.scripture) + '</p>' +
+            (day.scriptureRef ? '<cite>' + esc(day.scriptureRef) + '</cite>' : '') + '</blockquote>' : '') +
+        (day.pull ? '<p class="dt-pull">' + esc(day.pull) + '</p>' : '') +
+        paras(day.body) +
+        (day.greekWord ? '<p class="dt-greek">' + esc(day.greekWord) + '</p>' : '') +
+        (day.reflect && day.reflect.length ? '<div class="dt-reflect"><h3>Reflect</h3><ol>' +
+            day.reflect.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join("") + '</ol></div>' : '');
+    });
+
+    var close = "";
+    if (d.prayer) close += '<h3>' + esc(d.prayer.title || "A Prayer") + '</h3>' + paras([d.prayer.body]);
+    if (d.declaration && d.declaration.length) close += '<h3>Declaration</h3><div class="dt-decl">' + paras(d.declaration) + '</div>';
+    if (d.benediction && d.benediction.length) close += '<div class="dt-bened">' + paras(d.benediction) + '</div>';
+    if (close) html += '<div class="dt-close">' + close + '</div>';
+
+    html += '</article>';
+    root.innerHTML = html;
+  }
+
+  var slug = getSlug();
+  fetch("/devotionals/data/" + slug + ".json")
+    .then(function (r) { if (!r.ok) throw new Error("not found"); return r.json(); })
+    .then(render)
+    .catch(function () {
+      document.getElementById("dt-root").innerHTML =
+        '<div class="dt-error"><p>We couldn\'t load this devotional.</p>' +
+        '<p><a href="/devotionals">Browse all devotionals →</a></p></div>';
+    });
+})();
+</script>
+</body>
+</html>
