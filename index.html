@@ -345,6 +345,10 @@
   .ss-label{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
   .ss-date{font-size:1.55rem;font-weight:300;line-height:1.15;margin-bottom:7px;}
   .ss-meta{font-family:var(--sans);font-size:0.82rem;color:var(--muted);line-height:1.5;}
+  .ss-series{font-family:var(--sans);font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.5;margin-top:9px;}
+  .ss-series .ss-series-label{color:var(--gold);letter-spacing:0.04em;}
+  .ss-series a{color:rgba(255,255,255,0.85);text-decoration:none;border-bottom:1px solid rgba(184,147,90,0.35);transition:color .2s;}
+  .ss-series a:hover{color:#fff;}
   .ss-actions{display:flex;gap:14px;flex-wrap:wrap;}
   .ss-btn{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;padding:13px 26px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s;text-decoration:none;border:1px solid transparent;}
   .ss-btn-gold{background:var(--gold);color:#fff;}
@@ -359,6 +363,7 @@
       <p class="ss-label">Join Us This Sunday</p>
       <h2 class="ss-date" id="ss-date">This Sunday</h2>
       <p class="ss-meta">5:00 PM &nbsp;&middot;&nbsp; Cleburne Conference Center &nbsp;&middot;&nbsp; 1501 W Henderson St</p>
+      <p class="ss-series" id="ss-series" hidden></p>
     </div>
     <div class="ss-actions">
       <a href="#" class="ss-btn ss-btn-gold" id="ss-cal" role="button">Add to Calendar</a>
@@ -407,6 +412,24 @@
     document.body.appendChild(a); a.click();
     setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},100);
   });
+
+  // Show the current series on the strip, pulled from the sermon archive so it
+  // updates itself every time the weekly task publishes a new message. Uses the
+  // most recently preached sermon to name the series and its latest passage.
+  function escHtml(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  fetch('/sermons/data/index.json').then(function(r){return r.ok?r.json():null;}).then(function(list){
+    if(!list||!list.length) return;
+    var latest=list.slice().sort(function(a,b){return String(b.preachedOn||'').localeCompare(String(a.preachedOn||''));})[0];
+    if(!latest) return;
+    var name=latest.seriesGroup||latest.seriesShort||latest.series||'';
+    if(!name) return;
+    var out=document.getElementById('ss-series');
+    if(!out) return;
+    var tail=latest.passage?(' &middot; '+escHtml(latest.passage)):'';
+    out.innerHTML='<span class="ss-series-label">Now preaching</span> &nbsp;'+
+      '<a href="/sermons">'+escHtml(name)+'</a>'+tail;
+    out.hidden=false;
+  }).catch(function(){});
 })();
 </script>
 
