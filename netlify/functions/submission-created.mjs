@@ -17,7 +17,7 @@ const SB_URL = process.env.SUPABASE_URL || 'https://ktuapfiexhlladgkuauc.supabas
 // never SELECT, on website_submissions.
 const SB_KEY = process.env.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_Z72fHkjKvEG0QnxdIsHBlg_Q4nLAaN6';
 
-const HANDLED = new Set(['prayer-request', 'connect-card']);
+const HANDLED = new Set(['prayer-request', 'connect-card', 'serve-interest', 'contact']);
 
 export const handler = async (event) => {
   let formName = '(unknown)';
@@ -39,13 +39,18 @@ export const handler = async (event) => {
     }
 
     const row = { form_type: formName };
+    row.name = d.name || null;
+    row.email = d.email || null;
     if (formName === 'prayer-request') {
-      row.name = d.name || null;
-      row.email = d.email || null;
       row.request = d.request || null;
-    } else {
-      row.name = d.name || null;
-      row.email = d.email || null;
+    } else if (formName === 'serve-interest') {
+      row.phone = d.phone || null;
+      row.request = d.message || null;   // what they'd like to help with
+      row.heard_from = d.interest || null; // area(s) of interest
+    } else if (formName === 'contact') {
+      row.phone = d.phone || null;
+      row.request = d.message || null;   // their message
+    } else { // connect-card
       row.phone = d.phone || null;
       row.heard_from = d.heard_from || null;
     }

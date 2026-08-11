@@ -1,6 +1,17 @@
 [build]
   publish = "."
 
+# Build-time asset optimization: compress images and minify CSS/JS on deploy.
+# Files in the repo are untouched; Netlify serves optimized versions.
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  minify = true
+[build.processing.js]
+  minify = true
+[build.processing.images]
+  compress = true
+
 [functions]
   directory = "netlify/functions"
 
@@ -97,17 +108,17 @@
 
 [[redirects]]
   from = "/contact"
-  to = "/new-here.html"
+  to = "/contact.html"
   status = 200
 
 [[redirects]]
   from = "/serve"
-  to = "/belong.html"
+  to = "/serve.html"
   status = 200
 
 [[redirects]]
   from = "/prayer"
-  to = "/prayer-guide.html"
+  to = "/prayer.html"
   status = 200
 
 [[redirects]]

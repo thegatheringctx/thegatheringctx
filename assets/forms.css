@@ -1,0 +1,39 @@
+/* ============================================================
+   The Gathering CTX — shared form-page styling
+   Used by the Prayer, Serve, and Contact pages. Dark editorial
+   look to match the shared shell (gold #b8935a, Georgia serif).
+   ============================================================ */
+.form-page{background:#0a0a0a;color:#fff;font-family:'Georgia','Times New Roman',serif;min-height:100vh;}
+.fp-wrap{max-width:640px;margin:0 auto;padding:5.5rem 24px 7rem;}
+.fp-eyebrow{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#b8935a;margin-bottom:1.1rem;}
+.fp-title{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:300;line-height:1.05;letter-spacing:-.01em;margin-bottom:1.2rem;}
+.fp-title em{font-style:italic;color:rgba(255,255,255,.4);}
+.fp-intro{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1rem;line-height:1.85;color:rgba(255,255,255,.62);max-width:52ch;margin-bottom:3rem;}
+
+.tg-form{display:flex;flex-direction:column;gap:1.4rem;}
+.tg-field{display:flex;flex-direction:column;gap:.5rem;}
+.tg-field label{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#b8935a;}
+.tg-field label .opt{color:rgba(255,255,255,.3);}
+.tg-input,.tg-textarea,.tg-select{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.95rem;background:#111;border:1px solid #262626;color:#fff;padding:.95rem 1.1rem;outline:none;width:100%;border-radius:2px;transition:border-color .2s;}
+.tg-input:focus,.tg-textarea:focus,.tg-select:focus{border-color:#b8935a;}
+.tg-input::placeholder,.tg-textarea::placeholder{color:rgba(255,255,255,.28);}
+.tg-textarea{min-height:150px;resize:vertical;line-height:1.6;}
+.tg-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b8935a' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.4rem;}
+
+.tg-submit{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;background:#b8935a;color:#0a0a0a;border:none;padding:1.1rem 2rem;cursor:pointer;border-radius:2px;transition:filter .2s,opacity .2s;align-self:flex-start;}
+.tg-submit:hover{filter:brightness(1.08);}
+.tg-submit:disabled{opacity:.55;cursor:default;}
+
+.tg-note{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.78rem;line-height:1.7;color:rgba(255,255,255,.4);}
+.tg-msg{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.92rem;line-height:1.7;padding:1rem 1.2rem;border-radius:2px;display:none;}
+.tg-msg.show{display:block;}
+.tg-msg.ok{background:rgba(45,106,79,.16);border:1px solid rgba(45,106,79,.5);color:#a7d7bf;}
+.tg-msg.err{background:rgba(140,60,45,.16);border:1px solid rgba(140,60,45,.5);color:#e0a99a;}
+
+.tg-hp{position:absolute;left:-9999px;opacity:0;height:0;width:0;overflow:hidden;}
+
+.fp-alt{margin-top:3rem;padding-top:2rem;border-top:1px solid #1a1a1a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.9;}
+.fp-alt a{color:#b8935a;text-decoration:none;border-bottom:1px solid rgba(184,147,90,.35);}
+.fp-alt a:hover{border-color:#b8935a;}
+
+@media(max-width:600px){.fp-wrap{padding:4.5rem 20px 5rem;}}
