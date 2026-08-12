@@ -11,10 +11,17 @@
       "cards": [
         {
           "date": "Coming Up",
-          "title": "Partnership Class",
-          "body": "One session. 90 minutes. Everything you need to know about who we are, what we believe, and how to move from visitor to family. Contact us for the next date.",
+          "title": "Belong and Become",
+          "body": "One session. 90 minutes. Everything you need to know about who we are, what we believe, and how to move from visitor to family. Reserve your seat online in about a minute.",
           "linkHref": "/belong",
-          "linkLabel": "Learn More"
+          "linkLabel": "Reserve a Seat"
+        },
+        {
+          "date": "Register Now",
+          "title": "Evangelism Class",
+          "body": "Learn to share your faith with clarity and confidence. A practical class on telling people about Jesus in everyday life. Register online and we will see you there.",
+          "linkHref": "https://gatheringctx.churchcenter.com/registrations/events/3751602/reservations/new",
+          "linkLabel": "Register"
         },
         {
           "date": "Ongoing",

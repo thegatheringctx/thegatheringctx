@@ -63,8 +63,9 @@
   function isExpired(card){return card && card.expires && String(card.expires) < todayStr();}
 
   function cardHtml(c){
+    var ext = c.linkHref && /^https?:\/\//.test(c.linkHref);
     var link = (c.linkHref && c.linkLabel)
-      ? '<a href="'+esc(c.linkHref)+'" class="ev-link">'+esc(c.linkLabel)+'</a>' : '';
+      ? '<a href="'+esc(c.linkHref)+'" class="ev-link"'+(ext?' target="_blank" rel="noopener"':'')+'>'+esc(c.linkLabel)+'</a>' : '';
     return '<div class="event-card">' +
       (c.date ? '<div class="event-date">'+esc(c.date)+'</div>' : '') +
       '<h3>'+esc(c.title)+'</h3>' +

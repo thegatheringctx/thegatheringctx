@@ -51,6 +51,19 @@
   to = "/generosity.html"
   status = 200
 
+# Frictionless shortcuts straight to Church Center (giving + registrations).
+[[redirects]]
+  from = "/give"
+  to = "https://gatheringctx.churchcenter.com/giving"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/register"
+  to = "https://gatheringctx.churchcenter.com/registrations"
+  status = 302
+  force = true
+
 [[redirects]]
   from = "/small-gatherings"
   to = "/small-gatherings.html"
