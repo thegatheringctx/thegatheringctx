@@ -21,7 +21,7 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {--black: #000;--off: #f5f0e8;--gold: #c8a96e;
-   gold-dim: rgba(200,169,110,.15);--w08: rgba(255,255,255,.08);--w15: rgba(255,255,255,.15);--w30: rgba(255,255,255,.3);--w55: rgba(255,255,255,.55);--w75: rgba(255,255,255,.75);--w80: rgba(255,255,255,.8);--k70: rgba(0,0,0,.7);
+   gold-dim: rgba(200,169,110,.15);--w08: rgba(255,255,255,.08);--w15: rgba(255,255,255,.15);--w30: rgba(255,255,255,.5);--w55: rgba(255,255,255,.55);--w75: rgba(255,255,255,.75);--w80: rgba(255,255,255,.8);--k70: rgba(0,0,0,.7);
 }
 html { scroll-behavior: smooth; }
 body { background: var(--black); color: #fff; font-family: 'Nunito Sans', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
@@ -58,7 +58,7 @@ nav.scrolled { background: rgba(0,0,0,.92); border-color: var(--w08); backdrop-f
 .what-body { font-size: .95rem; line-height: 2; color: var(--k70); }
 .what-body p + p { margin-top: 1.2rem; }
 .what-card { background: #fff;border: 1px solid rgba(0,0,0,.07); padding: 2.5rem; margin-bottom: 1px; }
-.what-card-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: rgba(0,0,0,.12); line-height: 1; margin-bottom: .8rem; }
+.what-card-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color:rgba(0,0,0,.42); line-height: 1; margin-bottom: .8rem; }
 .what-card-title { font-size: .95rem; font-weight: 500; color: #000; margin-bottom: .5rem; }
 .what-card-body { font-size: .85rem; line-height: 1.85; color: var(--k70); }
 
@@ -93,7 +93,7 @@ nav.scrolled { background: rgba(0,0,0,.92); border-color: var(--w08); backdrop-f
 .walkaway-body { font-size: .95rem; line-height: 2; color: var(--k70); }
 .walkaway-items { display: flex; flex-direction: column; gap: 1px; }
 .walkaway-item { background: #fff;border: 1px solid rgba(0,0,0,.07); padding: 2rem 2.5rem; display: flex; gap: 2rem; align-items: start; }
-.walkaway-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: rgba(0,0,0,.12); line-height: 1; flex-shrink: 0; }
+.walkaway-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color:rgba(0,0,0,.42); line-height: 1; flex-shrink: 0; }
 .walkaway-text { font-size: .88rem; line-height: 1.9; color: var(--k70); padding-top: .5rem; }
 .walkaway-text strong { display: block; font-weight: 500; color: #000; margin-bottom: .3rem; font-size: .9rem; }
 
@@ -120,7 +120,7 @@ nav.scrolled { background: rgba(0,0,0,.92); border-color: var(--w08); backdrop-f
 .register-note { font-size: .78rem; color: var(--w30); line-height: 1.8; padding-top: 1.5rem; border-top: 1px solid var(--w08); }
 .btn-primary { display: inline-block; background: #fff; color: #000; text-decoration: none; font-family: 'Nunito Sans', sans-serif; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 600; padding: 1.2rem 3rem; transition: opacity .2s; margin-bottom: 1.5rem; }
 .btn-primary:hover { opacity: .85; }
-.btn-note { font-size: .82rem; color: rgba(255,255,255,.4); line-height: 1.8; }
+.btn-note { font-size: .82rem; color:rgba(255,255,255,0.62); line-height: 1.8; }
 
 /* FOOTER */
 footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
@@ -147,21 +147,21 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
   .footer-logo{text-decoration:none;color:#fff;display:block;margin-bottom:16px;}
   .footer-the{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;display:block;}
   .footer-gathering{font-size:1.1rem;letter-spacing:0.2em;text-transform:uppercase;}
-  .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:20px;font-family:Georgia,serif;font-style:italic;}
+  .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.62);line-height:1.5;margin-bottom:20px;font-family:Georgia,serif;font-style:italic;}
   .footer-social{display:flex;gap:16px;}
-  .footer-social a{color:rgba(255,255,255,0.4);transition:color 0.2s;text-decoration:none;}
+  .footer-social a{color:rgba(255,255,255,0.62);transition:color 0.2s;text-decoration:none;}
   .footer-social a:hover{color:#b8935a;}
   .footer-info-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:16px;display:block;}
-  .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.8;display:block;}
+  .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.62);line-height:1.8;display:block;}
   .footer-link{text-decoration:none;transition:color 0.2s;}
   .footer-link:hover{color:#fff;}
   .footer-map-link{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#b8935a;text-decoration:none;display:inline-block;margin-top:12px;}
   .footer-nav{display:flex;flex-direction:column;gap:2px;}
-  .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.4);text-decoration:none;line-height:1.9;transition:color 0.2s;}
+  .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.62);text-decoration:none;line-height:1.9;transition:color 0.2s;}
   .footer-nav-link:hover{color:#fff;}
   .footer-bottom{max-width:1200px;margin:0 auto;padding-top:32px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
-  .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.2);}
-  .footer-bottom-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+  .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.62);}
+  .footer-bottom-link{color:rgba(255,255,255,0.62);text-decoration:none;}
   @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:40px;}}
   @media(max-width:600px){.footer-inner{grid-template-columns:1fr;}.site-footer{padding:48px 24px 24px;}}
 
@@ -179,7 +179,7 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
     .register-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.1; letter-spacing: -.01em; margin-bottom: 1.5rem; }
     .register-h2 em { font-style: italic; color: var(--gold); }
     .register-body { font-size: .95rem; line-height: 2; color: var(--w55); margin-bottom: 2rem; }
-    .register-note { font-size: .82rem; line-height: 1.85; color: rgba(255,255,255,.3); border-top: 1px solid var(--w08); padding-top: 1.5rem; }
+    .register-note { font-size: .82rem; line-height: 1.85; color:rgba(255,255,255,0.62); border-top: 1px solid var(--w08); padding-top: 1.5rem; }
     .register-right { }
     .form-field { margin-bottom: 1.2rem; }
     .form-label { display: block; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--w30); margin-bottom: .5rem; }
@@ -428,7 +428,7 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
     <h2 class="register-h2">Ready to go<br><em>deeper?</em></h2>
     <p class="register-body">Formed &amp; Sent runs in five-week cohorts. Spots are limited to keep it personal. Fill out the form and we will reach out with the next available cohort date and everything you need to get started.</p>
     <div class="register-note">
-      This course is held in person at the Cleburne Conference Center. Prerequisite is Belong &amp; Become, but if you are ready to build, reach out and let's talk. Questions? Email us at <a href="mailto:info@gatheringctx.org" style="color:var(--gold);text-decoration:none">info@gatheringctx.org</a>
+      This course is held in person at the Cleburne Conference Center. Prerequisite is Belong &amp; Become, but if you are ready to build, reach out and let's talk. Questions? Email us at <a href="mailto:info@gatheringctx.org" style="color:var(--gold);text-decoration:underline;text-underline-offset:2px">info@gatheringctx.org</a>
     </div>
   </div>
   <div class="register-right">
@@ -439,7 +439,7 @@ footer { background: #000; border-top: 1px solid var(--w08); padding: 3rem 6rem;
         rel="noopener"
         style="display:inline-block;background:#fff;color:#000;text-decoration:none;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;padding:1.2rem 3rem;transition:opacity .2s;margin-bottom:1.5rem"
       >I'm Ready &rarr;</a>
-      <p style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.8">You'll be taken to our secure Planning Center form.<br>Your information goes directly into our church database.</p>
+      <p style="font-size:.82rem;color:rgba(255,255,255,0.62);line-height:1.8">You'll be taken to our secure Planning Center form.<br>Your information goes directly into our church database.</p>
     </div>
   </div>
 </section>

@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--black:#000;--off:#f5f0e8;--gold:#c8a96e;--w08:rgba(255,255,255,.08);--w30:rgba(255,255,255,.3);--w55:rgba(255,255,255,.55);--w80:rgba(255,255,255,.8);--k70:rgba(0,0,0,.7);--k40:rgba(0,0,0,.4)}
+:root{--black:#000;--off:#f5f0e8;--gold:#c8a96e;--w08:rgba(255,255,255,.08);--w30:rgba(255,255,255,.5);--w55:rgba(255,255,255,.55);--w80:rgba(255,255,255,.8);--k70:rgba(0,0,0,.7);--k40:rgba(0,0,0,.4)}
 html{scroll-behavior:smooth}
 body{background:var(--black);color:#fff;font-family:'Nunito Sans',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
@@ -41,7 +41,7 @@ nav.scrolled{background:rgba(0,0,0,.92);border-color:var(--w08);backdrop-filter:
 .vital-val{font-size:1rem;color:var(--w80);font-weight:300;line-height:1.5}
 .expect{background:var(--off);padding:9rem 6rem}
 .section-label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;margin-bottom:4rem}
-.section-label-dark{color:var(--k40)}
+.section-label-dark{color:#5c4b2a}
 .section-label-gold{color:var(--gold)}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start}
 .expect-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;line-height:1.15;color:#000;letter-spacing:-.01em}
@@ -59,7 +59,7 @@ nav.scrolled{background:rgba(0,0,0,.92);border-color:var(--w08);backdrop-filter:
 .flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--w08)}
 .flow-step{background:#0a0a0a;padding:2.5rem 2rem;border-top:2px solid transparent;transition:border-color .3s}
 .flow-step:hover{border-top-color:var(--gold)}
-.flow-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(200,169,110,.25);line-height:1;margin-bottom:1rem}
+.flow-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(200,169,110,.6);line-height:1;margin-bottom:1rem}
 .flow-title{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
 .flow-body{font-size:.88rem;line-height:1.85;color:var(--w55)}
 .faq{background:var(--black);padding:9rem 6rem;border-top:1px solid var(--w08);display:grid;grid-template-columns:1fr 1fr;gap:8rem}
@@ -101,21 +101,21 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display
   .footer-logo{text-decoration:none;color:#fff;display:block;margin-bottom:16px;}
   .footer-the{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;display:block;}
   .footer-gathering{font-size:1.1rem;letter-spacing:0.2em;text-transform:uppercase;}
-  .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:20px;font-family:Georgia,serif;font-style:italic;}
+  .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.62);line-height:1.5;margin-bottom:20px;font-family:Georgia,serif;font-style:italic;}
   .footer-social{display:flex;gap:16px;}
-  .footer-social a{color:rgba(255,255,255,0.4);transition:color 0.2s;text-decoration:none;}
+  .footer-social a{color:rgba(255,255,255,0.62);transition:color 0.2s;text-decoration:none;}
   .footer-social a:hover{color:#b8935a;}
   .footer-info-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:16px;display:block;}
-  .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.8;display:block;}
+  .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.62);line-height:1.8;display:block;}
   .footer-link{text-decoration:none;transition:color 0.2s;}
   .footer-link:hover{color:#fff;}
   .footer-map-link{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#b8935a;text-decoration:none;display:inline-block;margin-top:12px;}
   .footer-nav{display:flex;flex-direction:column;gap:2px;}
-  .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.4);text-decoration:none;line-height:1.9;transition:color 0.2s;}
+  .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.62);text-decoration:none;line-height:1.9;transition:color 0.2s;}
   .footer-nav-link:hover{color:#fff;}
   .footer-bottom{max-width:1200px;margin:0 auto;padding-top:32px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
-  .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.2);}
-  .footer-bottom-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+  .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.62);}
+  .footer-bottom-link{color:rgba(255,255,255,0.62);text-decoration:none;}
   @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:40px;}}
   @media(max-width:600px){.footer-inner{grid-template-columns:1fr;}.site-footer{padding:48px 24px 24px;}}
   
@@ -279,7 +279,7 @@ footer{background:#000;border-top:1px solid var(--w08);padding:3rem 6rem;display
       <input type="tel" id="visit-mobile" placeholder="Phone number" style="padding:1rem 1.5rem;font-family:'Nunito Sans',sans-serif;font-size:.9rem;border:1px solid rgba(0,0,0,.2);background:#fff;color:#000;outline:none;flex:1;" required/>
       <button type="submit" id="visit-btn" style="background:#000;color:#fff;border:none;padding:1rem 2rem;font-family:'Nunito Sans',sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;">I Am In &rarr;</button>
     </div>
-    <p style="font-size:.75rem;color:rgba(0,0,0,.45);line-height:1.7;text-align:center;margin-top:-.25rem;padding:0 .5rem;">By providing your phone number, you agree to receive text messages from The Gathering CTX regarding services, events, and updates. Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to opt out at any time.</p>
+    <p style="font-size:.75rem;color:rgba(0,0,0,0.66);line-height:1.7;text-align:center;margin-top:-.25rem;padding:0 .5rem;">By providing your phone number, you agree to receive text messages from The Gathering CTX regarding services, events, and updates. Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to opt out at any time.</p>
     <p id="visit-msg" style="font-size:.82rem;color:#5c4b2a;display:none;text-align:center;"></p>
   </form>
   <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">

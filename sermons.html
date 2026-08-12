@@ -12,7 +12,7 @@
     html{scroll-behavior:smooth}
     body{background:#000;color:#fff;font-family:"Nunito Sans",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
     a{color:inherit;text-decoration:none}
-    :root{--black:#000; white:#fff;--off:#f8f6f2;--ash:#0e0d0b;--gold:#c8a96e;--w90:rgba(255,255,255,.90);--w75:rgba(255,255,255,.75);--w55:rgba(255,255,255,.55);--w30:rgba(255,255,255,.30);--w15:rgba(255,255,255,.15);--w08:rgba(255,255,255,.08)}
+    :root{--black:#000; white:#fff;--off:#f8f6f2;--ash:#0e0d0b;--gold:#c8a96e;--w90:rgba(255,255,255,.90);--w75:rgba(255,255,255,.75);--w55:rgba(255,255,255,.55);--w30:rgba(255,255,255,.5);--w15:rgba(255,255,255,.15);--w08:rgba(255,255,255,.08)}
 
     /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.8rem 4rem;background:rgba(0,0,0,.92);backdrop-filter:blur(12px)}
@@ -99,7 +99,7 @@
     .subscribe-section{background:#111;padding:6rem;border-top:1px solid rgba(255,255,255,.06)}
     .subscribe-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
     .subscribe-h2{font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:200;color:#fff;line-height:1.2;margin:.6rem 0 .8rem}
-    .subscribe-sub{font-size:.85rem;line-height:1.9;color:rgba(255,255,255,.45)}
+    .subscribe-sub{font-size:.85rem;line-height:1.9;color:rgba(255,255,255,0.62)}
     .subscribe-form{display:flex;flex-direction:column;gap:.8rem}
     .sub-input-row{display:flex;gap:.6rem}
     .sub-input{flex:1;padding:1rem 1.4rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;font-size:.9rem;border-radius:2px;outline:none;transition:border-color .2s;font-family:inherit}
@@ -110,7 +110,7 @@
     .sub-msg.success{color:#6fcf97}
     .sub-msg.error{color:#eb5757}
     .sermon-nudge{display:flex;align-items:center;justify-content:space-between;padding:1.8rem 3rem;background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
-    .nudge-text{font-size:.82rem;color:rgba(255,255,255,.45);letter-spacing:.02em;margin:0}
+    .nudge-text{font-size:.82rem;color:rgba(255,255,255,0.62);letter-spacing:.02em;margin:0}
     .nudge-btn{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold,#c9a84c);text-decoration:none;white-space:nowrap;border:1px solid rgba(201,168,76,.3);padding:.6rem 1.2rem;border-radius:2px;transition:border-color .2s,background .2s}
     .nudge-btn:hover{border-color:var(--gold,#c9a84c);background:rgba(201,168,76,.06)}
     @media(max-width:768px){.subscribe-inner{grid-template-columns:1fr;gap:2rem}.sub-input-row{flex-direction:column}.subscribe-section{padding:4rem 2rem}.sermon-nudge{padding:1.8rem 2rem}}
@@ -119,7 +119,7 @@
 .subscribe-section{background:#111;padding:6rem;border-top:1px solid rgba(255,255,255,.06)}
 .subscribe-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 .subscribe-h2{font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:200;color:#fff;line-height:1.2;margin:.6rem 0 .8rem}
-.subscribe-sub{font-size:.85rem;line-height:1.9;color:rgba(255,255,255,.45)}
+.subscribe-sub{font-size:.85rem;line-height:1.9;color:rgba(255,255,255,0.62)}
 .subscribe-form{display:flex;flex-direction:column;gap:.8rem}
 .sub-input-row{display:flex;gap:.6rem}
 .sub-input{flex:1;padding:1rem 1.4rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;font-size:.9rem;border-radius:2px;outline:none;transition:border-color .2s;font-family:inherit}
@@ -135,21 +135,21 @@
   .footer-logo{text-decoration:none;color:#fff;display:block;margin-bottom:16px;}
   .footer-the{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;display:block;}
   .footer-gathering{font-size:1.1rem;letter-spacing:0.2em;text-transform:uppercase;}
-  .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:20px;font-family:Georgia,serif;font-style:italic;}
+  .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.62);line-height:1.5;margin-bottom:20px;font-family:Georgia,serif;font-style:italic;}
   .footer-social{display:flex;gap:16px;}
-  .footer-social a{color:rgba(255,255,255,0.4);transition:color 0.2s;text-decoration:none;}
+  .footer-social a{color:rgba(255,255,255,0.62);transition:color 0.2s;text-decoration:none;}
   .footer-social a:hover{color:#b8935a;}
   .footer-info-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:16px;display:block;}
-  .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.8;display:block;}
+  .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.62);line-height:1.8;display:block;}
   .footer-link{text-decoration:none;transition:color 0.2s;}
   .footer-link:hover{color:#fff;}
   .footer-map-link{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#b8935a;text-decoration:none;display:inline-block;margin-top:12px;}
   .footer-nav{display:flex;flex-direction:column;gap:2px;}
-  .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.4);text-decoration:none;line-height:1.9;transition:color 0.2s;}
+  .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.62);text-decoration:none;line-height:1.9;transition:color 0.2s;}
   .footer-nav-link:hover{color:#fff;}
   .footer-bottom{max-width:1200px;margin:0 auto;padding-top:32px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
-  .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.2);}
-  .footer-bottom-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+  .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.62);}
+  .footer-bottom-link{color:rgba(255,255,255,0.62);text-decoration:none;}
   @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:40px;}}
   @media(max-width:600px){.footer-inner{grid-template-columns:1fr;}.site-footer{padding:48px 24px 24px;}}
   
@@ -226,9 +226,9 @@
     <input id="sermon-search" type="search" aria-label="Search sermons" placeholder="Search by title, book, or passage"
       oninput="setSermonQuery(this.value)"
       style="width:100%;padding:.75rem 1rem .75rem 2.4rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:.88rem;border-radius:3px;outline:none;font-family:inherit;transition:border-color .2s">
-    <span aria-hidden="true" style="position:absolute;left:.85rem;top:50%;transform:translateY(-50%);display:flex;color:rgba(255,255,255,.4)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+    <span aria-hidden="true" style="position:absolute;left:.85rem;top:50%;transform:translateY(-50%);display:flex;color:rgba(255,255,255,0.62)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
   </div>
-  <p id="sermon-count" style="margin:.7rem 0 0;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3)"></p>
+  <p id="sermon-count" style="margin:.7rem 0 0;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.62)"></p>
 </div>
 
   <!-- Series filter -->
@@ -237,14 +237,14 @@
 </div>
 
 <div class="sermon-list" id="sermon-list">
-  <div style="padding:3rem;color:rgba(255,255,255,0.3);font-size:.85rem">Loading sermons...</div>
+  <div style="padding:3rem;color:rgba(255,255,255,0.62);font-size:.85rem">Loading sermons...</div>
 </div>
 
 <style>
-.filter-btn{padding:.4rem 1rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;border-radius:2px;transition:all .2s}
+.filter-btn{padding:.4rem 1rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,0.62);cursor:pointer;border-radius:2px;transition:all .2s}
 .filter-btn.active,.filter-btn:hover{border-color:var(--gold,#c9a84c);color:var(--gold,#c9a84c);background:rgba(201,168,76,.08)}
 #sermon-search:focus{border-color:var(--gold,#c9a84c)}
-#sermon-search::placeholder{color:rgba(255,255,255,.35)}
+#sermon-search::placeholder{color:rgba(255,255,255,0.62)}
 </style>
 
 <script>
@@ -288,7 +288,7 @@ function setSermonQuery(v) {
 
 function renderSermons(sermons, list) {
   if (!sermons.length) {
-    list.innerHTML = '<div style="padding:3rem;color:rgba(255,255,255,0.3);text-align:center">No sermons match your search.</div>';
+    list.innerHTML = '<div style="padding:3rem;color:rgba(255,255,255,0.62);text-align:center">No sermons match your search.</div>';
     return;
   }
   list.innerHTML = sermons.map(s => {
@@ -333,7 +333,7 @@ function renderSermons(sermons, list) {
     applyFilters();
   } catch(e) {
     document.getElementById('sermon-list').innerHTML =
-      '<div style="padding:3rem;color:rgba(255,255,255,0.3)">Could not load sermons.</div>';
+      '<div style="padding:3rem;color:rgba(255,255,255,0.62)">Could not load sermons.</div>';
     console.error(e);
   }
 })();

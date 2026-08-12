@@ -13,7 +13,7 @@
 /* ---- NAV ---- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(10,10,10,0.93);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04);}
 .nav-brand{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1;display:inline-block;color:#fff;text-decoration:none;}
-.nav-the{display:block;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.38;}
+.nav-the{display:block;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.62;}
 .nav-name{font-size:0.9rem;letter-spacing:0.22em;text-transform:uppercase;}
 .nav-links{display:flex;align-items:center;gap:32px;}
 .nav-links a{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.62);transition:color 0.2s;text-decoration:none;}
@@ -38,23 +38,23 @@
 .nav-mobile-menu .mob-give{color:#b8935a;font-weight:600;border-bottom:none;margin-top:4px;}
 
 /* ---- FOOTER ---- */
-.site-footer{background:#060606;border-top:1px solid #1a1a1a;padding:72px 56px 32px;font-family:'Cormorant Garamond','Georgia',serif;}
+.site-footer{background:#060606;border-top:1px solid #1a1a1a;padding:72px 56px 32px;font-family:'Cormorant Garamond','Georgia',serif;color:#f5f0e8;}
 .site-footer a{text-decoration:none;color:inherit;}
 .footer-inner{display:grid;grid-template-columns:1.8fr 1.2fr 1.2fr 1fr;gap:48px;max-width:1200px;margin:0 auto 56px;}
-.f-logo-the{display:block;font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.52rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:2px;}
+.f-logo-the{display:block;font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.52rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.6;margin-bottom:2px;}
 .f-logo-name{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1rem;letter-spacing:0.2em;text-transform:uppercase;}
-.f-tagline{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.45);margin-top:14px;margin-bottom:20px;font-style:italic;line-height:1.5;}
+.f-tagline{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.6);margin-top:14px;margin-bottom:20px;font-style:italic;line-height:1.5;}
 .f-social{display:flex;gap:16px;}
-.f-social a{color:rgba(255,255,255,0.3);transition:color 0.2s;}
+.f-social a{color:rgba(255,255,255,0.62);transition:color 0.2s;}
 .f-social a:hover{color:#b8935a;}
 .f-col-label{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:#b8935a;margin-bottom:18px;display:block;}
-.f-col-line{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.9;display:block;}
-.f-col-link{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.9;display:block;transition:color 0.2s;}
+.f-col-line{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.6);line-height:1.9;display:block;}
+.f-col-link{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.6);line-height:1.9;display:block;transition:color 0.2s;}
 .f-col-link:hover{color:#fff;}
 .f-map{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:#b8935a;display:inline-block;margin-top:12px;}
 .footer-bottom{max-width:1200px;margin:0 auto;padding-top:28px;border-top:1px solid #111;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
-.footer-bottom p{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.65rem;color:rgba(255,255,255,0.18);}
-.footer-bottom a{color:rgba(255,255,255,0.28);}
+.footer-bottom p{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:0.65rem;color:rgba(255,255,255,0.62);}
+.footer-bottom a{color:rgba(255,255,255,0.6);text-decoration:underline;text-underline-offset:2px;}
 
 /* Pages that had no nav before adopting the shell add this class so the
    fixed nav does not overlap their first line. Pages with a full-bleed

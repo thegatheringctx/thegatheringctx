@@ -28,12 +28,12 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
 
 /* Trivia */
 .trivia-header{text-align:center;margin-bottom:1.25rem}
-.trivia-score{font-family:'Fredoka One',cursive;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.3rem}
+.trivia-score{font-family:'Fredoka One',cursive;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.62);margin-bottom:.3rem}
 .trivia-score span{color:var(--gold)}
 .q-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.1rem;margin-bottom:1rem}
 .q-num{font-size:.65rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem}
 .q-text{font-size:.95rem;line-height:1.55;font-weight:700;margin-bottom:.9rem}
-.q-ref{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.9rem}
+.q-ref{font-size:.72rem;color:rgba(255,255,255,0.62);margin-bottom:.9rem}
 .choices{display:flex;flex-direction:column;gap:.45rem}
 .choice{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:.65rem .9rem;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;text-align:left;color:#fff;transition:.15s}
 .choice:hover{background:rgba(255,255,255,.14)}
@@ -48,16 +48,16 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
 .trivia-done{text-align:center;padding:1.5rem 0;display:none}
 .trivia-done.show{display:block}
 .done-score{font-family:'Fredoka One',cursive;font-size:2.5rem;color:var(--gold);margin-bottom:.3rem}
-.done-label{color:rgba(255,255,255,.5);font-size:.82rem;margin-bottom:1rem}
+.done-label{color:rgba(255,255,255,0.62);font-size:.82rem;margin-bottom:1rem}
 .done-msg{font-size:.95rem;font-weight:700;margin-bottom:1.25rem}
 .replay-btn{padding:.65rem 1.4rem;border:none;border-radius:99px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#fff;font-family:'Fredoka One',cursive;font-size:.9rem;cursor:pointer}
 
 /* Scramble */
 .scramble-word{text-align:center;margin:1rem 0}
 .scrambled{font-family:'Fredoka One',cursive;font-size:2.2rem;color:var(--purple);letter-spacing:.25em;margin-bottom:.5rem}
-.scramble-hint{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:1rem}
+.scramble-hint{font-size:.75rem;color:rgba(255,255,255,0.62);margin-bottom:1rem}
 .letter-row{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
-.letter-tile{width:44px;height:52px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;color:rgba(255,255,255,.4);transition:.15s;user-select:none}
+.letter-tile{width:44px;height:52px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;color:rgba(255,255,255,0.62);transition:.15s;user-select:none}
 .letter-tile.filled{background:rgba(167,139,250,.2);border-color:var(--purple);color:#fff}
 .guess-row{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
 .guess-slot{width:44px;height:52px;background:rgba(255,255,255,.05);border:2px dashed rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;cursor:pointer;transition:.15s;user-select:none}
@@ -67,7 +67,7 @@ h2{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:.
 .sc-btn{padding:.5rem 1.1rem;border:none;border-radius:99px;font-family:'Fredoka One',cursive;font-size:.85rem;cursor:pointer}
 .sc-btn.check{background:var(--gold);color:var(--dark)}
 .sc-btn.clear{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff}
-.sc-btn.skip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:.75rem}
+.sc-btn.skip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,0.62);font-size:.75rem}
 .sc-feedback{text-align:center;min-height:1.5rem;font-size:.88rem;font-weight:700;margin-bottom:.5rem}
 .sc-pts{color:var(--gold)}
 .sc-progress{display:flex;gap:.3rem;justify-content:center;margin-bottom:1rem}
@@ -276,7 +276,7 @@ function checkScramble(){
   const cleanWord=w.word.replace(/\s/g,'');
   const guess=guessLetters.join('');
   const fb=document.getElementById('sc-feedback');
-  if(guess.length<cleanWord.length){fb.innerHTML='<span style="color:rgba(255,255,255,.4)">Fill in all the letters first!</span>';return;}
+  if(guess.length<cleanWord.length){fb.innerHTML='<span style="color:rgba(255,255,255,0.62)">Fill in all the letters first!</span>';return;}
   if(guess===cleanWord){
     fb.innerHTML='<span class="sc-pts">+10 pts!</span>That\'s right!';
     scDone.push(scIdx);
