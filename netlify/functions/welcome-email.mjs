@@ -29,7 +29,7 @@ const SEQUENCES = {
         <p style="font-size:1rem;line-height:1.8;margin-bottom:16px">We know that first Sunday can feel like a lot. So here is exactly what to expect.</p>
         <p style="font-size:1rem;line-height:1.8;margin-bottom:16px"><strong>4:30 PM</strong> -- Doors open. People are gathering, talking, finding seats. Nobody will attack you with a visitor card. Just find a seat and settle in.</p>
         <p style="font-size:1rem;line-height:1.8;margin-bottom:16px"><strong>5:00 PM</strong> -- We start with worship. Live music. Real. You do not need to know the songs.</p>
-        <p style="font-size:1rem;line-height:1.8;margin-bottom:16px"><strong>Then</strong> -- We open the Bible and preach through it. Verse by verse. We are currently in Ephesians. You can follow along or just listen.</p>
+        <p style="font-size:1rem;line-height:1.8;margin-bottom:16px"><strong>Then</strong> -- We open the Bible and preach through it. Verse by verse, book by book. You can follow along or just listen.</p>
         <p style="font-size:1rem;line-height:1.8;margin-bottom:32px"><strong>6:30 PM</strong> -- We close in prayer and people hang around. That part is worth staying for.</p>
         <a href="https://gatheringctx.org/what-to-expect" style="display:inline-block;background:#1a1a1a;color:#fff;text-decoration:none;padding:14px 28px;font-family:sans-serif;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase">More FAQs</a>
         <p style="margin-top:40px;font-size:0.85rem;color:#888">Pastor Billy<br>The Gathering CTX</p>
