@@ -325,9 +325,8 @@
   <meta name="twitter:title" content="The Gathering CTX | Church in Cleburne, TX">
   <meta name="twitter:description" content="Walk with victory. Not to it. Sundays at 5 PM in Cleburne, TX.">
   <meta name="twitter:image" content="https://gatheringctx.org/Alexus-120.jpg">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Event","name":"Sunday Worship Service - The Gathering CTX","description":"Join us for Spirit-led worship, expository preaching, and real community. Come as you are.","startDate":"2026-05-25T17:00:00-05:00","endDate":"2026-05-25T18:30:00-05:00","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","location":{"@type":"Place","name":"Cleburne Conference Center","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"}},"organizer":{"@type":"Organization","name":"The Gathering CTX","url":"https://gatheringctx.org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://gatheringctx.org/visit"},"image":"https://gatheringctx.org/Alexus-120.jpg","url":"https://gatheringctx.org/visit"}
-</script>
+<!-- Sunday service Event schema is injected by JS below so its date always
+     rolls to the upcoming Sunday and never goes stale. -->
 <!-- build: 2026-06-09 09:00:00 -->
 </head>
 <body>
@@ -396,6 +395,16 @@
   var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
   var el=document.getElementById('ss-date');
   if(el) el.textContent='This Sunday, '+months[svc.getMonth()]+' '+svc.getDate();
+
+  // Inject an always-current Sunday service Event so structured data never
+  // advertises a past date. Central time offset: CDT (-05:00) Mar-Nov, else CST.
+  (function(){
+    function p(n){return (n<10?'0':'')+n;}
+    var mo=svc.getMonth(); var off=(mo>1 && mo<11)?'-05:00':'-06:00';
+    function iso(h,m){return svc.getFullYear()+'-'+p(mo+1)+'-'+p(svc.getDate())+'T'+p(h)+':'+p(m)+':00'+off;}
+    var ev={"@context":"https://schema.org","@type":"Event","name":"Sunday Worship Service - The Gathering CTX","description":"Join us for Spirit-led worship, expository preaching, and real community. Come as you are.","startDate":iso(17,0),"endDate":iso(18,30),"eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","location":{"@type":"Place","name":"Cleburne Conference Center","address":{"@type":"PostalAddress","streetAddress":"1501 W Henderson St","addressLocality":"Cleburne","addressRegion":"TX","postalCode":"76033","addressCountry":"US"}},"organizer":{"@type":"Organization","name":"The Gathering CTX","url":"https://gatheringctx.org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://gatheringctx.org/visit"},"image":"https://gatheringctx.org/Alexus-120.jpg","url":"https://gatheringctx.org/visit"};
+    var s=document.createElement('script');s.type='application/ld+json';s.textContent=JSON.stringify(ev);document.head.appendChild(s);
+  })();
 
   function pad(n){return (n<10?'0':'')+n;}
   function ymd(dt){return dt.getFullYear()+pad(dt.getMonth()+1)+pad(dt.getDate());}
