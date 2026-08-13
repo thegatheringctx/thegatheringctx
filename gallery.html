@@ -16,7 +16,6 @@
   <title>Gallery | The Gathering CTX | Cleburne, TX</title>
   <meta name="description" content="Photos from The Gathering CTX in Cleburne, TX. See what worship, community, and Sunday evenings look like when the family gathers.">>
   <link rel="canonical" href="https://gatheringctx.org/gallery">
-  <link rel="stylesheet" href="/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageGallery","name":"The Gathering CTX Gallery","url":"https://gatheringctx.org/gallery","author":{"@type":"Person","name":"Kendra","url":"https://www.instagram.com/captured.by.kendra_"}}</script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
@@ -31,9 +30,9 @@
     .gallery-hero{padding:80px 48px 60px;max-width:800px;}
     .gallery-label{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#b8935a;margin-bottom:20px;}
     .gallery-title{font-size:clamp(2.4rem,5vw,4rem);font-weight:300;line-height:1.05;margin-bottom:20px;font-family:'Cormorant Garamond',Georgia,serif;}
-    .gallery-title em{font-style:italic;color:rgba(255,255,255,0.38);}
-    .gallery-desc{font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.5);max-width:520px;}
-    .gallery-credit{margin-top:16px;font-size:0.75rem;color:rgba(255,255,255,0.3);}
+    .gallery-title em{font-style:italic;color:rgba(255,255,255,0.62);}
+    .gallery-desc{font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.62);max-width:520px;}
+    .gallery-credit{margin-top:16px;font-size:0.75rem;color:rgba(255,255,255,0.62);}
     .gallery-credit a{color:#b8935a;text-decoration:none;}
     .gallery-grid{columns:3;column-gap:3px;padding:0 3px 3px;}
     .gallery-item{break-inside:avoid;margin-bottom:3px;position:relative;overflow:hidden;cursor:pointer;}
@@ -43,30 +42,30 @@
     .lightbox.open{display:flex;}
     .lightbox-img{max-width:90vw;max-height:90vh;object-fit:contain;}
     .lightbox-close{position:absolute;top:24px;right:32px;font-size:1.8rem;color:rgba(255,255,255,0.6);cursor:pointer;background:none;border:none;}
-    .lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.5);font-size:2rem;cursor:pointer;padding:16px;}
+    .lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.62);font-size:2rem;cursor:pointer;padding:16px;}
     .lightbox-prev{left:16px;}.lightbox-next{right:16px;}
-    .lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+    .lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.62);}
     .site-footer{background:#080808;border-top:1px solid #1a1a1a;padding:72px 48px 32px;color:#fff;}
     .footer-inner{display:grid;grid-template-columns:1.8fr 1.2fr 1.2fr 1fr;gap:48px;max-width:1200px;margin:0 auto 48px;}
     .footer-logo{text-decoration:none;color:#fff;display:block;margin-bottom:16px;}
     .footer-the{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;display:block;}
     .footer-gathering{font-size:1.1rem;letter-spacing:0.2em;text-transform:uppercase;}
-    .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:20px;font-family:'Cormorant Garamond',Georgia,serif;}
+    .footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.62);line-height:1.5;margin-bottom:20px;font-family:'Cormorant Garamond',Georgia,serif;}
     .footer-tagline em{font-style:italic;}
     .footer-social{display:flex;gap:16px;}
-    .footer-social a{color:rgba(255,255,255,0.4);transition:color 0.2s;text-decoration:none;}
+    .footer-social a{color:rgba(255,255,255,0.62);transition:color 0.2s;text-decoration:none;}
     .footer-social a:hover{color:#b8935a;}
     .footer-info-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#b8935a;margin-bottom:16px;display:block;}
-    .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.8;display:block;}
+    .footer-info-line{font-size:0.8rem;color:rgba(255,255,255,0.62);line-height:1.8;display:block;}
     .footer-link{text-decoration:none;transition:color 0.2s;}
     .footer-link:hover{color:#fff;}
     .footer-map-link{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#b8935a;text-decoration:none;display:inline-block;margin-top:12px;}
     .footer-nav{display:flex;flex-direction:column;gap:2px;}
-    .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.4);text-decoration:none;line-height:1.9;transition:color 0.2s;}
+    .footer-nav-link{font-size:0.8rem;color:rgba(255,255,255,0.62);text-decoration:none;line-height:1.9;transition:color 0.2s;}
     .footer-nav-link:hover{color:#fff;}
     .footer-bottom{max-width:1200px;margin:0 auto;padding-top:32px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;}
-    .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.2);}
-    .footer-bottom-link{color:rgba(255,255,255,0.35);text-decoration:none;}
+    .footer-bottom p{font-size:0.68rem;color:rgba(255,255,255,0.62);}
+    .footer-bottom-link{color:rgba(255,255,255,0.62);text-decoration:none;}
     @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:40px;}.gallery-grid{columns:2;}}
     @media(max-width:600px){.footer-inner{grid-template-columns:1fr;}.site-footer{padding:48px 24px 24px;}.gallery-hero{padding:60px 24px 40px;}.nav{padding:16px 24px;}.gallery-grid{columns:1;}}
   </style>
