@@ -120,6 +120,32 @@
     } catch (e) {}
   }
 
+  // Normalize a series name so "Colossians: Rooted / All of Him" and plain
+  // "Colossians" compare equal (sermons carry a long series title, devotionals
+  // a short one). Everything before a colon, lowercased, punctuation flattened.
+  function nseries(s) {
+    return String(s || "").toLowerCase().split(":")[0].replace(/[^a-z0-9]+/g, " ").trim();
+  }
+
+  // Auto-link the matching devotional (same series + week). Prefer an explicit
+  // devotionalSlug if the sermon file sets one; otherwise look it up in the
+  // devotionals index. Fails silently (no link) when there is no match.
+  function crossDevo(d) {
+    var slot = document.getElementById("st-devo-link");
+    if (!slot) return;
+    function put(slug) { slot.innerHTML = '<a href="/devotionals/' + slug + '">This Week\'s Devotional</a>'; }
+    if (d.devotionalSlug) { put(d.devotionalSlug); return; }
+    if (d.week == null) return;
+    var key = nseries(d.seriesShort || d.seriesGroup || d.series);
+    if (!key) return;
+    fetch("/devotionals/data/index.json").then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (list) {
+        if (!Array.isArray(list)) return;
+        var m = list.find(function (x) { return x && nseries(x.series) === key && Number(x.week) === Number(d.week); });
+        if (m && m.slug) put(m.slug);
+      }).catch(function () {});
+  }
+
   function render(d) {
     var root = document.getElementById("st-root");
     document.title = (d.title || "Sermon") + " | The Gathering CTX";
@@ -169,13 +195,14 @@
       }).join("") + '</div>';
     }
     html += '<div class="st-more"><a href="/sermons">All Sermons</a>' +
-      (d.devotionalSlug ? '<a href="/devotionals/' + d.devotionalSlug + '">This Week\'s Devotional</a>' : '') +
+      '<span id="st-devo-link"></span>' +
       '<a href="/devotionals">Devotionals</a></div>';
     html += '</div>';
     root.innerHTML = html;
 
     embedPlayer(d.podcastUrl, document.getElementById("st-audio"));
     schema(d);
+    crossDevo(d);
 
     var theme = window.SeriesThemes ? window.SeriesThemes.get(d.themeKey || d.series || d.seriesShort, d.theme) : null;
     if (theme) {
