@@ -158,21 +158,9 @@ footer{background:#000;border-top:1px solid var(--w08);padding:2.5rem 6rem;displ
   <p class="hero-sub">You are not here by accident. The Gathering CTX is a church in Cleburne, TX built for people who are hungry for something real. Let us show you around.</p>
 
   <div class="capture-box">
-    <label>Tell us about you. We will reach out.</label>
-    <input id="n-name" type="text" placeholder="Your name" aria-label="Your name" required/>
-    <input id="n-email" type="email" placeholder="Email address" aria-label="Email address"/>
-    <input id="n-phone" type="tel" placeholder="Phone (we will text you Sunday details)" aria-label="Phone number"/>
-    <select id="n-status" aria-label="Where are you right now?">
-      <option value="" disabled selected>Where are you right now?</option>
-      <option value="first-time">Planning my first visit</option>
-      <option value="visited">Been once or twice</option>
-      <option value="regular">Coming regularly</option>
-      <option value="searching">Just exploring faith</option>
-      <option value="not-local">Not local but interested</option>
-    </select>
-    <button class="btn-gold-full" onclick="newHereSubmit()">I&rsquo;m Ready &rarr;</button>
-    <p id="n-msg" style="font-size:.78rem;color:var(--gold);display:none;text-align:center;margin-top:.75rem;"></p>
-    <p class="consent">By submitting, you agree to receive texts from The Gathering CTX. Msg &amp; data rates may apply. Reply STOP to opt out. <a href="/privacy">Privacy Policy</a></p>
+    <label>New here? Send us your connect card.</label>
+    <p style="font-family:var(--sans,'Nunito Sans',sans-serif);font-size:.92rem;line-height:1.7;color:rgba(255,255,255,0.7);margin-bottom:1.3rem;">Tell us you are coming and a little about you. It takes a minute, it goes straight to our team, and someone will personally reach out before Sunday.</p>
+    <a class="btn-gold-full" href="https://gatheringctx.churchcenter.com/people/forms/1244766" target="_blank" rel="noopener" style="text-decoration:none;text-align:center;display:block;">Fill Out Your Connect Card &rarr;</a>
   </div>
   <a href="#your-journey" style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.62);text-decoration:none;">Or scroll to see what&rsquo;s next &darr;</a>
 </section>
@@ -277,23 +265,6 @@ footer{background:#000;border-top:1px solid var(--w08);padding:2.5rem 6rem;displ
 <div id="site-footer"></div>
 
 <script>
-async function newHereSubmit() {
-  const msg = document.getElementById('n-msg');
-  const name = document.getElementById('n-name').value.trim();
-  const email = document.getElementById('n-email').value.trim();
-  const phone = document.getElementById('n-phone').value.trim();
-  if (!name) { msg.textContent = 'Please enter your name.'; msg.style.display='block'; return; }
-  if (!email && !phone) { msg.textContent = 'Add an email or phone so we can reach you.'; msg.style.display='block'; return; }
-  const promises = [];
-  if (email) promises.push(fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,type:'new-here'})}).catch(()=>{}));
-  if (phone) promises.push(fetch('/api/clearstream-subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,mobile:phone,list:'new'})}).catch(()=>{}));
-  await Promise.all(promises);
-  msg.textContent = 'Got it. Watch for a text or email from us before Sunday.';
-  msg.style.display = 'block';
-  document.getElementById('n-name').value='';
-  document.getElementById('n-email').value='';
-  document.getElementById('n-phone').value='';
-}
 window.addEventListener('scroll',()=>{document.querySelector('nav')?.classList.toggle('scrolled',window.scrollY>60)});
 </script>
 <script src="/assets/site.js" defer></script>
