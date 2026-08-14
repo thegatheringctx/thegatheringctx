@@ -27,6 +27,7 @@ const CORE = [
   ["/new-here", "monthly", "0.9"],
   ["/sermons", "weekly", "0.9"],
   ["/devotionals", "weekly", "0.9"],
+  ["/teaching", "weekly", "0.8"],
   ["/kids", "monthly", "0.8"],
   ["/generosity", "monthly", "0.8"],
   ["/events", "weekly", "0.8"],
