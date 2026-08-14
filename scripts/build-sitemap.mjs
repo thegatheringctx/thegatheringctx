@@ -101,13 +101,29 @@ if (Array.isArray(sermonIndex)) {
 }
 
 // ---- Template-driven devotional pages (devotionals/data/*.json) ----
+// While we are here, also (re)build devotionals/data/index.json so the sermon
+// and devotional pages can auto-link to each other by series + week. This
+// mirrors sermons/data/index.json, but is generated instead of hand-kept.
 const devoRows = [];
+const devoIndex = [];
 try {
   for (const f of readdirSync(join(ROOT, "devotionals/data"))) {
-    if (!f.endsWith(".json") || f.startsWith("_")) continue;
+    if (!f.endsWith(".json") || f.startsWith("_") || f === "index.json") continue;
     const slug = f.replace(/\.json$/, "");
     devoRows.push([`/devotionals/${slug}`, "monthly", "0.7", TODAY]);
+    const d = readJson(`devotionals/data/${f}`) || {};
+    devoIndex.push({
+      slug: d.slug || slug,
+      series: d.series || "",
+      week: d.week != null ? d.week : null,
+      title: d.title || "",
+      subtitle: d.subtitle || "",
+      passage: d.passage || "",
+    });
   }
+  devoIndex.sort((a, b) =>
+    String(a.series).localeCompare(String(b.series)) || (Number(a.week) - Number(b.week)));
+  writeFileSync(join(ROOT, "devotionals/data/index.json"), JSON.stringify(devoIndex, null, 2) + "\n");
 } catch { /* no devotionals data dir */ }
 
 // ---- Assemble, de-duplicating by path (first definition wins) ----
