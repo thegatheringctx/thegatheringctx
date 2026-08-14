@@ -43,17 +43,19 @@
 
     /* DEVOTIONAL LIST */
     .archive-section{background:var(--off);padding:6rem}
+    .archive-group{font-family:'Cormorant Garamond','Georgia',serif;font-size:1.7rem;font-weight:400;color:#2a2320;margin:3rem 0 .2rem;padding:0 .2rem}
+    .archive-group:first-child{margin-top:0}
     .archive-grid{display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.1)}
     .archive-card{background:var(--off);display:grid;grid-template-columns:100px 1fr auto;gap:3rem;padding:3rem;align-items:center;text-decoration:none;transition:background .3s;cursor:pointer}
     .archive-card:hover{background:#ede8e0}
     .archive-date{text-align:center}
-    .archive-month{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block}
+    .archive-month{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:#7a5c08;font-weight:600;display:block}
     .archive-day{font-size:2.8rem;font-weight:200;color:#000;line-height:1;letter-spacing:-.02em}
     .archive-year{font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,0,0,.35);display:block;margin-top:.2rem}
     .archive-info{}
-    .archive-series{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;display:block}
+    .archive-series{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:#7a5c08;margin-bottom:.4rem;display:block}
     .archive-title{font-size:1.25rem;font-weight:300;color:#000;letter-spacing:-.01em;line-height:1.3;margin-bottom:.5rem}
-    .archive-desc{font-size:.85rem;line-height:1.8;color:rgba(0,0,0,0.66);max-width:500px}
+    .archive-desc,.archive-excerpt{font-size:.85rem;line-height:1.8;color:#4a403a;max-width:500px}
     .archive-ref{font-size:.72rem;font-style:italic;color:var(--gold);margin-top:.5rem;display:block}
     .archive-arrow{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:#000;transition:letter-spacing .2s;white-space:nowrap}
     .archive-card:hover .archive-arrow{letter-spacing:.22em}
@@ -170,50 +172,56 @@
 </section>
 
 <section class="archive-section">
-  <div class="archive-grid" id="devos-grid">
-  <div style="padding:3rem;color:rgba(255,255,255,0.62);font-size:.85rem">Loading devotionals...</div>
+  <div id="devos-grid">
+  <div style="padding:3rem;color:#3a322d;font-size:.85rem">Loading devotionals...</div>
 </div>
 
 <script>
+// Every devotional on the site is listed here, grouped by series and week,
+// straight from the registry at /devotionals/data/index.json (kept in sync by
+// scripts/build-sitemap.mjs). Add a devotional's entry there and it appears.
 (async () => {
+  const grid = document.getElementById('devos-grid');
+  function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   try {
-    const res = await fetch('https://ktuapfiexhlladgkuauc.supabase.co/functions/v1/weekly-content-deploy', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'get_devotional_archive', data: {} })
-    });
-    const data = await res.json();
-    const devos = data.data || [];
-    const grid = document.getElementById('devos-grid');
-
-    if (!devos.length) {
-      grid.innerHTML = '<div style="padding:3rem;color:rgba(255,255,255,0.62);text-align:center">No devotionals published yet.</div>';
+    const res = await fetch('/devotionals/data/index.json', { cache: 'no-cache' });
+    const devos = await res.json();
+    if (!Array.isArray(devos) || !devos.length) {
+      grid.innerHTML = '<div style="padding:3rem;color:#3a322d;text-align:center">No devotionals published yet.</div>';
       return;
     }
 
-    grid.innerHTML = devos.map(d => {
-      const date = d.publish_at ? new Date(d.publish_at) : null;
-      const month = date ? date.toLocaleString('en-US',{month:'short'}) : '';
-      const day = date ? date.getDate() : '';
-      const year = date ? date.getFullYear() : '';
-      const url = '/' + (d.slug || '') + '.html';
-      const excerpt = d.intro_paragraphs ? d.intro_paragraphs.slice(0,140).replace(/<[^>]+>/g,'') + '...' : '';
-      return `<a href="${url}" class="archive-card">
-  <div class="archive-date">
-    <span class="archive-month">${month}</span>
-    <span class="archive-day">${day}</span>
-    <span class="archive-year">${year}</span>
-  </div>
-  <div class="archive-info">
-    <span class="archive-series">${d.series || ''}</span>
-    <h3 class="archive-title">${d.title || ''}</h3>
-    <p class="archive-excerpt">${excerpt}</p>
-  </div>
-</a>`;
-    }).join('');
-  } catch(e) {
-    document.getElementById('devos-grid').innerHTML =
-      '<div style="padding:3rem;color:#3a322d">Could not load devotionals.</div>';
+    // Group in the order series first appear in the registry; within a group,
+    // by week ascending (seasonal pieces, which have no week, sort last).
+    const order = [], groups = {};
+    devos.forEach(d => {
+      const s = d.series || 'Devotionals';
+      if (!groups[s]) { groups[s] = []; order.push(s); }
+      groups[s].push(d);
+    });
+    order.forEach(s => groups[s].sort((a, b) => (a.week || 99) - (b.week || 99)));
+
+    function card(d) {
+      const left = d.week
+        ? '<span class="archive-month">Week</span><span class="archive-day">' + d.week + '</span>'
+        : '<span class="archive-month">Read</span>';
+      return '<a href="' + esc(d.url || ('/' + (d.slug || ''))) + '" class="archive-card">' +
+        '<div class="archive-date">' + left + '</div>' +
+        '<div class="archive-info">' +
+          '<span class="archive-series">' + esc(d.passage || d.series || '') + '</span>' +
+          '<h3 class="archive-title">' + esc(d.title || '') + '</h3>' +
+          (d.subtitle ? '<p class="archive-excerpt">' + esc(d.subtitle) + '</p>' : '') +
+        '</div>' +
+        '<span class="archive-arrow">&rarr;</span>' +
+      '</a>';
+    }
+
+    grid.innerHTML = order.map(s =>
+      '<h2 class="archive-group">' + esc(s) + '</h2>' +
+      '<div class="archive-grid">' + groups[s].map(card).join('') + '</div>'
+    ).join('');
+  } catch (e) {
+    grid.innerHTML = '<div style="padding:3rem;color:#3a322d">Could not load devotionals.</div>';
     console.error(e);
   }
 })();

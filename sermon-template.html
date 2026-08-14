@@ -133,8 +133,8 @@
   function crossDevo(d) {
     var slot = document.getElementById("st-devo-link");
     if (!slot) return;
-    function put(slug) { slot.innerHTML = '<a href="/devotionals/' + slug + '">This Week\'s Devotional</a>'; }
-    if (d.devotionalSlug) { put(d.devotionalSlug); return; }
+    function put(url) { slot.innerHTML = '<a href="' + url + '">This Week\'s Devotional</a>'; }
+    if (d.devotionalSlug) { put("/devotionals/" + d.devotionalSlug); return; }
     if (d.week == null) return;
     var key = nseries(d.seriesShort || d.seriesGroup || d.series);
     if (!key) return;
@@ -142,7 +142,7 @@
       .then(function (list) {
         if (!Array.isArray(list)) return;
         var m = list.find(function (x) { return x && nseries(x.series) === key && Number(x.week) === Number(d.week); });
-        if (m && m.slug) put(m.slug);
+        if (m) put(m.url || ("/devotionals/" + m.slug));
       }).catch(function () {});
   }
 

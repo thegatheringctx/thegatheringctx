@@ -100,31 +100,20 @@ if (Array.isArray(sermonIndex)) {
   }
 }
 
-// ---- Template-driven devotional pages (devotionals/data/*.json) ----
-// While we are here, also (re)build devotionals/data/index.json so the sermon
-// and devotional pages can auto-link to each other by series + week. This
-// mirrors sermons/data/index.json, but is generated instead of hand-kept.
+// ---- Devotional pages, from the registry devotionals/data/index.json ----
+// The registry is the single list of every devotional on the site (both the
+// data-driven /devotionals/<slug> pages and the static /devotional-* pages),
+// with series + week so the sermon and devotional pages can auto-link. It is
+// hand-kept (add one entry when you publish a devotional), like the sermon
+// index; the archive page and the cross-links both read it.
 const devoRows = [];
-const devoIndex = [];
-try {
-  for (const f of readdirSync(join(ROOT, "devotionals/data"))) {
-    if (!f.endsWith(".json") || f.startsWith("_") || f === "index.json") continue;
-    const slug = f.replace(/\.json$/, "");
-    devoRows.push([`/devotionals/${slug}`, "monthly", "0.7", TODAY]);
-    const d = readJson(`devotionals/data/${f}`) || {};
-    devoIndex.push({
-      slug: d.slug || slug,
-      series: d.series || "",
-      week: d.week != null ? d.week : null,
-      title: d.title || "",
-      subtitle: d.subtitle || "",
-      passage: d.passage || "",
-    });
+const devoRegistry = readJson("devotionals/data/index.json");
+if (Array.isArray(devoRegistry)) {
+  for (const d of devoRegistry) {
+    if (!d || !d.url) continue;
+    devoRows.push([d.url, "monthly", "0.7", TODAY]);
   }
-  devoIndex.sort((a, b) =>
-    String(a.series).localeCompare(String(b.series)) || (Number(a.week) - Number(b.week)));
-  writeFileSync(join(ROOT, "devotionals/data/index.json"), JSON.stringify(devoIndex, null, 2) + "\n");
-} catch { /* no devotionals data dir */ }
+}
 
 // ---- Assemble, de-duplicating by path (first definition wins) ----
 const seen = new Set();

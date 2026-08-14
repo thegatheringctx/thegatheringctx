@@ -85,6 +85,15 @@
   to = "/devotionals.html"
   status = 200
 
+# The Colossians Week 1 devotional lives at its static page; send the old
+# data-driven slug there so there is one canonical URL. Must precede the
+# /devotionals/* rewrite below to take effect.
+[[redirects]]
+  from = "/devotionals/colossians-week-1"
+  to = "/devotional-colossians-1"
+  status = 301
+  force = true
+
 # Individual devotional pages /devotionals/[slug]
 [[redirects]]
   from = "/devotionals/*"

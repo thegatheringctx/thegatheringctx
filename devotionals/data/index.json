@@ -1,10 +1,22 @@
 [
-  {
-    "slug": "colossians-week-1",
-    "series": "Colossians",
-    "week": 1,
-    "title": "The Gospel That Bears Fruit",
-    "subtitle": "You were not improved. You were transferred.",
-    "passage": "Colossians 1:1 to 14"
-  }
+  { "slug": "devotional-colossians-1", "url": "/devotional-colossians-1", "series": "Colossians", "week": 1, "title": "The Gospel That Bears Fruit", "subtitle": "You were not improved. You were transferred.", "passage": "Colossians 1:1 to 14" },
+  { "slug": "devotional-colossians-2", "url": "/devotional-colossians-2", "series": "Colossians", "week": 2, "title": "All of Him", "subtitle": "Every power you fear, He made.", "passage": "Colossians 1:15 to 23" },
+  { "slug": "devotional-colossians-3", "url": "/devotional-colossians-3", "series": "Colossians", "week": 3, "title": "Christ In You, The Hope of Glory", "subtitle": "The treasure is a Person, and He lives in you.", "passage": "Colossians 1:24 to 2:5" },
+  { "slug": "devotional-colossians-4", "url": "/devotional-colossians-4", "series": "Colossians", "week": 4, "title": "Complete In Him", "subtitle": "You cannot add to full.", "passage": "Colossians 2:6 to 23" },
+  { "slug": "devotional-ephesians-1", "url": "/devotional-ephesians-1", "series": "Ephesians", "week": 1, "title": "Blessed Before You Breathed", "subtitle": "The staggering grace of election and spiritual blessing.", "passage": "Ephesians 1:1-14" },
+  { "slug": "devotional-ephesians-2", "url": "/devotional-ephesians-2", "series": "Ephesians", "week": 2, "title": "Brought Near by the Blood", "subtitle": "You were far off. You were dead. But God, who is rich in mercy, brought you near.", "passage": "Ephesians 2:13-22" },
+  { "slug": "devotional-ephesians-3", "url": "/devotional-ephesians-3", "series": "Ephesians", "week": 3, "title": "The Mystery Is Out", "subtitle": "The excluded are included. The strangers are now sons.", "passage": "Ephesians 3:1-21" },
+  { "slug": "devotional-ephesians-4", "url": "/devotional-ephesians-4", "series": "Ephesians", "week": 4, "title": "Walk Worthy Inside and Out", "subtitle": "The calling you have received has a way of walking that matches it.", "passage": "Ephesians 4:1-32" },
+  { "slug": "devotional-ephesians-5", "url": "/devotional-ephesians-5", "series": "Ephesians", "week": 5, "title": "Walk in Love, Light, and Wisdom", "subtitle": "Once you were darkness. Now you are light. Walk like it.", "passage": "Ephesians 5:1-33" },
+  { "slug": "devotional-ephesians-6", "url": "/devotional-ephesians-6", "series": "Ephesians", "week": 6, "title": "Stand", "subtitle": "The armor is a Person. Put on Christ and hold your ground.", "passage": "Ephesians 6:1-24" },
+  { "slug": "devotional-philippians-1", "url": "/devotional-philippians-1", "series": "Philippians", "week": 1, "title": "Joy in Chains", "subtitle": "Paul wrote this letter from prison. Joy appears sixteen times. This is that kind of joy.", "passage": "Philippians 1:1-30" },
+  { "slug": "devotional-philippians-2", "url": "/devotional-philippians-2", "series": "Philippians", "week": 2, "title": "The Mind That Emptied Itself", "subtitle": "Jesus had every right to stay in heaven. He chose to come down. All the way down.", "passage": "Philippians 2:1-11" },
+  { "slug": "devotional-philippians-3", "url": "/devotional-philippians-3", "series": "Philippians", "week": 3, "title": "Work It Out, Walk It Out", "subtitle": "You do not work for your salvation. You work it out, because God is at work in you.", "passage": "Philippians 2:12 to 30" },
+  { "slug": "devotional-philippians-4", "url": "/devotional-philippians-4", "series": "Philippians", "week": 4, "title": "All Things Loss", "subtitle": "Paul called the best religious resume in the room rubbish, to gain Christ.", "passage": "Philippians 3:1 to 11" },
+  { "slug": "devotional-philippians-5", "url": "/devotional-philippians-5", "series": "Philippians", "week": 5, "title": "Press On: Citizens of Heaven", "subtitle": "You are not a citizen of earth trying to reach heaven. You are a citizen of heaven deployed on earth.", "passage": "Philippians 3:12 to 21" },
+  { "slug": "devotional-philippians-6", "url": "/devotional-philippians-6", "series": "Philippians", "week": 6, "title": "The Settled Heart", "subtitle": "Peace is a garrison God stations. Contentment is a secret He teaches.", "passage": "Philippians 4:1 to 23" },
+  { "slug": "devotional-palm-sunday", "url": "/devotional-palm-sunday", "series": "Holy Week", "week": null, "season": true, "title": "The King Is Here", "subtitle": "Will you still follow Him when He does not fit your plan?", "passage": "Matthew 21:1-11" },
+  { "slug": "devotional-easter-sunday", "url": "/devotional-easter-sunday", "series": "Easter", "week": null, "season": true, "title": "He Got Up, And Everything Changed", "subtitle": "The risen Christ and the death of death.", "passage": "Matthew 28:1-10" },
+  { "slug": "devotional-pentecost", "url": "/devotional-pentecost", "series": "Pentecost", "week": null, "season": true, "title": "The Fire Fell", "subtitle": "Heaven did not send a letter. Heaven sent a fire.", "passage": "Acts 2:1-4" },
+  { "slug": "devotional-worship-why-what-how", "url": "/devotional-worship-why-what-how", "series": "Special Messages", "week": null, "season": true, "title": "Worship: Who, Why, and How", "subtitle": "We stop watching, and we bow.", "passage": "John 4:23 to 24" }
 ]
