@@ -90,6 +90,11 @@
   to = "/teaching.html"
   status = 200
 
+[[redirects]]
+  from = "/invite"
+  to = "/invite.html"
+  status = 200
+
 # The Colossians Week 1 devotional lives at its static page; send the old
 # data-driven slug there so there is one canonical URL. Must precede the
 # /devotionals/* rewrite below to take effect.
