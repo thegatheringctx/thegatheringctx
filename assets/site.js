@@ -98,6 +98,7 @@
         '<div>' +
           '<span class="f-col-label">Site</span>' +
           '<a href="/new-here" class="f-col-link">I\'m New</a>' +
+          '<a href="/invite" class="f-col-link">Invite a Friend</a>' +
           '<a href="/belong" class="f-col-link">Belong &amp; Become</a>' +
           '<a href="/formed" class="f-col-link">Formed &amp; Sent</a>' +
           '<a href="/sermons" class="f-col-link">Sermons</a>' +

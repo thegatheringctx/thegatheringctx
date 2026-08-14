@@ -28,6 +28,7 @@ const CORE = [
   ["/sermons", "weekly", "0.9"],
   ["/devotionals", "weekly", "0.9"],
   ["/teaching", "weekly", "0.8"],
+  ["/invite", "monthly", "0.7"],
   ["/kids", "monthly", "0.8"],
   ["/generosity", "monthly", "0.8"],
   ["/events", "weekly", "0.8"],
