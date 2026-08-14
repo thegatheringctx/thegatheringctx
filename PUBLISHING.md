@@ -18,11 +18,15 @@ versioned and reversible, and Netlify deploys it automatically.
 After the task has generated the content, its **publish step** is:
 
 1. Write one JSON file into the right folder (see schemas below).
-2. Commit and push to the repo.
-3. Netlify builds and deploys automatically. It is live in a minute or two.
+2. Add one line to that content type's list: `sermons/data/index.json` for a
+   sermon, `devotionals/data/index.json` for a devotional. This is what makes
+   it show in the archive and cross-link.
+3. Run `node scripts/build-sitemap.mjs` and commit the updated `sitemap.xml`.
+4. Commit and push to the repo. Netlify deploys automatically, live in a
+   minute or two.
 
 That is the whole workflow. A devotional file at
-`devotionals/data/colossians-week-1.json` is instantly live at
+`devotionals/data/colossians-week-1.json` is live at
 `https://gatheringctx.org/devotionals/colossians-week-1`.
 
 ---
@@ -34,6 +38,16 @@ That is the whole workflow. A devotional file at
 - **Lives at:** `/devotionals/<slug>`
 - **Template:** `devotional-template.html`
 - **Copy the skeleton:** `devotionals/data/_template.json`
+- **Also add it to the registry:** append one entry to
+  `devotionals/data/index.json` (`url`, `series`, `week`, `title`,
+  `subtitle`, `passage`). This one line is what lists the devotional in the
+  `/devotionals` archive, links it to its sermon, and puts it on `/teaching`.
+  For a data-driven devotional the `url` is `/devotionals/<slug>`.
+- **Match the sermon's series and week exactly.** The devotional and its
+  Sunday sermon auto-link to each other (and sit together on `/teaching`)
+  whenever their `series` and `week` line up. "Colossians" + week 2 finds
+  "Colossians" + week 2. Keep those two fields consistent and the linking is
+  automatic; no manual wiring.
 
 ### Fields
 
@@ -134,11 +148,11 @@ node scripts/build-sitemap.mjs
 ```
 
 It keeps a curated list of the main pages and automatically adds every sermon
-in `sermons/data/index.json` and every devotional in `devotionals/data/`, so
-newly published content shows up in search on its own. Commit the updated
-`sitemap.xml` alongside the content. When you add a brand new evergreen page
-(not a sermon or devotional), add one line to the `CORE` list at the top of
-`scripts/build-sitemap.mjs`.
+in `sermons/data/index.json` and every devotional in the registry
+`devotionals/data/index.json`, so newly published content shows up in search
+on its own. Commit the updated `sitemap.xml` alongside the content. When you
+add a brand new evergreen page (not a sermon or devotional), add one line to
+the `CORE` list at the top of `scripts/build-sitemap.mjs`.
 
 ---
 
@@ -158,15 +172,25 @@ Pentecost ember, Easter dawn; anything else falls back to the house gold.
 
 ## Good to know
 
-- **The `/sermons` archive now reads the JSON files** (`sermons/data/index.json`)
+- **The `/sermons` archive reads the JSON files** (`sermons/data/index.json`)
   and no longer depends on Supabase. Publishing a sermon = write its JSON +
   add one line to `index.json`.
-- **The `/devotionals` archive and the homepage's "latest"** still read the
-  existing Supabase content system, since the older devotional content lives
-  in the static pages, not fully in Supabase. New devotionals published as
-  JSON work at their own URL immediately; to also list one in the archive
-  today, keep updating Supabase as you do now. Converging the devotional
-  archive onto JSON (like sermons) is a planned follow-up.
+- **The `/devotionals` archive and `/teaching` read the registry**
+  (`devotionals/data/index.json`), not Supabase. A devotional shows up in
+  the archive and links to its sermon the moment it has a registry entry, so
+  the one thing not to skip is that line.
+
+## House rules for any copy
+
+- **No em-dashes.** Not the `—` character and not `--` as a stand-in. Use a
+  comma, a period, or "to" instead. This holds everywhere: titles, body,
+  meta descriptions, alt text.
+- **Voice:** warm, plain, confident. Match the existing sermons and
+  devotionals. "Walk with victory, not to it."
+- **Do not build new sign-up or connect forms.** Guest and connect flows go
+  to Planning Center now (the Church Center "Welcome to the gathering" form),
+  not to new forms on the site.
+- **Leave `admin.html` and anything Supabase alone.**
 - **Nothing is hand-built.** If a page ever looks off, fix the template or the
   theme once and every page updates.
 - **Everything is reversible.** It is all in git history.
