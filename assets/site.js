@@ -102,6 +102,7 @@
           '<a href="/formed" class="f-col-link">Formed &amp; Sent</a>' +
           '<a href="/sermons" class="f-col-link">Sermons</a>' +
           '<a href="/devotionals" class="f-col-link">Devotionals</a>' +
+          '<a href="/teaching" class="f-col-link">Teaching by Series</a>' +
           '<a href="/kids" class="f-col-link">Kids</a>' +
           '<a href="/our-story" class="f-col-link">Our Story</a>' +
           '<a href="/beliefs" class="f-col-link">What We Believe</a>' +
