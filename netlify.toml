@@ -65,9 +65,21 @@
   force = true
 
 [[redirects]]
-  from = "/small-gatherings"
-  to = "/small-gatherings.html"
+  from = "/table"
+  to = "/table.html"
   status = 200
+
+[[redirects]]
+  from = "/circles"
+  to = "/circles.html"
+  status = 200
+
+# The Table and Circles replace the old Small Gatherings / Small Groups pages.
+[[redirects]]
+  from = "/small-gatherings"
+  to = "/table"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/sermons"
@@ -264,8 +276,9 @@
 
 [[redirects]]
   from = "/small-groups"
-  to = "/small-groups.html"
-  status = 200
+  to = "/table"
+  status = 301
+  force = true
 [[redirects]]
   from = "/events"
   to = "/events.html"
