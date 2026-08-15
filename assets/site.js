@@ -101,6 +101,8 @@
           '<a href="/invite" class="f-col-link">Invite a Friend</a>' +
           '<a href="/belong" class="f-col-link">Belong &amp; Become</a>' +
           '<a href="/formed" class="f-col-link">Formed &amp; Sent</a>' +
+          '<a href="/table" class="f-col-link">The Table</a>' +
+          '<a href="/circles" class="f-col-link">Circles</a>' +
           '<a href="/sermons" class="f-col-link">Sermons</a>' +
           '<a href="/devotionals" class="f-col-link">Devotionals</a>' +
           '<a href="/teaching" class="f-col-link">Teaching by Series</a>' +
