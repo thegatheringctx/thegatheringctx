@@ -47,10 +47,19 @@ it is safe to run every Sunday even when nothing changed.
 
 ## Wiring into the Sunday deploy
 
-This is called from the weekly Cowork "SUNDAY Branch A" task, beside the
-existing `publish-devotional` call, so the sermon page and the devotional
-page stay in step. That orchestration lives in the Cowork task config, not in
-this repo or in Supabase.
+This is wired into Supabase `pg_cron`, so it runs automatically with no
+outside orchestration. The `content-publish-check` job (jobid 2, every 15
+minutes) activates any sermon whose `publish_at` has passed and then calls
+this function with that sermon's slug, which writes its detail JSON and
+append-only syncs the registry. Because the sync is idempotent it is a no-op
+when nothing changed, so it is safe to run on that cadence.
+
+To inspect or change the job:
+
+```sql
+select jobid, schedule, jobname, command from cron.job where jobid = 2;
+-- edit with: select cron.alter_job(2, command := $cmd$ ... $cmd$);
+```
 
 ## Requires
 
