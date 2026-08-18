@@ -2182,6 +2182,19 @@ window.renderArmor=function(){var el=document.getElementById("tab-warrior");if(!
      }
      return Promise.resolve([]);
     }
+
+    // 7. ORDERS reads + fulfilment — admin only (anon SELECT revoked; a
+    //    stranger could otherwise scrape children's shipping addresses).
+    if(path.indexOf('orders?')===0){
+     if(isGet(opts)){
+      return wzPost('wz-admin',{action:'rest',table:'orders',method:'GET',query:'?'+path.split('?')[1],pass:admPass()})
+       .then(function(r){ return (r&&r.ok&&Array.isArray(r.data))?r.data:[]; });
+     }
+     if(opts && String(opts.method).toUpperCase()==='PATCH'){
+      return wzPost('wz-admin',{action:'rest',table:'orders',method:'PATCH',query:'?'+path.split('?')[1],body:opts.body,pass:admPass(),prefer:(opts.prefer||'return=representation')})
+       .then(function(r){ return (r&&r.ok&&Array.isArray(r.data))?r.data:[]; });
+     }
+    }
    }
   }catch(e){}
   return _sb(path,opts);
