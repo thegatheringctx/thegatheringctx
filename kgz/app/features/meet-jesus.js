@@ -73,7 +73,7 @@
      "<p class='gv-p'>You can talk to Jesus right now, in your own words. If you’d like, you can pray something like this:</p>"+
      "<div class='gv-verse'><div class='gv-vt'>“Dear Jesus, I know I’ve done wrong things, and I’m sorry. Thank You for dying on the cross for me and coming back to life. Please forgive me and be my Savior and my King. I want to follow You. Amen.”</div></div>"+
      "<p class='gv-p' style='font-weight:800;color:#f5c842'>Really important next step:</p>"+
-     "<p class='gv-p'>Go tell your mom, dad, or your pastor today. One of the first things they’ll talk with you about is baptism, which is how we tell everybody that we belong to Jesus now. They will be so happy, and they’ll help you take your next steps with Jesus. This is bigger than an app, and you shouldn’t walk it alone.</p>";
+     "<p class='gv-p'>Go tell your mom, dad, or your pastor today. They will be so happy, and they’ll help you take your next steps with Jesus. This is bigger than an app, and you shouldn’t walk it alone.</p>";
    g.speak('You can talk to Jesus in your own words. And an important next step: go tell your mom, dad, or your pastor. They will be so happy to help you.');
    endBar();
   }
