@@ -8,13 +8,13 @@
  if(window.__wzCat)return; window.__wzCat=1;
  var TAG='catechism';
 
- // ao = answer for 8–12, ay = simpler answer for 4–7. c[0] is the correct
- // check option; c[1],c[2] are gentle, clearly-different distractors.
+ // ao = answer for 8–12, ay = simpler answer for 4–7. Verse text is ESV.
+ // c[0] is the correct check option; c[1],c[2] are gentle, clearly-different distractors.
  var Q=[
   {id:'made', q:'Who made you and everything?',
    ay:'God made everything, and God made me.',
    ao:'God made everything that exists, and God made me.',
-   v:'In the beginning God created the heavens and the earth.',vr:'Genesis 1:1',
+   v:'In the beginning, God created the heavens and the earth.',vr:'Genesis 1:1',
    c:['God made everything and made me.','Everything made itself.','No one really knows.']},
   {id:'why', q:'Why did God make you?',
    ay:'To know Him and love Him.',
@@ -23,53 +23,53 @@
    c:['To know, love, and glorify God.','So I could do whatever I want.','For no reason at all.']},
   {id:'god', q:'What is God like?',
    ay:'God is holy, loving, and perfect. There is only one God.',
-   ao:'God is holy, loving, and perfect — the one true God, who has always been and always will be.',
-   v:'Holy, holy, holy is the Lord God Almighty.',vr:'Revelation 4:8',
+   ao:'God is holy, loving, and perfect, the one true God, who has always been and always will be.',
+   v:'Holy, holy, holy, is the Lord God Almighty.',vr:'Revelation 4:8',
    c:['Holy, loving, and perfect.','Sometimes good, sometimes not.','Just a made-up idea.']},
   {id:'one', q:'How many true Gods are there?',
-   ay:'One! The one true God — the Father, the Son, and the Holy Spirit.',
-   ao:'There is only one true God, who is Father, Son, and Holy Spirit — three persons, one God.',
-   v:'The Lord our God, the Lord is one.',vr:'Deuteronomy 6:4',
-   c:['One true God — Father, Son, and Spirit.','Lots of different gods.','One god for each country.']},
+   ay:'One! The one true God: the Father, the Son, and the Holy Spirit.',
+   ao:'There is only one true God, who is Father, Son, and Holy Spirit: three persons, one God.',
+   v:'Hear, O Israel: The Lord our God, the Lord is one.',vr:'Deuteronomy 6:4',
+   c:['One true God: Father, Son, and Spirit.','Lots of different gods.','One god for each country.']},
   {id:'jesus', q:'Who is Jesus?',
    ay:'Jesus is God’s Son, who became a person to save us.',
    ao:'Jesus is the Son of God, fully God and fully man, who came to save us.',
-   v:'The Word became flesh and made his dwelling among us.',vr:'John 1:14',
+   v:'And the Word became flesh and dwelt among us.',vr:'John 1:14',
    c:['God’s Son, who came to save us.','Just a nice teacher, nothing more.','A made-up hero.']},
   {id:'sin', q:'What is sin?',
    ay:'Sin is doing, saying, or thinking what is wrong against God. Everyone sins.',
    ao:'Sin is anything we do, say, or think that goes against God. Everyone has sinned.',
    v:'For all have sinned and fall short of the glory of God.',vr:'Romans 3:23',
-   c:['Anything against God — and everyone sins.','Only really big crimes.','Something only other people do.']},
+   c:['Anything against God, and everyone sins.','Only really big crimes.','Something only other people do.']},
   {id:'save', q:'Can being good enough save you from sin?',
    ay:'No. Only Jesus can save us.',
-   ao:'No — we cannot save ourselves by being good. Only Jesus can save us.',
-   v:'…by grace you have been saved… not by works.',vr:'Ephesians 2:8-9',
-   c:['No — only Jesus can save us.','Yes, if I try really hard.','Yes, if I’m nicer than others.']},
+   ao:'No, we cannot save ourselves by being good. Only Jesus can save us.',
+   v:'By grace you have been saved through faith… not a result of works.',vr:'Ephesians 2:8-9',
+   c:['No, only Jesus can save us.','Yes, if I try really hard.','Yes, if I’m nicer than others.']},
   {id:'cross', q:'How did Jesus save us?',
    ay:'Jesus died on the cross for our sin, and rose again.',
    ao:'Jesus took the punishment for our sin by dying on the cross, and rose from the dead.',
    v:'Christ died for our sins… he was raised on the third day.',vr:'1 Corinthians 15:3-4',
    c:['He died for our sin and rose again.','He just gave good advice.','He never really came back.']},
   {id:'trust', q:'How does someone become part of God’s family?',
-   ay:'By trusting Jesus — not by being good enough.',
-   ao:'By turning from sin and trusting in Jesus — not by our own goodness.',
-   v:'…believe in the Lord Jesus, and you will be saved.',vr:'Acts 16:31',
-   c:['By trusting in Jesus.','By collecting enough good points.','By being born in a church.']},
+   ay:'By being sorry for my sin and trusting Jesus, not by being good enough.',
+   ao:'By turning from sin and trusting in Jesus, not by our own goodness.',
+   v:'Believe in the Lord Jesus, and you will be saved.',vr:'Acts 16:31',
+   c:['By being sorry for sin and trusting Jesus.','By collecting enough good points.','By being born in a church.']},
   {id:'bible', q:'What is the Bible?',
    ay:'The Bible is God’s true Word to us.',
-   ao:'The Bible is God’s true Word — breathed out by God to teach and guide us.',
-   v:'All Scripture is God-breathed…',vr:'2 Timothy 3:16',
+   ao:'The Bible is God’s true Word, breathed out by God to teach and guide us.',
+   v:'All Scripture is breathed out by God.',vr:'2 Timothy 3:16',
    c:['God’s true Word to us.','Just old stories people made up.','A book of magic spells.']},
   {id:'love', q:'What does God want us to do?',
    ay:'Love God with all our heart, and love others.',
-   ao:'Love God with all our heart, soul, mind, and strength — and love our neighbor as ourselves.',
-   v:'Love the Lord your God… love your neighbor as yourself.',vr:'Matthew 22:37-39',
+   ao:'Love God with all our heart, soul, mind, and strength, and love our neighbor as ourselves.',
+   v:'You shall love the Lord your God… You shall love your neighbor as yourself.',vr:'Matthew 22:37-39',
    c:['Love God and love others.','Only take care of myself.','Just follow lots of rules to look good.']},
   {id:'hope', q:'What is our forever hope?',
    ay:'To be with God forever, where He makes everything new.',
    ao:'To be with God forever in a world made new, with no more crying, pain, or death.',
-   v:'He will wipe every tear… “I am making everything new!”',vr:'Revelation 21:4-5',
+   v:'He will wipe away every tear from their eyes… “Behold, I am making all things new.”',vr:'Revelation 21:4-5',
    c:['To be with God forever, all made new.','That nothing happens after this.','To finally get everything I want.']}
  ];
 
@@ -134,7 +134,7 @@
    var m=mastered().length;
    dots.forEach(function(d){ d.classList.add('on'); });
    card.innerHTML="<div class='gv-emoji'>🏅</div><h3 class='gv-h'>Well done!</h3>"+
-     "<p class='gv-p'>You know <b style='color:#f5c842'>"+m+"</b> of <b>"+Q.length+"</b> big truths. Keep coming back — the ones you’re still learning will show up first.</p>"+
+     "<p class='gv-p'>You know <b style='color:#f5c842'>"+m+"</b> of <b>"+Q.length+"</b> big truths. Keep coming back. The ones you’re still learning will show up first.</p>"+
      "<p class='gv-p' style='font-size:.95rem;color:#cfc9ee'>Try teaching one big truth to someone in your family tonight.</p>";
    g.speak('Well done! You know '+m+' of '+Q.length+' big truths.');
    bar.innerHTML="";
@@ -147,7 +147,7 @@
  }
 
  var tile={ id:TAG, emoji:'💡', title:'Big Truths',
-   sub:'Know what you believe — one truth at a time', launch:launch,
+   sub:'Know what you believe, one truth at a time', launch:launch,
    doneToday:function(){ return window.wzGrow&&window.wzGrow.doneToday(TAG); } };
  if(window.wzGrow&&window.wzGrow.add)window.wzGrow.add(tile);
  else (window.__wzGrowQ=window.__wzGrowQ||[]).push(tile);

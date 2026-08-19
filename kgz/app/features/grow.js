@@ -33,7 +33,7 @@
    css();
    sec=document.createElement('div'); sec.id='wz-grow';
    sec.innerHTML="<div class='wg-h'>🌱 Grow Deeper</div>"+
-     "<div class='wg-sub'>Not just points — get to know God.</div>"+
+     "<div class='wg-sub'>Not just points. Get to know God.</div>"+
      "<div class='wg-g'></div>";
    host.appendChild(sec);
   }
