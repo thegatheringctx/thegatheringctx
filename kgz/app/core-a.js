@@ -30,24 +30,32 @@ function show(id){
 function navBack(){if(_stack.length)show(_stack.pop());else show("p-land");}
 
 // ── SUPABASE ─────────────────────────────────────
+// Self-contained call to the wz-login edge function (no dependency on core-b).
+function _wzLogin(body){
+  return fetch(SUPA_URL+"/functions/v1/wz-login",{
+    method:"POST",headers:{"content-type":"application/json"},
+    body:JSON.stringify(body)
+  }).then(function(r){ return r.json(); });
+}
 function sb(path,opts){
-  // Base-level login reroute (wrapper-independent). Anon SELECT on kids is
+  // Base-level login reroute (fully self-contained). Anon SELECT on kids is
   // revoked, so kid/parent login MUST go through the wz-login edge function.
-  // Doing it here in the base fetcher guarantees it fires even if the folded
-  // sb() wrapper in core-b failed to install for any reason.
+  // This does its OWN fetch (not wzPost, which lives in core-b) so login keeps
+  // working even if core-b ever fails to load/parse. That resilience matters:
+  // a single bad character in a published devotional once took down core-b and
+  // with it the whole login for a week.
   try{
     if(typeof path==='string' && path.indexOf('kids?select=*')===0
-       && typeof wzPost==='function'
        && (!opts || !opts.method || String(opts.method).toUpperCase()==='GET')){
       var _kl=path.match(/last_name=ilike\.([^&]*)&pin=eq\.(\d{4})/);
       if(_kl){ var _kp=_kl[2];
-        return wzPost('wz-login',{mode:'kid',last_name:decodeURIComponent(_kl[1]),pin:_kp})
+        return _wzLogin({mode:'kid',last_name:decodeURIComponent(_kl[1]),pin:_kp})
           .then(function(r){ if(!r||!r.ok||!r.kids)return []; return r.kids.map(function(k){k.pin=_kp;return k;}); });
       }
       if(path.indexOf('order=points.desc')<0){
         var _pl=path.match(/pin=eq\.(\d{4})/);
         if(_pl){ var _pp=_pl[1];
-          return wzPost('wz-login',{mode:'parent',pin:_pp})
+          return _wzLogin({mode:'parent',pin:_pp})
             .then(function(r){ if(!r||!r.ok||!r.kids)return []; return r.kids.map(function(k){k.pin=_pp;return k;}); });
         }
       }
