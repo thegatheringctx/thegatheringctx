@@ -31,6 +31,28 @@ function navBack(){if(_stack.length)show(_stack.pop());else show("p-land");}
 
 // ── SUPABASE ─────────────────────────────────────
 function sb(path,opts){
+  // Base-level login reroute (wrapper-independent). Anon SELECT on kids is
+  // revoked, so kid/parent login MUST go through the wz-login edge function.
+  // Doing it here in the base fetcher guarantees it fires even if the folded
+  // sb() wrapper in core-b failed to install for any reason.
+  try{
+    if(typeof path==='string' && path.indexOf('kids?select=*')===0
+       && typeof wzPost==='function'
+       && (!opts || !opts.method || String(opts.method).toUpperCase()==='GET')){
+      var _kl=path.match(/last_name=ilike\.([^&]*)&pin=eq\.(\d{4})/);
+      if(_kl){ var _kp=_kl[2];
+        return wzPost('wz-login',{mode:'kid',last_name:decodeURIComponent(_kl[1]),pin:_kp})
+          .then(function(r){ if(!r||!r.ok||!r.kids)return []; return r.kids.map(function(k){k.pin=_kp;return k;}); });
+      }
+      if(path.indexOf('order=points.desc')<0){
+        var _pl=path.match(/pin=eq\.(\d{4})/);
+        if(_pl){ var _pp=_pl[1];
+          return wzPost('wz-login',{mode:'parent',pin:_pp})
+            .then(function(r){ if(!r||!r.ok||!r.kids)return []; return r.kids.map(function(k){k.pin=_pp;return k;}); });
+        }
+      }
+    }
+  }catch(_e){}
   opts=opts||{};
   var method=opts.method||"GET";
   var headers={"apikey":SUPA_KEY,"Authorization":"Bearer "+SUPA_KEY};
