@@ -1,3 +1,4 @@
+/* cdn-bust 2026-08-23b */
 function dashTab(tab,btn){
   APP.tab=tab;
   ["devos","games","warrior","store","ranks","prayer","training","watch","verse","jesus"].forEach(function(t){
