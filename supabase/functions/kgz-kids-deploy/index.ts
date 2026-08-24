@@ -195,12 +195,15 @@ Deno.serve(async (req) => {
   if (mode === 'read') {
     const live = liveWeekPrefixes(content)
     const expectPrefix = (target.days[0] && String(target.days[0].id || '').replace(/-d\d+$/, '')) || null
-    const inSyncLive = expectPrefix != null && live.length === 1 && live[0] === expectPrefix
+    // liveMatchesTable: does the deployed file already carry the exact week the
+    // table says should be live. inSync (below) is the kids-vs-adult guard and
+    // means the same thing in every mode.
+    const liveMatchesTable = expectPrefix != null && live.length === 1 && live[0] === expectPrefix
     return jr({
       ok: true, mode: 'read', targetFile: t.path,
       liveWeeks: live, tableWeek: wk, tableExpectsPrefix: expectPrefix,
-      dayCount: target.days.length, inSync: inSyncLive,
-      allActiveWeeks: target.allWeeks, adultWeek: adult, kidsAdultInSync: cmp.inSync,
+      dayCount: target.days.length, inSync: cmp.inSync, liveMatchesTable,
+      allActiveWeeks: target.allWeeks, adultWeek: adult,
       warnings: target.warnings,
     })
   }
