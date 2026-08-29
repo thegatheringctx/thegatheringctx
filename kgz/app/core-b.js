@@ -32,6 +32,7 @@ var DEVOS=[{id:'col-wk6-d1',day:1,title:'Jesus Is in Every Room',scripture:'Colo
 
 function renderDevos(){
   var el=document.getElementById("tab-devos");if(!el)return;
+  if(!APP._devosLoaded){APP._devosLoaded=true;el.innerHTML="<p class='muted' style='text-align:center;padding:2rem'>Loading...</p>";var _g=APP.kid?APP.kid.age_group:"812";sb("devos?active=eq.true&or=(age_group.eq."+_g+",age_group.is.null)&order=sort_order.asc").then(function(rows){if(rows&&rows.length){DEVOS=rows.map(function(r,i){return {id:r.id,day:r.sort_order||(i+1),title:r.title,scripture:r.scripture,body:r.content,prayer:r.prayer};});}renderDevos();}).catch(function(){renderDevos();});return;}
   el.innerHTML="";
   var completed=APP.kid?APP.kid.completed_devos||[]:[];
   var doneCount=completed.length,total=DEVOS.length;
