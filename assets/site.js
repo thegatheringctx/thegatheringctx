@@ -214,7 +214,7 @@
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
     [].forEach.call(document.querySelectorAll("section"), function (s) {
       if (s.classList.contains("hero") || s.classList.contains("page-hero")) return;
       if (s.getBoundingClientRect().top < vh * 0.9) return;
