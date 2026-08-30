@@ -1,4 +1,5 @@
 [
+  {"slug":"devotional-1-peter-1","url":"/devotional-1-peter-1","series":"1 and 2 Peter","week":1,"title":"Born to a Living Hope","subtitle":"Your hope is alive, because it is tied to a Christ who is alive.","passage":"1 Peter 1:3 to 25"},
   {"slug":"devotional-colossians-1","url":"/devotional-colossians-1","series":"Colossians","week":1,"title":"The Gospel That Bears Fruit","subtitle":"You were not improved. You were transferred.","passage":"Colossians 1:1 to 14"},
   {"slug":"devotional-colossians-2","url":"/devotional-colossians-2","series":"Colossians","week":2,"title":"All of Him","subtitle":"Every power you fear, He made.","passage":"Colossians 1:15 to 23"},
   {"slug":"devotional-colossians-3","url":"/devotional-colossians-3","series":"Colossians","week":3,"title":"Christ In You, The Hope of Glory","subtitle":"The treasure is a Person, and He lives in you.","passage":"Colossians 1:24 to 2:5"},
@@ -20,6 +21,5 @@
   {"slug":"devotional-palm-sunday","url":"/devotional-palm-sunday","series":"Holy Week","week":null,"season":true,"title":"The King Is Here","subtitle":"Will you still follow Him when He does not fit your plan?","passage":"Matthew 21:1-11"},
   {"slug":"devotional-easter-sunday","url":"/devotional-easter-sunday","series":"Easter","week":null,"season":true,"title":"He Got Up, And Everything Changed","subtitle":"The risen Christ and the death of death.","passage":"Matthew 28:1-10"},
   {"slug":"devotional-pentecost","url":"/devotional-pentecost","series":"Pentecost","week":null,"season":true,"title":"The Fire Fell","subtitle":"Heaven did not send a letter. Heaven sent a fire.","passage":"Acts 2:1-4"},
-  {"slug":"devotional-worship-why-what-how","url":"/devotional-worship-why-what-how","series":"Special Messages","week":null,"season":true,"title":"Worship: Who, Why, and How","subtitle":"We stop watching, and we bow.","passage":"John 4:23 to 24"},
-  {"slug":"devotional-1-peter-1","url":"/devotional-1-peter-1","series":"1 and 2 Peter","week":1,"title":"Born to a Living Hope","subtitle":"Your hope is alive, because it is tied to a Christ who is alive.","passage":"1 Peter 1:3 to 25"}
+  {"slug":"devotional-worship-why-what-how","url":"/devotional-worship-why-what-how","series":"Special Messages","week":null,"season":true,"title":"Worship: Who, Why, and How","subtitle":"We stop watching, and we bow.","passage":"John 4:23 to 24"}
 ]
