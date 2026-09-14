@@ -105,15 +105,40 @@ function klTap(k){
 }
 
 // ── LOGIN ─────────────────────────────────────────
+function klPickWarrior(rows){
+  var err=document.getElementById("kl-err");
+  err.style.color="#f5c842";err.textContent="Which warrior are you?";
+  var picker=document.getElementById("kl-picker");
+  if(!picker){picker=document.createElement("div");picker.id="kl-picker";picker.style.cssText="margin-top:.65rem;display:flex;flex-direction:column;gap:.5rem";err.parentNode.insertBefore(picker,err.nextSibling);}
+  picker.innerHTML="";
+  rows.forEach(function(k){
+    var btn=document.createElement("div");
+    btn.style.cssText="background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:14px;padding:.85rem 1rem;cursor:pointer;font-weight:900;font-size:.95rem;text-align:center";
+    btn.textContent="\u2694\uFE0F "+k.first_name+" ("+k.points+" pts)";
+    btn.addEventListener("click",function(){
+      if(picker.parentNode)picker.parentNode.removeChild(picker);
+      err.style.color="";err.textContent="";
+      APP.kid=k;_pin=[];
+      document.getElementById("kl-last").value="";
+      document.querySelectorAll("#kl-dots .pin-dot").forEach(function(d){d.textContent="";d.classList.remove("filled");});
+      openDash(k);
+    });
+    picker.appendChild(btn);
+  });
+  _pin=[];
+  document.querySelectorAll("#kl-dots .pin-dot").forEach(function(d){d.textContent="";d.classList.remove("filled");});
+}
 function doLogin(){
   var last=(document.getElementById("kl-last").value||"").trim();
-  var err=document.getElementById("kl-err");err.textContent="";
+  var err=document.getElementById("kl-err");err.textContent="";err.style.color="";
+  var oldPick=document.getElementById("kl-picker");if(oldPick&&oldPick.parentNode)oldPick.parentNode.removeChild(oldPick);
   if(!last){err.textContent="Enter your last name!";return;}
   if(_pin.length!==4){err.textContent="Enter your 4-digit PIN!";return;}
   var pin=_pin.join("");err.textContent="Checking...";
   sb("kids?select=*&last_name=ilike."+encodeURIComponent(last)+"&pin=eq."+pin)
     .then(function(rows){
       if(!rows||!rows.length)throw new Error("No account found. Check your last name and PIN.");
+      if(rows.length>1){klPickWarrior(rows);return;}
       APP.kid=rows[0];_pin=[];err.textContent="";
       document.getElementById("kl-last").value="";
       document.querySelectorAll("#kl-dots .pin-dot").forEach(function(d){d.textContent="";d.classList.remove("filled");});
