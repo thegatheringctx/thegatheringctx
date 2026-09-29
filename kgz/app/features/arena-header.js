@@ -8,7 +8,7 @@
   if(!sub)return;
   var n=document.querySelectorAll('#tab-games .games-grid .game-card').length||7;
   var max=(window.CFG&&window.CFG.game_daily_max)||100;
-  function paint(pts){ var left=Math.max(0,max-(pts||0)); sub.innerHTML="<span>"+n+" games</span> &middot; <span style='color:#f5c842;font-weight:800'>"+(pts||0)+" of "+max+" pts today</span> &middot; <span>"+(left>0?left+" left":"cap reached")+"</span>"; }
+  function paint(pts){ var left=Math.max(0,max-(pts||0)); sub.innerHTML="<span>"+n+" games</span> &middot; <span style='color:#f5c842;font-weight:800'>"+(pts||0)+" of "+max+" pts today</span> &middot; <span>"+(left>0?left+" left":"maxed today &middot; try the verse quest!")+"</span>"; }
   try{ window.gamePtsToday(function(pts){ paint(pts); }); }catch(e){ paint(0); }
  }
  function hook(){ if(typeof window.renderGames==='function'&&!window.renderGames.__wzcap){ var o=window.renderGames; window.renderGames=function(){ var r=o.apply(this,arguments); try{setTimeout(capFix,60);}catch(e){} return r; }; window.renderGames.__wzcap=1; }
