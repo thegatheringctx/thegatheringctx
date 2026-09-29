@@ -512,19 +512,21 @@ try {
    }
 
    // 2. Today's verse
-   card({icon:'\uD83D\uDCDC',title:'Hide the verse in your heart',
-     desc:verse?(verse.reference||'This week\u2019s verse'):'Practice this week\u2019s verse',
+   // Scripture first (Sept 2026): the verse is the day's big quest until it's learned.
+   var vDone=!!verse&&(k.completed_verses||[]).indexOf(verse.id)>=0;
+   card({hero:!!verse&&!vDone,done:vDone,icon:'\uD83D\uDCDC',title:'Hide the verse in your heart',
+     desc:vDone?'You learned it! Keep practicing so it sticks.':((verse&&verse.reference)||'This week\u2019s verse')+' \u00B7 +'+((verse&&verse.points)||20)+' pts',
      onclick:function(){ dashTab('verse',navFor('verse')); }});
 
    // 3. Today's devo
    var devoDone=(k.completed_devos||[]).length>0;
    card({icon:'\uD83D\uDCD6',title:'Read today\u2019s devo',
-     desc:'A few minutes with God. Earn points.',
+     desc:'A few minutes with God. +'+(((window.CFG&&CFG.devo_pts)||10))+' pts',
      onclick:function(){ dashTab('devos',navFor('devos')); }});
 
    // 4. Play + learn
    card({icon:'\u2694\uFE0F',title:'Battle Arena',
-     desc:'Games that teach. Put on your armor.',
+     desc:'Games that teach. Up to '+(((window.CFG&&CFG.game_daily_max)||200))+' pts a day.',
      onclick:function(){ dashTab('games',navFor('games')); }});
 
    // gentle footer pointing to everything else
