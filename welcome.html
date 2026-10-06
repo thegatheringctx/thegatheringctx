@@ -86,7 +86,7 @@ h2{font-size:clamp(2rem,8vw,2.8rem);margin-bottom:.9rem}
 .phoneform .after{margin-top:1rem;font-size:.82rem;color:var(--w62)}
 .phoneform .after a{color:var(--gold)}
 @media(min-width:700px){.formbox iframe{height:920px}}
-@media(max-width:699px){.formbox,.formnote{display:none}.phoneform{display:block}}
+@media(max-width:699px){.formbox{min-height:0;height:780px;overflow:hidden}.formbox iframe{width:125%;height:975px;transform:scale(.8);transform-origin:0 0}}
 </style>
 </head>
 <body>
@@ -102,12 +102,6 @@ h2{font-size:clamp(2rem,8vw,2.8rem);margin-bottom:.9rem}
 </section>
 
 <section class="wrap formsec" id="form">
-  <div class="phoneform">
-    <div class="t">Say hello. <em>It takes a minute.</em></div>
-    <p>Tap below, fill in a few quick details, and someone from The Gathering will reach out.</p>
-    <a class="bigbtn" href="https://gatheringctx.churchcenter.com/people/forms/1332785" target="_blank" rel="noopener">Tell Us You&rsquo;re Here</a>
-    <div class="after">When you&rsquo;re done, come back here for your <a href="#tools">free tools</a>.</div>
-  </div>
   <div class="formbox">
     <iframe src="https://gatheringctx.churchcenter.com/people/forms/1332785" title="Welcome form for The Gathering CTX" allow="clipboard-write"></iframe>
   </div>
