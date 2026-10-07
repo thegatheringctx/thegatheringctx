@@ -1,0 +1,119 @@
+# SEO canonical for static sermon pages (added 2026-10-07).
+# Static sermons/<slug>.html pages ship without <link rel=canonical>, and each answers at
+# /sermons/<slug>, /sermons/<slug>/ and /sermons/<slug>.html. Search Console flagged
+# 'Google chose different canonical than user'. This Link header names the clean URL.
+# New static sermon pages: add a block here, or put <link rel="canonical"> in the head.
+/sermons/raised-with-christ
+  Link: <https://gatheringctx.org/sermons/raised-with-christ>; rel="canonical"
+/sermons/raised-with-christ/
+  Link: <https://gatheringctx.org/sermons/raised-with-christ>; rel="canonical"
+/sermons/raised-with-christ.html
+  Link: <https://gatheringctx.org/sermons/raised-with-christ>; rel="canonical"
+/sermons/complete-in-him
+  Link: <https://gatheringctx.org/sermons/complete-in-him>; rel="canonical"
+/sermons/complete-in-him/
+  Link: <https://gatheringctx.org/sermons/complete-in-him>; rel="canonical"
+/sermons/complete-in-him.html
+  Link: <https://gatheringctx.org/sermons/complete-in-him>; rel="canonical"
+/sermons/christ-in-you-the-hope-of-glory
+  Link: <https://gatheringctx.org/sermons/christ-in-you-the-hope-of-glory>; rel="canonical"
+/sermons/christ-in-you-the-hope-of-glory/
+  Link: <https://gatheringctx.org/sermons/christ-in-you-the-hope-of-glory>; rel="canonical"
+/sermons/christ-in-you-the-hope-of-glory.html
+  Link: <https://gatheringctx.org/sermons/christ-in-you-the-hope-of-glory>; rel="canonical"
+/sermons/all-of-him
+  Link: <https://gatheringctx.org/sermons/all-of-him>; rel="canonical"
+/sermons/all-of-him/
+  Link: <https://gatheringctx.org/sermons/all-of-him>; rel="canonical"
+/sermons/all-of-him.html
+  Link: <https://gatheringctx.org/sermons/all-of-him>; rel="canonical"
+/sermons/the-gospel-that-bears-fruit
+  Link: <https://gatheringctx.org/sermons/the-gospel-that-bears-fruit>; rel="canonical"
+/sermons/the-gospel-that-bears-fruit/
+  Link: <https://gatheringctx.org/sermons/the-gospel-that-bears-fruit>; rel="canonical"
+/sermons/the-gospel-that-bears-fruit.html
+  Link: <https://gatheringctx.org/sermons/the-gospel-that-bears-fruit>; rel="canonical"
+/sermons/the-settled-heart
+  Link: <https://gatheringctx.org/sermons/the-settled-heart>; rel="canonical"
+/sermons/the-settled-heart/
+  Link: <https://gatheringctx.org/sermons/the-settled-heart>; rel="canonical"
+/sermons/the-settled-heart.html
+  Link: <https://gatheringctx.org/sermons/the-settled-heart>; rel="canonical"
+/sermons/press-on-citizens-of-heaven
+  Link: <https://gatheringctx.org/sermons/press-on-citizens-of-heaven>; rel="canonical"
+/sermons/press-on-citizens-of-heaven/
+  Link: <https://gatheringctx.org/sermons/press-on-citizens-of-heaven>; rel="canonical"
+/sermons/press-on-citizens-of-heaven.html
+  Link: <https://gatheringctx.org/sermons/press-on-citizens-of-heaven>; rel="canonical"
+/sermons/all-things-loss
+  Link: <https://gatheringctx.org/sermons/all-things-loss>; rel="canonical"
+/sermons/all-things-loss/
+  Link: <https://gatheringctx.org/sermons/all-things-loss>; rel="canonical"
+/sermons/all-things-loss.html
+  Link: <https://gatheringctx.org/sermons/all-things-loss>; rel="canonical"
+/sermons/work-it-out-walk-it-out
+  Link: <https://gatheringctx.org/sermons/work-it-out-walk-it-out>; rel="canonical"
+/sermons/work-it-out-walk-it-out/
+  Link: <https://gatheringctx.org/sermons/work-it-out-walk-it-out>; rel="canonical"
+/sermons/work-it-out-walk-it-out.html
+  Link: <https://gatheringctx.org/sermons/work-it-out-walk-it-out>; rel="canonical"
+/sermons/the-mind-that-emptied-itself
+  Link: <https://gatheringctx.org/sermons/the-mind-that-emptied-itself>; rel="canonical"
+/sermons/the-mind-that-emptied-itself/
+  Link: <https://gatheringctx.org/sermons/the-mind-that-emptied-itself>; rel="canonical"
+/sermons/the-mind-that-emptied-itself.html
+  Link: <https://gatheringctx.org/sermons/the-mind-that-emptied-itself>; rel="canonical"
+/sermons/joy-in-chains
+  Link: <https://gatheringctx.org/sermons/joy-in-chains>; rel="canonical"
+/sermons/joy-in-chains/
+  Link: <https://gatheringctx.org/sermons/joy-in-chains>; rel="canonical"
+/sermons/joy-in-chains.html
+  Link: <https://gatheringctx.org/sermons/joy-in-chains>; rel="canonical"
+/sermons/let-the-fire-fall
+  Link: <https://gatheringctx.org/sermons/let-the-fire-fall>; rel="canonical"
+/sermons/let-the-fire-fall/
+  Link: <https://gatheringctx.org/sermons/let-the-fire-fall>; rel="canonical"
+/sermons/let-the-fire-fall.html
+  Link: <https://gatheringctx.org/sermons/let-the-fire-fall>; rel="canonical"
+/sermons/stand
+  Link: <https://gatheringctx.org/sermons/stand>; rel="canonical"
+/sermons/stand/
+  Link: <https://gatheringctx.org/sermons/stand>; rel="canonical"
+/sermons/stand.html
+  Link: <https://gatheringctx.org/sermons/stand>; rel="canonical"
+/sermons/walk-in-love-light-wisdom-and-the-holy-marriage
+  Link: <https://gatheringctx.org/sermons/walk-in-love-light-wisdom-and-the-holy-marriage>; rel="canonical"
+/sermons/walk-in-love-light-wisdom-and-the-holy-marriage/
+  Link: <https://gatheringctx.org/sermons/walk-in-love-light-wisdom-and-the-holy-marriage>; rel="canonical"
+/sermons/walk-in-love-light-wisdom-and-the-holy-marriage.html
+  Link: <https://gatheringctx.org/sermons/walk-in-love-light-wisdom-and-the-holy-marriage>; rel="canonical"
+/sermons/walk-worthy-inside-and-out
+  Link: <https://gatheringctx.org/sermons/walk-worthy-inside-and-out>; rel="canonical"
+/sermons/walk-worthy-inside-and-out/
+  Link: <https://gatheringctx.org/sermons/walk-worthy-inside-and-out>; rel="canonical"
+/sermons/walk-worthy-inside-and-out.html
+  Link: <https://gatheringctx.org/sermons/walk-worthy-inside-and-out>; rel="canonical"
+/sermons/the-mystery-is-out
+  Link: <https://gatheringctx.org/sermons/the-mystery-is-out>; rel="canonical"
+/sermons/the-mystery-is-out/
+  Link: <https://gatheringctx.org/sermons/the-mystery-is-out>; rel="canonical"
+/sermons/the-mystery-is-out.html
+  Link: <https://gatheringctx.org/sermons/the-mystery-is-out>; rel="canonical"
+/sermons/brought-near-by-the-blood
+  Link: <https://gatheringctx.org/sermons/brought-near-by-the-blood>; rel="canonical"
+/sermons/brought-near-by-the-blood/
+  Link: <https://gatheringctx.org/sermons/brought-near-by-the-blood>; rel="canonical"
+/sermons/brought-near-by-the-blood.html
+  Link: <https://gatheringctx.org/sermons/brought-near-by-the-blood>; rel="canonical"
+/sermons/identity-blessing-adoption-redemption
+  Link: <https://gatheringctx.org/sermons/identity-blessing-adoption-redemption>; rel="canonical"
+/sermons/identity-blessing-adoption-redemption/
+  Link: <https://gatheringctx.org/sermons/identity-blessing-adoption-redemption>; rel="canonical"
+/sermons/identity-blessing-adoption-redemption.html
+  Link: <https://gatheringctx.org/sermons/identity-blessing-adoption-redemption>; rel="canonical"
+/sermons/easter-sunday
+  Link: <https://gatheringctx.org/sermons/easter-sunday>; rel="canonical"
+/sermons/easter-sunday/
+  Link: <https://gatheringctx.org/sermons/easter-sunday>; rel="canonical"
+/sermons/easter-sunday.html
+  Link: <https://gatheringctx.org/sermons/easter-sunday>; rel="canonical"
