@@ -29,6 +29,12 @@ function replaceMeta(html, attr, val, content) {
 function injectMeta(html, data) {
   var t = esc(data.title), d = esc(data.desc);
   html = html.replace(/<title>[\s\S]*?<\/title>/i, "<title>" + t + "</title>");
+  // Server-side canonical (added 2026-10-07): Search Console reported "Google
+  // chose different canonical than user" because the only canonical was added
+  // by client-side JS. Insert one right after </title> unless one exists.
+  if (data.canonical && !/rel=["']canonical["']/i.test(html)) {
+    html = html.replace(/<\/title>/i, '</title>\n  <link rel="canonical" href="' + esc(data.canonical) + '">');
+  }
   html = html.replace(/(<meta\s+name="description"\s+content=")[^"]*(")/i, "$1" + d + "$2");
   html = replaceMeta(html, "property", "og:title", t);
   html = replaceMeta(html, "property", "og:description", d);
@@ -74,7 +80,8 @@ export default async (request, context) => {
 
     var out = injectMeta(html, {
       title: d.title + " | The Gathering CTX",
-      desc: String(desc || "").slice(0, 300)
+      desc: String(desc || "").slice(0, 300),
+      canonical: "https://gatheringctx.org/" + dir + "/" + slug
     });
 
     var headers = new Headers(tRes.headers);
