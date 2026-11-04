@@ -43,6 +43,9 @@ export const handler = async (event) => {
     row.email = d.email || null;
     if (formName === 'prayer-request') {
       row.request = d.request || null;
+      // Prayer wall opt-in. Nothing is posted automatically: the care team
+      // sees this flag in the queue and approves before anything goes public.
+      row.heard_from = d.share_wall === 'yes' ? 'prayer-wall: ok to share (first name, after review)' : null;
     } else if (formName === 'serve-interest') {
       row.phone = d.phone || null;
       row.request = d.message || null;   // what they'd like to help with

@@ -1,0 +1,14 @@
+{
+  "_howToUpdate": "Snapshot of the listed Tables in Planning Center Groups (group type The Table). Public details only: host names, town, and schedule as shown on Church Center. Never add a street address here. The link goes to the Table's Church Center page, which handles requests to join. Refresh when a Table is added, closed, or changes night.",
+  "updated": "2026-11-04",
+  "tables": [
+    {"host": "Paul & Donna Atkinson", "town": "Blum", "day": "Wednesday", "when": "Every other Wednesday, 6:30 to 8:00 PM", "url": "https://gatheringctx.churchcenter.com/groups/the-table/paul-donna-atkinson"},
+    {"host": "Kevin & Robyn Marriot", "town": "Cleburne", "day": "Wednesday", "when": "First and third Wednesday, 6:30 PM", "url": "https://gatheringctx.churchcenter.com/groups/the-table/kevin-robyn-marriot"},
+    {"host": "Chuck & Sarah Fisk", "town": "Itasca", "day": "Wednesday", "when": "Every other Wednesday, 6:30 to 8:00 PM", "url": "https://gatheringctx.churchcenter.com/groups/the-table/chuck-sarah-fisk"},
+    {"host": "Justin & April Remund", "town": "Cleburne", "day": "Thursday", "when": "Every other Thursday, 6:30 to 8:00 PM", "url": "https://gatheringctx.churchcenter.com/groups/the-table/justin-april-remund"},
+    {"host": "Henry & Laila Delano", "town": "Cleburne", "day": "Thursday", "when": "Every other Thursday, 7:00 to 8:30 PM", "url": "https://gatheringctx.churchcenter.com/groups/the-table/henry-laila-delano"},
+    {"host": "JD & Terri Christensen", "town": "Cleburne", "day": "Thursday", "when": "Every other Thursday, 6:30 to 8:30 PM", "url": "https://gatheringctx.churchcenter.com/groups/the-table/jd-terri-christensen"},
+    {"host": "Chris & Sarah Poss", "town": "Cleburne", "day": "Saturday", "when": "Every other Saturday, 2:00 PM", "url": "https://gatheringctx.churchcenter.com/groups/the-table/chris-sarah-poss"},
+    {"host": "James & Tanna Luckie", "town": "", "day": "", "when": "Ask the host for the schedule", "url": "https://gatheringctx.churchcenter.com/groups/the-table/james-tanna-luckie"}
+  ]
+}

@@ -192,6 +192,30 @@
   to = "/.netlify/functions/subscribe"
   status = 200
 
+# Interactive pages (added 2026-11)
+[[redirects]]
+  from = "/prayer-wall"
+  to = "/prayer-wall.html"
+  status = 200
+
+[[redirects]]
+  from = "/next-step"
+  to = "/next-step.html"
+  status = 200
+
+[[redirects]]
+  from = "/sunday-notes"
+  to = "/sunday-notes.html"
+  status = 200
+
+# Function dependencies are installed into the publish root at build time.
+# Never serve them.
+[[redirects]]
+  from = "/node_modules/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Custom 404
 [[redirects]]
   from = "/*"
