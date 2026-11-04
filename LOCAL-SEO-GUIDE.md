@@ -17,7 +17,7 @@ rule, so copy and paste rather than retyping.
 
 - Name: `The Gathering CTX`
 - Address: `1501 W Henderson St, Cleburne, TX 76033` (Cleburne Conference Center)
-- Phone: `(682) 286-5640`
+- Phone: `(817) 518-4773`
 - Website: `https://gatheringctx.org`
 - Gathering: Sundays, doors 4:30 PM, service 5:00 PM to about 6:30 PM
 
@@ -57,7 +57,7 @@ Google rewards completeness. Do all of these:
 - **Hours**. Add Sunday `4:30 PM to 6:30 PM`. Leave the other days closed
   unless you add a weekday event. This matches the website and the schema.
 - **Opening date**. Set the month and year the church launched. This helps.
-- **Phone**. `(682) 286-5640`. Use the same number as the website.
+- **Phone**. `(817) 518-4773`. Use the same number as the website.
 - **Website**. `https://gatheringctx.org`.
 - **Appointment / menu links**. Point the primary action link to
   `https://gatheringctx.org/visit`. You can add more links: giving to

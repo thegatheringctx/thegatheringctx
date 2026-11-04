@@ -91,7 +91,7 @@
         '</div>' +
         '<div>' +
           '<span class="f-col-label">Connect</span>' +
-          '<a href="tel:+16822865640" class="f-col-link">(682) 286-5640</a>' +
+          '<a href="tel:+18175184773" class="f-col-link">(817) 518-4773</a>' +
           '<a href="mailto:info@gatheringctx.org" class="f-col-link">info@gatheringctx.org</a>' +
           '<a href="sms:+18175184773&body=VISIT" class="f-col-link" style="margin-top:14px">Text VISIT to (817) 518-4773</a>' +
         '</div>' +

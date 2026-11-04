@@ -40,8 +40,8 @@
       accent: "#dfc06a"
     },
     _default: {
-      bg: "radial-gradient(ellipse at 50% -10%, rgba(184,147,90,0.16), transparent 60%), linear-gradient(165deg,#161210 0%,#0a0908 100%)",
-      accent: "#b8935a"
+      bg: "radial-gradient(ellipse at 50% -10%, rgba(200,169,110,0.16), transparent 60%), linear-gradient(165deg,#161210 0%,#0a0908 100%)",
+      accent: "#c8a96e"
     }
   };
 
