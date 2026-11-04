@@ -1,0 +1,114 @@
+/* ============================================================
+   The Gathering CTX - interactive components
+   Reading plan check-offs, decree mode, prayer wall, next step,
+   Table finder, Sunday notes. Black and gold only.
+   ============================================================ */
+:root{
+  --ix-black:#000000;--ix-near:#0a0a0a;--ix-gold:#c8a96e;--ix-off:#f5f0e8;
+  --ix-body:#2a2622;--ix-border:#1a1a1a;--ix-muted:rgba(255,255,255,0.62);
+  --ix-sans:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ix-serif:'Cormorant Garamond','Georgia',serif;
+}
+.ix-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--ix-sans);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;background:var(--ix-gold);color:#0a0a0a;border:1px solid var(--ix-gold);padding:13px 22px;cursor:pointer;text-decoration:none;border-radius:2px;transition:background .2s,color .2s;}
+.ix-btn:hover{background:transparent;color:var(--ix-gold);}
+.ix-btn.ghost{background:transparent;color:var(--ix-gold);}
+.ix-btn.ghost:hover{background:var(--ix-gold);color:#0a0a0a;}
+.ix-btn:focus-visible,.ix-chip:focus-visible,.rp-check:focus-visible{outline:2px solid var(--ix-gold);outline-offset:3px;}
+
+/* ---------- Reading plan ---------- */
+.rp-progress{margin:36px 0 0;border:1px solid var(--ix-border);background:#0e0e0e;padding:22px 24px;display:flex;gap:28px;flex-wrap:wrap;align-items:center;max-width:760px;}
+.rp-stat{font-family:var(--ix-sans);}
+.rp-stat b{display:block;font-family:var(--ix-serif);font-weight:400;font-size:2rem;color:var(--ix-gold);line-height:1;}
+.rp-stat span{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ix-muted);}
+.rp-word{flex:1 1 220px;font-family:var(--ix-serif);font-style:italic;font-size:1.1rem;line-height:1.5;color:rgba(255,255,255,0.8);}
+.days li.rp-row{align-items:center;cursor:pointer;}
+.rp-check{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1px solid rgba(200,169,110,0.55);border-radius:2px;background:transparent;cursor:pointer;flex:0 0 auto;display:grid;place-content:center;margin:0;}
+.rp-check::after{content:"";width:10px;height:6px;border-left:2px solid #0a0a0a;border-bottom:2px solid #0a0a0a;transform:rotate(-45deg) translate(1px,-1px);opacity:0;}
+.rp-check:checked{background:var(--ix-gold);border-color:var(--ix-gold);}
+.rp-check:checked::after{opacity:1;}
+.days li.rp-row .rp-left{display:flex;align-items:center;gap:14px;}
+.days li.rp-row.done .rp-ref{color:rgba(255,255,255,0.4);text-decoration:line-through;text-decoration-color:rgba(200,169,110,0.5);}
+.days li.rp-row.today{box-shadow:inset 2px 0 0 var(--ix-gold);padding-left:10px;}
+.rp-ref a{color:inherit;text-decoration:none;border-bottom:1px dotted rgba(200,169,110,0.4);}
+.rp-ref a:hover{color:var(--ix-gold);}
+
+/* ---------- Decree mode ---------- */
+.dm-launch{margin-top:22px;}
+.dm{position:fixed;inset:0;z-index:1000;background:#000;display:none;flex-direction:column;justify-content:center;align-items:center;padding:40px 24px;text-align:center;}
+.dm.open{display:flex;}
+.dm-series{position:absolute;top:28px;left:0;right:0;font-family:var(--ix-sans);font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--ix-gold);padding:0 64px;}
+.dm-close{position:absolute;top:18px;right:18px;background:none;border:1px solid #2a2a2a;color:#fff;width:42px;height:42px;font-size:1.1rem;cursor:pointer;border-radius:2px;}
+.dm-line{font-family:var(--ix-serif);font-weight:300;font-size:clamp(1.8rem,5.4vw,3.6rem);line-height:1.25;color:#fff;max-width:980px;opacity:0;transform:translateY(10px);transition:opacity .45s,transform .45s;}
+.dm-line.show{opacity:1;transform:none;}
+.dm-line.final{color:var(--ix-gold);font-style:italic;}
+.dm-hint{margin-top:36px;font-family:var(--ix-sans);font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);}
+.dm-dots{position:absolute;bottom:34px;left:0;right:0;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 24px;}
+.dm-dots i{width:7px;height:7px;border-radius:50%;background:#2a2a2a;display:block;}
+.dm-dots i.on{background:var(--ix-gold);}
+.dm-nav{position:absolute;bottom:64px;display:flex;gap:12px;}
+@media (prefers-reduced-motion:reduce){.dm-line{transition:none;transform:none;}}
+
+/* ---------- Shared page shells ---------- */
+.ix-wrap{max-width:1000px;margin:0 auto;padding:0 56px 96px;}
+@media(max-width:700px){.ix-wrap{padding:0 16px 72px;}}
+.ix-label{font-family:var(--ix-sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--ix-gold);margin-bottom:12px;}
+.ix-card{border:1px solid var(--ix-border);background:#0e0e0e;padding:26px 26px 22px;}
+.ix-note{font-family:var(--ix-sans);font-size:0.8rem;line-height:1.7;color:var(--ix-muted);}
+
+/* ---------- Prayer wall ---------- */
+.pw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:34px;}
+.pw-card{display:flex;flex-direction:column;gap:14px;}
+.pw-text{font-family:var(--ix-serif);font-size:1.2rem;line-height:1.5;color:rgba(255,255,255,0.88);}
+.pw-meta{font-family:var(--ix-sans);font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ix-muted);}
+.pw-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:12px;border-top:1px solid var(--ix-border);}
+.pw-pray{font-family:var(--ix-sans);font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;background:transparent;color:var(--ix-gold);border:1px solid rgba(200,169,110,0.5);padding:9px 14px;cursor:pointer;border-radius:2px;}
+.pw-pray[aria-pressed="true"]{background:var(--ix-gold);color:#0a0a0a;border-color:var(--ix-gold);cursor:default;}
+.pw-count{font-family:var(--ix-sans);font-size:0.74rem;color:var(--ix-muted);}
+.pw-empty{margin-top:34px;text-align:center;padding:56px 24px;}
+.pw-empty p.big{font-family:var(--ix-serif);font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:12px;}
+
+/* ---------- Next step ---------- */
+.ns{max-width:720px;}
+.ns-step{font-family:var(--ix-sans);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ix-muted);margin-bottom:10px;}
+.ns-q{font-family:var(--ix-serif);font-weight:300;font-size:clamp(1.6rem,3.6vw,2.4rem);line-height:1.25;color:#fff;margin-bottom:28px;}
+.ns-opts{display:grid;gap:10px;}
+.ns-opt{text-align:left;font-family:var(--ix-sans);font-size:0.95rem;color:rgba(255,255,255,0.85);background:#0e0e0e;border:1px solid var(--ix-border);padding:18px 20px;cursor:pointer;border-radius:2px;transition:border-color .2s;}
+.ns-opt:hover,.ns-opt:focus-visible{border-color:var(--ix-gold);outline:none;}
+.ns-bar{height:2px;background:var(--ix-border);margin-bottom:36px;}
+.ns-bar i{display:block;height:2px;background:var(--ix-gold);transition:width .3s;}
+.ns-result h2{font-family:var(--ix-serif);font-weight:300;font-size:clamp(2rem,4.4vw,3rem);line-height:1.15;color:#fff;margin-bottom:16px;}
+.ns-result h2 em{color:var(--ix-gold);}
+.ns-result p{font-family:var(--ix-sans);font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.72);margin-bottom:26px;max-width:620px;}
+.ns-back{margin-top:22px;background:none;border:none;color:var(--ix-muted);font-family:var(--ix-sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;padding:0;}
+
+/* ---------- Table finder ---------- */
+.tf-filters{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px;}
+.ix-chip{font-family:var(--ix-sans);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.7);border:1px solid #2a2a2a;padding:9px 14px;cursor:pointer;border-radius:2px;}
+.ix-chip[aria-pressed="true"]{border-color:var(--ix-gold);color:var(--ix-gold);}
+.tf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--ix-border);border:1px solid var(--ix-border);}
+.tf-card{background:#0e0e0e;padding:24px 22px;display:flex;flex-direction:column;gap:8px;}
+.tf-host{font-family:var(--ix-serif);font-size:1.35rem;color:#fff;font-weight:400;}
+.tf-when,.tf-where{font-family:var(--ix-sans);font-size:0.84rem;line-height:1.5;color:rgba(255,255,255,0.68);}
+.tf-where{color:var(--ix-gold);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;}
+.tf-card a{margin-top:auto;align-self:flex-start;}
+.tf-none{background:#0e0e0e;padding:28px;font-family:var(--ix-sans);font-size:0.9rem;color:var(--ix-muted);grid-column:1/-1;}
+
+/* ---------- Sunday notes ---------- */
+.sn-head{border-bottom:1px solid var(--ix-border);padding-bottom:24px;margin-bottom:30px;}
+.sn-title{font-family:var(--ix-serif);font-weight:300;font-size:clamp(2rem,4.6vw,3.2rem);line-height:1.1;color:#fff;}
+.sn-passage{font-family:var(--ix-sans);font-size:0.85rem;color:var(--ix-gold);margin-top:10px;letter-spacing:0.04em;}
+.sn-pick{font-family:var(--ix-sans);font-size:0.8rem;background:#0e0e0e;color:#fff;border:1px solid #2a2a2a;padding:10px 12px;border-radius:2px;margin-top:18px;max-width:100%;}
+.sn-field{margin-bottom:26px;}
+.sn-field label{display:block;font-family:var(--ix-sans);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ix-gold);margin-bottom:10px;}
+.sn-field textarea{width:100%;min-height:96px;resize:vertical;background:#0e0e0e;border:1px solid var(--ix-border);color:#fff;font-family:var(--ix-sans);font-size:0.95rem;line-height:1.7;padding:14px 16px;border-radius:2px;}
+.sn-field textarea:focus{outline:none;border-color:var(--ix-gold);}
+.sn-point{font-family:var(--ix-serif);font-size:1.25rem;line-height:1.6;color:rgba(255,255,255,0.9);margin-bottom:18px;}
+.sn-blank{font:inherit;color:var(--ix-gold);background:transparent;border:none;border-bottom:1px solid rgba(200,169,110,0.6);min-width:120px;width:auto;padding:0 4px;text-align:center;}
+.sn-blank:focus{outline:none;border-bottom-color:var(--ix-gold);}
+.sn-saved{font-family:var(--ix-sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ix-muted);min-height:1em;}
+.sn-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:8px;}
+.sn-decree{margin-top:40px;border-left:2px solid var(--ix-gold);padding-left:22px;font-family:var(--ix-serif);font-style:italic;font-size:1.3rem;color:#fff;line-height:1.5;}
+@media print{.sn-actions,.sn-pick,#site-header,#site-footer{display:none!important;}body{background:#fff!important;color:#000!important;}.sn-field textarea{border:1px solid #999;color:#000;background:#fff;}}
+.fp-wrap.wide{max-width:1040px;}
+.tf-card p,.pw-card p{margin:0;}.tf-card .tf-when{margin-bottom:10px;}
+.sn-field textarea,.sn-pick,.ns-opt,.ix-card,.tf-card{box-sizing:border-box;}
